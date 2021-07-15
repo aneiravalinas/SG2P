@@ -23,6 +23,15 @@
     <!-- Custom CSS File -->
     <link href="./View/css/mystyle.css" rel="stylesheet"/>
 
+    <!-- Custom JS Files -->
+    <script type="text/javascript" src="./Locale/lang.js"></script>
+    <script type="text/javascript" src="./Locale/Lang_ES.js"></script>
+    <script type="text/javascript" src="./Locale/Lang_EN.js"></script>
+    <script type="text/javascript" src="./Locale/Lang_GA"></script>
+    <script type="text/javascript" src="./View/js/funcionesFormularios.js"></script>
+    <script type="text/javascript" src="./View/js/validaciones.js"></script>
+    <script type="text/javascript" src="./View/js/md5.js"></script>
+
 </head>
 <body>
 
@@ -36,18 +45,50 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-        <h1 class="logo"><a href="#">SG2P</a></h1>
+        <h1 class="logo"><a href="index.php">SG2P</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
         <nav id="navbar" class="navbar">
             <ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="languageDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="idioma">Idioma</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="languageDropDown">
+                        <a class="dropdown-item" href="#">Español</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Galego</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">English</a>
+                    </div>
+                </li>
                 <?php
-                if(isAuthenticated()) {
-                    echo "<li><a class=\"nav-link\" href=\"#hero\">Panel de Administración</a></li>";
-                    echo "<li><a href=\"\" class=\"getstarted\">Desconectar</a></li>";
+                if(!isAuthenticated()) {
+                    ?>
+                    <li>
+                        <a type="button" class="getstarted" onclick=
+                            "crearform('formenviar','post');
+                                insertacampo(document.formenviar,'controller','Login');
+                                insertacampo(document.formenviar,'action','loginForm');
+                                enviaform(document.formenviar);">
+                            Iniciar Sesión
+                        </a>
+                    </li>
+                <?php
                 } else {
-                    echo "<li><a href=\"\" class=\"getstarted\">Iniciar Sesión</a></li>";
+                    ?>
+                    <li>
+                        <a type="button" class="nav-link">
+                            Panel de Administración
+                        </a>
+                    </li>
+                    <li>
+                        <a type="button" class="getstarted">
+                            Desconectar
+                        </a>
+                    </li>
+                <?php
                 }
                 ?>
             </ul>

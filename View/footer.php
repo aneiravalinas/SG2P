@@ -13,6 +13,8 @@
     </div>
 </footer>
 
+
+
 <!-- Vendor JS Files -->
 <script src="./View/assets/vendor/aos/aos.js"></script>
 <script src="./View/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

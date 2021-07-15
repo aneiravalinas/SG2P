@@ -2,7 +2,9 @@
 
 include './COMMON/Auth.php';
 
-session_start();
+if(!isset($_SESSION)) {
+    session_start();
+}
 $_SESSION['test'] = false;
 
 if (isAuthenticated()) {
@@ -17,7 +19,13 @@ if (isAuthenticated()) {
         $portal = new Portal();
         $portal->_default();
     } else {
-        // Pending UwU
+        if($_POST['controller'] === 'Login') {
+            if($_REQUEST['action'] === 'loginForm') {
+                include_once './Controller/Login_Controller.php';
+                $login = new Login();
+                $login->loginForm();
+            }
+        }
     }
 }
 
