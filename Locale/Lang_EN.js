@@ -18,9 +18,16 @@ arrayEN = {
         '01101' : 'Query by username failed',
 
         // Validaciones
-        '01102' : 'Username must exceed 3 characters',
-        '01103' : 'Username cannot exceed 20 characters',
-        '01104' : 'Username can only contain alphanumeric characters',
+
+            // Nombre de Usuario
+            '01102' : 'Username must exceed 3 characters',
+            '01103' : 'Username cannot exceed 20 characters',
+            '01104' : 'Username can only contain alphanumeric characters',
+
+            // Password
+            '01105' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada curta',
+            '01106' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada longa',
+            '01107' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada caracteres non permitidos',
 
 
 

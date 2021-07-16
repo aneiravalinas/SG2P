@@ -43,6 +43,19 @@ class Usuario_Validation extends Validator {
     }
 
     function validar_PASSWORD() {
-        // TODO: La password no debe ser vacía y puede contener números, letras, y guiones.
+
+        if(!$this->longitud_minima($this->password,32)) {
+            return $this->rellena_validation(false,'01105','USUARIO');
+        }
+
+        if(!$this->longitud_maxima($this->password,32)) {
+            return $this->rellena_validation(false,'01106','USUARIO');
+        }
+
+        if(!$this->solo_letras_espacios_guiones_todos($this->password)) {
+            return $this->rellena_validation(false,'01107','USUARIO');
+        }
+
+        return $this->rellena_validation(true,'00000','USUARIO');
     }
 }

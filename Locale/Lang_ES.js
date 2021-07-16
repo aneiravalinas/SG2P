@@ -18,9 +18,16 @@ arrayES = {
         '01101' : 'Error al consultar por nombre de usuario',
 
         // Validaciones
-        '01102' : 'El nombre de usuario debe superar los 3 caracteres',
-        '01103' : 'El nombre de usuario no puede superar los 20 caracteres',
-        '01104' : 'El nombre de usuario sólo puede contener caracteres alfanuméricos',
+
+            //Nombre Usuario
+            '01102' : 'El nombre de usuario debe superar los 3 caracteres',
+            '01103' : 'El nombre de usuario no puede superar los 20 caracteres',
+            '01104' : 'El nombre de usuario sólo puede contener caracteres alfanuméricos',
+
+            // Password
+            '01105' : 'Password security compromised. Short encrypted password',
+            '01106' : 'Password security compromised. Long encrypted password',
+            '01107' : 'Password security compromised. Encrypted password characters not allowed',
 
 
 

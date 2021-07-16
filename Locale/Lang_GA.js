@@ -18,9 +18,16 @@ arrayGA = {
         '01101' : 'Produciuse un erro o consultar por nome de usuario',
 
         // Validaciones
-        '01102' : 'O nome de usuario debe superar os 3 caracteres',
-        '01103' : 'O nomre de usuario non pode superar os 20 caracteres',
-        '01104' : 'O nome de usuario só pode conter caracteres alfanuméricos',
+
+            // Nombre de Usuario
+            '01102' : 'O nome de usuario debe superar os 3 caracteres',
+            '01103' : 'O nomre de usuario non pode superar os 20 caracteres',
+            '01104' : 'O nome de usuario só pode conter caracteres alfanuméricos',
+
+            // Password
+            '01105' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada curta',
+            '01106' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada longa',
+            '01107' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada caracteres non permitidos',
 
 
     // INTERFACE
