@@ -7,7 +7,7 @@ class Login_View {
     }
 
     function render() {
-        include './View/header.php';
+        include './View/Page/header.php';
         ?>
         <!-- ==== Login Box ===== -->
         <section id="hero" class="d-flex align-items-center">
@@ -16,19 +16,24 @@ class Login_View {
                     <div class="col-lg-5" id="ext-login-box">
                         <div class="row justify-content-center">
                             <div class="col-10" id="int-login-box">
-                                <h3 class="text-center">Login</h3>
-                                <form>
+                                <h3 class="text-center i18n-login">Login</h3>
+                                <form name="formulariologin" method="post">
                                     <div class="form-group login-forms">
-                                        <label for="usernameformcontrol">Username</label>
-                                        <input type="text" class="form-control" id="username" name="username"/>
+                                        <label for="username" class="i18n-username">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" onblur="if(not_empty('username')) check_letters_numbers('username',20);"/>
                                     </div>
                                     <div class="form-group login-forms">
-                                        <label for="pass_usuario">Password</label>
-                                        <input type="password" class="form-control" id="pass_usuario" name="pass_usuario"/>
+                                        <label for="password" class="i18n-password">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" onblur="not_empty('password');"/>
                                     </div>
                                 </form>
                                 <div class="text-center">
-                                    <a class="btn-get-started">Login</a>
+                                    <a class="btn-get-started i18n-login" type="button" onclick=
+                                        "insertacampo(document.formulariologin,'controller','Login');
+                                         insertacampo(document.formulariologin,'action','login');
+                                         enviaformcorrecto(document.formulariologin, check_login());">
+                                            Login
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -37,8 +42,29 @@ class Login_View {
             </div>
         </section>
 
+        <script>
+            var username = document.getElementById("username");
+            username.addEventListener("keydown", function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    insertacampo(document.formulariologin,'action','login');
+                    insertacampo(document.formulariologin,'controller','Login');
+                    enviaformcorrecto(document.formulariologin, check_login());
+                }
+            });
+            var password = document.getElementById("password");
+            password.addEventListener("keydown", function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    insertacampo(document.formulariologin,'action','login');
+                    insertacampo(document.formulariologin,'controller','Login');
+                    enviaformcorrecto(document.formulariologin, check_login());
+                }
+            });
+        </script>
+
 <?php
-        include './View/footer.php';
+        include './View/Page/footer.php';
     }
 
 }

@@ -27,13 +27,13 @@
     <script type="text/javascript" src="./Locale/lang.js"></script>
     <script type="text/javascript" src="./Locale/Lang_ES.js"></script>
     <script type="text/javascript" src="./Locale/Lang_EN.js"></script>
-    <script type="text/javascript" src="./Locale/Lang_GA"></script>
+    <script type="text/javascript" src="./Locale/Lang_GA.js"></script>
     <script type="text/javascript" src="./View/js/funcionesFormularios.js"></script>
     <script type="text/javascript" src="./View/js/validaciones.js"></script>
     <script type="text/javascript" src="./View/js/md5.js"></script>
 
 </head>
-<body>
+<body onload="setLang()">
 
 <!-- ==== Need a Model here... === -->
 
@@ -52,22 +52,22 @@
         <nav id="navbar" class="navbar">
             <ul>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="languageDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="idioma">Idioma</span>
+                    <a class="nav-link dropdown-toggle" type="button" id="languageDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="i18n-idioma">Idioma</span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="languageDropDown">
-                        <a class="dropdown-item" href="#">Español</a>
+                        <a class="dropdown-item" href="#" onclick="setLang('ES')">Español</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Galego</a>
+                        <a class="dropdown-item" href="#" onclick="setLang('GA')">Galego</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">English</a>
+                        <a class="dropdown-item" href="#" onclick="setLang('EN')">English</a>
                     </div>
                 </li>
                 <?php
                 if(!isAuthenticated()) {
                     ?>
                     <li>
-                        <a type="button" class="getstarted" onclick=
+                        <a type="button" class="getstarted i18n-login" onclick=
                             "crearform('formenviar','post');
                                 insertacampo(document.formenviar,'controller','Login');
                                 insertacampo(document.formenviar,'action','loginForm');
@@ -79,12 +79,16 @@
                 } else {
                     ?>
                     <li>
-                        <a type="button" class="nav-link">
+                        <a type="button" class="nav-link i18n-admin">
                             Panel de Administración
                         </a>
                     </li>
                     <li>
-                        <a type="button" class="getstarted">
+                        <a type="button" class="getstarted i18n-logout" onclick="
+                            crearform('formenviar','post');
+                                insertacampo(document.formenviar,'action','logout');
+                                insertacampo(document.formenviar,'controller','Login');
+                                enviaform(document.formenviar);">
                             Desconectar
                         </a>
                     </li>

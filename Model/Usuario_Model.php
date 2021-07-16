@@ -32,28 +32,28 @@ class Usuario_Model extends Abstract_Model {
         }
     }
 
-    protected function ADD()
+    function ADD()
     {
         // TODO: Implement ADD() method.
     }
 
-    protected function EDIT()
+    function EDIT()
     {
         // TODO: Implement EDIT() method.
     }
 
-    protected function DELETE()
+    function DELETE()
     {
         // TODO: Implement DELETE() method.
     }
 
-    protected function SEARCH()
+    function SEARCH()
     {
         // TODO: Implement SEARCH() method.
     }
 
     // Get user by username
-    protected function seek()
+    function seek()
     {
         $this->query = "
             SELECT * FROM USUARIO
@@ -61,6 +61,11 @@ class Usuario_Model extends Abstract_Model {
         ";
         $this->get_one_result_from_query();
         return $this->feedback;
+    }
+
+    function get_result()
+    {
+        return $this->rows;
     }
 
 }

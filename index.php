@@ -20,10 +20,13 @@ if (isAuthenticated()) {
         $portal->_default();
     } else {
         if($_POST['controller'] === 'Login') {
+            include_once './Controller/Login_Controller.php';
             if($_REQUEST['action'] === 'loginForm') {
-                include_once './Controller/Login_Controller.php';
                 $login = new Login();
                 $login->loginForm();
+            } else if($_REQUEST['action'] === 'login') {
+                $login = new Login();
+                $login->login();
             }
         }
     }
