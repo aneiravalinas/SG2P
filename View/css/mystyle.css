@@ -60,7 +60,7 @@
     color: white !important;
 }
 
-#new_button {
+.option_button {
     height: 40px;
     width: 40px;
     color: #2487ce;

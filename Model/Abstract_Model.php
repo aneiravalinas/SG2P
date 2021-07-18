@@ -104,6 +104,7 @@ abstract class Abstract_Model {
                     }
                     $result->close();
                     $this->code = '00003';
+                    $this->resource = $this->rows;
                 }
             } else {                                // Error de SQL
                 $this->ok = false;
@@ -126,7 +127,7 @@ abstract class Abstract_Model {
                 if ($result->num_rows == 0) {       // El recordset vuelve vacío
                     $this->code = '00002';
                 } else {                            // El recordset vuelve con datos
-                    $this->rows = $result->fetch_assoc();
+                    $this->resource = $result->fetch_assoc();
                     $this->code = '00003';
                 }
             } else {                                // Error de SQL

@@ -3,14 +3,18 @@ arrayGA = {
     '00001' : 'Éxito na execución do SQL',
     '00002' : 'O recordset vén vacío',
     '00003' : 'O recordset vén con datos',
-    '00101' : 'Error ao conectar coa base de datos. Contacte co seu administrador',
-    '00102' : 'Error na execución do SQL',
+    '00004' : 'Error ao conectar coa base de datos. Contacte co seu administrador',
+    '00005' : 'Error na execución do SQL',
 
     // USUARIO
 
         // Login
         '01001' : 'Iniciouse sesión no sistema correctamente',
         '01102' : 'As credenciais introducidas non son válidas',
+
+        // Search
+        '01002' : 'Búsqueda de Usuarios Ok',
+        '01109' : 'Error na búsqueda de Usuarios',
 
         // Búsqueda por Username
         '01000' : 'O nome de usuario existe',
@@ -20,14 +24,15 @@ arrayGA = {
         // Validaciones
 
             // Nombre de Usuario
-            '01102' : 'O nome de usuario debe superar os 3 caracteres',
-            '01103' : 'O nomre de usuario non pode superar os 20 caracteres',
-            '01104' : 'O nome de usuario só pode conter caracteres alfanuméricos',
+            '01103' : 'O nome de usuario debe superar os 3 caracteres',
+            '01104' : 'O nomre de usuario non pode superar os 20 caracteres',
+            '01105' : 'O nome de usuario só pode conter caracteres alfanuméricos',
 
             // Password
-            '01105' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada curta',
-            '01106' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada longa',
-            '01107' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada caracteres non permitidos',
+            '01106' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada curta',
+            '01107' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada longa',
+            '01108' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada caracteres non permitidos',
+
 
 
     // INTERFACE
@@ -49,6 +54,11 @@ arrayGA = {
         // MESSAGE_VIEW
         'i18n-msg-system' : 'Mensaxe do Sistema',
         'i18n-back' : 'Volver',
+
+        // DESHBOARD VIEW
+        'i18n-select-option' : 'Selecciona unha opción',
+        'i18n-users': 'Usuarios',
+        'i18n-profile' : 'Meu Perfil',
 
         // MODAL
             // Campos Modal

@@ -3,14 +3,18 @@ arrayEN = {
     '00001' : 'Successful SQL execution',
     '00002' : 'Recordset is empty',
     '00003' : 'Recordset contains data',
-    '00101' : 'Error while connecting with database. Contact your administrator',
-    '00102' : 'SQL execution error',
+    '00004' : 'Error while connecting with database. Contact your administrator',
+    '00005' : 'SQL execution error',
 
     // USUARIO
 
         // Login
         '01001' : 'You have successfully logged into the system',
         '01102' : 'The credentials entered are invalid',
+
+        // Search
+        '01002' : 'Users Search OK',
+        '01109' : 'Users Search Error',
 
         // Búsqueda por Username
         '01000' : 'The username exist',
@@ -20,14 +24,14 @@ arrayEN = {
         // Validaciones
 
             // Nombre de Usuario
-            '01102' : 'Username must exceed 3 characters',
-            '01103' : 'Username cannot exceed 20 characters',
-            '01104' : 'Username can only contain alphanumeric characters',
+            '01103' : 'Username must exceed 3 characters',
+            '01104' : 'Username cannot exceed 20 characters',
+            '01105' : 'Username can only contain alphanumeric characters',
 
             // Password
-            '01105' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada curta',
-            '01106' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada longa',
-            '01107' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada caracteres non permitidos',
+            '01106' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada curta',
+            '01107' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada longa',
+            '01108' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada caracteres non permitidos',
 
 
 
@@ -50,6 +54,11 @@ arrayEN = {
         // MESSAGE_VIEW
         'i18n-msg-system' : 'System Message',
         'i18n-back' : 'Go Back',
+
+        // DESHBOARD VIEW
+        'i18n-select-option' : 'Select an option',
+        'i18n-users': 'Users',
+        'i18n-profile' : 'My Profile',
 
         // MODAL
             // Campos Modal

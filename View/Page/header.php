@@ -79,7 +79,11 @@
                 } else {
                     ?>
                     <li>
-                        <a type="button" class="nav-link i18n-admin">
+                        <a type="button" class="nav-link i18n-admin" onclick="
+                            crearform('formenviar','post');
+                                insertacampo(document.formenviar,'action','deshboard');
+                                insertacampo(document.formenviar,'controller','Portal');
+                                enviaform(document.formenviar);">
                             Panel de Administración
                         </a>
                     </li>

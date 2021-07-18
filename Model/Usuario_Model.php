@@ -47,9 +47,21 @@ class Usuario_Model extends Abstract_Model {
         // TODO: Implement DELETE() method.
     }
 
-    function SEARCH()
-    {
-        // TODO: Implement SEARCH() method.
+    function SEARCH() {
+        $this->query = "
+            SELECT *
+            FROM USUARIO
+            WHERE
+                dni LIKE '%" . $this->dni . "%' AND
+                username LIKE '%" . $this->username . "%' AND
+                rol LIKE '%" . $this->rol . "%' AND
+                nombre LIKE '%" . $this->nombre . "%' AND
+                apellidos LIKE '%" . $this->apellidos . "%' AND
+                email LIKE '%" . $this->email . "%' AND
+                telefono LIKE '%" . $this->telefono . "%'";
+
+        $this->get_results_from_query();
+        return $this->feedback;
     }
 
     // Get user by username
@@ -63,10 +75,6 @@ class Usuario_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function get_result()
-    {
-        return $this->rows;
-    }
 
 }
 

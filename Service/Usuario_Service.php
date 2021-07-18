@@ -5,16 +5,6 @@ include_once './Validation/Usuario_Validation.php';
 
 class Usuario_Service extends Usuario_Validation {
     var $atributos;
-//    var $dni;
-//    var $username;
-//    var $password;
-//    var $rol;
-//    var $nombre;
-//    var $apellidos;
-//    var $email;
-//    var $telefono;
-//    var $foto_perfil;
-
     var $user_entity;
     var $feedback = array();
 
@@ -24,8 +14,7 @@ class Usuario_Service extends Usuario_Validation {
         $this->fill_fields();
     }
 
-    function fill_fields()
-    {
+    function fill_fields() {
         foreach ($this->atributos as $atributo) {
             if(isset($_POST[$atributo])) {
                 $this->$atributo = $_POST[$atributo];
@@ -35,12 +24,15 @@ class Usuario_Service extends Usuario_Validation {
         }
     }
 
-    function login()
-    {
-        // Pendiente de Validaciones
+    function login() {
+
+        $validation = $this->validar_atributos_login();
+        if(!$validation['ok']) {
+            return $validation;
+        }
 
         if($this->user_exist()) {
-            $user = $this->user_entity->get_result();
+            $user = $this->feedback['resource'];
             if($this->password === $user['password']) {
                 if(!isset($_SESSION)) {
                     session_start();
@@ -60,14 +52,29 @@ class Usuario_Service extends Usuario_Validation {
         return $this->feedback;
     }
 
-    function user_exist()
-    {
+    function SEARCH() {
+
+        // TODO: Some validations here...
+
+        $this->feedback = $this->user_entity->SEARCH();
+
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = '01002'; // Búsqueda de Usuarios Ok
+            return $this->feedback;
+        } else if($this->feedback['code'] == '00005') {
+            $this->feedback['code'] = '01109'; // Error en la consulta de Usuarios.
+        }
+
+        return $this->feedback;
+
+    }
+
+    function user_exist() {
         $this->feedback = $this->seekByUsername();
         return $this->feedback['code'] == '01000';
     }
 
-    function seekByUsername()
-    {
+    function seekByUsername() {
         $this->feedback = $this->user_entity->seek();
 
         if($this->feedback['ok']) {
@@ -77,7 +84,7 @@ class Usuario_Service extends Usuario_Validation {
             } else {
                 $this->feedback['code'] = '01000'; // El nombre de usuario existe.
             }
-        } else if($this->feedback['code'] == '00102') {
+        } else if($this->feedback['code'] == '00005') {
             $this->feedback['code'] = '01101'; // Error al consultar por nombre de usuario
         }
 

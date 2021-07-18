@@ -10,6 +10,11 @@ class Portal {
         include './View/Portal/Portal_Countries_View.php';
         new Portal_Countries();
     }
+
+    function deshboard() {
+        include './View/Deshboard/Deshboard_View.php';
+        new Deshboard();
+    }
 }
 
 

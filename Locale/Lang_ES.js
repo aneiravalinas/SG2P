@@ -3,14 +3,18 @@ arrayES = {
     '00001' : 'Éxito en la ejecición del SQL',
     '00002' : 'El recordset viene vacío',
     '00003' : 'El recordset viene con datos',
-    '00101' : 'Error al conectar con la base de datos. Contacte con su administrador',
-    '00102' : 'Error en la ejecución del SQL',
+    '00004' : 'Error al conectar con la base de datos. Contacte con su administrador',
+    '00005' : 'Error en la ejecución del SQL',
 
     // USUARIO
 
         // Login
         '01001' : 'Se ha iniciado sesión correctamente',
         '01102' : 'Las credenciales introducias no son válidas',
+
+        // Search
+        '01002' : 'Búsqueda de Usuarios Ok',
+        '01109' : 'Error en la búsqueda de Usuarios',
 
         // Búsqueda por Username
         '01000' : 'El nombre de usuario existe',
@@ -20,14 +24,14 @@ arrayES = {
         // Validaciones
 
             //Nombre Usuario
-            '01102' : 'El nombre de usuario debe superar los 3 caracteres',
-            '01103' : 'El nombre de usuario no puede superar los 20 caracteres',
-            '01104' : 'El nombre de usuario sólo puede contener caracteres alfanuméricos',
+            '01103' : 'El nombre de usuario debe superar los 3 caracteres',
+            '01104' : 'El nombre de usuario no puede superar los 20 caracteres',
+            '01105' : 'El nombre de usuario sólo puede contener caracteres alfanuméricos',
 
             // Password
-            '01105' : 'Password security compromised. Short encrypted password',
-            '01106' : 'Password security compromised. Long encrypted password',
-            '01107' : 'Password security compromised. Encrypted password characters not allowed',
+            '01106' : 'Password security compromised. Short encrypted password',
+            '01107' : 'Password security compromised. Long encrypted password',
+            '01108' : 'Password security compromised. Encrypted password characters not allowed',
 
 
 
@@ -51,6 +55,11 @@ arrayES = {
         // MESSAGE_VIEW
         'i18n-msg-system' : 'Mensaje del Sistema',
         'i18n-back' : 'Volver',
+
+        // DESHBOARD VIEW
+        'i18n-select-option' : 'Selecciona una opción',
+        'i18n-users': 'Usuarios',
+        'i18n-profile' : 'Mi Perfil',
 
         // MODAL
             // Campos Modal
