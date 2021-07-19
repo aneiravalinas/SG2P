@@ -29,9 +29,9 @@ arrayEN = {
             '01105' : 'Username can only contain alphanumeric characters',
 
             // Password
-            '01106' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada curta',
-            '01107' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada longa',
-            '01108' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada caracteres non permitidos',
+            '01106' : 'Password security is compromised. Short encrypted password',
+            '01107' : 'Password security is compromised. Long encrypted password',
+            '01108' : 'Password security is compromised. Password encrypted with characters not allowed',
 
             // DNI
             '01110' : 'The DNI cannot be empty',
