@@ -19,7 +19,7 @@ class Show_Users {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1 class="mb-4">Tabla Usuario</h1>
+                        <h1 class="mb-4">Usuarios</h1>
                     </div>
                 </div>
 
@@ -48,70 +48,28 @@ class Show_Users {
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>44093332D</td>
-                                <td>Antonio</td>
-                                <td>Neira Valiñas</td>
-                                <td>
-                                    <div class="btn-group dropdown">
-                                        <button type="button" class="btn btn-sm btn-primary">
-                                            <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Separated link</a>
+                            <?php foreach($this->users as $user): ?>
+                                <tr>
+                                    <td><?php echo $user['dni']?></td>
+                                    <td><?php echo $user['username']?></td>
+                                    <td><?php echo $user['rol']?></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
+                                                <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#">Detalles</a>
+                                            <?php if(es_admin()) :?>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Editar</a>
+                                                <a class="dropdown-item" href="#">Eliminar</a>
+                                            </div>
+                                            <?php endif;?>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>44223332D</td>
-                                <td>Lua</td>
-                                <td>Guau Guau</td>
-                                <td>
-                                    <div class="btn-group dropdown">
-                                        <button type="button" class="btn btn-sm btn-primary">
-                                            <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Separated link</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>44223333D</td>
-                                <td>Luaa</td>
-                                <td>Guaau Guaaau</td>
-                                <td>
-                                    <div class="btn-group dropdown">
-                                        <button type="button" class="btn btn-sm btn-primary">
-                                            <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Separated link</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
