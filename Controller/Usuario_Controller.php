@@ -24,4 +24,23 @@ class Usuario {
         new Search_User();
     }
 
+    function addForm() {
+        if(es_admin()) {
+            include_once './View/Users/Add_User_View.php';
+            new Add_User();
+        } else {
+            new Message('00006','Portal','deshboard');
+        }
+    }
+
+    function add() {
+        if(es_admin()) {
+            $user_service = new Usuario_Service();
+            $feedback = $user_service->ADD();
+            new Message($feedback['code'],'Usuario','show');
+        } else {
+            new Message('00006','Portal','deshboard');
+        }
+    }
+
 }

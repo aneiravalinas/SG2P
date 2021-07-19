@@ -6,6 +6,9 @@ arrayEN = {
     '00004' : 'Error while connecting with database. Contact your administrator',
     '00005' : 'SQL execution error',
 
+    // Acceso no autorizado
+    '00006' : 'You do not have the necessary privileges to perform this action',
+
     // USUARIO
 
         // Login
@@ -16,10 +19,30 @@ arrayEN = {
         '01002' : 'Users Search OK',
         '01109' : 'Users Search Error',
 
+        // ADD
+        '01124' : 'The Building Manager role is assigned automatically when a user is assigned to a building. Manual assignment of this role is not allowed',
+        '01006' : 'The user was added successfully',
+        '01131' : 'Error adding user',
+
         // Búsqueda por Username
-        '01000' : 'The username exist',
+        '01000' : 'The username already exist',
         '01100' : 'The username entered does not exist',
         '01101' : 'Query by username failed',
+
+        // Búsqueda por DNI
+        '01003' : 'The DNI already exist',
+        '01125' : 'The DNI entered does not exist',
+        '01126' : 'Query by DNI failed',
+
+        // Búsqueda por Email
+        '01004' : 'The email already exist',
+        '01127' : 'The email entered does not exist',
+        '01128' : 'Query by email failed',
+
+        // Búsqueda por Teléfono
+        '01005' : 'The phone number already exist',
+        '01129' : 'The phone number entered does not exist',
+        '01130' : 'Query by phone number failed',
 
         // Validaciones
 
@@ -104,6 +127,9 @@ arrayEN = {
         'i18n-cancelar' : 'Cancel',
         'i18n-enviar' : 'Send',
         'i18n-todos' : 'All',
+        'i18n-add-users' : 'Add User',
+        'i18n-selecciona-rol' : 'Select a Role',
+        'i18n-foto_perfil' : 'Profile Photo',
 
         // MODAL
             // Campos Modal

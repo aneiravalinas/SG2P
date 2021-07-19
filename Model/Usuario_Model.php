@@ -32,9 +32,33 @@ class Usuario_Model extends Abstract_Model {
         }
     }
 
-    function ADD()
-    {
-        // TODO: Implement ADD() method.
+    function ADD() {
+        $this->query = "
+            INSERT INTO USUARIO (
+                        dni,
+                        username,
+                        password,
+                        rol,
+                        nombre,
+                        apellidos,
+                        email,
+                        telefono,
+                        foto_perfil
+            ) VALUES (
+                      '$this->dni',
+                      '$this->username',
+                      '$this->password',
+                      '$this->rol',
+                      '$this->nombre',
+                      '$this->apellidos',
+                      '$this->email',
+                      '$this->telefono',
+                      '$this->foto_perfil'
+            );
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function EDIT()
@@ -75,6 +99,15 @@ class Usuario_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Get user by unique fields.
+    function seekByID($key, $value) {
+        $this->query = "
+            SELECT * FROM USUARIO
+            WHERE $key = '$value'";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
+    }
 
 }
 

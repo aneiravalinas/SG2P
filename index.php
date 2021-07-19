@@ -28,6 +28,10 @@ if (isAuthenticated()) {
                 $login = new Login();
                 $login->login();
             }
+        } else {
+            include_once './Controller/Portal_Controller.php';
+            $portal = new Portal();
+            $portal->_default();
         }
     }
 }

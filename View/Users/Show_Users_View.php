@@ -33,7 +33,11 @@ class Show_Users {
                                     enviaform(document.formenviar);">
                                 <span class="iconify option_button" data-icon="fluent:search-square-24-filled" data-inline="false"></span>
                             </a>
-                            <a type="button">
+                            <a type="button" onclick="
+                                    crearform('formenviar','post');
+                                    insertacampo(document.formenviar,'controller','Usuario');
+                                    insertacampo(document.formenviar,'action','addForm');
+                                    enviaform(document.formenviar);">
                                 <span class="iconify option_button" data-icon="gridicons-add" data-inline="false"></span>
                             </a>
                         </div>

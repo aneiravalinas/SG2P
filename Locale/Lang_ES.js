@@ -6,6 +6,9 @@ arrayES = {
     '00004' : 'Error al conectar con la base de datos. Contacte con su administrador',
     '00005' : 'Error en la ejecución del SQL',
 
+    // Acceso no autorizado
+    '00006' : 'No dispone de los privilegios necesarios para realizar esta acción',
+
     // USUARIO
 
         // Login
@@ -16,10 +19,31 @@ arrayES = {
         '01002' : 'Búsqueda de Usuarios Ok',
         '01109' : 'Error en la búsqueda de Usuarios',
 
+        // ADD
+        '01124' : 'El rol Resp. Edificio es asignado automáticamente cuando se asigna un usuario a un edificio. No se permite la asignación manual de este rol',
+        '01006' : 'Se ha añadido el usuario correctamente',
+        '01131' : 'Error al añadir usuario',
+
         // Búsqueda por Username
-        '01000' : 'El nombre de usuario existe',
+        '01000' : 'El nombre de usuario ya existe',
         '01100' : 'El nombre de usuario introducido no existe',
         '01101' : 'Error al consultar por nombre de usuario',
+
+        // Búsqueda por DNI
+        '01003' : 'El DNI introducido ya existe',
+        '01125' : 'El DNI introducido no existe',
+        '01126' : 'Error al consultar por DNI',
+
+        // Búsqueda por Email
+        '01004' : 'El email introducido ya existe',
+        '01127' : 'El email introducido no existe',
+        '01128' : 'Error al consultar por email',
+
+        // Búsqueda por Teléfono
+        '01005' : 'El telefono introducido ya existe',
+        '01129' : 'El telefono introducido no existe',
+        '01130' : 'Error al consultar por telefono',
+
 
         // Validaciones
 
@@ -103,6 +127,9 @@ arrayES = {
         'i18n-cancelar' : 'Cancelar',
         'i18n-enviar' : 'Enviar',
         'i18n-todos' : 'Todos',
+        'i18n-add-users' : 'Añadir Usuario',
+        'i18n-selecciona-rol' : 'Selecciona un Rol',
+        'i18n-foto_perfil' : 'Foto de Perfil',
 
         // MODAL
             // Campos Modal

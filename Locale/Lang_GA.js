@@ -6,6 +6,9 @@ arrayGA = {
     '00004' : 'Error ao conectar coa base de datos. Contacte co seu administrador',
     '00005' : 'Error na execución do SQL',
 
+    // Acceso no autorizado
+    '00006' : 'Non dispón dos privilexios necesarios pra realizar esta acción',
+
     // USUARIO
 
         // Login
@@ -16,10 +19,30 @@ arrayGA = {
         '01002' : 'Búsqueda de Usuarios Ok',
         '01109' : 'Error na búsqueda de Usuarios',
 
+        // ADD
+        '01124' : 'O rol Resp. Edificio é asignado automáticamente cando se asigna un usuario a un edificio. Non se permite a asignación manual de este rol',
+        '01006' : 'O usuario engadiuse correctamente',
+        '01131' : 'Error ó engadir o usuario',
+
         // Búsqueda por Username
-        '01000' : 'O nome de usuario existe',
+        '01000' : 'O nome de usuario xa existe',
         '01100' : 'O nome de usuario introducido non existe',
         '01101' : 'Produciuse un erro o consultar por nome de usuario',
+
+        // Búsqueda por DNI
+        '01003' : 'O DNI introducido xa existe',
+        '01125' : 'O DNI introducido non existe',
+        '01126' : 'Error ó consultar por DNI',
+
+        // Búsqueda por Email
+        '01004' : 'O email introducido xa existe',
+        '01127' : 'O email introducido non existe',
+        '01128' : 'Error ó consultar por email',
+
+        // Búsqueda por Teléfono
+        '01005' : 'O telefono introducido xa existe',
+        '01129' : 'O telefono introducido non existe',
+        '01130' : 'Error ó consultar por telefono',
 
         // Validaciones
 
@@ -58,6 +81,8 @@ arrayGA = {
             // Telefono
             '01122' : 'É necesario especificar un numero de telefono',
             '01123' : 'Formato de numero de telefono incorrecto',
+
+
 
 
 
@@ -104,6 +129,9 @@ arrayGA = {
         'i18n-cancelar' : 'Cancelar',
         'i18n-enviar' : 'Enviar',
         'i18n-todos' : 'Todos',
+        'i18n-add-users' : 'Engadir Usuario',
+        'i18n-selecciona-rol' : 'Selecciona un Rol',
+        'i18n-foto_perfil' : 'Foto de Perfil',
 
         // MODAL
             // Campos Modal
