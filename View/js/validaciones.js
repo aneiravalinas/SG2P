@@ -186,6 +186,7 @@ function check_email(element, size) {
 function check_enum(element, values) {
     var correct = false;
     var value = document.getElementById(element).value;
+    var name = document.getElementById(element).name;
 
     for(var i = 0; i < values.length; i++) {
         if(values[i] === value) {
@@ -194,7 +195,14 @@ function check_enum(element, values) {
         }
     }
 
-    return correct;
+    if(correct) {
+        document.getElementById(element).style.borderColor = 'green';
+        return true;
+    } else {
+        document.getElementById(element).style.borderColor = 'red';
+        openModal(name,'i18n-wrong-enum');
+        return false;
+    }
 }
 
 function check_pattern(element, pattern) {

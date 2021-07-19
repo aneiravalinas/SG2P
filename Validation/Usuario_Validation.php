@@ -82,7 +82,15 @@ class Usuario_Validation extends Validator {
 
 
     function validar_DNI() {
-        //TODO: Verificar no vacío, Formato DNI.
+        if(!$this->no_vacio($this->dni)) {
+            return $this->rellena_validation(false,'01110', 'USUARIO');
+        }
+
+        if(!$this->formato_dni($this->dni)) {
+            return $this->rellena_validation(false,'01111','USUARIO');
+        }
+
+        return $this->rellena_validation(true,'00000','USUARIO');
     }
 
 
@@ -121,22 +129,70 @@ class Usuario_Validation extends Validator {
 
 
     function validar_ROL() {
-        // TODO: Verificar no vacío. El valor debe ser uno de los contemplados: registrado, edificio, organizacion, adminsitrador.
+        if(!$this->no_vacio($this->rol)) {
+            return $this->rellena_validation(false,'01112','USUARIO');
+        }
+
+        if(!$this->es_rol($this->rol)) {
+            return $this->rellena_validation(false,'01113','USUARIO');
+        }
+
+        return $this->rellena_validation(true,'00000','USUARIO');
     }
 
     function validar_NOMBRE() {
-        // TODO: Verificar no vacío, letras espacios y acentos. Tamaño mínimo 3, tamaño máximo 20.
+        if(!$this->longitud_minima($this->nombre,3)) {
+            return $this->rellena_validation(false,'01114','USUARIO');
+        }
+
+        if(!$this->longitud_maxima($this->nombre,30)) {
+            return $this->rellena_validation(false,'01115','USUARIO');
+        }
+
+        if(!$this->solo_letras_espacios($this->nombre)) {
+            return $this->rellena_validation(false,'01116','USUARIO');
+        }
+
+        return $this->rellena_validation(true,'00000','USUARIO');
     }
 
     function validar_APELLIDOS() {
-        // TODO: Verificar no vacío, letras espacios y acentos. Tamaño mínimo 3, tamaño máximo 60.
+        if(!$this->longitud_minima($this->apellidos,3)) {
+            return $this->rellena_validation(false,'01117','USUARIO');
+        }
+
+        if(!$this->longitud_maxima($this->apellidos,60)) {
+            return $this->rellena_validation(false,'01118','USUARIO');
+        }
+
+        if(!$this->solo_letras_espacios($this->apellidos)) {
+            return $this->rellena_validation(false,'01119','USUARIO');
+        }
+
+        return $this->rellena_validation(true,'00000','USUARIO');
     }
 
     function validar_EMAIL() {
-        // TODO: Verificar no vacío y formato email correcto.
+        if(!$this->no_vacio($this->email)) {
+            return $this->rellena_validation(false,'01120','USUARIO');
+        }
+
+        if(!$this->formato_email($this->email)) {
+            return $this->rellena_validation(false,'01121','USUARIO');
+        }
+
+        return $this->rellena_validation(true,'00000','USUARIO');
     }
 
     function validar_TELEFONO() {
-        // TODO: Verificar no vacío, sólo dígitos y que empiece por 6,7,8,9 (formato).
+        if(!$this->no_vacio($this->telefono)) {
+            return $this->rellena_validation(false,'01122','USUARIO');
+        }
+
+        if(!$this->formato_telefono($this->telefono)) {
+            return $this->rellena_validation(false,'01123','USUARIO');
+        }
+
+        return $this->rellena_validation(true,'00000','USUARIO');
     }
 }

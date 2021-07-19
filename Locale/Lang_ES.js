@@ -29,10 +29,35 @@ arrayES = {
             '01105' : 'El nombre de usuario sólo puede contener caracteres alfanuméricos',
 
             // Password
-            '01106' : 'Password security compromised. Short encrypted password',
-            '01107' : 'Password security compromised. Long encrypted password',
-            '01108' : 'Password security compromised. Encrypted password characters not allowed',
+            '01106' : 'La seguridad de la contraseña está comprometida. Contraseña cifrada corta',
+            '01107' : 'La seguridad de la contraseña está comprometida. Contraseña cifrada larga',
+            '01108' : 'La seguridad de la contraseña está comprometida. Contraseña cifrada con caracteres no permitidos',
 
+            // DNI
+            '01110' : 'Es necesario especificar un DNI',
+            '01111' : 'Formato de DNI incorrecto',
+
+            // ROL
+            '01112' : 'Es necesario especificar un Rol',
+            '01113' : 'El rol indicado no está contemplado',
+
+            // Nombre
+            '01114' : 'El nombre debe superar los 3 caracteres',
+            '01115' : 'El nombre no debe superar los 30 caracteres',
+            '01116' : 'El nombre sólo puede contener letras y espacios',
+
+            // Apellidos
+            '01117' : 'El apellido debe superar los 3 caracteres',
+            '01118' : 'El apellido no debe superar los 60 caracteres',
+            '01119' : 'El apellido sólo puede contener letras y espacios',
+
+            // Email
+            '01120' : 'Es necesario especificar un email',
+            '01121' : 'Formato de email incorrecto',
+
+            // Telefono
+            '01122' : 'Es necesario especificar un numero de telefono',
+            '01123' : 'Formato de numero de telefono incorrecto',
 
 
     // INTERFAZ
@@ -89,6 +114,7 @@ arrayES = {
             'm-nombre' : ' Nombre ',
             'm-telefono' : ' Teléfono ',
             'm-email' : ' Email ',
+            'm-rol' : ' Rol ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',
@@ -97,4 +123,5 @@ arrayES = {
             'i18n-generic-format' : 'tiene un formato incorrecto',
             'i18n-letters-spaces-accents-format' : 'solo admite letras, espacios y acentos',
             'i18n-numbers-format' : 'sólo puede contener números',
+            'i18n-wrong-enum' : 'tiene un valor no contemplado',
 }

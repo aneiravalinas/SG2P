@@ -127,14 +127,14 @@ function check_TELEFONO_SEARCH() {
 
 function check_ROLE_SEARCH() {
     var enums = ['registrado', 'edificio', 'organizacion', 'administrador'];
-    if(not_empty('select-rol')) {
-        if(check_enum('select-rol', enums)) {
+    if(not_empty('rol')) {
+        if(check_enum('rol', enums)) {
             return true;
         } else {
             return false;
         }
     } else {
-        document.getElementById('select-rol').style.borderColor = 'green';
+        document.getElementById('rol').style.borderColor = 'green';
         return true;
     }
 }

@@ -33,6 +33,32 @@ arrayGA = {
             '01107' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada longa',
             '01108' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada caracteres non permitidos',
 
+            // DNI
+            '01110' : 'É necesario especificar un DNI',
+            '01111' : 'Formato de DNI incorrecto',
+
+            // ROL
+            '01112' : 'É necesario especificar un Rol',
+            '01113' : 'O rol indicado non está contemplado',
+
+            // Nombre
+            '01114' : 'O nome debe superar los 3 caracteres',
+            '01115' : 'O nome non debe superar os 30 caracteres',
+            '01116' : 'O nome só pode conter letras e espacios',
+
+            // Apellidos
+            '01117' : 'O apelido debe superar os 3 caracteres',
+            '01118' : 'O apelido nno debe superar os 60 caracteres',
+            '01119' : 'O apelido só pode conter letras e espacios',
+
+            // Email
+            '01120' : 'É necesario especificar un email',
+            '01121' : 'Formato de email incorrecto',
+
+            // Telefono
+            '01122' : 'É necesario especificar un numero de telefono',
+            '01123' : 'Formato de numero de telefono incorrecto',
+
 
 
     // INTERFACE
@@ -89,6 +115,7 @@ arrayGA = {
             'm-nombre' : ' Nome ',
             'm-telefono' : ' Teléfono ',
             'm-email' : ' Email ',
+            'm-rol' : ' Rol ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',
@@ -97,6 +124,7 @@ arrayGA = {
             'i18n-generic-format' : 'ten un formato incorrecto',
             'i18n-letters-spaces-accents-format' : 'só admite letras, espacios e acentos',
             'i18n-numbers-format' : 'só pode conter números',
+            'i18n-wrong-enum' : 'ten un valor non contemplado',
 
 
 }

@@ -98,6 +98,7 @@ abstract class Abstract_Model {
                 $this->rows = array();
                 if ($result->num_rows == 0) {       // El recordset vuelve vacío
                     $this->code = '00002';
+                    $this->resource = array();
                 } else {                            // El recordset vuelve con datos
                     for($i=0; $i<$result->num_rows; $i++){
                         $this->rows[] = $result->fetch_assoc();
@@ -126,6 +127,7 @@ abstract class Abstract_Model {
                 $this->ok = true;
                 if ($result->num_rows == 0) {       // El recordset vuelve vacío
                     $this->code = '00002';
+                    $this->resource = '';
                 } else {                            // El recordset vuelve con datos
                     $this->resource = $result->fetch_assoc();
                     $this->code = '00003';

@@ -133,5 +133,13 @@ abstract class Validator {
     }
 
 
+    function es_rol($rol) {
+        $roles = array('registrado','edificio','organizacion','administrador');
+        return in_array($rol,$roles);
+    }
+
+    function formato_telefono($telefono) {
+        return preg_match('/^[6-9][0-9]{8}$/', $telefono);
+    }
 
 }

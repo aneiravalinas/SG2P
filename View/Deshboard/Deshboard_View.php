@@ -25,7 +25,7 @@ class Deshboard {
                         <div class="icon-box">
                             <a type="button" onclick="
                                     crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'action','showAll');
+                                        insertacampo(document.formenviar,'action','show');
                                         insertacampo(document.formenviar,'controller','Usuario');
                                         enviaform(document.formenviar);">
                                 <div>

@@ -7,7 +7,7 @@ class Usuario {
         include './Service/Usuario_Service.php';
     }
 
-    function showAll() {
+    function show() {
         $user_service = new Usuario_Service();
         $feedback = $user_service->SEARCH();
         if($feedback['ok']) {
@@ -24,7 +24,4 @@ class Usuario {
         new Search_User();
     }
 
-    function SEARCH() {
-        var_dump($_POST);
-    }
 }

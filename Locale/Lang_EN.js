@@ -33,6 +33,32 @@ arrayEN = {
             '01107' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada longa',
             '01108' : 'Seguridade do contrasinal comprometida. Contrasinal encriptada caracteres non permitidos',
 
+            // DNI
+            '01110' : 'The DNI cannot be empty',
+            '01111' : 'Wrong DNI format',
+
+            // ROL
+            '01112' : 'The Rol cannot be empty',
+            '01113' : 'The indicated role is not contemplated',
+
+            // Nombre
+            '01114' : 'Name must exceed 3 characters',
+            '01115' : 'Name cannot exceed 30 characters',
+            '01116' : 'Name can only contain alphanumeric characters and spaces',
+
+            // Apellidos
+            '01117' : 'Surname must exceed 3 characters',
+            '01118' : 'Surname cannot exceed 60 characters,',
+            '01119' : 'Surname can only contain alphanumeric characters and spaces',
+
+            // Email
+            '01120' : 'Email cannot be empty',
+            '01121' : 'Wrong Email format',
+
+            // Telefono
+            '01122' : 'Phone number cannot be empty',
+            '01123' : 'Wrong phone number format',
+
 
 
     // INTERFACE
@@ -89,6 +115,7 @@ arrayEN = {
             'm-nombre' : ' Name ',
             'm-telefono' : ' Phone ',
             'm-email' : ' Email ',
+            'm-rol' : ' Role ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',
@@ -97,4 +124,5 @@ arrayEN = {
             'i18n-generic-format' : 'has a wrong format',
             'i18n-letters-spaces-accents-format' : 'only supports letters, spaces and accents',
             'i18n-numbers-format' : 'can only contain numbers',
+            'i18n-wrong-enum' : 'has a value not contemplated',
 }

@@ -54,7 +54,10 @@ class Usuario_Service extends Usuario_Validation {
 
     function SEARCH() {
 
-        // TODO: Some validations here...
+        $validation = $this->validar_atributos_search();
+        if(!$validation['ok']) {
+            return $validation;
+        }
 
         $this->feedback = $this->user_entity->SEARCH();
 
@@ -71,7 +74,7 @@ class Usuario_Service extends Usuario_Validation {
 
     function user_exist() {
         $this->feedback = $this->seekByUsername();
-        return $this->feedback['code'] == '01000';
+        return $this->feedback['code'] == '01000'; // El nombre de usuario existe
     }
 
     function seekByUsername() {

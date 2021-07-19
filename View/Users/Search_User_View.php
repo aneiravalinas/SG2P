@@ -57,7 +57,7 @@ class Search_User {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="select-rol" class="i18n-rol">Rol</label>
-                                    <select id="select-rol" name="select-rol" class="form-select">
+                                    <select id="rol" name="rol" class="form-select">
                                         <option value="" class="i18n-todos">Todos</option>
                                         <option value="registrado" class="i18n-f-registrado">Usuario Registrado</option>
                                         <option value="edificio" class="i18n-f-edificio">Responsable Edificio</option>
@@ -72,13 +72,13 @@ class Search_User {
                                     <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
                                         crearform('formenviar','post');
                                             insertacampo(document.formenviar,'controller','Usuario');
-                                            insertacampo(document.formenviar,'action','showAll');
+                                            insertacampo(document.formenviar,'action','show');
                                             enviaform(document.formenviar);">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
                                             insertacampo(document.formulariosearch,'controller','Usuario');
-                                            insertacampo(document.formulariosearch,'action','SEARCH');
+                                            insertacampo(document.formulariosearch,'action','show');
                                             enviaformcorrecto(document.formulariosearch,check_SEARCH());">
                                         Enviar
                                     </a>
