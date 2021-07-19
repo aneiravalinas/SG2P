@@ -60,17 +60,43 @@ arrayGA = {
         'i18n-users': 'Usuarios',
         'i18n-profile' : 'Meu Perfil',
 
+        // USER VIEWS
+        'i18n-dni' : 'DNI',
+        'i18n-rol' : 'Rol',
+        'i18n-details' : 'Detalles',
+        'i18n-edit' : 'Editar',
+        'i18n-delete' : 'Eliminar',
+        'i18n-f-administrador' : 'Administrador',
+        'i18n-f-edificio' : 'Resp. Edificio',
+        'i18n-f-organizacion' : 'Resp. Organizacion',
+        'i18n-f-registrado' : 'Usuario Registrado',
+        'i18n-search-users' : 'Búsqueda de Usuarios',
+        'i18n-nombre' : 'Nome',
+        'i18n-apellidos' : 'Apelidos',
+        'i18n-telefono' : 'Telefono',
+        'i18n-email' : 'Email',
+        'i18n-cancelar' : 'Cancelar',
+        'i18n-enviar' : 'Enviar',
+        'i18n-todos' : 'Todos',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Aviso!',
             'p-modal' : 'O campo ',
             'm-username' : ' Nome de Usuario ',
             'm-password' : ' Contrasinal ',
+            'm-dni' : ' DNI ',
+            'm-nombre' : ' Nome ',
+            'm-telefono' : ' Teléfono ',
+            'm-email' : ' Email ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',
             'i18n-only-letters-numbers' : 'só pode conter letras e números',
             'i18n-not-empty' : 'non pode ser vacío',
+            'i18n-generic-format' : 'ten un formato incorrecto',
+            'i18n-letters-spaces-accents-format' : 'só admite letras, espacios e acentos',
+            'i18n-numbers-format' : 'só pode conter números',
 
 
 }

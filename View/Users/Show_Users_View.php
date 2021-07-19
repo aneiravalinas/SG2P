@@ -19,17 +19,21 @@ class Show_Users {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1 class="mb-4">Usuarios</h1>
+                        <h1 class="mb-4 i18n-users">Usuarios</h1>
                     </div>
                 </div>
 
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 flex-wrap d-flex justify-content-end" id="search_add">
                         <div>
-                            <a href="index.html">
+                            <a type="button" onclick="
+                                    crearform('formenviar','post');
+                                    insertacampo(document.formenviar,'controller','Usuario');
+                                    insertacampo(document.formenviar,'action','searchForm');
+                                    enviaform(document.formenviar);">
                                 <span class="iconify option_button" data-icon="fluent:search-square-24-filled" data-inline="false"></span>
                             </a>
-                            <a href="index.html">
+                            <a type="button">
                                 <span class="iconify option_button" data-icon="gridicons-add" data-inline="false"></span>
                             </a>
                         </div>
@@ -41,9 +45,9 @@ class Show_Users {
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">DNI</th>
-                                    <th scope="col">Usuario</th>
-                                    <th scope="col">Rol</th>
+                                    <th scope="col" class="i18n-dni">DNI</th>
+                                    <th scope="col" class="i18n-username">Usuario</th>
+                                    <th scope="col" class="i18n-rol">Rol</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -52,20 +56,20 @@ class Show_Users {
                                 <tr>
                                     <td><?php echo $user['dni']?></td>
                                     <td><?php echo $user['username']?></td>
-                                    <td><?php echo $user['rol']?></td>
+                                    <td class="i18n-f-<?php echo $user['rol']?>"></td>
                                     <td>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
                                                 <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Detalles</a>
+                                                <a class="dropdown-item i18n-details" type="button">Detalles</a>
                                             <?php if(es_admin()) :?>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Editar</a>
-                                                <a class="dropdown-item" href="#">Eliminar</a>
-                                            </div>
+                                                <a class="dropdown-item i18n-edit" type="button">Editar</a>
+                                                <a class="dropdown-item i18n-delete" type="button">Eliminar</a>
                                             <?php endif;?>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -80,6 +84,7 @@ class Show_Users {
     <?php
         include './View/Page/footer.php';
     }
+
 }
 
 ?>

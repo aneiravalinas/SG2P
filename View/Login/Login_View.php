@@ -20,18 +20,18 @@ class Login_View {
                                 <form name="formulariologin" method="post">
                                     <div class="form-group login-forms">
                                         <label for="username" class="i18n-username">Username</label>
-                                        <input type="text" class="form-control" id="username" name="username" onblur="if(not_empty('username')) check_letters_numbers('username',20);"/>
+                                        <input type="text" class="form-control" id="username" name="username" onblur="check_USERNAME();"/>
                                     </div>
                                     <div class="form-group login-forms">
                                         <label for="password" class="i18n-password">Password</label>
-                                        <input type="password" class="form-control" id="password" name="password" onblur="not_empty('password');"/>
+                                        <input type="password" class="form-control" id="password" name="password" onblur="check_PASSWORD();"/>
                                     </div>
                                 </form>
                                 <div class="text-center">
                                     <a class="btn-get-started i18n-login" type="button" onclick=
                                         "insertacampo(document.formulariologin,'controller','Login');
                                          insertacampo(document.formulariologin,'action','login');
-                                         enviaformcorrecto(document.formulariologin, check_login());">
+                                         enviaformcorrecto(document.formulariologin, check_LOGIN());">
                                             Login
                                     </a>
                                 </div>
@@ -42,26 +42,6 @@ class Login_View {
             </div>
         </section>
 
-        <script>
-            var username = document.getElementById("username");
-            username.addEventListener("keydown", function(event) {
-                if (event.keyCode === 13) {
-                    event.preventDefault();
-                    insertacampo(document.formulariologin,'action','login');
-                    insertacampo(document.formulariologin,'controller','Login');
-                    enviaformcorrecto(document.formulariologin, check_login());
-                }
-            });
-            var password = document.getElementById("password");
-            password.addEventListener("keydown", function(event) {
-                if (event.keyCode === 13) {
-                    event.preventDefault();
-                    insertacampo(document.formulariologin,'action','login');
-                    insertacampo(document.formulariologin,'controller','Login');
-                    enviaformcorrecto(document.formulariologin, check_login());
-                }
-            });
-        </script>
 
 <?php
         include './View/Page/footer.php';

@@ -26,6 +26,66 @@ class Usuario_Validation extends Validator {
         return $this->validar_PASSWORD();
     }
 
+    function validar_atributos_search() {
+        $validacion = array('ok' => true, 'code' => '00000', 'resource' => 'USUARIO');
+        if($this->dni !== '') {
+            $validacion = $this->validar_DNI();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->username !== '') {
+            $validacion = $this->validar_USERNAME();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->rol !== '') {
+            $validacion = $this->validar_ROL();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->nombre !== '') {
+            $validacion = $this->validar_NOMBRE();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->apellidos !== '') {
+            $validacion = $this->validar_APELLIDOS();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->email !== '') {
+            $validacion = $this->validar_EMAIL();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->telefono !== '') {
+            $validacion = $this->validar_TELEFONO();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        return $validacion;
+    }
+
+
+    function validar_DNI() {
+        //TODO: Verificar no vacío, Formato DNI.
+    }
+
+
     function validar_USERNAME() {
         if(!$this->longitud_minima($this->username,3)) {
             return $this->rellena_validation(false,'01102','USUARIO');
@@ -57,5 +117,26 @@ class Usuario_Validation extends Validator {
         }
 
         return $this->rellena_validation(true,'00000','USUARIO');
+    }
+
+
+    function validar_ROL() {
+        // TODO: Verificar no vacío. El valor debe ser uno de los contemplados: registrado, edificio, organizacion, adminsitrador.
+    }
+
+    function validar_NOMBRE() {
+        // TODO: Verificar no vacío, letras espacios y acentos. Tamaño mínimo 3, tamaño máximo 20.
+    }
+
+    function validar_APELLIDOS() {
+        // TODO: Verificar no vacío, letras espacios y acentos. Tamaño mínimo 3, tamaño máximo 60.
+    }
+
+    function validar_EMAIL() {
+        // TODO: Verificar no vacío y formato email correcto.
+    }
+
+    function validar_TELEFONO() {
+        // TODO: Verificar no vacío, sólo dígitos y que empiece por 6,7,8,9 (formato).
     }
 }

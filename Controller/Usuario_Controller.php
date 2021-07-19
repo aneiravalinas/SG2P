@@ -18,4 +18,13 @@ class Usuario {
         }
 
     }
+
+    function searchForm() {
+        include_once './View/Users/Search_User_View.php';
+        new Search_User();
+    }
+
+    function SEARCH() {
+        var_dump($_POST);
+    }
 }

@@ -41,7 +41,6 @@ arrayES = {
         'i18n-login' : 'Iniciar Sesión',
         'i18n-admin' : 'Panel de Administración',
         'i18n-logout' : 'Desconectar',
-        'i18n-app-welcome' : '¡Bienvenido a SG2P!',
 
         // PORTAL_COUNTRIES
         'i18n-app-welcome' : '¡Bienvenido a SG2P!',
@@ -61,15 +60,41 @@ arrayES = {
         'i18n-users': 'Usuarios',
         'i18n-profile' : 'Mi Perfil',
 
+        // USER VIEWS
+        'i18n-dni' : 'DNI',
+        'i18n-rol' : 'Rol',
+        'i18n-details' : 'Detalles',
+        'i18n-edit' : 'Editar',
+        'i18n-delete' : 'Eliminar',
+        'i18n-f-administrador' : 'Administrador',
+        'i18n-f-edificio' : 'Resp. Edificio',
+        'i18n-f-organizacion' : 'Resp. Organizacion',
+        'i18n-f-registrado' : 'Usuario Registrado',
+        'i18n-search-users' : 'Búsqueda de Usuarios',
+        'i18n-nombre' : 'Nombre',
+        'i18n-apellidos' : 'Apellidos',
+        'i18n-telefono' : 'Telefono',
+        'i18n-email' : 'Email',
+        'i18n-cancelar' : 'Cancelar',
+        'i18n-enviar' : 'Enviar',
+        'i18n-todos' : 'Todos',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Aviso!',
             'p-modal' : 'El campo ',
             'm-username' : ' Nombre de usuario ',
             'm-password' : ' Contraseña ',
+            'm-dni' : ' DNI ',
+            'm-nombre' : ' Nombre ',
+            'm-telefono' : ' Teléfono ',
+            'm-email' : ' Email ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',
             'i18n-only-letters-numbers' : 'sólo puede contener letras y números',
             'i18n-not-empty' : 'no puede ser vacío',
+            'i18n-generic-format' : 'tiene un formato incorrecto',
+            'i18n-letters-spaces-accents-format' : 'solo admite letras, espacios y acentos',
+            'i18n-numbers-format' : 'sólo puede contener números',
 }

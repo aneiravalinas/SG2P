@@ -60,15 +60,41 @@ arrayEN = {
         'i18n-users': 'Users',
         'i18n-profile' : 'My Profile',
 
+        // USER VIEWS
+        'i18n-dni' : 'DNI',
+        'i18n-rol' : 'Role',
+        'i18n-details' : 'Details',
+        'i18n-edit' : 'Edit',
+        'i18n-delete' : 'Delete',
+        'i18n-f-administrador' : 'Administrator',
+        'i18n-f-edificio' : 'Building Manager',
+        'i18n-f-organizacion' : 'Organization Manager',
+        'i18n-f-registrado' : 'Registered User',
+        'i18n-search-users' : 'Users Search',
+        'i18n-nombre' : 'Name',
+        'i18n-apellidos' : 'Surname',
+        'i18n-telefono' : 'Phone',
+        'i18n-email' : 'Email',
+        'i18n-cancelar' : 'Cancel',
+        'i18n-enviar' : 'Send',
+        'i18n-todos' : 'All',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Warning!',
             'p-modal' : 'The field ',
             'm-username' : ' Username ',
             'm-password' : ' Password ',
+            'm-dni' : ' DNI ',
+            'm-nombre' : ' Name ',
+            'm-telefono' : ' Phone ',
+            'm-email' : ' Email ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',
             'i18n-only-letters-numbers' : 'can only contain letters and numbers',
             'i18n-not-empty' : 'cannot be empty',
+            'i18n-generic-format' : 'has a wrong format',
+            'i18n-letters-spaces-accents-format' : 'only supports letters, spaces and accents',
+            'i18n-numbers-format' : 'can only contain numbers',
 }
