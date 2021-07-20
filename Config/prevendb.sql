@@ -14,7 +14,7 @@ CREATE TABLE USUARIO
 	`apellidos` VARCHAR(60) NOT NULL,
 	`email` VARCHAR(50) NOT NULL,
 	`telefono` VARCHAR(9) NOT NULL,
-	`foto_perfil` VARCHAR(20) NULL,
+	`foto_perfil` VARCHAR(40) NULL,
 
 	CONSTRAINT `pk_usuario` PRIMARY KEY (`dni`),
 	CONSTRAINT `uq_user_username` UNIQUE (`username`),

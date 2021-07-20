@@ -1,6 +1,9 @@
+// Siguiente código de error: 01142
+// Siguiente código de éxito: 01011
+
 arrayES = {
     // Generales de la Base de Datos
-    '00001' : 'Éxito en la ejecición del SQL',
+    '00001' : 'Éxito en la ejecución del SQL',
     '00002' : 'El recordset viene vacío',
     '00003' : 'El recordset viene con datos',
     '00004' : 'Error al conectar con la base de datos. Contacte con su administrador',
@@ -24,6 +27,19 @@ arrayES = {
         '01006' : 'Se ha añadido el usuario correctamente',
         '01131' : 'Error al añadir usuario',
 
+        // DELETE
+        '01007' : 'Usuario eliminado con éxito',
+        '01135' : 'No se puede eliminar a un usuario que tenga asignados edificios',
+        '01136' : 'No se puede eliminar al usuario. Siempre debe existir al menos un responsable de la organización',
+        '01137' : 'No se puede eliminar al usuario. Siempre debe existir al menos un administrador',
+        '01138' : 'Error al eliminar al usuario',
+
+        // EDIT
+        '01010' : 'Usuario editado con éxito',
+        '01139' : 'No se puede modificar el rol. El usuario es el único responsable de la organización',
+        '01140' : 'No se puede modificar el rol. El usuario es el único adminsitrador de la aplicación',
+        '01141' : 'Error al editar al usuario',
+
         // Búsqueda por Username
         '01000' : 'El nombre de usuario ya existe',
         '01100' : 'El nombre de usuario introducido no existe',
@@ -43,6 +59,10 @@ arrayES = {
         '01005' : 'El telefono introducido ya existe',
         '01129' : 'El telefono introducido no existe',
         '01130' : 'Error al consultar por telefono',
+
+        // Mas de un usuario por rol
+        '01008' : 'Hay más de un usuario con el rol indicado',
+        '01138' : 'Hay menos de un usuario con el rol indicado',
 
 
         // Validaciones
@@ -82,6 +102,11 @@ arrayES = {
             // Telefono
             '01122' : 'Es necesario especificar un numero de telefono',
             '01123' : 'Formato de numero de telefono incorrecto',
+
+            // Foto_Perfil
+            '01132' : 'Error al subir la foto de perfil',
+            '01133' : 'La extensión de la imágen no está permitida',
+            '01134' : 'El tamaño de la imágen es superior a la permitida (100kb)',
 
 
     // INTERFAZ
@@ -130,6 +155,8 @@ arrayES = {
         'i18n-add-users' : 'Añadir Usuario',
         'i18n-selecciona-rol' : 'Selecciona un Rol',
         'i18n-foto_perfil' : 'Foto de Perfil',
+        'i18n-del-confirm' : '¿Está seguro que desea eliminar a este usuario? La acción no será reversible',
+        'i18n-edit-user' : 'Editar Usuario',
 
         // MODAL
             // Campos Modal
@@ -142,6 +169,8 @@ arrayES = {
             'm-telefono' : ' Teléfono ',
             'm-email' : ' Email ',
             'm-rol' : ' Rol ',
+            'm-apellidos' : ' Apellidos ',
+            'm-foto_perfil' : ' Foto de Perfil ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',
@@ -151,4 +180,5 @@ arrayES = {
             'i18n-letters-spaces-accents-format' : 'solo admite letras, espacios y acentos',
             'i18n-numbers-format' : 'sólo puede contener números',
             'i18n-wrong-enum' : 'tiene un valor no contemplado',
+            'i18n-ext-not-allowed' : 'tiene una extensión no permitida',
 }

@@ -81,7 +81,7 @@ function check_dni(element) {
     var str = document.getElementById(element).value.toString().toUpperCase();
 
     if (!nifRexp.test(str) && !nieRexp.test(str)){
-        openModal(element, 'i18n-dni-format');
+        openModal(element, 'i18n-generic-format');
         correct = false;
     }
     else{
@@ -97,7 +97,7 @@ function check_dni(element) {
             correct = true;
         }
         else{
-            openModal(element, 'i18n-dni-format');
+            openModal(name, 'i18n-generic-format');
             correct =  false;
         }
     }
@@ -247,4 +247,21 @@ function check_only_numbers(element, size) {
         document.getElementById(element).style.borderColor = 'red';
         return false;
     }
+}
+
+function check_imagen(element) {
+    var value = document.getElementById(element).value;
+    var allowed_extensions = new Array('.jpg','.jpeg','.png');
+
+    if(value.length !== 0) {
+        extension = value.substring(value.lastIndexOf('.')).toLowerCase();
+        if(allowed_extensions.includes(extension)) {
+            return true;
+        } else {
+            openModal(document.getElementById(element).name,'i18n-ext-not-allowed');
+            return false;
+        }
+    }
+
+    return true;
 }

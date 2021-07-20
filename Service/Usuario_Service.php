@@ -10,7 +10,7 @@ class Usuario_Service extends Usuario_Validation {
 
     function __construct() {
         $this->user_entity = new Usuario_Model();
-        $this->atributos = array('dni','username','password','rol','nombre','apellidos','email','telefono','foto_perfil');
+        $this->atributos = array('dni','username','password','rol','nombre','apellidos','email','telefono');
         $this->fill_fields();
     }
 
@@ -22,6 +22,12 @@ class Usuario_Service extends Usuario_Validation {
                 $this->$atributo = '';
             }
         }
+
+        if(isset($_FILES['foto_perfil']['name'])) {
+            $this->foto_perfil = $_FILES['foto_perfil']['name'];
+        } else {
+            $this->foto_perfil = '';
+        }
     }
 
     function login() {
@@ -31,7 +37,8 @@ class Usuario_Service extends Usuario_Validation {
             return $validation;
         }
 
-        if($this->user_exist()) {
+        $this->feedback = $this->seekByUsername();
+        if($this->feedback['ok']) {
             $user = $this->feedback['resource'];
             if($this->password === $user['password']) {
                 if(!isset($_SESSION)) {
@@ -74,7 +81,11 @@ class Usuario_Service extends Usuario_Validation {
 
     function ADD() {
 
-        // TODO: Make some validations here...
+        $validacion = $this->validar_atributos_add();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
         if($this->rol === 'edificio') {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = '01124'; // No se permite la asignación manual del rol Resp. Edificio
@@ -82,27 +93,195 @@ class Usuario_Service extends Usuario_Validation {
         }
 
         $this->feedback = $this->uq_attributes_not_exist();
-        if($this->feedback['ok']) {
-            if ($this->uploadPhoto()) {
-                $this->user_entity->foto_perfil = $this->foto_perfil;
-                $this->feedback = $this->user_entity->ADD();
-                if ($this->feedback['ok']) {
-                    $this->feedback['code'] = '01006';
-                    return $this->feedback;
+
+        if($this->feedback['ok']) { // Si ninguno de los atributos únicos existen
+            if($this->foto_perfil !== '') { // Si se ha añadido una foto de perfil.
+                if ($this->uploadPhoto()) { // Subir foto de perfil
+                    $this->user_entity->foto_perfil = $this->foto_perfil; // Se modifica el nombre de la foto de perfil con id generado al subirla.
+                    $this->feedback = $this->user_entity->ADD(); // Método ADD del modelo
+                    if ($this->feedback['ok']) {
+                        $this->feedback['code'] = '01006'; // Usuario añadido con éxito.
+                    } else {
+                        $this->deletePhoto($this->foto_perfil); // Si no se pudo añadir al usuario se borra la foto de perfil
+                        if ($this->feedback['code'] !== '00005') { // No es un error del gestor...
+                            $this->feedback['code'] = '01131'; // Error al añadir usuario
+                        }
+                    }
+                } else { // Error al subir la foto de perfil
+                    $this->feedback['ok'] = false;
+                    $this->feedback['code'] = '01132'; // Error al subir la foto de perfil.
+                }
+            } else { // No se ha añadido una foto de perfil
+                $this->feedback = $this->user_entity->ADD(); // Método ADD del modelo.
+                if($this->feedback['ok']) {
+                    $this->feedback['code'] = '01006'; // Usuario añadido con éxito.
                 } else {
-                    $this->deletePhoto($this->foto_perfil);
-                    if ($this->feedback['code'] !== '00005') {
-                        $this->feedback['code'] = '01131';
+                    if($this->feedback['code'] !== '00005') { // No es un error del gestor...
+                        $this->feedback['code'] = '01131'; // Error al añadir usuario
                     }
                 }
             }
         }
+
+        return $this->feedback;
     }
 
-    function user_exist() {
-        $this->feedback = $this->seekByUsername();
-        return $this->feedback['code'] == '01000'; // El nombre de usuario existe
+    function EDIT() {
+        $validation = $this->validar_atributos_edit();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByUsername(); // Buscamos datos originales del usuario.
+
+        if($this->feedback['ok']) {
+            $user = $this->feedback['resource'];
+            if($this->email != $user['email']) {
+                $this->feedback = $this->seekByEmail(); // Si se ha modificado el email y este ya existe.
+                if($this->feedback['ok']) {
+                    $this->feedback['ok'] = false;
+                    return $this->feedback;
+                }
+            }
+
+            if($this->telefono != $user['telefono']) {
+                $this->feedback = $this->seekByTelefono(); // Si se ha modificado el telefono y este ya existe.
+                if($this->feedback['ok']) {
+                    $this->feedback['ok'] = false;
+                    return $this->feedback;
+                }
+            }
+
+            // Si el rol antiguo o el nuevo rol es de tipo responsable de edificio, y no son iguales (se ha producido un cambio)
+            if(($user['rol'] == 'edificio' || $this->rol == 'edificio') && ($user['rol'] != $this->rol)) {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = '01124'; // No se permite la asignación manual del rol Resp. Edificio
+                return $this->feedback;
+            }
+
+            // Si se cambia el rol desde responsable organización, y no quedan más usuarios de ese tipo...
+            if(($user['rol'] == 'organizacion') && ($this->rol != 'organizacion')) {
+                $this->feedback = $this->check_more_than_one('organizacion');
+                if(!$this->feedback['ok']) {
+                    $this->feedback['code'] = '01139'; // No se puede modificar el rol. El usuario es el único responsable de la organización
+                    return $this->feedback;
+                }
+            }
+
+            // Si se cambia el rol desde administrador, y no quedan más usuarios de ese tipo...
+            if(($user['rol'] == 'administrador') && ($this->rol != 'administrador')) {
+                $this->feedback = $this->check_more_than_one('adminsitrador');
+                if(!$this->feedback['ok']) {
+                    $this->feedback['code'] = '01140'; // No se puede modificar el rol. El usuario es el único adminsitrador de la aplicación
+                    return $this->feedback;
+                }
+            }
+
+
+            if($this->foto_perfil != '') { // Si se ha subido una foto de perfil.
+                if($this->uploadPhoto()) { // Si la foto se sube correctamente.
+                    $this->deletePhoto($user['foto_perfil']); // Borramos la foto anterior.
+                    $this->user_entity->foto_perfil = $this->foto_perfil; // Modificamos en la entidad el nombre de la foto por el nuevo nombre generado
+                } else {
+                    $this->feedback['ok'] = false;
+                    $this->feedback['code'] = '01132'; // Error al subir la foto de perfil.
+                    return $this->feedback;
+                }
+            }
+
+            $this->feedback = $this->user_entity->EDIT(); // Llamamos al EDIT de la entidad
+            if($this->feedback['ok']) {
+                if(($this->username == $_SESSION['username']) && ($this->rol != $_SESSION['rol'])) { // Si el administrador se modifica a sí mismo, y se ha cambiado el rol.
+                    $_SESSION['rol'] = $this->rol; // Añadimos nuevo rol a la SESSION.
+                }
+                $this->feedback['code'] = '01010'; // Usuario editado correctamente.
+            } else if($this->feedback['code'] !== '00005') {
+                $this->feedback['code'] = '01141'; // Error al editar al usuario
+            }
+        }
+
+        return $this->feedback;
     }
+
+    function editForm() {
+        $validation = $this->validar_USERNAME(); // Validamos formato del nombre de usuario.
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByUsername(); // Buscamos por nombre de usuario
+        return $this->feedback;
+    }
+
+    function deleteForm() {
+
+        $validation = $this->validar_USERNAME(); // Validamos formato del nombre de usuario.
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByUsername(); // Buscamos por nombre de usuario
+        return $this->feedback;
+    }
+
+    function DELETE() {
+        $validation = $this->validar_USERNAME();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByUsername();
+        if($this->feedback['ok']) {
+            $user = $this->feedback['resource'];
+            if($user['rol'] == 'edificio') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = '01135'; // No se puede eliminar a un usuario que tenga asignados edificios.
+                return $this->feedback;
+            }
+
+            if($user['rol'] == 'organizacion') {
+                $this->feedback = $this->check_more_than_one('organizacion');
+                if(!$this->feedback['ok']) {
+                    $this->feedback['code'] = '01136'; // No se puede eliminar al usuario. Siempre debe existir al menos un responsable de la organización
+                    return $this->feedback;
+                }
+            } else if($user['rol'] == 'administrador') {
+                $this->feedback = $this->check_more_than_one('administrador');
+                if(!$this->feedback['ok']) {
+                    $this->feedback['code'] = '01137'; // No se puede eliminar al usuario. Siempre debe existir al menos un administrador
+                    return $this->feedback;
+                }
+            }
+
+            $this->feedback = $this->user_entity->DELETE();
+            if($this->feedback['ok']) {
+                $this->feedback['code'] = '01007'; // Usuario eliminado con éxito.
+                if($this->username == $_SESSION['username']) {
+                    session_destroy();
+                }
+                if($user['foto_perfil'] != '') {
+                    $this->deletePhoto($user['foto_perfil']); // Si hay foto de perfil, se elimina.
+                }
+            } else if($this->feedback['core'] !== '00005') {
+                $this->feedback['core'] = '01138'; // Error al eliminar al usuario.
+            }
+
+        }
+
+        return $this->feedback;
+    }
+
+    function check_more_than_one($rol) {
+        $this->feedback = $this->user_entity->searchByRol($rol);
+        if(sizeof($this->feedback['resource']) <= 1) {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = '01139'; // Menos de un usuario por rol
+        } else {
+            $this->feedback['code'] = '01007'; // Más de un usuario por rol
+        }
+        return $this->feedback;
+    }
+
 
     function uq_attributes_not_exist() {
         $this->feedback = $this->seekByDNI();
@@ -124,10 +303,12 @@ class Usuario_Service extends Usuario_Validation {
         }
 
         $this->feedback = $this->seekByTelefono();
-        if($this->feedback['ok']) { // No hace falta validar el código al devolverse ahora el feedback.
+        if($this->feedback['ok'] || $this->feedback['code'] !== '01129') { // Si el telefono existe o se ha producido un error en la consulta (resultado false distinto a 01129)
             $this->feedback['ok'] = false;
+            return $this->feedback;
         }
 
+        $this->feedback['ok'] = true; // No existe ninguno de los atributos
         return $this->feedback;
     }
 
@@ -200,18 +381,19 @@ class Usuario_Service extends Usuario_Validation {
         $temp = $_FILES['foto_perfil']['tmp_name'];
         $path = $_FILES['foto_perfil']['name'];
         $ext = pathinfo($path)['extension'];
-        $file = uniqid() . '.' . $ext;
-        if(move_uploaded_file($temp, profile_photos_path . $file)) {
-            chmod(profile_photos_path . $file, 0777);
-            $this->foto_perfil = $file;
-            return true;
+        $filename = pathinfo($path)['filename']; // Obtenemos el nombre de la imagen.
+        $file = $filename . '_' . uniqid() . '.' . $ext; // Nuevo nombre de la imágen: 'NombreAnterior_ID.ext'
+        if(move_uploaded_file($temp, profile_photos_path . $file)) { // Se almacena la imágen en servidor
+            //chmod(profile_photos_path . $file, 0777);
+            $this->foto_perfil = $file; // Se almacena le nuevo nombre de imágen generado.
+            return true; // Imágen subida con éxito.
+        } else {
+            return false; // Error al subir la imágen
         }
-
-        return false;
     }
 
     function deletePhoto($photo) {
-        return unlink(profile_photos_path . $photo);
+        return unlink(profile_photos_path . $photo); // Elimina la imágen pasada como parámetro. Devuelve true en caso de éxito.
     }
 }
 

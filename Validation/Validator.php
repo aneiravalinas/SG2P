@@ -142,4 +142,16 @@ abstract class Validator {
         return preg_match('/^[6-9][0-9]{8}$/', $telefono);
     }
 
+    function extension_imagen($field_name) {
+        $extensiones = array('jpg','jpeg','png');
+        $path = $_FILES[$field_name]['name'];
+        $extension = pathinfo($path)['extension'];
+
+        return in_array($extension,$extensiones);
+    }
+
+    function tamanho_max_imagen($field_name, $size) {
+        return ($_FILES[$field_name]['size'] <= $size);
+    }
+
 }

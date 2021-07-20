@@ -24,6 +24,19 @@ arrayGA = {
         '01006' : 'O usuario engadiuse correctamente',
         '01131' : 'Error ó engadir o usuario',
 
+        // DELETE
+        '01007' : 'Usuario eliminado con éxito',
+        '01135' : 'Non se pode eliminar a un usuario que teña asignados edificios',
+        '01136' : 'Non se pode eliminar ó usuario. Sempre debe existir polo menos un responsable da organización',
+        '01137' : 'Non se pode eliminar ó usuario. Sempre debe existir polo menos un administrador',
+        '01138' : 'Error o eliminar ó usuario',
+
+        // EDIT
+        '01010' : 'Usuario editado con éxito',
+        '01139' : 'Non se pode modificar o rol. O usuario é o único responsable da organización',
+        '01140' : 'Non se pode modificar o rol. O usuario é o único adminsitrador da aplicación',
+        '01141' : 'Error al editar al usuario',
+
         // Búsqueda por Username
         '01000' : 'O nome de usuario xa existe',
         '01100' : 'O nome de usuario introducido non existe',
@@ -43,6 +56,10 @@ arrayGA = {
         '01005' : 'O telefono introducido xa existe',
         '01129' : 'O telefono introducido non existe',
         '01130' : 'Error ó consultar por telefono',
+
+        // Mas de un usuario por rol
+        '01008' : 'Hay máis dun usuario co rol indicado',
+        '01138' : 'Hay menos dun usuario co rol indicado',
 
         // Validaciones
 
@@ -81,6 +98,11 @@ arrayGA = {
             // Telefono
             '01122' : 'É necesario especificar un numero de telefono',
             '01123' : 'Formato de numero de telefono incorrecto',
+
+            // Foto_Perfil
+            '01132' : 'Error ó subir a foto de perfil',
+            '01133' : 'A extensión da imáxen non está permitida',
+            '01134' : 'O tamaño da imáxen é superior a permitida (100kb)',
 
 
 
@@ -132,6 +154,8 @@ arrayGA = {
         'i18n-add-users' : 'Engadir Usuario',
         'i18n-selecciona-rol' : 'Selecciona un Rol',
         'i18n-foto_perfil' : 'Foto de Perfil',
+        'i18n-del-confirm' : '¿Está seguro de que quere eliminar a este usuario? A acción non será reversible',
+        'i18n-edit-user' : 'Edit User',
 
         // MODAL
             // Campos Modal
@@ -144,6 +168,8 @@ arrayGA = {
             'm-telefono' : ' Teléfono ',
             'm-email' : ' Email ',
             'm-rol' : ' Rol ',
+            'm-apellidos' : ' Apelidos ',
+            'm-foto_perfil' : ' Foto de Perfil ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',
@@ -153,6 +179,7 @@ arrayGA = {
             'i18n-letters-spaces-accents-format' : 'só admite letras, espacios e acentos',
             'i18n-numbers-format' : 'só pode conter números',
             'i18n-wrong-enum' : 'ten un valor non contemplado',
+            'i18n-ext-not-allowed' : 'ten unha extensión non permitida',
 
 
 }

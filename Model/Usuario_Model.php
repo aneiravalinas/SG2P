@@ -61,14 +61,31 @@ class Usuario_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function EDIT()
-    {
-        // TODO: Implement EDIT() method.
+    function EDIT() {
+        $this->query = "
+            UPDATE USUARIO SET " .
+                ($this->password == '' ? "" : "password = '$this->password', ") .
+                ($this->rol == '' ? "" : "rol = '$this->rol', ") .
+                ($this->nombre == '' ? "" : "nombre = '$this->nombre', ") .
+                ($this->apellidos == '' ? "" : "apellidos = '$this->apellidos', ") .
+                ($this->email == '' ? "" : "email = '$this->email', ") .
+                ($this->telefono == '' ? "" : "telefono = '$this->telefono', ") .
+                ($this->foto_perfil == '' ? "" : "foto_perfil = '$this->foto_perfil', ") .
+            " WHERE username = '$this->username'";
+
+        $this->execute_single_query();
+
+        return $this->feedback;
     }
 
-    function DELETE()
-    {
-        // TODO: Implement DELETE() method.
+    function DELETE() {
+        $this->query = "
+            DELETE FROM USUARIO
+            WHERE username = '$this->username';
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function SEARCH() {
@@ -106,6 +123,16 @@ class Usuario_Model extends Abstract_Model {
             WHERE $key = '$value'";
 
         $this->get_one_result_from_query();
+        return $this->feedback;
+    }
+
+    function searchByRol($rol) {
+        $this->query = "
+            SELECT * FROM USUARIO
+            WHERE rol = '$rol'
+        ";
+
+        $this->get_results_from_query();
         return $this->feedback;
     }
 

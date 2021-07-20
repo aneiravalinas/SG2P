@@ -24,6 +24,19 @@ arrayEN = {
         '01006' : 'The user was added successfully',
         '01131' : 'Error adding user',
 
+        // DELETE
+        '01007' : 'User deleted successfully',
+        '01135' : 'You cannot delete a user who has buildings assigned',
+        '01136' : 'The user cannot be deleted. There must always be at least one person in charge of the organization',
+        '01137' : 'The user cannot be deleted. There must always be at least one administrator',
+        '01138' : 'Failed to delete user',
+
+        // EDIT
+        '01010' : 'User edited successfully',
+        '01139' : 'The role cannot be modified. The user is solely responsible for the organization',
+        '01140' : 'The role cannot be modified. The user is the only administrator of the application',
+        '01141' : 'Error editing user',
+
         // Búsqueda por Username
         '01000' : 'The username already exist',
         '01100' : 'The username entered does not exist',
@@ -43,6 +56,10 @@ arrayEN = {
         '01005' : 'The phone number already exist',
         '01129' : 'The phone number entered does not exist',
         '01130' : 'Query by phone number failed',
+
+        // Mas de un usuario por rol
+        '01008' : 'There is more than one user with the indicated role',
+        '01138' : 'There is less than one user with the indicated role',
 
         // Validaciones
 
@@ -81,6 +98,11 @@ arrayEN = {
             // Telefono
             '01122' : 'Phone number cannot be empty',
             '01123' : 'Wrong phone number format',
+
+            // Foto_Perfil
+            '01132' : 'Error while uploading the profile picture',
+            '01133' : 'Image extension is not allowed',
+            '01134' : 'Image size is larger than allowed (100kb)',
 
 
 
@@ -130,6 +152,8 @@ arrayEN = {
         'i18n-add-users' : 'Add User',
         'i18n-selecciona-rol' : 'Select a Role',
         'i18n-foto_perfil' : 'Profile Photo',
+        'i18n-del-confirm' : 'Are you sure you want to delete this user? The action will not be reversible',
+        'i18n-edit-user' : 'Editar Usuario',
 
         // MODAL
             // Campos Modal
@@ -142,6 +166,8 @@ arrayEN = {
             'm-telefono' : ' Phone ',
             'm-email' : ' Email ',
             'm-rol' : ' Role ',
+            'm-apellidos' : ' Surname ',
+            'm-foto_perfil' : ' Profile Photo ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',
@@ -151,4 +177,5 @@ arrayEN = {
             'i18n-letters-spaces-accents-format' : 'only supports letters, spaces and accents',
             'i18n-numbers-format' : 'can only contain numbers',
             'i18n-wrong-enum' : 'has a value not contemplated',
+            'i18n-ext-not-allowed' : 'has a not allowed extension',
 }

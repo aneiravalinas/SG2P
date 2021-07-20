@@ -70,8 +70,21 @@ class Show_Users {
                                                 <a class="dropdown-item i18n-details" type="button">Detalles</a>
                                             <?php if(es_admin()) :?>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item i18n-edit" type="button">Editar</a>
-                                                <a class="dropdown-item i18n-delete" type="button">Eliminar</a>
+                                                <a class="dropdown-item i18n-edit" type="button" onclick="
+                                                    crearform('formenviar','post');
+                                                        insertacampo(document.formenviar, 'username', '<?php echo $user['username'] ?>');
+                                                        insertacampo(document.formenviar, 'controller','Usuario');
+                                                        insertacampo(document.formenviar, 'action', 'editForm');
+                                                        enviaform(document.formenviar);">
+                                                    Editar
+                                                </a>
+                                                <a class="dropdown-item i18n-delete" type="button" onclick="
+                                                    crearform('formenviar','post');
+                                                        insertacampo(document.formenviar,'username', '<?php echo $user['username'] ?>');
+                                                        insertacampo(document.formenviar,'controller','Usuario');
+                                                        insertacampo(document.formenviar,'action','deleteForm');
+                                                        enviaform(document.formenviar);">
+                                                    Eliminar</a>
                                             <?php endif;?>
                                             </div>
                                         </div>

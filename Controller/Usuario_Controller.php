@@ -34,10 +34,6 @@ class Usuario {
     }
 
     function add() {
-        $path = $_FILES['foto_perfil']['name'];
-        $ext = pathinfo($path)['extension'];
-        var_dump($ext);
-        end();
         if(es_admin()) {
             $user_service = new Usuario_Service();
             $feedback = $user_service->ADD();
@@ -46,5 +42,56 @@ class Usuario {
             new Message('00006','Portal','deshboard');
         }
     }
+
+    function deleteForm() {
+        if(es_admin()) {
+            $user_service = new Usuario_Service();
+            $feedback = $user_service->deleteForm();
+            if($feedback['ok']) {
+                include_once './View/Users/Delete_User_View.php';
+                new Delete_User($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'Usuario','show');
+            }
+        } else {
+            new Message('00006','Portal','deshboard');
+        }
+    }
+
+    function delete() {
+        if(es_admin()) {
+            $user_service = new Usuario_Service();
+            $feedback = $user_service->DELETE();
+            new Message($feedback['code'], 'Usuario','show');
+        } else {
+            new Message('00006','Portal','deshboard');
+        }
+    }
+
+    function editForm() {
+        if(es_admin()) {
+            $user_service = new Usuario_Service();
+            $feedback = $user_service->editForm();
+            if ($feedback['ok']) {
+                include './View/Users/Edit_User_View.php';
+                new Edit_User($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'Usuario', 'show');
+            }
+        } else {
+            new Message('00006','Portal','deshboard');
+        }
+    }
+
+    function edit() {
+        if(es_admin()) {
+            $user_service = new Usuario_Service();
+            $feedback = $user_service->EDIT();
+            new Message($feedback['code'],'Usuario','show');
+        } else {
+            new Message('00006', 'Portal', 'deshboard');
+        }
+    }
+
 
 }

@@ -1,14 +1,15 @@
 <?php
 
-class Add_User {
+class Edit_User {
+    var $user;
 
-    function __construct() {
+    function __construct($user) {
+        $this->user = $user;
         $this->render();
     }
 
     function render() {
         include './View/Page/header.php';
-
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -17,48 +18,48 @@ class Add_User {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1 class="mb-4 i18n-add-users">Añadir Usuario</h1>
+                        <h1 class="mb-4 i18n-edit-user">Editar Usuario</h1>
                     </div>
 
                     <div class="col-xl-7 col-lg-9">
-                        <form name="formularioadd" method="post" enctype="multipart/form-data">
+                        <form name="formularioedit" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="dni" class="i18n-dni">DNI</label>
-                                    <input type="text" class="form-control" id="dni" name="dni" onblur="check_DNI();"/>
+                                    <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $this->user['dni'] ?>" disabled/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="username" class="i18n-username">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" onblur="check_USERNAME();"/>
+                                    <input type="text" class="form-control" id="username" name="username" value="<?php echo $this->user['username'] ?>" disabled/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="password" class="i18n-password">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" onblur="check_PASSWORD();"/>
+                                    <input type="password" class="form-control" id="password" name="password" value="" onblur="check_PASSWORD_EDIT();"/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="email" class="i18n-email">Email</label>
-                                    <input type="text" class="form-control" id="email" name="email" placeholder="example@mail.ext" onblur="check_EMAIL();"/>
+                                    <input type="text" class="form-control" id="email" name="email" value="<?php echo $this->user['email'] ?>" onblur="check_EMAIL();"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_NAME();"/>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $this->user['nombre'] ?>" onblur="check_NAME();"/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="apellidos" class="i18n-apellidos">Apellidos</label>
-                                    <input type="text" class="form-control" id="apellidos" name="apellidos" onblur="check_SURNAME();"/>
+                                    <input type="text" class="form-control" id="apellidos" name="apellidos" value="<?php echo $this->user['apellidos'] ?>" onblur="check_SURNAME();"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="telefono" class="i18n-telefono">Telefono</label>
-                                    <input type="text" class="form-control" id="telefono" name="telefono" onblur="check_TELEFONO();"/>
+                                    <input type="text" class="form-control" id="telefono" name="telefono" value="<?php echo $this->user['telefono'] ?>" onblur="check_TELEFONO();"/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="foto_perfil" class="i18n-foto_perfil">Foto de Perfil</label>
@@ -70,10 +71,12 @@ class Add_User {
                                 <div class="form-group col">
                                     <label for="rol" class="i18n-rol">Rol</label>
                                     <select id="rol" name="rol" class="form-select">
-                                        <option value="" class="i18n-selecciona-rol">Selecciona un Rol</option>
-                                        <option value="registrado" class="i18n-f-registrado">Usuario Registrado</option>
-                                        <option value="organizacion" class="i18n-f-organizacion">Responsable Organizacion</option>
-                                        <option value="administrador" class="i18n-f-administrador">Administrador</option>
+                                        <?php if($this->user['rol'] == 'edificio') :?>
+                                        <option value="edificio" class="i18n-f-edificio" selected>>Responsable Edificio</option>
+                                        <?php endif; ?>
+                                        <option value="registrado" class="i18n-f-registrado" <?php if($this->user['rol'] == 'registrado') echo "selected"; ?>>Usuario Registrado</option>
+                                        <option value="organizacion" class="i18n-f-organizacion" <?php if($this->user['rol'] == 'organizacion') echo "selected"; ?>>Responsable Organizacion</option>
+                                        <option value="administrador" class="i18n-f-administrador" <?php if($this->user['rol'] == 'administrador') echo "selected"; ?>>Administrador</option>
                                     </select>
                                 </div>
                             </div>
@@ -88,9 +91,9 @@ class Add_User {
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
-                                            insertacampo(document.formularioadd,'controller','Usuario');
-                                            insertacampo(document.formularioadd,'action','add');
-                                            enviaformcorrecto(document.formularioadd,check_ADD());">
+                                            insertacampo(document.formularioedit,'controller','Usuario');
+                                            insertacampo(document.formularioedit,'action','edit');
+                                            enviaformcorrecto(document.formularioedit,check_EDIT());">
                                         Enviar
                                     </a>
                                 </div>
@@ -100,8 +103,6 @@ class Add_User {
                 </div>
             </div>
         </section>
-
-
 
 <?php
         include './View/Page/footer.php';

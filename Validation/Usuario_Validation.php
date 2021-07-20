@@ -17,6 +17,54 @@ class Usuario_Validation extends Validator {
     function __construct() {
     }
 
+    function validar_atributos_add() {
+        $validacion = $this->validar_DNI();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        $validacion = $this->validar_USERNAME();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        $validacion = $this->validar_PASSWORD();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        $validacion = $this->validar_ROL();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        $validacion = $this->validar_NOMBRE();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        $validacion = $this->validar_APELLIDOS();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        $validacion = $this->validar_EMAIL();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        $validacion = $this->validar_TELEFONO();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        if($this->foto_perfil !== '') {
+            $validacion = $this->validar_FOTO_PERFIL();
+        }
+
+        return $validacion;
+    }
+
     function validar_atributos_login() {
         $validacion = $this->validar_USERNAME();
         if(!$validacion['ok']) {
@@ -24,6 +72,57 @@ class Usuario_Validation extends Validator {
         }
 
         return $this->validar_PASSWORD();
+    }
+
+    function validar_atributos_edit() {
+        $validacion = $this->validar_DNI();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        $validacion = $this->validar_USERNAME();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        if($this->password != '') {
+            $validacion = $this->validar_PASSWORD();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        $validacion = $this->validar_ROL();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        $validacion = $this->validar_NOMBRE();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        $validacion = $this->validar_APELLIDOS();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        $validacion = $this->validar_EMAIL();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        $validacion = $this->validar_TELEFONO();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        if($this->foto_perfil !== '') {
+            $validacion = $this->validar_FOTO_PERFIL();
+        }
+
+        return $validacion;
+
     }
 
     function validar_atributos_search() {
@@ -96,15 +195,15 @@ class Usuario_Validation extends Validator {
 
     function validar_USERNAME() {
         if(!$this->longitud_minima($this->username,3)) {
-            return $this->rellena_validation(false,'01102','USUARIO'); // Nombre de usuario debe tener más de 3 caracteres.
+            return $this->rellena_validation(false,'01103','USUARIO'); // Nombre de usuario debe tener más de 3 caracteres.
         }
 
         if(!$this->longitud_maxima($this->username,20)) {
-            return $this->rellena_validation(false,'01103','USUARIO'); // Nombre de usuario debe tener menos de 20 caracteres.
+            return $this->rellena_validation(false,'01104','USUARIO'); // Nombre de usuario debe tener menos de 20 caracteres.
         }
 
         if(!$this->es_alfanumerico($this->username)) {
-            return $this->rellena_validation(false,'01104','USUARIO'); // Nombre de usuario sólo puede contener caracteres alfanuméricos.
+            return $this->rellena_validation(false,'01105','USUARIO'); // Nombre de usuario sólo puede contener caracteres alfanuméricos.
         }
 
         return $this->rellena_validation(true,'00000','USUARIO'); // Validación OK.
@@ -113,15 +212,15 @@ class Usuario_Validation extends Validator {
     function validar_PASSWORD() {
 
         if(!$this->longitud_minima($this->password,32)) {
-            return $this->rellena_validation(false,'01105','USUARIO'); // Password cifrada no puede contener menos de 32 caracteres.
+            return $this->rellena_validation(false,'01106','USUARIO'); // Password cifrada no puede contener menos de 32 caracteres.
         }
 
         if(!$this->longitud_maxima($this->password,32)) {
-            return $this->rellena_validation(false,'01106','USUARIO'); // Password cifrada no puede contener más de 32 caracteres.
+            return $this->rellena_validation(false,'01107','USUARIO'); // Password cifrada no puede contener más de 32 caracteres.
         }
 
         if(!$this->solo_letras_espacios_guiones_todos($this->password)) {
-            return $this->rellena_validation(false,'01107','USUARIO'); // Password cifrada no puede contener caracteres no permitidos.
+            return $this->rellena_validation(false,'01108','USUARIO'); // Password cifrada no puede contener caracteres no permitidos.
         }
 
         return $this->rellena_validation(true,'00000','USUARIO'); // Validación OK.
@@ -194,5 +293,18 @@ class Usuario_Validation extends Validator {
         }
 
         return $this->rellena_validation(true,'00000','USUARIO'); // Validación Ok.
+    }
+
+
+    function validar_FOTO_PERFIL() {
+        if(!$this->extension_imagen('foto_perfil')) {
+            return $this->rellena_validation(false,'01133','USUARIO'); // Extensión de fichero no permitida
+        }
+
+        if(!$this->tamanho_max_imagen('foto_perfil',100000)) {
+            return $this->rellena_validation(false,'01134','USUARIO'); // Tamaño de imagen superior al 100kb
+        }
+
+        return $this->rellena_validation(true,'00000','USUARIO'); // Validación OK
     }
 }
