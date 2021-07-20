@@ -83,15 +83,17 @@ class Usuario_Service extends Usuario_Validation {
 
         $this->feedback = $this->uq_attributes_not_exist();
         if($this->feedback['ok']) {
-            // TODO: Subir foto de perfil. Si se sube correctamente.
-            $this->feedback = $this->user_entity->ADD();
-            if($this->feedback['ok']) {
-                $this->feedback['code'] = '01006';
-                return $this->feedback;
-            } else {
-                // TODO: Eliminar foto de perfil.
-                if($this->feedback['code'] !== '00005') {
-                    $this->feedback['code'] = '01131';
+            if ($this->uploadPhoto()) {
+                $this->user_entity->foto_perfil = $this->foto_perfil;
+                $this->feedback = $this->user_entity->ADD();
+                if ($this->feedback['ok']) {
+                    $this->feedback['code'] = '01006';
+                    return $this->feedback;
+                } else {
+                    $this->deletePhoto($this->foto_perfil);
+                    if ($this->feedback['code'] !== '00005') {
+                        $this->feedback['code'] = '01131';
+                    }
                 }
             }
         }
@@ -192,6 +194,24 @@ class Usuario_Service extends Usuario_Validation {
         }
 
         return $this->feedback;
+    }
+
+    function uploadPhoto() {
+        $temp = $_FILES['foto_perfil']['tmp_name'];
+        $path = $_FILES['foto_perfil']['name'];
+        $ext = pathinfo($path)['extension'];
+        $file = uniqid() . '.' . $ext;
+        if(move_uploaded_file($temp, profile_photos_path . $file)) {
+            chmod(profile_photos_path . $file, 0777);
+            $this->foto_perfil = $file;
+            return true;
+        }
+
+        return false;
+    }
+
+    function deletePhoto($photo) {
+        return unlink(profile_photos_path . $photo);
     }
 }
 

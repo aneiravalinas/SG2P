@@ -21,7 +21,7 @@ class Add_User {
                     </div>
 
                     <div class="col-xl-7 col-lg-9">
-                        <form name="formularioadd" method="post">
+                        <form name="formularioadd" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="dni" class="i18n-dni">DNI</label>
@@ -88,9 +88,9 @@ class Add_User {
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
-                                            insertacampo(document.formulariosearch,'controller','Usuario');
-                                            insertacampo(document.formulariosearch,'action','add');
-                                            enviaformcorrecto(document.formulariosearch,check_SEARCH());">
+                                            insertacampo(document.formularioadd,'controller','Usuario');
+                                            insertacampo(document.formularioadd,'action','add');
+                                            enviaform(document.formularioadd);">
                                         Enviar
                                     </a>
                                 </div>

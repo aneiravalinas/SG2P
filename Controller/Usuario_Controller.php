@@ -34,6 +34,10 @@ class Usuario {
     }
 
     function add() {
+        $path = $_FILES['foto_perfil']['name'];
+        $ext = pathinfo($path)['extension'];
+        var_dump($ext);
+        end();
         if(es_admin()) {
             $user_service = new Usuario_Service();
             $feedback = $user_service->ADD();
