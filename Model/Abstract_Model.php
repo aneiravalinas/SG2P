@@ -70,16 +70,16 @@ abstract class Abstract_Model {
     protected function execute_single_query() {
         if (!$this->connection()) {                 // Error de conexión
             $this->ok = false;
-            $this->code = '00004';
+            $this->code = 'DB_ERR';
         } else {
             if ($this->conn->query($this->query)) { // Éxito de SQL
                 $this->ok = true;
-                $this->code = '00001';
+                $this->code = 'QRY-OK';
 //                $this->id_autoincrement = mysqli_insert_id($this->conn); //En caso de autoincrement,
 //                // recupera la clave generada
             } else {            // Error de SQL
                 $this->ok = false;
-                $this->code = '00005';
+                $this->code = 'QRY_KO';
             }
             $this->close_connection();
         }
@@ -90,26 +90,26 @@ abstract class Abstract_Model {
     protected function get_results_from_query() {
         if (!$this->connection()) {                 // Error de conexión
             $this->ok = false;
-            $this->code = '00004';
+            $this->code = 'DB_ERR';
         } else {
             $result = $this->conn->query($this->query);
             if ($result) {
                 $this->ok = true;
                 $this->rows = array();
                 if ($result->num_rows == 0) {       // El recordset vuelve vacío
-                    $this->code = '00002';
+                    $this->code = 'QRY_EMPTY';
                     $this->resource = array();
                 } else {                            // El recordset vuelve con datos
                     for($i=0; $i<$result->num_rows; $i++){
                         $this->rows[] = $result->fetch_assoc();
                     }
                     $result->close();
-                    $this->code = '00003';
+                    $this->code = 'QRY_DATA';
                     $this->resource = $this->rows;
                 }
             } else {                                // Error de SQL
                 $this->ok = false;
-                $this->code = '00005';
+                $this->code = 'QRY_KO';
             }
             $this->close_connection();
         }
@@ -120,21 +120,21 @@ abstract class Abstract_Model {
     protected function get_one_result_from_query() {
         if (!$this->connection()) {                 // Error de conexión
             $this->ok = false;
-            $this->code = '00004';
+            $this->code = 'DB_ERR';
         } else {
             $result = $this->conn->query($this->query);
             if ($result) {
                 $this->ok = true;
                 if ($result->num_rows == 0) {       // El recordset vuelve vacío
-                    $this->code = '00002';
+                    $this->code = 'QRY_EMPTY';
                     $this->resource = '';
                 } else {                            // El recordset vuelve con datos
                     $this->resource = $result->fetch_assoc();
-                    $this->code = '00003';
+                    $this->code = 'QRY_DATA';
                 }
             } else {                                // Error de SQL
                 $this->ok = false;
-                $this->code = '00005';
+                $this->code = 'QRY_KO';
             }
             $this->close_connection();
         }

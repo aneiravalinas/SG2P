@@ -1,112 +1,111 @@
-// Siguiente código de error: 01142
-// Siguiente código de éxito: 01011
+
 
 arrayES = {
     // Generales de la Base de Datos
-    '00001' : 'Éxito en la ejecución del SQL',
-    '00002' : 'El recordset viene vacío',
-    '00003' : 'El recordset viene con datos',
-    '00004' : 'Error al conectar con la base de datos. Contacte con su administrador',
-    '00005' : 'Error en la ejecución del SQL',
+    'QRY_OK' : 'Éxito en la ejecución del SQL', // QRY_OK
+    'QRY_EMPT' : 'El recordset viene vacío', // QRY_EMPT
+    'QRY_DATA' : 'El recordset viene con datos', // QRY_DATA
+    'DB_ERR' : 'Error al conectar con la base de datos. Contacte con su administrador', // QRY_ERR
+    'QRY_KO' : 'Error en la ejecución del SQL', // QRY_KO
 
     // Acceso no autorizado
-    '00006' : 'No dispone de los privilegios necesarios para realizar esta acción',
+    'FRB_ACCS' : 'No dispone de los privilegios necesarios para realizar esta acción', // FRB_ACCS
 
     // USUARIO
 
         // Login
-        '01001' : 'Se ha iniciado sesión correctamente',
-        '01102' : 'Las credenciales introducias no son válidas',
+        'LOG_OK' : 'Se ha iniciado sesión correctamente', // LOG_OK
+        'LOG_KO' : 'Las credenciales introducias no son válidas', // LOG_KO
 
         // Search
-        '01002' : 'Búsqueda de Usuarios Ok',
-        '01109' : 'Error en la búsqueda de Usuarios',
+        'USR_SRCH_OK' : 'Búsqueda de Usuarios Ok', // USR_SRCH_OK
+        'USR_SRCH_KO' : 'Error en la búsqueda de Usuarios', // USR_SRCH_KO
 
         // ADD
-        '01124' : 'El rol Resp. Edificio es asignado automáticamente cuando se asigna un usuario a un edificio. No se permite la asignación manual de este rol',
-        '01006' : 'Se ha añadido el usuario correctamente',
-        '01131' : 'Error al añadir usuario',
+        'BM_ADD' : 'El rol Resp. Edificio es asignado automáticamente cuando se asigna un usuario a un edificio. No se permite la asignación manual de este rol', // BM_ADD
+        'USR_ADD_OK' : 'Se ha añadido el usuario correctamente', // USR_ADD_OK
+        'USR_ADD_KO' : 'Error al añadir usuario', // USR_ADD_KO
 
         // DELETE
-        '01007' : 'Usuario eliminado con éxito',
-        '01135' : 'No se puede eliminar a un usuario que tenga asignados edificios',
-        '01136' : 'No se puede eliminar al usuario. Siempre debe existir al menos un responsable de la organización',
-        '01137' : 'No se puede eliminar al usuario. Siempre debe existir al menos un administrador',
-        '01138' : 'Error al eliminar al usuario',
+        'USR_DEL_OK' : 'Usuario eliminado con éxito', // USR_DEL_OK
+        'BM_DEL' : 'No se puede eliminar a un usuario que tenga asignados edificios', // BM_DEL
+        'OM_UNQ_DEL' : 'No se puede eliminar al usuario. Siempre debe existir al menos un responsable de la organización', // OM_UNQ_DEL
+        'ADM_UNQ_DEL' : 'No se puede eliminar al usuario. Siempre debe existir al menos un administrador', // ADM_UNQ_DEL
+        'USR_DEL_KO' : 'Error al eliminar al usuario', // USR_DEL_KO
 
         // EDIT
-        '01010' : 'Usuario editado con éxito',
-        '01139' : 'No se puede modificar el rol. El usuario es el único responsable de la organización',
-        '01140' : 'No se puede modificar el rol. El usuario es el único adminsitrador de la aplicación',
-        '01141' : 'Error al editar al usuario',
+        'USR_EDT_OK' : 'Usuario editado con éxito', // USR_EDT_OK
+        'OM_UNQ_EDT' : 'No se puede modificar el rol. El usuario es el único responsable de la organización', // OM_UNQ_EDT
+        'ADM_UNQ_EDT' : 'No se puede modificar el rol. El usuario es el único adminsitrador de la aplicación', // ADM_UNQ_EDT
+        'USR_EDT_KO' : 'Error al editar al usuario', // USR_EDT_KO
 
         // Búsqueda por Username
-        '01000' : 'El nombre de usuario ya existe',
-        '01100' : 'El nombre de usuario introducido no existe',
-        '01101' : 'Error al consultar por nombre de usuario',
+        'USRNM_EXST' : 'El nombre de usuario ya existe', // USRNM_EXST
+        'USRNM_NOT_EXST' : 'El nombre de usuario introducido no existe', // USRNM_NOT_EXST
+        'USRNM_KO' : 'Error al consultar por nombre de usuario', // USRNM_KO
 
         // Búsqueda por DNI
-        '01003' : 'El DNI introducido ya existe',
-        '01125' : 'El DNI introducido no existe',
-        '01126' : 'Error al consultar por DNI',
+        'DNI_EXST' : 'El DNI introducido ya existe', // DNI_EXST
+        'DNI_NOT_EXST' : 'El DNI introducido no existe', // DNI_NOT_EXST
+        'DNI_KO' : 'Error al consultar por DNI', // DNI_KO
 
         // Búsqueda por Email
-        '01004' : 'El email introducido ya existe',
-        '01127' : 'El email introducido no existe',
-        '01128' : 'Error al consultar por email',
+        'EML_EXST' : 'El email introducido ya existe', // EML_EXST
+        'EML_NOT_EXST' : 'El email introducido no existe', // EML_NOT_EXST
+        'EML_KO' : 'Error al consultar por email', // EML_KO
 
         // Búsqueda por Teléfono
-        '01005' : 'El telefono introducido ya existe',
-        '01129' : 'El telefono introducido no existe',
-        '01130' : 'Error al consultar por telefono',
+        'TLF_EXST' : 'El telefono introducido ya existe', // TLF_EXST
+        'TLF_NOT_EXST' : 'El telefono introducido no existe', // TLF_NOT_EXST
+        'TLF_KO' : 'Error al consultar por telefono', // TLF_KO
 
         // Mas de un usuario por rol
-        '01008' : 'Hay más de un usuario con el rol indicado',
-        '01138' : 'Hay menos de un usuario con el rol indicado',
+        'ROL_MTO' : 'Hay más de un usuario con el rol indicado', // ROL_MTO
+        'ROL_LTO' : 'Hay menos de un usuario con el rol indicado', // ROL_LTO
 
 
         // Validaciones
 
             //Nombre Usuario
-            '01103' : 'El nombre de usuario debe superar los 3 caracteres',
-            '01104' : 'El nombre de usuario no puede superar los 20 caracteres',
-            '01105' : 'El nombre de usuario sólo puede contener caracteres alfanuméricos',
+            'USRNM_SHRT' : 'El nombre de usuario debe superar los 3 caracteres', // USRNM_SHRT
+            'USRNM_LRG' : 'El nombre de usuario no puede superar los 20 caracteres', // USRNM_LRG
+            'USRNM_ALF' : 'El nombre de usuario sólo puede contener caracteres alfanuméricos', // USRNM_ALF
 
             // Password
-            '01106' : 'La seguridad de la contraseña está comprometida. Contraseña cifrada corta',
-            '01107' : 'La seguridad de la contraseña está comprometida. Contraseña cifrada larga',
-            '01108' : 'La seguridad de la contraseña está comprometida. Contraseña cifrada con caracteres no permitidos',
+            'PSW_SHRT' : 'La seguridad de la contraseña está comprometida. Contraseña cifrada corta', // PSW_SHRT
+            'PSW_LRG' : 'La seguridad de la contraseña está comprometida. Contraseña cifrada larga', // PSW_LRG
+            'PSW_FRMT' : 'La seguridad de la contraseña está comprometida. Contraseña cifrada con caracteres no permitidos', // PSW_FRMT
 
             // DNI
-            '01110' : 'Es necesario especificar un DNI',
-            '01111' : 'Formato de DNI incorrecto',
+            'DNI_EMPT' : 'Es necesario especificar un DNI', // DNI_EMPT
+            'DNI_FRMT' : 'Formato de DNI incorrecto', // DNI_FRMT
 
             // ROL
-            '01112' : 'Es necesario especificar un Rol',
-            '01113' : 'El rol indicado no está contemplado',
+            'ROL_EMPT' : 'Es necesario especificar un Rol', // ROL_EMPT
+            'ROL_FRMT' : 'El rol indicado no está contemplado', // ROL_FRMT
 
             // Nombre
-            '01114' : 'El nombre debe superar los 3 caracteres',
-            '01115' : 'El nombre no debe superar los 30 caracteres',
-            '01116' : 'El nombre sólo puede contener letras y espacios',
+            'NAM_SHRT' : 'El nombre debe superar los 3 caracteres', // NAM_SHRT
+            'NAM_LRG' : 'El nombre no debe superar los 30 caracteres', // NAM_LRG
+            'NAM_LT_SPC' : 'El nombre sólo puede contener letras y espacios', // NAM_LT_SPC
 
             // Apellidos
-            '01117' : 'El apellido debe superar los 3 caracteres',
-            '01118' : 'El apellido no debe superar los 60 caracteres',
-            '01119' : 'El apellido sólo puede contener letras y espacios',
+            'SRNM_SHRT' : 'El apellido debe superar los 3 caracteres', //  SRNM_SHRT
+            'SRNM_LRG' : 'El apellido no debe superar los 60 caracteres', // SRNM_LRG
+            'SRNM_LT_SPC' : 'El apellido sólo puede contener letras y espacios', // SRNM_LT_SPC
 
             // Email
-            '01120' : 'Es necesario especificar un email',
-            '01121' : 'Formato de email incorrecto',
+            'EML_EMPT' : 'Es necesario especificar un email', // EML_EMPT
+            'EML_FRMT' : 'Formato de email incorrecto', // EML_FRMT
 
             // Telefono
-            '01122' : 'Es necesario especificar un numero de telefono',
-            '01123' : 'Formato de numero de telefono incorrecto',
+            'TLF_EMPT' : 'Es necesario especificar un numero de telefono', // TLF_EMPT
+            'TLF_FRMT' : 'Formato de numero de telefono incorrecto', // TLF_FRMT
 
             // Foto_Perfil
-            '01132' : 'Error al subir la foto de perfil',
-            '01133' : 'La extensión de la imágen no está permitida',
-            '01134' : 'El tamaño de la imágen es superior a la permitida (100kb)',
+            'PRPH_KO' : 'Error al subir la foto de perfil', // PRPH_KO
+            'PRPH_EXT' : 'La extensión de la imágen no está permitida', // PRPH_EXT
+            'PRPH_LRG' : 'El tamaño de la imágen es superior a la permitida (100kb)', // PRPH_LRG
 
 
     // INTERFAZ

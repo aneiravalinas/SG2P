@@ -1,108 +1,108 @@
 arrayEN = {
     // Database General
-    '00001' : 'Successful SQL execution',
-    '00002' : 'Recordset is empty',
-    '00003' : 'Recordset contains data',
-    '00004' : 'Error while connecting with database. Contact your administrator',
-    '00005' : 'SQL execution error',
+    'QRY_OK' : 'Successful SQL execution',
+    'QRY_EMPT' : 'Recordset is empty',
+    'QRY_DATA' : 'Recordset contains data',
+    'DB_ERR' : 'Error while connecting with database. Contact your administrator',
+    'QRY_KO' : 'SQL execution error',
 
     // Acceso no autorizado
-    '00006' : 'You do not have the necessary privileges to perform this action',
+    'FRB_ACCS' : 'You do not have the necessary privileges to perform this action',
 
     // USUARIO
 
         // Login
-        '01001' : 'You have successfully logged into the system',
-        '01102' : 'The credentials entered are invalid',
+        'LOG_OK' : 'You have successfully logged into the system',
+        'LOG_KO' : 'The credentials entered are invalid',
 
         // Search
-        '01002' : 'Users Search OK',
-        '01109' : 'Users Search Error',
+        'USR_SRCH_OK' : 'Users Search OK',
+        'USR_SRCH_KO' : 'Users Search Error',
 
         // ADD
-        '01124' : 'The Building Manager role is assigned automatically when a user is assigned to a building. Manual assignment of this role is not allowed',
-        '01006' : 'The user was added successfully',
-        '01131' : 'Error adding user',
+        'BM_ADD' : 'The Building Manager role is assigned automatically when a user is assigned to a building. Manual assignment of this role is not allowed',
+        'USR_ADD_OK' : 'The user was added successfully',
+        'USR_ADD_KO' : 'Error adding user',
 
         // DELETE
-        '01007' : 'User deleted successfully',
-        '01135' : 'You cannot delete a user who has buildings assigned',
-        '01136' : 'The user cannot be deleted. There must always be at least one person in charge of the organization',
-        '01137' : 'The user cannot be deleted. There must always be at least one administrator',
-        '01138' : 'Failed to delete user',
+        'USR_DEL_OK' : 'User deleted successfully',
+        'BM_DEL' : 'You cannot delete a user who has buildings assigned',
+        'OM_UNQ_DEL' : 'The user cannot be deleted. There must always be at least one person in charge of the organization',
+        'ADM_UNQ_DEL' : 'The user cannot be deleted. There must always be at least one administrator',
+        'USR_DEL_KO' : 'Failed to delete user',
 
         // EDIT
-        '01010' : 'User edited successfully',
-        '01139' : 'The role cannot be modified. The user is solely responsible for the organization',
-        '01140' : 'The role cannot be modified. The user is the only administrator of the application',
-        '01141' : 'Error editing user',
+        'USR_EDT_OK' : 'User edited successfully',
+        'OM_UNQ_EDT' : 'The role cannot be modified. The user is solely responsible for the organization',
+        'ADM_UNQ_EDT' : 'The role cannot be modified. The user is the only administrator of the application',
+        'USR_EDT_KO' : 'Error editing user',
 
         // Búsqueda por Username
-        '01000' : 'The username already exist',
-        '01100' : 'The username entered does not exist',
-        '01101' : 'Query by username failed',
+        'USRNM_EXST' : 'The username already exist',
+        'USRNM_NOT_EXST' : 'The username entered does not exist',
+        'USRNM_KO' : 'Query by username failed',
 
         // Búsqueda por DNI
-        '01003' : 'The DNI already exist',
-        '01125' : 'The DNI entered does not exist',
-        '01126' : 'Query by DNI failed',
+        'DNI_EXST' : 'The DNI already exist',
+        'DNI_NOT_EXST' : 'The DNI entered does not exist',
+        'DNI_KO' : 'Query by DNI failed',
 
         // Búsqueda por Email
-        '01004' : 'The email already exist',
-        '01127' : 'The email entered does not exist',
-        '01128' : 'Query by email failed',
+        'EML_EXST' : 'The email already exist',
+        'EML_NOT_EXST' : 'The email entered does not exist',
+        'EML_KO' : 'Query by email failed',
 
         // Búsqueda por Teléfono
-        '01005' : 'The phone number already exist',
-        '01129' : 'The phone number entered does not exist',
-        '01130' : 'Query by phone number failed',
+        'TLF_EXST' : 'The phone number already exist',
+        'TLF_NOT_EXST' : 'The phone number entered does not exist',
+        'TLF_KO' : 'Query by phone number failed',
 
         // Mas de un usuario por rol
-        '01008' : 'There is more than one user with the indicated role',
-        '01138' : 'There is less than one user with the indicated role',
+        'ROL_MTO' : 'There is more than one user with the indicated role',
+        'ROL_LTO' : 'There is less than one user with the indicated role',
 
         // Validaciones
 
             // Nombre de Usuario
-            '01103' : 'Username must exceed 3 characters',
-            '01104' : 'Username cannot exceed 20 characters',
-            '01105' : 'Username can only contain alphanumeric characters',
+            'USRNM_SHRT' : 'Username must exceed 3 characters',
+            'USRNM_LRG' : 'Username cannot exceed 20 characters',
+            'USRNM_ALF' : 'Username can only contain alphanumeric characters',
 
             // Password
-            '01106' : 'Password security is compromised. Short encrypted password',
-            '01107' : 'Password security is compromised. Long encrypted password',
-            '01108' : 'Password security is compromised. Password encrypted with characters not allowed',
+            'PSW_SHRT' : 'Password security is compromised. Short encrypted password',
+            'PSW_LRG' : 'Password security is compromised. Long encrypted password',
+            'PSW_FRMT' : 'Password security is compromised. Password encrypted with characters not allowed',
 
             // DNI
-            '01110' : 'The DNI cannot be empty',
-            '01111' : 'Wrong DNI format',
+            'DNI_EMPT' : 'The DNI cannot be empty',
+            'DNI_FRMT' : 'Wrong DNI format',
 
             // ROL
-            '01112' : 'The Rol cannot be empty',
-            '01113' : 'The indicated role is not contemplated',
+            'ROL_EMPT' : 'The Rol cannot be empty',
+            'ROL_FRMT' : 'The indicated role is not contemplated',
 
             // Nombre
-            '01114' : 'Name must exceed 3 characters',
-            '01115' : 'Name cannot exceed 30 characters',
-            '01116' : 'Name can only contain alphanumeric characters and spaces',
+            'NAM_SHRT' : 'Name must exceed 3 characters',
+            'NAM_LRG' : 'Name cannot exceed 30 characters',
+            'NAM_LT_SPC' : 'Name can only contain alphanumeric characters and spaces',
 
             // Apellidos
-            '01117' : 'Surname must exceed 3 characters',
-            '01118' : 'Surname cannot exceed 60 characters,',
-            '01119' : 'Surname can only contain alphanumeric characters and spaces',
+            'SRNM_SHRT' : 'Surname must exceed 3 characters',
+            'SRNM_LRG' : 'Surname cannot exceed 60 characters,',
+            'SRNM_LT_SPC' : 'Surname can only contain alphanumeric characters and spaces',
 
             // Email
-            '01120' : 'Email cannot be empty',
-            '01121' : 'Wrong Email format',
+            'EML_EMPT' : 'Email cannot be empty',
+            'EML_FRMT' : 'Wrong Email format',
 
             // Telefono
-            '01122' : 'Phone number cannot be empty',
-            '01123' : 'Wrong phone number format',
+            'TLF_EMPT' : 'Phone number cannot be empty',
+            'TLF_FRMT' : 'Wrong phone number format',
 
             // Foto_Perfil
-            '01132' : 'Error while uploading the profile picture',
-            '01133' : 'Image extension is not allowed',
-            '01134' : 'Image size is larger than allowed (100kb)',
+            'PRPH_KO' : 'Error while uploading the profile picture',
+            'PRPH_EXT' : 'Image extension is not allowed',
+            'PRPH_LRG' : 'Image size is larger than allowed (100kb)',
 
 
 

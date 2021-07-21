@@ -29,7 +29,7 @@ class Usuario {
             include_once './View/Users/Add_User_View.php';
             new Add_User();
         } else {
-            new Message('00006','Portal','deshboard');
+            new Message('FRB_ACCS','Portal','deshboard');
         }
     }
 
@@ -39,7 +39,7 @@ class Usuario {
             $feedback = $user_service->ADD();
             new Message($feedback['code'],'Usuario','show');
         } else {
-            new Message('00006','Portal','deshboard');
+            new Message('FRB_ACCS','Portal','deshboard');
         }
     }
 
@@ -54,7 +54,7 @@ class Usuario {
                 new Message($feedback['code'],'Usuario','show');
             }
         } else {
-            new Message('00006','Portal','deshboard');
+            new Message('FRB_ACCS','Portal','deshboard');
         }
     }
 
@@ -64,7 +64,7 @@ class Usuario {
             $feedback = $user_service->DELETE();
             new Message($feedback['code'], 'Usuario','show');
         } else {
-            new Message('00006','Portal','deshboard');
+            new Message('FRB_ACCS','Portal','deshboard');
         }
     }
 
@@ -79,7 +79,7 @@ class Usuario {
                 new Message($feedback['code'], 'Usuario', 'show');
             }
         } else {
-            new Message('00006','Portal','deshboard');
+            new Message('FRB_ACCS','Portal','deshboard');
         }
     }
 
@@ -89,7 +89,7 @@ class Usuario {
             $feedback = $user_service->EDIT();
             new Message($feedback['code'],'Usuario','show');
         } else {
-            new Message('00006', 'Portal', 'deshboard');
+            new Message('FRB_ACCS', 'Portal', 'deshboard');
         }
     }
 
