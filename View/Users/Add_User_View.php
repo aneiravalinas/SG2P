@@ -82,13 +82,13 @@ class Add_User {
                                 <div class="col d-flex justify-content-between flex-wrap">
                                     <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
                                         crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','Usuario');
+                                            insertacampo(document.formenviar,'controller','User');
                                             insertacampo(document.formenviar,'action','show');
                                             enviaform(document.formenviar);">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
-                                            insertacampo(document.formularioadd,'controller','Usuario');
+                                            insertacampo(document.formularioadd,'controller','User');
                                             insertacampo(document.formularioadd,'action','add');
                                             enviaformcorrecto(document.formularioadd,check_ADD());">
                                         Enviar

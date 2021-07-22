@@ -241,7 +241,7 @@ CREATE TABLE NOTIFICACION
 
 
 INSERT INTO USUARIO (`dni`,`username`,`password`,`rol`,`nombre`,`apellidos`,`email`,`telefono`,`foto_perfil`)
-VALUES ('00000000D','sg2proot','7a25b0bc04e77a2f7453dd021168cdc2','administrador','admin','adminsurname','admin@email.es','111111111',null);
+VALUES ('14197701P','sg2padmin','7a25b0bc04e77a2f7453dd021168cdc2','administrador','admin','adminsurname','admin@email.es','666666666','default.jpeg');
 
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';

@@ -78,3 +78,9 @@
 .modal-title {
     color: #124265 !important;
 }
+
+#picture-profile {
+    width: 200px !important;
+    height: 200px !important;
+    object-fit: cover !important;
+}

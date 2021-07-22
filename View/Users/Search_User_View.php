@@ -71,13 +71,13 @@ class Search_User {
                                 <div class="col d-flex justify-content-between flex-wrap">
                                     <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
                                         crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','Usuario');
+                                            insertacampo(document.formenviar,'controller','User');
                                             insertacampo(document.formenviar,'action','show');
                                             enviaform(document.formenviar);">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
-                                            insertacampo(document.formulariosearch,'controller','Usuario');
+                                            insertacampo(document.formulariosearch,'controller','User');
                                             insertacampo(document.formulariosearch,'action','show');
                                             enviaformcorrecto(document.formulariosearch,check_SEARCH());">
                                         Enviar

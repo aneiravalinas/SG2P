@@ -31,7 +31,7 @@ class Delete_User {
                     <div class="col-xl-7 col-lg-9 d-flex justify-content-between flex-wrap">
                         <a class="btn-get-started i18n-cancelar" type="button" onclick="
                                         crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','Usuario');
+                                            insertacampo(document.formenviar,'controller','User');
                                             insertacampo(document.formenviar,'action','show');
                                             enviaform(document.formenviar);">
                             Cancelar
@@ -39,7 +39,7 @@ class Delete_User {
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-delete" onclick="
                             crearform('formenviar','post');
                                 insertacampo(document.formenviar, 'username', '<?php echo $this->user['username'] ?>');
-                                insertacampo(document.formenviar, 'controller', 'Usuario');
+                                insertacampo(document.formenviar, 'controller', 'User');
                                 insertacampo(document.formenviar, 'action', 'delete');
                                 enviaform(document.formenviar)">
                             Eliminar

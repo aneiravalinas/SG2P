@@ -28,14 +28,14 @@ class Show_Users {
                         <div>
                             <a type="button" onclick="
                                     crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'controller','Usuario');
+                                    insertacampo(document.formenviar,'controller','User');
                                     insertacampo(document.formenviar,'action','searchForm');
                                     enviaform(document.formenviar);">
                                 <span class="iconify option_button" data-icon="fluent:search-square-24-filled" data-inline="false"></span>
                             </a>
                             <a type="button" onclick="
                                     crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'controller','Usuario');
+                                    insertacampo(document.formenviar,'controller','User');
                                     insertacampo(document.formenviar,'action','addForm');
                                     enviaform(document.formenviar);">
                                 <span class="iconify option_button" data-icon="gridicons-add" data-inline="false"></span>
@@ -73,7 +73,7 @@ class Show_Users {
                                                 <a class="dropdown-item i18n-edit" type="button" onclick="
                                                     crearform('formenviar','post');
                                                         insertacampo(document.formenviar, 'username', '<?php echo $user['username'] ?>');
-                                                        insertacampo(document.formenviar, 'controller','Usuario');
+                                                        insertacampo(document.formenviar, 'controller','User');
                                                         insertacampo(document.formenviar, 'action', 'editForm');
                                                         enviaform(document.formenviar);">
                                                     Editar
@@ -81,7 +81,7 @@ class Show_Users {
                                                 <a class="dropdown-item i18n-delete" type="button" onclick="
                                                     crearform('formenviar','post');
                                                         insertacampo(document.formenviar,'username', '<?php echo $user['username'] ?>');
-                                                        insertacampo(document.formenviar,'controller','Usuario');
+                                                        insertacampo(document.formenviar,'controller','User');
                                                         insertacampo(document.formenviar,'action','deleteForm');
                                                         enviaform(document.formenviar);">
                                                     Eliminar</a>

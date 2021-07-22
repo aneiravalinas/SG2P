@@ -1,15 +1,15 @@
 <?php
 
-include_once './Model/Usuario_Model.php';
-include_once './Validation/Usuario_Validation.php';
+include_once './Model/User_Model.php';
+include_once './Validation/User_Validation.php';
 
-class Usuario_Service extends Usuario_Validation {
+class User_Service extends User_Validation {
     var $atributos;
     var $user_entity;
     var $feedback = array();
 
     function __construct() {
-        $this->user_entity = new Usuario_Model();
+        $this->user_entity = new User_Model();
         $this->atributos = array('dni','username','password','rol','nombre','apellidos','email','telefono');
         $this->fill_fields();
     }
@@ -109,9 +109,10 @@ class Usuario_Service extends Usuario_Validation {
                     }
                 } else { // Error al subir la foto de perfil
                     $this->feedback['ok'] = false;
-                    $this->feedback['code'] = 'PRPH_KO'; // Error al subir la foto de perfil.
+                    $this->feedback['code'] = ''; // Error al subir la foto de perfil.
                 }
             } else { // No se ha enviado una foto de perfil
+                $this->user_entity->foto_perfil = default_profile_photo; // Se añade foto de perfil por defecto.
                 $this->feedback = $this->user_entity->ADD(); // Método ADD del modelo.
                 if($this->feedback['ok']) {
                     $this->feedback['code'] = 'USR_ADD_OK'; // Usuario añadido con éxito.
@@ -260,8 +261,8 @@ class Usuario_Service extends Usuario_Validation {
                 if($this->username == $_SESSION['username']) {
                     session_destroy();
                 }
-                if($user['foto_perfil'] != '') {
-                    $this->deletePhoto($user['foto_perfil']); // Si hay foto de perfil, se elimina.
+                if($user['foto_perfil'] != default_profile_photo) { // Si la foto de perfil del usuario no es la de por defecto se elimina
+                    $this->deletePhoto($user['foto_perfil']);
                 }
             } else if($this->feedback['core'] == 'QRY_KO') {
                 $this->feedback['core'] = 'USR_DEL_KO'; // Error al eliminar al usuario.

@@ -3,7 +3,7 @@
 class Login {
 
     function __construct() {
-        include './Service/Usuario_Service.php';
+        include './Service/User_Service.php';
         include './View/Page/Message_View.php';
         include './View/Login/Login_View.php';
     }
@@ -14,7 +14,7 @@ class Login {
 
     function login()
     {
-        $user_service = new Usuario_Service();
+        $user_service = new User_Service();
         $feedback = $user_service->login();
 
         if($feedback['ok']) {

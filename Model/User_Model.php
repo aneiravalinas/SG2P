@@ -2,7 +2,7 @@
 
 include_once './Model/Abstract_Model.php';
 
-class Usuario_Model extends Abstract_Model {
+class User_Model extends Abstract_Model {
 
     var $atributos;
     var $dni;

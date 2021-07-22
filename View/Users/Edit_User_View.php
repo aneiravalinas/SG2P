@@ -18,7 +18,15 @@ class Edit_User {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1 class="mb-4 i18n-edit-user">Editar Usuario</h1>
+                        <h1 class="mb-4 mt-4 i18n-edit-user">Editar Usuario</h1>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-sm-6 col-9 my-4 text-center">
+                            <label for="foto_perfil">
+                                <img src="<?php echo profile_photos_path . $this->user['foto_perfil'] ?>" id="picture-profile" class="rounded-circle"/>
+                            </label>
+                        </div>
                     </div>
 
                     <div class="col-xl-7 col-lg-9">
@@ -81,17 +89,17 @@ class Edit_User {
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row justify-content-center">
                                 <div class="col d-flex justify-content-between flex-wrap">
                                     <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
                                         crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','Usuario');
+                                            insertacampo(document.formenviar,'controller','User');
                                             insertacampo(document.formenviar,'action','show');
                                             enviaform(document.formenviar);">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
-                                            insertacampo(document.formularioedit,'controller','Usuario');
+                                            insertacampo(document.formularioedit,'controller','User');
                                             insertacampo(document.formularioedit,'action','edit');
                                             enviaformcorrecto(document.formularioedit,check_EDIT());">
                                         Enviar

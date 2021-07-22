@@ -2,7 +2,7 @@
 
 include_once 'Validator.php';
 
-class Usuario_Validation extends Validator {
+class User_Validation extends Validator {
 
     var $dni;
     var $username;
