@@ -110,4 +110,15 @@ class User {
         new Message($feedback['code'], 'Portal', 'deshboard');
     }
 
+    function showCurrent() {
+        $user_service = new User_Service();
+        $feedback = $user_service->seek();
+        if($feedback['ok']) {
+            include './View/Users/ShowCurrent_User_View.php';
+            new ShowCurrent_User($feedback['resource']);
+        } else {
+            new Message($feedback['code'],'User','show');
+        }
+    }
+
 }

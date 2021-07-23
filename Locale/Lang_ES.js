@@ -163,6 +163,7 @@ arrayES = {
         'i18n-foto_perfil' : 'Foto de Perfil',
         'i18n-del-confirm' : '¿Está seguro que desea eliminar a este usuario? La acción no será reversible',
         'i18n-edit-user' : 'Editar Usuario',
+        'i18n-user-details' : 'Detalles del Usuario',
 
         // MODAL
             // Campos Modal

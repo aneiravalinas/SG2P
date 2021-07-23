@@ -67,7 +67,14 @@ class Show_Users {
                                                 <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item i18n-details" type="button">Detalles</a>
+                                                <a class="dropdown-item i18n-details" type="button" onclick="
+                                                    crearform('formenviar','post');
+                                                        insertacampo(document.formenviar,'username','<?php echo $user['username'] ?>');
+                                                        insertacampo(document.formenviar,'controller','User');
+                                                        insertacampo(document.formenviar,'action','showCurrent');
+                                                        enviaform(document.formenviar);">
+                                                    Detalles
+                                                </a>
                                             <?php if(es_admin()) :?>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item i18n-edit" type="button" onclick="
@@ -84,7 +91,8 @@ class Show_Users {
                                                         insertacampo(document.formenviar,'controller','User');
                                                         insertacampo(document.formenviar,'action','deleteForm');
                                                         enviaform(document.formenviar);">
-                                                    Eliminar</a>
+                                                    Eliminar
+                                                </a>
                                             <?php endif;?>
                                             </div>
                                         </div>

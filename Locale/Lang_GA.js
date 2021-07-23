@@ -161,7 +161,8 @@ arrayGA = {
         'i18n-selecciona-rol' : 'Selecciona un Rol',
         'i18n-foto_perfil' : 'Foto de Perfil',
         'i18n-del-confirm' : '¿Está seguro de que quere eliminar a este usuario? A acción non será reversible',
-        'i18n-edit-user' : 'Edit User',
+        'i18n-edit-user' : 'Editar Usuario',
+        'i18n-user-details' : 'Detalles do Usuario',
 
         // MODAL
             // Campos Modal

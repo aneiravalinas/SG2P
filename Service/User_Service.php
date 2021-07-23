@@ -315,6 +315,16 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
+    function seek() {
+        $validation = $this->validar_USERNAME();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByUsername();
+        return $this->feedback;
+    }
+
     function check_more_than_one($rol) {
         $this->feedback = $this->user_entity->searchByRol($rol);
         if($this->feedback['ok']) {

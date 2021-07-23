@@ -161,6 +161,7 @@ arrayEN = {
         'i18n-foto_perfil' : 'Profile Photo',
         'i18n-del-confirm' : 'Are you sure you want to delete this user? The action will not be reversible',
         'i18n-edit-user' : 'Editar Usuario',
+        'i18n-user-details' : 'User Details',
 
         // MODAL
             // Campos Modal
