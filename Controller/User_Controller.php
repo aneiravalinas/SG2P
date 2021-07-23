@@ -46,7 +46,7 @@ class User {
     function deleteForm() {
         if(es_admin()) {
             $user_service = new User_Service();
-            $feedback = $user_service->deleteForm();
+            $feedback = $user_service->dataForm();
             if($feedback['ok']) {
                 include_once './View/Users/Delete_User_View.php';
                 new Delete_User($feedback['resource']);
@@ -71,7 +71,7 @@ class User {
     function editForm() {
         if(es_admin()) {
             $user_service = new User_Service();
-            $feedback = $user_service->editForm();
+            $feedback = $user_service->dataForm();
             if ($feedback['ok']) {
                 include './View/Users/Edit_User_View.php';
                 new Edit_User($feedback['resource']);

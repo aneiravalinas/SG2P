@@ -60,6 +60,7 @@ arrayGA = {
         // Mas de un usuario por rol
         'ROL_MTO' : 'Hay máis dun usuario co rol indicado',
         'ROL_LTO' : 'Hay menos dun usuario co rol indicado',
+        'ROL_KO' : 'Error ó consultar por rol',
 
         // Validaciones
 
@@ -103,7 +104,7 @@ arrayGA = {
             'PRPH_KO' : 'Error ó subir a foto de perfil',
             'PRPH_EXT' : 'A extensión da imáxen non está permitida',
             'PRPH_LRG' : 'O tamaño da imáxen é superior a permitida (100kb)',
-
+            'PRPH_FRMT' : 'O nome da foto de perfil só pode conter letras, números y guiones',
 
 
 

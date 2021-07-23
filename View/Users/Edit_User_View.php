@@ -34,7 +34,7 @@ class Edit_User {
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="dni" class="i18n-dni">DNI</label>
-                                    <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $this->user['dni'] ?>" disabled/>
+                                    <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $this->user['dni'] ?>" onblur="check_DNI();"/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="username" class="i18n-username">Username</label>
@@ -78,14 +78,15 @@ class Edit_User {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="rol" class="i18n-rol">Rol</label>
+                                <?php if($this->user['rol'] == 'edificio') :?>
+                                    <input type="text" class="form-control" id="rol" name="rol" value="<?php $this->user['rol'] ?>" disabled/>
+                                <?php else :?>
                                     <select id="rol" name="rol" class="form-select">
-                                        <?php if($this->user['rol'] == 'edificio') :?>
-                                        <option value="edificio" class="i18n-f-edificio" selected>>Responsable Edificio</option>
-                                        <?php endif; ?>
                                         <option value="registrado" class="i18n-f-registrado" <?php if($this->user['rol'] == 'registrado') echo "selected"; ?>>Usuario Registrado</option>
                                         <option value="organizacion" class="i18n-f-organizacion" <?php if($this->user['rol'] == 'organizacion') echo "selected"; ?>>Responsable Organizacion</option>
                                         <option value="administrador" class="i18n-f-administrador" <?php if($this->user['rol'] == 'administrador') echo "selected"; ?>>Administrador</option>
                                     </select>
+                                <?php endif; ?>
                                 </div>
                             </div>
 

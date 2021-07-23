@@ -62,6 +62,7 @@ arrayES = {
         // Mas de un usuario por rol
         'ROL_MTO' : 'Hay más de un usuario con el rol indicado', // ROL_MTO
         'ROL_LTO' : 'Hay menos de un usuario con el rol indicado', // ROL_LTO
+        'ROL_KO' : 'Error al consultar por rol',
 
 
         // Validaciones
@@ -106,6 +107,7 @@ arrayES = {
             'PRPH_KO' : 'Error al subir la foto de perfil', // PRPH_KO
             'PRPH_EXT' : 'La extensión de la imágen no está permitida', // PRPH_EXT
             'PRPH_LRG' : 'El tamaño de la imágen es superior a la permitida (100kb)', // PRPH_LRG
+            'PRPH_FRMT' : 'El nombre de la foto de perfil sólo puede contener letras, números e guions',
 
 
     // INTERFAZ

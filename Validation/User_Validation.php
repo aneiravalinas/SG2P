@@ -301,8 +301,12 @@ class User_Validation extends Validator {
             return $this->rellena_validation(false,'PRPH_EXT','USUARIO'); // Extensión de fichero no permitida
         }
 
-        if(!$this->tamanho_max_imagen('foto_perfil',100000)) {
+        if(!$this->max_tamanho_imagen('foto_perfil',100000)) {
             return $this->rellena_validation(false,'PRPH_LRG','USUARIO'); // Tamaño de imagen superior al 100kb
+        }
+
+        if(!$this->formato_nombre_imagen('foto_perfil')) {
+            return $this->rellena_validation(false, 'PRPH_FRMT', 'USUARIO'); // Formato de nombre incorrecto (sólo letras, números y guiones)
         }
 
         return $this->rellena_validation(true,'00000','USUARIO'); // Validación OK

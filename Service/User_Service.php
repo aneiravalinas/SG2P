@@ -109,7 +109,7 @@ class User_Service extends User_Validation {
                     }
                 } else { // Error al subir la foto de perfil
                     $this->feedback['ok'] = false;
-                    $this->feedback['code'] = ''; // Error al subir la foto de perfil.
+                    $this->feedback['code'] = 'PRPH_KO'; // Error al subir la foto de perfil.
                 }
             } else { // No se ha enviado una foto de perfil
                 $this->user_entity->foto_perfil = default_profile_photo; // Se añade foto de perfil por defecto.
@@ -138,20 +138,9 @@ class User_Service extends User_Validation {
         if($this->feedback['ok']) {
             $user = $this->feedback['resource'];
 
-            if($this->email != $user['email']) {
-                $this->feedback = $this->seekByEmail(); // Si se ha modificado el email y este ya existe.
-                if($this->feedback['ok']) {
-                    $this->feedback['ok'] = false;
-                    return $this->feedback;
-                }
-            }
-
-            if($this->telefono != $user['telefono']) {
-                $this->feedback = $this->seekByTelefono(); // Si se ha modificado el telefono y este ya existe.
-                if($this->feedback['ok']) {
-                    $this->feedback['ok'] = false;
-                    return $this->feedback;
-                }
+            $this->feedback = $this->uq_att_changed_not_exists($user);
+            if(!$this->feedback['ok']) {
+                return $this->feedback;
             }
 
             // Si el rol antiguo o el nuevo rol es de tipo responsable de edificio, y no son iguales (se ha producido un cambio)
@@ -165,7 +154,9 @@ class User_Service extends User_Validation {
             if(($user['rol'] == 'organizacion') && ($this->rol != 'organizacion')) {
                 $this->feedback = $this->check_more_than_one('organizacion');
                 if(!$this->feedback['ok']) {
-                    $this->feedback['code'] = 'OM_UNQ_EDT'; // No se puede modificar el rol. El usuario es el único responsable de la organización
+                    if($this->feedback['code'] == 'ROL_LTO') {
+                        $this->feedback['code'] = 'OM_UNQ_EDT'; // No se puede modificar el rol. El usuario es el único responsable de la organización
+                    }
                     return $this->feedback;
                 }
             }
@@ -174,21 +165,16 @@ class User_Service extends User_Validation {
             if(($user['rol'] == 'administrador') && ($this->rol != 'administrador')) {
                 $this->feedback = $this->check_more_than_one('adminsitrador');
                 if(!$this->feedback['ok']) {
-                    $this->feedback['code'] = 'ADM_UNQ_EDT'; // No se puede modificar el rol. El usuario es el único adminsitrador de la aplicación
+                    if($this->feedback['code'] == 'ROL_LTO') {
+                        $this->feedback['code'] = 'ADM_UNQ_EDT'; // No se puede modificar el rol. El usuario es el único adminsitrador de la aplicación
+                    }
                     return $this->feedback;
                 }
             }
 
-
-            if($this->foto_perfil != '') { // Si se ha subido una foto de perfil.
-                if($this->uploadPhoto()) { // Si la foto se sube correctamente.
-                    $this->deletePhoto($user['foto_perfil']); // Borramos la foto anterior.
-                    $this->user_entity->foto_perfil = $this->foto_perfil; // Modificamos en la entidad el nombre de la foto por el nuevo nombre generado
-                } else {
-                    $this->feedback['ok'] = false;
-                    $this->feedback['code'] = 'PRPH_KO'; // Error al subir la foto de perfil.
-                    return $this->feedback;
-                }
+            $this->feedback = $this->changePhoto($user);
+            if(!$this->feedback['ok']) {
+                return $this->feedback;
             }
 
             $this->feedback = $this->user_entity->EDIT(); // Llamamos al EDIT de la entidad
@@ -205,18 +191,7 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
-    function editForm() {
-        $validation = $this->validar_USERNAME(); // Validamos formato del nombre de usuario.
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->seekByUsername(); // Buscamos por nombre de usuario
-        return $this->feedback;
-    }
-
-    function deleteForm() {
-
+    function dataForm() {
         $validation = $this->validar_USERNAME(); // Validamos formato del nombre de usuario.
         if(!$validation['ok']) {
             return $validation;
@@ -244,13 +219,17 @@ class User_Service extends User_Validation {
             if($user['rol'] == 'organizacion') {
                 $this->feedback = $this->check_more_than_one('organizacion');
                 if(!$this->feedback['ok']) {
-                    $this->feedback['code'] = 'OM_UNQ_DEL'; // No se puede eliminar al usuario. Siempre debe existir al menos un responsable de la organización
+                    if($this->feedback['code'] == 'ROL_LTO') {
+                        $this->feedback['code'] = 'OM_UNQ_DEL'; // No se puede eliminar al usuario. Siempre debe existir al menos un responsable de la organización
+                    }
                     return $this->feedback;
                 }
             } else if($user['rol'] == 'administrador') {
                 $this->feedback = $this->check_more_than_one('administrador');
                 if(!$this->feedback['ok']) {
-                    $this->feedback['code'] = 'ADM_UNQ_DEL'; // No se puede eliminar al usuario. Siempre debe existir al menos un administrador
+                    if($this->feedback['code'] == 'ROL_LTO') {
+                        $this->feedback['code'] = 'ADM_UNQ_DEL'; // No se puede eliminar al usuario. Siempre debe existir al menos un administrador
+                    }
                     return $this->feedback;
                 }
             }
@@ -264,8 +243,8 @@ class User_Service extends User_Validation {
                 if($user['foto_perfil'] != default_profile_photo) { // Si la foto de perfil del usuario no es la de por defecto se elimina
                     $this->deletePhoto($user['foto_perfil']);
                 }
-            } else if($this->feedback['core'] == 'QRY_KO') {
-                $this->feedback['core'] = 'USR_DEL_KO'; // Error al eliminar al usuario.
+            } else if($this->feedback['code'] == 'QRY_KO') {
+                $this->feedback['code'] = 'USR_DEL_KO'; // Error al eliminar al usuario.
             }
 
         }
@@ -275,11 +254,15 @@ class User_Service extends User_Validation {
 
     function check_more_than_one($rol) {
         $this->feedback = $this->user_entity->searchByRol($rol);
-        if(sizeof($this->feedback['resource']) <= 1) {
-            $this->feedback['ok'] = false;
-            $this->feedback['code'] = 'ROL_LTO'; // Menos de un usuario por rol
-        } else {
-            $this->feedback['code'] = 'ROL_MTO'; // Más de un usuario por rol
+        if($this->feedback['ok']) {
+            if (sizeof($this->feedback['resource']) <= 1) {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'ROL_LTO'; // Menos de un usuario por rol
+            } else {
+                $this->feedback['code'] = 'ROL_MTO'; // Más de un usuario por rol
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'ROL_KO'; // Error al buscar por rol.
         }
         return $this->feedback;
     }
@@ -311,6 +294,35 @@ class User_Service extends User_Validation {
         }
 
         $this->feedback['ok'] = true; // No existe ninguno de los atributos
+        return $this->feedback;
+    }
+
+    function uq_att_changed_not_exists($user) {
+        if($this->dni != $user['dni']) {
+            $this->feedback = $this->seekByDNI();
+            if($this->feedback['ok'] || $this->feedback['code'] == 'DNI_KO') { // Si se ha modificado el dni y este ya existe o se produce un error al consultar por DNI.
+                $this->feedback['ok'] = false;
+                return $this->feedback;
+            }
+        }
+
+        if($this->email != $user['email']) {
+            $this->feedback = $this->seekByEmail(); // Si se ha modificado el email y este ya existe.
+            if($this->feedback['ok'] || $this->feedback['code'] == 'EML_KO') { // Si se ha modificado el email y este ya existe o se produce un error al consultar por email.
+                $this->feedback['ok'] = false;
+                return $this->feedback;
+            }
+        }
+
+        if($this->telefono != $user['telefono']) {
+            $this->feedback = $this->seekByTelefono(); // Si se ha modificado el telefono y este ya existe.
+            if($this->feedback['ok'] || $this->feedback['code'] == 'TLF_KO')  {
+                $this->feedback['ok'] = false;
+                return $this->feedback;
+            }
+        }
+
+        $this->feedback['ok'] = true;
         return $this->feedback;
     }
 
@@ -379,6 +391,22 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
+    function changePhoto($user) {
+        if($this->foto_perfil != '') { // Si se ha subido una foto de perfil.
+            if($this->uploadPhoto()) { // Si la foto se sube correctamente.
+                $this->deletePhoto($user['foto_perfil']); // Borramos la foto anterior.
+                $this->user_entity->foto_perfil = $this->foto_perfil; // Modificamos en la entidad el nombre de la foto por el nuevo nombre generado
+                $this->feedback['ok'] = true;
+            } else {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'PRPH_KO'; // Error al subir la foto de perfil.
+            }
+        } else {
+            $this->feedback['ok'] = true;
+        }
+        return $this->feedback;
+    }
+
     function uploadPhoto() {
         $temp = $_FILES['foto_perfil']['tmp_name'];
         $path = $_FILES['foto_perfil']['name'];
@@ -386,7 +414,6 @@ class User_Service extends User_Validation {
         $filename = pathinfo($path)['filename']; // Obtenemos el nombre de la imagen.
         $file = $filename . '_' . uniqid() . '.' . $ext; // Nuevo nombre de la imágen: 'NombreAnterior_ID.ext'
         if(move_uploaded_file($temp, profile_photos_path . $file)) { // Se almacena la imágen en servidor
-            //chmod(profile_photos_path . $file, 0777);
             $this->foto_perfil = $file; // Se almacena le nuevo nombre de imágen generado.
             return true; // Imágen subida con éxito.
         } else {

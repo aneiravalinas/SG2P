@@ -142,16 +142,27 @@ abstract class Validator {
         return preg_match('/^[6-9][0-9]{8}$/', $telefono);
     }
 
-    function extension_imagen($field_name) {
+    function extension_imagen($image) {
         $extensiones = array('jpg','jpeg','png');
-        $path = $_FILES[$field_name]['name'];
+        $path = $_FILES[$image]['name'];
         $extension = pathinfo($path)['extension'];
 
         return in_array($extension,$extensiones);
     }
 
-    function tamanho_max_imagen($field_name, $size) {
-        return ($_FILES[$field_name]['size'] <= $size);
+    function max_tamanho_imagen($image, $size) {
+        return ($_FILES[$image]['size'] <= $size);
+    }
+
+    function formato_nombre_imagen($image) {
+        $name = $_FILES[$image]['name'];
+        $filename = pathinfo($name)['filename'];
+
+        if(preg_match('/[^a-zA-Z0-9\-\_]/', $filename)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

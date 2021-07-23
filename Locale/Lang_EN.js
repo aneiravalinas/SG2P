@@ -60,6 +60,7 @@ arrayEN = {
         // Mas de un usuario por rol
         'ROL_MTO' : 'There is more than one user with the indicated role',
         'ROL_LTO' : 'There is less than one user with the indicated role',
+        'ROL_KO' : 'Query by rol failed',
 
         // Validaciones
 
@@ -103,6 +104,7 @@ arrayEN = {
             'PRPH_KO' : 'Error while uploading the profile picture',
             'PRPH_EXT' : 'Image extension is not allowed',
             'PRPH_LRG' : 'Image size is larger than allowed (100kb)',
+            'PRPH_FRMT' : 'The name of the profile picture can only contain letters, numbers and hyphens',
 
 
 
