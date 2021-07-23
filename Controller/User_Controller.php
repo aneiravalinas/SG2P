@@ -93,5 +93,21 @@ class User {
         }
     }
 
+    function profileForm() {
+        $user_service = new User_Service();
+        $feedback = $user_service->dataForm();
+        if($feedback['ok']) {
+            include './View/Users/Profile_View.php';
+            new Profile($feedback['resource']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'deshboard');
+        }
+    }
+
+    function editProfile() {
+        $user_service = new User_Service();
+        $feedback = $user_service->editProfile();
+        new Message($feedback['code'], 'Portal', 'deshboard');
+    }
 
 }

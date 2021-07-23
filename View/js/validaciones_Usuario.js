@@ -44,6 +44,23 @@ function check_ADD() {
     }
 }
 
+
+function check_PROFILE() {
+    if(
+        check_PASSWORD_EDIT() &&
+        check_TELEFONO() &&
+        check_EMAIL() &&
+        check_FOTO()
+    ) {
+        if(document.getElementById('password').value.length != 0) {
+            encrypt();
+        }
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function check_EDIT() {
     if(
         check_PASSWORD_EDIT() &&

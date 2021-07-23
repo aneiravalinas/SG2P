@@ -62,19 +62,29 @@ class User_Model extends Abstract_Model {
     }
 
     function EDIT() {
-        $this->query = "
-            UPDATE USUARIO SET " .
+        $this->query = "UPDATE USUARIO SET " .
                 ($this->password == '' ? "" : "password = '$this->password', ") .
                 ($this->rol == '' ? "" : "rol = '$this->rol', ") .
                 ($this->nombre == '' ? "" : "nombre = '$this->nombre', ") .
                 ($this->apellidos == '' ? "" : "apellidos = '$this->apellidos', ") .
                 ($this->email == '' ? "" : "email = '$this->email', ") .
-                ($this->telefono == '' ? "" : "telefono = '$this->telefono', ") .
                 ($this->foto_perfil == '' ? "" : "foto_perfil = '$this->foto_perfil', ") .
+                ($this->telefono == '' ? "" : "telefono = '$this->telefono'") .
             " WHERE username = '$this->username'";
 
         $this->execute_single_query();
+        return $this->feedback;
+    }
 
+    function editProfile() {
+        $this->query = "UPDATE USUARIO SET " .
+                ($this->password == '' ? "" : "password = '$this->password', ") .
+                ($this->foto_perfil == '' ? "" : "foto_perfil = '$this->foto_perfil', ") .
+                ($this->email == '' ? "" : "email = '$this->email', ") .
+                ($this->telefono == '' ? "" : "telefono = '$this->telefono'") .
+            " WHERE username = '$this->username'";
+
+        $this->execute_single_query();
         return $this->feedback;
     }
 

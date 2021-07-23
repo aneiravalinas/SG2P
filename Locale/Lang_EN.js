@@ -37,6 +37,11 @@ arrayEN = {
         'ADM_UNQ_EDT' : 'The role cannot be modified. The user is the only administrator of the application',
         'USR_EDT_KO' : 'Error editing user',
 
+        // EDIT_PROFILE
+        'PRF_USR_KO' : 'You cannot edit another user\'s profile',
+        'PRF_OK' : 'Profile data has been stored successfully',
+        'PRF_KO' : 'Error modifying profile data',
+
         // Búsqueda por Username
         'USRNM_EXST' : 'The username already exist',
         'USRNM_NOT_EXST' : 'The username entered does not exist',

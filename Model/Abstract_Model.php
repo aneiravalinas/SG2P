@@ -74,7 +74,7 @@ abstract class Abstract_Model {
         } else {
             if ($this->conn->query($this->query)) { // Éxito de SQL
                 $this->ok = true;
-                $this->code = 'QRY-OK';
+                $this->code = 'QRY_OK';
 //                $this->id_autoincrement = mysqli_insert_id($this->conn); //En caso de autoincrement,
 //                // recupera la clave generada
             } else {            // Error de SQL

@@ -1,6 +1,6 @@
 <?php
 
-class Edit_User {
+class Profile {
     var $user;
 
     function __construct($user) {
@@ -18,7 +18,7 @@ class Edit_User {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1 class="mb-4 mt-4 i18n-edit-user">Editar Usuario</h1>
+                        <h1 class="mb-4 mt-4 i18n-profile">Mi Perfil</h1>
                     </div>
 
                     <div class="row justify-content-center">
@@ -34,7 +34,7 @@ class Edit_User {
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="dni" class="i18n-dni">DNI</label>
-                                    <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $this->user['dni'] ?>" onblur="check_DNI();"/>
+                                    <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $this->user['dni'] ?>" disabled/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="username" class="i18n-username">Username</label>
@@ -56,11 +56,11 @@ class Edit_User {
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $this->user['nombre'] ?>" onblur="check_NAME();"/>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $this->user['nombre'] ?>" disabled/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="apellidos" class="i18n-apellidos">Apellidos</label>
-                                    <input type="text" class="form-control" id="apellidos" name="apellidos" value="<?php echo $this->user['apellidos'] ?>" onblur="check_SURNAME();"/>
+                                    <input type="text" class="form-control" id="apellidos" name="apellidos" value="<?php echo $this->user['apellidos'] ?>" disabled/>
                                 </div>
                             </div>
 
@@ -78,35 +78,27 @@ class Edit_User {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="rol" class="i18n-rol">Rol</label>
-                                <?php if($this->user['rol'] == 'edificio') :?>
-                                    <select id="rol" name="rol" class="form-select">
-                                        <option value="edificio" class="i18n-f-edificio" selected></option>
+                                    <select id="rol" name="rol" class="form-select" disabled>
+                                        <option value="<?php echo $this->user['rol'] ?>" class="i18n-f-<?php echo $this->user['rol'] ?>" selected></option>
                                     </select>
-                                <?php else :?>
-                                    <select id="rol" name="rol" class="form-select">
-                                        <option value="registrado" class="i18n-f-registrado" <?php if($this->user['rol'] == 'registrado') echo "selected"; ?>>Usuario Registrado</option>
-                                        <option value="organizacion" class="i18n-f-organizacion" <?php if($this->user['rol'] == 'organizacion') echo "selected"; ?>>Responsable Organizacion</option>
-                                        <option value="administrador" class="i18n-f-administrador" <?php if($this->user['rol'] == 'administrador') echo "selected"; ?>>Administrador</option>
-                                    </select>
-                                <?php endif; ?>
                                 </div>
                             </div>
 
                             <div class="row justify-content-center">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
+                                    <a class="btn-get-started i18n-back" type="button" onclick="
                                         crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','User');
-                                            insertacampo(document.formenviar,'action','show');
+                                            insertacampo(document.formenviar,'controller','Portal');
+                                            insertacampo(document.formenviar,'action','deshboard');
                                             enviaform(document.formenviar);">
-                                        Cancelar
+                                        Volver
                                     </a>
-                                    <a class="btn-get-started i18n-enviar" type="button" onclick="
-                                            insertacampo(document.formularioedit,'username', '<?php echo $this->user['username']; ?>')
+                                    <a class="btn-get-started i18n-edit" type="button" onclick="
+                                            insertacampo(document.formularioedit,'username', '<?php echo $this->user['username']; ?>');
                                             insertacampo(document.formularioedit,'controller','User');
-                                            insertacampo(document.formularioedit,'action','edit');
-                                            enviaformcorrecto(document.formularioedit,check_EDIT());">
-                                        Enviar
+                                            insertacampo(document.formularioedit,'action','editProfile');
+                                            enviaformcorrecto(document.formularioedit,check_PROFILE());">
+                                        Editar
                                     </a>
                                 </div>
                             </div>

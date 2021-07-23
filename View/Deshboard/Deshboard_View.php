@@ -38,7 +38,12 @@ class Deshboard {
 
                     <div class="col-lg-4 col-sm-6 col-xl-3 d-flex align-items-stretch panel-option" data-aos="zoom-in" data-aos-delay="200">
                         <div class="icon-box">
-                            <a type="button">
+                            <a type="button" onclick="
+                                    crearform('formenviar','post');
+                                        insertacampo(document.formenviar,'username','<?php echo $_SESSION['username']; ?>')
+                                        insertacampo(document.formenviar,'action','profileForm');
+                                        insertacampo(document.formenviar,'controller','User');
+                                        enviaform(document.formenviar);">
                                 <div>
                                     <div class="icon"><i class="iconify" data-icon="carbon:user-profile"></i></div>
                                     <h4 class="title i18n-profile">Mi Perfil</h4>

@@ -96,7 +96,8 @@ class User_Service extends User_Validation {
 
         if($this->feedback['ok']) { // Si ninguno de los atributos únicos existen
             if($this->foto_perfil !== '') { // Si se ha enviado una foto de perfil.
-                if ($this->uploadPhoto()) { // Subir foto de perfil
+                $this->feedback = $this->uploadPhoto();
+                if ($this->feedback['ok']) { // Subir foto de perfil
                     $this->user_entity->foto_perfil = $this->foto_perfil; // Se modifica el nombre de la foto de perfil con id generado al subirla.
                     $this->feedback = $this->user_entity->ADD(); // Método ADD del modelo
                     if ($this->feedback['ok']) {
@@ -107,9 +108,6 @@ class User_Service extends User_Validation {
                             $this->feedback['code'] = 'USR_ADD_KO'; // Error al añadir usuario
                         }
                     }
-                } else { // Error al subir la foto de perfil
-                    $this->feedback['ok'] = false;
-                    $this->feedback['code'] = 'PRPH_KO'; // Error al subir la foto de perfil.
                 }
             } else { // No se ha enviado una foto de perfil
                 $this->user_entity->foto_perfil = default_profile_photo; // Se añade foto de perfil por defecto.
@@ -125,6 +123,57 @@ class User_Service extends User_Validation {
         }
 
         return $this->feedback;
+    }
+
+
+    function editProfile() {
+        $validation = $this->validar_atributos_perfil();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        if($this->username != $_SESSION['username']) {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'PRF_USR_KO';
+            return $this->feedback;
+        }
+
+        $this->feedback = $this->seekByUsername();
+
+        if($this->feedback['ok']) {
+            $user = $this->feedback['resource'];
+            $this->feedback = $this->uq_att_changed_not_exists($user);
+            if(!$this->feedback['ok']) {
+                return $this->feedback;
+            }
+
+            if($this->foto_perfil != '') {
+                $this->feedback = $this->uploadPhoto();
+                if(!$this->feedback['ok']) {
+                    return $this->feedback;
+                }
+                $this->user_entity->foto_perfil = $this->foto_perfil;
+                $this->feedback = $this->user_entity->editProfile();
+                if($this->feedback['ok']) {
+                    $this->feedback['code'] = 'PRF_OK';
+                    $this->deletePhoto($user['foto_perfil']);
+                } else {
+                    $this->feedback['code'] = 'PRF_KO';
+                    $this->deletePhoto($this->foto_perfil);
+                }
+            } else {
+                $this->feedback = $this->user_entity->editProfile();
+                if($this->feedback['ok']) {
+                    $this->feedback['code'] = 'PRF_OK';
+                } else {
+                    $this->feedback['code'] = 'PRF_KO';
+                }
+            }
+        }
+
+        return $this->feedback;
+
+
     }
 
     function EDIT() {
@@ -172,20 +221,34 @@ class User_Service extends User_Validation {
                 }
             }
 
-            $this->feedback = $this->changePhoto($user);
-            if(!$this->feedback['ok']) {
-                return $this->feedback;
+            if($this->foto_perfil != '') {
+                $this->feedback = $this->uploadPhoto();
+                if($this->feedback['ok']) {
+                    $this->user_entity->foto_perfil = $this->foto_perfil;
+                    $this->feedback = $this->user_entity->EDIT(); // Llamamos al EDIT de la entidad
+                    if($this->feedback['ok']) {
+                        if(($this->username == $_SESSION['username']) && ($this->rol != $_SESSION['rol'])) { // Si el administrador se modifica a sí mismo, y se ha cambiado el rol.
+                            $_SESSION['rol'] = $this->rol; // Añadimos nuevo rol a la SESSION.
+                        }
+                        $this->feedback['code'] = 'USR_EDT_OK'; // Usuario editado correctamente.
+                        $this->deletePhoto($user['foto_perfil']);
+                    } else if($this->feedback['code'] == 'QRY_KO') {
+                        $this->feedback['code'] = 'USR_EDT_KO'; // Error al editar al usuario
+                        $this->deletePhoto($this->foto_perfil);
+                    }
+                }
+            } else{
+                $this->feedback = $this->user_entity->EDIT(); // Llamamos al EDIT de la entidad
+                if($this->feedback['ok']) {
+                    if(($this->username == $_SESSION['username']) && ($this->rol != $_SESSION['rol'])) { // Si el administrador se modifica a sí mismo, y se ha cambiado el rol.
+                        $_SESSION['rol'] = $this->rol; // Añadimos nuevo rol a la SESSION.
+                    }
+                    $this->feedback['code'] = 'USR_EDT_OK'; // Usuario editado correctamente.
+                } else if($this->feedback['code'] == 'QRY_KO') {
+                    $this->feedback['code'] = 'USR_EDT_KO'; // Error al editar al usuario
+                }
             }
 
-            $this->feedback = $this->user_entity->EDIT(); // Llamamos al EDIT de la entidad
-            if($this->feedback['ok']) {
-                if(($this->username == $_SESSION['username']) && ($this->rol != $_SESSION['rol'])) { // Si el administrador se modifica a sí mismo, y se ha cambiado el rol.
-                    $_SESSION['rol'] = $this->rol; // Añadimos nuevo rol a la SESSION.
-                }
-                $this->feedback['code'] = 'USR_EDT_OK'; // Usuario editado correctamente.
-            } else if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'USR_EDT_KO'; // Error al editar al usuario
-            }
         }
 
         return $this->feedback;
@@ -391,21 +454,6 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
-    function changePhoto($user) {
-        if($this->foto_perfil != '') { // Si se ha subido una foto de perfil.
-            if($this->uploadPhoto()) { // Si la foto se sube correctamente.
-                $this->deletePhoto($user['foto_perfil']); // Borramos la foto anterior.
-                $this->user_entity->foto_perfil = $this->foto_perfil; // Modificamos en la entidad el nombre de la foto por el nuevo nombre generado
-                $this->feedback['ok'] = true;
-            } else {
-                $this->feedback['ok'] = false;
-                $this->feedback['code'] = 'PRPH_KO'; // Error al subir la foto de perfil.
-            }
-        } else {
-            $this->feedback['ok'] = true;
-        }
-        return $this->feedback;
-    }
 
     function uploadPhoto() {
         $temp = $_FILES['foto_perfil']['tmp_name'];
@@ -415,15 +463,16 @@ class User_Service extends User_Validation {
         $file = $filename . '_' . uniqid() . '.' . $ext; // Nuevo nombre de la imágen: 'NombreAnterior_ID.ext'
         if(move_uploaded_file($temp, profile_photos_path . $file)) { // Se almacena la imágen en servidor
             $this->foto_perfil = $file; // Se almacena le nuevo nombre de imágen generado.
-            return true; // Imágen subida con éxito.
+            $this->feedback['ok'] = true;
         } else {
-            return false; // Error al subir la imágen
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'PRPH_KO';
         }
+
+        return $this->feedback;
     }
 
     function deletePhoto($photo) {
         return unlink(profile_photos_path . $photo); // Elimina la imágen pasada como parámetro. Devuelve true en caso de éxito.
     }
 }
-
-?>

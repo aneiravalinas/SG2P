@@ -39,6 +39,11 @@ arrayES = {
         'ADM_UNQ_EDT' : 'No se puede modificar el rol. El usuario es el único adminsitrador de la aplicación', // ADM_UNQ_EDT
         'USR_EDT_KO' : 'Error al editar al usuario', // USR_EDT_KO
 
+        // EDIT_PROFILE
+        'PRF_USR_KO' : 'No puede editar el perfil de otro usuario',
+        'PRF_OK' : 'Los datos del perfil se han almacenado correctamente',
+        'PRF_KO' : 'Error al modificar los datos del perfil',
+
         // Búsqueda por Username
         'USRNM_EXST' : 'El nombre de usuario ya existe', // USRNM_EXST
         'USRNM_NOT_EXST' : 'El nombre de usuario introducido no existe', // USRNM_NOT_EXST
