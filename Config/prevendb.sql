@@ -6,8 +6,8 @@ USE PREVENDB;
 
 CREATE TABLE USUARIO
 (
-	`dni` CHAR(9),
-	`username` VARCHAR(20) NOT NULL,
+	`username` VARCHAR(20),
+    `dni` CHAR(9) NOT NULL,
 	`password` VARCHAR(128) NOT NULL,
 	`rol` enum('edificio','organizacion','registrado','administrador') NOT NULL,
 	`nombre` VARCHAR(30) NOT NULL,
@@ -16,8 +16,8 @@ CREATE TABLE USUARIO
 	`telefono` VARCHAR(9) NOT NULL,
 	`foto_perfil` VARCHAR(40) NULL,
 
-	CONSTRAINT `pk_usuario` PRIMARY KEY (`dni`),
-	CONSTRAINT `uq_user_username` UNIQUE (`username`),
+	CONSTRAINT `pk_usuario` PRIMARY KEY (`username`),
+	CONSTRAINT `uq_user_dni` UNIQUE (`dni`),
 	CONSTRAINT `uq_user_telf` UNIQUE (`telefono`),
 	CONSTRAINT `uq_user_email` UNIQUE (`email`)
 );
@@ -25,10 +25,10 @@ CREATE TABLE USUARIO
 CREATE TABLE EDIFICIO
 (
 	`edificio_id` INT(10) AUTO_INCREMENT,
-	`dni` CHAR(9) NOT NULL,
+    `username` VARCHAR(20) NOT NULL,
 	`nombre` VARCHAR(60) NOT NULL,
 	`calle` VARCHAR(60) NOT NULL,
-	`localidad` VARCHAR(40) NOT NULL,
+	`ciudad` VARCHAR(40) NOT NULL,
 	`provincia` VARCHAR(40) NOT NULL,
 	`codigo_postal` CHAR(5) NOT NULL,
 	`telefono` VARCHAR(9) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE EDIFICIO
 	`foto_edificio` VARCHAR(12) NULL,
 
 	CONSTRAINT `pk_edificio` PRIMARY KEY (`edificio_id`),
-	CONSTRAINT `fk_edificio_to_usuario` FOREIGN KEY (`dni`) REFERENCES USUARIO (`dni`)
+	CONSTRAINT `fk_edificio_to_usuario` FOREIGN KEY (`username`) REFERENCES USUARIO (`username`)
 );
 
 CREATE TABLE PLANTA
@@ -48,7 +48,7 @@ CREATE TABLE PLANTA
 	`descripcion` TEXT NOT NULL,
 
 	CONSTRAINT `pk_planta` PRIMARY KEY (`planta_id`),
-	CONSTRAINT `fk_planta_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`)
+	CONSTRAINT `fk_planta_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`) ON DELETE CASCADE
 );
 
 CREATE TABLE ESPACIO
@@ -61,7 +61,7 @@ CREATE TABLE ESPACIO
 	`foto_espacio` VARCHAR(20) NULL,
 
 	CONSTRAINT `pk_espacio` PRIMARY KEY (`espacio_id`),
-	CONSTRAINT `fk_espacio_to_planta` FOREIGN KEY (`planta_id`) REFERENCES PLANTA (`planta_id`)
+	CONSTRAINT `fk_espacio_to_planta` FOREIGN KEY (`planta_id`) REFERENCES PLANTA (`planta_id`) ON DELETE CASCADE
 );
 
 CREATE TABLE PLAN
@@ -162,7 +162,7 @@ CREATE TABLE PLANTA_RUTA
 	`nombre_doc` VARCHAR(20) NOT NULL,
 
 	CONSTRAINT `pk_planta_ruta` PRIMARY KEY (`planta_ruta_id`),
-	CONSTRAINT `fk_planta_ruta_to_planta` FOREIGN KEY (`planta_id`) REFERENCES PLANTA (`planta_id`),
+	CONSTRAINT `fk_planta_ruta_to_planta` FOREIGN KEY (`planta_id`) REFERENCES PLANTA (`planta_id`) ON DELETE CASCADE,
 	CONSTRAINT `fk_planta_ruta_to_ruta` FOREIGN KEY (`ruta_id`) REFERENCES RUTA (`ruta_id`)
 );
 
@@ -226,7 +226,7 @@ CREATE TABLE EDIFICIO_FORMACION
 CREATE TABLE NOTIFICACION
 (
 	`id_notificacion` INT(10) AUTO_INCREMENT,
-	`dni` CHAR(9) NOT NULL,
+    `username` VARCHAR(20) NOT NULL,
 	`edificio_id` INT(10) NOT NULL,
 	`plan_id` INT(10) NOT NULL,
 	`leido` BIT NOT NULL DEFAULT 0,
@@ -234,14 +234,14 @@ CREATE TABLE NOTIFICACION
 	`mensaje` VARCHAR(280) NOT NULL,
 
 	CONSTRAINT `pk_notificacion` PRIMARY KEY (`id_notificacion`),
-	CONSTRAINT `fk_notificacion_to_usuario` FOREIGN KEY (`dni`) REFERENCES USUARIO (`dni`),
+	CONSTRAINT `fk_notificacion_to_usuario` FOREIGN KEY (`username`) REFERENCES USUARIO (`username`),
 	CONSTRAINT `fk_notificacion_to_edificio_plan` FOREIGN KEY (`edificio_id`, `plan_id`) REFERENCES EDIFICIO_PLAN (`edificio_id`, `plan_id`)
 );
 
 
 
-INSERT INTO USUARIO (`dni`,`username`,`password`,`rol`,`nombre`,`apellidos`,`email`,`telefono`,`foto_perfil`)
-VALUES ('14197701P','sg2padmin','7a25b0bc04e77a2f7453dd021168cdc2','administrador','admin','adminsurname','admin@email.es','666666666','default.jpeg');
+INSERT INTO USUARIO (`username`, `dni`, `password`,`rol`,`nombre`,`apellidos`,`email`,`telefono`,`foto_perfil`)
+VALUES ('sg2padmin','14197701P','7a25b0bc04e77a2f7453dd021168cdc2','administrador','admin','adminsurname','admin@email.es','666666666','default.jpeg');
 
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';
