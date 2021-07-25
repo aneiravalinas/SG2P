@@ -137,6 +137,7 @@ arrayEN = {
         'i18n-select-option' : 'Select an option',
         'i18n-users': 'Users',
         'i18n-profile' : 'My Profile',
+        'i18n-buildings' : 'Buildings',
 
         // USER VIEWS
         'i18n-dni' : 'DNI',

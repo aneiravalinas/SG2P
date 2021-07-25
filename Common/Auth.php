@@ -24,4 +24,8 @@ function es_admin() {
 	return $_SESSION['rol'] === 'administrador';
 }
 
+function getUser() {
+	return $_SESSION['username'];
+}
+
 ?> 

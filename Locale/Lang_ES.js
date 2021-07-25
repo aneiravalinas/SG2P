@@ -139,6 +139,7 @@ arrayES = {
         'i18n-select-option' : 'Selecciona una opción',
         'i18n-users': 'Usuarios',
         'i18n-profile' : 'Mi Perfil',
+        'i18n-buildings' : 'Edificios',
 
         // USER VIEWS
         'i18n-dni' : 'DNI',
