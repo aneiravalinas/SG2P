@@ -2,7 +2,7 @@
 
 include_once 'Validator.php';
 
-class Building_Validation extends Validation {
+class Building_Validation extends Validator {
     var $edificio_id;
     var $username;
     var $nombre;

@@ -166,6 +166,11 @@ arrayES = {
         'i18n-edit-user' : 'Editar Usuario',
         'i18n-user-details' : 'Detalles del Usuario',
 
+        // BUILDINGS VIEWS
+        'i18n-responsable' : 'Responsable',
+        'i18n-city' : 'Ciudad',
+        'i18n-buildings-empty' : 'No hay edificios registrado todavía',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Aviso!',

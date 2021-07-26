@@ -12,7 +12,8 @@ class Building {
             $building_service = new Building_Service();
             $feedback = $building_service->SEARCH();
             if($feedback['ok']) {
-                // TODO: Send resource to Show_Buildings_View
+                include_once './View/Buildings/Show_Buildings_View.php';
+                new Show_Buildings($feedback['resource']);
             } else {
                 new Message($feedback['code'],'Portal','deshboard');
             }

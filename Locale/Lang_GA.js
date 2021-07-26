@@ -165,6 +165,11 @@ arrayGA = {
         'i18n-edit-user' : 'Editar Usuario',
         'i18n-user-details' : 'Detalles do Usuario',
 
+        // BUILDINGS VIEWS
+        'i18n-responsable' : 'Responsable',
+        'i18n-city' : 'Cidade',
+        'i18n-buildings-empty' : 'Aínda non hay edificios rexitrados',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Aviso!',
