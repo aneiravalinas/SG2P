@@ -63,8 +63,8 @@ class Add_Building {
 
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="responsable" class="i18n-responsable">Responsable</label>
-                                    <select id="responsable" name="responsable" class="form-select">
+                                    <label for="username" class="i18n-responsable">Responsable</label>
+                                    <select id="username" name="username" class="form-select">
                                         <?php foreach($this->candidates as $candidate) :?>
                                         <option value="<?php echo $candidate['username'] ?>"><?php echo $candidate['username'] ?></option>
                                         <?php endforeach; ?>

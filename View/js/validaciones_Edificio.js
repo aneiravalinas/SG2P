@@ -1,5 +1,7 @@
 function check_ADD_EDIFICIO() {
-    return check_NOMBRE_EDIFICIO() &&
+
+    if(
+        check_NOMBRE_EDIFICIO() &&
         check_CALLE() &&
         check_CIUDAD() &&
         check_PROVINCIA() &&
@@ -7,7 +9,12 @@ function check_ADD_EDIFICIO() {
         check_FAX() &&
         check_TELEFONO() &&
         check_RESPONSABLE_EDIFICIO() &&
-        check_FOTO_EDIFICIO();
+        check_FOTO_EDIFICIO()
+    ) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
@@ -61,11 +68,11 @@ function check_FAX() {
 }
 
 function check_FOTO_EDIFICIO() {
-    return check_imagen('foto_edifico');
+    return check_imagen('foto_edificio');
 }
 
 function check_RESPONSABLE_EDIFICIO() {
-    if(not_empty('responsable',true) && check_letters_numbers('responsable',20)) {
+    if(not_empty('username',true) && check_letters_numbers('username',20)) {
         return true;
     } else {
         return false;

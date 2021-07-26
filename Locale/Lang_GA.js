@@ -73,9 +73,14 @@ arrayGA = {
         'BLD_SRCH_OK' : 'Búsqueda de Edificios Ok',
         'BLD_SRCH_KO' : 'Búsqueda de Edificios KO',
 
+        // ADD
+        'BLD_ADD_KO' : 'Error ó engadir o edificio',
+        'BLD_ADD_OK' : 'O edificio engadiurse correctamente',
+
         // Obtener candidatos a responsable de edificio
         'BLD_RESP_EMPT' : 'Non hay candidatos dispoñibles pra ser responsable de edificio',
         'GT_MANG_KO' : 'Error ó obter candidatos a responsable de edificio',
+        'BLD_RESP_INV' : 'O usuario indicado non é válido pra ser responsable de edificio',
 
         // Validaciones
 

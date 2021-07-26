@@ -161,6 +161,17 @@ class User_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function change_role($username,$rol) {
+        $this->query = "
+            UPDATE USUARIO 
+            SET rol = '$rol'
+            WHERE username = '$username';
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
+    }
+
 }
 
 ?>

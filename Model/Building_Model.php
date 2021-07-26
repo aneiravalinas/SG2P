@@ -32,7 +32,32 @@ class Building_Model extends Abstract_Model {
     }
 
     function ADD() {
-        // TODO: Implement ADD() method.
+        $this->query = "
+            INSERT INTO EDIFICIO (
+                            username,
+                            nombre,
+                            calle,
+                            ciudad,
+                            provincia,
+                            codigo_postal,
+                            telefono,
+                            fax,
+                            foto_edificio
+                ) VALUES (
+                          '$this->username',
+                          '$this->nombre',
+                          '$this->calle',
+                          '$this->ciudad',
+                          '$this->provincia',
+                          '$this->codigo_postal',
+                          '$this->telefono',
+                          '$this->fax',
+                          '$this->foto_edificio'
+                );
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function EDIT() {

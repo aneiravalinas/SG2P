@@ -166,7 +166,7 @@ abstract class Validator {
     }
 
     function solo_letras_numeros_espacios_acentos($string) {
-        if(preg_match('/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ]*[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+$/')) {
+        if(preg_match('/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ]*[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+$/',$string)) {
             return true;
         } else {
             return false;

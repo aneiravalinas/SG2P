@@ -73,9 +73,14 @@ arrayEN = {
         'BLD_SRCH_OK' : 'Building Search Ok',
         'BLD_SRCH_KO' : 'Building Search KO',
 
+        // ADD
+        'BLD_ADD_KO' : 'Failed to add building',
+        'BLD_ADD_OK' : 'The building has been added successfully',
+
         // Obtener candidatos a responsable de edificio
         'BLD_RESP_EMPT' : 'There are no candidates available to be building manager',
         'GT_MANG_KO' : 'Failed to obtain building manager candidates',
+        'BLD_RESP_INV' : 'The specified user is not valid to be a building manager',
 
         // Validaciones
 

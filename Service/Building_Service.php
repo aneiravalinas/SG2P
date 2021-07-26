@@ -93,7 +93,7 @@ class Building_Service extends Building_Validation {
                 $this->uploader->deletePhoto(building_photos_path, $this->foto_edificio);
             }
         } else {
-            $this->feedback = $this->username->cambiar_rol($this->username, 'edificio');
+            $this->feedback = $this->user_entity->change_role($this->username, 'edificio');
             if($this->feedback['ok']) {
                 $this->feedback['code'] = 'BLD_ADD_OK';
             } else {

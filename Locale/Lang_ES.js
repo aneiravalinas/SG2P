@@ -75,9 +75,20 @@ arrayES = {
         'BLD_SRCH_OK' : 'Búsqueda de Edificios Ok',
         'BLD_SRCH_KO' : 'Búsqueda de Edificios KO',
 
+        // ADD
+        'BLD_ADD_KO' : 'Error al añadir el edificio',
+        'BLD_ADD_OK' : 'El edificio se ha añadido correctamente',
+
         // Obtener candidatos a responsable de edificio
         'BLD_RESP_EMPT' : 'No hay candidatos disponbiles para ser responsable de edificio',
         'GT_MANG_KO' : 'Error al obtener candidatos a responsable de edificio',
+        'BLD_RESP_INV' : 'El usuario especificado no es válido para ser responsable de edificio',
+
+        // Error al modificar el rol del responsable
+        'BLD_EDT_ROL_KO' : 'Error al modificar el rol del responsable',
+
+        // Fotos Edificio
+        'BLD_PH_KO' : 'Error al subir la foto del edificio',
 
 
         // Validaciones
