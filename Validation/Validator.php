@@ -165,4 +165,20 @@ abstract class Validator {
         }
     }
 
+    function solo_letras_numeros_espacios_acentos($string) {
+        if(preg_match('/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ]*[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+$/')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function exact_size($string,$size) {
+        if(strlen($string) == $size) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

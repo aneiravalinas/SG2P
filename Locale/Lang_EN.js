@@ -67,6 +67,16 @@ arrayEN = {
         'ROL_LTO' : 'There is less than one user with the indicated role',
         'ROL_KO' : 'Query by rol failed',
 
+    // EDIFICIOS
+
+        // SEARCH
+        'BLD_SRCH_OK' : 'Building Search Ok',
+        'BLD_SRCH_KO' : 'Building Search KO',
+
+        // Obtener candidatos a responsable de edificio
+        'BLD_RESP_EMPT' : 'There are no candidates available to be building manager',
+        'GT_MANG_KO' : 'Failed to obtain building manager candidates',
+
         // Validaciones
 
             // Nombre de Usuario
@@ -166,8 +176,15 @@ arrayEN = {
 
         // BUILDINGS VIEWS
         'i18n-responsable' : 'Manager',
-        'i18n-city' : 'City',
+        'i18n-ciudad' : 'City',
         'i18n-buildings-empty' : 'There is no registered building yet',
+        'i18n-add-building' : 'Add Building',
+        'i18n-ciudad' : 'City',
+        'i18n-calle' : 'Street',
+        'i18n-provincia' : 'Province',
+        'i18n-codigo_postal' : 'Postal Code',
+        'i18n-fax' : 'Fax',
+
 
         // MODAL
             // Campos Modal
@@ -182,6 +199,13 @@ arrayEN = {
             'm-rol' : ' Role ',
             'm-apellidos' : ' Surname ',
             'm-foto_perfil' : ' Profile Photo ',
+            'm-calle' : ' Street ',
+            'm-ciudad' : ' City ',
+            'm-provincia' : ' Province ',
+            'm-codigo_postal' : ' Postal Code ',
+            'm-fax' : ' Fax ',
+            'm-responsable' : ' Manager ',
+            'm-foto_edificio' : ' Building Photo ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',

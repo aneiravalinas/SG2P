@@ -146,6 +146,21 @@ class User_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function get_usernames_byRoles($roles) {
+        $this->query = "
+            SELECT username FROM USUARIO
+            WHERE ";
+
+        for($i = 0; $i < count($roles) - 1; $i++) {
+            $this->query .= "rol = '$roles[$i]' OR ";
+        }
+
+        $this->query .= "rol = '$roles[$i]'";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
 }
 
 ?>

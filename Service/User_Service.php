@@ -2,14 +2,17 @@
 
 include_once './Model/User_Model.php';
 include_once './Validation/User_Validation.php';
+include_once './Service/Uploader_Service.php';
 
 class User_Service extends User_Validation {
     var $atributos;
     var $user_entity;
+    var $uploader;
     var $feedback = array();
 
     function __construct() {
         $this->user_entity = new User_Model();
+        $this->uploader = new Uploader();
         $this->atributos = array('dni','username','password','rol','nombre','apellidos','email','telefono');
         $this->fill_fields();
     }
@@ -96,18 +99,21 @@ class User_Service extends User_Validation {
 
         if($this->feedback['ok']) { // Si ninguno de los atributos únicos existen
             if($this->foto_perfil !== '') { // Si se ha enviado una foto de perfil.
-                $this->feedback = $this->uploadPhoto();
+                $this->feedback = $this->uploader->uploadPhoto(profile_photos_path,'foto_perfil');
                 if ($this->feedback['ok']) { // Subir foto de perfil
+                    $this->foto_perfil = $this->feedback['resource'];
                     $this->user_entity->foto_perfil = $this->foto_perfil; // Se modifica el nombre de la foto de perfil con id generado al subirla.
                     $this->feedback = $this->user_entity->ADD(); // Método ADD del modelo
                     if ($this->feedback['ok']) {
                         $this->feedback['code'] = 'USR_ADD_OK'; // Usuario añadido con éxito.
                     } else {
-                        $this->deletePhoto($this->foto_perfil); // Si no se pudo añadir al usuario se borra la foto de perfil
+                        $this->uploader->deletePhoto(profile_photos_path,$this->foto_perfil); // Si no se pudo añadir al usuario se borra la foto de perfil
                         if ($this->feedback['code'] == 'QRY_KO') { // No es un error del gestor...
                             $this->feedback['code'] = 'USR_ADD_KO'; // Error al añadir usuario
                         }
                     }
+                } else {
+                    $this->feedback['code'] = 'PRPH_KO'; // Error al subir la imágen
                 }
             } else { // No se ha enviado una foto de perfil
                 $this->user_entity->foto_perfil = default_profile_photo; // Se añade foto de perfil por defecto.
@@ -148,18 +154,20 @@ class User_Service extends User_Validation {
             }
 
             if($this->foto_perfil != '') {
-                $this->feedback = $this->uploadPhoto();
+                $this->feedback = $this->uploader->uploadPhoto(profile_photos_path,'foto_perfil');
                 if(!$this->feedback['ok']) {
+                    $this->feedback['code'] = 'PRPH_KO';
                     return $this->feedback;
                 }
+                $this->foto_perfil = $this->feedback['resource'];
                 $this->user_entity->foto_perfil = $this->foto_perfil;
                 $this->feedback = $this->user_entity->editProfile();
                 if($this->feedback['ok']) {
                     $this->feedback['code'] = 'PRF_OK';
-                    $this->deletePhoto($user['foto_perfil']);
+                    $this->uploader->deletePhoto(profile_photos_path, $user['foto_perfil']);
                 } else {
                     $this->feedback['code'] = 'PRF_KO';
-                    $this->deletePhoto($this->foto_perfil);
+                    $this->uploader->deletePhoto(profile_photos_path, $this->foto_perfil);
                 }
             } else {
                 $this->feedback = $this->user_entity->editProfile();
@@ -222,8 +230,9 @@ class User_Service extends User_Validation {
             }
 
             if($this->foto_perfil != '') {
-                $this->feedback = $this->uploadPhoto();
+                $this->feedback = $this->uploader->uploadPhoto(profile_photos_path, 'foto_perfil');
                 if($this->feedback['ok']) {
+                    $this->foto_perfil = $this->feedback['resource'];
                     $this->user_entity->foto_perfil = $this->foto_perfil;
                     $this->feedback = $this->user_entity->EDIT(); // Llamamos al EDIT de la entidad
                     if($this->feedback['ok']) {
@@ -231,11 +240,13 @@ class User_Service extends User_Validation {
                             $_SESSION['rol'] = $this->rol; // Añadimos nuevo rol a la SESSION.
                         }
                         $this->feedback['code'] = 'USR_EDT_OK'; // Usuario editado correctamente.
-                        $this->deletePhoto($user['foto_perfil']);
+                        $this->uploader->deletePhoto(profile_photos_path, $user['foto_perfil']);
                     } else if($this->feedback['code'] == 'QRY_KO') {
                         $this->feedback['code'] = 'USR_EDT_KO'; // Error al editar al usuario
-                        $this->deletePhoto($this->foto_perfil);
+                        $this->uploader->deletePhoto(profile_photos_path, $this->foto_perfil);
                     }
+                } else {
+                    $this->feedback['code'] = 'PRPH_KO';
                 }
             } else{
                 $this->feedback = $this->user_entity->EDIT(); // Llamamos al EDIT de la entidad
@@ -304,7 +315,7 @@ class User_Service extends User_Validation {
                     session_destroy();
                 }
                 if($user['foto_perfil'] != default_profile_photo) { // Si la foto de perfil del usuario no es la de por defecto se elimina
-                    $this->deletePhoto($user['foto_perfil']);
+                    $this->uploader->deletePhoto(profile_photos_path, $user['foto_perfil']);
                 }
             } else if($this->feedback['code'] == 'QRY_KO') {
                 $this->feedback['code'] = 'USR_DEL_KO'; // Error al eliminar al usuario.
@@ -465,24 +476,4 @@ class User_Service extends User_Validation {
     }
 
 
-    function uploadPhoto() {
-        $temp = $_FILES['foto_perfil']['tmp_name'];
-        $path = $_FILES['foto_perfil']['name'];
-        $ext = pathinfo($path)['extension'];
-        $filename = pathinfo($path)['filename']; // Obtenemos el nombre de la imagen.
-        $file = $filename . '_' . uniqid() . '.' . $ext; // Nuevo nombre de la imágen: 'NombreAnterior_ID.ext'
-        if(move_uploaded_file($temp, profile_photos_path . $file)) { // Se almacena la imágen en servidor
-            $this->foto_perfil = $file; // Se almacena le nuevo nombre de imágen generado.
-            $this->feedback['ok'] = true;
-        } else {
-            $this->feedback['ok'] = false;
-            $this->feedback['code'] = 'PRPH_KO';
-        }
-
-        return $this->feedback;
-    }
-
-    function deletePhoto($photo) {
-        return unlink(profile_photos_path . $photo); // Elimina la imágen pasada como parámetro. Devuelve true en caso de éxito.
-    }
 }

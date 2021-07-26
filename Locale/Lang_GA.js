@@ -67,6 +67,16 @@ arrayGA = {
         'ROL_LTO' : 'Hay menos dun usuario co rol indicado',
         'ROL_KO' : 'Error ó consultar por rol',
 
+    // EDIFICIOS
+
+        // SEARCH
+        'BLD_SRCH_OK' : 'Búsqueda de Edificios Ok',
+        'BLD_SRCH_KO' : 'Búsqueda de Edificios KO',
+
+        // Obtener candidatos a responsable de edificio
+        'BLD_RESP_EMPT' : 'Non hay candidatos dispoñibles pra ser responsable de edificio',
+        'GT_MANG_KO' : 'Error ó obter candidatos a responsable de edificio',
+
         // Validaciones
 
             // Nombre de Usuario
@@ -167,8 +177,15 @@ arrayGA = {
 
         // BUILDINGS VIEWS
         'i18n-responsable' : 'Responsable',
-        'i18n-city' : 'Cidade',
+        'i18n-ciudad' : 'Cidade',
         'i18n-buildings-empty' : 'Aínda non hay edificios rexitrados',
+        'i18n-add-building' : 'Engadir Edificio',
+        'i18n-ciudad' : 'Cidade',
+        'i18n-calle' : 'Calle',
+        'i18n-provincia' : 'Provincia',
+        'i18n-codigo_postal' : 'Código Postal',
+        'i18n-fax' : 'Fax',
+
 
         // MODAL
             // Campos Modal
@@ -183,6 +200,13 @@ arrayGA = {
             'm-rol' : ' Rol ',
             'm-apellidos' : ' Apelidos ',
             'm-foto_perfil' : ' Foto de Perfil ',
+            'm-calle' : ' Calle ',
+            'm-ciudad' : ' Cidade ',
+            'm-provincia' : ' Provincia ',
+            'm-codigo_postal' : ' Código Postal ',
+            'm-fax' : ' Fax ',
+            'm-responsable' : ' Responsable ',
+            'm-foto_edificio' : ' Foto Edificio ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',

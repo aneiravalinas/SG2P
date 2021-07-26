@@ -265,3 +265,49 @@ function check_imagen(element) {
 
     return true;
 }
+
+
+function check_letters_numbers_accents_spaces(element, size) {
+    var correct = true;
+    var value = document.getElementById(element).value;
+    var name = document.getElementById(element).name;
+
+    if(value.length > size) {
+        openModal(name,'i18n-max-size');
+        correct = false;
+    }
+
+    var pattern = /^[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+$/g;
+    if(!pattern.test(value)) {
+        openModal(name,'i18n-letters-numbers-accents-spaces');
+        correct = false;
+    }
+
+    if(correct) {
+        document.getElementById(element).style.borderColor = 'green';
+        return true;
+    } else {
+        document.getElementById(element).style.borderColor = 'red';
+        return false;
+    }
+}
+
+function check_codigo_postal(element) {
+    var correct = true;
+    var value = document.getElementById(element).value;
+    var name = document.getElementById(element).name;
+
+    var pattern = /^[0-9]{5}$/;
+    if(!pattern.test(value)) {
+        openModal(name,'i18n-cp-format');
+        correct = false;
+    }
+
+    if(correct) {
+        document.getElementById(element).style.borderColor = 'green';
+        return true;
+    } else {
+        document.getElementById(element).style.borderColor = 'red';
+        return false;
+    }
+}
