@@ -106,8 +106,17 @@ class Building_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    protected function seek() {
+    function seek() {
         // TODO: Implement seek() method.
     }
 
+    function seekByUsername($username) {
+        $this->query = "
+            SELECT * FROM EDIFICIO
+            WHERE username = '$username'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
 }

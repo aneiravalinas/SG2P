@@ -1,17 +1,21 @@
 <?php
 
 include_once './Model/User_Model.php';
+include_once './Model/Building_Model.php';
 include_once './Validation/User_Validation.php';
 include_once './Service/Uploader_Service.php';
+
 
 class User_Service extends User_Validation {
     var $atributos;
     var $user_entity;
+    var $building_entity;
     var $uploader;
     var $feedback = array();
 
     function __construct() {
         $this->user_entity = new User_Model();
+        $this->building_entity = new Building_Model();
         $this->uploader = new Uploader();
         $this->atributos = array('dni','username','password','rol','nombre','apellidos','email','telefono');
         $this->fill_fields();
@@ -200,11 +204,22 @@ class User_Service extends User_Validation {
                 return $this->feedback;
             }
 
-            // Si el rol antiguo o el nuevo rol es de tipo responsable de edificio, y no son iguales (se ha producido un cambio)
-            if(($user['rol'] == 'edificio' || $this->rol == 'edificio') && ($user['rol'] != $this->rol)) {
-                $this->feedback['ok'] = false;
-                $this->feedback['code'] = 'BM_ADD'; // No se permite la asignación manual del rol Resp. Edificio
-                return $this->feedback;
+
+            if($user['rol'] == 'edificio' && $this->rol != 'edificio') {
+                $this->feedback = $this->user_has_buildings($user['username']);
+                if($this->feedback['ok']) {
+                    $this->feedback['ok'] = false;
+                    $this->feedback['code'] = 'BM_WITH_BLD';
+                    return $this->feedback;
+                }
+
+            }
+
+            if($user['rol'] != 'edificio' && $this->rol == 'edificio') {
+                $this->feedback = $this->user_has_buildings($user['username']);
+                if(!$this->feedback['ok']) {
+                    return $this->feedback;
+                }
             }
 
             // Si se cambia el rol desde responsable organización, y no quedan más usuarios de ese tipo...
@@ -285,9 +300,13 @@ class User_Service extends User_Validation {
         if($this->feedback['ok']) {
             $user = $this->feedback['resource'];
             if($user['rol'] == 'edificio') {
-                $this->feedback['ok'] = false;
-                $this->feedback['code'] = 'BM_DEL'; // No se puede eliminar a un usuario que tenga asignados edificios.
-                return $this->feedback;
+                $this->feedback = $this->user_has_buildings($user['username']);
+                if($this->feedback['ok']) {
+                    $this->feedback['ok'] = false;
+                    $this->feedback['code'] = 'BM_DEL'; // No se puede eliminar a un usuario que tenga asignados edificios.
+                    return $this->feedback;
+                }
+
             }
 
             if($user['rol'] == 'organizacion') {
@@ -475,5 +494,19 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
+    function user_has_buildings($username) {
+        $this->feedback = $this->building_entity->seekByUsername($username);
+        if($this->feedback['ok']) {
+            if($this->feedback['code'] == 'QRY_EMPT') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'BM_ADD';
+            }
+
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'USR_HAS_BLD_KO';
+        }
+
+        return $this->feedback;
+    }
 
 }

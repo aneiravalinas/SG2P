@@ -22,7 +22,7 @@ arrayES = {
         'USR_SRCH_KO' : 'Error en la búsqueda de Usuarios', // USR_SRCH_KO
 
         // ADD
-        'BM_ADD' : 'El rol Resp. Edificio es asignado automáticamente cuando se asigna un usuario a un edificio. No se permite la asignación manual de este rol', // BM_ADD
+        'BM_ADD' : 'No se puede asignar el rol de responsable de edificio si el usuario no tiene edificios asignados', // BM_ADD
         'USR_ADD_OK' : 'Se ha añadido el usuario correctamente', // USR_ADD_OK
         'USR_ADD_KO' : 'Error al añadir usuario', // USR_ADD_KO
 
@@ -38,6 +38,7 @@ arrayES = {
         'OM_UNQ_EDT' : 'No se puede modificar el rol. El usuario es el único responsable de la organización', // OM_UNQ_EDT
         'ADM_UNQ_EDT' : 'No se puede modificar el rol. El usuario es el único adminsitrador de la aplicación', // ADM_UNQ_EDT
         'USR_EDT_KO' : 'Error al editar al usuario', // USR_EDT_KO
+        'BM_WITH_BLD' : 'No se puede desasignar el rol de responsable de edificio si el usuario tiene edificios asignados',
 
         // EDIT_PROFILE
         'PRF_USR_KO' : 'No puede editar el perfil de otro usuario',

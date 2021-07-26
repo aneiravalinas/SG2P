@@ -78,17 +78,12 @@ class Edit_User {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="rol" class="i18n-rol">Rol</label>
-                                <?php if($this->user['rol'] == 'edificio') :?>
                                     <select id="rol" name="rol" class="form-select">
-                                        <option value="edificio" class="i18n-f-edificio" selected></option>
-                                    </select>
-                                <?php else :?>
-                                    <select id="rol" name="rol" class="form-select">
+                                        <option value="edificio" class="i18n-f-edificio" <?php if($this->user['rol'] == 'edificio') echo "selected"; ?>> Responsable de Edificio</option>
                                         <option value="registrado" class="i18n-f-registrado" <?php if($this->user['rol'] == 'registrado') echo "selected"; ?>>Usuario Registrado</option>
                                         <option value="organizacion" class="i18n-f-organizacion" <?php if($this->user['rol'] == 'organizacion') echo "selected"; ?>>Responsable Organizacion</option>
                                         <option value="administrador" class="i18n-f-administrador" <?php if($this->user['rol'] == 'administrador') echo "selected"; ?>>Administrador</option>
                                     </select>
-                                <?php endif; ?>
                                 </div>
                             </div>
 

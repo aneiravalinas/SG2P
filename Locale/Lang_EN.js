@@ -20,7 +20,7 @@ arrayEN = {
         'USR_SRCH_KO' : 'Users Search Error',
 
         // ADD
-        'BM_ADD' : 'The Building Manager role is assigned automatically when a user is assigned to a building. Manual assignment of this role is not allowed',
+        'BM_ADD' : 'Cannot assign building manager role if user does not have buildings assigned',
         'USR_ADD_OK' : 'The user was added successfully',
         'USR_ADD_KO' : 'Error adding user',
 
@@ -36,6 +36,7 @@ arrayEN = {
         'OM_UNQ_EDT' : 'The role cannot be modified. The user is solely responsible for the organization',
         'ADM_UNQ_EDT' : 'The role cannot be modified. The user is the only administrator of the application',
         'USR_EDT_KO' : 'Error editing user',
+        'BM_WITH_BLD' : 'The building manager role cannot be disassociated if the user has buildings assigned',
 
         // EDIT_PROFILE
         'PRF_USR_KO' : 'You cannot edit another user\'s profile',
