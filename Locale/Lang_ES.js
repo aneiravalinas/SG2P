@@ -80,6 +80,11 @@ arrayES = {
         'BLD_ADD_KO' : 'Error al añadir el edificio',
         'BLD_ADD_OK' : 'El edificio se ha añadido correctamente',
 
+        // DELETE
+        'BLD_DEL_OK' : 'El edificio se ha eliminado correctamente',
+        'BLD_EDT_ROL_KO' : 'Error al modificar el rol del responsable de edificio a usuario registrado. La acción debe realizarse manualmente',
+        'BLD_DEL_KO' : 'Error al eliminar el edificio',
+
         // Obtener candidatos a responsable de edificio
         'BLD_RESP_EMPT' : 'No hay candidatos disponbiles para ser responsable de edificio',
         'GT_MANG_KO' : 'Error al obtener candidatos a responsable de edificio',
@@ -90,6 +95,10 @@ arrayES = {
 
         // Fotos Edificio
         'BLD_PH_KO' : 'Error al subir la foto del edificio',
+
+        // Búsqueda por Edificio_ID
+        'BLDID_NOT_EXST' : 'El ID del Edificio no existe',
+        'BLDID_KO' : 'Error al consultar por ID de Edificio',
 
 
         // Validaciones
@@ -134,7 +143,45 @@ arrayES = {
             'PRPH_KO' : 'Error al subir la foto de perfil', // PRPH_KO
             'PRPH_EXT' : 'La extensión de la imágen no está permitida', // PRPH_EXT
             'PRPH_LRG' : 'El tamaño de la imágen es superior a la permitida (100kb)', // PRPH_LRG
-            'PRPH_FRMT' : 'El nombre de la foto de perfil sólo puede contener letras, números e guions',
+            'PRPH_FRMT' : 'El nombre de la foto de perfil sólo puede contener letras, números y guiones',
+
+            // Edificio_ID
+            'BLD_ID_EMPT' : 'El ID del edificio no puede ser vacío',
+            'BLD_ID_NOT_NUMERIC' : 'El ID del edificio debe ser numérico',
+
+            // Building Name
+            'BLD_NAM_SHRT' : 'El nombre del edificio debe superar los 3 caracteres',
+            'BLD_NAM_LRG' : 'El nombre del edificio no debe superar los 60 caracteres',
+            'BLD_NAM_FRMT' : 'El nombre del edifico sólo puede contener caracteres alfanuméricos, espacios y números',
+
+            // Calle
+            'CALLE_SHRT' : 'La calle debe superar los 8 caracteres',
+            'CALLE_LRG' : 'La calle no debe superar los 60 caracteres',
+            'CALLE_FRMT' : 'La calle sólo puede contener caracteres alfanuméricos, espacios y números',
+
+            // Ciudad
+            'CIUDAD_SHRT' : 'La ciudad debe superar los 3 caracteres',
+            'CIUDAD_LRG' : 'La ciudad no debe superar los 40 caracteres',
+            'CIUDAD_FRMT' : 'La ciudad sólo puede contener letras y espacios',
+
+            // Provincia
+            'PROV_SHRT' : 'La provincia debe superar los 3 caracteres',
+            'PROV_LRG' : 'La provincia no debe superar los 40 caracteres',
+            'PROV_FRMT' : 'La provincia sólo puede contener letras y espacios',
+
+            // Código Postal
+            'CP_EMPT' : 'Es necesario especificar un código postal',
+            'CP_NUMERIC' : 'El código postal debe ser numérico',
+            'CP_SIZE' : 'El código postal debe ser un número de 5 dígitos',
+
+            // Fax
+            'FAX_EMPT' : 'Es necesario especificar un número de fax',
+            'FAX_FRMT' : 'Formato de número de fax incorrecto',
+
+            // Foto Edificio
+            'BLD_PH_EXT' : 'La extensión de la foto del edificio no está permitida',
+            'BLD_PH_FRMT' : 'El nombre de la foto del edificio sólo puede contener letras, números y guiones',
+
 
 
     // INTERFAZ
@@ -184,7 +231,7 @@ arrayES = {
         'i18n-add-users' : 'Añadir Usuario',
         'i18n-selecciona-rol' : 'Selecciona un Rol',
         'i18n-foto_perfil' : 'Foto de Perfil',
-        'i18n-del-confirm' : '¿Está seguro que desea eliminar a este usuario? La acción no será reversible',
+        'i18n-del-user-confirm' : '¿Está seguro que desea eliminar a este usuario? La acción no será reversible',
         'i18n-edit-user' : 'Editar Usuario',
         'i18n-user-details' : 'Detalles del Usuario',
 
@@ -198,6 +245,7 @@ arrayES = {
         'i18n-provincia' : 'Provincia',
         'i18n-codigo_postal' : 'Código Postal',
         'i18n-fax' : 'Fax',
+        'i18n-del-building-confirm' : '¿Está seguro que desea eliminar este edificio? La acción no será reversible',
 
         // MODAL
             // Campos Modal

@@ -46,4 +46,29 @@ class Building {
             new Message('FRB_ACCS','Portal','deshboard');
         }
     }
+
+    function deleteForm() {
+        if(es_resp_organizacion() || es_admin()) {
+            $building_service = new Building_Service();
+            $feedback = $building_service->dataForm();
+            if($feedback['ok']) {
+                include './View/Buildings/Delete_Building_View.php';
+                new Delete_Building($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'Building','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Portal','deshboard');
+        }
+    }
+
+    function delete() {
+        if(es_resp_organizacion() || es_admin()) {
+            $building_service = new Building_Service();
+            $feedback = $building_service->DELETE();
+            new Message($feedback['code'],'Building','show');
+        } else {
+            new Message('FRB_ACCS','Portal','deshboard');
+        }
+    }
 }

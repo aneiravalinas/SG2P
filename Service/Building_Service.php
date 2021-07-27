@@ -62,6 +62,16 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+    function dataForm() {
+        $validation = $this->validar_EDIFICIO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByBuildingID();
+        return $this->feedback;
+    }
+
     function ADD() {
         $validation = $this->validar_atributos_add();
         if(!$validation['ok']) {
@@ -105,6 +115,45 @@ class Building_Service extends Building_Validation {
 
     }
 
+    function DELETE() {
+        $validation = $this->validar_EDIFICIO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByBuildingID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $building = $this->feedback['resource'];
+
+        // TODO: Cuando se asignen planes, se debe comprobar si el edificio tiene planes asignados. En caso afirmativo, devolver código BLD_DEL_PLANS.
+
+        $this->feedback = $this->building_entity->DELETE();
+        if($this->feedback['ok']) {
+            if($building['foto_edificio'] != default_building_photo) {
+                $this->uploader->deletePhoto(building_photos_path, $building['foto_edificio']);
+            }
+
+            $this->feedback = $this->seekByUsername($building['username']);
+            if($this->feedback['ok']) {
+                $this->feedback['code'] = 'BLD_DEL_OK';
+            } else {
+                $this->feedback = $this->user_entity->change_role($building['username'],'registrado');
+                if($this->feedback['ok']) {
+                    $this->feedback['code'] = 'BLD_DEL_OK';
+                } else {
+                    $this->feedback['code'] = 'BLD_EDT_ROL_KO';
+                }
+            }
+        } else {
+            $this->feedback['code'] = 'BLD_DEL_KO';
+        }
+
+        return $this->feedback;
+    }
+
 
     function get_candidates() {
         $this->feedback = $this->user_entity->get_usernames_byRoles(self::roles_candidates);
@@ -140,4 +189,36 @@ class Building_Service extends Building_Validation {
 
         return $this->feedback;
     }
+
+    function seekByBuildingID() {
+        $this->feedback = $this->building_entity->seek();
+        if($this->feedback['ok']) {
+            if($this->feedback['code'] == 'QRY_EMPT') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'BLDID_NOT_EXST';
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'BLDID_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function seekByUsername($username) {
+        $this->feedback = $this->building_entity->seekByUsername($username);
+        if($this->feedback['ok']) {
+            if($this->feedback['code'] == 'QRY_EMPT') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'USRNM_NOT_EXST';
+            } else {
+                $this->feedback['code'] = 'USRNM_EXST';
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'USRNM_KO';
+        }
+
+        return $this->feedback;
+    }
+
+
 }

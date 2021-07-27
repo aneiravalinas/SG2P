@@ -1,10 +1,10 @@
 <?php
 
-class Delete_User {
-    var $user;
+class Delete_Building {
+    var $building;
 
-    function __construct($user) {
-        $this->user = $user;
+    function __construct($building) {
+        $this->building = $building;
         $this->render();
     }
 
@@ -22,8 +22,8 @@ class Delete_User {
 
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h3 class="mb-4 i18n-del-user-confirm">¿Está seguro que desea eliminar a este usuario? El cambo no será reversible</h3>
-                        <h2><?php echo $this->user['username'] ?></h2>
+                        <h3 class="mb-4 i18n-del-building-confirm">¿Está seguro que desea eliminar este edificio? El cambo no será reversible</h3>
+                        <h2><?php echo $this->building['nombre'] ?> - <?php echo $this->building['ciudad'] ?></h2>
                     </div>
                 </div>
 
@@ -31,24 +31,23 @@ class Delete_User {
                     <div class="col-xl-7 col-lg-9 d-flex justify-content-between flex-wrap">
                         <a class="btn-get-started i18n-cancelar" type="button" onclick="
                                         crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','User');
+                                            insertacampo(document.formenviar,'controller','Building');
                                             insertacampo(document.formenviar,'action','show');
                                             enviaform(document.formenviar);">
                             Cancelar
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-delete" onclick="
                             crearform('formenviar','post');
-                                insertacampo(document.formenviar, 'username', '<?php echo $this->user['username'] ?>');
-                                insertacampo(document.formenviar, 'controller', 'User');
-                                insertacampo(document.formenviar, 'action', 'delete');
-                                enviaform(document.formenviar)">
+                            insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
+                            insertacampo(document.formenviar, 'controller', 'Building');
+                            insertacampo(document.formenviar, 'action', 'delete');
+                            enviaform(document.formenviar)">
                             Eliminar
                         </a>
                     </div>
                 </div>
             </div>
         </section>
-
 
 <?php
         include './View/Page/footer.php';

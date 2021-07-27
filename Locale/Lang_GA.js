@@ -78,6 +78,11 @@ arrayGA = {
         'BLD_ADD_KO' : 'Error ó engadir o edificio',
         'BLD_ADD_OK' : 'O edificio engadiurse correctamente',
 
+        // DELETE
+        'BLD_DEL_OK' : 'O edificio eliminouse correctamente',
+        'BLD_EDT_ROL_KO' : 'Produciuse un erro o modificar o rol do responsable do edificio a usuario rexistrado. A acción deberá realizarse manualmente',
+        'BLD_DEL_KO' : 'Error ó eliminar o edificio',
+
         // Obtener candidatos a responsable de edificio
         'BLD_RESP_EMPT' : 'Non hay candidatos dispoñibles pra ser responsable de edificio',
         'GT_MANG_KO' : 'Error ó obter candidatos a responsable de edificio',
@@ -126,6 +131,47 @@ arrayGA = {
             'PRPH_EXT' : 'A extensión da imáxen non está permitida',
             'PRPH_LRG' : 'O tamaño da imáxen é superior a permitida (100kb)',
             'PRPH_FRMT' : 'O nome da foto de perfil só pode conter letras, números y guiones',
+
+            // Edificio_ID
+            'BLD_ID_EMPT' : 'O ID do edificio non pode estar valeiro',
+            'BLD_ID_NOT_NUMERIC' : 'O ID do edificio debe ser numérico',
+
+            // Building Name
+            'BLD_NAM_SHRT' : 'O nome do edificio debe superar os 3 caracteres',
+            'BLD_NAM_LRG' : 'O nome do edificio non debe superar os 60 caracteres',
+            'BLD_NAM_FRMT' : 'O nome do edificio só pode conter caracteres alfanuméricos, espacios e guións',
+
+            // Calle
+            'CALLE_SHRT' : 'A calle debe superar os 8 caracteres',
+            'CALLE_LRG' : 'A calle non debe superar os 60 caracteres',
+            'CALLE_FRMT' : 'A calle só pode conter caracteres alfanuméricos, espacios e guións',
+
+            // Ciudad
+            'CIUDAD_SHRT' : 'A cidade debe superar os 3 caracteres',
+            'CIUDAD_LRG' : 'A cidade non debe superar os 40 caracteres',
+            'CIUDAD_FRMT' : 'A cidade só pode conter letras e espacios',
+
+            // Provincia
+            'PROV_SHRT' : 'A provincia debe superar os 3 caracteres',
+            'PROV_LRG' : 'A provincia non debe sueperar os 40 caracteres',
+            'PROV_FRMT' : 'A provincia só pode conter letras e espacios',
+
+            // Código Postal
+            'CP_EMPT' : 'É necesario especificar un código postal',
+            'CP_NUMERIC' : 'O código postal debe ser numérico',
+            'CP_SIZE' : 'O código postal debe ser un número de 5 díxitos',
+
+            // Fax
+            'FAX_EMPT' : 'É necesario especificar un número de fax',
+            'FAX_FRMT' : 'Formato de número de fax incorrecto',
+
+            // Foto Edificio
+            'BLD_PH_EXT' : 'A extensión da foto do edificio non está permitida',
+            'BLD_PH_FRMT' : 'O nome da foto do edificio só pode conter letras, números e guións',
+
+            // Búsqueda por Edificio_ID
+            'BLDID_NOT_EXST' : 'O ID do Edificio non existe',
+            'BLDID_KO' : 'Erro ó consultar por ID de Edificio',
 
 
 
@@ -177,7 +223,7 @@ arrayGA = {
         'i18n-add-users' : 'Engadir Usuario',
         'i18n-selecciona-rol' : 'Selecciona un Rol',
         'i18n-foto_perfil' : 'Foto de Perfil',
-        'i18n-del-confirm' : '¿Está seguro de que quere eliminar a este usuario? A acción non será reversible',
+        'i18n-del-user-confirm' : '¿Está seguro de que quere eliminar a este usuario? A acción non será reversible',
         'i18n-edit-user' : 'Editar Usuario',
         'i18n-user-details' : 'Detalles do Usuario',
 
@@ -191,6 +237,7 @@ arrayGA = {
         'i18n-provincia' : 'Provincia',
         'i18n-codigo_postal' : 'Código Postal',
         'i18n-fax' : 'Fax',
+        'i18n-del-building-confirm' : '¿Está seguro de que quere eliminar este edificio? A acción non será reversible',
 
 
         // MODAL

@@ -67,6 +67,18 @@ class Building_Validation extends Validator {
         return $validacion;
     }
 
+    function validar_EDIFICIO_ID() {
+        if(!$this->no_vacio($this->edificio_id)) {
+            return $this->rellena_validation(false,'BLD_ID_EMPT','BUILDING');
+        }
+
+        if(!$this->es_numerico($this->edificio_id)) {
+            return $this->rellena_validation(false,'BLD_ID_NOT_NUMERIC','BUILDING');
+        }
+
+        return $this->rellena_validation(true,'00000','BUILDING');
+    }
+
     function validar_USERNAME() {
         if(!$this->longitud_minima($this->username,3)) {
             return $this->rellena_validation(false,'USRNM_SHRT','BUILDING'); // Nombre de usuario debe tener más de 3 caracteres.

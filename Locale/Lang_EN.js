@@ -78,6 +78,11 @@ arrayEN = {
         'BLD_ADD_KO' : 'Failed to add building',
         'BLD_ADD_OK' : 'The building has been added successfully',
 
+        // DELETE
+        'BLD_DEL_OK' : 'The building has been successfully removed',
+        'BLD_EDT_ROL_KO' : 'Error when modifying the role of the building manager to a registered user. Action must be done manually',
+        'BLD_DEL_KO' : 'Failed to delete building',
+
         // Obtener candidatos a responsable de edificio
         'BLD_RESP_EMPT' : 'There are no candidates available to be building manager',
         'GT_MANG_KO' : 'Failed to obtain building manager candidates',
@@ -127,6 +132,46 @@ arrayEN = {
             'PRPH_LRG' : 'Image size is larger than allowed (100kb)',
             'PRPH_FRMT' : 'The name of the profile picture can only contain letters, numbers and hyphens',
 
+            // Edificio_ID
+            'BLD_ID_EMPT' : 'Building ID cannot be empty',
+            'BLD_ID_NOT_NUMERIC' : 'Building ID must be numeric',
+
+            // Building Name
+            'BLD_NAM_SHRT' : 'The name of the building must exceed 3 characters',
+            'BLD_NAM_LRG' : 'The name of the building must not exceed 60 characters',
+            'BLD_NAM_FRMT' : 'The building name can only contain alphanumeric characters, spaces and numbers',
+
+            // Calle
+            'CALLE_SHRT' : 'The street must exceed 8 characters',
+            'CALLE_LRG' : 'The street must not exceed 60 characters',
+            'CALLE_FRMT' : 'The street can only contain alphanumeric characters, spaces and numbers',
+
+            // Ciudad
+            'CIUDAD_SHRT' : 'The city must exceed 3 characters',
+            'CIUDAD_LRG' : 'The city must not exceed 40 characters',
+            'CIUDAD_FRMT' : 'The city can only contain letters and spaces',
+
+            // Provincia
+            'PROV_SHRT' : 'The province must exceed 3 characters',
+            'PROV_LRG' : 'The province must not exceed 40 characters',
+            'PROV_FRMT' : 'The province can only contain letters and spaces',
+
+            // Código Postal
+            'CP_EMPT' : 'You need to specify a zip code',
+            'CP_NUMERIC' : 'Zip code must be numeric',
+            'CP_SIZE' : 'Zip code must be a 5-digit number',
+
+            // Fax
+            'FAX_EMPT' : 'You need to specify a fax number',
+            'FAX_FRMT' : 'Incorrect fax number format',
+
+            // Foto Edificio
+            'BLD_PH_EXT' : 'The extension of the building photo is not allowed',
+            'BLD_PH_FRMT' : 'The building photo name can only contain letters, numbers and hyphens',
+
+            // Búsqueda por Edificio_ID
+            'BLDID_NOT_EXST' : 'Building ID does not exist',
+            'BLDID_KO' : 'Failed to query by Building ID',
 
 
     // INTERFACE
@@ -176,7 +221,7 @@ arrayEN = {
         'i18n-add-users' : 'Add User',
         'i18n-selecciona-rol' : 'Select a Role',
         'i18n-foto_perfil' : 'Profile Photo',
-        'i18n-del-confirm' : 'Are you sure you want to delete this user? The action will not be reversible',
+        'i18n-del-user-confirm' : 'Are you sure you want to delete this user? The action will not be reversible',
         'i18n-edit-user' : 'Editar Usuario',
         'i18n-user-details' : 'User Details',
 
@@ -188,8 +233,9 @@ arrayEN = {
         'i18n-ciudad' : 'City',
         'i18n-calle' : 'Street',
         'i18n-provincia' : 'Province',
-        'i18n-codigo_postal' : 'Postal Code',
+        'i18n-codigo_postal' : 'Zip Code',
         'i18n-fax' : 'Fax',
+        'i18n-del-building-confirm' : 'Are you sure you want to delete this building? The action will not be reversible',
 
 
         // MODAL
@@ -208,7 +254,7 @@ arrayEN = {
             'm-calle' : ' Street ',
             'm-ciudad' : ' City ',
             'm-provincia' : ' Province ',
-            'm-codigo_postal' : ' Postal Code ',
+            'm-codigo_postal' : ' Zip Code ',
             'm-fax' : ' Fax ',
             'm-responsable' : ' Manager ',
             'm-foto_edificio' : ' Building Photo ',
