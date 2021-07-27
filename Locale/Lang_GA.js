@@ -84,9 +84,21 @@ arrayGA = {
         'BLD_DEL_KO' : 'Error ó eliminar o edificio',
 
         // Obtener candidatos a responsable de edificio
-        'BLD_RESP_EMPT' : 'Non hay candidatos dispoñibles pra ser responsable de edificio',
+        'MANG_EMPT' : 'Non hay candidatos dispoñibles pra ser responsable de edificio',
         'GT_MANG_KO' : 'Error ó obter candidatos a responsable de edificio',
-        'BLD_RESP_INV' : 'O usuario indicado non é válido pra ser responsable de edificio',
+        'MANG_INV' : 'O usuario indicado non é válido pra ser responsable de edificio',
+
+        // Fotos Edificio
+        'BLD_PH_KO' : 'Error ó subir a foto do edificio',
+
+        // Búsqueda por Edificio_ID
+        'BLDID_NOT_EXST' : 'O ID do Edificio non existe',
+        'BLDID_KO' : 'Erro ó consultar por ID de Edificio',
+
+        // Búsqueda por Responsable
+        'MANG_NOT_EXST' : 'O Responsable introducido non existe',
+        'MANG_EXST' : 'O Responsable existe',
+        'MANG_KO' : 'Error ó consultar por responsable',
 
         // Validaciones
 
@@ -136,6 +148,11 @@ arrayGA = {
             'BLD_ID_EMPT' : 'O ID do edificio non pode estar valeiro',
             'BLD_ID_NOT_NUMERIC' : 'O ID do edificio debe ser numérico',
 
+            // Responsable (Usuario)
+            'MANG_SHRT' : 'O nome do responsable debe superar os 3 caracteres',
+            'MANG_LRG' : 'O nome do responsable non pode superar os 20 caracteres',
+            'MANG_ALF' : 'O nome do responsable só pode conter caracteres alfanuméricos',
+
             // Building Name
             'BLD_NAM_SHRT' : 'O nome do edificio debe superar os 3 caracteres',
             'BLD_NAM_LRG' : 'O nome do edificio non debe superar os 60 caracteres',
@@ -168,10 +185,6 @@ arrayGA = {
             // Foto Edificio
             'BLD_PH_EXT' : 'A extensión da foto do edificio non está permitida',
             'BLD_PH_FRMT' : 'O nome da foto do edificio só pode conter letras, números e guións',
-
-            // Búsqueda por Edificio_ID
-            'BLDID_NOT_EXST' : 'O ID do Edificio non existe',
-            'BLDID_KO' : 'Erro ó consultar por ID de Edificio',
 
 
 
@@ -232,12 +245,11 @@ arrayGA = {
         'i18n-ciudad' : 'Cidade',
         'i18n-buildings-empty' : 'Aínda non hay edificios rexitrados',
         'i18n-add-building' : 'Engadir Edificio',
-        'i18n-ciudad' : 'Cidade',
         'i18n-calle' : 'Calle',
         'i18n-provincia' : 'Provincia',
         'i18n-codigo_postal' : 'Código Postal',
         'i18n-fax' : 'Fax',
-        'i18n-del-building-confirm' : '¿Está seguro de que quere eliminar este edificio? A acción non será reversible',
+        'i18n-del-building-confirm' : '¿Está seguro de que quere eliminar este edificio, así como os elementos asociados? A acción non será reversible',
 
 
         // MODAL

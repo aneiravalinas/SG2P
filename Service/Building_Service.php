@@ -128,8 +128,6 @@ class Building_Service extends Building_Validation {
 
         $building = $this->feedback['resource'];
 
-        // TODO: Cuando se asignen planes, se debe comprobar si el edificio tiene planes asignados. En caso afirmativo, devolver código BLD_DEL_PLANS.
-
         $this->feedback = $this->building_entity->DELETE();
         if($this->feedback['ok']) {
             if($building['foto_edificio'] != default_building_photo) {
@@ -160,7 +158,7 @@ class Building_Service extends Building_Validation {
         if($this->feedback['ok']) {
             if($this->feedback['code'] == 'QRY_EMPT') {
                 $this->feedback['ok'] = false;
-                $this->feedback['code'] = 'BLD_RESP_EMPT';
+                $this->feedback['code'] = 'MANG_EMPT';
             }
         } else if($this->feedback['code'] == 'QRY_KO') {
             $this->feedback['code'] = 'GT_MANG_KO';
@@ -175,16 +173,16 @@ class Building_Service extends Building_Validation {
         if($this->feedback['ok']) {
             if($this->feedback['code'] = 'QRY_EMPT') {
                 $this->feedback['ok'] = false;
-                $this->feedback['code'] = 'USRNM_NOT_EXST';
+                $this->feedback['code'] = 'MANG_NOT_EXST';
             } else {
                 $user = $this->feedback['resource'];
                 if(!in_array($user['rol'],self::roles_candidates)) {
                     $this->feedback['ok'] = false;
-                    $this->feedback['code'] = 'BLD_RESP_INV';
+                    $this->feedback['code'] = 'MANG_INV';
                 }
             }
         } else if($this->feedback['code'] == 'QRY_KO') {
-            $this->feedback['code'] = 'USRNM_KO';
+            $this->feedback['code'] = 'MANG_KO';
         }
 
         return $this->feedback;
@@ -209,12 +207,12 @@ class Building_Service extends Building_Validation {
         if($this->feedback['ok']) {
             if($this->feedback['code'] == 'QRY_EMPT') {
                 $this->feedback['ok'] = false;
-                $this->feedback['code'] = 'USRNM_NOT_EXST';
+                $this->feedback['code'] = 'MANG_NOT_EXST';
             } else {
-                $this->feedback['code'] = 'USRNM_EXST';
+                $this->feedback['code'] = 'MANG_EXST';
             }
         } else if($this->feedback['code'] == 'QRY_KO') {
-            $this->feedback['code'] = 'USRNM_KO';
+            $this->feedback['code'] = 'MANG_KO';
         }
 
         return $this->feedback;

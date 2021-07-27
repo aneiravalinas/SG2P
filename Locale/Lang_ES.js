@@ -86,12 +86,10 @@ arrayES = {
         'BLD_DEL_KO' : 'Error al eliminar el edificio',
 
         // Obtener candidatos a responsable de edificio
-        'BLD_RESP_EMPT' : 'No hay candidatos disponbiles para ser responsable de edificio',
+        'MANG_EMPT' : 'No hay candidatos disponbiles para ser responsable de edificio',
         'GT_MANG_KO' : 'Error al obtener candidatos a responsable de edificio',
-        'BLD_RESP_INV' : 'El usuario especificado no es válido para ser responsable de edificio',
+        'MANG_INV' : 'El usuario especificado no es válido para ser responsable de edificio',
 
-        // Error al modificar el rol del responsable
-        'BLD_EDT_ROL_KO' : 'Error al modificar el rol del responsable',
 
         // Fotos Edificio
         'BLD_PH_KO' : 'Error al subir la foto del edificio',
@@ -99,6 +97,11 @@ arrayES = {
         // Búsqueda por Edificio_ID
         'BLDID_NOT_EXST' : 'El ID del Edificio no existe',
         'BLDID_KO' : 'Error al consultar por ID de Edificio',
+
+        // Búsqueda por Responsable
+        'MANG_NOT_EXST' : 'El Responsable introducido no existe',
+        'MANG_EXST' : 'El Responsable existe',
+        'MANG_KO' : 'Error al consultar al responsable',
 
 
         // Validaciones
@@ -148,6 +151,12 @@ arrayES = {
             // Edificio_ID
             'BLD_ID_EMPT' : 'El ID del edificio no puede ser vacío',
             'BLD_ID_NOT_NUMERIC' : 'El ID del edificio debe ser numérico',
+
+
+            // Responsable (Usuario)
+            'MANG_SHRT' : 'El nombre del responsable debe superar los 3 caracteres',
+            'MANG_LRG' : 'El nombre del responsable no puede superar los 20 caracteres',
+            'MANG_ALF' : 'El nombre del responsable sólo puede contener caracteres alfanuméricos',
 
             // Building Name
             'BLD_NAM_SHRT' : 'El nombre del edificio debe superar los 3 caracteres',
@@ -240,12 +249,11 @@ arrayES = {
         'i18n-ciudad' : 'Ciudad',
         'i18n-buildings-empty' : 'No hay edificios registrado todavía',
         'i18n-add-building' : 'Añadir Edificio',
-        'i18n-ciudad' : 'Ciudad',
         'i18n-calle' : 'Calle',
         'i18n-provincia' : 'Provincia',
         'i18n-codigo_postal' : 'Código Postal',
         'i18n-fax' : 'Fax',
-        'i18n-del-building-confirm' : '¿Está seguro que desea eliminar este edificio? La acción no será reversible',
+        'i18n-del-building-confirm' : '¿Está seguro que desea eliminar este edificio, así como los elementos asociados? La acción no será reversible',
 
         // MODAL
             // Campos Modal

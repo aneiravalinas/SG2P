@@ -84,9 +84,21 @@ arrayEN = {
         'BLD_DEL_KO' : 'Failed to delete building',
 
         // Obtener candidatos a responsable de edificio
-        'BLD_RESP_EMPT' : 'There are no candidates available to be building manager',
+        'MANG_EMPT' : 'There are no candidates available to be building manager',
         'GT_MANG_KO' : 'Failed to obtain building manager candidates',
-        'BLD_RESP_INV' : 'The specified user is not valid to be a building manager',
+        'MANG_INV' : 'The specified user is not valid to be a building manager',
+
+        // Fotos Edificio
+        'BLD_PH_KO' : 'Failed to upload building photo',
+
+        // Búsqueda por Edificio_ID
+        'BLDID_NOT_EXST' : 'Building ID does not exist',
+        'BLDID_KO' : 'Failed to query by Building ID',
+
+        // Búsqueda por Responsable
+        'MANG_NOT_EXST' : 'The building manager does not exist',
+        'MANG_EXST' : 'The building manager exist',
+        'MANG_KO' : 'Error when consulting the building manager',
 
         // Validaciones
 
@@ -136,6 +148,11 @@ arrayEN = {
             'BLD_ID_EMPT' : 'Building ID cannot be empty',
             'BLD_ID_NOT_NUMERIC' : 'Building ID must be numeric',
 
+            // Responsable (Usuario)
+            'MANG_SHRT' : 'The name of the building manager must exceed 3 characters',
+            'MANG_LRG' : 'The name of the building manager cannot exceed 20 characters',
+            'MANG_ALF' : 'The name of the building manager can only contain alphanumeric characters',
+
             // Building Name
             'BLD_NAM_SHRT' : 'The name of the building must exceed 3 characters',
             'BLD_NAM_LRG' : 'The name of the building must not exceed 60 characters',
@@ -169,9 +186,6 @@ arrayEN = {
             'BLD_PH_EXT' : 'The extension of the building photo is not allowed',
             'BLD_PH_FRMT' : 'The building photo name can only contain letters, numbers and hyphens',
 
-            // Búsqueda por Edificio_ID
-            'BLDID_NOT_EXST' : 'Building ID does not exist',
-            'BLDID_KO' : 'Failed to query by Building ID',
 
 
     // INTERFACE
@@ -230,12 +244,11 @@ arrayEN = {
         'i18n-ciudad' : 'City',
         'i18n-buildings-empty' : 'There is no registered building yet',
         'i18n-add-building' : 'Add Building',
-        'i18n-ciudad' : 'City',
         'i18n-calle' : 'Street',
         'i18n-provincia' : 'Province',
         'i18n-codigo_postal' : 'Zip Code',
         'i18n-fax' : 'Fax',
-        'i18n-del-building-confirm' : 'Are you sure you want to delete this building? The action will not be reversible',
+        'i18n-del-building-confirm' : 'Are you sure you want to delete this building as well as the associated items? The action will not be reversible',
 
 
         // MODAL

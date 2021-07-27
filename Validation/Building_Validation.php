@@ -81,15 +81,15 @@ class Building_Validation extends Validator {
 
     function validar_USERNAME() {
         if(!$this->longitud_minima($this->username,3)) {
-            return $this->rellena_validation(false,'USRNM_SHRT','BUILDING'); // Nombre de usuario debe tener más de 3 caracteres.
+            return $this->rellena_validation(false,'MANG_SHRT','BUILDING'); // Nombre de usuario debe tener más de 3 caracteres.
         }
 
         if(!$this->longitud_maxima($this->username,20)) {
-            return $this->rellena_validation(false,'USRNM_LRG','BUILDING'); // Nombre de usuario debe tener menos de 20 caracteres.
+            return $this->rellena_validation(false,'MANG_LRG','BUILDING'); // Nombre de usuario debe tener menos de 20 caracteres.
         }
 
         if(!$this->es_alfanumerico($this->username)) {
-            return $this->rellena_validation(false,'USRNM_ALF','BUILDING'); // Nombre de usuario sólo puede contener caracteres alfanuméricos.
+            return $this->rellena_validation(false,'MANG_ALF','BUILDING'); // Nombre de usuario sólo puede contener caracteres alfanuméricos.
         }
 
         return $this->rellena_validation(true,'00000','BUILDING'); // Validación OK.
