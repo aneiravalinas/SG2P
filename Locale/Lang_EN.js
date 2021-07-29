@@ -273,6 +273,11 @@ arrayEN = {
         'i18n-edit-building' : 'Edit Building',
         'i18n-search-building' : 'Search Building',
 
+        // PORTAL VIEWS
+        'i18n-resp-info' : 'Consult the information regarding the bulding manager',
+        'i18n-contact' : 'Contact',
+        'i18n-address' : 'Address',
+
 
         // MODAL
             // Campos Modal

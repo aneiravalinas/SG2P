@@ -274,6 +274,11 @@ arrayGA = {
         'i18n-edit-building' : 'Editar Edificio',
         'i18n-search-building' : 'Buscar Edificio',
 
+        // PORTAL VIEWS
+        'i18n-resp-info' : 'Consulta a información relativa ó responsable do edificio',
+        'i18n-contact' : 'Contacto',
+        'i18n-address' : 'Dirección',
+
 
         // MODAL
             // Campos Modal

@@ -28,7 +28,7 @@ class Portal_Cities {
                         </form>
                         <div class="text-center">
                             <a class="btn-get-started" type="button" id="i18n-l-buildings" onclick="
-                                insertacampo(document.formcities,'Controller','Portal');
+                                insertacampo(document.formcities,'controller','Portal');
                                 insertacampo(document.formcities,'action','searchBuildingsByCity');
                                 enviaform(document.formcities);">
                                 Buscar Edificios

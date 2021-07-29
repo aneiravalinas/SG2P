@@ -45,21 +45,16 @@ class Building_Service extends Building_Validation {
     }
 
     function SEARCH() {
+        $validation = $this->validar_atributos_search();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
         if(es_resp_edificio()) {
-            return $this->searchByRespInSession();
+            $this->feedback = $this->building_entity->searchByResp(getUser());
         } else {
-            return $this->searchAll();
+            $this->feedback = $this->building_entity->SEARCH();
         }
-    }
-
-    function searchByRespInSession() {
-        $validation = $this->validar_atributos_search();
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->building_entity->searchByResp(getUser());
-
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'BLD_SRCH_OK';
         } else if($this->feedback['code'] == 'QRY_KO') {
@@ -69,21 +64,6 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
-    function searchAll() {
-        $validation = $this->validar_atributos_search();
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->building_entity->SEARCH();
-        if($this->feedback['ok']) {
-            $this->feedback['code'] = 'BLD_SRCH_OK';
-        } else if($this->feedback['code'] == 'QRY_KO') {
-            $this->feedback['code'] = 'BLD_SRCH_KO';
-        }
-
-        return $this->feedback;
-    }
 
     function addForm() {
         $this->feedback = $this->get_candidates();
@@ -272,14 +252,6 @@ class Building_Service extends Building_Validation {
     }
 
     function seek() {
-        if(es_resp_edificio()) {
-            return $this->seekByRespInSession();
-        } else {
-            return $this->seekAll();
-        }
-    }
-
-    function seekByRespInSession() {
         $validation = $this->validar_EDIFICIO_ID();
         if(!$validation['ok']) {
             return $validation;
@@ -302,7 +274,12 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
-    function seekAll() {
+    function seekPortal() {
+        if(isset($_SESSION) && isset($_SESSION['portal'])) {
+            $this->edificio_id = $_SESSION['portal'];
+            $this->building_entity->edificio_id = $this->edificio_id;
+        }
+
         $validation = $this->validar_EDIFICIO_ID();
         if(!$validation['ok']) {
             return $validation;
@@ -310,11 +287,11 @@ class Building_Service extends Building_Validation {
 
         $this->feedback = $this->seekByBuildingID();
         if($this->feedback['ok']) {
-            $this->feedback['code'] = 'BLD_CURRENT_OK';
-        } else if($this->feedback['code'] == 'BLDID_KO') {
-            $this->feedback['code'] = 'BLD_CURRENT_KO';
+            if(!isset($_SESSION)) {
+                session_start();
+            }
+            $_SESSION['portal'] = $this->feedback['resource']['edificio_id'];
         }
-
         return $this->feedback;
     }
 

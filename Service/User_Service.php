@@ -51,7 +51,7 @@ class User_Service extends User_Validation {
                 if(!isset($_SESSION)) {
                     session_start();
                 }
-                $_SESSION['dni'] = $user['dni'];
+
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['rol'] = $user['rol'];
 
@@ -356,6 +356,26 @@ class User_Service extends User_Validation {
         }
 
         $this->feedback = $this->seekByUsername();
+        return $this->feedback;
+    }
+
+    function seekPortalManager() {
+        $validation = $this->validar_USERNAME();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByUsername();
+        if($this->feedback['ok']) {
+            $user = $this->feedback['resource'];
+            if($user['rol'] != 'edificio') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'USR_NOT_MANG';
+            } else {
+                $this->feedback['code'] = 'SEEK_MANG_OK';
+            }
+        }
+
         return $this->feedback;
     }
 

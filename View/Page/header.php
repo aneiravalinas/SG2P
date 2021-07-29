@@ -53,6 +53,7 @@
 
         <nav id="navbar" class="navbar">
             <ul>
+                <li><a class="nav-link active" href="index.php">Home</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" type="button" id="languageDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="i18n-idioma">Idioma</span>
@@ -84,7 +85,7 @@
                         <a type="button" class="nav-link i18n-admin" onclick="
                             crearform('formenviar','post');
                                 insertacampo(document.formenviar,'action','deshboard');
-                                insertacampo(document.formenviar,'controller','Portal');
+                                insertacampo(document.formenviar,'controller','Panel');
                                 enviaform(document.formenviar);">
                             Panel de Administración
                         </a>

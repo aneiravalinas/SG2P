@@ -278,6 +278,11 @@ arrayES = {
         'i18n-edit-building' : 'Editar Edificio',
         'i18n-search-building' : 'Buscar Edificio',
 
+        // PORTAL VIEWS
+        'i18n-resp-info' : 'Consulta la información relativa al responsable del edificio',
+        'i18n-contact' : 'Contacto',
+        'i18n-address' : 'Dirección',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Aviso!',

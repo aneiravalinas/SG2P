@@ -20,7 +20,7 @@ class Portal_Buildings {
                     </div>
                 </div>
 
-                <div class="row icon-boxes justify-content-center text-center">
+                <div class="row d-flex flex-wrap icon-boxes justify-content-center text-center">
                 <?php foreach($this->buildings as $building) :?>
                     <div class="col-lg-4 col-xl-3 col-sm-6 d-flex align-items-stretch panel-option" data-aos="zoom-in" data-aos-delay="200">
                         <div class="icon-box">
@@ -31,16 +31,21 @@ class Portal_Buildings {
                                         insertacampo(document.formenviar,'controller','Portal');
                                         enviaform(document.formenviar);">
                                 <div>
-                                    <div class="icon"><img src="<?php echo building_photos_path . $building['foto_edificio']; ?>" id="picture-profile" class="rounded-circle"/></div>
-                                    <h2><?php echo $building['nombre'] ?></h2>
+                                    <div class="icon">
+                                        <img src="<?php echo building_photos_path . $building['foto_edificio']; ?>" class="rounded-circle img-card"/>
+                                    </div>
+                                    <h2 class="title" style="color: #124265;">
+                                        <?php echo $building['nombre'] ?>
+                                    </h2>
+                                    <span>
+                                        <?php echo $building['ciudad'] ?>
+                                    </span>
                                 </div>
                             </a>
                         </div>
                     </div>
                 <?php endforeach; ?>
                 </div>
-            </div>
-        </section>
             </div>
         </section>
 

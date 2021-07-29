@@ -84,3 +84,14 @@
     height: 200px !important;
     object-fit: cover !important;
 }
+
+.img-card {
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+}
+
+.icon-portal {
+    width: 50px;
+    height: 50px;
+}
