@@ -158,7 +158,7 @@ class User_Validation extends Validator {
     function validar_atributos_search() {
         $validacion = array('ok' => true, 'code' => '00000', 'resource' => 'USUARIO');
         if($this->dni !== '') {
-            $validacion = $this->validar_DNI();
+            $validacion = $this->validar_DNI_SEARCH();
             if(!$validacion['ok']) {
                 return $validacion;
             }
@@ -193,14 +193,14 @@ class User_Validation extends Validator {
         }
 
         if($this->email !== '') {
-            $validacion = $this->validar_EMAIL();
+            $validacion = $this->validar_EMAIL_SEARCH();
             if(!$validacion['ok']) {
                 return $validacion;
             }
         }
 
         if($this->telefono !== '') {
-            $validacion = $this->validar_TELEFONO();
+            $validacion = $this->validar_TELEFONO_SEARCH();
             if(!$validacion['ok']) {
                 return $validacion;
             }
@@ -222,6 +222,13 @@ class User_Validation extends Validator {
         return $this->rellena_validation(true,'00000','USUARIO'); // Validación Ok.
     }
 
+    function validar_DNI_SEARCH() {
+        if(!$this->formato_dni_search($this->dni)) {
+            return $this->rellena_validation(false,'DNI_FRMT','USUARIO');
+        }
+
+        return $this->rellena_validation(true,'00000','USUARIO');
+    }
 
     function validar_USERNAME() {
         if(!$this->longitud_minima($this->username,3)) {
@@ -313,6 +320,14 @@ class User_Validation extends Validator {
         return $this->rellena_validation(true,'00000','USUARIO'); // Validación Ok
     }
 
+    function validar_EMAIL_SEARCH() {
+        if(!$this->formato_email_search($this->email)) {
+            return $this->rellena_validation(false,'EML_FRMT','USUARIO');
+        }
+
+        return $this->rellena_validation(true,'00000','USUARIO');
+    }
+
     function validar_TELEFONO() {
         if(!$this->no_vacio($this->telefono)) {
             return $this->rellena_validation(false,'TLF_EMPT','USUARIO'); // Teléfono no puede ser vacío
@@ -323,6 +338,18 @@ class User_Validation extends Validator {
         }
 
         return $this->rellena_validation(true,'00000','USUARIO'); // Validación Ok.
+    }
+
+    function validar_TELEFONO_SEARCH() {
+        if(!$this->longitud_maxima($this->telefono,9)) {
+            return $this->rellena_validation(false,'TLF_MAX_SIZE','USUARIO');
+        }
+
+        if(!$this->es_numerico($this->telefono)) {
+            return $this->rellena_validation(false,'TLF_WITH_LETTERS','USUARIO');
+        }
+
+        return $this->rellena_validation(true,'00000','USUARIO');
     }
 
 

@@ -32,8 +32,7 @@ CREATE TABLE EDIFICIO
 	`provincia` VARCHAR(40) NOT NULL,
 	`codigo_postal` CHAR(5) NOT NULL,
 	`telefono` VARCHAR(9) NOT NULL,
-	`fax` VARCHAR(9) NULL,
-	`foto_edificio` VARCHAR(12) NULL,
+	`foto_edificio` VARCHAR(40) NULL,
 
 	CONSTRAINT `pk_edificio` PRIMARY KEY (`edificio_id`),
 	CONSTRAINT `fk_edificio_to_usuario` FOREIGN KEY (`username`) REFERENCES USUARIO (`username`)
@@ -83,7 +82,7 @@ CREATE TABLE EDIFICIO_PLAN
 	`estado` enum('pendiente', 'implementado','prescrito') NOT NULL DEFAULT 'pendiente',
 
 	CONSTRAINT `pk_edificio_plan` PRIMARY KEY (`edificio_id`, `plan_id`),
-	CONSTRAINT `fk_edificio_plan_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
+	CONSTRAINT `fk_edificio_plan_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`) ON DELETE CASCADE,
 	CONSTRAINT `fk_edificio_plan_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
 );
 
@@ -134,7 +133,7 @@ CREATE TABLE EDIFICIO_DOCUMENTO
 	`nombre_doc` VARCHAR(20) NOT NULL,
 
 	CONSTRAINT `pk_edificio_documento` PRIMARY KEY (`edificio_documento_id`),
-	CONSTRAINT `fk_edificio_documento_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
+	CONSTRAINT `fk_edificio_documento_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`) ON DELETE CASCADE,
 	CONSTRAINT `fk_edificio_documento_to_documento` FOREIGN KEY (`documento_id`) REFERENCES DOCUMENTO (`documento_id`)
 );
 
@@ -148,7 +147,7 @@ CREATE TABLE EDIFICIO_PROCEDIMIENTO
 	`nombre_doc` VARCHAR(20) NOT NULL,
 
 	CONSTRAINT `pk_edificio_procedimiento` PRIMARY KEY (`edificio_procedimiento_id`),
-	CONSTRAINT `fk_edificio_procedimiento_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
+	CONSTRAINT `fk_edificio_procedimiento_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`) ON DELETE CASCADE,
 	CONSTRAINT `fk_edificio_procedimiento_to_procedimiento` FOREIGN KEY (`procedimiento_id`) REFERENCES PROCEDIMIENTO (`procedimiento_id`)
 );
 
@@ -190,7 +189,7 @@ CREATE TABLE EDIFICIO_SIMULACRO
 	`resultado` TEXT NULL,
 
 	CONSTRAINT `pk_edificio_simulacro` PRIMARY KEY (`edificio_simulacro_id`),
-	CONSTRAINT `fk_edificio_simulacro_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
+	CONSTRAINT `fk_edificio_simulacro_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`) ON DELETE CASCADE,
 	CONSTRAINT `fk_edificio_simulacro_to_simulacro` FOREIGN KEY (`simulacro_id`) REFERENCES SIMULACRO (`simulacro_id`)
 );
 
@@ -218,7 +217,7 @@ CREATE TABLE EDIFICIO_FORMACION
 	`destinatarios` VARCHAR(100) NOT NULL,
 
 	CONSTRAINT `pk_edificio_formacion` PRIMARY KEY (`edificio_formacion_id`),
-	CONSTRAINT `fk_edificio_formacion_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
+	CONSTRAINT `fk_edificio_formacion_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`) ON DELETE CASCADE,
 	CONSTRAINT `fk_edificio_formacion_to_formacion` FOREIGN KEY (`formacion_id`) REFERENCES FORMACION (`formacion_id`)
 );
 
@@ -235,7 +234,7 @@ CREATE TABLE NOTIFICACION
 
 	CONSTRAINT `pk_notificacion` PRIMARY KEY (`id_notificacion`),
 	CONSTRAINT `fk_notificacion_to_usuario` FOREIGN KEY (`username`) REFERENCES USUARIO (`username`),
-	CONSTRAINT `fk_notificacion_to_edificio_plan` FOREIGN KEY (`edificio_id`, `plan_id`) REFERENCES EDIFICIO_PLAN (`edificio_id`, `plan_id`)
+	CONSTRAINT `fk_notificacion_to_edificio_plan` FOREIGN KEY (`edificio_id`, `plan_id`) REFERENCES EDIFICIO_PLAN (`edificio_id`, `plan_id`) ON DELETE CASCADE
 );
 
 

@@ -1,11 +1,10 @@
 <?php
 
-class Add_Building {
+class Search_Building {
+    var $managers;
 
-    var $candidates;
-
-    function __construct($candidates) {
-        $this->candidates = $candidates;
+    function __construct($managers) {
+        $this->managers = $managers;
         $this->render();
     }
 
@@ -19,45 +18,45 @@ class Add_Building {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1 class="mb-4 i18n-add-building">Añadir Edificio</h1>
+                        <h1 class="mb-4 i18n-search-building">Buscar Edificio</h1>
                     </div>
 
                     <div class="col-xl-7 col-lg-9">
-                        <form name="formularioadd" method="post" enctype="multipart/form-data">
+                        <form name="formulariosearch" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_EDIFICIO();"/>
+                                    <label for="edificio_id" class="i18n-edificio_id">ID Edificio</label>
+                                    <input type="text" class="form-control" id="edificio_id" name="edificio_id" onblur="check_EDIFICIO_ID_SEARCH();"/>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="calle" class="i18n-calle">Calle</label>
-                                    <input type="text" class="form-control" id="calle" name="calle" onblur="check_CALLE();"/>
+                                    <label for="nombre" class="i18n-nombre">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_EDIFICIO_SEARCH();"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label for="ciudad" class="i18n-ciudad">Ciudad</label>
-                                    <input type="text" class="form-control" id="ciudad" name="ciudad" onblur="check_CIUDAD();"/>
+                                    <input type="text" class="form-control" id="ciudad" name="ciudad" onblur="check_CIUDAD_SEARCH();"/>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="provincia" class="i18n-provincia">Provincia</label>
-                                    <input type="text" class="form-control" id="provincia" name="provincia" onblur="check_PROVINCIA();"/>
+                                    <input type="text" class="form-control" id="provincia" name="provincia" onblur="check_PROVINCIA_SEARCH();"/>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="codigo_postal" class="i18n-codigo_postal">Código Postal</label>
-                                    <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" onblur="check_CPOSTAL();"/>
+                                    <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" onblur="check_CPOSTAL_SEARCH();"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="telefono" class="i18n-telefono">Telefono</label>
-                                    <input type="text" class="form-control" id="telefono" name="telefono" onblur="check_TELEFONO();"/>
+                                    <label for="calle" class="i18n-calle">Calle</label>
+                                    <input type="text" class="form-control" id="calle" name="calle" onblur="check_CALLE_SEARCH();"/>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="foto_edificio" class="i18n-foto_edificio">Foto del Edificio</label>
-                                    <input type="file" class="form-control-sm" id="foto_edificio" name="foto_edificio"/>
+                                    <label for="telefono" class="i18n-telefono">Telefono</label>
+                                    <input type="text" class="form-control" id="telefono" name="telefono" onblur="check_TELEFONO_SEARCH();"/>
                                 </div>
                             </div>
 
@@ -65,9 +64,14 @@ class Add_Building {
                                 <div class="form-group col">
                                     <label for="username" class="i18n-responsable">Responsable</label>
                                     <select id="username" name="username" class="form-select">
-                                        <?php foreach($this->candidates as $candidate) :?>
-                                        <option value="<?php echo $candidate['username'] ?>"><?php echo $candidate['username'] ?></option>
-                                        <?php endforeach; ?>
+                                        <?php if(es_resp_edificio()): ?>
+                                            <option value="<?php echo getUser() ?>" selected><?php echo getUser(); ?></option>
+                                        <?php else: ?>
+                                            <option value="">Todos</option>
+                                            <?php foreach($this->managers as $manager) :?>
+                                                <option value="<?php echo $manager['username'] ?>"><?php echo $manager['username'] ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                             </div>
@@ -82,9 +86,9 @@ class Add_Building {
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
-                                            insertacampo(document.formularioadd,'controller','Building');
-                                            insertacampo(document.formularioadd,'action','add');
-                                            enviaformcorrecto(document.formularioadd,check_ADD_EDIFICIO());">
+                                            insertacampo(document.formulariosearch,'controller','Building');
+                                            insertacampo(document.formulariosearch,'action','search');
+                                            enviaformcorrecto(document.formulariosearch,check_SEARCH_EDIFICIO());">
                                         Enviar
                                     </a>
                                 </div>
@@ -94,6 +98,7 @@ class Add_Building {
                 </div>
             </div>
         </section>
+
 
 <?php
         include './View/Page/footer.php';

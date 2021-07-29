@@ -249,6 +249,27 @@ function check_only_numbers(element, size) {
     }
 }
 
+
+function check_only_numbers(element) {
+    var correct = true;
+    var value = document.getElementById(element).value;
+    var name = document.getElementById(element).name;
+
+    var pattern = /^[0-9]+$/;
+    if(!pattern.test(value)) {
+        openModal(name,'i18n-numbers-format');
+        correct = false;
+    }
+
+    if(correct) {
+        document.getElementById(element).style.borderColor = 'green';
+        return true;
+    } else {
+        document.getElementById(element).style.borderColor = 'red';
+        return false;
+    }
+}
+
 function check_imagen(element) {
     var value = document.getElementById(element).value;
     var allowed_extensions = new Array('.jpg','.jpeg','.png');

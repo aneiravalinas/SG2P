@@ -168,7 +168,9 @@ class User_Service extends User_Validation {
                 $this->feedback = $this->user_entity->editProfile();
                 if($this->feedback['ok']) {
                     $this->feedback['code'] = 'PRF_OK';
-                    $this->uploader->deletePhoto(profile_photos_path, $user['foto_perfil']);
+                    if($user['foto_perfil'] != default_profile_photo) {
+                        $this->uploader->deletePhoto(profile_photos_path, $user['foto_perfil']);
+                    }
                 } else {
                     $this->feedback['code'] = 'PRF_KO';
                     $this->uploader->deletePhoto(profile_photos_path, $this->foto_perfil);
@@ -255,7 +257,9 @@ class User_Service extends User_Validation {
                             $_SESSION['rol'] = $this->rol; // Añadimos nuevo rol a la SESSION.
                         }
                         $this->feedback['code'] = 'USR_EDT_OK'; // Usuario editado correctamente.
-                        $this->uploader->deletePhoto(profile_photos_path, $user['foto_perfil']);
+                        if($user['foto_perfil'] != default_profile_photo) {
+                            $this->uploader->deletePhoto(profile_photos_path, $user['foto_perfil']);
+                        }
                     } else if($this->feedback['code'] == 'QRY_KO') {
                         $this->feedback['code'] = 'USR_EDT_KO'; // Error al editar al usuario
                         $this->uploader->deletePhoto(profile_photos_path, $this->foto_perfil);

@@ -50,7 +50,7 @@ class Building {
     function deleteForm() {
         if(es_resp_organizacion() || es_admin()) {
             $building_service = new Building_Service();
-            $feedback = $building_service->dataForm();
+            $feedback = $building_service->deleteForm();
             if($feedback['ok']) {
                 include './View/Buildings/Delete_Building_View.php';
                 new Delete_Building($feedback['resource']);
@@ -67,6 +67,76 @@ class Building {
             $building_service = new Building_Service();
             $feedback = $building_service->DELETE();
             new Message($feedback['code'],'Building','show');
+        } else {
+            new Message('FRB_ACCS','Portal','deshboard');
+        }
+    }
+
+    function editForm() {
+        if(es_resp_organizacion() || es_admin()) {
+            $building_service = new Building_Service();
+            $feedback = $building_service->editForm();
+            if($feedback['ok']) {
+                include_once './View/Buildings/Edit_Building_View.php';
+                new Edit_Building($feedback['resource']['building'], $feedback['resource']['candidates']);
+            } else {
+                new Message($feedback['code'],'Building','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Portal','deshboard');
+        }
+    }
+
+    function edit() {
+        if(es_resp_organizacion() || es_admin()) {
+            $building_service = new Building_Service();
+            $feedback = $building_service->EDIT();
+            new Message($feedback['code'],'Building','show');
+        } else {
+            new Message('FRB_ACCS','Portal','deshboard');
+        }
+    }
+
+    function searchForm() {
+        if(!es_registrado()) {
+            $building_service = new Building_Service();
+            $feedback = $building_service->searchForm();
+            if($feedback['ok']) {
+                include_once './View/Buildings/Search_Building_View.php';
+                new Search_Building($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'Building','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Portal','deshboard');
+        }
+    }
+
+    function search() {
+        if(!es_registrado()) {
+            $building_service = new Building_Service();
+            $feedback = $building_service->SEARCH();
+            if($feedback['ok']) {
+                include_once './View/Buildings/Show_Buildings_View.php';
+                new Show_Buildings($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'Building','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Portal','deshboard');
+        }
+    }
+
+    function showCurrent() {
+        if(!es_registrado()) {
+            $building_service = new Building_Service();
+            $feedback = $building_service->seek();
+            if($feedback['ok']) {
+                include_once './View/Buildings/ShowCurrent_Building_View.php';
+                new ShowCurrent_Building($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'Building','show');
+            }
         } else {
             new Message('FRB_ACCS','Portal','deshboard');
         }

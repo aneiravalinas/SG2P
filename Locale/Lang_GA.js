@@ -77,11 +77,32 @@ arrayGA = {
         // ADD
         'BLD_ADD_KO' : 'Error ó engadir o edificio',
         'BLD_ADD_OK' : 'O edificio engadiurse correctamente',
+        'BLD_ADD_OK_ROL_KO' : 'Error ó modificar o rol de usuario rexistrado a responsable de edificio. A acción debe realizarse manualmente',
 
         // DELETE
         'BLD_DEL_OK' : 'O edificio eliminouse correctamente',
-        'BLD_EDT_ROL_KO' : 'Produciuse un erro o modificar o rol do responsable do edificio a usuario rexistrado. A acción deberá realizarse manualmente',
+        'BLD_DEL_OK_ROL_KO' : 'Produciuse un erro o modificar o rol do responsable do edificio a usuario rexistrado. A acción deberá realizarse manualmente',
         'BLD_DEL_KO' : 'Error ó eliminar o edificio',
+
+        // EDIT
+        'BLD_EDIT_OK_ROL_KO' : 'O edificio modificouse correctamente, pero produciuse un error na asignación de roles. Porfavor, revisar os roles manualmente',
+        'BLD_EDIT_KO' : 'Produciuse un error ó modificar o edificio',
+        'BLD_EDIT_OK' : 'O edificio modificouse correctamente',
+
+        // SHOWCURRENT
+        'BLD_CURRNT_MANG_KO' : 'Non dispon dos privilexios necesarios pra consultar os detalles dese edificio',
+        'BLD_CURRENT_OK' : 'A consulta dos detalles do edificio realizouse correctamente',
+        'BLD_CURRNT_KO' : 'Error ó consultar os detalles do edificio',
+
+        // Búsqueda de ciudades
+        'CTY_NOT_FOUND' : 'Actualmente non hay ningún edificio rexistrado no sistema. Rexistra algún edificio pra acceder ó seu portal',
+        'SRCH_CTY_KO' : 'Produciuse un erro ó obter as cidades rexistradas no sistema. Contacte co seu administrador',
+        'SRCH_CTY_OK' : 'Búsqueda de cidades Ok',
+
+        // Búsqueda por ciudad
+        'CTY_NOT_EXST' : 'A cidade introducida non existe',
+        'SRCH_BY_CTS_OK' : 'Búsqueda por cidade Ok',
+        'SRCH_BY_CTS_KO' : 'Error ó buscar por cidade',
 
         // Obtener candidatos a responsable de edificio
         'MANG_EMPT' : 'Non hay candidatos dispoñibles pra ser responsable de edificio',
@@ -137,6 +158,8 @@ arrayGA = {
             // Telefono
             'TLF_EMPT' : 'É necesario especificar un numero de telefono',
             'TLF_FRMT' : 'Formato de numero de telefono incorrecto',
+            'TLF_MAX_SIZE' : 'O número de teléfono supera o tamaño máximo',
+            'TLF_WITH_LETTERS' : 'O número de teléfono só pode conter números',
 
             // Foto_Perfil
             'PRPH_KO' : 'Error ó subir a foto de perfil',
@@ -177,10 +200,7 @@ arrayGA = {
             'CP_EMPT' : 'É necesario especificar un código postal',
             'CP_NUMERIC' : 'O código postal debe ser numérico',
             'CP_SIZE' : 'O código postal debe ser un número de 5 díxitos',
-
-            // Fax
-            'FAX_EMPT' : 'É necesario especificar un número de fax',
-            'FAX_FRMT' : 'Formato de número de fax incorrecto',
+            'CP_MAX_SIZE' : 'O código postal non debe superar os 5 díxitos',
 
             // Foto Edificio
             'BLD_PH_EXT' : 'A extensión da foto do edificio non está permitida',
@@ -241,6 +261,7 @@ arrayGA = {
         'i18n-user-details' : 'Detalles do Usuario',
 
         // BUILDINGS VIEWS
+        'i18n-edificio_id' : 'Edificio ID',
         'i18n-responsable' : 'Responsable',
         'i18n-ciudad' : 'Cidade',
         'i18n-buildings-empty' : 'Aínda non hay edificios rexitrados',
@@ -250,6 +271,8 @@ arrayGA = {
         'i18n-codigo_postal' : 'Código Postal',
         'i18n-fax' : 'Fax',
         'i18n-del-building-confirm' : '¿Está seguro de que quere eliminar este edificio, así como os elementos asociados? A acción non será reversible',
+        'i18n-edit-building' : 'Editar Edificio',
+        'i18n-search-building' : 'Buscar Edificio',
 
 
         // MODAL
@@ -272,6 +295,7 @@ arrayGA = {
             'm-fax' : ' Fax ',
             'm-responsable' : ' Responsable ',
             'm-foto_edificio' : ' Foto Edificio ',
+            'm-edificio_id' : ' ID Edificio ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',
@@ -282,6 +306,8 @@ arrayGA = {
             'i18n-numbers-format' : 'só pode conter números',
             'i18n-wrong-enum' : 'ten un valor non contemplado',
             'i18n-ext-not-allowed' : 'ten unha extensión non permitida',
+            'i18n-cp-format' : 'debe ser un número de 5 díxitos',
+            'i18n-letters-numbers-accents-spaces' : 'só pode conter letras, números, espacios e acentos',
 
 
 }

@@ -13,11 +13,10 @@ class Building_Model extends Abstract_Model {
     var $provincia;
     var $codigo_postal;
     var $telefono;
-    var $fax;
     var $foto_edificio;
 
     function __construct() {
-        $this->atributos = array('edificio_id', 'username', 'nombre', 'calle', 'ciudad', 'provincia', 'codigo_postal', 'telefono', 'fax', 'foto_edificio');
+        $this->atributos = array('edificio_id', 'username', 'nombre', 'calle', 'ciudad', 'provincia', 'codigo_postal', 'telefono', 'foto_edificio');
         $this->fill_fields();
     }
 
@@ -41,7 +40,6 @@ class Building_Model extends Abstract_Model {
                             provincia,
                             codigo_postal,
                             telefono,
-                            fax,
                             foto_edificio
                 ) VALUES (
                           '$this->username',
@@ -51,7 +49,6 @@ class Building_Model extends Abstract_Model {
                           '$this->provincia',
                           '$this->codigo_postal',
                           '$this->telefono',
-                          '$this->fax',
                           '$this->foto_edificio'
                 );
         ";
@@ -61,7 +58,19 @@ class Building_Model extends Abstract_Model {
     }
 
     function EDIT() {
-        // TODO: Implement EDIT() method.
+        $this->query = "UPDATE EDIFICIO SET " .
+            ($this->username == '' ? "" : "username = '$this->username', ") .
+            ($this->nombre == '' ? "" : "nombre = '$this->nombre', ") .
+            ($this->calle == '' ? "" : "calle = '$this->calle', ") .
+            ($this->ciudad == '' ? "" : "ciudad = '$this->ciudad', ") .
+            ($this->provincia == '' ? "" : "provincia = '$this->provincia', ") .
+            ($this->foto_edificio == '' ? "" : "foto_edificio = '$this->foto_edificio', ") .
+            ($this->codigo_postal == '' ? "" : "codigo_postal = '$this->codigo_postal', ") .
+            ($this->telefono == '' ? "" : "telefono = '$this->telefono'") .
+            " WHERE edificio_id = '$this->edificio_id'";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function DELETE() {
@@ -86,27 +95,25 @@ class Building_Model extends Abstract_Model {
                 ciudad LIKE '%" . $this->ciudad . "%' AND
                 provincia LIKE '%" . $this->provincia . "%' AND
                 codigo_postal LIKE '%" . $this->codigo_postal . "%' AND
-                telefono LIKE '%" . $this->telefono . "%' AND
-                fax LIKE '%" . $this->fax . "%'";
+                telefono LIKE '%" . $this->telefono . "%'";
 
         $this->get_results_from_query();
         return $this->feedback;
     }
 
-    function searchByResp() {
+    function searchByResp($username) {
         $this->query = "
             SELECT *
             FROM EDIFICIO
             WHERE
                 edificio_id LIKE '%" . $this->edificio_id . "%' AND
-                username = '$this->username' AND
+                username = '$username' AND
                 nombre LIKE '%" . $this->nombre . "%' AND
                 calle LIKE '%" . $this->calle . "%' AND
                 ciudad LIKE '%" . $this->ciudad . "%' AND
                 provincia LIKE '%" . $this->provincia . "%' AND
                 codigo_postal LIKE '%" . $this->codigo_postal . "%' AND
-                telefono LIKE '%" . $this->telefono . "%' AND
-                fax LIKE '%" . $this->fax . "%'";
+                telefono LIKE '%" . $this->telefono . "%'";
 
         $this->get_results_from_query();
         return $this->feedback;
@@ -126,6 +133,26 @@ class Building_Model extends Abstract_Model {
         $this->query = "
             SELECT * FROM EDIFICIO
             WHERE username = '$username'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchCities() {
+        $this->query = "
+            SELECT DISTINCT ciudad
+            FROM EDIFICIO
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchByCity() {
+        $this->query = "
+            SELECT * FROM EDIFICIO
+            WHERE ciudad = '$this->ciudad'
         ";
 
         $this->get_results_from_query();

@@ -115,6 +115,14 @@ abstract class Validator {
         }
     }
 
+    function formato_email_search($email) {
+        if(preg_match('/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@?[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/',$email)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function formato_dni($dni){
         $letra = substr($dni, -1);
         $numeros = substr($dni, 0, -1);
@@ -124,6 +132,15 @@ abstract class Validator {
             return false;
         }
     }
+
+    function formato_dni_search($dni) {
+        if(preg_match('/^[0-9]{0,8}[A-Z]?$/',$dni)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function formato_fecha($fecha){
         if(!preg_match('/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/', $fecha)){
             return false;

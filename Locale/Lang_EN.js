@@ -77,11 +77,32 @@ arrayEN = {
         // ADD
         'BLD_ADD_KO' : 'Failed to add building',
         'BLD_ADD_OK' : 'The building has been added successfully',
+        'BLD_ADD_OK_ROL_KO' : 'Error when modifying the registered user role to building manager. Action must be done manually',
 
         // DELETE
         'BLD_DEL_OK' : 'The building has been successfully removed',
-        'BLD_EDT_ROL_KO' : 'Error when modifying the role of the building manager to a registered user. Action must be done manually',
+        'BLD_DEL_OK_ROL_KO' : 'Error when modifying the role of the building manager to a registered user. Action must be done manually',
         'BLD_DEL_KO' : 'Failed to delete building',
+
+        // EDIT
+        'BLD_EDIT_OK_ROL_KO' : 'The building has been modified successfully, but there was an error in the assignment of roles. Please review the roles manually.',
+        'BLD_EDIT_KO' : 'An error occurred while modifying the building',
+        'BLD_EDIT_OK' : 'The building has been successfully modified',
+
+        // SHOWCURRENT
+        'BLD_CURRNT_MANG_KO' : 'You do not have the necessary permits to consult the details of that building',
+        'BLD_CURRENT_OK' : 'The query of the building details has been executed correctly',
+        'BLD_CURRNT_KO' : 'Failed to query building details',
+
+        // Búsqueda de ciudades
+        'CTY_NOT_FOUND' : 'There are currently no buildings registered in the system. Register a building to access its portal',
+        'SRCH_CTY_KO' : 'An error occurred while obtaining the cities registered in the system. Contact your administrator',
+        'SRCH_CTY_OK' : 'City search Ok',
+
+        // Búsqueda por ciudad
+        'CTY_NOT_EXST' : 'The entered city does not exist',
+        'SRCH_BY_CTS_OK' : 'Search by city Ok',
+        'SRCH_BY_CTS_KO' : 'Error searching by city',
 
         // Obtener candidatos a responsable de edificio
         'MANG_EMPT' : 'There are no candidates available to be building manager',
@@ -137,6 +158,8 @@ arrayEN = {
             // Telefono
             'TLF_EMPT' : 'Phone number cannot be empty',
             'TLF_FRMT' : 'Wrong phone number format',
+            'TLF_MAX_SIZE' : 'The phone number exceeds the maximum size',
+            'TLF_WITH_LETTERS' : 'The phone number can only contain numbers',
 
             // Foto_Perfil
             'PRPH_KO' : 'Error while uploading the profile picture',
@@ -177,10 +200,7 @@ arrayEN = {
             'CP_EMPT' : 'You need to specify a zip code',
             'CP_NUMERIC' : 'Zip code must be numeric',
             'CP_SIZE' : 'Zip code must be a 5-digit number',
-
-            // Fax
-            'FAX_EMPT' : 'You need to specify a fax number',
-            'FAX_FRMT' : 'Incorrect fax number format',
+            'CP_MAX_SIZE' : 'Zip code must not exceed 5 digits',
 
             // Foto Edificio
             'BLD_PH_EXT' : 'The extension of the building photo is not allowed',
@@ -240,6 +260,7 @@ arrayEN = {
         'i18n-user-details' : 'User Details',
 
         // BUILDINGS VIEWS
+        'i18n-edificio_id' : 'Building ID',
         'i18n-responsable' : 'Manager',
         'i18n-ciudad' : 'City',
         'i18n-buildings-empty' : 'There is no registered building yet',
@@ -249,6 +270,8 @@ arrayEN = {
         'i18n-codigo_postal' : 'Zip Code',
         'i18n-fax' : 'Fax',
         'i18n-del-building-confirm' : 'Are you sure you want to delete this building as well as the associated items? The action will not be reversible',
+        'i18n-edit-building' : 'Edit Building',
+        'i18n-search-building' : 'Search Building',
 
 
         // MODAL
@@ -271,6 +294,7 @@ arrayEN = {
             'm-fax' : ' Fax ',
             'm-responsable' : ' Manager ',
             'm-foto_edificio' : ' Building Photo ',
+            'm-edificio_id' : ' Building ID ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',
@@ -281,4 +305,6 @@ arrayEN = {
             'i18n-numbers-format' : 'can only contain numbers',
             'i18n-wrong-enum' : 'has a value not contemplated',
             'i18n-ext-not-allowed' : 'has a not allowed extension',
+            'i18n-cp-format' : 'must be a 5 digit number',
+            'i18n-letters-numbers-accents-spaces' : 'can only contain letters, numbers, accents, and spaces',
 }

@@ -15,7 +15,7 @@ class Building_Service extends Building_Validation {
     var $feedback = array();
 
     function __construct() {
-        $this->atributos = array('edificio_id', 'username', 'nombre', 'calle', 'ciudad', 'provincia', 'codigo_postal', 'telefono', 'fax');
+        $this->atributos = array('edificio_id', 'username', 'nombre', 'calle', 'ciudad', 'provincia', 'codigo_postal', 'telefono');
         $this->building_entity = new Building_Model();
         $this->user_entity = new User_Model();
         $this->uploader = new Uploader();
@@ -36,21 +36,49 @@ class Building_Service extends Building_Validation {
         } else {
             $this->foto_edificio = '';
         }
+
+    }
+
+    function searchForm() {
+        $this->feedback = $this->user_entity->searchByRol('edificio');
+        return $this->feedback;
     }
 
     function SEARCH() {
-        // TODO: Validar atributos search.
-
         if(es_resp_edificio()) {
-            $this->building_entity->username = getUser();
-            $this->feedback = $this->building_entity->searchByResp();
+            return $this->searchByRespInSession();
         } else {
-            $this->feedback = $this->building_entity->SEARCH();
+            return $this->searchAll();
         }
+    }
+
+    function searchByRespInSession() {
+        $validation = $this->validar_atributos_search();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->building_entity->searchByResp(getUser());
 
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'BLD_SRCH_OK';
-        } else {
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'BLD_SRCH_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function searchAll() {
+        $validation = $this->validar_atributos_search();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->building_entity->SEARCH();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'BLD_SRCH_OK';
+        } else if($this->feedback['code'] == 'QRY_KO') {
             $this->feedback['code'] = 'BLD_SRCH_KO';
         }
 
@@ -62,7 +90,7 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
-    function dataForm() {
+    function deleteForm() {
         $validation = $this->validar_EDIFICIO_ID();
         if(!$validation['ok']) {
             return $validation;
@@ -99,7 +127,7 @@ class Building_Service extends Building_Validation {
         $this->feedback = $this->building_entity->ADD();
         if(!$this->feedback['ok']) {
             $this->feedback['code'] = 'BLD_ADD_KO';
-            if($this->foto_perfil != default_building_photo) {
+            if($this->foto_edificio != default_building_photo) {
                 $this->uploader->deletePhoto(building_photos_path, $this->foto_edificio);
             }
         } else {
@@ -107,7 +135,7 @@ class Building_Service extends Building_Validation {
             if($this->feedback['ok']) {
                 $this->feedback['code'] = 'BLD_ADD_OK';
             } else {
-                $this->feedback['code'] = 'BLD_EDT_ROL_KO';
+                $this->feedback['code'] = 'BLD_ADD_OK_ROL_KO';
             }
         }
 
@@ -142,11 +170,185 @@ class Building_Service extends Building_Validation {
                 if($this->feedback['ok']) {
                     $this->feedback['code'] = 'BLD_DEL_OK';
                 } else {
-                    $this->feedback['code'] = 'BLD_EDT_ROL_KO';
+                    $this->feedback['code'] = 'BLD_DEL_OK_ROL_KO';
                 }
             }
         } else {
             $this->feedback['code'] = 'BLD_DEL_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function editForm() {
+        $validation = $this->validar_EDIFICIO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByBuildingID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $building = $this->feedback['resource'];
+        $candidates = $this->get_candidates()['resource'];
+
+        $this->feedback['ok'] = true;
+        $this->feedback['resource'] = array('building' => $building, 'candidates' => $candidates);
+
+        return $this->feedback;
+    }
+
+    function EDIT() {
+        $validation = $this->validar_atributos_edit();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByBuildingID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $building = $this->feedback['resource'];
+        $this->feedback = $this->is_candidate($this->username);
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        if($this->foto_edificio != '') {
+            $this->feedback = $this->uploader->uploadPhoto(building_photos_path, 'foto_edificio');
+            if(!$this->feedback['ok']) {
+                $this->feedback['code'] = 'BLD_PH_KO';
+                return $this->feedback;
+            }
+            $this->foto_edificio = $this->feedback['resource'];
+            $this->building_entity->foto_edificio = $this->foto_edificio;
+            $this->feedback = $this->building_entity->EDIT();
+            if($this->feedback['ok']) {
+                if($building['foto_edificio'] != default_building_photo) {
+                    $this->uploader->deletePhoto(building_photos_path,$building['foto_edificio']);
+                }
+            } else{
+                if($this->feedback['code'] == 'QRY_KO') {
+                    $this->feedback['code'] = 'BLD_EDIT_KO';
+                }
+                $this->uploader->deletePhoto(building_photos_path,$this->foto_edificio);
+            }
+        } else {
+            $this->feedback = $this->building_entity->EDIT();
+            if(!$this->feedback['ok'] && $this->feedback['code'] == 'QRY_KO') {
+                $this->feedback['code'] = 'BLD_EDIT_KO';
+            }
+        }
+
+        if($this->feedback['ok']) {
+            $failed = false;
+            if($this->username != $building['username']) {
+                $this->feedback = $this->user_entity->change_role($this->username,'edificio');
+                if(!$this->feedback['ok']) {
+                    $failed = true;
+                }
+                $this->feedback = $this->seekByUsername($building['username']);
+                if(!$this->feedback['ok']) {
+                    $this->feedback = $this->user_entity->change_role($building['username'],'registrado');
+                    if(!$this->feedback['ok']) {
+                        $failed = true;
+                    }
+                }
+            }
+            if($failed) {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'BLD_EDIT_OK_ROL_KO';
+            } else {
+                $this->feedback['ok'] = true;
+                $this->feedback['code'] = 'BLD_EDIT_OK';
+            }
+
+        }
+
+        return $this->feedback;
+    }
+
+    function seek() {
+        if(es_resp_edificio()) {
+            return $this->seekByRespInSession();
+        } else {
+            return $this->seekAll();
+        }
+    }
+
+    function seekByRespInSession() {
+        $validation = $this->validar_EDIFICIO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByBuildingID();
+        if($this->feedback['ok']) {
+            $building = $this->feedback['resource'];
+            if($building['username'] != getUser()) {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'BLD_CURRNT_MANG_KO';
+                $this->feedback['resource'] = array();
+            } else {
+                $this->feedback['code'] = 'BLD_CURRENT_OK';
+            }
+        } else if($this->feedback['code'] == 'BLDID_KO') {
+            $this->feedback['code'] = 'BLD_CURRENT_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function seekAll() {
+        $validation = $this->validar_EDIFICIO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByBuildingID();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'BLD_CURRENT_OK';
+        } else if($this->feedback['code'] == 'BLDID_KO') {
+            $this->feedback['code'] = 'BLD_CURRENT_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function showCities() {
+        $this->feedback = $this->building_entity->searchCities();
+        if($this->feedback['ok']) {
+            if($this->feedback['code'] == 'QRY_EMPT') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'CTY_NOT_FOUND';
+            } else {
+                $this->feedback['code'] = 'SRCH_CTY_OK';
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'SRCH_CTY_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function searchBuildingsByCity() {
+        $validation = $this->validar_CIUDAD();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->building_entity->searchByCity();
+        if($this->feedback['ok']) {
+            if($this->feedback['code'] == 'QRY_EMPT') {
+                $this->feedback['code'] = 'CTY_NOT_EXST';
+            } else {
+                $this->feedback['code'] = 'SRCH_BY_CTS_OK';
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'SRCH_BY_CTS_KO';
         }
 
         return $this->feedback;
@@ -171,7 +373,7 @@ class Building_Service extends Building_Validation {
         $this->user_entity->username = $username;
         $this->feedback = $this->user_entity->seek();
         if($this->feedback['ok']) {
-            if($this->feedback['code'] = 'QRY_EMPT') {
+            if($this->feedback['code'] == 'QRY_EMPT') {
                 $this->feedback['ok'] = false;
                 $this->feedback['code'] = 'MANG_NOT_EXST';
             } else {

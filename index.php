@@ -28,6 +28,11 @@ if (isAuthenticated()) {
                 $login = new Login();
                 $login->login();
             }
+        } else if($_POST['controller'] === 'Portal') {
+            include_once './Controller/Portal_Controller.php';
+            $requested_action = isset($_POST['action']) ? $_POST['action'] : '_default';
+            $portal = new Portal();
+            $portal->$requested_action();
         } else {
             include_once './Controller/Portal_Controller.php';
             $portal = new Portal();

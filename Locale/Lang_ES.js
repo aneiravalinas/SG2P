@@ -79,11 +79,32 @@ arrayES = {
         // ADD
         'BLD_ADD_KO' : 'Error al añadir el edificio',
         'BLD_ADD_OK' : 'El edificio se ha añadido correctamente',
+        'BLD_ADD_OK_ROL_KO' : 'Error al modificar el rol de usuario registrado a responsable de edificio. La acción debe realizarse manualmente',
 
         // DELETE
         'BLD_DEL_OK' : 'El edificio se ha eliminado correctamente',
-        'BLD_EDT_ROL_KO' : 'Error al modificar el rol del responsable de edificio a usuario registrado. La acción debe realizarse manualmente',
+        'BLD_DEL_OK_ROL_KO' : 'Error al modificar el rol del responsable de edificio a usuario registrado. La acción debe realizarse manualmente',
         'BLD_DEL_KO' : 'Error al eliminar el edificio',
+
+        // EDIT
+        'BLD_EDIT_OK_ROL_KO' : 'El edificio se ha modificado correctamente, pero se ha producido un error en la asignación de roles. Porfavor, revisar los roles manualmente',
+        'BLD_EDIT_KO' : 'Se ha producido un error al modificar el edificio',
+        'BLD_EDIT_OK' : 'El edificio se ha modificado correctamente',
+
+        // SHOWCURRENT
+        'BLD_CURRNT_MANG_KO' : 'No dispone de los permisos necesarios para consultar los detalles de ese edificio',
+        'BLD_CURRENT_OK' : 'La consulta de los detalles del edificio se ha ejecutado correctamente',
+        'BLD_CURRNT_KO' : 'Error al consultar los detalles del edificio',
+
+        // Búsqueda de ciudades
+        'CTY_NOT_FOUND' : 'Actualmente no hay ningún edificio registrado en el sistema. Registra algún edificio para acceder a su portal',
+        'SRCH_CTY_KO' : 'Se ha producido un error al obtener las ciudades registradas en el sistema. Contacte con su administrador',
+        'SRCH_CTY_OK' : 'Búsqueda de ciudades Ok',
+
+        // Búsqueda por ciudad
+        'CTY_NOT_EXST' : 'La ciudad introducida no existe',
+        'SRCH_BY_CTS_OK' : 'Búsqueda por ciudad Ok',
+        'SRCH_BY_CTS_KO' : 'Error al buscar por ciudad',
 
         // Obtener candidatos a responsable de edificio
         'MANG_EMPT' : 'No hay candidatos disponbiles para ser responsable de edificio',
@@ -141,6 +162,8 @@ arrayES = {
             // Telefono
             'TLF_EMPT' : 'Es necesario especificar un numero de telefono', // TLF_EMPT
             'TLF_FRMT' : 'Formato de numero de telefono incorrecto', // TLF_FRMT
+            'TLF_MAX_SIZE' : 'El número de teléfono supera el tamaño máximo',
+            'TLF_WITH_LETTERS' : 'El número de teléfono sólo puede contener números',
 
             // Foto_Perfil
             'PRPH_KO' : 'Error al subir la foto de perfil', // PRPH_KO
@@ -182,10 +205,7 @@ arrayES = {
             'CP_EMPT' : 'Es necesario especificar un código postal',
             'CP_NUMERIC' : 'El código postal debe ser numérico',
             'CP_SIZE' : 'El código postal debe ser un número de 5 dígitos',
-
-            // Fax
-            'FAX_EMPT' : 'Es necesario especificar un número de fax',
-            'FAX_FRMT' : 'Formato de número de fax incorrecto',
+            'CP_MAX_SIZE' : 'El código postal no debe superar los 5 dígitos',
 
             // Foto Edificio
             'BLD_PH_EXT' : 'La extensión de la foto del edificio no está permitida',
@@ -245,6 +265,7 @@ arrayES = {
         'i18n-user-details' : 'Detalles del Usuario',
 
         // BUILDINGS VIEWS
+        'i18n-edificio_id' : 'Edificio ID',
         'i18n-responsable' : 'Responsable',
         'i18n-ciudad' : 'Ciudad',
         'i18n-buildings-empty' : 'No hay edificios registrado todavía',
@@ -254,6 +275,8 @@ arrayES = {
         'i18n-codigo_postal' : 'Código Postal',
         'i18n-fax' : 'Fax',
         'i18n-del-building-confirm' : '¿Está seguro que desea eliminar este edificio, así como los elementos asociados? La acción no será reversible',
+        'i18n-edit-building' : 'Editar Edificio',
+        'i18n-search-building' : 'Buscar Edificio',
 
         // MODAL
             // Campos Modal
@@ -275,6 +298,7 @@ arrayES = {
             'm-fax' : ' Fax ',
             'm-responsable' : ' Responsable ',
             'm-foto_edificio' : ' Foto Edificio ',
+            'm-edificio_id' : ' ID Edificio ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',
@@ -285,4 +309,6 @@ arrayES = {
             'i18n-numbers-format' : 'sólo puede contener números',
             'i18n-wrong-enum' : 'tiene un valor no contemplado',
             'i18n-ext-not-allowed' : 'tiene una extensión no permitida',
+            'i18n-cp-format' : 'debe ser un número de 5 dígitos',
+            'i18n-letters-numbers-accents-spaces' : 'sólo puede contener letras, números acentos y espacios',
 }
