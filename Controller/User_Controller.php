@@ -14,7 +14,7 @@ class User {
             include './View/Users/Show_Users_View.php';
             new Show_Users($feedback['resource']);
         } else {
-            new Message($feedback['code'],'Portal','deshboard');
+            new Message($feedback['code'],'Panel','deshboard');
         }
 
     }
@@ -29,7 +29,7 @@ class User {
             include_once './View/Users/Add_User_View.php';
             new Add_User();
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -39,7 +39,7 @@ class User {
             $feedback = $user_service->ADD();
             new Message($feedback['code'],'User','show');
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -54,7 +54,7 @@ class User {
                 new Message($feedback['code'],'User','show');
             }
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -64,7 +64,7 @@ class User {
             $feedback = $user_service->DELETE();
             new Message($feedback['code'], 'User','show');
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -79,7 +79,7 @@ class User {
                 new Message($feedback['code'], 'User', 'show');
             }
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -89,7 +89,7 @@ class User {
             $feedback = $user_service->EDIT();
             new Message($feedback['code'],'User','show');
         } else {
-            new Message('FRB_ACCS', 'Portal', 'deshboard');
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
         }
     }
 
@@ -100,14 +100,14 @@ class User {
             include './View/Users/Profile_View.php';
             new Profile($feedback['resource']);
         } else {
-            new Message($feedback['code'], 'Portal', 'deshboard');
+            new Message($feedback['code'], 'Panel', 'deshboard');
         }
     }
 
     function editProfile() {
         $user_service = new User_Service();
         $feedback = $user_service->editProfile();
-        new Message($feedback['code'], 'Portal', 'deshboard');
+        new Message($feedback['code'], 'Panel', 'deshboard');
     }
 
     function showCurrent() {

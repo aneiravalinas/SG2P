@@ -272,6 +272,7 @@ arrayEN = {
         'i18n-del-building-confirm' : 'Are you sure you want to delete this building as well as the associated items? The action will not be reversible',
         'i18n-edit-building' : 'Edit Building',
         'i18n-search-building' : 'Search Building',
+        'i18n-view-floors' : 'Show Floors',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consult the information regarding the bulding manager',

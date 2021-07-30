@@ -45,8 +45,10 @@ CREATE TABLE PLANTA
 	`nombre` VARCHAR(40) NOT NULL,
 	`num_planta` TINYINT UNSIGNED NOT NULL,
 	`descripcion` TEXT NOT NULL,
+    `foto_planta` VARCHAR(40) NULL,
 
 	CONSTRAINT `pk_planta` PRIMARY KEY (`planta_id`),
+	CONSTRAINT `uq_edificio_num_planta` UNIQUE (`edificio_id`,`num_planta`),
 	CONSTRAINT `fk_planta_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`) ON DELETE CASCADE
 );
 
@@ -239,8 +241,16 @@ CREATE TABLE NOTIFICACION
 
 
 
-INSERT INTO USUARIO (`username`, `dni`, `password`,`rol`,`nombre`,`apellidos`,`email`,`telefono`,`foto_perfil`)
-VALUES ('sg2padmin','14197701P','7a25b0bc04e77a2f7453dd021168cdc2','administrador','admin','adminsurname','admin@email.es','666666666','default.jpg');
+INSERT INTO USUARIO (`username`, `dni`, `password`,`rol`,`nombre`,`apellidos`,`email`,`telefono`,`foto_perfil`) VALUES
+('sg2padmin','14197701P','7a25b0bc04e77a2f7453dd021168cdc2','administrador','admin','adminsurname','admin@email.es','666666666','default.jpg'),
+('sg2porg','84001360R','7a25b0bc04e77a2f7453dd021168cdc2','organizacion','rorganizacion','rorganizacion','rorg@email.es','666666667','default.jpg'),
+('sg2ped','67453966A','7a25b0bc04e77a2f7453dd021168cdc2','edificio','redificio','redificio','red@email.es','666666668','default.jpg'),
+('sg2ped2','53147657Q','7a25b0bc04e77a2f7453dd021168cdc2','edificio','redificioo','redificioo','red2@email.es','666666669','default.jpg');
+
+INSERT INTO EDIFICIO (`edificio_id`, `username`, `nombre`, `calle`, `ciudad`, `provincia`, `codigo_postal`, `telefono`, `foto_edificio`) VALUES
+(1,'sg2ped','Edificio Uno','Calle ejemplo 1','Ourense','Ourense','36687','987678765','aeronautica_6101edf994473.jpg'),
+(2,'sg2ped2','Edificio Dos','Calle ejemplo 2','Ourense','Ourense','36687','987678766','historia_6101edc4bc6f0.jpg'),
+(3,'sg2ped','Edificio Tres','Calle ejemplo 3','Ourense','Ourense','36687','987678767','turismo_6101ee2697024.jpg');
 
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';

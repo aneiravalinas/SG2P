@@ -15,10 +15,10 @@ class Building {
                 include_once './View/Buildings/Show_Buildings_View.php';
                 new Show_Buildings($feedback['resource']);
             } else {
-                new Message($feedback['code'],'Portal','deshboard');
+                new Message($feedback['code'],'Panel','deshboard');
             }
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -33,7 +33,7 @@ class Building {
                 new Message($feedback['code'],'Building','show');
             }
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -43,7 +43,7 @@ class Building {
             $feedback = $building_service->ADD();
             new Message($feedback['code'],'Building','show');
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -58,7 +58,7 @@ class Building {
                 new Message($feedback['code'],'Building','show');
             }
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -68,7 +68,7 @@ class Building {
             $feedback = $building_service->DELETE();
             new Message($feedback['code'],'Building','show');
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -83,7 +83,7 @@ class Building {
                 new Message($feedback['code'],'Building','show');
             }
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -93,7 +93,7 @@ class Building {
             $feedback = $building_service->EDIT();
             new Message($feedback['code'],'Building','show');
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -108,7 +108,7 @@ class Building {
                 new Message($feedback['code'],'Building','show');
             }
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -123,7 +123,7 @@ class Building {
                 new Message($feedback['code'],'Building','show');
             }
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 
@@ -138,7 +138,7 @@ class Building {
                 new Message($feedback['code'],'Building','show');
             }
         } else {
-            new Message('FRB_ACCS','Portal','deshboard');
+            new Message('FRB_ACCS','Panel','deshboard');
         }
     }
 }

@@ -277,6 +277,7 @@ arrayES = {
         'i18n-del-building-confirm' : '¿Está seguro que desea eliminar este edificio, así como los elementos asociados? La acción no será reversible',
         'i18n-edit-building' : 'Editar Edificio',
         'i18n-search-building' : 'Buscar Edificio',
+        'i18n-view-floors' : 'Ver Plantas',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consulta la información relativa al responsable del edificio',

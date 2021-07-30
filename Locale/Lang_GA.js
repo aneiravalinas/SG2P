@@ -273,6 +273,7 @@ arrayGA = {
         'i18n-del-building-confirm' : '¿Está seguro de que quere eliminar este edificio, así como os elementos asociados? A acción non será reversible',
         'i18n-edit-building' : 'Editar Edificio',
         'i18n-search-building' : 'Buscar Edificio',
+        'i18n-view-floors' : 'Ver Plantas',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consulta a información relativa ó responsable do edificio',

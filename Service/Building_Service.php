@@ -259,13 +259,15 @@ class Building_Service extends Building_Validation {
 
         $this->feedback = $this->seekByBuildingID();
         if($this->feedback['ok']) {
-            $building = $this->feedback['resource'];
-            if($building['username'] != getUser()) {
-                $this->feedback['ok'] = false;
-                $this->feedback['code'] = 'BLD_CURRNT_MANG_KO';
-                $this->feedback['resource'] = array();
-            } else {
-                $this->feedback['code'] = 'BLD_CURRENT_OK';
+            if(es_resp_edificio()) {
+                $building = $this->feedback['resource'];
+                if ($building['username'] != getUser()) {
+                    $this->feedback['ok'] = false;
+                    $this->feedback['code'] = 'BLD_CURRNT_MANG_KO';
+                    $this->feedback['resource'] = array();
+                } else {
+                    $this->feedback['code'] = 'BLD_CURRENT_OK';
+                }
             }
         } else if($this->feedback['code'] == 'BLDID_KO') {
             $this->feedback['code'] = 'BLD_CURRENT_KO';
