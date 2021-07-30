@@ -28,7 +28,24 @@ class Floor_Model extends Abstract_Model {
     }
 
     function ADD() {
-        // TODO: Implement ADD() method.
+        $this->query = "
+            INSERT INTO PLANTA (
+                            edificio_id,
+                            nombre,
+                            num_planta,
+                            descripcion,
+                            foto_planta
+                ) VALUES (
+                          '$this->edificio_id',
+                          '$this->nombre',
+                          '$this->num_planta',
+                          '$this->descripcion',
+                          '$this->foto_planta'
+                );
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function EDIT() {
@@ -55,6 +72,19 @@ class Floor_Model extends Abstract_Model {
 
     function seek() {
         // TODO: Implement seek() method.
+    }
+
+    function seekNumPlanta() {
+        $this->query = "
+            SELECT *
+            FROM PLANTA
+            WHERE
+                num_planta = '$this->num_planta' AND
+                edificio_id = '$this->edificio_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
 

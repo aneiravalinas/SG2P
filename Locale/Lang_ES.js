@@ -124,6 +124,24 @@ arrayES = {
         'MANG_EXST' : 'El Responsable existe',
         'MANG_KO' : 'Error al consultar al responsable',
 
+    // PLANTAS
+
+        // SEARCH
+        'FLR_SRCH_NT_ALLOWED' : 'No dispone de permisos para buscar plantas en este edificio',
+        'FLR_SRCH_OK' : 'Búsqueda de plantas Ok',
+        'FLR_SRCH_KO' : 'Error al consultar las plantas',
+
+        // ADD
+        'FLR_ADD_OK' : 'La planta se ha añadido correctamente',
+        'FLR_ADD_KO' : 'Error al añadir la planta',
+
+        // Existe numero de planta en un edificio
+        'FLR_NUM_EXST' : 'Ya existe una planta con el número de planta indicando en este edificio',
+        'NUM_PLNT_EXST_KO' : 'Error al consultar por número de planta',
+
+        // Subir foto planta
+        'FLR_PH_KO' : 'Error al subir la foto de la planta',
+
 
         // Validaciones
 
@@ -184,7 +202,7 @@ arrayES = {
             // Building Name
             'BLD_NAM_SHRT' : 'El nombre del edificio debe superar los 3 caracteres',
             'BLD_NAM_LRG' : 'El nombre del edificio no debe superar los 60 caracteres',
-            'BLD_NAM_FRMT' : 'El nombre del edifico sólo puede contener caracteres alfanuméricos, espacios y números',
+            'BLD_NAM_FRMT' : 'El nombre del edifico sólo puede contener caracteres alfanuméricos, espacios, números y acentos',
 
             // Calle
             'CALLE_SHRT' : 'La calle debe superar los 8 caracteres',
@@ -210,6 +228,29 @@ arrayES = {
             // Foto Edificio
             'BLD_PH_EXT' : 'La extensión de la foto del edificio no está permitida',
             'BLD_PH_FRMT' : 'El nombre de la foto del edificio sólo puede contener letras, números y guiones',
+
+            // Nombre Planta
+            'FLR_NAM_SHRT' : 'El nombre de la planta debe superar los 3 caracteres',
+            'FLR_NAM_LRG' : 'El nombre de la planta no debe superar los 40 caracteres',
+            'FLR_NAM_FRMT' : 'El nombre de la planta sólo puede contener caracteres alfanuméricos, espacios, números y acentos',
+
+            // Número de Planta
+            'NUM_FLOOR_EMPT' : 'El número de planta no puede ser vacío',
+            'NUM_FLOOR_LRG': 'El número de planta debe ser un número de 1 o 2 dígitos',
+            'NUM_FLOOR_NOT_NUMERIC' : 'El número de planta debe ser un número',
+
+            // Descripción
+            'DESC_EMPTY' : 'El campo descripción no puede ser vacío',
+            'DESC_FRMT' : 'El campo descripción contiene caracteres no permitidos',
+
+            // Foto Planta
+            'FLR_PH_EXT' : 'La extensión de la foto de la planta no está permitida',
+            'FLR_PH_FRMT' : 'El nombre de la foto de la planta sólo puede contener letras, números y guiones',
+
+            // Planta ID
+            'FLR_ID_EMPT' : 'El ID de planta no puede ser vacío',
+            'FLR_ID_NOT_NUMERIC' : 'El ID de planta debe ser numérico',
+
 
 
 
@@ -279,6 +320,14 @@ arrayES = {
         'i18n-search-building' : 'Buscar Edificio',
         'i18n-view-floors' : 'Ver Plantas',
 
+        // FlOORS VIEWS
+        'i18n-floors' : 'Plantas',
+        'i18n-planta_id' : 'ID Planta',
+        'i18n-num_planta' : 'Número de Planta',
+        'i18n-floors-empty' : 'Este edificio no tiene plantas registradas todavía',
+        'i18n-add-floor' : 'Añadir Planta',
+        'i18n-descripcion' : 'Descripción',
+
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consulta la información relativa al responsable del edificio',
         'i18n-contact' : 'Contacto',
@@ -305,6 +354,9 @@ arrayES = {
             'm-responsable' : ' Responsable ',
             'm-foto_edificio' : ' Foto Edificio ',
             'm-edificio_id' : ' ID Edificio ',
+            'm-num_planta' : ' Número de Planta ',
+            'm-foto_planta' : ' Foto Planta ',
+            'm-descripcion' : ' Descripción ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',
@@ -317,4 +369,5 @@ arrayES = {
             'i18n-ext-not-allowed' : 'tiene una extensión no permitida',
             'i18n-cp-format' : 'debe ser un número de 5 dígitos',
             'i18n-letters-numbers-accents-spaces' : 'sólo puede contener letras, números acentos y espacios',
+            'i18n-chars-not_allow' : 'contiene caracteres no permitidos',
 }

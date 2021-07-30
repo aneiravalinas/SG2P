@@ -121,6 +121,24 @@ arrayEN = {
         'MANG_EXST' : 'The building manager exist',
         'MANG_KO' : 'Error when consulting the building manager',
 
+    // PLANTAS
+
+        // SEARCH
+        'FLR_SRCH_NT_ALLOWED' : 'You do not have the necessary permits to search for plants in this building',
+        'FLR_SRCH_OK' : 'Plant search Ok',
+        'FLR_SRCH_KO' : 'Failed to query plants',
+
+        // ADD
+        'FLR_ADD_OK' : 'The floor has been added successfully',
+        'FLR_ADD_KO' : 'Failed to add floor',
+
+        // Existe numero de planta en un edificio
+        'FLR_NUM_EXST' : 'There is already a floor with the floor number indicating in this building',
+        'NUM_PLNT_EXST_KO' : 'Error when consulting by floor number',
+
+        // Subir foto planta
+        'FLR_PH_KO' : 'Error uploading the floor photo',
+
         // Validaciones
 
             // Nombre de Usuario
@@ -179,7 +197,7 @@ arrayEN = {
             // Building Name
             'BLD_NAM_SHRT' : 'The name of the building must exceed 3 characters',
             'BLD_NAM_LRG' : 'The name of the building must not exceed 60 characters',
-            'BLD_NAM_FRMT' : 'The building name can only contain alphanumeric characters, spaces and numbers',
+            'BLD_NAM_FRMT' : 'The building name can only contain alphanumeric characters, spaces, numbers and accents',
 
             // Calle
             'CALLE_SHRT' : 'The street must exceed 8 characters',
@@ -205,6 +223,28 @@ arrayEN = {
             // Foto Edificio
             'BLD_PH_EXT' : 'The extension of the building photo is not allowed',
             'BLD_PH_FRMT' : 'The building photo name can only contain letters, numbers and hyphens',
+
+            // Nombre Planta
+            'FLR_NAM_SHRT' : 'The name of the floor must exceed 3 characters',
+            'FLR_NAM_LRG' : 'The name of the floor must not exceed 40 characters',
+            'FLR_NAM_FRMT' : 'The floor name can only contain alphanumeric characters, spaces, numbers and accents',
+
+            // Número de Planta
+            'NUM_FLOOR_EMPT' : 'The floor number cannot be empty',
+            'NUM_FLOOR_LRG': 'The floor number must be a 1 or 2 digit number',
+            'NUM_FLOOR_NOT_NUMERIC' : 'The floor number must be a number',
+
+            // Descripción
+            'DESC_EMPTY' : 'The description field cannot be empty',
+            'DESC_FRMT' : 'Description field contains illegal characters',
+
+            // Foto Planta
+            'FLR_PH_EXT' : 'The extension of the floor photo is not allowed',
+            'FLR_PH_FRMT' : 'The name of the floor photo can only contain letters, numbers and hyphens',
+
+            // Planta ID
+            'FLR_ID_EMPT' : 'Floor ID cannot be empty',
+            'FLR_ID_NOT_NUMERIC' : 'Floor ID must be numeric',
 
 
 
@@ -274,8 +314,16 @@ arrayEN = {
         'i18n-search-building' : 'Search Building',
         'i18n-view-floors' : 'Show Floors',
 
+        // FlOORS VIEWS
+        'i18n-floors' : 'Floors',
+        'i18n-planta_id' : 'Floor ID',
+        'i18n-num_planta' : 'Floor number',
+        'i18n-floors-empty' : 'This building does not have registered floors yet',
+        'i18n-add-floor' : 'Add Building',
+        'i18n-descripcion' : 'Description',
+
         // PORTAL VIEWS
-        'i18n-resp-info' : 'Consult the information regarding the bulding manager',
+        'i18n-resp-info' : 'Consult the information regarding the building manager',
         'i18n-contact' : 'Contact',
         'i18n-address' : 'Address',
 
@@ -301,6 +349,9 @@ arrayEN = {
             'm-responsable' : ' Manager ',
             'm-foto_edificio' : ' Building Photo ',
             'm-edificio_id' : ' Building ID ',
+            'm-num_planta' : ' Floor Number ',
+            'm-foto_planta' : ' Floor Photo ',
+            'm-descripcion' : ' Description ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',
@@ -313,4 +364,5 @@ arrayEN = {
             'i18n-ext-not-allowed' : 'has a not allowed extension',
             'i18n-cp-format' : 'must be a 5 digit number',
             'i18n-letters-numbers-accents-spaces' : 'can only contain letters, numbers, accents, and spaces',
+            'i18n-chars-not_allow' : 'contains illegal characters',
 }

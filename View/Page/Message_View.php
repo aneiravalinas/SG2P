@@ -5,11 +5,13 @@ class Message {
     var $msg;
     var $controller;
     var $action;
+    var $params;
 
-    function __construct($msg, $controller, $action) {
+    function __construct($msg, $controller, $action, $params = array()) {
         $this->msg = $msg;
         $this->controller = $controller;
         $this->action = $action;
+        $this->params = $params;
         $this->render();
     }
 
@@ -38,6 +40,9 @@ class Message {
                             "crearform('formenviar','post');
                              insertacampo(document.formenviar,'action','<?php echo $this->action; ?>');
                              insertacampo(document.formenviar,'controller','<?php echo $this->controller; ?>');
+                             <?php foreach($this->params as $field => $value) :?>
+                                insertacampo(document.formenviar,'<?php echo $field; ?>', '<?php echo $value; ?>');
+                             <?php endforeach; ?>
                              enviaform(document.formenviar);">Volver</a>
                     </div>
                 </div>

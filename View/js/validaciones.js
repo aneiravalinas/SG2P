@@ -224,33 +224,8 @@ function check_pattern(element, pattern) {
     }
 }
 
-function check_only_numbers(element, size) {
-    var correct = true;
-    var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
-    if(value.length > size) {
-        openModal(name,'i18n-max-size');
-        correct = false;
-    }
-
-    var pattern = /^[0-9]+$/;
-    if(!pattern.test(value)) {
-        openModal(name,'i18n-numbers-format');
-        correct = false;
-    }
-
-    if(correct) {
-        document.getElementById(element).style.borderColor = 'green';
-        return true;
-    } else {
-        document.getElementById(element).style.borderColor = 'red';
-        return false;
-    }
-}
-
-
-function check_only_numbers(element) {
+function check_only_numbers(element, size=null) {
     var correct = true;
     var value = document.getElementById(element).value;
     var name = document.getElementById(element).name;
@@ -259,6 +234,13 @@ function check_only_numbers(element) {
     if(!pattern.test(value)) {
         openModal(name,'i18n-numbers-format');
         correct = false;
+    }
+
+    if(size != null) {
+        if(value.length > size) {
+            openModal(name,'i18n-max-size');
+            correct = false;
+        }
     }
 
     if(correct) {
@@ -302,6 +284,33 @@ function check_letters_numbers_accents_spaces(element, size) {
     if(!pattern.test(value)) {
         openModal(name,'i18n-letters-numbers-accents-spaces');
         correct = false;
+    }
+
+    if(correct) {
+        document.getElementById(element).style.borderColor = 'green';
+        return true;
+    } else {
+        document.getElementById(element).style.borderColor = 'red';
+        return false;
+    }
+}
+
+function check_text(element,size=null) {
+    var correct = true;
+    var value = document.getElementById(element).value;
+    var name = document.getElementById(element).name;
+
+    var pattern = /^[./&ª\-_ºA-z0-9À-ú\s\t\n\u00f1\u00d1]+$/g;
+    if(!pattern.test(value)) {
+        openModal(name,'i18n-chars-not_allow');
+        correct = false;
+    }
+
+    if(size != null) {
+        if(value.length > size) {
+            openModal(name,'i18n-max-size');
+            correct = false;
+        }
     }
 
     if(correct) {

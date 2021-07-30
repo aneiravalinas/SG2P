@@ -38,7 +38,11 @@ class Floor_Service extends Floor_Validation {
     }
 
     function SEARCH() {
-        // TODO: Validar Atributos Search.
+        $validation = $this->validar_atributos_search();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
         $this->feedback = $this->seekByBuildingID();
         if(!$this->feedback['ok']) {
             return $this->feedback;
@@ -53,14 +57,76 @@ class Floor_Service extends Floor_Validation {
         }
 
         $this->feedback = $this->floor_entity->SEARCH();
+
         if($this->feedback['ok']) {
-            $this->feedback['bname'] = $building['nombre'];
             $this->feedback['code'] = 'FLR_SRCH_OK';
         } else if($this->feedback['code'] == 'QRY_KO') {
             $this->feedback['code'] = 'FLR_SRCH_KO';
         }
 
+        $this->feedback['building'] = array('edificio_id' => $building['edificio_id'], 'nombre' => $building['nombre']);
+
         return $this->feedback;
+    }
+
+    function addForm() {
+        $this->feedback = $this->seekByBuildingID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $building = $this->feedback['resource'];
+        $this->feedback['building'] = array('edificio_id' => $building['edificio_id'], 'nombre' => $building['nombre']);
+        $this->feedback['resource'] = array();
+        return $this->feedback;
+    }
+
+    function ADD() {
+        $validation = $this->validar_atributos_add();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByBuildingID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $building = $this->feedback['resource'];
+
+        $this->feedback = $this->num_planta_not_exists();
+        if(!$this->feedback['ok']) {
+            $this->feedback['building'] = array('edificio_id' => $building['edificio_id']);
+            return $this->feedback;
+        }
+
+        if($this->foto_planta != '') {
+            $this->feedback = $this->uploader->uploadPhoto(floor_photos_path, 'foto_planta');
+            if(!$this->feedback['ok']) {
+                $this->feedback['building'] = array('edificio_id' => $building['edificio_id']);
+                $this->feedback['code'] = 'FLR_PH_KO';
+                return $this->feedback;
+            } else{
+                $this->foto_planta = $this->feedback['resource'];
+                $this->floor_entity->foto_planta = $this->foto_planta;
+            }
+        } else {
+            $this->floor_entity->foto_planta = default_floor_photo;
+        }
+
+        $this->feedback = $this->floor_entity->ADD();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'FLR_ADD_OK';
+        } else {
+            if($this->foto_planta != default_floor_photo) {
+                $this->uploader->deletePhoto(floor_photos_path,$this->foto_planta);
+            }
+            $this->feedback['code'] = 'FLR_ADD_KO';
+        }
+
+        $this->feedback['building'] = array('edificio_id' => $building['edificio_id']);
+        return $this->feedback;
+
     }
 
     function seekByBuildingID() {
@@ -76,4 +142,30 @@ class Floor_Service extends Floor_Validation {
 
         return $this->feedback;
     }
+
+
+    function num_planta_not_exists() {
+        $this->feedback = $this->floor_entity->seekNumPlanta();
+        if($this->feedback['ok']) {
+            if($this->feedback['code'] != 'QRY_EMPT') {
+                $this->feedback['code'] = 'FLR_NUM_EXST';
+                $this->feedback['ok'] = false;
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'NUM_PLNT_EXST_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    /*function fillReturn($controller, $action, $params = array()) {
+        $this->feedback['return']['controller'] = $controller;
+        $this->feedback['return']['action'] = $action;
+        $this->feedback['return']['params'] = array();
+        foreach($params as $param=>$value) {
+            array_push($this->feedback['return']['params'], array($param => $value));
+        }
+
+        return $this->feedback;
+    }*/
 }

@@ -32,6 +32,7 @@
     <script type="text/javascript" src="./View/js/validaciones.js"></script>
     <script type="text/javascript" src="./View/js/validaciones_Usuario.js"></script>
     <script type="text/javascript" src="./View/js/validaciones_Edificio.js"></script>
+    <script text="text/javascript" src="./View/js/validaciones_Planta.js"></script>
     <script type="text/javascript" src="./View/js/md5.js"></script>
 
 </head>

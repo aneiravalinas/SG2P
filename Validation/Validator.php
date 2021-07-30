@@ -198,4 +198,12 @@ abstract class Validator {
         }
     }
 
+    function comprobar_textos($string) {
+        if(preg_match('/^[.\/&ª\-_ºA-z0-9À-úñÑ\s\t\n]+$/',$string)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

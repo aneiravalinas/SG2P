@@ -2,11 +2,11 @@
 
 class Show_Floors {
     var $floors;
-    var $building_name;
+    var $building;
 
-    function __construct($floors, $building_name) {
+    function __construct($floors, $building) {
         $this->floors = $floors;
-        $this->building_name = $building_name;
+        $this->building = $building;
         $this->render();
     }
 
@@ -20,8 +20,8 @@ class Show_Floors {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1 class="mb-4">Plantas</h1>
-                        <h2><?php echo $this->building_name ?></h2>
+                        <h1><?php echo $this->building['nombre'] ?></h1>
+                        <h2 class="mb-4 i18n-floors">Plantas</h2>
                     </div>
                 </div>
 
@@ -30,14 +30,16 @@ class Show_Floors {
                         <div>
                             <a type="button" onclick="
                                     crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'controller','Building');
+                                    insertacampo(document.formenviar,'edificio_id','<?php echo $this->building['edificio_id'] ?>');
+                                    insertacampo(document.formenviar,'controller','Floor');
                                     insertacampo(document.formenviar,'action','searchForm');
                                     enviaform(document.formenviar);">
                                 <span class="iconify option_button" data-icon="fluent:search-square-24-filled" data-inline="false"></span>
                             </a>
                             <a type="button" onclick="
                                     crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'controller','Building');
+                                    insertacampo(document.formenviar,'edificio_id','<?php echo $this->building['edificio_id'] ?>');
+                                    insertacampo(document.formenviar,'controller','Floor');
                                     insertacampo(document.formenviar,'action','addForm');
                                     enviaform(document.formenviar);">
                                 <span class="iconify option_button" data-icon="gridicons-add" data-inline="false"></span>
@@ -51,9 +53,9 @@ class Show_Floors {
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">ID Planta</th>
+                                <th scope="col" class="i18n-planta_id">ID Planta</th>
                                 <th scope="col" class="i18n-nombre">Nombre</th>
-                                <th scope="col">Número de Planta</th>
+                                <th scope="col" class="i18n-num_planta">Número de Planta</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -113,7 +115,7 @@ class Show_Floors {
                             <?php if(empty($this->floors)) :?>
                                 <tr>
                                     <td colspan="4" class="text-center">
-                                        <span>No hay plantas registradas</span>
+                                        <span class="i18n-floors-empty">No hay plantas registradas</span>
                                     </td>
                                 </tr>
                             <?php endif; ?>
