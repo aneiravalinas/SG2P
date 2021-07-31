@@ -141,6 +141,11 @@ class Building_Service extends Building_Validation {
             return $this->feedback;
         }
 
+        $this->feedback = $this->has_not_plans();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
         $this->feedback = $this->building_entity->DELETE();
         if($this->feedback['ok']) {
             if($building['foto_edificio'] != default_building_photo) {
@@ -422,7 +427,19 @@ class Building_Service extends Building_Validation {
     }
 
     function has_not_plans() {
+        include_once './Model/Build_Plan_Model.php';
+        $build_plan_model = new Build_Plan_Model();
+        $this->feedback = $build_plan_model->searchByBuildingID();
+        if($this->feedback['ok']) {
+            if($this->feedback['code'] != 'QRY_EMPT') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'BLD_PLN_EXST';
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'BLD_SRCH_PLN_KO';
+        }
 
+        return $this->feedback;
     }
 
 }

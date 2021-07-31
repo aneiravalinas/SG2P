@@ -121,6 +121,14 @@ arrayEN = {
         'MANG_EXST' : 'The building manager exist',
         'MANG_KO' : 'Error when consulting the building manager',
 
+        // Búsqueda de Plantas del Edificio
+        'BLD_FLR_EXST' : 'The building cannot be deleted as long as it has associated floors',
+        'BLD_SRCH_FLR_KO' : 'Error when consulting the building floors',
+
+        // Búsqueda de Planes asignados al Edificio
+        'BLD_PLN_EXST' : 'Building cannot be deleted while it has assigned plans',
+        'BLD_SRCH_PLN_KO': 'Error when consulting the plans associated with the building',
+
     // PLANTAS
 
         // SEARCH

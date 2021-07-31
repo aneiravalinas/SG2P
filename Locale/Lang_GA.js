@@ -121,6 +121,14 @@ arrayGA = {
         'MANG_EXST' : 'O Responsable existe',
         'MANG_KO' : 'Error ó consultar por responsable',
 
+        // Búsqueda de Plantas del Edificio
+        'BLD_FLR_EXST' : 'Non se pode eliminar o edificio mentras teña plantas asociadas',
+        'BLD_SRCH_FLR_KO' : 'Error ó consultar as plantas do edificio',
+
+        // Búsqueda de Planes asignados al Edificio
+        'BLD_PLN_EXST' : 'Non se pode eliminar o edificio mentras teña plans asignados',
+        'BLD_SRCH_PLN_KO': 'Error ó consultar os plan asignados o edificio',
+
     // PLANTAS
 
         // SEARCH
