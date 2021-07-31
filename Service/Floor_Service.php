@@ -38,6 +38,7 @@ class Floor_Service extends Floor_Validation {
     }
 
     function SEARCH() {
+
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
             return $validation;
@@ -66,6 +67,46 @@ class Floor_Service extends Floor_Validation {
 
         $this->feedback['building'] = array('edificio_id' => $building['edificio_id'], 'nombre' => $building['nombre']);
 
+        return $this->feedback;
+    }
+
+
+    function seek() {
+        $validation = $this->validar_EDIFICIO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $validation = $this->validar_PLANTA_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByBuildingID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $building = $this->feedback['resource'];
+        if(es_resp_edificio() && $building['username'] != getUser()) {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'FLR_SEEK_NOT_ALLOWED';
+            return $this->feedback;
+        }
+
+        $this->feedback = $this->floor_entity->seek();
+        if($this->feedback['ok']) {
+            if($this->feedback['code'] == 'QRY_EMPT') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'FLRID_NOT_EXST';
+            } else {
+                $this->feedback['code'] = 'FLR_SEEK_OK';
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'FLR_SEEK_KO';
+        }
+
+        $this->feedback['building'] = array('edificio_id' => $building['edificio_id'], 'nombre' => $building['nombre']);
         return $this->feedback;
     }
 
@@ -129,6 +170,60 @@ class Floor_Service extends Floor_Validation {
 
     }
 
+    function deleteForm() {
+        $validation = $this->validar_PLANTA_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByFloorID();
+        if($this->feedback['ok']) {
+            $this->feedback['building'] = $this->feedback['resource']['edificio_id'];
+        }
+
+        return $this->feedback;
+    }
+
+    function DELETE() {
+        $validation = $this->validar_PLANTA_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByFloorID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $floor = $this->feedback['resource'];
+
+        $this->feedback = $this->has_not_spaces();
+        if(!$this->feedback['ok']) {
+            $this->feedback['building'] = array('edificio_id' => $floor['edificio_id']);
+            return $this->feedback;
+        }
+
+        $this->feedback = $this->has_not_routes();
+        if(!$this->feedback['ok']) {
+            $this->feedback['building'] = array('edificio_id' => $floor['edificio_id']);
+            return $this->feedback;
+        }
+
+        $this->feedback = $this->floor_entity->DELETE();
+        if($this->feedback['ok']) {
+            if($floor['foto_planta'] != default_floor_photo) {
+                $this->uploader->deletePhoto(floor_photos_path, $floor['foto_planta']);
+            }
+            $this->feedback['code'] = 'FLR_DEL_OK';
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'FLR_DEL_KO';
+        }
+
+        $this->feedback['building'] = array('edificio_id' => $floor['edificio_id']);
+        return $this->feedback;
+    }
+
+
     function seekByBuildingID() {
         $this->feedback = $this->building_entity->seek();
         if($this->feedback['ok']) {
@@ -158,14 +253,50 @@ class Floor_Service extends Floor_Validation {
         return $this->feedback;
     }
 
-    /*function fillReturn($controller, $action, $params = array()) {
-        $this->feedback['return']['controller'] = $controller;
-        $this->feedback['return']['action'] = $action;
-        $this->feedback['return']['params'] = array();
-        foreach($params as $param=>$value) {
-            array_push($this->feedback['return']['params'], array($param => $value));
+    function seekByFloorID() {
+        $this->feedback = $this->floor_entity->seekByFloorID();
+        if($this->feedback['ok']) {
+            if($this->feedback['code'] == 'QRY_EMPT') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'FLRID_NOT_EXST';
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'FLRID_KO';
         }
 
         return $this->feedback;
-    }*/
+    }
+
+    function has_not_spaces() {
+        include_once './Model/Space_Model.php';
+        $space_model = new Space_Model();
+        $this->feedback = $space_model->searchByPlantaID();
+        if($this->feedback['ok']) {
+            if($this->feedback['code'] != 'QRY_EMPT') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'FLR_SPC_EXST';
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'FLR_SPC_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function has_not_routes() {
+        include_once './Model/Imp_Route_Model.php';
+        $impl_route_model = new Impl_Route_Model();
+        $this->feedback = $impl_route_model->searchByPlantaID();
+        if($this->feedback['ok']) {
+            if($this->feedback['code'] != 'QRY_EMPT') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'FLR_RT_EXST';
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'FLR_RT_KO';
+        }
+
+        return $this->feedback;
+    }
+
 }

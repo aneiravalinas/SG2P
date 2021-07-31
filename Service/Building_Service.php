@@ -136,6 +136,11 @@ class Building_Service extends Building_Validation {
 
         $building = $this->feedback['resource'];
 
+        $this->feedback = $this->has_not_floors();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
         $this->feedback = $this->building_entity->DELETE();
         if($this->feedback['ok']) {
             if($building['foto_edificio'] != default_building_photo) {
@@ -399,5 +404,25 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+
+    function has_not_floors() {
+        include_once './Model/Floor_Model.php';
+        $floor_model = new Floor_Model();
+        $this->feedback = $floor_model->searchByBuildingID();
+        if($this->feedback['ok']) {
+            if($this->feedback['code'] != 'QRY_EMPT') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'BLD_FLR_EXST';
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'BLD_SRCH_FLR_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function has_not_plans() {
+
+    }
 
 }

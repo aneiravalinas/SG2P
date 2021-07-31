@@ -18,7 +18,7 @@ class ShowCurrent_Building {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1 class="mb-4 i18n-edit-building">Editar Edificio</h1>
+                        <h1 class="mb-4 i18n-building-details">Editar Edificio</h1>
                     </div>
 
                     <div class="row justify-content-center">

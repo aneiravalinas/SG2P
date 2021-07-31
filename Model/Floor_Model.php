@@ -53,7 +53,13 @@ class Floor_Model extends Abstract_Model {
     }
 
     function DELETE() {
-        // TODO: Implement DELETE() method.
+        $this->query = "
+            DELETE FROM PLANTA
+            WHERE planta_id = '$this->planta_id';
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function SEARCH() {
@@ -71,7 +77,25 @@ class Floor_Model extends Abstract_Model {
     }
 
     function seek() {
-        // TODO: Implement seek() method.
+        $this->query = "
+            SELECT * FROM PLANTA
+            WHERE 
+                planta_id = '$this->planta_id' AND
+                edificio_id = '$this->edificio_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
+    }
+
+    function seekByFloorID() {
+        $this->query = "
+            SELECT * FROM PLANTA
+            WHERE planta_id = '$this->planta_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
     function seekNumPlanta() {
@@ -87,5 +111,14 @@ class Floor_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function searchByBuildingID() {
+        $this->query = "
+            SELECT * FROM PLANTA
+            WHERE edificio_id = '$this->edificio_id';
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
 
 }

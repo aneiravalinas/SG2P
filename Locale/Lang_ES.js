@@ -135,12 +135,34 @@ arrayES = {
         'FLR_ADD_OK' : 'La planta se ha añadido correctamente',
         'FLR_ADD_KO' : 'Error al añadir la planta',
 
+        // DELETE
+        'FLR_DEL_OK' : 'La planta se ha eliminado con éxito',
+        'FLR_DEL_KO' : 'Error al eliminar la planta',
+
+        // SEEK
+        'FLR_SEEK_NOT_ALLOWED' : 'No dispone de los permisos necesarios para consultar los detalles de esta planta',
+        'FLR_SEEK_OK' : 'La consulta de los detalles de la planta se ha realizado correctamente',
+        'FLR_SEEK_KO' : 'Error al consultar los detalles de la planta',
+
+
         // Existe numero de planta en un edificio
         'FLR_NUM_EXST' : 'Ya existe una planta con el número de planta indicando en este edificio',
         'NUM_PLNT_EXST_KO' : 'Error al consultar por número de planta',
 
         // Subir foto planta
         'FLR_PH_KO' : 'Error al subir la foto de la planta',
+
+        // Consulta por Planta
+        'FLRID_NOT_EXST' : 'La Planta no existe',
+        'FLRID_KO' : 'Error al consultar por ID de Planta',
+
+        // Consulta de Espacios asociados a Planta
+        'FLR_SPC_EXST' : 'No se puede eliminar la planta mientras tenga Espacios asociados',
+        'FLR_SPC_KO' : 'Error al consultar los espacios asociados a la planta',
+
+        // Consutla de Implementaciones de Rutas en Plantas
+        'FLR_RT_EXST' : 'No se puede eliminar la planta mientras tenga implementaciones de Rutas',
+        'FLR_RT_KO' : 'Error al consultar las implementaciones de rutas en la planta',
 
 
         // Validaciones
@@ -315,10 +337,11 @@ arrayES = {
         'i18n-provincia' : 'Provincia',
         'i18n-codigo_postal' : 'Código Postal',
         'i18n-fax' : 'Fax',
-        'i18n-del-building-confirm' : '¿Está seguro que desea eliminar este edificio, así como los elementos asociados? La acción no será reversible',
+        'i18n-del-building-confirm' : '¿Está seguro que desea eliminar este edificio? La acción no será reversible',
         'i18n-edit-building' : 'Editar Edificio',
         'i18n-search-building' : 'Buscar Edificio',
         'i18n-view-floors' : 'Ver Plantas',
+        'i18n-building-details' : 'Detalles del Edificio',
 
         // FlOORS VIEWS
         'i18n-floors' : 'Plantas',
@@ -327,6 +350,8 @@ arrayES = {
         'i18n-floors-empty' : 'Este edificio no tiene plantas registradas todavía',
         'i18n-add-floor' : 'Añadir Planta',
         'i18n-descripcion' : 'Descripción',
+        'i18n-details-floor' : 'Detalles de la Planta',
+        'i18n-del-floor-confirm' : '¿Está seguro de que desea eliminar esta planta? La acción no será reversible',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consulta la información relativa al responsable del edificio',

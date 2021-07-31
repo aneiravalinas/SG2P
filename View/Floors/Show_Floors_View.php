@@ -74,7 +74,8 @@ class Show_Floors {
                                                 <a class="dropdown-item i18n-details" type="button" onclick="
                                                     crearform('formenviar','post');
                                                     insertacampo(document.formenviar,'edificio_id','<?php echo $floor['edificio_id'] ?>');
-                                                    insertacampo(document.formenviar,'controller','Building');
+                                                    insertacampo(document.formenviar,'planta_id','<?php echo $floor['planta_id'] ?>');
+                                                    insertacampo(document.formenviar,'controller','Floor');
                                                     insertacampo(document.formenviar,'action','showCurrent');
                                                     enviaform(document.formenviar);">
                                                     Detalles
@@ -84,7 +85,8 @@ class Show_Floors {
                                                     <a class="dropdown-item i18n-edit" type="button" onclick="
                                                         crearform('formenviar','post');
                                                         insertacampo(document.formenviar, 'edificio_id', '<?php echo $floor['edificio_id'] ?>');
-                                                        insertacampo(document.formenviar, 'controller','Building');
+                                                        insertacampo(document.formenviar, 'planta_id','<?php echo $floor['planta_id'] ?>');
+                                                        insertacampo(document.formenviar, 'controller','Floor');
                                                         insertacampo(document.formenviar, 'action', 'editForm');
                                                         enviaform(document.formenviar);">
                                                         Editar
@@ -92,7 +94,8 @@ class Show_Floors {
                                                     <a class="dropdown-item i18n-delete" type="button" onclick="
                                                         crearform('formenviar','post');
                                                         insertacampo(document.formenviar,'edificio_id', '<?php echo $floor['edificio_id'] ?>');
-                                                        insertacampo(document.formenviar,'controller','Building');
+                                                        insertacampo(document.formenviar, 'planta_id','<?php echo $floor['planta_id'] ?>');
+                                                        insertacampo(document.formenviar,'controller','Floor');
                                                         insertacampo(document.formenviar,'action','deleteForm');
                                                         enviaform(document.formenviar);">
                                                         Eliminar

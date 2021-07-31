@@ -132,12 +132,33 @@ arrayEN = {
         'FLR_ADD_OK' : 'The floor has been added successfully',
         'FLR_ADD_KO' : 'Failed to add floor',
 
+        // DELETE
+        'FLR_DEL_OK' : 'The floor has been successfully removed',
+        'FLR_DEL_KO' : 'Failed to delete the floor',
+
+        // SEEK
+        'FLR_SEEK_NOT_ALLOWED' : 'You do not have the necessary permits to consult the details of this floor',
+        'FLR_SEEK_OK' : 'The consultation of the details of the floor has been carried out correctly',
+        'FLR_SEEK_KO' : 'Failed to query floor details',
+
         // Existe numero de planta en un edificio
         'FLR_NUM_EXST' : 'There is already a floor with the floor number indicating in this building',
         'NUM_PLNT_EXST_KO' : 'Error when consulting by floor number',
 
         // Subir foto planta
         'FLR_PH_KO' : 'Error uploading the floor photo',
+
+        // Consulta por Planta
+        'FLRID_NOT_EXST' : 'The floor does not exist',
+        'FLRID_KO' : 'Error when consulting by Floor ID',
+
+        // Consulta de Espacios asociados a Planta
+        'FLR_SPC_EXST' : 'The floor cannot be deleted as long as it has associated Spaces',
+        'FLR_SPC_KO' : 'Error when consulting the spaces associated with the floor',
+
+        // Consutla de Implementaciones de Rutas en Plantas
+        'FLR_RT_EXST' : 'Cannot delete floor while it has Route implementations',
+        'FLR_RT_KO' : 'Failed to query floor route implementations',
 
         // Validaciones
 
@@ -309,10 +330,11 @@ arrayEN = {
         'i18n-provincia' : 'Province',
         'i18n-codigo_postal' : 'Zip Code',
         'i18n-fax' : 'Fax',
-        'i18n-del-building-confirm' : 'Are you sure you want to delete this building as well as the associated items? The action will not be reversible',
+        'i18n-del-building-confirm' : 'Are you sure you want to delete this building? The action will not be reversible',
         'i18n-edit-building' : 'Edit Building',
         'i18n-search-building' : 'Search Building',
         'i18n-view-floors' : 'Show Floors',
+        'i18n-building-details' : 'Building Details',
 
         // FlOORS VIEWS
         'i18n-floors' : 'Floors',
@@ -321,6 +343,8 @@ arrayEN = {
         'i18n-floors-empty' : 'This building does not have registered floors yet',
         'i18n-add-floor' : 'Add Building',
         'i18n-descripcion' : 'Description',
+        'i18n-details-floor' : 'Floor Details',
+        'i18n-del-floor-confirm' : 'Are you sure you want to remove this floor? The action will not be reversible',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consult the information regarding the building manager',

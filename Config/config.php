@@ -5,11 +5,13 @@
     define('database', 'prevendb');
     define('test_database', 'prevendb_test');
     define('profile_photos_path', './Uploads/Profile_Photos/');
-    define('default_profile_photo', 'default.jpg');
+    define('default_profile_photo', 'default.png');
     define('building_photos_path','./Uploads/Building_Photos/');
     define('default_building_photo', 'default.png');
     define('floor_photos_path', './Uploads/Floor_Photos/');
-    define('default_floor_photo', 'floor.png');
+    define('default_floor_photo', 'default.png');
+    define('space_photos_path','Uploads/Spaces_Fotos/');
+    define('default_space_photo','default.png');
 
 ?>
 

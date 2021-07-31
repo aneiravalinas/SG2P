@@ -88,7 +88,7 @@ class Profile {
                                 <div class="col d-flex justify-content-between flex-wrap">
                                     <a class="btn-get-started i18n-back" type="button" onclick="
                                         crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','Portal');
+                                            insertacampo(document.formenviar,'controller','Panel');
                                             insertacampo(document.formenviar,'action','deshboard');
                                             enviaform(document.formenviar);">
                                         Volver
