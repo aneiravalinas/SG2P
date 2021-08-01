@@ -149,6 +149,10 @@ arrayGA = {
         'FLR_SEEK_OK' : 'A consulta dos detalles da planta realizouse correctamente',
         'FLR_SEEK_KO' : 'Error ó consultar os detalles da planta',
 
+        // EDIT
+        'FLR_EDT_OK' : 'Os datos da planta modificáronse correctamente',
+        'FLR_EDT_KO' : 'Error ó modificar os datos da planta',
+
         // Existe numero de planta en un edificio
         'FLR_NUM_EXST' : 'Xa existe unha planta con ese número neste edificio',
         'NUM_PLNT_EXST_KO' : 'Error ó consultar por número de planta',
@@ -355,6 +359,7 @@ arrayGA = {
         'i18n-details-floor' : 'Detalles da Planta',
         'i18n-del-floor-confirm' : '¿Está seguro de que desexa eliminar esta planta? A acción non será reversible',
         'i18n-search-floor' : 'Buscar Plantas',
+        'i18n-edit-floor' : 'Editar Planta',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consulta a información relativa ó responsable do edificio',

@@ -149,6 +149,10 @@ arrayEN = {
         'FLR_SEEK_OK' : 'The consultation of the details of the floor has been carried out correctly',
         'FLR_SEEK_KO' : 'Failed to query floor details',
 
+        // EDIT
+        'FLR_EDT_OK' : 'Floor data has been successfully modified',
+        'FLR_EDT_KO' : 'Error when modifying floor data',
+
         // Existe numero de planta en un edificio
         'FLR_NUM_EXST' : 'There is already a floor with the floor number indicating in this building',
         'NUM_PLNT_EXST_KO' : 'Error when consulting by floor number',
@@ -354,6 +358,7 @@ arrayEN = {
         'i18n-descripcion' : 'Description',
         'i18n-details-floor' : 'Floor Details',
         'i18n-del-floor-confirm' : 'Are you sure you want to remove this floor? The action will not be reversible',
+        'i18n-edit-floor' : 'Edit Floor',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consult the information regarding the building manager',

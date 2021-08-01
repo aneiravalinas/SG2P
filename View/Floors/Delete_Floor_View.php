@@ -2,9 +2,11 @@
 
 class Delete_Floor {
     var $floor;
+    var $building;
 
-    function __construct($floor) {
+    function __construct($floor, $building) {
         $this->floor = $floor;
+        $this->building = $building;
         $this->render();
     }
 
@@ -23,7 +25,7 @@ class Delete_Floor {
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
                         <h3 class="mb-4 i18n-del-floor-confirm">¿Está seguro que desea eliminar esta planta? El cambo no será reversible</h3>
-                        <h2><?php echo $this->floor['edificio_id'] ?> - <?php echo $this->floor['nombre'] ?></h2>
+                        <h2><?php echo $this->building['nombre'] ?> - <?php echo $this->floor['nombre'] ?></h2>
                     </div>
                 </div>
 

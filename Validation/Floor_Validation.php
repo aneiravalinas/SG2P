@@ -15,12 +15,7 @@ class Floor_Validation extends Validator {
     }
 
 
-    function validar_atributos_add() {
-        $validacion = $this->validar_EDIFICIO_ID();
-        if(!$validacion['ok']) {
-            return $validacion;
-        }
-
+    function validar_atributos() {
         $validacion = $this->validar_NOMBRE();
         if(!$validacion['ok']) {
             return $validacion;
@@ -44,10 +39,7 @@ class Floor_Validation extends Validator {
     }
 
     function validar_atributos_search() {
-        $validacion = $this->validar_EDIFICIO_ID();
-        if(!$validacion['ok']) {
-            return $validacion;
-        }
+        $validacion = $this->rellena_validation(true,'00000','PLANTA');
 
         if($this->planta_id != '') {
             $validacion = $this->validar_PLANTA_ID();

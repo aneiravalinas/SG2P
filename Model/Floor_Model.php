@@ -49,7 +49,15 @@ class Floor_Model extends Abstract_Model {
     }
 
     function EDIT() {
-        // TODO: Implement EDIT() method.
+        $this->query = "UPDATE PLANTA SET " .
+            ($this->nombre == '' ? "" : "nombre = '$this->nombre', ") .
+            ($this->num_planta == '' ? "" : "num_planta = '$this->num_planta', ") .
+            ($this->foto_planta == '' ? "" : "foto_planta = '$this->foto_planta', ") .
+            ($this->descripcion == '' ? "" : "descripcion = '$this->descripcion'") .
+            " WHERE planta_id = '$this->planta_id'";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function DELETE() {
@@ -79,24 +87,13 @@ class Floor_Model extends Abstract_Model {
     function seek() {
         $this->query = "
             SELECT * FROM PLANTA
-            WHERE 
-                planta_id = '$this->planta_id' AND
-                edificio_id = '$this->edificio_id'
-        ";
-
-        $this->get_one_result_from_query();
-        return $this->feedback;
-    }
-
-    function seekByFloorID() {
-        $this->query = "
-            SELECT * FROM PLANTA
             WHERE planta_id = '$this->planta_id'
         ";
 
         $this->get_one_result_from_query();
         return $this->feedback;
     }
+
 
     function seekNumPlanta() {
         $this->query = "

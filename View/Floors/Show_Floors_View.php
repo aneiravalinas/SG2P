@@ -73,7 +73,6 @@ class Show_Floors {
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item i18n-details" type="button" onclick="
                                                     crearform('formenviar','post');
-                                                    insertacampo(document.formenviar,'edificio_id','<?php echo $floor['edificio_id'] ?>');
                                                     insertacampo(document.formenviar,'planta_id','<?php echo $floor['planta_id'] ?>');
                                                     insertacampo(document.formenviar,'controller','Floor');
                                                     insertacampo(document.formenviar,'action','showCurrent');
@@ -84,7 +83,6 @@ class Show_Floors {
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item i18n-edit" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar, 'edificio_id', '<?php echo $floor['edificio_id'] ?>');
                                                         insertacampo(document.formenviar, 'planta_id','<?php echo $floor['planta_id'] ?>');
                                                         insertacampo(document.formenviar, 'controller','Floor');
                                                         insertacampo(document.formenviar, 'action', 'editForm');
@@ -93,7 +91,6 @@ class Show_Floors {
                                                     </a>
                                                     <a class="dropdown-item i18n-delete" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar,'edificio_id', '<?php echo $floor['edificio_id'] ?>');
                                                         insertacampo(document.formenviar, 'planta_id','<?php echo $floor['planta_id'] ?>');
                                                         insertacampo(document.formenviar,'controller','Floor');
                                                         insertacampo(document.formenviar,'action','deleteForm');
