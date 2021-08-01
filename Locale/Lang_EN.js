@@ -343,6 +343,7 @@ arrayEN = {
         'i18n-search-building' : 'Search Building',
         'i18n-view-floors' : 'Show Floors',
         'i18n-building-details' : 'Building Details',
+        'i18n-search-floor' : 'Search Floors',
 
         // FlOORS VIEWS
         'i18n-floors' : 'Floors',
@@ -384,6 +385,7 @@ arrayEN = {
             'm-num_planta' : ' Floor Number ',
             'm-foto_planta' : ' Floor Photo ',
             'm-descripcion' : ' Description ',
+            'm-planta_id' : ' Floor ID ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',

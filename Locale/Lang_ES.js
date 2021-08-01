@@ -336,7 +336,7 @@ arrayES = {
         'i18n-user-details' : 'Detalles del Usuario',
 
         // BUILDINGS VIEWS
-        'i18n-edificio_id' : 'Edificio ID',
+        'i18n-edificio_id' : 'ID Edificio',
         'i18n-responsable' : 'Responsable',
         'i18n-ciudad' : 'Ciudad',
         'i18n-buildings-empty' : 'No hay edificios registrado todavía',
@@ -360,6 +360,7 @@ arrayES = {
         'i18n-descripcion' : 'Descripción',
         'i18n-details-floor' : 'Detalles de la Planta',
         'i18n-del-floor-confirm' : '¿Está seguro de que desea eliminar esta planta? La acción no será reversible',
+        'i18n-search-floor' : 'Buscar Plantas',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consulta la información relativa al responsable del edificio',
@@ -390,6 +391,7 @@ arrayES = {
             'm-num_planta' : ' Número de Planta ',
             'm-foto_planta' : ' Foto Planta ',
             'm-descripcion' : ' Descripción ',
+            'm-planta_id' : ' ID Planta ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',

@@ -25,7 +25,7 @@ class Floor {
     function addForm() {
         if(es_resp_organizacion() || es_admin()) {
             $floor_service = new Floor_Service();
-            $feedback = $floor_service->addForm();
+            $feedback = $floor_service->emptyForm();
             if($feedback['ok']) {
                 include_once './View/Floors/Add_Floor_View.php';
                 new Add_Floor($feedback['building']);
@@ -75,7 +75,7 @@ class Floor {
     function deleteForm() {
         if(es_resp_organizacion() || es_admin()) {
             $floor_service = new Floor_Service();
-            $feedback = $floor_service->deleteForm();
+            $feedback = $floor_service->dataForm();
             if($feedback['ok']) {
                 include_once './View/Floors/Delete_Floor_View.php';
                 new Delete_Floor($feedback['resource']);
@@ -93,6 +93,21 @@ class Floor {
             $feedback = $floor_service->DELETE();
             if(isset($feedback['building'])) {
                 new Message($feedback['code'],'Floor','show', $feedback['building']);
+            } else {
+                new Message($feedback['code'],'Building','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
+
+    function searchForm() {
+        if(!es_registrado()) {
+            $floor_service = new Floor_Service();
+            $feedback = $floor_service->emptyForm();
+            if($feedback['ok']) {
+                include_once './View/Floors/Search_Floor_View.php';
+                new Search_Floor($feedback['building']);
             } else {
                 new Message($feedback['code'],'Building','show');
             }

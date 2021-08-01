@@ -110,7 +110,12 @@ class Floor_Service extends Floor_Validation {
         return $this->feedback;
     }
 
-    function addForm() {
+    function emptyForm() {
+        $validation = $this->validar_EDIFICIO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
         $this->feedback = $this->seekByBuildingID();
         if(!$this->feedback['ok']) {
             return $this->feedback;
@@ -170,17 +175,13 @@ class Floor_Service extends Floor_Validation {
 
     }
 
-    function deleteForm() {
+    function dataForm() {
         $validation = $this->validar_PLANTA_ID();
         if(!$validation['ok']) {
             return $validation;
         }
 
         $this->feedback = $this->seekByFloorID();
-        if($this->feedback['ok']) {
-            $this->feedback['building'] = $this->feedback['resource']['edificio_id'];
-        }
-
         return $this->feedback;
     }
 
