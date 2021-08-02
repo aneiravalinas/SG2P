@@ -153,6 +153,10 @@ arrayEN = {
         'FLR_EDT_OK' : 'Floor data has been successfully modified',
         'FLR_EDT_KO' : 'Error when modifying floor data',
 
+        // Búsqueda de Plantas del Portal
+        'PRTL_FLR_SRCH_OK' : 'The portal floor search was successful',
+        'PRTL_FLR_SRCH_KO' : 'Failed to find portal plants',
+
         // Existe numero de planta en un edificio
         'FLR_NUM_EXST' : 'There is already a floor with the floor number indicating in this building',
         'NUM_PLNT_EXST_KO' : 'Error when consulting by floor number',
@@ -290,7 +294,7 @@ arrayEN = {
 
         // PORTAL_COUNTRIES
         'i18n-app-welcome' : '¡Welcome to SG2P!',
-        'i18n-select-building' : 'Select a city to search for Buildings',
+        'i18n-select-city' : 'Select a city to search for Buildings',
         'i18n-l-buildings' : 'Search Buildings',
 
         // LOGIN
@@ -364,7 +368,12 @@ arrayEN = {
         'i18n-resp-info' : 'Consult the information regarding the building manager',
         'i18n-contact' : 'Contact',
         'i18n-address' : 'Address',
-
+        'i18n-details-manager' : 'Manager Details',
+        'i18n-floors-info' : 'Check the information on the floors and spaces of the building',
+        'i18n-select-building' : 'Select a Building',
+        'i18n-select-floor' : 'Select a Floor',
+        'i18n-portal-floors-empty' : 'This building does not have registered floors yet',
+        'i18n-piso' : 'Floor number: ',
 
         // MODAL
             // Campos Modal

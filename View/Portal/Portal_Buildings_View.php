@@ -16,7 +16,7 @@ class Portal_Buildings {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center mt-5 pt-5">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1>Selecciona un Edificio</h1>
+                        <h1 class="i18n-select-building">Selecciona un Edificio</h1>
                     </div>
                 </div>
 
@@ -34,7 +34,7 @@ class Portal_Buildings {
                                     <div class="icon">
                                         <img src="<?php echo building_photos_path . $building['foto_edificio']; ?>" class="rounded-circle img-card"/>
                                     </div>
-                                    <h2 class="title" style="color: #124265;">
+                                    <h2 class="title title-icon-box">
                                         <?php echo $building['nombre'] ?>
                                     </h2>
                                     <span>

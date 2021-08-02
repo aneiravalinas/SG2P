@@ -156,6 +156,9 @@ arrayES = {
         'FLR_EDT_OK' : 'Los datos de la planta se han modificado correctamente',
         'FLR_EDT_KO' : 'Error al modificar los datos de la planta',
 
+        // Búsqueda de Plantas del Portal
+        'PRTL_FLR_SRCH_OK' : 'La búsqueda de plantas del portal se ha realizado correctamente',
+        'PRTL_FLR_SRCH_KO' : 'Error al buscar las plantas del portal',
 
         // Existe numero de planta en un edificio
         'FLR_NUM_EXST' : 'Ya existe una planta con el número de planta indicando en este edificio',
@@ -297,7 +300,7 @@ arrayES = {
 
         // PORTAL_COUNTRIES
         'i18n-app-welcome' : '¡Bienvenido a SG2P!',
-        'i18n-select-building' : 'Selecciona una ciudad donde consultar Edificios',
+        'i18n-select-city' : 'Selecciona una ciudad donde consultar Edificios',
         'i18n-l-buildings' : 'Buscar Edificios',
 
         // LOGIN
@@ -371,6 +374,12 @@ arrayES = {
         'i18n-resp-info' : 'Consulta la información relativa al responsable del edificio',
         'i18n-contact' : 'Contacto',
         'i18n-address' : 'Dirección',
+        'i18n-details-manager' : 'Detalles del Responsable',
+        'i18n-floors-info' : 'Consulta información de las plantas y de los espacios del edificio',
+        'i18n-select-building' : 'Selecciona un Edificio',
+        'i18n-select-floor' : 'Selecciona una Planta',
+        'i18n-portal-floors-empty' : 'Este edificio no tiene plantas registradas todavía',
+        'i18n-piso' : 'Piso número: ',
 
         // MODAL
             // Campos Modal

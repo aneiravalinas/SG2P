@@ -16,7 +16,7 @@ class Portal_Manager {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1 class="mb-4 mt-4 i18n-user-details">Detalles del Usuario</h1>
+                        <h1 class="mb-4 mt-4 i18n-details-manager">Información del Responsable</h1>
                     </div>
 
                     <div class="row justify-content-center">

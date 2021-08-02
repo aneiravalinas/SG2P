@@ -17,7 +17,7 @@ class Portal_Cities {
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
                         <h1 id="i18n-app-welcome">¡Bienvenido a SG2P!</h1>
-                        <h2 id="i18n-select-building">Selecciona una ciudad para consultar Edificios</h2>
+                        <h2 id="i18n-select-city">Selecciona una ciudad para consultar Edificios</h2>
                         <!-- === Select City to list Builds ==== -->
                         <form name="formcities" method="post">
                             <select id="ciudad" name="ciudad" class="form-select" aria-label="Select a building">

@@ -12,10 +12,6 @@ class Portal {
     }
 
     function showCities() {
-        if(isset($_SESSION) && isset($_SESSION['portal'])) {
-            unset($_SESSION['portal']);
-        }
-
         include './View/Portal/Portal_Cities_View.php';
         $building_service = new Building_Service();
         $feedback = $building_service->showCities();
@@ -56,6 +52,18 @@ class Portal {
         if($feedback['ok']) {
             include_once './View/Portal/Portal_Manager_View.php';
             new Portal_Manager($feedback['resource']);
+        } else {
+            new Message($feedback['code'],'Portal','getPortal');
+        }
+    }
+
+    function showPortalFloors() {
+        include_once './Service/Floor_Service.php';
+        $floor_service = new Floor_Service();
+        $feedback = $floor_service->searchPortalFloors();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_Floors_View.php';
+            new Portal_Floors($feedback['resource']);
         } else {
             new Message($feedback['code'],'Portal','getPortal');
         }

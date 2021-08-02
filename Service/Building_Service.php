@@ -287,9 +287,11 @@ class Building_Service extends Building_Validation {
     }
 
     function seekPortal() {
-        if(isset($_SESSION) && isset($_SESSION['portal'])) {
-            $this->edificio_id = $_SESSION['portal'];
-            $this->building_entity->edificio_id = $this->edificio_id;
+        if($this->edificio_id == '') {
+            if(isset($_SESSION['portal'])) {
+                $this->edificio_id = $_SESSION['portal'];
+                $this->building_entity->edificio_id = $this->edificio_id;
+            }
         }
 
         $validation = $this->validar_EDIFICIO_ID();

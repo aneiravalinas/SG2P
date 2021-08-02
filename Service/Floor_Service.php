@@ -86,9 +86,6 @@ class Floor_Service extends Floor_Validation {
         if($this->feedback['ok']) {
             $this->building_entity->edificio_id = $this->feedback['resource']['edificio_id'];
             $building = $this->seekByBuildingID();
-            if(!$building['ok']) {
-                return $building;
-            }
             $building = $building['resource'];
             if(es_resp_edificio() && $building['username'] != getUser()) {
                 $this->feedback['ok'] = false;
@@ -184,9 +181,6 @@ class Floor_Service extends Floor_Validation {
         if($this->feedback['ok']) {
             $this->building_entity->edificio_id = $this->feedback['resource']['edificio_id'];
             $building = $this->seekByBuildingID();
-            if(!$building['ok']) {
-                return $building;
-            }
             $this->feedback['building'] = array('nombre' => $building['resource']['nombre']);
         }
         return $this->feedback;
@@ -290,6 +284,27 @@ class Floor_Service extends Floor_Validation {
         return $this->feedback;
     }
 
+    function searchPortalFloors() {
+        $validation = $this->validar_EDIFICIO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByBuildingID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $this->feedback = $this->floor_entity->searchByBuildingID();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'PRTL_FLR_SRCH_OK';
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'PRTL_FLR_SRCH_KO';
+        }
+
+        return $this->feedback;
+    }
+
 
     function seekByBuildingID() {
         $feedback = $this->building_entity->seek();
@@ -363,7 +378,7 @@ class Floor_Service extends Floor_Validation {
             $feedback['code'] = 'FLR_RT_KO';
         }
 
-        return $this->feedback;
+        return $feedback;
     }
 
 }
