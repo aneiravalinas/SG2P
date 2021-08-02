@@ -10,7 +10,7 @@
     define('default_building_photo', 'default.png');
     define('floor_photos_path', './Uploads/Floor_Photos/');
     define('default_floor_photo', 'default.png');
-    define('space_photos_path','Uploads/Spaces_Fotos/');
+    define('space_photos_path','Uploads/Spaces_Photos/');
     define('default_space_photo','default.png');
 
 ?>

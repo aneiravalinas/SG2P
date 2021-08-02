@@ -2,7 +2,7 @@
 
 include_once './Model/Abstract_Model.php';
 
-class Impl_Route_Model extends Abstract_Model {
+class ImpRoute_Model extends Abstract_Model {
 
     var $atributos;
     var $planta_ruta_id;
@@ -50,7 +50,7 @@ class Impl_Route_Model extends Abstract_Model {
     function searchByPlantaID() {
         $this->query = "
             SELECT * FROM PLANTA_RUTA
-            WHERE planta_id = '$this->planta_id';
+            WHERE planta_id = '$this->planta_id'
         ";
 
         $this->get_results_from_query();

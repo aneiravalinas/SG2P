@@ -95,6 +95,8 @@ class Floor_Service extends Floor_Validation {
                 $this->feedback['code'] = 'FLR_SEEK_OK';
                 $this->feedback['building'] = array('edificio_id' => $building['edificio_id'], 'nombre' => $building['nombre']);
             }
+        } else if($this->feedback['code'] == 'FLRID_KO') {
+            $this->feedback['code'] = 'FLR_SEEK_KO';
         }
 
         return $this->feedback;
@@ -153,6 +155,7 @@ class Floor_Service extends Floor_Validation {
                 $this->floor_entity->foto_planta = $this->foto_planta;
             }
         } else {
+            $this->foto_planta = default_floor_photo;
             $this->floor_entity->foto_planta = default_floor_photo;
         }
 
@@ -343,7 +346,7 @@ class Floor_Service extends Floor_Validation {
                 $feedback['code'] = 'FLRID_NOT_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
-            $feedback['code'] = 'FLR_SEEK_KO';
+            $feedback['code'] = 'FLRID_KO';
         }
 
         return $feedback;
@@ -366,8 +369,8 @@ class Floor_Service extends Floor_Validation {
     }
 
     function has_not_routes() {
-        include_once './Model/Imp_Route_Model.php';
-        $impl_route_model = new Impl_Route_Model();
+        include_once './Model/ImpRoute_Model.php';
+        $impl_route_model = new ImpRoute_Model();
         $feedback = $impl_route_model->searchByPlantaID();
         if($feedback['ok']) {
             if($feedback['code'] != 'QRY_EMPT') {

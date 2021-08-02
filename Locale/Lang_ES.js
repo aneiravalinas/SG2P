@@ -179,6 +179,32 @@ arrayES = {
         'FLR_RT_EXST' : 'No se puede eliminar la planta mientras tenga implementaciones de Rutas',
         'FLR_RT_KO' : 'Error al consultar las implementaciones de rutas en la planta',
 
+    // ESPACIOS
+
+        // SEARCH
+        'SPC_SRCH_NOT_ALLOWED' : 'No dispone de permisos para buscar espacios en este edificio',
+        'SPC_SRCH_OK' : 'La búsqueda de espacios se ha realizado correctamente',
+        'SPC_SRCH_KO' : 'Error al realizar la búsqueda de espacios',
+
+        // ADD
+        'SPC_ADD_OK' : 'El espacio se ha añadido correctamente',
+        'SPC_ADD_KO' : 'Error al añadir el espacio',
+
+        // DELETE
+        'SPC_DEL_OK' : 'El espacio se ha eliminado con éxito',
+        'SPC_DEL_KO' : 'Error al eliminar el espacio',
+
+        // Búsqueda por ID de Espacio
+        'SPCID_NOT_EXST' : 'El espacio indicado no existe',
+        'SPCID_KO' : 'Error al consultar por ID de Espacio',
+
+        // Búsqueda por nombre de espacio
+        'SPC_NAM_EXST' : 'Ya existe un espacio con el nombre indicado en esta planta',
+        'SPC_NAM_KO' : 'Error al consultar por nombre de espacio',
+
+        // Subir foto espacio
+        'SPC_PH_KO' : 'Error al subir la foto del espacio',
+
 
         // Validaciones
 
@@ -288,6 +314,19 @@ arrayES = {
             'FLR_ID_EMPT' : 'El ID de planta no puede ser vacío',
             'FLR_ID_NOT_NUMERIC' : 'El ID de planta debe ser numérico',
 
+            // Espacio ID
+            'SPC_ID_EMPT' : 'El ID del espacio no puede ser vacío',
+            'SPC_ID_NOT_NUMERIC' : 'El ID del espacio debe ser numérico',
+
+            // Nombre del Espacio
+            'SPC_NAM_SHRT' : 'El nombre del espacio debe superar los 3 caracteres',
+            'SPC_NAM_LRG' : 'El nombre del espacio no debe superar los 40 caracteres',
+            'SPC_NAM_FRMT' : 'El nombre del espacio sólo puede contener caracteres alfanuméricos, espacios, números y acentos',
+
+            // Foto Espacio
+            'SPC_PH_EXT' : 'La extensión de la foto del espacio no está permitida',
+            'SPC_PH_FRMT' : 'El nombre de la foto del espacio sólo puede contener letras, números y guiones',
+
 
 
 
@@ -357,6 +396,7 @@ arrayES = {
         'i18n-search-building' : 'Buscar Edificio',
         'i18n-view-floors' : 'Ver Plantas',
         'i18n-building-details' : 'Detalles del Edificio',
+        'i18n-foto_edificio' : 'Foto del Edificio',
 
         // FlOORS VIEWS
         'i18n-floors' : 'Plantas',
@@ -369,6 +409,16 @@ arrayES = {
         'i18n-del-floor-confirm' : '¿Está seguro de que desea eliminar esta planta? La acción no será reversible',
         'i18n-search-floor' : 'Buscar Plantas',
         'i18n-edit-floor' : 'Editar Planta',
+        'i18n-view-spaces' : 'Ver Espacios',
+        'i18n-foto_planta' : 'Foto de la Planta',
+
+        // SPACES VIEWS
+        'i18n-spaces' : 'Espacios',
+        'i18n-espacio_id' : 'ID Espacio',
+        'i18n-spaces-empty' : 'Esta planta no tiene espacios registrados todavía',
+        'i18n-add-space' : 'Añadir Espacio',
+        'i18n-foto_espacio' : 'Foto del Espacio',
+        'i18n-del-space-confirm' : '¿Está seguro de que desea eliminar este espacio? La acción no será reversible',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consulta la información relativa al responsable del edificio',

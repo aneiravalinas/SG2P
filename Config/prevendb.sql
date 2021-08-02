@@ -32,7 +32,7 @@ CREATE TABLE EDIFICIO
 	`provincia` VARCHAR(40) NOT NULL,
 	`codigo_postal` CHAR(5) NOT NULL,
 	`telefono` VARCHAR(9) NOT NULL,
-	`foto_edificio` VARCHAR(40) NULL,
+	`foto_edificio` VARCHAR(40) NOT NULL,
 
 	CONSTRAINT `pk_edificio` PRIMARY KEY (`edificio_id`),
 	CONSTRAINT `fk_edificio_to_usuario` FOREIGN KEY (`username`) REFERENCES USUARIO (`username`)
@@ -45,7 +45,7 @@ CREATE TABLE PLANTA
 	`nombre` VARCHAR(40) NOT NULL,
 	`num_planta` TINYINT UNSIGNED NOT NULL,
 	`descripcion` TEXT NOT NULL,
-    `foto_planta` VARCHAR(40) NULL,
+    `foto_planta` VARCHAR(40) NOT NULL,
 
 	CONSTRAINT `pk_planta` PRIMARY KEY (`planta_id`),
 	CONSTRAINT `uq_edificio_num_planta` UNIQUE (`edificio_id`,`num_planta`),
@@ -57,9 +57,8 @@ CREATE TABLE ESPACIO
 	`espacio_id` INT(10) AUTO_INCREMENT,
 	`planta_id` INT(10) NOT NULL,
 	`nombre` VARCHAR(40) NOT NULL,
-	`dimensiones` VARCHAR(10) NULL,
 	`descripcion` TEXT NOT NULL,
-	`foto_espacio` VARCHAR(20) NULL,
+	`foto_espacio` VARCHAR(40) NOT NULL,
 
 	CONSTRAINT `pk_espacio` PRIMARY KEY (`espacio_id`),
 	CONSTRAINT `fk_espacio_to_planta` FOREIGN KEY (`planta_id`) REFERENCES PLANTA (`planta_id`)

@@ -176,6 +176,32 @@ arrayGA = {
         'FLR_RT_EXST' : 'Non se pode eliminar a planta mentras teña implementacións de Rutas',
         'FLR_RT_KO' : 'Error ó consultar as implementacións de rutas na planta',
 
+    // ESPACIOS
+
+        // SEARCH
+        'SPC_SRCH_NOT_ALLOWED' : 'Non dispón de permisos pra buscar espazos este edificio',
+        'SPC_SRCH_OK' : 'The search for spaces was successful',
+        'SPC_SRCH_KO' : 'Error while searching for spaces',
+
+        // ADD
+        'SPC_ADD_OK' : 'O espazo añadiuse correctamente',
+        'SPC_ADD_KO' : 'Error ó añadir o espazo',
+
+        // DELETE
+        'SPC_DEL_OK' : 'O espazo eliminouse con éxito',
+        'SPC_DEL_KO' : 'Error ó eliminar o espazo',
+
+        // Búsqueda por ID de Espacio
+        'SPCID_NOT_EXST' : 'O espazo indicado non existe',
+        'SPCID_KO' : 'Error ó consultar por ID de Espazo',
+
+        // Búsqueda por nombre de espacio
+        'SPC_NAM_EXST' : 'Xa existe un espazo co nome indicado nesta planta',
+        'SPC_NAM_KO' : 'Error ó consultar por nome de espazo',
+
+        // Subir foto espacio
+        'SPC_PH_KO' : 'Error ó subir a foto do espazo',
+
         // Validaciones
 
             // Nombre de Usuario
@@ -267,21 +293,34 @@ arrayGA = {
             'FLR_NAM_FRMT' : 'O nome da planta só pode conter caracteres alfanuméricos, espacios, números e acentos',
 
             // Número de Planta
-            'NUM_FLOOR_EMPT' : 'El número de planta no puede ser vacío',
-            'NUM_FLOOR_LRG': 'El número de planta debe ser un número de 1 o 2 dígitos',
-            'NUM_FLOOR_NOT_NUMERIC' : 'El número de planta debe ser un número',
+            'NUM_FLOOR_EMPT' : 'O número da planta non pode ser vacío',
+            'NUM_FLOOR_LRG': 'O número da planta debe ser un número de 1 ou 2 díxitos',
+            'NUM_FLOOR_NOT_NUMERIC' : 'O número de planta debe ser un número',
 
             // Descripción
-            'DESC_EMPTY' : 'El campo descripción no puede ser vacío',
-            'DESC_FRMT' : 'El campo descripción contiene caracteres no permitidos',
+            'DESC_EMPTY' : 'O campo descripción non pode ser vacío',
+            'DESC_FRMT' : 'O campo descripción contén caracteres non permitidos',
 
             // Foto Planta
-            'FLR_PH_EXT' : 'La extensión de la foto de la planta no está permitida',
-            'FLR_PH_FRMT' : 'El nombre de la foto de la planta sólo puede contener letras, números y guiones',
+            'FLR_PH_EXT' : 'A extensión da foto da planta non está permitida',
+            'FLR_PH_FRMT' : 'O nome da foto da planta só pode conter letras, números e guións',
 
             // Planta ID
             'FLR_ID_EMPT' : 'O ID da planta non pode ser vacío',
             'FLR_ID_NOT_NUMERIC' : 'O ID da planta debe ser numérico',
+
+            // Espacio ID
+            'SPC_ID_EMPT' : 'El ID do espazo non pode ser vacío',
+            'SPC_ID_NOT_NUMERIC' : 'El ID do espazo debe ser numérico',
+
+            // Nombre del Espacio
+            'SPC_NAM_SHRT' : 'O nome do espazo debe superar os 3 caracteres',
+            'SPC_NAM_LRG' : 'O nome do espazo non debe superar os 40 caracteres',
+            'SPC_NAM_FRMT' : 'O nome do espazo só pode conter caracteres alfanuméricos, espazos, números e acentos',
+
+            // Foto Espacio
+            'SPC_PH_EXT' : 'A extensión da foto do espazo non está permitida',
+            'SPC_PH_FRMT' : 'O nome da foto do espazo só contener letras, números e guións',
 
 
 
@@ -352,6 +391,7 @@ arrayGA = {
         'i18n-search-building' : 'Buscar Edificio',
         'i18n-view-floors' : 'Ver Plantas',
         'i18n-building-details' : 'Detalles do Edificio',
+        'i18n-foto_edificio' : 'Foto do Edificio',
 
         // FlOORS VIEWS
         'i18n-floors' : 'Plantas',
@@ -364,6 +404,16 @@ arrayGA = {
         'i18n-del-floor-confirm' : '¿Está seguro de que desexa eliminar esta planta? A acción non será reversible',
         'i18n-search-floor' : 'Buscar Plantas',
         'i18n-edit-floor' : 'Editar Planta',
+        'i18n-view-spaces' : 'Ver Espazos',
+        'i18n-foto_planta' : 'Foto da Planta',
+
+        // SPACES VIEWS
+        'i18n-spaces' : 'Espazos',
+        'i18n-espacio_id' : 'ID Espazo',
+        'i18n-spaces-empty' : 'Esta planta non ten espazos rexistrados todavía',
+        'i18n-add-space' : 'Engadir Espazo',
+        'i18n-foto_espacio' : 'Foto do Espazo',
+        'i18n-del-space-confirm' : '¿Está seguro de que desexa eliminar este espazo? A acción non será reversible',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consulta a información relativa ó responsable do edificio',
