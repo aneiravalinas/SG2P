@@ -222,6 +222,63 @@ class Space_Service extends Space_Validation {
         return $this->feedback;
     }
 
+    function EDIT() {
+        $validation = $this->validar_ESPACIO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekBySpaceID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $space = $this->feedback['resource'];
+        $validation = $this->validar_atributos();
+        if(!$validation['ok']) {
+            $validation['floor'] = array('planta_id' => $space['planta_id']);
+            return $validation;
+        }
+
+        if($space['nombre'] != $this->nombre) {
+            $this->feedback = $this->name_space_not_exists();
+            if(!$this->feedback['ok']) {
+                $this->feedback['floor'] = array('planta_id' => $space['planta_id']);
+                return $this->feedback;
+            }
+        }
+
+        if($this->foto_espacio != '') {
+            $this->feedback = $this->uploader->uploadPhoto(space_photos_path, 'foto_espacio');
+            if(!$this->feedback['ok']) {
+                $this->feedback['code'] = 'SPC_PH_KO';
+                $this->feedback['floor'] = array('planta_id' => $space['planta_id']);
+                return $this->feedback;
+            }
+            $this->foto_espacio = $this->feedback['resource'];
+            $this->space_entity->foto_espacio = $this->foto_espacio;
+        }
+
+        $this->feedback = $this->space_entity->EDIT();
+        if($this->feedback['ok']) {
+            if($this->foto_espacio != '' && $space['foto_espacio'] != default_space_photo) {
+                $this->uploader->deletePhoto(space_photos_path, $space['foto_espacio']);
+            }
+            $this->feedback['code'] = 'SPC_EDT_OK';
+        } else {
+            if($this->foto_espacio != '') {
+                $this->uploader->deletePhoto(space_photos_path, $this->foto_espacio);
+            }
+
+            if($this->feedback['code'] == 'QRY_KO') {
+                $this->feedback['code'] = 'SPC_EDT_KO';
+            }
+        }
+
+        $this->feedback['floor'] = array('planta_id' => $space['planta_id']);
+        return $this->feedback;
+    }
+
 
     function name_space_not_exists() {
         $feedback = $this->space_entity->seekNameSpace();

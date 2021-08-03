@@ -196,6 +196,10 @@ arrayGA = {
         'SPC_SEEK_OK' : 'A consulta dos detalles do espazo realizouse correctamente',
         'SPC_SEEK_NOT_ALLOWED' : 'Non dispón dos permisos necesarios para consultar os detalles deste espazo',
 
+        // EDIT
+        'SPC_EDT_OK' : 'O espazo editouse correctamente',
+        'SPC_EDT_KO' : 'Error ó editar o espazo',
+
         // Búsqueda por ID de Espacio
         'SPCID_NOT_EXST' : 'O espazo indicado non existe',
         'SPCID_KO' : 'Error ó consultar por ID de Espazo',
@@ -421,6 +425,7 @@ arrayGA = {
         'i18n-del-space-confirm' : '¿Está seguro de que desexa eliminar este espazo? A acción non será reversible',
         'i18n-details-space' : 'Detalles do Espazo',
         'i18n-search-space' : 'Buscar Espazos',
+        'i18n-edit-space' : 'Editar Espazo',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consulta a información relativa ó responsable do edificio',

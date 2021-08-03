@@ -46,7 +46,14 @@ class Space_Model extends Abstract_Model {
     }
 
     function EDIT() {
-        // TODO: Implement EDIT() method.
+        $this->query = "UPDATE ESPACIO SET " .
+            ($this->nombre == '' ? "" : "nombre = '$this->nombre', ") .
+            ($this->foto_espacio == '' ? "" : "foto_espacio = '$this->foto_espacio', ") .
+            ($this->descripcion == '' ? "" : "descripcion = '$this->descripcion'") .
+            " WHERE espacio_id = '$this->espacio_id'";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function DELETE() {

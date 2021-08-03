@@ -111,4 +111,33 @@ class Space {
             new Message('FRB_ACCS','Panel','deshboard');
         }
     }
+
+    function editForm() {
+        if(es_resp_organizacion() || es_admin()) {
+            $space_service = new Space_Service();
+            $feedback = $space_service->dataForm();
+            if($feedback['ok']) {
+                include_once './View/Spaces/Edit_Space_View.php';
+                new Edit_Space($feedback['resource'], $feedback['floor']);
+            } else {
+                new Message($feedback['code'],'Building','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
+
+    function edit() {
+        if(es_resp_organizacion() || es_admin()) {
+            $space_service = new Space_Service();
+            $feedback = $space_service->EDIT();
+            if(isset($feedback['floor'])) {
+                new Message($feedback['code'],'Space','show',$feedback['floor']);
+            } else {
+                new Message($feedback['code'],'Building','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
 }

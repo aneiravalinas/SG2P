@@ -196,6 +196,10 @@ arrayEN = {
         'SPC_SEEK_OK' : 'The consultation of the details of the space has been carried out correctly',
         'SPC_SEEK_NOT_ALLOWED' : 'You do not have the necessary permissions to consult the details of this space',
 
+        // EDIT
+        'SPC_EDT_OK' : 'The space has been edited successfully',
+        'SPC_EDT_KO' : 'Error editing space',
+
         // Búsqueda por ID de Espacio
         'SPCID_NOT_EXST' : 'The indicated space does not exist',
         'SPCID_KO' : 'Failed to query by Space ID',
@@ -420,6 +424,7 @@ arrayEN = {
         'i18n-del-space-confirm' : 'Are you sure you want to delete this space? The action will not be reversible',
         'i18n-details-space' : 'Space Details',
         'i18n-search-space' : 'Search Spaces',
+        'i18n-edit-space' : 'Edit Space',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consult the information regarding the building manager',
