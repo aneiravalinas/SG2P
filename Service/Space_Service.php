@@ -73,7 +73,6 @@ class Space_Service extends Space_Validation {
             $this->feedback['code'] = 'SPC_SRCH_OK';
             $this->feedback['floor'] = array('planta_id' => $floor['planta_id'], 'nombre' => $floor['nombre'], 'edificio_id' => $floor['edificio_id']);
         } else {
-            $this->feedback['floor'] = array('planta_id' => $floor['planta_id'], 'edificio_id' => $floor['edificio_id']);
             if($this->feedback['code'] == 'QRY_KO') {
                 $this->feedback['code'] = 'SPC_SRCH_KO';
             }
@@ -81,6 +80,39 @@ class Space_Service extends Space_Validation {
 
         return $this->feedback;
 
+    }
+
+    function seek() {
+        $validation = $this->validar_ESPACIO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekBySpaceID();
+        if(!$this->feedback['ok']) {
+            if($this->feedback['code'] == 'SPCID_KO') {
+                $this->feedback['code'] = 'SPC_SEEK_KO';
+            }
+            return $this->feedback;
+        }
+
+        $this->floor_entity->planta_id = $this->feedback['resource']['planta_id'];
+        $floor = $this->seekByFloorID()['resource'];
+
+        if(es_resp_edificio()) {
+            $this->building_entity->edificio_id = $floor['edificio_id'];
+            $building = $this->seekByBuildingID()['resource'];
+            if($building['username'] != getUser()) {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'SPC_SEEK_NOT_ALLOWED';
+                $this->feedback['resource'] = array();
+                return $this->feedback;
+            }
+        }
+
+        $this->feedback['code'] = 'SPC_SEEK_OK';
+        $this->feedback['floor'] = array('nombre' => $floor['nombre']);
+        return $this->feedback;
     }
 
     function emptyForm() {

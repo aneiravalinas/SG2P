@@ -191,6 +191,11 @@ arrayGA = {
         'SPC_DEL_OK' : 'O espazo eliminouse con éxito',
         'SPC_DEL_KO' : 'Error ó eliminar o espazo',
 
+        // SEEK
+        'SPC_SEEK_KO' : 'Error ó consultar os detalles do espazo',
+        'SPC_SEEK_OK' : 'A consulta dos detalles do espazo realizouse correctamente',
+        'SPC_SEEK_NOT_ALLOWED' : 'Non dispón dos permisos necesarios para consultar os detalles deste espazo',
+
         // Búsqueda por ID de Espacio
         'SPCID_NOT_EXST' : 'O espazo indicado non existe',
         'SPCID_KO' : 'Error ó consultar por ID de Espazo',
@@ -414,6 +419,8 @@ arrayGA = {
         'i18n-add-space' : 'Engadir Espazo',
         'i18n-foto_espacio' : 'Foto do Espazo',
         'i18n-del-space-confirm' : '¿Está seguro de que desexa eliminar este espazo? A acción non será reversible',
+        'i18n-details-space' : 'Detalles do Espazo',
+        'i18n-search-space' : 'Buscar Espazos',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consulta a información relativa ó responsable do edificio',
@@ -452,6 +459,7 @@ arrayGA = {
             'm-foto_planta' : ' Foto Planta ',
             'm-descripcion' : ' Descripción ',
             'm-planta_id' : ' ID Planta ',
+            'm-espacio_id' : ' ID Espazo ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',

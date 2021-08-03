@@ -14,7 +14,9 @@ class Floor {
             if($feedback['ok']) {
                 include_once './View/Floors/Show_Floors_View.php';
                 new Show_Floors($feedback['resource'], $feedback['building']);
-            } else  {
+            } else if(isset($feedback['building'])) {
+                new Message($feedback['code'],'Floor','show',$feedback['building']);
+            } else {
                 new Message($feedback['code'],'Building','show');
             }
         } else {

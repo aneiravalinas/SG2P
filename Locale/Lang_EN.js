@@ -191,6 +191,11 @@ arrayEN = {
         'SPC_DEL_OK' : 'The space has been successfully removed',
         'SPC_DEL_KO' : 'Failed to remove space',
 
+        // SEEK
+        'SPC_SEEK_KO' : 'Failed to check space details',
+        'SPC_SEEK_OK' : 'The consultation of the details of the space has been carried out correctly',
+        'SPC_SEEK_NOT_ALLOWED' : 'You do not have the necessary permissions to consult the details of this space',
+
         // Búsqueda por ID de Espacio
         'SPCID_NOT_EXST' : 'The indicated space does not exist',
         'SPCID_KO' : 'Failed to query by Space ID',
@@ -413,6 +418,8 @@ arrayEN = {
         'i18n-add-space' : 'Add Space',
         'i18n-foto_espacio' : 'Space Photo',
         'i18n-del-space-confirm' : 'Are you sure you want to delete this space? The action will not be reversible',
+        'i18n-details-space' : 'Space Details',
+        'i18n-search-space' : 'Search Spaces',
 
         // PORTAL VIEWS
         'i18n-resp-info' : 'Consult the information regarding the building manager',
@@ -450,6 +457,7 @@ arrayEN = {
             'm-foto_planta' : ' Floor Photo ',
             'm-descripcion' : ' Description ',
             'm-planta_id' : ' Floor ID ',
+            'm-espacio_id' : ' Space ID ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',

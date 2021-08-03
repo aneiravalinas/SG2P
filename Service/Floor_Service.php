@@ -67,11 +67,11 @@ class Floor_Service extends Floor_Validation {
 
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'FLR_SRCH_OK';
+            $this->feedback['building'] = array('edificio_id' => $building['edificio_id'], 'nombre' => $building['nombre']);
         } else if($this->feedback['code'] == 'QRY_KO') {
             $this->feedback['code'] = 'FLR_SRCH_KO';
         }
 
-        $this->feedback['building'] = array('edificio_id' => $building['edificio_id'], 'nombre' => $building['nombre']);
         return $this->feedback;
     }
 
