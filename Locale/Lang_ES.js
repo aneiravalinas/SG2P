@@ -160,6 +160,10 @@ arrayES = {
         'PRTL_FLR_SRCH_OK' : 'La búsqueda de plantas del portal se ha realizado correctamente',
         'PRTL_FLR_SRCH_KO' : 'Error al buscar las plantas del portal',
 
+        // Detalles de la planta del Portal
+        'PRTL_FLR_SEEK_OK' : 'La consulta de los detalles de la planta del portal se ha realizado correctamente',
+        'PRTL_FLR_SEEK_KO' : 'Error al consultar los detalles de la planta del portal',
+
         // Existe numero de planta en un edificio
         'FLR_NUM_EXST' : 'Ya existe una planta con el número de planta indicando en este edificio',
         'NUM_PLNT_EXST_KO' : 'Error al consultar por número de planta',
@@ -202,6 +206,10 @@ arrayES = {
         // EDIT
         'SPC_EDT_OK' : 'El espacio se ha editado correctamente',
         'SPC_EDT_KO' : 'Error al editar el espacio',
+
+        // Detalles del espacio del portal
+        'PRTL_SPC_SEEK_OK' : 'La consulta de los detalles del espacio del portal se ha realizado correctamente',
+        'PRTL_SPC_SEEK_KO' : 'Error al consultar los detalles del espacio del portal',
 
         // Búsqueda por ID de Espacio
         'SPCID_NOT_EXST' : 'El espacio indicado no existe',
@@ -442,6 +450,7 @@ arrayES = {
         'i18n-select-floor' : 'Selecciona una Planta',
         'i18n-portal-floors-empty' : 'Este edificio no tiene plantas registradas todavía',
         'i18n-piso' : 'Piso número: ',
+        'i18n-floor-spaces' : 'Espacios de la Planta',
 
         // MODAL
             // Campos Modal

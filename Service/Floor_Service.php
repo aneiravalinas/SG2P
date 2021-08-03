@@ -308,6 +308,28 @@ class Floor_Service extends Floor_Validation {
         return $this->feedback;
     }
 
+    function seekPortalFloor() {
+        $validation = $this->validar_PLANTA_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByFloorID();
+        if(!$this->feedback['ok']) {
+            if($this->feedback['code'] == 'FLRID_KO') {
+                $this->feedback['code'] = 'PRT_FLR_SEEK_KO';
+            }
+            return $this->feedback;
+        }
+
+        include_once './Model/Space_Model.php';
+        $space_entity = new Space_Model();
+        $this->feedback['spaces'] = $space_entity->searchByPlantaID()['resource'];
+        $this->feedback['code'] = 'PRTL_FLR_SEEK_OK';
+
+        return $this->feedback;
+    }
+
 
     function seekByBuildingID() {
         $feedback = $this->building_entity->seek();

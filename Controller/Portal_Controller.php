@@ -68,4 +68,28 @@ class Portal {
             new Message($feedback['code'],'Portal','getPortal');
         }
     }
+
+    function seekPortalFloor() {
+        include_once './Service/Floor_Service.php';
+        $floor_service = new Floor_Service();
+        $feedback = $floor_service->seekPortalFloor();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_ShowCurrent_Floor_View.php';
+            new Portal_ShowCurrent_Floor($feedback['resource'], $feedback['spaces']);
+        } else {
+            new Message($feedback['code'],'Portal','getPortal');
+        }
+    }
+
+    function seekPortalSpace() {
+        include_once './Service/Space_Service.php';
+        $space_service = new Space_Service();
+        $feedback = $space_service->seekPortalSpace();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_ShowCurrent_Space_View.php';
+            new Portal_ShowCurrent_Space($feedback['resource']);
+        } else {
+            new Message($feedback['code'],'Portal','getPortal');
+        }
+    }
 }

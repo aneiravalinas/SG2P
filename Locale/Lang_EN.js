@@ -153,6 +153,10 @@ arrayEN = {
         'FLR_EDT_OK' : 'Floor data has been successfully modified',
         'FLR_EDT_KO' : 'Error when modifying floor data',
 
+        // Detalles de la planta del Portal
+        'PRTL_FLR_SEEK_OK' : 'The consultation of the details of the portal plant has been carried out correctly',
+        'PRTL_FLR_SEEK_KO' : 'Failed to query the details of the portal plant',
+
         // Búsqueda de Plantas del Portal
         'PRTL_FLR_SRCH_OK' : 'The portal floor search was successful',
         'PRTL_FLR_SRCH_KO' : 'Failed to find portal plants',
@@ -199,6 +203,10 @@ arrayEN = {
         // EDIT
         'SPC_EDT_OK' : 'The space has been edited successfully',
         'SPC_EDT_KO' : 'Error editing space',
+
+        // Detalles del espacio del portal
+        'PRTL_SPC_SEEK_OK' : 'The consultation of the details of the portal space has been carried out correctly',
+        'PRTL_SPC_SEEK_KO' : 'Failed to check the details of the portal space',
 
         // Búsqueda por ID de Espacio
         'SPCID_NOT_EXST' : 'The indicated space does not exist',
@@ -436,6 +444,7 @@ arrayEN = {
         'i18n-select-floor' : 'Select a Floor',
         'i18n-portal-floors-empty' : 'This building does not have registered floors yet',
         'i18n-piso' : 'Floor number: ',
+        'i18n-floor-spaces' : 'Floor Spaces',
 
         // MODAL
             // Campos Modal

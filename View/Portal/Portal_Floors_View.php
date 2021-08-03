@@ -28,7 +28,7 @@ class Portal_Floors {
                                 <a type="button" onclick="
                                     crearform('formenviar','post');
                                     insertacampo(document.formenviar,'planta_id',<?php echo $floor['planta_id'] ;?>);
-                                    insertacampo(document.formenviar,'action','getPortal');
+                                    insertacampo(document.formenviar,'action','seekPortalFloor');
                                     insertacampo(document.formenviar,'controller','Portal');
                                     enviaform(document.formenviar);">
                                     <div>

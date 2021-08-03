@@ -279,6 +279,22 @@ class Space_Service extends Space_Validation {
         return $this->feedback;
     }
 
+    function seekPortalSpace() {
+        $validation = $this->validar_ESPACIO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekBySpaceID();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'PRTL_SPC_SEEK_OK';
+        } else if($this->feedback['code'] == 'SPCID_KO') {
+            $this->feedback['code'] = 'PRTL_SPC_SEEK_KO';
+        }
+
+        return $this->feedback;
+    }
+
 
     function name_space_not_exists() {
         $feedback = $this->space_entity->seekNameSpace();
