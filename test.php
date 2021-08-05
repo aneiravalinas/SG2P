@@ -1,5 +1,7 @@
 <?php
 
+include './COMMON/Auth.php';
+
     session_start();
     $_SESSION['test'] = true;
 

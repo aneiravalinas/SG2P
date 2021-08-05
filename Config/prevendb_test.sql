@@ -268,7 +268,7 @@ INSERT INTO PLAN (`plan_id`, `nombre`, `descripcion`, `instrucciones`) VALUES
 (1,'Plan Uno','Descripcion Plan Uno', 'Instrucciones del Plan Uno');
 
 INSERT INTO EDIFICIO_PLAN (`edificio_id`, `plan_id`, `fecha_asignacion`, `fecha_implementacion`, `estado`) VALUES
-(1,1, '25-12-2020', null, 'pendiente');
+(2,1, '25-12-2020', null, 'pendiente');
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';
 GRANT ALL PRIVILEGES ON prevendb_test.* TO 'prevenroot'@'localhost';

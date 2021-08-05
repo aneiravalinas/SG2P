@@ -86,7 +86,8 @@ class Building_Service extends Building_Validation {
             return $validation;
         }
 
-        if(!$this->is_candidate($this->username)) {
+        $this->feedback = $this->is_candidate($this->username);
+        if(!$this->feedback['ok']) {
             return $this->feedback;
         }
 
@@ -185,6 +186,7 @@ class Building_Service extends Building_Validation {
         $candidates = $this->get_candidates()['resource'];
 
         $this->feedback['ok'] = true;
+        $this->feedback['code'] = 'BLDID_EXST';
         $this->feedback['resource'] = array('building' => $building, 'candidates' => $candidates);
 
         return $this->feedback;
@@ -269,14 +271,13 @@ class Building_Service extends Building_Validation {
 
         $this->feedback = $this->seekByBuildingID();
         if($this->feedback['ok']) {
+            $this->feedback['code'] = 'BLD_CURRENT_OK';
             if(es_resp_edificio()) {
                 $building = $this->feedback['resource'];
                 if ($building['username'] != getUser()) {
                     $this->feedback['ok'] = false;
                     $this->feedback['code'] = 'BLD_CURRNT_MANG_KO';
                     $this->feedback['resource'] = array();
-                } else {
-                    $this->feedback['code'] = 'BLD_CURRENT_OK';
                 }
             }
         } else if($this->feedback['code'] == 'BLDID_KO') {

@@ -11,6 +11,7 @@ class Test {
 
     function test() {
         include './Test/User_Test.php';
+        include './Test/Building_Test.php';
 
         session_destroy();
 

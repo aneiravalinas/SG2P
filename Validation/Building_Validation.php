@@ -242,7 +242,7 @@ class Building_Validation extends Validator {
             return $this->rellena_validation(false,'CP_NUMERIC','EDIFICIO');
         }
 
-        if($this->longitud_maxima($this->codigo_postal,5)) {
+        if(!$this->longitud_maxima($this->codigo_postal,5)) {
             return $this->rellena_validation(false,'CP_MAX_SIZE','EDIFICIO');
         }
 
