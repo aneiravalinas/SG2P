@@ -54,6 +54,7 @@ class Building_Model extends Abstract_Model {
         ";
 
         $this->execute_single_query();
+        $this->edificio_id = $this->id_autoincrement;
         return $this->feedback;
     }
 

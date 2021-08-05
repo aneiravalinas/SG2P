@@ -4,6 +4,7 @@
     define('pass', 'passsg2p');
     define('database', 'prevendb');
     define('test_database', 'prevendb_test');
+
     define('profile_photos_path', './Uploads/Profile_Photos/');
     define('default_profile_photo', 'default.png');
     define('building_photos_path','./Uploads/Building_Photos/');
@@ -13,5 +14,4 @@
     define('space_photos_path','Uploads/Spaces_Photos/');
     define('default_space_photo','default.png');
 
-?>
 

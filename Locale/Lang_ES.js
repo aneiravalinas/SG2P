@@ -45,6 +45,10 @@ arrayES = {
         'PRF_OK' : 'Los datos del perfil se han almacenado correctamente',
         'PRF_KO' : 'Error al modificar los datos del perfil',
 
+        // SEEK
+        'USR_SEEK_OK' : 'La búsqueda de los detalles del usuario se ha realizado correctamente',
+        'USR_SEEK_KO' : 'Error al consultar los detalles del usuario',
+
         // Búsqueda por Username
         'USRNM_EXST' : 'El nombre de usuario ya existe', // USRNM_EXST
         'USRNM_NOT_EXST' : 'El nombre de usuario introducido no existe', // USRNM_NOT_EXST
@@ -118,6 +122,7 @@ arrayES = {
         // Búsqueda por Edificio_ID
         'BLDID_NOT_EXST' : 'El ID del Edificio no existe',
         'BLDID_KO' : 'Error al consultar por ID de Edificio',
+        'BLDID_EXST' : 'El ID de edificio existe',
 
         // Búsqueda por Responsable
         'MANG_NOT_EXST' : 'El Responsable introducido no existe',

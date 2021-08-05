@@ -1,8 +1,8 @@
 
-DROP DATABASE IF EXISTS PREVENDB;
-CREATE DATABASE PREVENDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+DROP DATABASE IF EXISTS prevendb;
+CREATE DATABASE prevendb DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-USE PREVENDB;
+USE prevendb;
 
 CREATE TABLE USUARIO
 (
@@ -14,7 +14,7 @@ CREATE TABLE USUARIO
 	`apellidos` VARCHAR(60) NOT NULL,
 	`email` VARCHAR(50) NOT NULL,
 	`telefono` VARCHAR(9) NOT NULL,
-	`foto_perfil` VARCHAR(40) NULL,
+	`foto_perfil` VARCHAR(40) NOT NULL,
 
 	CONSTRAINT `pk_usuario` PRIMARY KEY (`username`),
 	CONSTRAINT `uq_user_dni` UNIQUE (`dni`),
@@ -61,6 +61,7 @@ CREATE TABLE ESPACIO
 	`foto_espacio` VARCHAR(40) NOT NULL,
 
 	CONSTRAINT `pk_espacio` PRIMARY KEY (`espacio_id`),
+    CONSTRAINT `uq_planta_nombre_espacio` UNIQUE (`planta_id`,`nombre`),
 	CONSTRAINT `fk_espacio_to_planta` FOREIGN KEY (`planta_id`) REFERENCES PLANTA (`planta_id`)
 );
 
@@ -249,7 +250,18 @@ INSERT INTO USUARIO (`username`, `dni`, `password`,`rol`,`nombre`,`apellidos`,`e
 INSERT INTO EDIFICIO (`edificio_id`, `username`, `nombre`, `calle`, `ciudad`, `provincia`, `codigo_postal`, `telefono`, `foto_edificio`) VALUES
 (1,'sg2ped','Edificio Uno','Calle ejemplo 1','Ourense','Ourense','36687','987678765','default.png'),
 (2,'sg2ped2','Edificio Dos','Calle ejemplo 2','Ourense','Ourense','36687','987678766','default.png'),
-(3,'sg2ped','Edificio Tres','Calle ejemplo 3','Ourense','Ourense','36687','987678767','default.png');
+(3,'sg2ped','Edificio Tres','Calle ejemplo 3','Ourense','Ourense','36687','987678768','default.png'),
+(4,'sg2ped2','Edificio Cuatro','Calle ejemplo 4','Ourense','Ourense','36687','987678769','default.png');
+
+INSERT INTO PLANTA (`planta_id`, `edificio_id`, `nombre`, `num_planta`, `descripcion`, `foto_planta`) VALUES
+(1,1,'Planta Uno',1,'descripcion de la planta uno','default.png'),
+(2,1,'Planta Dos',2,'descripcion de la planta dos','default.png'),
+(3,1,'Planta Tres',3,'descripcion de la planta tres','default.png');
+
+INSERT INTO ESPACIO (`espacio_id`, `planta_id`, `nombre`, `descripcion`, `foto_espacio`) VALUES
+(1,1,'Espacio Uno','Descripcion del espacio uno','default.png'),
+(2,1,'Espacio Dos','Descripcion del espacio dos','default.png'),
+(3,1,'Espacio Tres','Descripcion del espacio tres','default.png');
 
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';

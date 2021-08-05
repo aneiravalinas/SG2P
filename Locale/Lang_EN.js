@@ -43,6 +43,10 @@ arrayEN = {
         'PRF_OK' : 'Profile data has been stored successfully',
         'PRF_KO' : 'Error modifying profile data',
 
+        // SEEK
+        'USR_SEEK_OK' : 'Search for user details was successful',
+        'USR_SEEK_KO' : 'Failed to query user details',
+
         // Búsqueda por Username
         'USRNM_EXST' : 'The username already exist',
         'USRNM_NOT_EXST' : 'The username entered does not exist',
@@ -115,6 +119,7 @@ arrayEN = {
         // Búsqueda por Edificio_ID
         'BLDID_NOT_EXST' : 'Building ID does not exist',
         'BLDID_KO' : 'Failed to query by Building ID',
+        'BLDID_EXST' : 'Building ID exists',
 
         // Búsqueda por Responsable
         'MANG_NOT_EXST' : 'The building manager does not exist',

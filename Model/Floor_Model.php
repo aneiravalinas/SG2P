@@ -45,6 +45,7 @@ class Floor_Model extends Abstract_Model {
         ";
 
         $this->execute_single_query();
+        $this->planta_id = $this->id_autoincrement;
         return $this->feedback;
     }
 

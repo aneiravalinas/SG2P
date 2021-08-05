@@ -152,7 +152,7 @@ class User_Service extends User_Validation {
 
         if($this->feedback['ok']) {
             $user = $this->feedback['resource'];
-            $this->feedback = $this->uq_att_changed_not_exists($user);
+            $this->feedback = $this->uq_att_changed_not_exists($user,false);
             if(!$this->feedback['ok']) {
                 return $this->feedback;
             }
@@ -284,7 +284,7 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
-    function dataForm() {
+   /* function dataForm() {
         $validation = $this->validar_USERNAME(); // Validamos formato del nombre de usuario.
         if(!$validation['ok']) {
             return $validation;
@@ -292,7 +292,7 @@ class User_Service extends User_Validation {
 
         $this->feedback = $this->seekByUsername(); // Buscamos por nombre de usuario
         return $this->feedback;
-    }
+    }*/
 
     function DELETE() {
         $validation = $this->validar_USERNAME();
@@ -356,8 +356,14 @@ class User_Service extends User_Validation {
         }
 
         $this->feedback = $this->seekByUsername();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'USR_SEEK_OK';
+        } else if($this->feedback['code'] == 'USRNM_KO') {
+            $this->feedback['code'] = 'USR_SEEK_KO';
+        }
         return $this->feedback;
     }
+
 
     function seekPortalManager() {
         $validation = $this->validar_USERNAME();
@@ -424,8 +430,8 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
-    function uq_att_changed_not_exists($user) {
-        if($this->dni != $user['dni']) {
+    function uq_att_changed_not_exists($user, $flag=true) {
+        if($flag && $this->dni != $user['dni']) {
             $this->feedback = $this->seekByDNI();
             if($this->feedback['ok'] || $this->feedback['code'] == 'DNI_KO') { // Si se ha modificado el dni y este ya existe o se produce un error al consultar por DNI.
                 $this->feedback['ok'] = false;

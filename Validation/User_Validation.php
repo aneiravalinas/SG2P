@@ -256,7 +256,7 @@ class User_Validation extends Validator {
             return $this->rellena_validation(false,'PSW_LRG','USUARIO'); // Password cifrada no puede contener más de 32 caracteres.
         }
 
-        if(!$this->solo_letras_espacios_guiones_todos($this->password)) {
+        if(!$this->solo_alfanumerico_espacios_guiones_todos($this->password)) {
             return $this->rellena_validation(false,'PSW_FRMT','USUARIO'); // Password cifrada no puede contener caracteres no permitidos.
         }
 

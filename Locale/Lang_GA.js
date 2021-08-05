@@ -43,6 +43,10 @@ arrayGA = {
         'PRF_OK' : 'Os datos do perfil almacenáronse correctamente',
         'PRF_KO' : 'Error ó modificar os datos do perfil',
 
+        // SEEK
+        'USR_SEEK_OK' : 'A búsqueda dos detalles do usuario realizouse correctamente',
+        'USR_SEEK_KO' : 'Error ó consultar os detalles do usuario',
+
         // Búsqueda por Username
         'USRNM_EXST' : 'O nome de usuario xa existe',
         'USRNM_NOT_EXST' : 'O nome de usuario introducido non existe',
@@ -115,6 +119,7 @@ arrayGA = {
         // Búsqueda por Edificio_ID
         'BLDID_NOT_EXST' : 'O ID do Edificio non existe',
         'BLDID_KO' : 'Erro ó consultar por ID de Edificio',
+        'BLDID_EXST' : 'O ID de edificio existe',
 
         // Búsqueda por Responsable
         'MANG_NOT_EXST' : 'O Responsable introducido non existe',

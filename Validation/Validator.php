@@ -62,8 +62,16 @@ abstract class Validator {
 
     //comprueba si un string tiene solo letras numeros y espacios
     //devuelve true si es corrrecto false en caso contrario
-    function solo_letras_espacios($string){
+    function solo_alfanumerico_espacios($string){
         if (preg_match('/[^a-zA-Z0-9\s]/',$string)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    function solo_letras_espacios($string) {
+        if (preg_match('/[^a-zA-Z\s]/',$string)){
             return false;
         }else{
             return true;
@@ -72,8 +80,16 @@ abstract class Validator {
 
     //comprueba si un string tiene solo letras numeros espacios y guiones altos
     //devuelve true si es corrrecto false en caso contrario
-    function solo_letras_espacios_guiones($string){
+    function solo_alfanumerico_espacios_guiones($string){
         if (preg_match('/[^a-zA-Z0-9\s\-]/',$string)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    function solo_letras_espacios_guiones($string) {
+        if (preg_match('/[^a-zA-Z\s\-]/',$string)){
             return false;
         }else{
             return true;
@@ -82,8 +98,16 @@ abstract class Validator {
 
     //comprueba si un string tiene solo letras numeros espacios y guiones
     //devuelve true si es corrrecto false en caso contrario
-    function solo_letras_espacios_guiones_todos($string){
+    function solo_alfanumerico_espacios_guiones_todos($string){
         if (preg_match('/[^a-zA-Z0-9\s\-\_]/',$string)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    function solo_letras_espacios_guiones_todos($string) {
+        if (preg_match('/[^a-zA-Z\s\-\_]/',$string)){
             return false;
         }else{
             return true;
@@ -116,7 +140,7 @@ abstract class Validator {
     }
 
     function formato_email_search($email) {
-        if(preg_match('/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@?[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/',$email)) {
+        if(preg_match('/^([a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@)?[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/',$email)) {
             return true;
         } else {
             return false;

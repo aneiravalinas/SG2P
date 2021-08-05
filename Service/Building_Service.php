@@ -387,6 +387,8 @@ class Building_Service extends Building_Validation {
             if($this->feedback['code'] == 'QRY_EMPT') {
                 $this->feedback['ok'] = false;
                 $this->feedback['code'] = 'BLDID_NOT_EXST';
+            } else {
+                $this->feedback['code'] = 'BLDID_EXST';
             }
         } else if($this->feedback['code'] == 'QRY_KO') {
             $this->feedback['code'] = 'BLDID_KO';
