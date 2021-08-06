@@ -216,6 +216,7 @@ arrayGA = {
 
         // Búsqueda por ID de Espacio
         'SPCID_NOT_EXST' : 'O espazo indicado non existe',
+        'SPCID_EXST' : 'O espazo indicado existe',
         'SPCID_KO' : 'Error ó consultar por ID de Espazo',
 
         // Búsqueda por nombre de espacio

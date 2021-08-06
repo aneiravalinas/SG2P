@@ -216,6 +216,7 @@ arrayEN = {
 
         // Búsqueda por ID de Espacio
         'SPCID_NOT_EXST' : 'The indicated space does not exist',
+        'SPCID_EXST' : 'The indicated spaces exist',
         'SPCID_KO' : 'Failed to query by Space ID',
 
         // Búsqueda por nombre de espacio

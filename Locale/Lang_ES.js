@@ -219,6 +219,7 @@ arrayES = {
 
         // Búsqueda por ID de Espacio
         'SPCID_NOT_EXST' : 'El espacio indicado no existe',
+        'SPCID_EXST' : 'El espacio indicado existe',
         'SPCID_KO' : 'Error al consultar por ID de Espacio',
 
         // Búsqueda por nombre de espacio

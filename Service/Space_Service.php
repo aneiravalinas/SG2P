@@ -317,6 +317,8 @@ class Space_Service extends Space_Validation {
             if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
                 $feedback['code'] = 'SPCID_NOT_EXST';
+            } else {
+                $feedback['code'] = 'SPCID_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'SPCID_KO';
@@ -331,6 +333,8 @@ class Space_Service extends Space_Validation {
             if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
                 $feedback['code'] = 'FLRID_NOT_EXST';
+            } else {
+                $feedback['code'] = 'FLRID_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'FLRID_KO';
