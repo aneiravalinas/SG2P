@@ -338,7 +338,7 @@ class Floor_Service extends Floor_Validation {
                 $feedback['ok'] = false;
                 $feedback['code'] = 'BLDID_NOT_EXST';
             } else {
-                $this->feedback['code'] = 'BLDID_EXST';
+                $feedback['code'] = 'BLDID_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'BLDID_KO';
