@@ -40,18 +40,20 @@ $respTest = obtenerRespuesta('Espacio', 'SEARCH', 'ACCION', 'La planta no existe
 array_push($testEspacio, $respTest);
 
 // El usuario no es responsable del edificio al que pertence la planta.
-$_SESSION['username'] = 'sg2ped';
+$_SESSION['username'] = 'sg2ped2';
 $_SESSION['rol'] = 'edificio';
 $_POST = array('planta_id' => '2');
 $space_service = new Space_Service();
 $feedback = $space_service->SEARCH();
 $respTest = obtenerRespuesta('Espacio', 'SEARCH', 'ACCION', 'Responsable no asignado a la planta',
-    'FLRID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'SPC_SRCH_NOT_ALLOWED', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testEspacio, $respTest);
 
 /*
  *  --- SEARCH: VALIDACIONES ---
  */
+
+$_SESSION['username'] = 'sg2ped';
 
 // ID de Espacio no numérico
 $_POST = array('planta_id' => '1', 'espacio_id' => '123a');
@@ -102,7 +104,7 @@ array_push($testEspacio, $respTest);
  */
 
 // ID de Espacio vacío
-$_POST = array('espacio_id' => '123a');
+$_POST = array('espacio_id' => '');
 $space_service = new Space_Service();
 $feedback = $space_service->seek();
 $respTest = obtenerRespuesta('Espacio', 'SEEK', 'PLANTA_ID', 'ID de Planta vacío',
@@ -122,6 +124,7 @@ array_push($testEspacio, $respTest);
  */
 
 // Espacio no pertenece a un edificio asignado al responsable
+$_SESSION['username'] = 'sg2ped2';
 $_POST = array('espacio_id' => '2');
 $space_service = new Space_Service();
 $feedback = $space_service->seek();
@@ -129,6 +132,8 @@ $respTest = obtenerRespuesta('Espacio', 'SEEK', 'ACCION', 'Espacio no pertenece 
     'SPC_SEEK_NOT_ALLOWED', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testEspacio, $respTest);
 
+
+$_SESSION['username'] = 'sg2ped';
 // Consulta de Espacio Ok
 $_POST = array('espacio_id' => '1');
 $space_service = new Space_Service();
@@ -346,7 +351,7 @@ $_POST = array('planta_id' => '1', 'nombre' => 'Espacio Test',
 $space_service = new Space_Service();
 $feedback = $space_service->ADD();
 $respTest = obtenerRespuesta('Espacio', 'ADD', 'ACCION', 'Espacio añadido Ok',
-    'SPC_ADD_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+    'SPC_ADD_OK', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testEspacio, $respTest);
 
 if($feedback['ok']) {
@@ -397,13 +402,192 @@ array_push($testEspacio, $respTest);
 
 
 /*
+ *  --- EDIT: VALIDACIONES (Espacio) ---
+ */
+
+// ID del Espacio vacío
+$_POST = array('espacio_id' => '');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'ESPACIO_ID', 'ID de Espacio vacío',
+    'SPC_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+// ID del Espacio no numérico
+$_POST = array('espacio_id' => '12a');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'ESPACIO_ID', 'ID de Espacio no numérico',
+    'SPC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+/*
+ *  --- EDIT: ACCIONES (Espacio) ---
+ */
+
+// El espacio no existe
+$_POST = array('espacio_id' => '1111');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'ACCION', 'El espacio no existe',
+    'SPCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+
+/*
  *  --- EDIT: VALIDACIONES ---
  */
+
+// Nombre de espacio corto (menos de 3 caracteres)
+$_POST = array('espacio_id' => '1', 'nombre' => 'aa');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'NOMBRE', 'Nombre de espacio corto',
+    'SPC_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+// Nombre de espacio largo (más de 40 caracteres)
+$_POST = array('espacio_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'NOMBRE', 'Nombre de espacio largo',
+    'SPC_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+// Nombre de espacio caracteres no permitidos
+$_POST = array('espacio_id' => '1', 'nombre' => 'Nombre Esp^cio');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'NOMBRE', 'Nombre de espacio caracteres no permitdos',
+    'SPC_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+// Descripción vacío
+$_POST = array('espacio_id' => '1', 'nombre' => 'Nombre Espacio', 'descripcion' => '');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'DESCRIPCION', 'Descripción vacío',
+    'DESC_EMPTY', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+// Descripción caracteres no permitidos
+$_POST = array('espacio_id' => '1', 'nombre' => 'Nombre Espacio', 'descripcion' => 'Descripción d+l +sP`cio');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'DESCRIPCION', 'Descripción caracteres no permitidos',
+    'DESC_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+// Extensión foto espacio no permitida
+$_FILES = array('foto_espacio' => array('name' => 'foto.php'));
+$_POST = array('espacio_id' => '1', 'nombre' => 'Nombre Espacio',
+    'descripcion' => 'Descripción del Espacio', 'foto_espacio' => 'foto.php');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'FOTO_ESPACIO', 'Extensión no permitida',
+    'SPC_PH_EXT', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+// Caracteres no permitidos en el nombre de la foto del espacio
+$_FILES = array('foto_espacio' => array('name' => 'f+to.jpg'));
+$_POST = array('espacio_id' => '1', 'nombre' => 'Nombre Espacio',
+    'descripcion' => 'Descripción del Espacio', 'foto_espacio' => 'f+to.jpg');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'FOTO_ESPACIO', 'Nombre de la foto con caracteres no permitidos',
+    'SPC_PH_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+unset($_FILES);
+
+
+/*
+ *  --- EDIT: ACCIONES ---
+ */
+
+// Ya existe espacio con ese nombre en la planta
+$_POST = array('espacio_id' => '1', 'nombre' => 'Espacio Dos',
+    'descripcion' => 'Descripcion del espacio uno');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'ACCION', 'Ya existe un espacio con ese nombre',
+    'SPC_NAM_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+// Error al subir la foto
+$_FILES = array('foto_espacio' => array('tmp_name' => '/foto.jpg', 'name' => '/foto.jpg'));
+$_POST = array('espacio_id' => '1', 'nombre' => 'Espacio Uno',
+    'descripcion' => 'Descripcion del espacio uno', 'foto_espacio' => 'foto.jpg');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'ACCION', 'Error al subir la foto del espacio',
+    'SPC_PH_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+unset($_FILES);
+
+// Espacio editado Ok
+$_POST = array('espacio_id' => '1', 'nombre' => 'Espacio Test',
+    'descripcion' => 'Descripcion del espacio uno');
+$space_service = new Space_Service();
+$feedback = $space_service->EDIT();
+$respTest = obtenerRespuesta('Espacio', 'EDIT', 'ACCION', 'Espacio editado Ok',
+    'SPC_EDT_OK', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+if($feedback['ok']) {
+    $_POST = array('espacio_id' => '1', 'nombre' => 'Espacio Uno',
+        'descripcion' => 'Descripcion del espacio uno');
+    $space_service = new Space_Service();
+    $feedback = $space_service->EDIT();
+}
+
+
+/*
+ *  --- SEEK_PORTAL_SPACE: VALIDACIONES ---
+ */
+
+// ID del Espacio vacío
+$_POST = array('espacio_id' => '');
+$space_service = new Space_Service();
+$feedback = $space_service->seekPortalSpace();
+$respTest = obtenerRespuesta('Espacio', 'SEEK_PRTL_SPC', 'ESPACIO_ID', 'ID de Espacio vacío',
+    'SPC_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+// ID del Espacio no numérico
+$_POST = array('espacio_id' => '12a');
+$space_service = new Space_Service();
+$feedback = $space_service->seekPortalSpace();
+$respTest = obtenerRespuesta('Espacio', 'SEEK_PRTL_SPC', 'ESPACIO_ID', 'ID de Espacio no numérico',
+    'SPC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+
+/*
+ *  --- SEEK_PORTAL_SPACE: VALIDACIONES ---
+ */
+
+// El espacio no existe
+$_POST = array('espacio_id' => '1111');
+$space_service = new Space_Service();
+$feedback = $space_service->seekPortalSpace();
+$respTest = obtenerRespuesta('Espacio', 'SEEK_PRTL_SPC', 'ACCION', 'El espacio no existe',
+    'SPCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+// Búsqueda del espacio del portal Ok
+$_POST = array('espacio_id' => '1');
+$space_service = new Space_Service();
+$feedback = $space_service->seekPortalSpace();
+$respTest = obtenerRespuesta('Espacio', 'SEEK_PRTL_SPC', 'ACCION', 'Consulta del espacio del portal Ok',
+    'PRTL_SPC_SEEK_OK', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testEspacio, $respTest);
+
+unset($_SESSION['username'], $_SESSION['rol']);
 
 
 //------------------------------------------------------------------------------
 //Fin test espacios
 //------------------------------------------------------------------------------
-$this->respuestaTest['resultado']['Edificio'] = $testEspacio;
+$this->respuestaTest['resultado']['Espacio'] = $testEspacio;
 $this->respuestaTest['numFallos'] += $numFallos;
 $this->respuestaTest['numTest'] += $numTest;

@@ -13,6 +13,7 @@ class Test {
         include './Test/User_Test.php';
         include './Test/Building_Test.php';
         include './Test/Floor_Test.php';
+        include './Test/Space_Test.php';
 
         session_destroy();
 

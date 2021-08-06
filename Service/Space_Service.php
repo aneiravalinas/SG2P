@@ -241,6 +241,7 @@ class Space_Service extends Space_Validation {
         }
 
         if($space['nombre'] != $this->nombre) {
+            $this->space_entity->planta_id = $space['planta_id'];
             $this->feedback = $this->name_space_not_exists();
             if(!$this->feedback['ok']) {
                 $this->feedback['floor'] = array('planta_id' => $space['planta_id']);

@@ -79,8 +79,8 @@ CREATE TABLE EDIFICIO_PLAN
 (
     `edificio_id` INT(10) NOT NULL,
     `plan_id` INT(10) NOT NULL,
-    `fecha_asignacion` DATE NOT NULL,
-    `fecha_implementacion` DATE NULL,
+    `fecha_asignacion` DATE NOT NULL DEFAULT CURRENT_DATE,
+    `fecha_implementacion` DATE NOT NULL DEFAULT (CURRENT_DATE  + INTERVAL 2 YEAR),
     `estado` enum('pendiente', 'implementado','prescrito') NOT NULL DEFAULT 'pendiente',
 
     CONSTRAINT `pk_edificio_plan` PRIMARY KEY (`edificio_id`, `plan_id`),
@@ -131,7 +131,7 @@ CREATE TABLE EDIFICIO_DOCUMENTO
     `edificio_id` INT(10) NOT NULL,
     `documento_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_implementacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `fecha_implementacion` DATE NOT NULL DEFAULT (CURRENT_DATE  + INTERVAL 2 YEAR),
     `nombre_doc` VARCHAR(20) NOT NULL,
 
     CONSTRAINT `pk_edificio_documento` PRIMARY KEY (`edificio_documento_id`),
@@ -145,7 +145,7 @@ CREATE TABLE EDIFICIO_PROCEDIMIENTO
     `edificio_id` INT(10) NOT NULL,
     `procedimiento_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_implementacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `fecha_implementacion` DATE NOT NULL DEFAULT (CURRENT_DATE  + INTERVAL 2 YEAR),
     `nombre_doc` VARCHAR(20) NOT NULL,
 
     CONSTRAINT `pk_edificio_procedimiento` PRIMARY KEY (`edificio_procedimiento_id`),
@@ -159,7 +159,7 @@ CREATE TABLE PLANTA_RUTA
     `planta_id` INT(10) NOT NULL,
     `ruta_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_implementacion` DATE NULL,
+    `fecha_implementacion` DATE NOT NULL DEFAULT (CURRENT_DATE  + INTERVAL 2 YEAR),
     `nombre_doc` VARCHAR(20) NOT NULL,
 
     CONSTRAINT `pk_planta_ruta` PRIMARY KEY (`planta_ruta_id`),
@@ -185,7 +185,7 @@ CREATE TABLE EDIFICIO_SIMULACRO
     `edificio_id` INT(10) NOT NULL,
     `simulacro_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_planificacion` TIMESTAMP NOT NULL,
+    `fecha_planificacion` DATE NOT NULL DEFAULT (CURRENT_DATE  + INTERVAL 2 YEAR),
     `url_recurso` VARCHAR(20) NULL,
     `destinatarios` VARCHAR(100) NOT NULL,
     `resultado` TEXT NULL,
@@ -213,7 +213,7 @@ CREATE TABLE EDIFICIO_FORMACION
     `edificio_id` INT(10) NOT NULL,
     `formacion_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_planificacion` TIMESTAMP NOT NULL,
+    `fecha_planificacion` DATE NOT NULL DEFAULT (CURRENT_DATE  + INTERVAL 2 YEAR),
     `nombre_doc` VARCHAR(20) NULL,
     `url_recurso` VARCHAR(20) NULL,
     `destinatarios` VARCHAR(100) NOT NULL,
@@ -231,13 +231,14 @@ CREATE TABLE NOTIFICACION
     `edificio_id` INT(10) NOT NULL,
     `plan_id` INT(10) NOT NULL,
     `leido` BIT NOT NULL DEFAULT 0,
-    `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `fecha` DATE NOT NULL DEFAULT CURRENT_DATE,
     `mensaje` VARCHAR(280) NOT NULL,
 
     CONSTRAINT `pk_notificacion` PRIMARY KEY (`id_notificacion`),
     CONSTRAINT `fk_notificacion_to_usuario` FOREIGN KEY (`username`) REFERENCES USUARIO (`username`),
     CONSTRAINT `fk_notificacion_to_edificio_plan` FOREIGN KEY (`edificio_id`, `plan_id`) REFERENCES EDIFICIO_PLAN (`edificio_id`, `plan_id`)
 );
+
 
 
 
@@ -273,8 +274,8 @@ INSERT INTO RUTA (`ruta_id`, `plan_id`, `titulo`, `descripcion`, `comentario`) V
 INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_implementacion`, `nombre_doc`) VALUES
 (1,2,1,'vigente','15-05-2021','nombre_doc');
 
-INSERT INTO EDIFICIO_PLAN (`edificio_id`, `plan_id`, `fecha_asignacion`, `fecha_implementacion`, `estado`) VALUES
-(2,1, '25-12-2020', null, 'pendiente');
+INSERT INTO EDIFICIO_PLAN (`edificio_id`, `plan_id`, `fecha_asignacion`, `estado`) VALUES
+(2,1, '25-12-2020', 'pendiente');
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';
 GRANT ALL PRIVILEGES ON prevendb_test.* TO 'prevenroot'@'localhost';
