@@ -159,7 +159,7 @@ CREATE TABLE PLANTA_RUTA
     `planta_id` INT(10) NOT NULL,
     `ruta_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_implementacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `fecha_implementacion` DATE NULL,
     `nombre_doc` VARCHAR(20) NOT NULL,
 
     CONSTRAINT `pk_planta_ruta` PRIMARY KEY (`planta_ruta_id`),
@@ -266,6 +266,12 @@ INSERT INTO ESPACIO (`espacio_id`, `planta_id`, `nombre`, `descripcion`, `foto_e
 
 INSERT INTO PLAN (`plan_id`, `nombre`, `descripcion`, `instrucciones`) VALUES
 (1,'Plan Uno','Descripcion Plan Uno', 'Instrucciones del Plan Uno');
+
+INSERT INTO RUTA (`ruta_id`, `plan_id`, `titulo`, `descripcion`, `comentario`) VALUES
+(1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta','Comentario de la definición de la ruta');
+
+INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_implementacion`, `nombre_doc`) VALUES
+(1,2,1,'vigente','15-05-2021','nombre_doc');
 
 INSERT INTO EDIFICIO_PLAN (`edificio_id`, `plan_id`, `fecha_asignacion`, `fecha_implementacion`, `estado`) VALUES
 (2,1, '25-12-2020', null, 'pendiente');

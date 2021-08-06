@@ -178,6 +178,7 @@ arrayES = {
 
         // Consulta por Planta
         'FLRID_NOT_EXST' : 'La Planta no existe',
+        'FLRID_EXST' : 'La Planta existe',
         'FLRID_KO' : 'Error al consultar por ID de Planta',
 
         // Consulta de Espacios asociados a Planta

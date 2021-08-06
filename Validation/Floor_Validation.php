@@ -108,7 +108,7 @@ class Floor_Validation extends Validator {
             return $this->rellena_validation(false,'NUM_FLOOR_EMPT','PLANTA');
         }
 
-        if(!$this->longitud_maxima($this->num_planta,2)) {
+        if(!$this->longitud_maxima($this->num_planta,3)) {
             return $this->rellena_validation(false,'NUM_FLOOR_LRG','PLANTA');
         }
 

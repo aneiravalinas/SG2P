@@ -175,6 +175,7 @@ arrayGA = {
 
         // Consulta por Planta
         'FLRID_NOT_EXST' : 'A Planta non existe',
+        'FLRID_EXST' : 'A Planta existe',
         'FLRID_KO' : 'Error ó consultar por ID de Planta',
 
         // Consulta de Espacios asociados a Planta

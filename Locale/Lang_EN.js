@@ -175,6 +175,7 @@ arrayEN = {
 
         // Consulta por Planta
         'FLRID_NOT_EXST' : 'The floor does not exist',
+        'FLRID_EXST' : 'The floor exist',
         'FLRID_KO' : 'Error when consulting by Floor ID',
 
         // Consulta de Espacios asociados a Planta

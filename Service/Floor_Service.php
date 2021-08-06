@@ -337,6 +337,8 @@ class Floor_Service extends Floor_Validation {
             if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
                 $feedback['code'] = 'BLDID_NOT_EXST';
+            } else {
+                $this->feedback['code'] = 'BLDID_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'BLDID_KO';
@@ -366,6 +368,8 @@ class Floor_Service extends Floor_Validation {
             if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
                 $feedback['code'] = 'FLRID_NOT_EXST';
+            } else {
+                $feedback['code'] = 'FLRID_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'FLRID_KO';
