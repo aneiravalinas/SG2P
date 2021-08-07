@@ -374,6 +374,7 @@ arrayGA = {
         'i18n-users': 'Usuarios',
         'i18n-profile' : 'Meu Perfil',
         'i18n-buildings' : 'Edificios',
+        'i18n-admin-plans' : 'Administrar Plans',
 
         // USER VIEWS
         'i18n-dni' : 'DNI',
@@ -453,6 +454,11 @@ arrayGA = {
         'i18n-portal-floors-empty' : 'Este edificio aínda non ten plantas rexistradas',
         'i18n-piso' : 'Piso número: ',
         'i18n-floor-spaces' : 'Espazos da Planta',
+
+        // DEF_PLANS VIEW
+        'i18n-def-plans' : 'Definicións de Plans',
+        'i18n-def-plans-empty' : 'Non hay definicións de plans rexistradas',
+        'i18n-plan_id' : 'ID Plan',
 
 
         // MODAL

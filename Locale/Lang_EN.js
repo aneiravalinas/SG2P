@@ -373,6 +373,7 @@ arrayEN = {
         'i18n-users': 'Users',
         'i18n-profile' : 'My Profile',
         'i18n-buildings' : 'Buildings',
+        'i18n-admin-plans' : 'Manage Plans',
 
         // USER VIEWS
         'i18n-dni' : 'DNI',
@@ -452,6 +453,11 @@ arrayEN = {
         'i18n-portal-floors-empty' : 'This building does not have registered floors yet',
         'i18n-piso' : 'Floor number: ',
         'i18n-floor-spaces' : 'Floor Spaces',
+
+        // DEF_PLANS VIEW
+        'i18n-def-plans' : 'Definitions of Plans',
+        'i18n-def-plans-empty' : 'No plan definitions on file',
+        'i18n-plan_id' : 'ID Plan',
 
         // MODAL
             // Campos Modal

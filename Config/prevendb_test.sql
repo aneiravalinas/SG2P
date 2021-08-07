@@ -69,8 +69,7 @@ CREATE TABLE PLAN
 (
     `plan_id` INT(10) AUTO_INCREMENT,
     `nombre` VARCHAR(40) NOT NULL,
-    `descripcion` VARCHAR(380) NOT NULL,
-    `instrucciones` TEXT NOT NULL,
+    `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_plan` PRIMARY KEY (`plan_id`)
 );
@@ -80,8 +79,8 @@ CREATE TABLE EDIFICIO_PLAN
     `edificio_id` INT(10) NOT NULL,
     `plan_id` INT(10) NOT NULL,
     `fecha_asignacion` DATE NOT NULL DEFAULT CURRENT_DATE,
-    `fecha_implementacion` DATE NOT NULL DEFAULT (CURRENT_DATE  + INTERVAL 2 YEAR),
-    `estado` enum('pendiente', 'implementado','prescrito') NOT NULL DEFAULT 'pendiente',
+    `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `estado` enum('pendiente', 'implementado','vencido') NOT NULL DEFAULT 'pendiente',
 
     CONSTRAINT `pk_edificio_plan` PRIMARY KEY (`edificio_id`, `plan_id`),
     CONSTRAINT `fk_edificio_plan_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
@@ -93,8 +92,7 @@ CREATE TABLE DOCUMENTO
     `documento_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
     `titulo` VARCHAR(50) NOT NULL,
-    `descripcion` VARCHAR(380) NOT NULL,
-    `comentario` TEXT NULL,
+    `descripcion` TEXT NOT NULL,
     `visible` BIT NOT NULL,
 
     CONSTRAINT `pk_documento` PRIMARY KEY (`documento_id`),
@@ -106,8 +104,7 @@ CREATE TABLE PROCEDIMIENTO
     `procedimiento_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
     `titulo` VARCHAR(50) NOT NULL,
-    `descripcion` VARCHAR(380) NOT NULL,
-    `comentario` TEXT NULL,
+    `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_procedimiento` PRIMARY KEY (`procedimiento_id`),
     CONSTRAINT `fk_procedimiento_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
@@ -118,8 +115,7 @@ CREATE TABLE RUTA
     `ruta_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
     `titulo` VARCHAR(50) NOT NULL,
-    `descripcion` VARCHAR(380) NOT NULL,
-    `comentario` TEXT NULL,
+    `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_ruta` PRIMARY KEY (`ruta_id`),
     CONSTRAINT `fk_ruta_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
@@ -131,7 +127,7 @@ CREATE TABLE EDIFICIO_DOCUMENTO
     `edificio_id` INT(10) NOT NULL,
     `documento_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_implementacion` DATE NOT NULL DEFAULT (CURRENT_DATE  + INTERVAL 2 YEAR),
+    `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NOT NULL,
 
     CONSTRAINT `pk_edificio_documento` PRIMARY KEY (`edificio_documento_id`),
@@ -145,7 +141,7 @@ CREATE TABLE EDIFICIO_PROCEDIMIENTO
     `edificio_id` INT(10) NOT NULL,
     `procedimiento_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_implementacion` DATE NOT NULL DEFAULT (CURRENT_DATE  + INTERVAL 2 YEAR),
+    `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NOT NULL,
 
     CONSTRAINT `pk_edificio_procedimiento` PRIMARY KEY (`edificio_procedimiento_id`),
@@ -159,7 +155,7 @@ CREATE TABLE PLANTA_RUTA
     `planta_id` INT(10) NOT NULL,
     `ruta_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_implementacion` DATE NOT NULL DEFAULT (CURRENT_DATE  + INTERVAL 2 YEAR),
+    `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NOT NULL,
 
     CONSTRAINT `pk_planta_ruta` PRIMARY KEY (`planta_ruta_id`),
@@ -172,8 +168,7 @@ CREATE TABLE SIMULACRO
     `simulacro_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
     `titulo` VARCHAR(50) NOT NULL,
-    `descripcion` VARCHAR(380) NOT NULL,
-    `comentario` TEXT NULL,
+    `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_simulacro` PRIMARY KEY (`simulacro_id`),
     CONSTRAINT `fk_simulacro_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
@@ -185,7 +180,7 @@ CREATE TABLE EDIFICIO_SIMULACRO
     `edificio_id` INT(10) NOT NULL,
     `simulacro_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_planificacion` DATE NOT NULL DEFAULT (CURRENT_DATE  + INTERVAL 2 YEAR),
+    `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
     `url_recurso` VARCHAR(20) NULL,
     `destinatarios` VARCHAR(100) NOT NULL,
     `resultado` TEXT NULL,
@@ -200,8 +195,7 @@ CREATE TABLE FORMACION
     `formacion_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
     `titulo` VARCHAR(50) NOT NULL,
-    `descripcion` VARCHAR(380) NOT NULL,
-    `comentario` TEXT NULL,
+    `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_formacion` PRIMARY KEY (`formacion_id`),
     CONSTRAINT `fk_formacion_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
@@ -213,7 +207,7 @@ CREATE TABLE EDIFICIO_FORMACION
     `edificio_id` INT(10) NOT NULL,
     `formacion_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_planificacion` DATE NOT NULL DEFAULT (CURRENT_DATE  + INTERVAL 2 YEAR),
+    `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NULL,
     `url_recurso` VARCHAR(20) NULL,
     `destinatarios` VARCHAR(100) NOT NULL,
@@ -241,7 +235,6 @@ CREATE TABLE NOTIFICACION
 
 
 
-
 INSERT INTO USUARIO (`username`, `dni`, `password`,`rol`,`nombre`,`apellidos`,`email`,`telefono`,`foto_perfil`) VALUES
 ('sg2padmin','14197701P','7a25b0bc04e77a2f7453dd021168cdc2','administrador','admin','adminsurname','admin@email.es','666666666','default.png'),
 ('sg2porg','84001360R','7a25b0bc04e77a2f7453dd021168cdc2','organizacion','rorganizacion','rorganizacion','rorg@email.es','666666667','default.png'),
@@ -265,11 +258,11 @@ INSERT INTO ESPACIO (`espacio_id`, `planta_id`, `nombre`, `descripcion`, `foto_e
 (2,1,'Espacio Dos','Descripcion del espacio dos','default.png'),
 (3,1,'Espacio Tres','Descripcion del espacio tres','default.png');
 
-INSERT INTO PLAN (`plan_id`, `nombre`, `descripcion`, `instrucciones`) VALUES
-(1,'Plan Uno','Descripcion Plan Uno', 'Instrucciones del Plan Uno');
+INSERT INTO PLAN (`plan_id`, `nombre`, `descripcion`) VALUES
+(1,'Plan Uno','Descripcion Plan Uno');
 
-INSERT INTO RUTA (`ruta_id`, `plan_id`, `titulo`, `descripcion`, `comentario`) VALUES
-(1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta','Comentario de la definición de la ruta');
+INSERT INTO RUTA (`ruta_id`, `plan_id`, `titulo`, `descripcion`) VALUES
+(1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta');
 
 INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_implementacion`, `nombre_doc`) VALUES
 (1,2,1,'vigente','15-05-2021','nombre_doc');
