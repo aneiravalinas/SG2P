@@ -2,16 +2,16 @@
 
 include_once './Model/Abstract_Model.php';
 
-class Build_Plan_Model extends Abstract_Model {
+class DefDoc_Model extends Abstract_Model {
     var $atributos;
-    var $edificio_id;
+    var $documento_id;
     var $plan_id;
-    var $fecha_asignacion;
-    var $fecha_implementacion;
-    var $estado;
+    var $nombre;
+    var $descripcion;
+    var $visible;
 
     function __construct() {
-        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_impementacion','estado');
+        $this->atributos = array('documento_id','plan_id','nombre','decripcion','visible');
         $this->fill_fields();
     }
 
@@ -45,19 +45,9 @@ class Build_Plan_Model extends Abstract_Model {
         // TODO: Implement seek() method.
     }
 
-    function searchByBuildingID() {
-        $this->query = "
-            SELECT * FROM EDIFICIO_PLAN
-            WHERE edificio_id = '$this->edificio_id';
-        ";
-
-        $this->get_results_from_query();
-        return $this->feedback;
-    }
-
     function searchByPlan() {
         $this->query = "
-            SELECT * FROM EDIFICIO_PLAN
+            SELECT * FROM DOCUMENTO
             WHERE plan_id = '$this->plan_id'
         ";
 

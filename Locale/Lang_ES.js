@@ -229,6 +229,21 @@ arrayES = {
         // Subir foto espacio
         'SPC_PH_KO' : 'Error al subir la foto del espacio',
 
+    // DEF_PLAN
+
+        // SEARCH
+        'DFPLAN_SEARCH_OK' : 'La búsqueda de definiciones de planes se ha realizado correctamente',
+        'DFPLAN_SEARCH_KO' : 'Error al buscar definiciones de planes',
+
+        // ADD
+        'DFPLAN_ADD_OK' : 'La definición del plan se ha añadido correctamente',
+        'DFPLAN_ADD_KO' : 'Error al añadir la definición del plan',
+
+        // Búsqueda por nombre de plan
+        'DFPLAN_NAM_NOT_EXST': 'El nombre del plan no existe',
+        'DFPLAN_NAM_EXST' : 'El nombre del plan existe',
+        'DFPLAN_NAM_KO' : 'Error al consultar por nombre de plan',
+
 
         // Validaciones
 
@@ -350,6 +365,15 @@ arrayES = {
             // Foto Espacio
             'SPC_PH_EXT' : 'La extensión de la foto del espacio no está permitida',
             'SPC_PH_FRMT' : 'El nombre de la foto del espacio sólo puede contener letras, números y guiones',
+
+            // ID DefPlan
+            'DFPLAN_ID_EMPT' : 'El ID del Plan no puede ser vacío',
+            'DFPLAN_ID_NOT_NUMERIC' : 'El ID del Plan debe ser numérico',
+
+            // Nombre DefPlan
+            'DFPLAN_NAM_SHRT' : 'El nombre del plan debe ser superior a 3 caracteres',
+            'DEFPLAN_NAM_LRG' : 'El nombre del plan no debe superar los 60 caracteres',
+            'DEFPLAN_NAM_FRMT' : 'El nombre del plan contiene caracteres no permitidos',
 
 
 

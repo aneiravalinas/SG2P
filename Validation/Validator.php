@@ -44,7 +44,7 @@ abstract class Validator {
     //comprueba si un string tiene solo letras y números
     //devuelve true si es corrrecto false en caso contrario
     function es_alfanumerico($string){
-        if (preg_match('/[^a-zA-Z0-9]/',$string)){
+        if (preg_match('/[^a-zA-Z0-9áéíóúñÑ]/',$string)){
             return false;
         }else{
             return true;
@@ -63,7 +63,7 @@ abstract class Validator {
     //comprueba si un string tiene solo letras numeros y espacios
     //devuelve true si es corrrecto false en caso contrario
     function solo_alfanumerico_espacios($string){
-        if (preg_match('/[^a-zA-Z0-9\s]/',$string)){
+        if (preg_match('/[^a-zA-Z0-9áéíóúñÑ\s]/',$string)){
             return false;
         }else{
             return true;
@@ -71,7 +71,7 @@ abstract class Validator {
     }
 
     function solo_letras_espacios($string) {
-        if (preg_match('/[^a-zA-Z\s]/',$string)){
+        if (preg_match('/[^a-zA-ZáéíóúñÑ\s]/',$string)){
             return false;
         }else{
             return true;
@@ -81,7 +81,7 @@ abstract class Validator {
     //comprueba si un string tiene solo letras numeros espacios y guiones altos
     //devuelve true si es corrrecto false en caso contrario
     function solo_alfanumerico_espacios_guiones($string){
-        if (preg_match('/[^a-zA-Z0-9\s\-]/',$string)){
+        if (preg_match('/[^a-zA-Z0-9áéíóúñÑ\s\-]/',$string)){
             return false;
         }else{
             return true;
@@ -89,7 +89,7 @@ abstract class Validator {
     }
 
     function solo_letras_espacios_guiones($string) {
-        if (preg_match('/[^a-zA-Z\s\-]/',$string)){
+        if (preg_match('/[^a-zA-ZáéíóúñÑ\s\-]/',$string)){
             return false;
         }else{
             return true;
@@ -99,7 +99,7 @@ abstract class Validator {
     //comprueba si un string tiene solo letras numeros espacios y guiones
     //devuelve true si es corrrecto false en caso contrario
     function solo_alfanumerico_espacios_guiones_todos($string){
-        if (preg_match('/[^a-zA-Z0-9\s\-\_]/',$string)){
+        if (preg_match('/[^a-zA-Z0-9áéíóúñÑ\s\-\_]/',$string)){
             return false;
         }else{
             return true;
@@ -107,7 +107,7 @@ abstract class Validator {
     }
 
     function solo_letras_espacios_guiones_todos($string) {
-        if (preg_match('/[^a-zA-Z\s\-\_]/',$string)){
+        if (preg_match('/[^a-zA-ZáéíóúñÑ\s\-\_]/',$string)){
             return false;
         }else{
             return true;

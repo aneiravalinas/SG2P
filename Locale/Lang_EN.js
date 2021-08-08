@@ -226,6 +226,30 @@ arrayEN = {
         // Subir foto espacio
         'SPC_PH_KO' : 'Error uploading space photo',
 
+        // ID DefPlan
+        'DFPLAN_ID_EMPT' : 'Plan ID cannot be empty',
+        'DFPLAN_ID_NOT_NUMERIC' : 'Plan ID must be numeric',
+
+        // Nombre DefPlan
+        'DFPLAN_NAM_SHRT' : 'The plan name must be longer than 3 characters',
+        'DEFPLAN_NAM_LRG' : 'Plan name must not exceed 60 characters',
+        'DEFPLAN_NAM_FRMT' : 'Plan name contains illegal characters',
+
+    // DEF_PLAN
+
+        // SEARCH
+        'DFPLAN_SEARCH_OK' : 'Search for plan definitions was successful',
+        'DFPLAN_SEARCH_KO' : 'Failed to search plan definitions',
+
+        // ADD
+        'DFPLAN_ADD_OK' : 'The plan definition has been added successfully',
+        'DFPLAN_ADD_KO' : 'Failed to add plan definition',
+
+        // Búsqueda por nombre de plan
+        'DFPLAN_NAM_NOT_EXST': 'Plan name does not exist',
+        'DFPLAN_NAM_EXST' : 'Plan name exists',
+        'DFPLAN_NAM_KO' : 'Failed to query by plan name',
+
         // Validaciones
 
             // Nombre de Usuario

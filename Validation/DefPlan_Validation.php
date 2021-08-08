@@ -28,11 +28,6 @@ class DefPlan_Validation extends Validator {
     }
 
     function validar_atributos() {
-        $validacion = $this->validar_PLAN_ID();
-        if(!$validacion['ok']) {
-            return $validacion;
-        }
-
         $validacion = $this->validar_NOMBRE();
         if(!$validacion['ok']) {
             return $validacion;
@@ -58,7 +53,7 @@ class DefPlan_Validation extends Validator {
             return $this->rellena_validation(false, 'DFPLAN_NAM_SHRT', 'DEF_PLAN');
         }
 
-        if(!$this->longitud_maxima($this->nombre,40)) {
+        if(!$this->longitud_maxima($this->nombre,60)) {
             return $this->rellena_validation(false, 'DEFPLAN_NAM_LRG', 'DEF_PLAN');
         }
 

@@ -24,7 +24,19 @@ class DefPlan_Model extends Abstract_Model {
     }
 
     function ADD() {
-        // TODO: Implement ADD() method.
+        $this->query = "
+            INSERT INTO PLAN (
+                nombre,
+                descripcion
+            ) VALUES (
+                '$this->nombre',
+                '$this->descripcion'
+            );    
+        ";
+
+        $this->execute_single_query();
+        $this->plan_id = $this->id_autoincrement;
+        return $this->feedback;
     }
 
     function EDIT() {
@@ -49,8 +61,22 @@ class DefPlan_Model extends Abstract_Model {
     }
 
     function seek() {
-        // TODO: Implement seek() method.
+        $this->query = "
+            SELECT * FROM PLAN
+            WHERE plan_id = '$this->plan_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
+    function seekNamePlan() {
+        $this->query = "
+            SELECT * FROM PLAN
+            WHERE nombre = '$this->nombre'
+        ";
 
+        $this->get_one_result_from_query();
+        return $this->feedback;
+    }
 }

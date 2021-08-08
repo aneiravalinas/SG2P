@@ -34,6 +34,7 @@
     <script type="text/javascript" src="./View/js/validaciones_Edificio.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_Planta.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_Espacio.js"></script>
+    <script text="text/javascript" src="./View/js/validaciones_DefPlan.js"></script>
     <script type="text/javascript" src="./View/js/md5.js"></script>
 
 </head>

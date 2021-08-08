@@ -24,4 +24,25 @@ class DefPlan {
             new Message($feedback['code'], 'Panel', 'deshboard');
         }
     }
+
+    function addForm() {
+        include_once './View/DefPlans/Add_DefPlan_View.php';
+        new Add_DefPlan();
+    }
+
+    function add() {
+        $defPlan_service = new DefPlan_Service();
+        $feedback = $defPlan_service->ADD();
+        new Message($feedback['code'],'DefPlan', 'show');
+    }
+
+    function deleteForm() {
+        $defPlan_service = new DefPlan_Service();
+        $feedback = $defPlan_service->seek();
+        if($feedback['ok']) {
+            // TODO: Include and send DELETE_DEFPLAN_VIEW
+        } else {
+            new Message($feedback['code'],'DefPlan','show');
+        }
+    }
 }

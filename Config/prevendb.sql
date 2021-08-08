@@ -68,10 +68,11 @@ CREATE TABLE ESPACIO
 CREATE TABLE PLAN
 (
     `plan_id` INT(10) AUTO_INCREMENT,
-    `nombre` VARCHAR(40) NOT NULL,
+    `nombre` VARCHAR(60) NOT NULL,
     `descripcion` TEXT NOT NULL,
 
-    CONSTRAINT `pk_plan` PRIMARY KEY (`plan_id`)
+    CONSTRAINT `pk_plan` PRIMARY KEY (`plan_id`),
+    CONSTRAINT `uq_plan_nombre` UNIQUE (`nombre`)
 );
 
 CREATE TABLE EDIFICIO_PLAN
@@ -91,7 +92,7 @@ CREATE TABLE DOCUMENTO
 (
     `documento_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
-    `titulo` VARCHAR(50) NOT NULL,
+    `nombre` VARCHAR(50) NOT NULL,
     `descripcion` TEXT NOT NULL,
     `visible` BIT NOT NULL,
 
@@ -103,7 +104,7 @@ CREATE TABLE PROCEDIMIENTO
 (
     `procedimiento_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
-    `titulo` VARCHAR(50) NOT NULL,
+    `nombre` VARCHAR(50) NOT NULL,
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_procedimiento` PRIMARY KEY (`procedimiento_id`),
@@ -114,7 +115,7 @@ CREATE TABLE RUTA
 (
     `ruta_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
-    `titulo` VARCHAR(50) NOT NULL,
+    `nombre` VARCHAR(50) NOT NULL,
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_ruta` PRIMARY KEY (`ruta_id`),
@@ -167,7 +168,7 @@ CREATE TABLE SIMULACRO
 (
     `simulacro_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
-    `titulo` VARCHAR(50) NOT NULL,
+    `nombre` VARCHAR(50) NOT NULL,
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_simulacro` PRIMARY KEY (`simulacro_id`),
@@ -194,7 +195,7 @@ CREATE TABLE FORMACION
 (
     `formacion_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
-    `titulo` VARCHAR(50) NOT NULL,
+    `nombre` VARCHAR(50) NOT NULL,
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_formacion` PRIMARY KEY (`formacion_id`),
@@ -261,7 +262,7 @@ INSERT INTO ESPACIO (`espacio_id`, `planta_id`, `nombre`, `descripcion`, `foto_e
 INSERT INTO PLAN (`plan_id`, `nombre`, `descripcion`) VALUES
 (1,'Plan Uno','Descripcion Plan Uno');
 
-INSERT INTO RUTA (`ruta_id`, `plan_id`, `titulo`, `descripcion`) VALUES
+INSERT INTO RUTA (`ruta_id`, `plan_id`, `nombre`, `descripcion`) VALUES
 (1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta');
 
 INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_implementacion`, `nombre_doc`) VALUES
