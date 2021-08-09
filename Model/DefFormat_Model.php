@@ -2,7 +2,7 @@
 
 include_once './Model/Abstract_Model.php';
 
-class DefTrain_Model extends Abstract_Model {
+class DefFormat_Model extends Abstract_Model {
     var $atributos;
     var $formacion_id;
     var $plan_id;

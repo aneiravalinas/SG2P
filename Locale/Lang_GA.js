@@ -237,10 +237,53 @@ arrayGA = {
         'DFPLAN_ADD_OK' : 'A definición do plan engadiuse correctamente',
         'DFPLAN_ADD_KO' : 'Error ó engadir a definición do plan',
 
+        // DELETE
+        'DFPLAN_DEL_OK' : 'A definición do plan eliminouse correctamente',
+        'DFPLAN_DEL_KO' : 'Error ó eliminar a definición do plan',
+
+        // SEEK
+        'DFPLAN_SEEK_OK' : 'A consulta dos detalles da definición do plan realizouse correctamente correctamente',
+        'DFPLAN_SEEK_KO' : 'Error ó consultar os detalles da definición do plan',
+
         // Búsqueda por nombre de plan
         'DFPLAN_NAM_NOT_EXST': 'O nome do plan non existe',
         'DFPLAN_NAM_EXST' : 'O nome do plan existe',
         'DFPLAN_NAM_KO' : 'Error ó consultar por nome do plan',
+
+        // Búsqueda por ID de Plan
+        'DFPLANID_NOT_EXST' : 'A definición do plan non existe',
+        'DFPLANID_EXST' : 'A definición do plan existe',
+        'DFPLANID_KO' : 'Error ó consultar por ID de Plan',
+
+        // Búsqueda de edificios asignados
+        'DFPLAN_BLD_EXST' : 'Non se pode eliminar a definición do plan mentres teña edificios asignados',
+        'DFPLAN_BLD_NOT_EXST' : 'A definición do plan non está asignada a ningún edificio',
+        'DFPLAN_BLD_KO' : 'Fallou a consulta dos edificios asignados',
+
+        // Búsqueda de documentos asociados
+        'DFPLAN_DOC_EXST' : 'Non se pode eliminar a definición do plan mentres ten asociadas definicións de documentos',
+        'DFPLAN_DOC_NOT_EXST' : 'A definición do plan non ten definicións de documentos asociadas',
+        'DFPLAN_DOC_KO' : 'Fallou a consulta das definicións de documentos asociados',
+
+        // Búsqueda de procedimientos asociados
+        'DFPLAN_PROC_EXST' : 'Non se pode eliminar a definición do plan mentres ten definicións de procedemento asociadas',
+        'DFPLAN_PROC_NOT_EXST' : 'A definición do plan non ten definicións de procedemento asociadas',
+        'DFPLAN_PROC_KO' : 'Produciuse un erro ao consultar as definicións de procedemento asociadas',
+
+        // Búsqueda de rutas asociadas
+        'DFPLAN_ROUTE_EXST' : 'Non se pode eliminar a definición do plan mentres teña asociadas definicións de ruta',
+        'DFPLAN_ROUTE_NOT_EXST' : 'A definición do plan non ten definicións de ruta asociadas',
+        'DFPLAN_ROUTE_KO' : 'Erro ao consultar as definicións das rutas asociadas',
+
+        // Búsqueda de formaciones asociados
+        'DFPLAN_FRMT_EXST' : 'Non se pode eliminar a definición do plan mentres teña asociadas definicións de adestramento',
+        'DFPLAN_FRMT_NOT_EXST' : 'A definición do plan non ten definicións de formacións asociadas',
+        'DFPLAN_FRMT_KO' : 'Erro ao consultar definicións de formacións asociadas',
+
+        // Búsqueda de simulacros asociados
+        'DFPLAN_SIM_EXST' : 'Non se pode eliminar a definición do plan mentres teña asociadas definicións de perforación',
+        'DFPLAN_SIM_NOT_EXST' : 'A definición do plan non ten definicións de exercicio asociadas',
+        'DFPLAN_SIM_KO' : 'Fallou a consulta de definicións falsas',
 
         // Validaciones
 
@@ -484,6 +527,7 @@ arrayGA = {
         'i18n-def-plans' : 'Definicións de Plans',
         'i18n-def-plans-empty' : 'Non hay definicións de plans rexistradas',
         'i18n-plan_id' : 'ID Plan',
+        'i18n-del-def-plan-confirm' : '¿Está seguro de que desexa eliminar a definición deste plan? A acción non será reversible',
 
 
         // MODAL

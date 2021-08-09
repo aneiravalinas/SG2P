@@ -239,10 +239,53 @@ arrayES = {
         'DFPLAN_ADD_OK' : 'La definición del plan se ha añadido correctamente',
         'DFPLAN_ADD_KO' : 'Error al añadir la definición del plan',
 
+        // DELETE
+        'DFPLAN_DEL_OK' : 'La definición del plan se ha eliminado correctamente',
+        'DFPLAN_DEL_KO' : 'Error al eliminar la definición del plan',
+
+        // SEEK
+        'DFPLAN_SEEK_OK' : 'La consulta de los detalles de la definición del plan se ha realizado correctamente',
+        'DFPLAN_SEEK_KO' : 'Error al consultar los detalles de la definición del plan',
+
         // Búsqueda por nombre de plan
         'DFPLAN_NAM_NOT_EXST': 'El nombre del plan no existe',
         'DFPLAN_NAM_EXST' : 'El nombre del plan existe',
         'DFPLAN_NAM_KO' : 'Error al consultar por nombre de plan',
+
+        // Búsqueda por ID de Plan
+        'DFPLANID_NOT_EXST' : 'La definición del plan no existe',
+        'DFPLANID_EXST' : 'La definición del plan existe',
+        'DFPLANID_KO' : 'Error al consultar por ID de Plan',
+
+        // Búsqueda de edificios asignados
+        'DFPLAN_BLD_EXST' : 'No se puede eliminar la definición del plan mientras esté asignado a edificios',
+        'DFPLAN_BLD_NOT_EXST' : 'La definición del plan no está asignado a ningún edificio',
+        'DFPLAN_BLD_KO' : 'Error al consultar los edificios asignados',
+
+        // Búsqueda de documentos asociados
+        'DFPLAN_DOC_EXST' : 'No se puede eliminar la definición del plan mientras tenga definiciones de documentos asociadas',
+        'DFPLAN_DOC_NOT_EXST' : 'La definición del plan no tiene definiciones de documentos asociadas',
+        'DFPLAN_DOC_KO' : 'Error al consultar definiciones de documentos asociadas',
+
+        // Búsqueda de procedimientos asociados
+        'DFPLAN_PROC_EXST' : 'No se puede eliminar la definición del plan mientras tenga definiciones de procedimientos asociadas',
+        'DFPLAN_PROC_NOT_EXST' : 'La definición del plan no tiene definiciones de procedimientos asociados',
+        'DFPLAN_PROC_KO' : 'Error al consultar definiciones de procedimientos asociadas',
+
+        // Búsqueda de rutas asociadas
+        'DFPLAN_ROUTE_EXST' : 'No se puede eliminar la definición del plan mientras tenga definiciones de rutas asociadas',
+        'DFPLAN_ROUTE_NOT_EXST' : 'La definición del plan no tiene definiciones de rutas asociadas',
+        'DFPLAN_ROUTE_KO' : 'Error al consultar definiciones de rutas asociadas',
+
+        // Búsqueda de formaciones asociados
+        'DFPLAN_FRMT_EXST' : 'No se puede eliminar la definición del plan mientras tenga definiciones de formaciones asociadas',
+        'DFPLAN_FRMT_NOT_EXST' : 'La definición del plan no tiene definiciones de formaciones asociadas',
+        'DFPLAN_FRMT_KO' : 'Error al consultar definiciones de formaciones asociadas',
+
+        // Búsqueda de simulacros asociados
+        'DFPLAN_SIM_EXST' : 'No se puede eliminar la definición del plan mientras tenga definiciones de simulacros asociadas',
+        'DFPLAN_SIM_NOT_EXST' : 'La definición del plan no tiene definiciones de simulacros asociados',
+        'DFPLAN_SIM_KO' : 'Error al consultar definiciones de simulacros',
 
 
         // Validaciones
@@ -488,6 +531,7 @@ arrayES = {
         'i18n-def-plans' : 'Definiciones de Planes',
         'i18n-def-plans-empty' : 'No hay definiciones de planes registradas',
         'i18n-plan_id' : 'ID Plan',
+        'i18n-del-def-plan-confirm' : '¿Está seguro que desea eliminar la definición de este plan? La acción no será reversible',
 
         // MODAL
             // Campos Modal

@@ -245,10 +245,53 @@ arrayEN = {
         'DFPLAN_ADD_OK' : 'The plan definition has been added successfully',
         'DFPLAN_ADD_KO' : 'Failed to add plan definition',
 
+        // DELETE
+        'DFPLAN_DEL_OK' : 'The plan definition has been successfully removed',
+        'DFPLAN_DEL_KO' : 'Failed to delete plan definition',
+
+        // SEEK
+        'DFPLAN_SEEK_OK' : 'The consultation of the details of the definition of the plan has been carried out correctly',
+        'DFPLAN_SEEK_KO' : 'Failed to query plan definition details',
+
         // Búsqueda por nombre de plan
         'DFPLAN_NAM_NOT_EXST': 'Plan name does not exist',
         'DFPLAN_NAM_EXST' : 'Plan name exists',
         'DFPLAN_NAM_KO' : 'Failed to query by plan name',
+
+        // Búsqueda por ID de Plan
+        'DFPLANID_NOT_EXST' : 'The definition of the plan does not exist',
+        'DFPLANID_EXST' : 'The definition of the plan exists',
+        'DFPLANID_KO' : 'Failed to query by Plan ID',
+
+        // Búsqueda de edificios asignados
+        'DFPLAN_BLD_EXST' : 'Cannot delete plan definition while assigned to buildings',
+        'DFPLAN_BLD_NOT_EXST' : 'The definition of the plan is not assigned to any building',
+        'DFPLAN_BLD_KO' : 'Failed to query assigned buildings',
+
+        // Búsqueda de documentos asociados
+        'DFPLAN_DOC_EXST' : 'Cannot delete plan definition while it has document definitions associated',
+        'DFPLAN_DOC_NOT_EXST' : 'The plan definition has no associated document definitions',
+        'DFPLAN_DOC_KO' : 'Failed to query associated document definitions',
+
+        // Búsqueda de procedimientos asociados
+        'DFPLAN_PROC_EXST' : 'Cannot delete plan definition while it has associated procedure definitions',
+        'DFPLAN_PROC_NOT_EXST' : 'The plan definition has no associated procedure definitions',
+        'DFPLAN_PROC_KO' : 'Failed to query associated procedure definitions',
+
+        // Búsqueda de rutas asociadas
+        'DFPLAN_ROUTE_EXST' : 'Cannot delete plan definition while it has associated route definitions',
+        'DFPLAN_ROUTE_NOT_EXST' : 'The plan definition does not have associated route definitions',
+        'DFPLAN_ROUTE_KO' : 'Error querying definitions of associated routes',
+
+        // Búsqueda de formaciones asociados
+        'DFPLAN_FRMT_EXST' : 'Cannot delete plan definition while it has associated formation definitions',
+        'DFPLAN_FRMT_NOT_EXST' : 'The definition of the plan does not have definitions of associated formations',
+        'DFPLAN_FRMT_KO' : 'Error querying definitions of associated formations',
+
+        // Búsqueda de simulacros asociados
+        'DFPLAN_SIM_EXST' : 'Cannot delete plan definition while it has simulacrum definitions associated',
+        'DFPLAN_SIM_NOT_EXST' : 'The plan definition has no associated simulacrum definitions',
+        'DFPLAN_SIM_KO' : 'Failed to query simulacrum definitions',
 
         // Validaciones
 
@@ -482,6 +525,7 @@ arrayEN = {
         'i18n-def-plans' : 'Definitions of Plans',
         'i18n-def-plans-empty' : 'No plan definitions on file',
         'i18n-plan_id' : 'ID Plan',
+        'i18n-del-def-plan-confirm' : 'Are you sure you want to delete the definition of this plan? The action will not be reversible',
 
         // MODAL
             // Campos Modal

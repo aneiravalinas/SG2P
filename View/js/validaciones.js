@@ -300,7 +300,7 @@ function check_text(element,size=null) {
     var value = document.getElementById(element).value;
     var name = document.getElementById(element).name;
 
-    var pattern = /^[./&ª\-_ºA-z0-9À-ú\s\t\n\u00f1\u00d1]+$/g;
+    var pattern = /^[,¡!¿?./&ª\-_ºA-z0-9À-ú\s\t\n\u00f1\u00d1]+$/g;
     if(!pattern.test(value)) {
         openModal(name,'i18n-chars-not_allow');
         correct = false;

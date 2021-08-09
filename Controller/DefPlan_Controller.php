@@ -40,9 +40,16 @@ class DefPlan {
         $defPlan_service = new DefPlan_Service();
         $feedback = $defPlan_service->seek();
         if($feedback['ok']) {
-            // TODO: Include and send DELETE_DEFPLAN_VIEW
+            include_once './View/DefPlans/Delete_DefPlan_View.php';
+            new Delete_DefPlan($feedback['resource']);
         } else {
             new Message($feedback['code'],'DefPlan','show');
         }
+    }
+
+    function delete() {
+        $defPlan_service = new DefPlan_Service();
+        $feedback = $defPlan_service->DELETE();
+        new Message($feedback['code'],'DefPlan','show');
     }
 }
