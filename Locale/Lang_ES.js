@@ -291,6 +291,21 @@ arrayES = {
         'DFPLAN_SIM_NOT_EXST' : 'La definición del plan no tiene definiciones de simulacros asociados',
         'DFPLAN_SIM_KO' : 'Error al consultar definiciones de simulacros',
 
+    // DEF_DOC
+
+        // SEARCH
+        'DFDOC_SEARCH_OK' : 'Búsqueda de definiciones de documentos OK',
+        'DFDOC_SEARCH_KO' : 'Error al buscar definiciones de documentos',
+
+        // ADD
+        'DFDOC_ADD_OK' : 'La definición del documento se ha añadido correctamente',
+        'DFDOC_ADD_KO' : 'Error al añadir la definición del documento',
+
+        // Búsqueda por nombre de documento
+        'DFDOC_NAME_EXST' : 'Ya existe una definición de documento con el nombre indicado para este plan',
+        'DFDOC_NAME_NOT_EXST' : 'No existe una definicón de documento con el nombre indicado en este plan',
+        'DFDOC_NAME_KO' : 'Error al consultar por nombre de documento',
+
 
         // Validaciones
 
@@ -422,6 +437,19 @@ arrayES = {
             'DEFPLAN_NAM_LRG' : 'El nombre del plan no debe superar los 60 caracteres',
             'DEFPLAN_NAM_FRMT' : 'El nombre del plan contiene caracteres no permitidos',
 
+            // ID DefDoc
+            'DFDOC_ID_EMPT' : 'El ID del Documento no puede ser vacío',
+            'DFDOC_ID_NOT_NUMERIC' : 'El ID del Documento debe ser numérico',
+
+            // Nombre DefDoc
+            'DFDOC_NAM_SHRT' : 'El nombre del documento debe ser superior a 5 caracteres',
+            'DFDOC_NAM_LRG' : 'El nombre del documento no debe superar los 50 caracteres',
+            'DFDOC_NAM_FRMT' : 'El nombre del documento contiene caracteres no permitidos',
+
+            // Documento visible
+            'DFDOC_VISB_EMPT' : 'Se debe indicar si el documento será visible o no',
+            'DFDOC_VISB_VALUES' : 'Los valores permitidos para indicar la visibilidad del documento son sí o no',
+
 
 
 
@@ -538,6 +566,20 @@ arrayES = {
         'i18n-del-def-plan-confirm' : '¿Está seguro que desea eliminar la definición de este plan? La acción no será reversible',
         'i18n-search-def-plan' : 'Buscar Def. de Planes',
         'i18n-showCurrent-defPlan' : 'Detalles de la Def. del Plan',
+        'i18n-show-plans-defdocs' : 'Def. de Documentos',
+        'i18n-show-plans-defprocs' : 'Def. de Procedimientos',
+        'i18n-show-plans-defroutes' : 'Def. de Rutas',
+        'i18n-show-plans-deformats' : 'Def. de Formaciones',
+        'i18n-show-plans-defsims' : 'Def. de Simulacros',
+
+        // DEF_DOCS VIEW
+        'i18n-def-docs' : 'Definiciones de Documentos',
+        'i18n-document_id' : 'ID Documento',
+        'i18n-visible' : 'Visible',
+        'i18n-def-docs-empty' : 'No hay definiciones de documentos registradas',
+        'i18n-add-defDoc' : 'Definir Documento',
+        'i18n-yes': 'Sí',
+        'i18n-no' : 'No',
 
         // MODAL
             // Campos Modal

@@ -26,7 +26,23 @@ class DefDoc_Model extends Abstract_Model {
     }
 
     function ADD() {
-        // TODO: Implement ADD() method.
+        $this->query = "
+            INSERT INTO DOCUMENTO (
+                plan_id,
+                nombre,
+                descripcion,
+                visible
+            ) VALUES (
+                '$this->plan_id',
+                '$this->nombre',
+                '$this->descripcion',
+                '$this->visible'
+            );    
+        ";
+
+        $this->execute_single_query();
+        $this->documento_id = $this->id_autoincrement;
+        return $this->feedback;
     }
 
     function EDIT() {
@@ -38,7 +54,18 @@ class DefDoc_Model extends Abstract_Model {
     }
 
     function SEARCH() {
-        // TODO: Implement SEARCH() method.
+        $this->query = "
+            SELECT * 
+            FROM DOCUMENTO
+            WHERE
+                documento_id LIKE '%" . $this->documento_id . "%' AND
+                nombre LIKE '%" . $this->nombre . "%' AND
+                visible LIKE '%" . $this->visible . "%' AND
+                plan_id = '$this->plan_id'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
     }
 
     function seek() {
@@ -52,6 +79,18 @@ class DefDoc_Model extends Abstract_Model {
         ";
 
         $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function seekByDocName() {
+        $this->query = "
+            SELECT * FROM DOCUMENTO
+            WHERE 
+                  nombre = '$this->nombre' AND 
+                  plan_id = '$this->plan_id'
+        ";
+
+        $this->get_one_result_from_query();
         return $this->feedback;
     }
 

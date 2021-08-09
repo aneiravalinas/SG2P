@@ -289,6 +289,21 @@ arrayGA = {
         'DFPLAN_SIM_NOT_EXST' : 'A definición do plan non ten definicións de exercicio asociadas',
         'DFPLAN_SIM_KO' : 'Fallou a consulta de definicións falsas',
 
+    // DEF_DOC
+
+        // SEARCH
+        'DFDOC_SEARCH_OK' : 'Búsqueda de definicións de documentos OK',
+        'DFDOC_SEARCH_KO' : 'Error ó buscar definicións de documentos',
+
+        // ADD
+        'DFDOC_ADD_OK' : 'A definición do documento engadiuse correctamente',
+        'DFDOC_ADD_KO' : 'Erro ao engadir a definición do documento',
+
+        // Búsqueda por nombre de documento
+        'DFDOC_NAME_EXST' : 'Xa existe para este plan unha definición de documento co nome indicado',
+        'DFDOC_NAME_NOT_EXST' : 'Non hai ningunha definición de documento co nome indicado neste plan',
+        'DFDOC_NAME_KO' : 'Fallou a consulta polo nome do documento',
+
         // Validaciones
 
             // Nombre de Usuario
@@ -418,6 +433,19 @@ arrayGA = {
             'DEFPLAN_NAM_LRG' : 'O nome do plan plan non debe superar os 60 caracteres',
             'DEFPLAN_NAM_FRMT' : 'O nome do plan contén caracteres non permitidos',
 
+            // ID DefDoc
+            'DFDOC_ID_EMPT' : 'O ID do documento non pode estar baleiro',
+            'DFDOC_ID_NOT_NUMERIC' : 'O ID do documento debe ser numérico',
+
+            // Nombre DefDoc
+            'DFDOC_NAM_SHRT' : 'O nome do documento debe ter máis de 5 caracteres',
+            'DFDOC_NAM_LRG' : 'O nome do documento non debe exceder os 50 caracteres',
+            'DFDOC_NAM_FRMT' : 'O nome do documento contén caracteres ilegais',
+
+            // Documento visible
+            'DFDOC_VISB_EMPT' : 'Debe indicarse se o documento será visible ou non',
+            'DFDOC_VISB_VALUES' : 'Os valores permitidos para indicar a visibilidade do documento son si ou non',
+
 
 
 
@@ -534,6 +562,20 @@ arrayGA = {
         'i18n-del-def-plan-confirm' : '¿Está seguro de que desexa eliminar a definición deste plan? A acción non será reversible',
         'i18n-search-def-plan' : 'Buscar Def. de Plans',
         'i18n-showCurrent-defPlan' : 'Detalles da Def. do Plan',
+        'i18n-show-plans-defdocs' : 'Def. de Documentos',
+        'i18n-show-plans-defprocs' : 'Def. de Procedementos',
+        'i18n-show-plans-defroutes' : 'Def. de Rutas',
+        'i18n-show-plans-deformats' : 'Def. de Formacións',
+        'i18n-show-plans-defsims' : 'Def. de Simulacros',
+
+        // DEF_DOCS VIEW
+        'i18n-def-docs' : 'Definicións de Documentos',
+        'i18n-document_id' : 'ID Documento',
+        'i18n-visible' : 'Visible',
+        'i18n-def-docs-empty' : 'Non hai definicións de documentos rexistrados',
+        'i18n-add-defDoc' : 'Definir Documento',
+        'i18n-yes': 'Sí',
+        'i18n-no' : 'Non',
 
 
         // MODAL

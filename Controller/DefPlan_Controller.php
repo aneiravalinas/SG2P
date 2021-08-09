@@ -5,7 +5,6 @@ class DefPlan {
     function __construct() {
         include './View/Page/Message_View.php';
         include './Service/DefPlan_Service.php';
-        $this->checkPermission();
     }
 
     function checkPermission() {

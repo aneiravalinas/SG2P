@@ -226,15 +226,6 @@ arrayEN = {
         // Subir foto espacio
         'SPC_PH_KO' : 'Error uploading space photo',
 
-        // ID DefPlan
-        'DFPLAN_ID_EMPT' : 'Plan ID cannot be empty',
-        'DFPLAN_ID_NOT_NUMERIC' : 'Plan ID must be numeric',
-
-        // Nombre DefPlan
-        'DFPLAN_NAM_SHRT' : 'The plan name must be longer than 3 characters',
-        'DEFPLAN_NAM_LRG' : 'Plan name must not exceed 60 characters',
-        'DEFPLAN_NAM_FRMT' : 'Plan name contains illegal characters',
-
     // DEF_PLAN
 
         // SEARCH
@@ -296,6 +287,22 @@ arrayEN = {
         'DFPLAN_SIM_EXST' : 'Cannot delete plan definition while it has simulacrum definitions associated',
         'DFPLAN_SIM_NOT_EXST' : 'The plan definition has no associated simulacrum definitions',
         'DFPLAN_SIM_KO' : 'Failed to query simulacrum definitions',
+
+
+    // DEF_DOC
+
+        // SEARCH
+        'DFDOC_SEARCH_OK' : 'Document definition search OK',
+        'DFDOC_SEARCH_KO' : 'Error searching document definitions',
+
+        // ADD
+        'DFDOC_ADD_OK' : 'Document definition has been added successfully',
+        'DFDOC_ADD_KO' : 'Error adding document definition',
+
+        // Búsqueda por nombre de documento
+        'DFDOC_NAME_EXST' : 'A document definition with the indicated name already exists for this plan',
+        'DFDOC_NAME_NOT_EXST' : 'There is no document definition with the name indicated in this plan',
+        'DFDOC_NAME_KO' : 'Failed to query by document name',
 
         // Validaciones
 
@@ -417,6 +424,28 @@ arrayEN = {
             'SPC_PH_EXT' : 'The photo extension of the space is not allowed',
             'SPC_PH_FRMT' : 'The name of the space photo can only contain letters, numbers and hyphens',
 
+            // ID DefPlan
+            'DFPLAN_ID_EMPT' : 'Plan ID cannot be empty',
+            'DFPLAN_ID_NOT_NUMERIC' : 'Plan ID must be numeric',
+
+            // Nombre DefPlan
+            'DFPLAN_NAM_SHRT' : 'The plan name must be longer than 3 characters',
+            'DEFPLAN_NAM_LRG' : 'Plan name must not exceed 60 characters',
+            'DEFPLAN_NAM_FRMT' : 'Plan name contains illegal characters',
+
+            // ID DefDoc
+            'DFDOC_ID_EMPT' : 'Document ID cannot be empty',
+            'DFDOC_ID_NOT_NUMERIC' : 'The Document ID must be numeric',
+
+            // Nombre DefDoc
+            'DFDOC_NAM_SHRT' : 'The name of the document must be longer than 5 characters',
+            'DFDOC_NAM_LRG' : 'The name of the document must not exceed 50 characters',
+            'DFDOC_NAM_FRMT' : 'Document name contains illegal characters',
+
+            // Documento visible
+            'DFDOC_VISB_EMPT' : 'It must be indicated if the document will be visible or not',
+            'DFDOC_VISB_VALUES' : 'The allowed values ​​to indicate the visibility of the document are yes or no',
+
 
 
     // INTERFACE
@@ -532,6 +561,20 @@ arrayEN = {
         'i18n-del-def-plan-confirm' : 'Are you sure you want to delete the definition of this plan? The action will not be reversible',
         'i18n-search-def-plan' : 'Search Plan Def.',
         'i18n-showCurrent-defPlan' : 'Details of the Plan Def',
+        'i18n-show-plans-defdocs' : 'Document Defs.',
+        'i18n-show-plans-defprocs' : 'Procedure Defs.',
+        'i18n-show-plans-defroutes' : 'Routes Defs.',
+        'i18n-show-plans-deformats' : 'Formations Defs.',
+        'i18n-show-plans-defsims' : 'Simulacrums Defs.',
+
+        // DEF_DOCS VIEW
+        'i18n-def-docs' : 'Document Definitions',
+        'i18n-document_id' : 'Document ID',
+        'i18n-visible' : 'Visible',
+        'i18n-def-docs-empty' : 'No registered document definitions',
+        'i18n-add-defDoc' : 'Define Document',
+        'i18n-yes': 'Yes',
+        'i18n-no' : 'No',
 
         // MODAL
             // Campos Modal

@@ -96,30 +96,49 @@ class Show_DefPlans {
                                                 <span class="iconify" data-icon="fluent:textbox-more-24-filled" data-inline="false"></span>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item i18n-details" type="button" onclick="
+                                                <a class="dropdown-item i18n-show-plans-defdocs" type="button" onclick="
                                                     crearform('formenviar','post');
                                                     insertacampo(document.formenviar,'plan_id','<?php echo $plan['plan_id'] ?>');
-                                                    insertacampo(document.formenviar,'controller','DefPlan');
-                                                    insertacampo(document.formenviar,'action','showCurrent');
+                                                    insertacampo(document.formenviar,'controller','DefDoc');
+                                                    insertacampo(document.formenviar,'action','show');
                                                     enviaform(document.formenviar);">
-                                                    Detalles
+                                                    Def. de Documentos
                                                 </a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item i18n-edit" type="button" onclick="
+                                                <a class="dropdown-item i18n-show-plans-defprocs" type="button" onclick="
                                                     crearform('formenviar','post');
                                                     insertacampo(document.formenviar, 'plan_id','<?php echo $plan['plan_id'] ?>');
-                                                    insertacampo(document.formenviar, 'controller','DefPlan');
-                                                    insertacampo(document.formenviar, 'action', 'editForm');
+                                                    insertacampo(document.formenviar, 'controller','DefProc');
+                                                    insertacampo(document.formenviar, 'action', 'show');
                                                     enviaform(document.formenviar);">
-                                                    Editar
+                                                    Def. de Procedimientos
                                                 </a>
-                                                <a class="dropdown-item i18n-delete" type="button" onclick="
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item i18n-show-plans-defroutes" type="button" onclick="
                                                     crearform('formenviar','post');
                                                     insertacampo(document.formenviar, 'plan_id','<?php echo $plan['plan_id'] ?>');
-                                                    insertacampo(document.formenviar,'controller','DefPlan');
-                                                    insertacampo(document.formenviar,'action','deleteForm');
+                                                    insertacampo(document.formenviar,'controller','DefRoute');
+                                                    insertacampo(document.formenviar,'action','show');
                                                     enviaform(document.formenviar);">
-                                                    Eliminar
+                                                    Def. de Rutas
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item i18n-show-plans-deformats" type="button" onclick="
+                                                        crearform('formenviar','post');
+                                                        insertacampo(document.formenviar, 'plan_id','<?php echo $plan['plan_id'] ?>');
+                                                        insertacampo(document.formenviar,'controller','DefFormat');
+                                                        insertacampo(document.formenviar,'action','show');
+                                                        enviaform(document.formenviar);">
+                                                    Def. de Formaciones
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item i18n-show-plans-defsims" type="button" onclick="
+                                                        crearform('formenviar','post');
+                                                        insertacampo(document.formenviar, 'plan_id','<?php echo $plan['plan_id'] ?>');
+                                                        insertacampo(document.formenviar,'controller','DefSim');
+                                                        insertacampo(document.formenviar,'action','show');
+                                                        enviaform(document.formenviar);">
+                                                    Def. de Simulacros
                                                 </a>
                                             </div>
                                         </div>
