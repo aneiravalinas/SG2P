@@ -1,6 +1,6 @@
 <?php
 
-include 'Validator.php';
+include_once 'Validator.php';
 
 class DefPlan_Validation extends Validator {
     var $plan_id;
@@ -12,7 +12,7 @@ class DefPlan_Validation extends Validator {
     }
 
     function validar_atributos_search() {
-        $validacion = array('ok' => true, 'code' => '00000', 'resource' => 'EDIFICIO');
+        $validacion = array('ok' => true, 'code' => '00000', 'resource' => 'DEF_PLAN');
         if($this->plan_id != '') {
             $validacion = $this->validar_PLAN_ID();
             if(!$validacion['ok']) {
@@ -33,7 +33,7 @@ class DefPlan_Validation extends Validator {
             return $validacion;
         }
 
-        return $this->validar_DESCRIPCION();;
+        return $this->validar_DESCRIPCION();
     }
 
     function validar_PLAN_ID() {

@@ -94,7 +94,7 @@ CREATE TABLE DOCUMENTO
     `plan_id` INT(10) NOT NULL,
     `nombre` VARCHAR(50) NOT NULL,
     `descripcion` TEXT NOT NULL,
-    `visible` BIT NOT NULL,
+    `visible` BOOLEAN NOT NULL,
 
     CONSTRAINT `pk_documento` PRIMARY KEY (`documento_id`),
     CONSTRAINT `fk_documento_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)

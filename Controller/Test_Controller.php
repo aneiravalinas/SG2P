@@ -14,6 +14,7 @@ class Test {
         include './Test/Building_Test.php';
         include './Test/Floor_Test.php';
         include './Test/Space_Test.php';
+        include './Test/DefPlan_Test.php';
 
         session_destroy();
 

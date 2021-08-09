@@ -94,7 +94,7 @@ CREATE TABLE DOCUMENTO
     `plan_id` INT(10) NOT NULL,
     `nombre` VARCHAR(50) NOT NULL,
     `descripcion` TEXT NOT NULL,
-    `visible` BIT NOT NULL,
+    `visible` BOOLEAN NOT NULL,
 
     CONSTRAINT `pk_documento` PRIMARY KEY (`documento_id`),
     CONSTRAINT `fk_documento_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
@@ -260,10 +260,29 @@ INSERT INTO ESPACIO (`espacio_id`, `planta_id`, `nombre`, `descripcion`, `foto_e
 (3,1,'Espacio Tres','Descripcion del espacio tres','default.png');
 
 INSERT INTO PLAN (`plan_id`, `nombre`, `descripcion`) VALUES
-(1,'Plan Uno','Descripcion Plan Uno');
+(1,'Plan Uno','Descripcion Plan Uno'),
+(2,'Plan con Documentos','Descripcion Plan'),
+(3,'Plan con Procedimientos','Descripcion Plan'),
+(4,'Plan con Rutas','Descripcion Plan'),
+(5,'Plan con Formaciones','Descripcion Plan'),
+(6,'Plan con Simulacros','Descripcion Plan');
+
+
+INSERT INTO DOCUMENTO (`documento_id`,`plan_id`,`nombre`,`descripcion`,`visible`) VALUES
+(1,2,'Documentos del plan con documentos','Descripcion del Documento','yes');
+
+INSERT INTO PROCEDIMIENTO (`procedimiento_id`,`plan_id`,`nombre`,`descripcion`) VALUES
+(1,3,'Procedimiento del plan con procedimientos','Descripcion del Procedimiento');
 
 INSERT INTO RUTA (`ruta_id`, `plan_id`, `nombre`, `descripcion`) VALUES
-(1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta');
+(1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta'),
+(2,4,'Rutas del plan con rutas','Descripcion Rutas');
+
+INSERT INTO FORMACION (`formacion_id`,`plan_id`,`nombre`,`descripcion`) VALUES
+(1,5,'Formaciones del plan con formaciones','Descripción de la formación');
+
+INSERT INTO SIMULACRO (`simulacro_id`,`plan_id`,`nombre`,`descripcion`) VALUES
+(1,6,'Simulacros del plan con simulacros','Descripcion del simulacro');
 
 INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_implementacion`, `nombre_doc`) VALUES
 (1,2,1,'vigente','15-05-2021','nombre_doc');
