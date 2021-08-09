@@ -33,7 +33,7 @@ class DefPlan_Service extends DefPlan_Validation {
         $this->feedback = $this->defPlan_entity->SEARCH();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'DFPLAN_SEARCH_OK';
-        } else {
+        } else if($this->feedback['code'] == 'QRY_KO') {
             $this->feedback['ok'] = 'DFPLAN_SEARCH_KO';
         }
 
@@ -80,12 +80,46 @@ class DefPlan_Service extends DefPlan_Validation {
         $this->feedback = $this->defPlan_entity->DELETE();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'DFPLAN_DEL_OK';
-        } else {
+        } else if($this->feedback['code'] == 'QRY_KO') {
             $this->feedback['code'] = 'DFPLAN_DEL_KO';
         }
 
         return $this->feedback;
 
+    }
+
+    function EDIT() {
+        $validation = $this->validar_PLAN_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $validation = $this->validar_atributos();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByPlanID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $plan = $this->feedback['resource'];
+        if($plan['nombre'] != $this->nombre) {
+            $this->feedback = $this->name_plan_not_exist();
+            if(!$this->feedback['ok']) {
+                return $this->feedback;
+            }
+        }
+
+        $this->feedback = $this->defPlan_entity->EDIT();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'DFPLAN_EDT_OK';
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'DFPLAN_EDT_KO';
+        }
+
+        return $this->feedback;
     }
 
 

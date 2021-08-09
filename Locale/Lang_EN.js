@@ -253,6 +253,10 @@ arrayEN = {
         'DFPLAN_SEEK_OK' : 'The consultation of the details of the definition of the plan has been carried out correctly',
         'DFPLAN_SEEK_KO' : 'Failed to query plan definition details',
 
+        // EDIT
+        'DFPLAN_EDT_OK' : 'The plan definition has been modified successfully',
+        'DFPLAN_EDT_KO' : 'Error modifying plan definition',
+
         // Búsqueda por nombre de plan
         'DFPLAN_NAM_NOT_EXST': 'Plan name does not exist',
         'DFPLAN_NAM_EXST' : 'Plan name exists',
@@ -526,6 +530,8 @@ arrayEN = {
         'i18n-def-plans-empty' : 'No plan definitions on file',
         'i18n-plan_id' : 'ID Plan',
         'i18n-del-def-plan-confirm' : 'Are you sure you want to delete the definition of this plan? The action will not be reversible',
+        'i18n-search-def-plan' : 'Search Plan Def.',
+        'i18n-showCurrent-defPlan' : 'Details of the Plan Def',
 
         // MODAL
             // Campos Modal

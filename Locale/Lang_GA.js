@@ -245,6 +245,10 @@ arrayGA = {
         'DFPLAN_SEEK_OK' : 'A consulta dos detalles da definición do plan realizouse correctamente correctamente',
         'DFPLAN_SEEK_KO' : 'Error ó consultar os detalles da definición do plan',
 
+        // EDIT
+        'DFPLAN_EDT_OK' : 'A definición do plan modificouse correctamente',
+        'DFPLAN_EDT_KO' : 'Produciuse un erro ó modificar a definición do plan',
+
         // Búsqueda por nombre de plan
         'DFPLAN_NAM_NOT_EXST': 'O nome do plan non existe',
         'DFPLAN_NAM_EXST' : 'O nome do plan existe',
@@ -528,6 +532,8 @@ arrayGA = {
         'i18n-def-plans-empty' : 'Non hay definicións de plans rexistradas',
         'i18n-plan_id' : 'ID Plan',
         'i18n-del-def-plan-confirm' : '¿Está seguro de que desexa eliminar a definición deste plan? A acción non será reversible',
+        'i18n-search-def-plan' : 'Buscar Def. de Plans',
+        'i18n-showCurrent-defPlan' : 'Detalles da Def. do Plan',
 
 
         // MODAL
