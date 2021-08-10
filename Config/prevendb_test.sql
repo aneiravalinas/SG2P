@@ -109,6 +109,7 @@ CREATE TABLE PROCEDIMIENTO
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_procedimiento` PRIMARY KEY (`procedimiento_id`),
+    CONSTRAINT `uq_documento_plan` UNIQUE (`plan_id`,`nombre`),
     CONSTRAINT `fk_procedimiento_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
 );
 

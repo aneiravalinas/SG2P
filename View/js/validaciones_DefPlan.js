@@ -8,10 +8,10 @@ function check_DEFPLAN_SEARCH() {
 }
 
 function check_ID_PLAN_SEARCH() {
-    if(not_empty('espacio_id')) {
-        return check_only_numbers('espacio_id');
+    if(not_empty('plan_id')) {
+        return check_only_numbers('plan_id');
     } else {
-        document.getElementById('espacio_id').style.borderColor = 'green';
+        document.getElementById('plan_id').style.borderColor = 'green';
         return true;
     }
 }

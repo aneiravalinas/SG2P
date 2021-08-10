@@ -326,6 +326,21 @@ arrayEN = {
         'DFPLAN_IMPL_NOT_EXST' : 'The indicated document definition has no implementations in buildings',
         'DFPLAN_IMPL_KO' : 'Failed to query document implementations',
 
+    // DEF_PROC
+
+        // SEARCH
+        'DFPROC_SEARCH_OK' : 'Search for procedure definitions was successful',
+        'DFPROC_SEARCH_KO' : 'Error searching procedure definitions',
+
+        // ADD
+        'DFPROC_ADD_OK' : 'Procedure definition has been added successfully',
+        'DFPROC_ADD_KO' : 'Error adding procedure definition',
+
+        // Búsqueda por nombre de procedimiento
+        'DFPROC_NAME_EXST' : 'A procedure definition with the name indicated already exists in this plan',
+        'DFPROC_NAME_NOT_EXST' : 'There is no procedure definition with the name indicated in this plan',
+        'DFPROC_NAME_KO' : 'Failed to query by procedure name',
+
         // Validaciones
 
             // Nombre de Usuario
@@ -451,7 +466,7 @@ arrayEN = {
             'DFPLAN_ID_NOT_NUMERIC' : 'Plan ID must be numeric',
 
             // Nombre DefPlan
-            'DFPLAN_NAM_SHRT' : 'The plan name must be longer than 3 characters',
+            'DFPLAN_NAM_SHRT' : 'The plan name must be longer than 5 characters',
             'DEFPLAN_NAM_LRG' : 'Plan name must not exceed 60 characters',
             'DEFPLAN_NAM_FRMT' : 'Plan name contains illegal characters',
 
@@ -466,7 +481,16 @@ arrayEN = {
 
             // Documento visible
             'DFDOC_VISB_EMPT' : 'It must be indicated if the document will be visible or not',
-            'DFDOC_VISB_VALUES' : 'The allowed values ​​to indicate the visibility of the document are yes or no',
+            'DFDOC_VISB_VALUES' : 'The allowed values to indicate the visibility of the document are yes or no',
+
+            // ID DefProc
+            'DFPROC_ID_EMPT' : 'Procedure ID cannot be empty',
+            'DFPROC_ID_NOT_NUMERIC' : 'Procedure ID must be numeric',
+
+            // Nombre Procedimiento
+            'DFPROC_NAM_SHRT' : 'The name of the procedure must exceed 5 characters',
+            'DFPROC_NAM_LRG' : 'The name of the procedure must not exceed 50 characters',
+            'DFPROC_NAM_FRMT' : 'Procedure name contains illegal characters',
 
 
 
@@ -602,6 +626,12 @@ arrayEN = {
         'i18n-search-defDoc' : 'Search Documents Definitions',
         'i18n-edit-defDoc' : 'Edit Document Definition',
 
+        // DEF_PROCS VIEW
+        'i18n-def-procs' : 'Definitions of Procedures',
+        'i18n-procedimiento_id' : 'Procedure ID',
+        'i18n-def-procs-empty' : 'There are no registered procedure definitions',
+        'i18n-add-defProc' : 'Define Procedure',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Warning!',
@@ -628,6 +658,9 @@ arrayEN = {
             'm-descripcion' : ' Description ',
             'm-planta_id' : ' Floor ID ',
             'm-espacio_id' : ' Space ID ',
+            'm-documento_id' : ' Document ID ',
+            'm-plan_id' : ' Plan ID ',
+            'm-procedimiento_id' : ' Procedure ID ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',

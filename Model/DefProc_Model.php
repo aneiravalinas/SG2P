@@ -25,7 +25,21 @@ class DefProc_Model extends Abstract_Model {
     }
 
     function ADD() {
-        // TODO: Implement ADD() method.
+        $this->query = "
+            INSERT INTO PROCEDIMIENTO
+                (nombre,
+                 descripcion,
+                 plan_id
+                ) VALUES (
+                 '$this->nombre',
+                 '$this->descripcion',
+                 '$this->plan_id'
+            );
+        ";
+
+        $this->execute_single_query();
+        $this->procedimiento_id = $this->id_autoincrement;
+        return $this->feedback;
     }
 
     function EDIT() {
@@ -37,11 +51,32 @@ class DefProc_Model extends Abstract_Model {
     }
 
     function SEARCH() {
-        // TODO: Implement SEARCH() method.
+        $this->query = "
+            SELECT * FROM PROCEDIMIENTO
+            WHERE
+                plan_id = '$this->plan_id' AND
+                procedimiento_id LIKE '%" . $this->procedimiento_id . "%' AND
+                nombre LIKE '%" . $this->nombre . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
     }
 
     function seek() {
         // TODO: Implement seek() method.
+    }
+
+    function seekByProcName() {
+        $this->query = "
+            SELECT * FROM PROCEDIMIENTO
+            WHERE
+                nombre = '$this->nombre' AND
+                plan_id = '$this->plan_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
     function searchByPlan() {

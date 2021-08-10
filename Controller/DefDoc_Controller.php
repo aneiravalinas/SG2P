@@ -18,7 +18,9 @@ class DefDoc {
             if($feedback['ok']) {
                 include_once './View/DefDocs/Show_DefDocs_View.php';
                 new Show_DefDocs($feedback['resource'], $feedback['plan']);
-            } else{
+            } else if(isset($feedback['plan'])) {
+                new Message($feedback['code'],'DefDoc','show', $feedback['plan']);
+            } else {
                 new Message($feedback['code'],'DefPlan','show');
             }
         } else {

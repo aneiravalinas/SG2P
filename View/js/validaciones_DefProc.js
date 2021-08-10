@@ -1,24 +1,20 @@
-function check_DEFDOC() {
-    return check_NOMBRE_DEFDOC() &&
-        check_DESCRIPCION_DEFDOC();
-}
-
-function check_DEFDOC_SEARCH() {
-    return check_DEFDOC_ID_SEARCH() &&
-        check_NOMBRE_DEFDOC_SEARCH();
+function check_DEFPROC() {
+    return check_NOMBRE_DEFPROC() &&
+        check_DESCRIPCION_DEFPROC();
 }
 
 
-function check_DEFDOC_ID_SEARCH() {
-    if(not_empty('documento_id')) {
-        return check_only_numbers('documento_id');
+
+function check_DEFPROC_ID_SEARCH() {
+    if(not_empty('procedimiento_id')) {
+        return check_only_numbers('procedimiento_id');
     } else {
-        document.getElementById('documento_id').style.borderColor = 'green';
+        document.getElementById('procedimiento_id').style.borderColor = 'green';
         return true;
     }
 }
 
-function check_NOMBRE_DEFDOC() {
+function check_NOMBRE_DEFPROC() {
     if(not_empty('nombre',true) && check_letters_numbers_accents_spaces('nombre',50)) {
         return true;
     } else {
@@ -26,7 +22,7 @@ function check_NOMBRE_DEFDOC() {
     }
 }
 
-function check_NOMBRE_DEFDOC_SEARCH() {
+function check_NOMBRE_DEFPROC_SEARCH() {
     if(not_empty('nombre')) {
         return check_letters_numbers_accents_spaces('nombre',50);
     } else {
@@ -35,7 +31,7 @@ function check_NOMBRE_DEFDOC_SEARCH() {
     }
 }
 
-function check_DESCRIPCION_DEFDOC() {
+function check_DESCRIPCION_DEFPROC() {
     if(not_empty('descripcion',true) && check_text('descripcion')) {
         return true;
     } else {

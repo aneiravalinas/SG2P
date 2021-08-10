@@ -326,6 +326,22 @@ arrayGA = {
         'DFPLAN_IMPL_NOT_EXST' : 'A def. do documento indicada non ten implementacións en edificios',
         'DFPLAN_IMPL_KO' : 'Produciuse un erro ao consultar as implementacións de documentos',
 
+    // DEF_PROC
+
+        // SEARCH
+        'DFPROC_SEARCH_OK' : 'A búsqueda de definicións de procedementos realizouse correctamente',
+        'DFPROC_SEARCH_KO' : 'Error ó buscar definicións de procedementos',
+
+        // ADD
+        'DFPROC_ADD_OK' : 'A definición do procedemento engadiuse correctamente',
+        'DFPROC_ADD_KO' : 'Error ó engadir a definición do procedemento',
+
+        // Búsqueda por nombre de procedimiento
+        'DFPROC_NAME_EXST' : 'Xa existe unha definción de procedemento co nome indicado neste plan',
+        'DFPROC_NAME_NOT_EXST' : 'Non existe unha definición de procedemento co nome indicado neste plan',
+        'DFPROC_NAME_KO' : 'Error ó consultar por nome de procedemento',
+
+
         // Validaciones
 
             // Nombre de Usuario
@@ -451,7 +467,7 @@ arrayGA = {
             'DFPLAN_ID_NOT_NUMERIC' : 'O ID do Plan debe ser numérico',
 
             // Nombre DefPlan
-            'DFPLAN_NAM_SHRT' : 'O nome do plan debe ser superior a 3 caracteres',
+            'DFPLAN_NAM_SHRT' : 'O nome do plan debe ser superior a 5 caracteres',
             'DEFPLAN_NAM_LRG' : 'O nome do plan plan non debe superar os 60 caracteres',
             'DEFPLAN_NAM_FRMT' : 'O nome do plan contén caracteres non permitidos',
 
@@ -467,6 +483,15 @@ arrayGA = {
             // Documento visible
             'DFDOC_VISB_EMPT' : 'Debe indicarse se o documento será visible ou non',
             'DFDOC_VISB_VALUES' : 'Os valores permitidos para indicar a visibilidade do documento son si ou non',
+
+            // ID DefProc
+            'DFPROC_ID_EMPT' : 'O ID do Procedemento non debe ser vacío',
+            'DFPROC_ID_NOT_NUMERIC' : 'O ID do Procedemento debe ser numérico',
+
+            // Nombre Procedimiento
+            'DFPROC_NAM_SHRT' : 'O nome do procedemento debe superar os 5 caracteres',
+            'DFPROC_NAM_LRG' : 'O nome do procedemento non debe superar os 50 caracteres',
+            'DFPROC_NAM_FRMT' : 'O nome do procedemento contén caracteres non permitidos',
 
 
 
@@ -604,6 +629,13 @@ arrayGA = {
         'i18n-edit-defDoc' : 'Editar Def. do Documento',
 
 
+        // DEF_PROCS VIEW
+        'i18n-def-procs' : 'Definicións de Procedementos',
+        'i18n-procedimiento_id' : 'ID Procedemento',
+        'i18n-def-procs-empty' : 'Non hay definicións de procedementos rexistradas',
+        'i18n-add-defProc' : 'Definir Procedemento',
+
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Aviso!',
@@ -630,6 +662,9 @@ arrayGA = {
             'm-descripcion' : ' Descripción ',
             'm-planta_id' : ' ID Planta ',
             'm-espacio_id' : ' ID Espazo ',
+            'm-documento_id' : ' ID Documento ',
+            'm-plan_id' : ' ID Plan ',
+            'm-procedimiento_id' : ' ID Procedemento ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',
