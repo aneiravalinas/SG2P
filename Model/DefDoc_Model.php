@@ -50,7 +50,13 @@ class DefDoc_Model extends Abstract_Model {
     }
 
     function DELETE() {
-        // TODO: Implement DELETE() method.
+        $this->query = "
+            DELETE FROM DOCUMENTO
+            WHERE documento_id = '$this->documento_id'
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function SEARCH() {
@@ -69,7 +75,13 @@ class DefDoc_Model extends Abstract_Model {
     }
 
     function seek() {
-        // TODO: Implement seek() method.
+        $this->query = "
+            SELECT * FROM DOCUMENTO
+            WHERE documento_id = '$this->documento_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
     function searchByPlan() {

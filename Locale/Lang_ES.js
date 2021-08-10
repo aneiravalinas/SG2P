@@ -301,10 +301,28 @@ arrayES = {
         'DFDOC_ADD_OK' : 'La definición del documento se ha añadido correctamente',
         'DFDOC_ADD_KO' : 'Error al añadir la definición del documento',
 
+        // SEEK
+        'DFDOC_SEEK_OK' : 'Éxito al obtener los detalles de la def. del documento',
+        'DFDOC_SEEK_KO' : 'Error al obtener los detalles de la def. del documento',
+
+        // DELETE
+        'DFDOC_DEL_OK' : 'La definición del documento se ha eliminado correctamente',
+        'DFDOC_DEL_KO' : 'Error al eliminar la definición del documento',
+
         // Búsqueda por nombre de documento
         'DFDOC_NAME_EXST' : 'Ya existe una definición de documento con el nombre indicado para este plan',
         'DFDOC_NAME_NOT_EXST' : 'No existe una definicón de documento con el nombre indicado en este plan',
         'DFDOC_NAME_KO' : 'Error al consultar por nombre de documento',
+
+        // Búsqueda por ID de Documento
+        'DFDOCID_EXST' : 'El ID de documento existe',
+        'DFDOCID_NOT_EXST' : 'La definición de documento indicada no existe',
+        'DFDOCID_KO' : 'Error al consultar por ID de documento',
+
+        // Búsqueda de implementaciones de documentos
+        'DFPLAN_IMPL_EXST' : 'No se puede eliminar la def. de documento mientras tenga implementaciones en edificios',
+        'DFPLAN_IMPL_NOT_EXST' : 'La def. de documento indicada no tiene implementaciones en edificios',
+        'DFPLAN_IMPL_KO' : 'Error al consultar implementaciones de documentos',
 
 
         // Validaciones
@@ -574,12 +592,14 @@ arrayES = {
 
         // DEF_DOCS VIEW
         'i18n-def-docs' : 'Definiciones de Documentos',
-        'i18n-document_id' : 'ID Documento',
         'i18n-visible' : 'Visible',
         'i18n-def-docs-empty' : 'No hay definiciones de documentos registradas',
         'i18n-add-defDoc' : 'Definir Documento',
         'i18n-yes': 'Sí',
         'i18n-no' : 'No',
+        'i18n-del-def-doc-confirm' : '¿Está seguro que desea eliminar la definición de este documento? El cambio no será reversible',
+        'i18n-documento_id' : 'ID Documento',
+        'i18n-search-defDoc' : 'Buscar def. de Documentos',
 
         // MODAL
             // Campos Modal

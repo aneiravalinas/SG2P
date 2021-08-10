@@ -299,10 +299,28 @@ arrayEN = {
         'DFDOC_ADD_OK' : 'Document definition has been added successfully',
         'DFDOC_ADD_KO' : 'Error adding document definition',
 
+        // SEEK
+        'DFDOC_SEEK_OK' : 'Success in getting the details of the document definition',
+        'DFDOC_SEEK_KO' : 'Failed to get document definition details',
+
+        // DELETE
+        'DFDOC_DEL_OK' : 'Document definition has been successfully removed',
+        'DFDOC_DEL_KO' : 'Failed to delete document definition',
+
         // Búsqueda por nombre de documento
         'DFDOC_NAME_EXST' : 'A document definition with the indicated name already exists for this plan',
         'DFDOC_NAME_NOT_EXST' : 'There is no document definition with the name indicated in this plan',
         'DFDOC_NAME_KO' : 'Failed to query by document name',
+
+        // Búsqueda por ID de Documento
+        'DFDOCID_EXST' : 'Document ID exists',
+        'DFDOCID_NOT_EXST' : 'The indicated document definition does not exist',
+        'DFDOCID_KO' : 'Failed to query by document ID',
+
+        // Búsqueda de implementaciones de documentos
+        'DFPLAN_IMPL_EXST' : 'Cannot delete document definition while having building deployments',
+        'DFPLAN_IMPL_NOT_EXST' : 'The indicated document definition has no implementations in buildings',
+        'DFPLAN_IMPL_KO' : 'Failed to query document implementations',
 
         // Validaciones
 
@@ -569,12 +587,14 @@ arrayEN = {
 
         // DEF_DOCS VIEW
         'i18n-def-docs' : 'Document Definitions',
-        'i18n-document_id' : 'Document ID',
         'i18n-visible' : 'Visible',
         'i18n-def-docs-empty' : 'No registered document definitions',
         'i18n-add-defDoc' : 'Define Document',
         'i18n-yes': 'Yes',
         'i18n-no' : 'No',
+        'i18n-del-def-doc-confirm' : 'Are you sure you want to remove the definition from this document? The change will not be reversible',
+        'i18n-documento_id' : 'Document ID',
+        'i18n-search-defDoc' : 'Search Documents Definitions',
 
         // MODAL
             // Campos Modal

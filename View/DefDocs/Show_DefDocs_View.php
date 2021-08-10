@@ -53,7 +53,7 @@ class Show_DefDocs {
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col" class="i18n-document_id">ID Documento</th>
+                                <th scope="col" class="i18n-documento_id">ID Documento</th>
                                 <th scope="col" class="i18n-nombre">Nombre</th>
                                 <th scope="col" class="i18n-visible">Visible</th>
                                 <th scope="col"></th>
@@ -64,7 +64,7 @@ class Show_DefDocs {
                                 <tr>
                                     <td><?php echo $doc['documento_id'] ?></td>
                                     <td><?php echo $doc['nombre'] ?></td>
-                                    <td><?php echo $doc['visible'] ?></td>
+                                    <td class="i18n-<?php if($doc['visible']) echo 'yes'; else echo 'no'; ?>"></td>
                                     <td class="text-center">
                                         <div class="btn-group px-md-2">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">

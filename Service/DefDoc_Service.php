@@ -107,6 +107,52 @@ class DefDoc_Service extends DefDoc_Validation {
         return $this->feedback;
     }
 
+    function seek() {
+        $validation = $this->validar_DOCUMENTO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByDocID();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'DFDOC_SEEK_OK';
+        } else if($this->feedback['code'] == 'DFDOCID_KO') {
+            $this->feedback['code'] = 'DFDOC_SEEK_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function DELETE() {
+        $validation = $this->validar_DOCUMENTO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByDocID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $doc = $this->feedback['resource'];
+
+        $this->feedback = $this->imp_docs_not_exist();
+        if(!$this->feedback['ok']) {
+            $this->feedback['plan'] = array('plan_id' => $doc['plan_id']);
+            return $this->feedback;
+        }
+
+        $this->feedback = $this->defDoc_entity->DELETE();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'DFDOC_DEL_OK';
+        } else {
+            $this->feedback['code'] = 'DFDOC_DEL_KO';
+        }
+
+        $this->feedback['plan'] = array('plan_id' => $doc['plan_id']);
+        return $this->feedback;
+    }
+
     function seekByPlanID() {
         $feedback = $this->defPlan_entity->seek();
         if($feedback['ok']) {
@@ -123,6 +169,21 @@ class DefDoc_Service extends DefDoc_Validation {
         return $feedback;
     }
 
+    function seekByDocID() {
+        $feedback = $this->defDoc_entity->seek();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['code'] = 'DFDOCID_NOT_EXST';
+            } else {
+                $feedback['code'] = 'DFDOCID_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'DFDOCID_KO';
+        }
+
+        return $feedback;
+    }
+
     function name_doc_not_exist() {
         $feedback = $this->defDoc_entity->seekByDocName();
         if($feedback['ok']) {
@@ -134,6 +195,24 @@ class DefDoc_Service extends DefDoc_Validation {
             }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'DFDOC_NAME_KO';
+        }
+
+        return $feedback;
+    }
+
+    function imp_docs_not_exist() {
+        include_once './Model/ImpDoc_Model.php';
+        $impDoc_entity = new ImpDoc_Model();
+        $feedback = $impDoc_entity->searchByDocID();
+        if($feedback['ok']) {
+            if($feedback['code'] != 'QRY_EMPT') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'DFPLAN_IMPL_EXST';
+            } else {
+                $feedback['code'] = 'DFPLAN_IMPL_NOT_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'DFPLAN_IMPL_KO';
         }
 
         return $feedback;
