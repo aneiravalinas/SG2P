@@ -11,7 +11,7 @@ class DefDoc_Model extends Abstract_Model {
     var $visible;
 
     function __construct() {
-        $this->atributos = array('documento_id','plan_id','nombre','decripcion','visible');
+        $this->atributos = array('documento_id','plan_id','nombre','descripcion','visible');
         $this->fill_fields();
     }
 
@@ -46,7 +46,14 @@ class DefDoc_Model extends Abstract_Model {
     }
 
     function EDIT() {
-        // TODO: Implement EDIT() method.
+        $this->query = "UPDATE DOCUMENTO SET " .
+            ($this->nombre == '' ? "" : "nombre = '$this->nombre', ") .
+            ($this->descripcion == '' ? "" : "descripcion = '$this->descripcion', ") .
+            ($this->visible == '' ? "" : "visible = '$this->visible'") .
+            " WHERE documento_id = '$this->documento_id'";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function DELETE() {

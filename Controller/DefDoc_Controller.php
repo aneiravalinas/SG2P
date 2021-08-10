@@ -114,4 +114,33 @@ class DefDoc {
         }
     }
 
+    function editForm() {
+        if($this->checkPermission()) {
+            $defDoc_service = new DefDoc_Service();
+            $feedback = $defDoc_service->seek();
+            if($feedback['ok']) {
+                include_once './View/DefDocs/Edit_DefDoc_View.php';
+                new Edit_DefDoc($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
+
+    function edit() {
+        if($this->checkPermission()) {
+            $defDoc_service = new DefDoc_Service();
+            $feedback = $defDoc_service->EDIT();
+            if(isset($feedback['plan'])) {
+                new Message($feedback['code'],'DefDoc','show',$feedback['plan']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
+
 }

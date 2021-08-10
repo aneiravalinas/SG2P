@@ -64,7 +64,7 @@ class Show_DefDocs {
                                 <tr>
                                     <td><?php echo $doc['documento_id'] ?></td>
                                     <td><?php echo $doc['nombre'] ?></td>
-                                    <td class="i18n-<?php if($doc['visible']) echo 'yes'; else echo 'no'; ?>"></td>
+                                    <td class="i18n-<?php echo $doc['visible'] ?>"></td>
                                     <td class="text-center">
                                         <div class="btn-group px-md-2">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">

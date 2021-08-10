@@ -94,9 +94,10 @@ CREATE TABLE DOCUMENTO
     `plan_id` INT(10) NOT NULL,
     `nombre` VARCHAR(50) NOT NULL,
     `descripcion` TEXT NOT NULL,
-    `visible` BOOLEAN NOT NULL,
+    `visible` enum('yes','no') NOT NULL,
 
     CONSTRAINT `pk_documento` PRIMARY KEY (`documento_id`),
+    CONSTRAINT `uq_documento_plan` UNIQUE (`plan_id`,`nombre`),
     CONSTRAINT `fk_documento_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
 );
 
@@ -129,7 +130,7 @@ CREATE TABLE EDIFICIO_DOCUMENTO
     `documento_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
     `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
-    `nombre_doc` VARCHAR(20) NOT NULL,
+    `nombre_doc` VARCHAR(20) NOT NULL DEFAULT 'empty',
 
     CONSTRAINT `pk_edificio_documento` PRIMARY KEY (`edificio_documento_id`),
     CONSTRAINT `fk_edificio_documento_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
@@ -269,7 +270,8 @@ INSERT INTO PLAN (`plan_id`, `nombre`, `descripcion`) VALUES
 
 
 INSERT INTO DOCUMENTO (`documento_id`,`plan_id`,`nombre`,`descripcion`,`visible`) VALUES
-(1,2,'Documentos del plan con documentos','Descripcion del Documento','yes');
+(1,2,'Documentos del plan con documentos','Descripcion del Documento','yes'),
+(2,2,'Nombre Documento','Descripcion','no');
 
 INSERT INTO PROCEDIMIENTO (`procedimiento_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (1,3,'Procedimiento del plan con procedimientos','Descripcion del Procedimiento');
@@ -289,6 +291,10 @@ INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fe
 
 INSERT INTO EDIFICIO_PLAN (`edificio_id`, `plan_id`, `fecha_asignacion`, `estado`) VALUES
 (2,1, '25-12-2020', 'pendiente');
+
+INSERT INTO EDIFICIO_DOCUMENTO (`edificio_documento_id`, `edificio_id`, `documento_id`, `estado`, `nombre_doc`) VALUES
+(1,2,1,'vigente','doc.pdf');
+
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';
 GRANT ALL PRIVILEGES ON prevendb_test.* TO 'prevenroot'@'localhost';

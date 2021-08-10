@@ -307,6 +307,10 @@ arrayGA = {
         'DFDOC_DEL_OK' : 'A definición do documento eliminouse correctamente',
         'DFDOC_DEL_KO' : 'Non se puido eliminar a definición do documento',
 
+        // EDIT
+        'DFDOC_EDT_OK' : 'A definición do documento modificouse correctamente',
+        'DFDOC_EDT_KO' : 'Error ó modificar a definición do documento',
+
         // Búsqueda por nombre de documento
         'DFDOC_NAME_EXST' : 'Xa existe para este plan unha definición de documento co nome indicado',
         'DFDOC_NAME_NOT_EXST' : 'Non hai ningunha definición de documento co nome indicado neste plan',
@@ -585,6 +589,7 @@ arrayGA = {
         'i18n-show-plans-defroutes' : 'Def. de Rutas',
         'i18n-show-plans-deformats' : 'Def. de Formacións',
         'i18n-show-plans-defsims' : 'Def. de Simulacros',
+        'i18n-edit-defPlan' : 'Editar Def. do Plan',
 
         // DEF_DOCS VIEW
         'i18n-def-docs' : 'Definicións de Documentos',
@@ -595,7 +600,8 @@ arrayGA = {
         'i18n-no' : 'Non',
         'i18n-del-def-doc-confirm' : 'Seguro que queres eliminar a definición deste documento? O cambio non será reversible',
         'i18n-documento_id' : 'ID Documento',
-        'i18n-search-defDoc' : 'Buscar def. de Documentos',
+        'i18n-search-defDoc' : 'Buscar Def. de Documentos',
+        'i18n-edit-defDoc' : 'Editar Def. do Documento',
 
 
         // MODAL

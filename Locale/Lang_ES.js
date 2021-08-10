@@ -309,6 +309,10 @@ arrayES = {
         'DFDOC_DEL_OK' : 'La definición del documento se ha eliminado correctamente',
         'DFDOC_DEL_KO' : 'Error al eliminar la definición del documento',
 
+        // EDIT
+        'DFDOC_EDT_OK' : 'La definición del documento se ha modificado correctamente',
+        'DFDOC_EDT_KO' : 'Error al modificar la definición del documento',
+
         // Búsqueda por nombre de documento
         'DFDOC_NAME_EXST' : 'Ya existe una definición de documento con el nombre indicado para este plan',
         'DFDOC_NAME_NOT_EXST' : 'No existe una definicón de documento con el nombre indicado en este plan',
@@ -589,6 +593,7 @@ arrayES = {
         'i18n-show-plans-defroutes' : 'Def. de Rutas',
         'i18n-show-plans-deformats' : 'Def. de Formaciones',
         'i18n-show-plans-defsims' : 'Def. de Simulacros',
+        'i18n-edit-defPlan' : 'Edit Def. del Plan',
 
         // DEF_DOCS VIEW
         'i18n-def-docs' : 'Definiciones de Documentos',
@@ -599,7 +604,8 @@ arrayES = {
         'i18n-no' : 'No',
         'i18n-del-def-doc-confirm' : '¿Está seguro que desea eliminar la definición de este documento? El cambio no será reversible',
         'i18n-documento_id' : 'ID Documento',
-        'i18n-search-defDoc' : 'Buscar def. de Documentos',
+        'i18n-search-defDoc' : 'Buscar Def. de Documentos',
+        'i18n-edit-defDoc' : 'Editar Def. del Documento',
 
         // MODAL
             // Campos Modal

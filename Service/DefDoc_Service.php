@@ -98,12 +98,10 @@ class DefDoc_Service extends DefDoc_Validation {
         $this->feedback = $this->defDoc_entity->ADD();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'DFDOC_ADD_OK';
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id'], 'nombre' => $plan['nombre']);
         } else if($this->feedback['code'] == 'QRY_KO') {
             $this->feedback['code'] = 'DFDOC_ADD_KO';
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
         }
-
+        $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
         return $this->feedback;
     }
 
@@ -153,6 +151,44 @@ class DefDoc_Service extends DefDoc_Validation {
         return $this->feedback;
     }
 
+    function EDIT() {
+        $validation = $this->validar_DOCUMENTO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByDocID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $doc = $this->feedback['resource'];
+        $validation = $this->validar_atributos();
+        if(!$validation['ok']) {
+            $validation['plan'] = array('plan_id' => $doc['plan_id']);
+            return $validation;
+        }
+
+        if($doc['nombre'] != $this->nombre) {
+            $this->defDoc_entity->plan_id = $doc['plan_id'];
+            $this->feedback = $this->name_doc_not_exist();
+            if(!$this->feedback['ok']) {
+                $this->feedback['plan'] = array('plan_id' => $doc['plan_id']);
+                return $this->feedback;
+            }
+        }
+
+        $this->feedback = $this->defDoc_entity->EDIT();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'DFDOC_EDT_OK';
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'DFDOC_EDT_KO';
+        }
+
+        $this->feedback['plan'] = array('plan_id' => $doc['plan_id']);
+        return $this->feedback;
+    }
+
     function seekByPlanID() {
         $feedback = $this->defPlan_entity->seek();
         if($feedback['ok']) {
@@ -173,6 +209,7 @@ class DefDoc_Service extends DefDoc_Validation {
         $feedback = $this->defDoc_entity->seek();
         if($feedback['ok']) {
             if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['ok'] = false;
                 $feedback['code'] = 'DFDOCID_NOT_EXST';
             } else {
                 $feedback['code'] = 'DFDOCID_EXST';

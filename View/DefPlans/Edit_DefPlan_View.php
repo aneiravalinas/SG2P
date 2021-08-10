@@ -18,7 +18,7 @@ class Edit_DefPlan {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1 class="mb-4 i18n-add-defPlan">Definir Plan</h1>
+                        <h1 class="mb-4 i18n-edit-defPlan">Edita def. de Plan</h1>
                     </div>
 
                     <div class="col-xl-7 col-lg-9">
