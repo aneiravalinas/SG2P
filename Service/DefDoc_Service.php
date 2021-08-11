@@ -122,12 +122,7 @@ class DefDoc_Service extends DefDoc_Validation {
     }
 
     function DELETE() {
-        $validation = $this->validar_DOCUMENTO_ID();
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->seekByDocID();
+        $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
@@ -152,12 +147,7 @@ class DefDoc_Service extends DefDoc_Validation {
     }
 
     function EDIT() {
-        $validation = $this->validar_DOCUMENTO_ID();
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->seekByDocID();
+        $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
@@ -244,12 +234,12 @@ class DefDoc_Service extends DefDoc_Validation {
         if($feedback['ok']) {
             if($feedback['code'] != 'QRY_EMPT') {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'DFPLAN_IMPL_EXST';
+                $feedback['code'] = 'DFDOC_IMPL_EXST';
             } else {
-                $feedback['code'] = 'DFPLAN_IMPL_NOT_EXST';
+                $feedback['code'] = 'DFDOC_IMPL_NOT_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
-            $feedback['code'] = 'DFPLAN_IMPL_KO';
+            $feedback['code'] = 'DFDOC_IMPL_KO';
         }
 
         return $feedback;

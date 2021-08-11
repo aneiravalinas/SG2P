@@ -322,9 +322,9 @@ arrayEN = {
         'DFDOCID_KO' : 'Failed to query by document ID',
 
         // Búsqueda de implementaciones de documentos
-        'DFPLAN_IMPL_EXST' : 'Cannot delete document definition while having building deployments',
-        'DFPLAN_IMPL_NOT_EXST' : 'The indicated document definition has no implementations in buildings',
-        'DFPLAN_IMPL_KO' : 'Failed to query document implementations',
+        'DFDOC_IMPL_EXST' : 'Cannot delete document definition while having building deployments',
+        'DFDOC_IMPL_NOT_EXST' : 'The indicated document definition has no implementations in buildings',
+        'DFDOC_IMPL_KO' : 'Failed to query document implementations',
 
     // DEF_PROC
 
@@ -335,6 +335,24 @@ arrayEN = {
         // ADD
         'DFPROC_ADD_OK' : 'Procedure definition has been added successfully',
         'DFPROC_ADD_KO' : 'Error adding procedure definition',
+
+        // DELETE
+        'DFPROC_DEL_OK' : 'Procedure definition has been successfully removed',
+        'DFPROC_DEL_KO' : 'Failed to delete procedure definition',
+
+        // SEEK
+        'DFPROC_SEEK_OK' : 'Success in obtaining the details of the procedure definition',
+        'DFPROC_SEEK_KO' : 'Failed to query the details of the procedure definition',
+
+        // Búsqueda por ID de Procedimiento
+        'DFPROCID_NOT_EXST' : 'The indicated procedure definition does not exist',
+        'DFPROCID_EXST' : 'The indicated procedure definition exists',
+        'DFPROCID_KO' : 'Failed to query by ID procedure',
+
+        // Búsqueda de implementaciones de procedimientos
+        'DFPROC_IMPL_EXST' : 'You cannot delete the procedure definition while you have building implementations',
+        'DFPROC_IMPL_NOT_EXST' : 'The definition of the procedure has no implementations in buildings',
+        'DFPROC_IMPL_KO' : 'Failed to query procedural implementations',
 
         // Búsqueda por nombre de procedimiento
         'DFPROC_NAME_EXST' : 'A procedure definition with the name indicated already exists in this plan',
@@ -625,12 +643,15 @@ arrayEN = {
         'i18n-documento_id' : 'Document ID',
         'i18n-search-defDoc' : 'Search Documents Definitions',
         'i18n-edit-defDoc' : 'Edit Document Definition',
+        'i18n-current-defDoc' : 'Details of the Document Def.',
 
         // DEF_PROCS VIEW
         'i18n-def-procs' : 'Definitions of Procedures',
         'i18n-procedimiento_id' : 'Procedure ID',
         'i18n-def-procs-empty' : 'There are no registered procedure definitions',
         'i18n-add-defProc' : 'Define Procedure',
+        'i18n-del-def-proc-confirm' : 'Are you sure you want to delete the definition of this procedure? The action will not be reversible',
+        'i18n-current-defProc' : 'Details of the Procedure Def.',
 
         // MODAL
             // Campos Modal

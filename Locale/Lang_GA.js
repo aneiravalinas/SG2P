@@ -322,9 +322,9 @@ arrayGA = {
         'DFDOCID_KO' : 'Produciuse un erro na consulta polo ID do documento',
 
         // Búsqueda de implementaciones de documentos
-        'DFPLAN_IMPL_EXST' : 'Non se pode eliminar a def. do documento mentres teña implementacións en edificios',
-        'DFPLAN_IMPL_NOT_EXST' : 'A def. do documento indicada non ten implementacións en edificios',
-        'DFPLAN_IMPL_KO' : 'Produciuse un erro ao consultar as implementacións de documentos',
+        'DFDOC_IMPL_EXST' : 'Non se pode eliminar a def. do documento mentres teña implementacións en edificios',
+        'DFDOC_IMPL_NOT_EXST' : 'A def. do documento indicada non ten implementacións en edificios',
+        'DFDOC_IMPL_KO' : 'Produciuse un erro ao consultar as implementacións de documentos',
 
     // DEF_PROC
 
@@ -335,6 +335,24 @@ arrayGA = {
         // ADD
         'DFPROC_ADD_OK' : 'A definición do procedemento engadiuse correctamente',
         'DFPROC_ADD_KO' : 'Error ó engadir a definición do procedemento',
+
+        // DELETE
+        'DFPROC_DEL_OK' : 'A definición do procedemento eliminouse correctamente',
+        'DFPROC_DEL_KO' : 'Non se puido eliminar a definición do procedemento',
+
+        // SEEK
+        'DFPROC_SEEK_OK' : 'Éxito na obtención dos detalles da definición do procedemento',
+        'DFPROC_SEEK_KO' : 'Non se puideron consultar os detalles da definición do procedemento',
+
+        // Búsqueda por ID de Procedimiento
+        'DFPROCID_NOT_EXST' : 'A definición do procedemento indicado non existe',
+        'DFPROCID_EXST' : 'A definición do procedemento indicado existe',
+        'DFPROCID_KO' : 'Fallou a consulta polo procedemento de identificación',
+
+        // Búsqueda de implementaciones de procedimientos
+        'DFPROC_IMPL_EXST' : 'Non pode eliminar a definición do procedemento mentres teña implementacións en edificios',
+        'DFPROC_IMPL_NOT_EXST' : 'A definición do procedemento non ten implementacións en edificios',
+        'DFPROC_IMPL_KO' : 'Erro ao consultar as implementacións de procedemento',
 
         // Búsqueda por nombre de procedimiento
         'DFPROC_NAME_EXST' : 'Xa existe unha definción de procedemento co nome indicado neste plan',
@@ -627,6 +645,7 @@ arrayGA = {
         'i18n-documento_id' : 'ID Documento',
         'i18n-search-defDoc' : 'Buscar Def. de Documentos',
         'i18n-edit-defDoc' : 'Editar Def. do Documento',
+        'i18n-current-defDoc' : 'Detalles da Def. do Documento',
 
 
         // DEF_PROCS VIEW
@@ -634,6 +653,8 @@ arrayGA = {
         'i18n-procedimiento_id' : 'ID Procedemento',
         'i18n-def-procs-empty' : 'Non hay definicións de procedementos rexistradas',
         'i18n-add-defProc' : 'Definir Procedemento',
+        'i18n-del-def-proc-confirm' : '¿Está seguro de que desexa eliminar a definición deste procedemento? A acción non será reversible',
+        'i18n-current-defProc' : 'Detalles da Def. do Procedemento',
 
 
         // MODAL

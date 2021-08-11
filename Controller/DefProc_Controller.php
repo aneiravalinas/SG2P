@@ -45,12 +45,56 @@ class DefProc {
 
     function add() {
         if($this->checkPermission()) {
-            $defPorc_service = new DefProc_Service();
-            $feedback = $defPorc_service->ADD();
+            $defProc_service = new DefProc_Service();
+            $feedback = $defProc_service->ADD();
             if(isset($feedback['plan'])) {
-                new Message($feedback['resource'],'DefProc','show',$feedback['plan']);
+                new Message($feedback['code'],'DefProc','show',$feedback['plan']);
             } else {
-                new Message($feedback['resource'],'DefPlan','show');
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function deleteForm() {
+        if($this->checkPermission()) {
+            $defProc_service = new DefProc_Service();
+            $feedback = $defProc_service->seek();
+            if($feedback['ok']) {
+                include_once './View/DefProcs/Delete_DefProc_View.php';
+                new Delete_DefProc($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function delete() {
+        if($this->checkPermission()) {
+            $defProc_service = new DefProc_Service();
+            $feedback = $defProc_service->DELETE();
+            if(isset($feedback['plan'])) {
+                new Message($feedback['code'],'DefProc','show',$feedback['plan']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function showCurrent() {
+        if($this->checkPermission()) {
+            $defProc_service = new DefProc_Service();
+            $feedback = $defProc_service->seek();
+            if($feedback['ok']) {
+                include_once './View/DefProcs/ShowCurrent_DefProc_View.php';
+                new ShowCurrent_DefProc($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'DFPLAN','show');
             }
         } else {
             new Message('FRB_ACCS', 'Panel', 'deshboard');

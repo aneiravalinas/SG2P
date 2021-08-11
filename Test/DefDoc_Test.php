@@ -329,7 +329,7 @@ $_POST = array('documento_id' => '1');
 $defDoc_service = new DefDoc_Service();
 $feedback = $defDoc_service->DELETE();
 $respTest = obtenerRespuesta('DefDoc','DELETE','ACCION','El documento tiene implementaciones en edificios',
-    'DFPLAN_IMPL_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DFDOC_IMPL_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
 // Documento eliminado Ok

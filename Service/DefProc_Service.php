@@ -104,6 +104,64 @@ class DefProc_Service extends DefProc_Validation {
         return $this->feedback;
     }
 
+    function seek() {
+        $validation = $this->validar_PROCEDIMIENTO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByProcID();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'DFPROC_SEEK_OK';
+        } else if($this->feedback['code'] == 'DFPROCID_KO') {
+            $this->feedback['code'] = 'DFPROC_SEEK_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function DELETE() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $proc = $this->feedback['resource'];
+
+        $this->feedback = $this->imp_procs_not_exist();
+        if(!$this->feedback['ok']) {
+            $this->feedback['plan'] = array('plan_id' => $proc['plan_id']);
+            return $this->feedback;
+        }
+
+        $this->feedback = $this->defProc_entity->DELETE();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'DFPROC_DEL_OK';
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'DFPROC_DEL_KO';
+        }
+
+        $this->feedback['plan'] = array('plan_id' => $proc['plan_id']);
+        return $this->feedback;
+    }
+
+
+    function seekByProcID() {
+        $feedback = $this->defProc_entity->seek();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'DFPROCID_NOT_EXST';
+            } else {
+                $feedback['code'] = 'DFPROCID_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'DFPROCID_KO';
+        }
+
+        return $feedback;
+    }
+
 
     function seekByPlanID() {
         $feedback = $this->defPlan_entity->seek();
@@ -132,6 +190,24 @@ class DefProc_Service extends DefProc_Validation {
             }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'DFPROC_NAME_KO';
+        }
+
+        return $feedback;
+    }
+
+    function imp_procs_not_exist() {
+        include_once './Model/ImpProc_Model.php';
+        $impProc_entity = new ImpProc_Model();
+        $feedback = $impProc_entity->searchByProcID();
+        if($feedback['ok']) {
+            if($feedback['code'] != 'QRY_EMPT') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'DFPROC_IMPL_EXST';
+            } else {
+                $feedback['code'] = 'DFPROC_IMPL_NOT_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'DFPROC_IMPL_KO';
         }
 
         return $feedback;
