@@ -94,42 +94,42 @@ $respTest = obtenerRespuesta('DefDoc','SEARCH','ACCION','Búsqueda de documentos
 array_push($testDefDoc, $respTest);
 
 /*
- *  --- EMPTY_FORM: VALIDACIONES ---
+ *  --- SEEK_PLAN: VALIDACIONES ---
  */
 
 // Plan ID vacío
 $_POST = array('plan_id' => '');
 $defDoc_service = new DefDoc_Service();
-$feedback = $defDoc_service->emptyForm();
-$respTest = obtenerRespuesta('DefDoc','EMPTY_FORM','PLAN_ID','ID del plan vacío',
+$feedback = $defDoc_service->seekPlan();
+$respTest = obtenerRespuesta('DefDoc','SEEK_PLAN','PLAN_ID','ID del plan vacío',
     'DFPLAN_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
 // Plan ID no numérico
 $_POST = array('plan_id' => 'aa');
 $defDoc_service = new DefDoc_Service();
-$feedback = $defDoc_service->emptyForm();
-$respTest = obtenerRespuesta('DefDoc','EMPTY_FORM','PLAN_ID','ID del plan no numérico',
+$feedback = $defDoc_service->seekPlan();
+$respTest = obtenerRespuesta('DefDoc','SEEK_PLAN','PLAN_ID','ID del plan no numérico',
     'DFPLAN_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
 /*
- *  --- EMPTY_FORM: ACCIONES ---
+ *  --- SEEK_PLAN: ACCIONES ---
  */
 
 // El plan no existe
 $_POST = array('plan_id' => '11111');
 $defDoc_service = new DefDoc_Service();
-$feedback = $defDoc_service->emptyForm();
-$respTest = obtenerRespuesta('DefDoc','EMPTY_FORM','ACCION','El plan no existe',
+$feedback = $defDoc_service->seekPlan();
+$respTest = obtenerRespuesta('DefDoc','SEEK_PLAN','ACCION','El plan no existe',
     'DFPLANID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
 // El plan existe
 $_POST = array('plan_id' => '2');
 $defDoc_service = new DefDoc_Service();
-$feedback = $defDoc_service->emptyForm();
-$respTest = obtenerRespuesta('DefDoc','EMPTY_FORM','ACCION','El plan existe',
+$feedback = $defDoc_service->seekPlan();
+$respTest = obtenerRespuesta('DefDoc','SEEK_PLAN','ACCION','El plan existe',
     'DFPLANID_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 

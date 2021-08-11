@@ -375,6 +375,28 @@ arrayES = {
         'DFROUTE_ADD_OK' : 'La definición de la ruta se ha añadido correctamente',
         'DFROUTE_ADD_KO' : 'Error al añadir la definición de la ruta',
 
+        // SEEK
+        'DFROUTE_SEEK_OK' : 'Se han consultado los detalles de la definición de la ruta correctamente',
+        'DFROUTE_SEEK_KO' : 'Error al consultar los detalles de la definición de la ruta',
+
+        // DELETE
+        'DFROUTE_DEL_OK' : 'La definición de la ruta se ha eliminado correctamente',
+        'DFROUTE_DEL_KO' : 'Error al eliminar la definición de la ruta',
+
+        // EDIT
+        'DFROUTE_EDT_OK' : 'La definición de la ruta se ha modificado correctamente',
+        'DFROUTE_EDT_KO' : 'Error al modificar la definición de la ruta',
+
+        // Búsqueda de implementaciones de rutas en plantas
+        'DFROUTE_IMPL_EXST' : 'No se puede eliminar la definición de la ruta mientras existan implementaciones en alguna planta',
+        'DFROUTE_IMPL_NOT_EXST' : 'La definición de la ruta no tiene implementaciones en plantas',
+        'DFROUTE_IMPL_KO' : 'Error al consultar implementaciones de la ruta en plantas',
+
+        // Búsqueda por ID de ruta
+        'DFROUTEID_NOT_EXST' : 'La definición de la ruta indicada no existe',
+        'DFROUTEID_EXST' : 'La definición de la ruta indicada existe',
+        'DFROUTEID_KO' : 'Error al consultar por ID de Ruta',
+
         // Búsqueda por nombre de ruta
         'DFROUTE_NAME_EXST' : 'Ya existe una definición de ruta con el nombre indicado para este plan',
         'DFROUTE_NAME_NOT_EXST' : 'No existe una definición de ruta con el nombre indicado en el plan',
@@ -693,6 +715,10 @@ arrayES = {
         'i18n-ruta_id' : 'ID Ruta',
         'i18n-def-routes-empty' : 'No hay definiciones de rutas registradas',
         'i18n-add-defRoute' : 'Definir Ruta',
+        'i18n-del-def-route-confirm' : '¿Está seguro que desea eliminar la definición de esta ruta? El cambio no será reversible',
+        'i18n-current-defRoute' : 'Detalles de la Def. de la Ruta',
+        'i18n-search-defRoute' : 'Buscar Def. de Rutas',
+        'i18n-edit-defRoute' : 'Editar Def. de la Ruta',
 
         // MODAL
             // Campos Modal

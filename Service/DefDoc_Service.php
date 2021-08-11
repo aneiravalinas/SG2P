@@ -29,12 +29,7 @@ class DefDoc_Service extends DefDoc_Validation {
 
 
     function SEARCH() {
-        $validation = $this->validar_PLAN_ID();
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->seekByPlanID();
+        $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
@@ -61,7 +56,7 @@ class DefDoc_Service extends DefDoc_Validation {
         return $this->feedback;
     }
 
-    function emptyForm() {
+    function seekPlan() {
         $validation = $this->validar_PLAN_ID();
         if(!$validation['ok']) {
             return $validation;
@@ -71,12 +66,7 @@ class DefDoc_Service extends DefDoc_Validation {
     }
 
     function ADD() {
-        $validation = $this->validar_PLAN_ID();
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->seekByPlanID();
+        $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }

@@ -373,6 +373,28 @@ arrayGA = {
         'DFROUTE_ADD_OK' : 'A definición da ruta engadiuse correctamente',
         'DFROUTE_ADD_KO' : 'Erro ó engadir a definición da ruta',
 
+        // SEEK
+        'DFROUTE_SEEK_OK' : 'Consultouse os detalles da definición da ruta correctamente',
+        'DFROUTE_SEEK_KO' : 'Erro ó consultar os detalles da definición da ruta',
+
+        // DELETE
+        'DFROUTE_DEL_OK' : 'A definición da ruta eliminouse correctamente',
+        'DFROUTE_DEL_KO' : 'Erro ó eliminar a definición da ruta',
+
+        // EDIT
+        'DFROUTE_EDT_OK' : 'A definición da ruta modificouse correctamente',
+        'DFROUTE_EDT_KO' : 'Erro ó modificar a definición da ruta',
+
+        // Búsqueda de implementaciones de rutas en plantas
+        'DFROUTE_IMPL_EXST' : 'Non se pode eliminar a definición da ruta mentras existan implementacións nalgunha planta',
+        'DFROUTE_IMPL_NOT_EXST' : 'A definición da ruta non ten implementacións en plantas',
+        'DFROUTE_IMPL_KO' : 'Erro ó consultar implementacións da ruta en plantas',
+
+        // Búsqueda por ID de ruta
+        'DFROUTEID_NOT_EXST' : 'A definición da ruta indicada non existe',
+        'DFROUTEID_EXST' : 'A definición da ruta indicada existe',
+        'DFROUTEID_KO' : 'Error ó consultar por ID de Ruta',
+
         // Búsqueda por nombre de ruta
         'DFROUTE_NAME_EXST' : 'Xa existe unha definición de ruta co nome indicado neste plan',
         'DFROUTE_NAME_NOT_EXST' : 'Non existe unha definición de ruta co nome indicado neste plan',
@@ -691,6 +713,10 @@ arrayGA = {
         'i18n-ruta_id' : 'ID Ruta',
         'i18n-def-routes-empty' : 'Non hay definicións de rutas rexistradas',
         'i18n-add-defRoute' : 'Definir Ruta',
+        'i18n-del-def-route-confirm' : '¿Está seguro de que desexa eliminar a definición desta ruta? O cambio non será reversible',
+        'i18n-current-defRoute' : 'Detalles da Def. da Ruta',
+        'i18n-search-defRoute' : 'Buscar Def. de Rutas',
+        'i18n-edit-defRoute' : 'Editar Def. da Ruta',
 
 
         // MODAL

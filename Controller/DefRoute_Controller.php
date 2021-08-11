@@ -56,4 +56,92 @@ class DefRoute {
             new Message('FRB_ACCS','Panel','deshboard');
         }
     }
+
+    function deleteForm() {
+        if($this->checkPermission()) {
+            $defRoute_service = new DefRoute_Service();
+            $feedback = $defRoute_service->seek();
+            if($feedback['ok']) {
+                include_once './View/DefRoutes/Delete_DefRoute_View.php';
+                new Delete_DefRoute($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
+
+    function delete() {
+        if($this->checkPermission()) {
+            $defRoute_service = new DefRoute_Service();
+            $feedback = $defRoute_service->DELETE();
+            if(isset($feedback['plan'])) {
+                new Message($feedback['code'],'DefRoute','show',$feedback['plan']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
+
+    function showCurrent() {
+        if($this->checkPermission()) {
+            $defRoute_service = new DefRoute_Service();
+            $feedback = $defRoute_service->seek();
+            if($feedback['ok']) {
+                include_once './View/DefRoutes/ShowCurrent_DefRoute_View.php';
+                new ShowCurrent_DefRoute($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
+
+    function searchForm() {
+        if($this->checkPermission()) {
+            $defRoute_service = new DefRoute_Service();
+            $feedback = $defRoute_service->seekPlan();
+            if($feedback['ok']) {
+                include_once './View/DefRoutes/Search_DefRoute_View.php';
+                new Search_DefRoute($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
+
+    function editForm() {
+        if($this->checkPermission()) {
+            $defRoute_service = new DefRoute_Service();
+            $feedback = $defRoute_service->seek();
+            if($feedback['ok']) {
+                include_once './View/DefRoutes/Edit_DefRoute_View.php';
+                new Edit_DefRoute($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
+
+    function edit() {
+        if($this->checkPermission()) {
+            $defRoute_service = new DefRoute_Service();
+            $feedback = $defRoute_service->EDIT();
+            if(isset($feedback['plan'])) {
+                new Message($feedback['code'],'DefRoute','show',$feedback['plan']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
 }

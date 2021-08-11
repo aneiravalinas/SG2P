@@ -44,11 +44,23 @@ class DefRoute_Model extends Abstract_Model {
     }
 
     function EDIT() {
-        // TODO: Implement EDIT() method.
+        $this->query = "UPDATE RUTA SET " .
+            ($this->nombre == '' ? "" : "nombre = '$this->nombre', ") .
+            ($this->descripcion == '' ? "" : "descripcion = '$this->descripcion'") .
+            " WHERE ruta_id = '$this->ruta_id'";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function DELETE() {
-        // TODO: Implement DELETE() method.
+        $this->query = "
+            DELETE FROM RUTA
+            WHERE ruta_id = '$this->ruta_id'
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function SEARCH() {
@@ -75,6 +87,17 @@ class DefRoute_Model extends Abstract_Model {
     }
 
     function searchByPlan() {
+        $this->query = "
+            SELECT * FROM RUTA
+            WHERE 
+                  plan_id = '$this->plan_id'     
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchByRouteName() {
         $this->query = "
             SELECT * FROM RUTA
             WHERE 

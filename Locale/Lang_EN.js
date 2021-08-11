@@ -373,6 +373,28 @@ arrayEN = {
         'DFROUTE_ADD_OK' : 'The route definition has been added successfully',
         'DFROUTE_ADD_KO' : 'Error adding route definition',
 
+        // SEEK
+        'DFROUTE_SEEK_OK' : 'The details of the route definition have been consulted correctly',
+        'DFROUTE_SEEK_KO' : 'Failed to query the details of the route definition',
+
+        // DELETE
+        'DFROUTE_DEL_OK' : 'The route definition has been successfully removed',
+        'DFROUTE_DEL_KO' : 'Failed to delete route definition',
+
+        // EDIT
+        'DFROUTE_EDT_OK' : 'The route definition has been modified successfully',
+        'DFROUTE_EDT_KO' : 'Error modifying route definition',
+
+        // Búsqueda de implementaciones de rutas en plantas
+        'DFROUTE_IMPL_EXST' : 'It is not possible to delete the definition of the route while there are implementations in some floor',
+        'DFROUTE_IMPL_NOT_EXST' : 'The route definition has no floor implementations',
+        'DFROUTE_IMPL_KO' : 'Error when consulting route implementations in floors',
+
+        // Búsqueda por ID de ruta
+        'DFROUTEID_NOT_EXST' : 'The definition of the indicated route does not exist',
+        'DFROUTEID_EXST' : 'The definition of the indicated route exists',
+        'DFROUTEID_KO' : 'Failed to query by Route ID',
+
         // Búsqueda por nombre de ruta
         'DFROUTE_NAME_EXST' : 'A route definition with the indicated name already exists for this plan',
         'DFROUTE_NAME_NOT_EXST' : 'There is no route definition with the name indicated in the plan',
@@ -688,6 +710,10 @@ arrayEN = {
         'i18n-ruta_id' : 'Route ID',
         'i18n-def-routes-empty' : 'No routes definitions registered',
         'i18n-add-defRoute' : 'Route Definition',
+        'i18n-del-def-route-confirm' : 'Are you sure you want to delete the definition of this route? The change will not be reversible',
+        'i18n-current-defRoute' : 'Details of the Route Def.',
+        'i18n-search-defRoute' : 'Search Routes Definitions',
+        'i18n-edit-defRoute' : 'Edit Route Definition',
 
         // MODAL
             // Campos Modal

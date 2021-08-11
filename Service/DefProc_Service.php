@@ -29,12 +29,7 @@ class DefProc_Service extends DefProc_Validation {
 
 
     function SEARCH() {
-        $validation = $this->validar_PLAN_ID();
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->seekByPlanID();
+        $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
@@ -59,7 +54,7 @@ class DefProc_Service extends DefProc_Validation {
 
     }
 
-    function emptyForm() {
+    function seekPlan() {
         $validation = $this->validar_PLAN_ID();
         if(!$validation['ok']) {
             return $validation;
@@ -69,12 +64,7 @@ class DefProc_Service extends DefProc_Validation {
     }
 
     function ADD() {
-        $validation = $this->validar_PLAN_ID();
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->seekByPlanID();
+        $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }

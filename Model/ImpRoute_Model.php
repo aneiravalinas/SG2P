@@ -57,4 +57,14 @@ class ImpRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function searchByRouteID() {
+        $this->query = "
+            SELECT * FROM PLANTA_RUTA
+            WHERE ruta_id = '$this->ruta_id'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
 }

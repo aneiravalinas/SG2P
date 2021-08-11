@@ -17,6 +17,7 @@ class Test {
         include './Test/DefPlan_Test.php';
         include './Test/DefDoc_Test.php';
         include './Test/DefProc_Test.php';
+        include './Test/DefRoute_Test.php';
 
         session_destroy();
 

@@ -280,7 +280,8 @@ INSERT INTO PROCEDIMIENTO (`procedimiento_id`,`plan_id`,`nombre`,`descripcion`) 
 
 INSERT INTO RUTA (`ruta_id`, `plan_id`, `nombre`, `descripcion`) VALUES
 (1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta'),
-(2,4,'Rutas del plan con rutas','Descripcion Rutas');
+(2,4,'Rutas del plan con rutas','Descripcion Rutas'),
+(3,1,'Otra Ruta del Plan Uno','Descripcion de la definicion de la ruta');
 
 INSERT INTO FORMACION (`formacion_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (1,5,'Formaciones del plan con formaciones','Descripción de la formación');

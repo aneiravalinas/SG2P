@@ -89,22 +89,22 @@ array_push($testDefProc, $respTest);
 
 
 /*
- *  --- EMPTY_FORM: VALIDACIONES ---
+ *  --- SEEK_PLAN: VALIDACIONES ---
  */
 
 // ID del Plan vacío
 $_POST = array('plan_id' => '');
 $defProc_service = new DefProc_Service();
-$feedback = $defProc_service->emptyForm();
-$respTest = obtenerRespuesta('DefProc','EMPTY_FORM','PLAN_ID','ID del Plan vacío',
+$feedback = $defProc_service->seekPlan();
+$respTest = obtenerRespuesta('DefProc','SEEK_PLAN','PLAN_ID','ID del Plan vacío',
     'DFPLAN_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 
 // ID del Plan no numérico
 $_POST = array('plan_id' => 'aa');
 $defProc_service = new DefProc_Service();
-$feedback = $defProc_service->emptyForm();
-$respTest = obtenerRespuesta('DefProc','EMPTY_FORM','PLAN_ID','ID del Plan no numérico',
+$feedback = $defProc_service->seekPlan();
+$respTest = obtenerRespuesta('DefProc','SEEK_PLAN','PLAN_ID','ID del Plan no numérico',
     'DFPLAN_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 
@@ -115,16 +115,16 @@ array_push($testDefProc, $respTest);
 // El plan no existe
 $_POST = array('plan_id' => '1111');
 $defProc_service = new DefProc_Service();
-$feedback = $defProc_service->emptyForm();
-$respTest = obtenerRespuesta('DefProc','EMPTY_FORM','ACCION','El plan no existe',
+$feedback = $defProc_service->seekPlan();
+$respTest = obtenerRespuesta('DefProc','SEEK_PLAN','ACCION','El plan no existe',
     'DFPLANID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 
 // El plan existe
 $_POST = array('plan_id' => '1');
 $defProc_service = new DefProc_Service();
-$feedback = $defProc_service->emptyForm();
-$respTest = obtenerRespuesta('DefProc','EMPTY_FORM','ACCION','El plan existe',
+$feedback = $defProc_service->seekPlan();
+$respTest = obtenerRespuesta('DefProc','SEEK_PLAN','ACCION','El plan existe',
     'DFPLANID_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 

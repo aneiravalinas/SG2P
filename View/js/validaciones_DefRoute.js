@@ -4,7 +4,7 @@ function check_DEFROUTE() {
 }
 
 function check_DEFROUTE_SEARCH() {
-    return check_DEFPROC_ID_SEARCH() &&
+    return check_DEFROUTE_ID_SEARCH() &&
         check_NOMBRE_DEFPROC_SEARCH();
 }
 

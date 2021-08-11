@@ -31,7 +31,7 @@ class DefDoc {
     function addForm() {
         if($this->checkPermission()) {
             $defDoc_service = new DefDoc_Service();
-            $feedback = $defDoc_service->emptyForm();
+            $feedback = $defDoc_service->seekPlan();
             if($feedback['ok']) {
                 include_once './View/DefDocs/Add_DefDoc_View.php';
                 new Add_DefDoc($feedback['resource']);
@@ -89,7 +89,7 @@ class DefDoc {
     function searchForm() {
         if($this->checkPermission()) {
             $defDoc_service = new DefDoc_Service();
-            $feedback = $defDoc_service->emptyForm();
+            $feedback = $defDoc_service->seekPlan();
             if($feedback['ok']) {
                 include_once './View/DefDocs/Search_DefDoc_View.php';
                 new Search_DefDoc($feedback['resource']);

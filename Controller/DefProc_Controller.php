@@ -31,7 +31,7 @@ class DefProc {
     function addForm() {
         if($this->checkPermission()) {
             $defProc_service = new DefProc_Service();
-            $feedback = $defProc_service->emptyForm();
+            $feedback = $defProc_service->seekPlan();
             if($feedback['ok']) {
                 include_once './View/DefProcs/Add_DefProc_View.php';
                 new Add_DefProc($feedback['resource']);
@@ -104,7 +104,7 @@ class DefProc {
     function searchForm() {
         if($this->checkPermission()) {
             $defProc_service = new DefProc_Service();
-            $feedback = $defProc_service->emptyForm();
+            $feedback = $defProc_service->seekPlan();
             if($feedback['ok']) {
                 include './View/DefProcs/Search_DefProc_View.php';
                 new Search_DefProc($feedback['resource']);
