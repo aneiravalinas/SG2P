@@ -275,7 +275,8 @@ INSERT INTO DOCUMENTO (`documento_id`,`plan_id`,`nombre`,`descripcion`,`visible`
 (2,2,'Nombre Documento','Descripcion','no');
 
 INSERT INTO PROCEDIMIENTO (`procedimiento_id`,`plan_id`,`nombre`,`descripcion`) VALUES
-(1,3,'Procedimiento del plan con procedimientos','Descripcion del Procedimiento');
+(1,3,'Procedimiento del plan con procedimientos','Descripcion del Procedimiento'),
+(2,3,'Nombre Procedimiento','Descripcion del Procedimiento');
 
 INSERT INTO RUTA (`ruta_id`, `plan_id`, `nombre`, `descripcion`) VALUES
 (1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta'),
@@ -295,6 +296,9 @@ INSERT INTO EDIFICIO_PLAN (`edificio_id`, `plan_id`, `fecha_asignacion`, `estado
 
 INSERT INTO EDIFICIO_DOCUMENTO (`edificio_documento_id`, `edificio_id`, `documento_id`, `estado`, `nombre_doc`) VALUES
 (1,2,1,'vigente','doc.pdf');
+
+INSERT INTO EDIFICIO_PROCEDIMIENTO (`edificio_procedimiento_id`, `edificio_id`, `procedimiento_id`, `estado`, `nombre_doc`) VALUES
+(1,3,1,'vigente','doc.pdf');
 
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';

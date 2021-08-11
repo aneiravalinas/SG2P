@@ -43,7 +43,13 @@ class DefProc_Model extends Abstract_Model {
     }
 
     function EDIT() {
-        // TODO: Implement EDIT() method.
+        $this->query = "UPDATE PROCEDIMIENTO SET " .
+            ($this->nombre == '' ? "" : "nombre = '$this->nombre', ") .
+            ($this->descripcion == '' ? "" : "descripcion = '$this->descripcion'") .
+            " WHERE procedimiento_id = '$this->procedimiento_id'";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function DELETE() {

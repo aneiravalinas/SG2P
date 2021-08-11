@@ -353,6 +353,6 @@ array_push($testDefPlan, $respTest);
 //------------------------------------------------------------------------------
 //Fin test Definición de Planes
 //------------------------------------------------------------------------------
-$this->respuestaTest['resultado']['DefPlanes'] = $testDefPlan;
+$this->respuestaTest['resultado']['Def_Plan'] = $testDefPlan;
 $this->respuestaTest['numFallos'] += $numFallos;
 $this->respuestaTest['numTest'] += $numTest;

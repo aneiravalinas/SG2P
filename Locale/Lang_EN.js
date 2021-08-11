@@ -344,6 +344,10 @@ arrayEN = {
         'DFPROC_SEEK_OK' : 'Success in obtaining the details of the procedure definition',
         'DFPROC_SEEK_KO' : 'Failed to query the details of the procedure definition',
 
+        // EDIT
+        'DFPROC_EDT_OK' : 'The definition of the procedure has been modified correctly',
+        'DFPROC_EDT_KO' : 'Error modifying procedure definition',
+
         // Búsqueda por ID de Procedimiento
         'DFPROCID_NOT_EXST' : 'The indicated procedure definition does not exist',
         'DFPROCID_EXST' : 'The indicated procedure definition exists',
@@ -652,6 +656,8 @@ arrayEN = {
         'i18n-add-defProc' : 'Define Procedure',
         'i18n-del-def-proc-confirm' : 'Are you sure you want to delete the definition of this procedure? The action will not be reversible',
         'i18n-current-defProc' : 'Details of the Procedure Def.',
+        'i18n-search-defProc' : 'Search Procedures Definitions',
+        'i18n-edit-defProc' : 'Edit Procedure Definition',
 
         // MODAL
             // Campos Modal

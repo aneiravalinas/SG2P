@@ -344,6 +344,10 @@ arrayGA = {
         'DFPROC_SEEK_OK' : 'Éxito na obtención dos detalles da definición do procedemento',
         'DFPROC_SEEK_KO' : 'Non se puideron consultar os detalles da definición do procedemento',
 
+        // EDIT
+        'DFPROC_EDT_OK' : 'A definición do procedemento modificouse correctamente',
+        'DFPROC_EDT_KO' : 'Erro ó modificar a definición do procedemento',
+
         // Búsqueda por ID de Procedimiento
         'DFPROCID_NOT_EXST' : 'A definición do procedemento indicado non existe',
         'DFPROCID_EXST' : 'A definición do procedemento indicado existe',
@@ -655,6 +659,8 @@ arrayGA = {
         'i18n-add-defProc' : 'Definir Procedemento',
         'i18n-del-def-proc-confirm' : '¿Está seguro de que desexa eliminar a definición deste procedemento? A acción non será reversible',
         'i18n-current-defProc' : 'Detalles da Def. do Procedemento',
+        'i18n-search-defProc' : 'Buscar Def. de Procedementos',
+        'i18n-edit-defProc' : 'Editar Def. do Procedemento',
 
 
         // MODAL

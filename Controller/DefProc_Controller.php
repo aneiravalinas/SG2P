@@ -100,4 +100,48 @@ class DefProc {
             new Message('FRB_ACCS', 'Panel', 'deshboard');
         }
     }
+
+    function searchForm() {
+        if($this->checkPermission()) {
+            $defProc_service = new DefProc_Service();
+            $feedback = $defProc_service->emptyForm();
+            if($feedback['ok']) {
+                include './View/DefProcs/Search_DefProc_View.php';
+                new Search_DefProc($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function editForm() {
+        if($this->checkPermission()) {
+            $defProc_service = new DefProc_Service();
+            $feedback = $defProc_service->seek();
+            if($feedback['ok']) {
+                include './View/DefProcs/Edit_DefProc_View.php';
+                new Edit_DefProc($feedback['resource']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function edit() {
+        if($this->checkPermission()) {
+            $defProc_service = new DefProc_Service();
+            $feedback = $defProc_service->EDIT();
+            if(isset($feedback['plan'])) {
+                new Message($feedback['code'],'DefProc','show',$feedback['plan']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
 }

@@ -454,16 +454,11 @@ $respTest = obtenerRespuesta('DefDoc','EDIT','ACCION','Documento editado Ok',
     'DFDOC_EDT_OK', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
-if($feedback['ok']) {
-    $_POST = array('documento_id' => '1', 'nombre' => 'Documentos del plan con documentos', 'descripcion' => 'Descripcion del Documento', 'visible' => 'yes');
-    $defDoc_service = new DefDoc_Service();
-    $defDoc_service->EDIT();
-}
 
 
 //------------------------------------------------------------------------------
 //Fin test Definición de Documentos
 //------------------------------------------------------------------------------
-$this->respuestaTest['resultado']['DefDocumentos'] = $testDefDoc;
+$this->respuestaTest['resultado']['Def_Doc'] = $testDefDoc;
 $this->respuestaTest['numFallos'] += $numFallos;
 $this->respuestaTest['numTest'] += $numTest;

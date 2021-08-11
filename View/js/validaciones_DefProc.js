@@ -3,7 +3,10 @@ function check_DEFPROC() {
         check_DESCRIPCION_DEFPROC();
 }
 
-
+function check_DEFPROC_SEARCH() {
+    return check_DEFPROC_ID_SEARCH() &&
+        check_NOMBRE_DEFPROC_SEARCH();
+}
 
 function check_DEFPROC_ID_SEARCH() {
     if(not_empty('procedimiento_id')) {

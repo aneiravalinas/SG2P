@@ -145,6 +145,40 @@ class DefProc_Service extends DefProc_Validation {
         return $this->feedback;
     }
 
+    function EDIT() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $proc = $this->feedback['resource'];
+
+        $validation = $this->validar_atributos();
+        if(!$validation['ok']) {
+            $validation['plan'] = array('plan_id' => $proc['plan_id']);
+            return $validation;
+        }
+
+        if($this->nombre != $proc['nombre']) {
+            $this->defProc_entity->plan_id = $proc['plan_id'];
+            $this->feedback = $this->name_proc_not_exist();
+            if(!$this->feedback['ok']) {
+                $this->feedback['plan'] = array('plan_id' => $proc['plan_id']);
+                return $this->feedback;
+            }
+        }
+
+        $this->feedback = $this->defProc_entity->EDIT();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'DFPROC_EDT_OK';
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'DFPROC_EDT_KO';
+        }
+
+        $this->feedback['plan'] = array('plan_id' => $proc['plan_id']);
+        return $this->feedback;
+    }
+
 
     function seekByProcID() {
         $feedback = $this->defProc_entity->seek();

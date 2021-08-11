@@ -37,7 +37,7 @@ class Edit_DefDoc {
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" value="<?php echo $this->doc['nombre'] ?>" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFPLAN();"/>
+                                    <input type="text" value="<?php echo $this->doc['nombre'] ?>" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFDOC();"/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="visible" class="i18n-visible">Visible</label>
@@ -69,7 +69,7 @@ class Edit_DefDoc {
                                         insertacampo(document.formularioedit,'documento_id','<?php echo $this->doc['documento_id'] ?>');
                                         insertacampo(document.formularioedit,'controller','DefDoc');
                                         insertacampo(document.formularioedit,'action','edit');
-                                        enviaformcorrecto(document.formularioedit,check_DEFPLAN());">
+                                        enviaformcorrecto(document.formularioedit,check_DEFDOC());">
                                         Enviar
                                     </a>
                                 </div>
