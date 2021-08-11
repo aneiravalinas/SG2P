@@ -25,7 +25,22 @@ class DefRoute_Model extends Abstract_Model {
     }
 
     function ADD() {
-        // TODO: Implement ADD() method.
+        $this->query = "
+            INSERT INTO RUTA
+                (
+                 plan_id,
+                 nombre,
+                 descripcion
+                ) VALUES (
+                '$this->plan_id',
+                '$this->nombre',
+                '$this->descripcion'
+                );
+        ";
+
+        $this->execute_single_query();
+        $this->ruta_id = $this->id_autoincrement;
+        return $this->feedback;
     }
 
     function EDIT() {
@@ -37,17 +52,35 @@ class DefRoute_Model extends Abstract_Model {
     }
 
     function SEARCH() {
-        // TODO: Implement SEARCH() method.
+        $this->query = "
+            SELECT * FROM RUTA
+            WHERE
+                plan_id = '$this->plan_id' AND
+                ruta_id LIKE '%" . $this->ruta_id . "%' AND
+                nombre LIKE '%" . $this->nombre . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
     }
 
     function seek() {
-        // TODO: Implement seek() method.
+        $this->query = "
+            SELECT * FROM RUTA
+            WHERE ruta_id = '$this->ruta_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
     function searchByPlan() {
         $this->query = "
             SELECT * FROM RUTA
-            WHERE plan_id = '$this->plan_id'
+            WHERE 
+                  plan_id = '$this->plan_id' AND 
+                  nombre = '$this->nombre'
+                  
         ";
 
         $this->get_results_from_query();

@@ -1,11 +1,11 @@
 <?php
 
-class Show_DefDocs {
-    var $docs;
+class Show_DefRoutes {
+    var $routes;
     var $plan;
 
-    function __construct($docs, $plan) {
-        $this->docs = $docs;
+    function __construct($routes, $plan) {
+        $this->routes = $routes;
         $this->plan = $plan;
         $this->render();
     }
@@ -21,7 +21,7 @@ class Show_DefDocs {
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
                         <h1><?php echo $this->plan['nombre'] ?></h1>
-                        <h2 class="mb-4 i18n-def-docs">Definiciones de Documentos</h2>
+                        <h2 class="mb-4 i18n-def-routes">Definiciones de Rutas</h2>
                     </div>
                 </div>
 
@@ -31,7 +31,7 @@ class Show_DefDocs {
                             <a type="button" onclick="
                                 crearform('formenviar','post');
                                 insertacampo(document.formenviar,'plan_id','<?php echo $this->plan['plan_id'] ?>');
-                                insertacampo(document.formenviar,'controller','DefDoc');
+                                insertacampo(document.formenviar,'controller','DefRoute');
                                 insertacampo(document.formenviar,'action','searchForm');
                                 enviaform(document.formenviar);">
                                 <span class="iconify option_button" data-icon="fluent:search-square-24-filled" data-inline="false"></span>
@@ -39,7 +39,7 @@ class Show_DefDocs {
                             <a type="button" onclick="
                                 crearform('formenviar','post');
                                 insertacampo(document.formenviar,'plan_id','<?php echo $this->plan['plan_id'] ?>');
-                                insertacampo(document.formenviar,'controller','DefDoc');
+                                insertacampo(document.formenviar,'controller','DefRoute');
                                 insertacampo(document.formenviar,'action','addForm');
                                 enviaform(document.formenviar);">
                                 <span class="iconify option_button" data-icon="gridicons-add" data-inline="false"></span>
@@ -53,18 +53,16 @@ class Show_DefDocs {
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col" class="i18n-documento_id">ID Documento</th>
+                                <th scope="col" class="i18n-ruta_id">ID Ruta</th>
                                 <th scope="col" class="i18n-nombre">Nombre</th>
-                                <th scope="col" class="i18n-visible">Visible</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($this->docs as $doc): ?>
+                            <?php foreach($this->routes as $route): ?>
                                 <tr>
-                                    <td><?php echo $doc['documento_id'] ?></td>
-                                    <td><?php echo $doc['nombre'] ?></td>
-                                    <td class="i18n-<?php echo $doc['visible'] ?>"></td>
+                                    <td><?php echo $route['ruta_id'] ?></td>
+                                    <td><?php echo $route['nombre'] ?></td>
                                     <td class="text-center">
                                         <div class="btn-group px-md-2">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
@@ -73,8 +71,8 @@ class Show_DefDocs {
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item i18n-details" type="button" onclick="
                                                     crearform('formenviar','post');
-                                                    insertacampo(document.formenviar,'documento_id','<?php echo $doc['documento_id'] ?>');
-                                                    insertacampo(document.formenviar,'controller','DefDoc');
+                                                    insertacampo(document.formenviar,'ruta_id','<?php echo $route['ruta_id'] ?>');
+                                                    insertacampo(document.formenviar,'controller','DefRoute');
                                                     insertacampo(document.formenviar,'action','showCurrent');
                                                     enviaform(document.formenviar);">
                                                     Detalles
@@ -82,16 +80,16 @@ class Show_DefDocs {
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item i18n-edit" type="button" onclick="
                                                     crearform('formenviar','post');
-                                                    insertacampo(document.formenviar, 'documento_id','<?php echo $doc['documento_id'] ?>');
-                                                    insertacampo(document.formenviar, 'controller','DefDoc');
+                                                    insertacampo(document.formenviar, 'ruta_id','<?php echo $route['ruta_id'] ?>');
+                                                    insertacampo(document.formenviar, 'controller','DefRoute');
                                                     insertacampo(document.formenviar, 'action', 'editForm');
                                                     enviaform(document.formenviar);">
                                                     Editar
                                                 </a>
                                                 <a class="dropdown-item i18n-delete" type="button" onclick="
                                                     crearform('formenviar','post');
-                                                    insertacampo(document.formenviar, 'documento_id','<?php echo $doc['documento_id'] ?>');
-                                                    insertacampo(document.formenviar,'controller','DefDoc');
+                                                    insertacampo(document.formenviar, 'ruta_id','<?php echo $route['ruta_id'] ?>');
+                                                    insertacampo(document.formenviar,'controller','DefRoute');
                                                     insertacampo(document.formenviar,'action','deleteForm');
                                                     enviaform(document.formenviar);">
                                                     Eliminar
@@ -101,10 +99,10 @@ class Show_DefDocs {
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
-                            <?php if(empty($this->docs)) :?>
+                            <?php if(empty($this->routes)) :?>
                                 <tr>
-                                    <td colspan="4" class="text-center">
-                                        <span class="i18n-def-docs-empty">No hay definiciones de documentos registradas</span>
+                                    <td colspan="3" class="text-center">
+                                        <span class="i18n-def-routes-empty">No hay definiciones de rutas registradas</span>
                                     </td>
                                 </tr>
                             <?php endif; ?>

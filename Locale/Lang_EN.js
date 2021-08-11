@@ -363,6 +363,21 @@ arrayEN = {
         'DFPROC_NAME_NOT_EXST' : 'There is no procedure definition with the name indicated in this plan',
         'DFPROC_NAME_KO' : 'Failed to query by procedure name',
 
+    // DEF_ROUTE
+
+        // SEARCH
+        'DFROUTE_SEARCH_OK' : 'Search for route definitions was successful',
+        'DFROUTE_SEARCH_KO' : 'Failed to find routes definitions',
+
+        // ADD
+        'DFROUTE_ADD_OK' : 'The route definition has been added successfully',
+        'DFROUTE_ADD_KO' : 'Error adding route definition',
+
+        // Búsqueda por nombre de ruta
+        'DFROUTE_NAME_EXST' : 'A route definition with the indicated name already exists for this plan',
+        'DFROUTE_NAME_NOT_EXST' : 'There is no route definition with the name indicated in the plan',
+        'DFROUTE_NAME_KO' : 'Failed to query by route name',
+
         // Validaciones
 
             // Nombre de Usuario
@@ -514,6 +529,15 @@ arrayEN = {
             'DFPROC_NAM_LRG' : 'The name of the procedure must not exceed 50 characters',
             'DFPROC_NAM_FRMT' : 'Procedure name contains illegal characters',
 
+            // ID DefRoute
+            'DFROUTE_ID_EMPT' : 'Route ID cannot be empty',
+            'DEFROUTE_ID_NOT_NUMERIC' : 'The Route ID must be numeric',
+
+            // Nombre DefRoute
+            'DFROUTE_NAM_SHRT' : 'The route name must exceed 5 characters',
+            'DFROUTE_NAM_LRG' : 'The route name must not exceed 50 characters',
+            'DFROUTE_NAM_FRMT' : 'Route name contains illegal characters',
+
 
 
     // INTERFACE
@@ -659,6 +683,12 @@ arrayEN = {
         'i18n-search-defProc' : 'Search Procedures Definitions',
         'i18n-edit-defProc' : 'Edit Procedure Definition',
 
+        // DEF_ROUTES VIEW
+        'i18n-def-routes' : 'Routes Definitions',
+        'i18n-ruta_id' : 'Route ID',
+        'i18n-def-routes-empty' : 'No routes definitions registered',
+        'i18n-add-defRoute' : 'Route Definition',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Warning!',
@@ -688,6 +718,7 @@ arrayEN = {
             'm-documento_id' : ' Document ID ',
             'm-plan_id' : ' Plan ID ',
             'm-procedimiento_id' : ' Procedure ID ',
+            'm-ruta_id' : ' Route ID ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',

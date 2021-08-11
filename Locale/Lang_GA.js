@@ -363,6 +363,21 @@ arrayGA = {
         'DFPROC_NAME_NOT_EXST' : 'Non existe unha definición de procedemento co nome indicado neste plan',
         'DFPROC_NAME_KO' : 'Error ó consultar por nome de procedemento',
 
+    // DEF_ROUTE
+
+        // SEARCH
+        'DFROUTE_SEARCH_OK' : 'A búsqueda de definicións de rutas realizouse correctamente',
+        'DFROUTE_SEARCH_KO' : 'Erro ó buscar definicións de rutas',
+
+        // ADD
+        'DFROUTE_ADD_OK' : 'A definición da ruta engadiuse correctamente',
+        'DFROUTE_ADD_KO' : 'Erro ó engadir a definición da ruta',
+
+        // Búsqueda por nombre de ruta
+        'DFROUTE_NAME_EXST' : 'Xa existe unha definición de ruta co nome indicado neste plan',
+        'DFROUTE_NAME_NOT_EXST' : 'Non existe unha definición de ruta co nome indicado neste plan',
+        'DFROUTE_NAME_KO' : 'Erro ó consultar por nome de ruta',
+
 
         // Validaciones
 
@@ -515,6 +530,15 @@ arrayGA = {
             'DFPROC_NAM_LRG' : 'O nome do procedemento non debe superar os 50 caracteres',
             'DFPROC_NAM_FRMT' : 'O nome do procedemento contén caracteres non permitidos',
 
+            // ID DefRoute
+            'DFROUTE_ID_EMPT' : 'El ID da Ruta non pode ser vacío',
+            'DEFROUTE_ID_NOT_NUMERIC' : 'O ID da Ruta debe ser numérico',
+
+            // Nombre DefRoute
+            'DFROUTE_NAM_SHRT' : 'O nome da ruta debe superar os 5 caracteres',
+            'DFROUTE_NAM_LRG' : 'O nome da ruta non debe superar os 50 caracteres',
+            'DFROUTE_NAM_FRMT' : 'O nome da ruta contén caracteres non permitidos',
+
 
 
 
@@ -662,6 +686,12 @@ arrayGA = {
         'i18n-search-defProc' : 'Buscar Def. de Procedementos',
         'i18n-edit-defProc' : 'Editar Def. do Procedemento',
 
+        // DEF_ROUTES VIEW
+        'i18n-def-routes' : 'Definicións de Rutas',
+        'i18n-ruta_id' : 'ID Ruta',
+        'i18n-def-routes-empty' : 'Non hay definicións de rutas rexistradas',
+        'i18n-add-defRoute' : 'Definir Ruta',
+
 
         // MODAL
             // Campos Modal
@@ -692,6 +722,7 @@ arrayGA = {
             'm-documento_id' : ' ID Documento ',
             'm-plan_id' : ' ID Plan ',
             'm-procedimiento_id' : ' ID Procedemento ',
+            'm-ruta_id' : ' ID Ruta ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',

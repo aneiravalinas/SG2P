@@ -365,6 +365,21 @@ arrayES = {
         'DFPROC_NAME_NOT_EXST' : 'No existe una definición de procedimiento con el nombre indicado en este plan',
         'DFPROC_NAME_KO' : 'Error al consultar por nombre de procedimiento',
 
+    // DEF_ROUTE
+
+        // SEARCH
+        'DFROUTE_SEARCH_OK' : 'La búsqueda de definiciones de rutas se ha realizado correctamente',
+        'DFROUTE_SEARCH_KO' : 'Error al buscar definiciones de rutas',
+
+        // ADD
+        'DFROUTE_ADD_OK' : 'La definición de la ruta se ha añadido correctamente',
+        'DFROUTE_ADD_KO' : 'Error al añadir la definición de la ruta',
+
+        // Búsqueda por nombre de ruta
+        'DFROUTE_NAME_EXST' : 'Ya existe una definición de ruta con el nombre indicado para este plan',
+        'DFROUTE_NAME_NOT_EXST' : 'No existe una definición de ruta con el nombre indicado en el plan',
+        'DFROUTE_NAME_KO' : 'Error al consultar por nombre de ruta',
+
 
         // Validaciones
 
@@ -518,6 +533,15 @@ arrayES = {
             'DFPROC_NAM_LRG' : 'El nombre del procedimiento no debe superar los 50 caracteres',
             'DFPROC_NAM_FRMT' : 'El nombre del procedimiento contiene caracteres no permitidos',
 
+            // ID DefRoute
+            'DFROUTE_ID_EMPT' : 'El ID de la Ruta no puede ser vacío',
+            'DEFROUTE_ID_NOT_NUMERIC' : 'El ID de la Ruta debe ser numérico',
+
+            // Nombre DefRoute
+            'DFROUTE_NAM_SHRT' : 'El nombre de la ruta debe superar los 5 caracteres',
+            'DFROUTE_NAM_LRG' : 'El nombre de la ruta no debe superar los 50 caracteres',
+            'DFROUTE_NAM_FRMT' : 'El nombre de la ruta contiene caracteres no permitidos',
+
 
 
 
@@ -664,6 +688,12 @@ arrayES = {
         'i18n-search-defProc' : 'Buscar Def. de Procedimientos',
         'i18n-edit-defProc' : 'Editar Def. del Procedimiento',
 
+        // DEF_ROUTES VIEW
+        'i18n-def-routes' : 'Definiciones de Rutas',
+        'i18n-ruta_id' : 'ID Ruta',
+        'i18n-def-routes-empty' : 'No hay definiciones de rutas registradas',
+        'i18n-add-defRoute' : 'Definir Ruta',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Aviso!',
@@ -693,6 +723,7 @@ arrayES = {
             'm-documento_id' : ' ID Documento ',
             'm-plan_id' : ' ID Plan ',
             'm-procedimiento_id' : ' ID Procedimiento ',
+            'm-ruta_id' : ' ID Ruta ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',
