@@ -440,6 +440,22 @@ arrayES = {
         'DFFRMT_IMPL_KO' : 'Error al consultar implementaciones de formaciones',
 
 
+    // DEF_SIM
+
+        // SEARCH
+        'DFSIM_SEARCH_OK' : 'La búsqueda de definiciones de simulacros se ha realizado correctamente',
+        'DFSIM_SEARCH_KO' : 'Error al buscar definiciones de simulacros',
+
+        // ADD
+        'DFSIM_ADD_OK' : 'La definición del simulacro se ha añadido correctamente',
+        'DFSIM_ADD_KO' : 'Error al añadir la definición del simulacro',
+
+        // Búsqueda por nombre de simulacro
+        'DFSIM_NAME_EXST' : 'Ya existe una definición de simulacro con el nombre indicado en este plan',
+        'DFSIM_NAME_NOT_EXST' : 'No existe una definición de simulacro con el nombre indicado en este plan',
+        'DFSIM_NAME_KO' : 'Error al consultar por nombre de simulacro',
+
+
         // Validaciones
 
             //Nombre Usuario
@@ -610,6 +626,15 @@ arrayES = {
             'DFFRMT_NAM_LRG' : 'El nombre de la formación no debe superar los 50 caracteres',
             'DFFRMT_NAM_FRMT' : 'El nombre de la formación contiene caracteres no permitidos',
 
+            // ID DefSim
+            'DFSIM_ID_EMPT' : 'El ID del Simulacro no puede ser vacío',
+            'DEFSIM_ID_NOT_NUMERIC' : 'El ID del Simulacro debe ser numérico',
+
+            // Nombre Simulacro
+            'DFSIM_NAM_SHRT' : 'El nombre del simulacro debe superar los 5 caracteres',
+            'DFSIM_NAM_LRG' : 'El nombre del simulacro no debe superar los 50 caracteres',
+            'DFSIM_NAM_FRMT' : 'El nombre del simulacro contiene caracteres no permitidos',
+
 
 
 
@@ -776,6 +801,12 @@ arrayES = {
         'i18n-search-defFormat' : 'Buscar Def. de Formaciones',
         'i18n-edit-defFormat' : 'Editar Def. de la Formación',
 
+        // DEF_SIMS VIEW
+        'i18n-def-sims' : 'Definiciones de Simulacros',
+        'i18n-simulacro_id' : 'ID Simulacro',
+        'i18n-def-sims-empty' : 'No hay definiciones de simulacros registradas',
+        'i18n-add-defSim' : 'Definir Simulacro',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Aviso!',
@@ -807,6 +838,7 @@ arrayES = {
             'm-procedimiento_id' : ' ID Procedimiento ',
             'm-ruta_id' : ' ID Ruta ',
             'm-formacion_id' : ' ID Formacion ',
+            'm-simulacro_id' : ' ID Simulacro ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',

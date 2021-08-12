@@ -437,6 +437,21 @@ arrayGA = {
         'DFFRMT_IMPL_NOT_EXST' : 'A definición da formación non ten implementacións en edificios',
         'DFFRMT_IMPL_KO' : 'Erro ó consultar implementacións en edificios',
 
+    // DEF_SIM
+
+        // SEARCH
+        'DFSIM_SEARCH_OK' : 'A búsqueda de definicións de simulacros realizouse correctamente',
+        'DFSIM_SEARCH_KO' : 'Erro ó buscar definicións de simulacros',
+
+        // ADD
+        'DFSIM_ADD_OK' : 'A definición do simulacro engadiuse correctamente',
+        'DFSIM_ADD_KO' : 'Erro ó engadir a definición do simulacro',
+
+        // Búsqueda por nombre de simulacro
+        'DFSIM_NAME_EXST' : 'Xa existe unha definición de simulacro co nome indicado neste plan',
+        'DFSIM_NAME_NOT_EXST' : 'Non existe unha definición de simulacro co nome indiccado neste plan',
+        'DFSIM_NAME_KO' : 'Erro ó consultar por nome de simulacro',
+
 
         // Validaciones
 
@@ -607,6 +622,15 @@ arrayGA = {
             'DFFRMT_NAM_LRG' : 'O nome da formación non debe superar os 50 caracteres',
             'DFFRMT_NAM_FRMT' : 'O nome da formación contén caracteres non permitidos',
 
+            // ID DefSim
+            'DFSIM_ID_EMPT' : 'O ID do Simulacro non pode ser vacío',
+            'DEFSIM_ID_NOT_NUMERIC' : 'O ID do Simulacro debe ser numérico',
+
+            // Nombre Simulacro
+            'DFSIM_NAM_SHRT' : 'O nome do simulacro debe superar os 5 caracteres',
+            'DFSIM_NAM_LRG' : 'O nome do simulacro non debe superar os 50 caracteres',
+            'DFSIM_NAM_FRMT' : 'O nome do simulacro contén caracteres non permitidos',
+
 
 
 
@@ -774,6 +798,12 @@ arrayGA = {
         'i18n-search-defFormat' : 'Buscar Def. de Formacións',
         'i18n-edit-defFormat' : 'Editar Def. da Formación',
 
+        // DEF_SIMS VIEW
+        'i18n-def-sims' : 'Definicións de Simulacros',
+        'i18n-simulacro_id' : 'ID Simulacro',
+        'i18n-def-sims-empty' : 'Non hay definicións de simulacros rexistradas',
+        'i18n-add-defSim' : 'Definir Simulacro',
+
 
         // MODAL
             // Campos Modal
@@ -806,6 +836,7 @@ arrayGA = {
             'm-procedimiento_id' : ' ID Procedemento ',
             'm-ruta_id' : ' ID Ruta ',
             'm-formacion_id' : ' ID Formacion ',
+            'm-simulacro_id' : ' ID Simulacro ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',

@@ -437,6 +437,21 @@ arrayEN = {
         'DFFRMT_IMPL_NOT_EXST' : 'The definition of formation has no implementations in buildings',
         'DFFRMT_IMPL_KO' : 'Failed to query formations deployments',
 
+    // DEF_SIM
+
+        // SEARCH
+        'DFSIM_SEARCH_OK' : 'Search for Simulacrum Definitions Succeeded',
+        'DFSIM_SEARCH_KO' : 'Failed to find simulacrum definitions',
+
+        // ADD
+        'DFSIM_ADD_OK' : 'The simulacrum definition has been added successfully',
+        'DFSIM_ADD_KO' : 'Error adding simulacrum definition',
+
+        // Búsqueda por nombre de simulacro
+        'DFSIM_NAME_EXST' : 'A simulacrum definition already exists with the name indicated in this plan',
+        'DFSIM_NAME_NOT_EXST' : 'There is no definition of simulacrum with the name indicated in this plan',
+        'DFSIM_NAME_KO' : 'Failed to query by simulacrum name',
+
         // Validaciones
 
             // Nombre de Usuario
@@ -606,6 +621,15 @@ arrayEN = {
             'DFFRMT_NAM_LRG' : 'The name of the formation must not exceed 50 characters',
             'DFFRMT_NAM_FRMT' : 'Formation name contains illegal characters',
 
+            // ID DefSim
+            'DFSIM_ID_EMPT' : 'Simulacrum ID cannot be empty S',
+            'DEFSIM_ID_NOT_NUMERIC' : 'Simulacrum ID must be numeric',
+
+            // Nombre Simulacro
+            'DFSIM_NAM_SHRT' : 'The name of the simulacrum must exceed 5 characters',
+            'DFSIM_NAM_LRG' : 'The name of the simulacrum must not exceed 50 characters',
+            'DFSIM_NAM_FRMT' : 'The simulacrum name contains illegal characters',
+
 
 
     // INTERFACE
@@ -771,6 +795,13 @@ arrayEN = {
         'i18n-search-defFormat' : 'Search Formations Definitions',
         'i18n-edit-defFormat' : 'Edit Formation Definition',
 
+
+        // DEF_SIMS VIEW
+        'i18n-def-sims' : 'Simulacrums Definitions',
+        'i18n-simulacro_id' : 'Simulacrum ID',
+        'i18n-def-sims-empty' : 'No recorded simulacrum definitions',
+        'i18n-add-defSim' : 'Simulacrum Definition',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Warning!',
@@ -802,6 +833,7 @@ arrayEN = {
             'm-procedimiento_id' : ' Procedure ID ',
             'm-ruta_id' : ' Route ID ',
             'm-formacion_id' : ' Formation ID ',
+            'm-simulacro_id' : ' Simulacrum ID ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',

@@ -25,7 +25,21 @@ class DefSim_Model extends Abstract_Model {
     }
 
     function ADD() {
-        // TODO: Implement ADD() method.
+        $this->query = "
+            INSERT INTO SIMULACRO
+                (
+                 plan_id,
+                 nombre,
+                 descripcion
+                ) VALUES (
+                '$this->plan_id',
+                '$this->nombre',
+                '$this->descripcion'
+                );
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function EDIT() {
@@ -37,7 +51,16 @@ class DefSim_Model extends Abstract_Model {
     }
 
     function SEARCH() {
-        // TODO: Implement SEARCH() method.
+        $this->query = "
+            SELECT * FROM SIMULACRO
+            WHERE
+                plan_id = '$this->plan_id' AND
+                simulacro_id LIKE '%" . $this->simulacro_id . "%' AND
+                nombre LIKE '%" . $this->nombre . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
     }
 
     function seek() {
@@ -51,6 +74,18 @@ class DefSim_Model extends Abstract_Model {
         ";
 
         $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchByName() {
+        $this->query = "
+            SELECT * FROM SIMULACRO
+            WHERE
+                plan_id = '$this->plan_id' AND
+                nombre = '$this->nombre'
+        ";
+
+        $this->get_one_result_from_query();
         return $this->feedback;
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-class Add_DefFormat {
+class Add_DefSim {
     var $plan;
 
     function __construct($plan) {
@@ -19,7 +19,7 @@ class Add_DefFormat {
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
                         <h1><?php echo $this->plan['nombre'] ?></h1>
-                        <h2 class="mb-4 i18n-add-defFormat">Definir Formación</h2>
+                        <h2 class="mb-4 i18n-add-defSim">Definir Simulacro</h2>
                     </div>
 
                     <div class="col-xl-7 col-lg-9">
@@ -31,14 +31,14 @@ class Add_DefFormat {
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFFORMAT();"/>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFSIM();"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="descripcion" class="i18n-descripcion">Descripcion</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPCION_DEFFORMAT();"></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPCION_DEFSIM();"></textarea>
                                 </div>
                             </div>
 
@@ -47,16 +47,16 @@ class Add_DefFormat {
                                     <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
                                         crearform('formenviar','post');
                                         insertacampo(document.formenviar,'plan_id', '<?php echo $this->plan['plan_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','DefFormat');
+                                        insertacampo(document.formenviar,'controller','DefSim');
                                         insertacampo(document.formenviar,'action','show');
                                         enviaform(document.formenviar);">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
                                         insertacampo(document.formularioadd,'plan_id', '<?php echo $this->plan['plan_id'] ?>');
-                                        insertacampo(document.formularioadd,'controller','DefFormat');
+                                        insertacampo(document.formularioadd,'controller','DefSim');
                                         insertacampo(document.formularioadd,'action','add');
-                                        enviaformcorrecto(document.formularioadd,check_DEFFORMAT());">
+                                        enviaformcorrecto(document.formularioadd,check_DEFSIM());">
                                         Enviar
                                     </a>
                                 </div>
