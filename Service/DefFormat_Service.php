@@ -1,18 +1,18 @@
 <?php
 
-include_once './Validation/DefRoute_Validation.php';
-include_once './Model/DefRoute_Model.php';
+include_once './Validation/DefFormat_Validation.php';
+include_once './Model/DefFormat_Model.php';
 include_once './Model/DefPlan_Model.php';
 
-class DefRoute_Service extends DefRoute_Validation {
+class DefFormat_Service extends DefFormat_Validation {
     var $atributos;
-    var $defRoute_entity;
+    var $defFormat_entity;
     var $defPlan_entity;
     var $feedback = array();
 
     function __construct() {
-        $this->atributos = array('ruta_id','plan_id','nombre','descripcion');
-        $this->defRoute_entity = new DefRoute_Model();
+        $this->atributos = array('formacion_id','plan_id','nombre','descripcion');
+        $this->defFormat_entity = new DefFormat_Model();
         $this->defPlan_entity = new DefPlan_Model();
         $this->fill_fields();
     }
@@ -40,20 +40,19 @@ class DefRoute_Service extends DefRoute_Validation {
             return $validation;
         }
 
-        $this->feedback = $this->defRoute_entity->SEARCH();
+        $this->feedback = $this->defFormat_entity->SEARCH();
         if($this->feedback['ok']) {
-            $this->feedback['code'] = 'DFROUTE_SEARCH_OK';
+            $this->feedback['code'] = 'DFFRMT_SEARCH_OK';
             $this->feedback['plan'] = array('plan_id' => $plan['plan_id'], 'nombre' => $plan['nombre']);
         } else {
             if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'DFROUTE_SEARCH_KO';
+                $this->feedback['code'] = 'DFFRMT_SEARCH_KO';
             }
             $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
         }
 
         return $this->feedback;
     }
-
 
     function ADD() {
         $this->feedback = $this->seekPlan();
@@ -68,36 +67,20 @@ class DefRoute_Service extends DefRoute_Validation {
             return $validation;
         }
 
-        $this->feedback = $this->name_route_not_exist();
+        $this->feedback = $this->name_format_not_exist();
         if(!$this->feedback['ok']) {
             $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
             return $this->feedback;
         }
 
-        $this->feedback = $this->defRoute_entity->ADD();
+        $this->feedback = $this->defFormat_entity->ADD();
         if($this->feedback['ok']) {
-            $this->feedback['code'] = 'DFROUTE_ADD_OK';
+            $this->feedback['code'] = 'DFFRMT_ADD_OK';
         } else if($this->feedback['code'] == 'QRY_KO') {
-            $this->feedback['code'] = 'DFROUTE_ADD_KO';
+            $this->feedback['code'] = 'DFFRMT_ADD_KO';
         }
 
         $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
-        return $this->feedback;
-    }
-
-    function seek() {
-        $validation = $this->validar_RUTA_ID();
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->seekByRouteID();
-        if($this->feedback['ok']) {
-            $this->feedback['code'] = 'DFROUTE_SEEK_OK';
-        } else if($this->feedback['code'] == 'DFROUTEID_KO') {
-            $this->feedback['code'] = 'DFROUTE_SEEK_KO';
-        }
-
         return $this->feedback;
     }
 
@@ -107,21 +90,54 @@ class DefRoute_Service extends DefRoute_Validation {
             return $this->feedback;
         }
 
-        $route = $this->feedback['resource'];
-        $this->feedback = $this->imp_routes_not_exist();
+        $format = $this->feedback['resource'];
+        $this->feedback = $this->imp_formats_not_exist();
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $route['plan_id']);
+            $this->feedback['plan'] = array('plan_id' => $format['plan']);
             return $this->feedback;
         }
 
-        $this->feedback = $this->defRoute_entity->DELETE();
+        $this->feedback = $this->defFormat_entity->DELETE();
         if($this->feedback['ok']) {
-            $this->feedback['code'] = 'DFROUTE_DEL_OK';
+            $this->feedback['code'] = 'DFFRMT_DEL_OK';
         } else if($this->feedback['code'] == 'QRY_KO') {
-            $this->feedback['code'] = 'DFROUTE_DEL_KO';
+            $this->feedback['code'] = 'DFFRMT_DEL_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $route['plan_id']);
+        $this->feedback['plan'] = array('plan_id' => $format['plan_id']);
+        return $this->feedback;
+    }
+
+    function EDIT() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $format = $this->feedback['resource'];
+        $validation = $this->validar_atributos();
+        if(!$validation['ok']) {
+            $validation['plan'] = array('plan_id' => $format['plan_id']);
+            return $validation;
+        }
+
+        if($this->nombre != $format['nombre']) {
+            $this->defFormat_entity->plan_id = $format['plan_id'];
+            $this->feedback = $this->name_format_not_exist();
+            if(!$this->feedback['ok']) {
+                $this->feedback['plan'] = array('plan_id' => $format['plan_id']);
+                return $this->feedback;
+            }
+        }
+
+        $this->feedback = $this->defFormat_entity->EDIT();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'DFFRMT_EDT_OK';
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'DFFRMT_EDIT_KO';
+        }
+
+        $this->feedback['plan'] = array('plan_id' => $format['plan_id']);
         return $this->feedback;
     }
 
@@ -134,56 +150,57 @@ class DefRoute_Service extends DefRoute_Validation {
         return $this->seekByPlanID();
     }
 
-    function EDIT() {
-        $this->feedback = $this->seek();
-        if(!$this->feedback['ok']) {
-            return $this->feedback;
-        }
 
-        $route = $this->feedback['resource'];
-        $validation = $this->validar_atributos();
+    function seek() {
+        $validation = $this->validar_FORMACION_ID();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $route['plan_id']);
             return $validation;
         }
 
-        if($this->nombre != $route['nombre']) {
-            $this->defRoute_entity->plan_id = $route['plan_id'];
-            $this->feedback = $this->name_route_not_exist();
-            if(!$this->feedback['ok']) {
-                $this->feedback['plan'] = array('plan_id' => $route['plan_id']);
-                return $this->feedback;
-            }
-        }
-
-        $this->feedback = $this->defRoute_entity->EDIT();
+        $this->feedback = $this->seekByFormatID();
         if($this->feedback['ok']) {
-            $this->feedback['code'] = 'DFROUTE_EDT_OK';
-        } else if($this->feedback['code'] == 'QRY_KO') {
-            $this->feedback['code'] = 'DFROUTE_EDT_KO';
+            $this->feedback['code'] = 'DFFRMT_SEEK_OK';
+        } else if($this->feedback['code'] == 'DFFRMTID_KO') {
+            $this->feedback['code'] = 'DFFRMT_SEEK_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $route['plan_id']);
         return $this->feedback;
     }
 
-
-    function name_route_not_exist() {
-        $feedback = $this->defRoute_entity->searchByRouteName();
+    function imp_formats_not_exist() {
+        include_once './Model/ImpFormat_Model.php';
+        $impFormat_entity = new ImpFormat_Model();
+        $feedback = $impFormat_entity->searchByFormatID();
         if($feedback['ok']) {
             if($feedback['code'] != 'QRY_EMPT') {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'DFROUTE_NAME_EXST';
+                $feedback['code'] = 'DFFRMT_IMPL_EXST';
             } else {
-                $feedback['code'] = 'DFROUTE_NAME_NOT_EXST';
+                $feedback['code'] = 'DFFRMT_IMPL_NOT_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
-            $feedback['code'] = 'DFROUTE_NAME_KO';
+            $feedback['code'] = 'DFFRMT_IMPL_KO';
         }
 
         return $feedback;
     }
 
+
+    function seekByFormatID() {
+        $feedback = $this->defFormat_entity->seek();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'DFFRMTID_NOT_EXST';
+            } else {
+                $feedback['code'] = 'DFFRMTID_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'DFFRMTID_KO';
+        }
+
+        return $feedback;
+    }
 
     function seekByPlanID() {
         $feedback = $this->defPlan_entity->seek();
@@ -201,35 +218,17 @@ class DefRoute_Service extends DefRoute_Validation {
         return $feedback;
     }
 
-    function seekByRouteID() {
-        $feedback = $this->defRoute_entity->seek();
-        if($feedback['ok']) {
-            if($feedback['code'] == 'QRY_EMPT') {
-                $feedback['ok'] = false;
-                $feedback['code'] = 'DFROUTEID_NOT_EXST';
-            } else {
-                $feedback['code'] = 'DFROUTEID_EXST';
-            }
-        } else if($feedback['code'] == 'QRY_KO') {
-            $feedback['code'] = 'DFROUTEID_KO';
-        }
-
-        return $feedback;
-    }
-
-    function imp_routes_not_exist() {
-        include_once './Model/ImpRoute_Model.php';
-        $impRoute_entity = new ImpRoute_Model();
-        $feedback = $impRoute_entity->searchByRouteID();
+    function name_format_not_exist() {
+        $feedback = $this->defFormat_entity->searchByName();
         if($feedback['ok']) {
             if($feedback['code'] != 'QRY_EMPT') {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'DFROUTE_IMPL_EXST';
+                $feedback['code'] = 'DFFRMT_NAME_EXST';
             } else {
-                $feedback['code'] = 'DFROUTE_IMPL_NOT_EXST';
+                $feedback['code'] = 'DFFRMT_NAME_NOT_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
-            $feedback['code'] = 'DFROUTE_IMPL_KO';
+            $feedback['code'] = 'DFFRMT_NAME_KO';
         }
 
         return $feedback;

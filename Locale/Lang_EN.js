@@ -400,6 +400,43 @@ arrayEN = {
         'DFROUTE_NAME_NOT_EXST' : 'There is no route definition with the name indicated in the plan',
         'DFROUTE_NAME_KO' : 'Failed to query by route name',
 
+    // DEF_FORMAT
+
+        // SEARCH
+        'DFFRMT_SEARCH_OK' : 'Formation definition search was successful',
+        'DFFRMT_SEARCH_KO' : 'Failed to search definitions of formations',
+
+        // ADD
+        'DFFRMT_ADD_OK' : 'Formation definition has been added successfully',
+        'DFFRMT_ADD_KO' : 'Failed to add formation definition',
+
+        // SEEK
+        'DFFRMT_SEEK_OK' : 'The details of the formation definition have been consulted correctly',
+        'DFFRMT_SEEK_KO' : 'Failed to query the details of the formation definition',
+
+        // DELETE
+        'DFFRMT_DEL_OK' : 'Formation definition removed correctly',
+        'DFFRMT_DEL_KO' : 'Failed to delete formation definition',
+
+        // EDIT
+        'DFFRMT_EDT_OK' : 'The definition of the formation has been modified correctly',
+        'DFFRMT_EDT_KO' : 'Error modifying formation definition',
+
+        // Búsqueda por nombre
+        'DFFRMT_NAME_EXST' : 'There is already a formation definition with the name indicated in this plan',
+        'DFFRMT_NAME_NOT_EXST' : 'There is no definition of formation with the name indicated in the plan',
+        'DFFRMT_NAME_KO' : 'Failed to query by formation definition name',
+
+        // Búsqueda por ID de Formación
+        'DFFRMTID_NOT_EXST' : 'The definition of the indicated formation does not exist',
+        'DFFRMTID_EXST' : 'The definition of the indicated formation exists',
+        'DFFRMTID_KO' : 'Failed to query for Formation ID',
+
+        // Búsqueda de implementacione de la formación en edificios
+        'DFFRMT_IMPL_EXST' : 'Formation definition cannot be deleted while you have building deployments',
+        'DFFRMT_IMPL_NOT_EXST' : 'The definition of formation has no implementations in buildings',
+        'DFFRMT_IMPL_KO' : 'Failed to query formations deployments',
+
         // Validaciones
 
             // Nombre de Usuario
@@ -560,6 +597,15 @@ arrayEN = {
             'DFROUTE_NAM_LRG' : 'The route name must not exceed 50 characters',
             'DFROUTE_NAM_FRMT' : 'Route name contains illegal characters',
 
+            // ID DefFormat
+            'DFFRMT_ID_EMPT' : 'Formation ID cannot be empty',
+            'DEFFRMT_ID_NOT_NUMERIC' : 'The Formation ID must be numeric',
+
+            // Nombre Formación
+            'DFFRMT_NAM_SHRT' : 'The name of the formation must exceed 5 characters',
+            'DFFRMT_NAM_LRG' : 'The name of the formation must not exceed 50 characters',
+            'DFFRMT_NAM_FRMT' : 'Formation name contains illegal characters',
+
 
 
     // INTERFACE
@@ -715,6 +761,16 @@ arrayEN = {
         'i18n-search-defRoute' : 'Search Routes Definitions',
         'i18n-edit-defRoute' : 'Edit Route Definition',
 
+        // DEF_FORMATS VIEW
+        'i18n-def-formats' : 'Formation Definitions',
+        'i18n-formacion_id' : 'Formation ID',
+        'i18n-def-formats-empty' : 'There are no definitions of registered formations',
+        'i18n-add-defFormat' : 'Formation Definition',
+        'i18n-del-def-format-confirm' : 'Are you sure you want to delete the definition of this formation? The change will not be reversible',
+        'i18n-current-defFormat' : 'Details of the Formation Def.',
+        'i18n-search-defFormat' : 'Search Formations Definitions',
+        'i18n-edit-defFormat' : 'Edit Formation Definition',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Warning!',
@@ -745,6 +801,7 @@ arrayEN = {
             'm-plan_id' : ' Plan ID ',
             'm-procedimiento_id' : ' Procedure ID ',
             'm-ruta_id' : ' Route ID ',
+            'm-formacion_id' : ' Formation ID ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',

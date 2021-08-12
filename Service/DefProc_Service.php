@@ -45,8 +45,10 @@ class DefProc_Service extends DefProc_Validation {
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'DFPROC_SEARCH_OK';
             $this->feedback['plan'] = array('plan_id' => $plan['plan_id'], 'nombre' => $plan['nombre']);
-        } else if($this->feedback['code'] == 'QRY_KO') {
-            $this->feedback['code'] = 'DFPROC_SEARCH_KO';
+        } else {
+            if($this->feedback['code'] == 'QRY_KO') {
+                $this->feedback['code'] = 'DFPROC_SEARCH_KO';
+            }
             $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
         }
 

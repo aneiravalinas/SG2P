@@ -402,6 +402,43 @@ arrayES = {
         'DFROUTE_NAME_NOT_EXST' : 'No existe una definición de ruta con el nombre indicado en el plan',
         'DFROUTE_NAME_KO' : 'Error al consultar por nombre de ruta',
 
+    // DEF_FORMAT
+
+        // SEARCH
+        'DFFRMT_SEARCH_OK' : 'La búsqueda de definiciones de formaciones se ha realizado correctamente',
+        'DFFRMT_SEARCH_KO' : 'Error al buscar definiciones de formaciones',
+
+        // ADD
+        'DFFRMT_ADD_OK' : 'La definición de la formación se ha añadido correctamente',
+        'DFFRMT_ADD_KO' : 'Error al añadir la definición de la formación',
+
+        // SEEK
+        'DFFRMT_SEEK_OK' : 'Se han consultado los detalles de la definición de la formación correctamente',
+        'DFFRMT_SEEK_KO' : 'Error al consultar los detalles de la definición de la formación',
+
+        // DELETE
+        'DFFRMT_DEL_OK' : 'Se ha eliminado la definición de la formación correctamente',
+        'DFFRMT_DEL_KO' : 'Error al eliminar la definición de la formación',
+
+        // EDIT
+        'DFFRMT_EDT_OK' : 'La definición de la formación se ha modificado correctamente',
+        'DFFRMT_EDT_KO' : 'Error al modificar la definición de la formación',
+
+        // Búsqueda por nombre
+        'DFFRMT_NAME_EXST' : 'Ya existe una definición de formación con el nombre indicado en este plan',
+        'DFFRMT_NAME_NOT_EXST' : 'No existe una definición de formación con el nombre indicado en el plan',
+        'DFFRMT_NAME_KO' : 'Error al consultar por nombre de definición de formación',
+
+        // Búsqueda por ID de Formación
+        'DFFRMTID_NOT_EXST' : 'La definición de la formación indicada no existe',
+        'DFFRMTID_EXST' : 'La definición de la formación indicada existe',
+        'DFFRMTID_KO' : 'Error al consultar por ID de Formación',
+
+        // Búsqueda de implementacione de la formación en edificios
+        'DFFRMT_IMPL_EXST' : 'No se puede eliminar la definición de la formación mientras tenga implementaciones en edificios',
+        'DFFRMT_IMPL_NOT_EXST' : 'La definición de la formación no tiene implementaciones en edificios',
+        'DFFRMT_IMPL_KO' : 'Error al consultar implementaciones de formaciones',
+
 
         // Validaciones
 
@@ -564,6 +601,15 @@ arrayES = {
             'DFROUTE_NAM_LRG' : 'El nombre de la ruta no debe superar los 50 caracteres',
             'DFROUTE_NAM_FRMT' : 'El nombre de la ruta contiene caracteres no permitidos',
 
+            // ID DefFormat
+            'DFFRMT_ID_EMPT' : 'El ID de la Formación no puede ser vacío',
+            'DEFFRMT_ID_NOT_NUMERIC' : 'El ID de la Formación debe ser numérico',
+
+            // Nombre Formación
+            'DFFRMT_NAM_SHRT' : 'El nombre de la formación debe superar los 5 caracteres',
+            'DFFRMT_NAM_LRG' : 'El nombre de la formación no debe superar los 50 caracteres',
+            'DFFRMT_NAM_FRMT' : 'El nombre de la formación contiene caracteres no permitidos',
+
 
 
 
@@ -720,6 +766,16 @@ arrayES = {
         'i18n-search-defRoute' : 'Buscar Def. de Rutas',
         'i18n-edit-defRoute' : 'Editar Def. de la Ruta',
 
+        // DEF_FORMATS VIEW
+        'i18n-def-formats' : 'Definiciones de Formaciones',
+        'i18n-formacion_id' : 'ID Formación',
+        'i18n-def-formats-empty' : 'No hay definiciones de formaciones registradas',
+        'i18n-add-defFormat' : 'Definir Formación',
+        'i18n-del-def-format-confirm' : '¿Está seguro que desea eliminar la definición de esta formación? El cambio no será reversible',
+        'i18n-current-defFormat' : 'Detalles de al Def. de la Formación',
+        'i18n-search-defFormat' : 'Buscar Def. de Formaciones',
+        'i18n-edit-defFormat' : 'Editar Def. de la Formación',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Aviso!',
@@ -750,6 +806,7 @@ arrayES = {
             'm-plan_id' : ' ID Plan ',
             'm-procedimiento_id' : ' ID Procedimiento ',
             'm-ruta_id' : ' ID Ruta ',
+            'm-formacion_id' : ' ID Formacion ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',

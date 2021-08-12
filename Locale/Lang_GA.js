@@ -400,6 +400,43 @@ arrayGA = {
         'DFROUTE_NAME_NOT_EXST' : 'Non existe unha definición de ruta co nome indicado neste plan',
         'DFROUTE_NAME_KO' : 'Erro ó consultar por nome de ruta',
 
+    // DEF_FORMAT
+
+        // SEARCH
+        'DFFRMT_SEARCH_OK' : 'A búsqueda de definicións de formacións realizouse correctamente',
+        'DFFRMT_SEARCH_KO' : 'Erro ó buscar definicións de formacións',
+
+        // ADD
+        'DFFRMT_ADD_OK' : 'A definición da formación engadiuse correctamente',
+        'DFFRMT_ADD_KO' : 'Erro ó engadir a definición da formación',
+
+        // SEEK
+        'DFFRMT_SEEK_OK' : 'Consultáronse os detalles da definición da formación correctamente',
+        'DFFRMT_SEEK_KO' : 'Erro ó consultar os detalles da definición da formación',
+
+        // DELETE
+        'DFFRMT_DEL_OK' : 'Eliminouse a definiciónd da formación correctamente',
+        'DFFRMT_DEL_KO' : 'Erro ó eliminar a definición da formación',
+
+        // EDIT
+        'DFFRMT_EDT_OK' : 'A definición da formación modificouse correctamente',
+        'DFFRMT_EDT_KO' : 'Erro ó modificar a definición da formación',
+
+        // Búsqueda por nombre
+        'DFFRMT_NAME_EXST' : 'Xa existe unha definición de formación co nome indicado neste plan',
+        'DFFRMT_NAME_NOT_EXST' : 'Non existe unha definición de formación co nome indicado neste plan',
+        'DFFRMT_NAME_KO' : 'Erro ó consultar por nome de definición de formación',
+
+        // Búsqueda por ID de Formación
+        'DFFRMTID_NOT_EXST' : 'A definición da información indicada non existe',
+        'DFFRMTID_EXST' : 'A definición da formación indicada existe',
+        'DFFRMTID_KO' : 'Erro ó consultar por ID da Formación',
+
+        // Búsqueda de implementacione de la formación en edificios
+        'DFFRMT_IMPL_EXST' : 'Non se pode eliminar a definición da formación mentras teña implementacións en edificios',
+        'DFFRMT_IMPL_NOT_EXST' : 'A definición da formación non ten implementacións en edificios',
+        'DFFRMT_IMPL_KO' : 'Erro ó consultar implementacións en edificios',
+
 
         // Validaciones
 
@@ -561,6 +598,15 @@ arrayGA = {
             'DFROUTE_NAM_LRG' : 'O nome da ruta non debe superar os 50 caracteres',
             'DFROUTE_NAM_FRMT' : 'O nome da ruta contén caracteres non permitidos',
 
+            // ID DefFormat
+            'DFFRMT_ID_EMPT' : 'O ID da Formación non pode ser vacío',
+            'DEFFRMT_ID_NOT_NUMERIC' : 'O ID da Formación debe ser numérico',
+
+            // Nombre Formación
+            'DFFRMT_NAM_SHRT' : 'O nome da formación debe superar os 5 caracteres',
+            'DFFRMT_NAM_LRG' : 'O nome da formación non debe superar os 50 caracteres',
+            'DFFRMT_NAM_FRMT' : 'O nome da formación contén caracteres non permitidos',
+
 
 
 
@@ -718,6 +764,16 @@ arrayGA = {
         'i18n-search-defRoute' : 'Buscar Def. de Rutas',
         'i18n-edit-defRoute' : 'Editar Def. da Ruta',
 
+        // DEF_FORMATS VIEW
+        'i18n-def-formats' : 'Definicións de Formacións',
+        'i18n-formacion_id' : 'ID Formación',
+        'i18n-def-formats-empty' : 'Non hay definicións de formacións rexistradas',
+        'i18n-add-defFormat' : 'Definir Formación',
+        'i18n-del-def-format-confirm' : '¿Está seguro de que desexa eliminar a definición desta formación? O cambio non será reversible',
+        'i18n-current-defFormat' : 'Detalles da Def. da Formación',
+        'i18n-search-defFormat' : 'Buscar Def. de Formacións',
+        'i18n-edit-defFormat' : 'Editar Def. da Formación',
+
 
         // MODAL
             // Campos Modal
@@ -749,6 +805,7 @@ arrayGA = {
             'm-plan_id' : ' ID Plan ',
             'm-procedimiento_id' : ' ID Procedemento ',
             'm-ruta_id' : ' ID Ruta ',
+            'm-formacion_id' : ' ID Formacion ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',

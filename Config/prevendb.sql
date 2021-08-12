@@ -121,6 +121,7 @@ CREATE TABLE RUTA
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_ruta` PRIMARY KEY (`ruta_id`),
+    CONSTRAINT `uq_ruta_plan` UNIQUE (`plan_id`,`nombre`),
     CONSTRAINT `fk_ruta_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
 );
 
@@ -174,6 +175,7 @@ CREATE TABLE SIMULACRO
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_simulacro` PRIMARY KEY (`simulacro_id`),
+    CONSTRAINT `uq_simulacro_plan` UNIQUE (`plan_id`,`nombre`),
     CONSTRAINT `fk_simulacro_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
 );
 
@@ -201,6 +203,7 @@ CREATE TABLE FORMACION
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_formacion` PRIMARY KEY (`formacion_id`),
+    CONSTRAINT `uq_formacion_plan` UNIQUE (`plan_id`,`nombre`),
     CONSTRAINT `fk_formacion_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
 );
 
@@ -211,7 +214,6 @@ CREATE TABLE EDIFICIO_FORMACION
     `formacion_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
-    `nombre_doc` VARCHAR(20) NULL,
     `url_recurso` VARCHAR(20) NULL,
     `destinatarios` VARCHAR(100) NOT NULL,
 

@@ -121,6 +121,7 @@ CREATE TABLE RUTA
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_ruta` PRIMARY KEY (`ruta_id`),
+    CONSTRAINT `uq_ruta_plan` UNIQUE (`plan_id`,`nombre`),
     CONSTRAINT `fk_ruta_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
 );
 
@@ -174,6 +175,7 @@ CREATE TABLE SIMULACRO
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_simulacro` PRIMARY KEY (`simulacro_id`),
+    CONSTRAINT `uq_simulacro_plan` UNIQUE (`plan_id`,`nombre`),
     CONSTRAINT `fk_simulacro_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
 );
 
@@ -201,6 +203,7 @@ CREATE TABLE FORMACION
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_formacion` PRIMARY KEY (`formacion_id`),
+    CONSTRAINT `uq_formacion_plan` UNIQUE (`plan_id`,`nombre`),
     CONSTRAINT `fk_formacion_to_plan` FOREIGN KEY (`plan_id`) REFERENCES PLAN (`plan_id`)
 );
 
@@ -211,7 +214,6 @@ CREATE TABLE EDIFICIO_FORMACION
     `formacion_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
-    `nombre_doc` VARCHAR(20) NULL,
     `url_recurso` VARCHAR(20) NULL,
     `destinatarios` VARCHAR(100) NOT NULL,
 
@@ -284,7 +286,8 @@ INSERT INTO RUTA (`ruta_id`, `plan_id`, `nombre`, `descripcion`) VALUES
 (3,1,'Otra Ruta del Plan Uno','Descripcion de la definicion de la ruta');
 
 INSERT INTO FORMACION (`formacion_id`,`plan_id`,`nombre`,`descripcion`) VALUES
-(1,5,'Formaciones del plan con formaciones','Descripción de la formación');
+(1,5,'Formaciones del plan con formaciones','Descripción de la formación'),
+(2,5,'Otra Formación del plan con formaciones','Descripción de la formación');
 
 INSERT INTO SIMULACRO (`simulacro_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (1,6,'Simulacros del plan con simulacros','Descripcion del simulacro');
@@ -300,6 +303,10 @@ INSERT INTO EDIFICIO_DOCUMENTO (`edificio_documento_id`, `edificio_id`, `documen
 
 INSERT INTO EDIFICIO_PROCEDIMIENTO (`edificio_procedimiento_id`, `edificio_id`, `procedimiento_id`, `estado`, `nombre_doc`) VALUES
 (1,3,1,'vigente','doc.pdf');
+
+INSERT INTO EDIFICIO_FORMACION (`edificio_formacion_id`,`edificio_id`,`formacion_id`,`estado`,`url_recurso`,`destinatarios`) VALUES
+(1,4,2,'vigente','recurso','destinatarios');
+
 
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';

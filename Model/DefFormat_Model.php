@@ -25,23 +25,65 @@ class DefFormat_Model extends Abstract_Model {
     }
 
     function ADD() {
-        // TODO: Implement ADD() method.
+        $this->query = "
+            INSERT INTO FORMACION
+            (
+             plan_id,
+             nombre,
+             descripcion
+            ) VALUES (
+            '$this->plan_id',
+            '$this->nombre',
+            '$this->descripcion'
+            );
+        ";
+
+        $this->execute_single_query();
+        $this->formacion_id = $this->id_autoincrement;
+        return $this->feedback;
     }
 
     function EDIT() {
-        // TODO: Implement EDIT() method.
+        $this->query = "UPDATE FORMACION SET " .
+            ($this->nombre == '' ? "" : "nombre = '$this->nombre', ") .
+            ($this->descripcion == '' ? "" : "descripcion = '$this->descripcion'") .
+            " WHERE formacion_id = '$this->formacion_id'";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function DELETE() {
-        // TODO: Implement DELETE() method.
+        $this->query = "
+            DELETE FROM FORMACION
+            WHERE formacion_id = '$this->formacion_id'
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function SEARCH() {
-        // TODO: Implement SEARCH() method.
+        $this->query = "
+            SELECT * FROM FORMACION
+            WHERE
+                plan_id = '$this->plan_id' AND 
+                nombre LIKE '%" . $this->nombre . "%' AND
+                formacion_id LIKE '%" . $this->formacion_id . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
     }
 
     function seek() {
-        // TODO: Implement seek() method.
+        $this->query = "
+            SELECT * FROM FORMACION
+            WHERE formacion_id = '$this->formacion_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
     function searchByPlan() {
@@ -51,6 +93,18 @@ class DefFormat_Model extends Abstract_Model {
         ";
 
         $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchByName() {
+        $this->query = "
+            SELECT * FROM FORMACION
+            WHERE
+                nombre = '$this->nombre' AND
+                plan_id = '$this->plan_id'
+        ";
+
+        $this->get_one_result_from_query();
         return $this->feedback;
     }
 

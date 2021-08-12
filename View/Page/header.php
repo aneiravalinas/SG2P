@@ -38,6 +38,7 @@
     <script text="text/javascript" src="./View/js/validaciones_DefDoc.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_DefProc.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_DefRoute.js"></script>
+    <script text="text/javascript" src="./View/js/validaciones_DefFormat.js"></script>
     <script type="text/javascript" src="./View/js/md5.js"></script>
 
 </head>
