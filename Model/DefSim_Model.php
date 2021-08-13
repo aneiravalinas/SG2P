@@ -39,15 +39,28 @@ class DefSim_Model extends Abstract_Model {
         ";
 
         $this->execute_single_query();
+        $this->simulacro_id = $this->id_autoincrement;
         return $this->feedback;
     }
 
     function EDIT() {
-        // TODO: Implement EDIT() method.
+        $this->query = "UPDATE SIMULACRO SET " .
+            ($this->nombre == '' ? "" : "nombre = '$this->nombre', ") .
+            ($this->descripcion == '' ? "" : "descripcion = '$this->descripcion'") .
+            " WHERE simulacro_id = '$this->simulacro_id'";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function DELETE() {
-        // TODO: Implement DELETE() method.
+        $this->query = "
+            DELETE FROM SIMULACRO
+            WHERE simulacro_id = '$this->simulacro_id'
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function SEARCH() {
@@ -64,7 +77,13 @@ class DefSim_Model extends Abstract_Model {
     }
 
     function seek() {
-        // TODO: Implement seek() method.
+        $this->query = "
+            SELECT * FROM SIMULACRO
+            WHERE simulacro_id = '$this->simulacro_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
     function searchByPlan() {

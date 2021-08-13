@@ -19,6 +19,7 @@ class Test {
         include './Test/DefProc_Test.php';
         include './Test/DefRoute_Test.php';
         include './Test/DefFormat_Test.php';
+        include './Test/DefSim_Test.php';
 
         session_destroy();
 

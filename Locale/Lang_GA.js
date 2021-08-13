@@ -447,6 +447,28 @@ arrayGA = {
         'DFSIM_ADD_OK' : 'A definición do simulacro engadiuse correctamente',
         'DFSIM_ADD_KO' : 'Erro ó engadir a definición do simulacro',
 
+        // SEEK
+        'DFSIM_SEEK_OK' : 'Consultáronse os detalles da definición do simulacro correctamente',
+        'DFSIM_SEEK_KO' : 'Erro ó consultar os detalles da definición do simulacro',
+
+        // DELETE
+        'DFSIM_DEL_OK' : 'A definición do simulacro eliminouse correctamente',
+        'DFSIM_DEL_KO' : 'Erro ó eliminar a definición do simulacro',
+
+        // EDIT
+        'DFSIM_EDT_OK' : 'A definició do simulacro modificouse correctamente',
+        'DFSIM_EDT_KO' : 'Erro ó modificar a definición do simulacro',
+
+        // Búsqueda por ID de Simulacro
+        'DFSIMID_NOT_EXST' : 'A definición do simulacro indicada non existe',
+        'DFSIMID_EXST' : 'A definición do simulacro indicada existe',
+        'DFSIMID_KO' : 'Erro ó consultar por ID de Simulacro',
+
+        // Consulta de implementaciones de simulacros
+        'DFSIM_IMPL_EXST' : 'Non se pode eliminar a definición do simulacro mentras teña implementacións en edificios',
+        'DFSIM_IMPL_NOT_EXST' : 'A definición do simulacro non ten implementacións en edificios',
+        'DFSIM_IMPL_KO' : 'Erro ó consultar as implementacións do simulacro',
+
         // Búsqueda por nombre de simulacro
         'DFSIM_NAME_EXST' : 'Xa existe unha definición de simulacro co nome indicado neste plan',
         'DFSIM_NAME_NOT_EXST' : 'Non existe unha definición de simulacro co nome indiccado neste plan',
@@ -624,7 +646,7 @@ arrayGA = {
 
             // ID DefSim
             'DFSIM_ID_EMPT' : 'O ID do Simulacro non pode ser vacío',
-            'DEFSIM_ID_NOT_NUMERIC' : 'O ID do Simulacro debe ser numérico',
+            'DFSIM_ID_NOT_NUMERIC' : 'O ID do Simulacro debe ser numérico',
 
             // Nombre Simulacro
             'DFSIM_NAM_SHRT' : 'O nome do simulacro debe superar os 5 caracteres',
@@ -803,6 +825,10 @@ arrayGA = {
         'i18n-simulacro_id' : 'ID Simulacro',
         'i18n-def-sims-empty' : 'Non hay definicións de simulacros rexistradas',
         'i18n-add-defSim' : 'Definir Simulacro',
+        'i18n-del-def-sim-confirm' : '¿Está seguro que desexa eliminar a definición deste simulacro? O cambio non será reversible',
+        'i18n-current-defSim' : 'Detalles da def. do Simulacro',
+        'i18n-search-defSim' : 'Buscar Def. de Simulacros',
+        'i18n-edit-defSim' : 'Editar Def. do Simulacro',
 
 
         // MODAL

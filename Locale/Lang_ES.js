@@ -450,6 +450,28 @@ arrayES = {
         'DFSIM_ADD_OK' : 'La definición del simulacro se ha añadido correctamente',
         'DFSIM_ADD_KO' : 'Error al añadir la definición del simulacro',
 
+        // SEEK
+        'DFSIM_SEEK_OK' : 'Se han consultado los detalles de la definición del simulacro correctamente',
+        'DFSIM_SEEK_KO' : 'Error al consultar los detalles de la definición del simulacro',
+
+        // DELETE
+        'DFSIM_DEL_OK' : 'La definición del simulacro se ha eliminado correctamente',
+        'DFSIM_DEL_KO' : 'Error al eliminar la definición del simulacro',
+
+        // EDIT
+        'DFSIM_EDT_OK' : 'La definición del simulacro se ha modificado correctamente',
+        'DFSIM_EDT_KO' : 'Error al modificar la definición del simulacro',
+
+        // Búsqueda por ID de Simulacro
+        'DFSIMID_NOT_EXST' : 'La definición de simulacro indicada no existe',
+        'DFSIMID_EXST' : 'La definición del simulacro indicada existe',
+        'DFSIMID_KO' : 'Error al consultar por ID de Simulacro',
+
+        // Consulta de implementaciones de simulacros
+        'DFSIM_IMPL_EXST' : 'No se puede eliminar la definición del simulacro mientras tenga implementaciones en edificios',
+        'DFSIM_IMPL_NOT_EXST' : 'La definición del simulacro no tiene implementaciones en edificios',
+        'DFSIM_IMPL_KO' : 'Error al consultar implementaciones del simulacro',
+
         // Búsqueda por nombre de simulacro
         'DFSIM_NAME_EXST' : 'Ya existe una definición de simulacro con el nombre indicado en este plan',
         'DFSIM_NAME_NOT_EXST' : 'No existe una definición de simulacro con el nombre indicado en este plan',
@@ -628,7 +650,7 @@ arrayES = {
 
             // ID DefSim
             'DFSIM_ID_EMPT' : 'El ID del Simulacro no puede ser vacío',
-            'DEFSIM_ID_NOT_NUMERIC' : 'El ID del Simulacro debe ser numérico',
+            'DFSIM_ID_NOT_NUMERIC' : 'El ID del Simulacro debe ser numérico',
 
             // Nombre Simulacro
             'DFSIM_NAM_SHRT' : 'El nombre del simulacro debe superar los 5 caracteres',
@@ -806,6 +828,10 @@ arrayES = {
         'i18n-simulacro_id' : 'ID Simulacro',
         'i18n-def-sims-empty' : 'No hay definiciones de simulacros registradas',
         'i18n-add-defSim' : 'Definir Simulacro',
+        'i18n-del-def-sim-confirm' : '¿Está seguro que desea eliminar la definición de este simulacro? El cambio no será reversible',
+        'i18n-current-defSim' : 'Detalles de la def. del Simulacro',
+        'i18n-search-defSim' : 'Buscar Def. de Simulacros',
+        'i18n-edit-defSim' : 'Editar Def. del Simulacro',
 
         // MODAL
             // Campos Modal

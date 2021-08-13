@@ -447,6 +447,28 @@ arrayEN = {
         'DFSIM_ADD_OK' : 'The simulacrum definition has been added successfully',
         'DFSIM_ADD_KO' : 'Error adding simulacrum definition',
 
+        // SEEK
+        'DFSIM_SEEK_OK' : 'Simulacrum definition details were checked successfully',
+        'DFSIM_SEEK_KO' : 'Failed to query simulacrum definition details',
+
+        // DELETE
+        'DFSIM_DEL_OK' : 'The simulacrum definition has been successfully removed',
+        'DFSIM_DEL_KO' : 'Failed to delete simulacrum definition',
+
+        // EDIT
+        'DFSIM_EDT_OK' : 'The definition of the simulacrum has been modified correctly',
+        'DFSIM_EDT_KO' : 'Error modifying simulacrum definition',
+
+        // Búsqueda por ID de Simulacro
+        'DFSIMID_NOT_EXST' : 'The indicated simulacrum definition does not exist',
+        'DFSIMID_EXST' : 'The definition of the indicated simulacrum exists',
+        'DFSIMID_KO' : 'Failed to query by Simulacrum ID',
+
+        // Consulta de implementaciones de simulacros
+        'DFSIM_IMPL_EXST' : 'You cannot delete the simulacrum definition while you have building deployments',
+        'DFSIM_IMPL_NOT_EXST' : 'The definition of the simulacrum has no implementations in buildings',
+        'DFSIM_IMPL_KO' : 'Failed to query simulacrum implementations',
+
         // Búsqueda por nombre de simulacro
         'DFSIM_NAME_EXST' : 'A simulacrum definition already exists with the name indicated in this plan',
         'DFSIM_NAME_NOT_EXST' : 'There is no definition of simulacrum with the name indicated in this plan',
@@ -623,7 +645,7 @@ arrayEN = {
 
             // ID DefSim
             'DFSIM_ID_EMPT' : 'Simulacrum ID cannot be empty S',
-            'DEFSIM_ID_NOT_NUMERIC' : 'Simulacrum ID must be numeric',
+            'DFSIM_ID_NOT_NUMERIC' : 'Simulacrum ID must be numeric',
 
             // Nombre Simulacro
             'DFSIM_NAM_SHRT' : 'The name of the simulacrum must exceed 5 characters',
@@ -801,6 +823,10 @@ arrayEN = {
         'i18n-simulacro_id' : 'Simulacrum ID',
         'i18n-def-sims-empty' : 'No recorded simulacrum definitions',
         'i18n-add-defSim' : 'Simulacrum Definition',
+        'i18n-del-def-sim-confirm' : 'Are you sure you want to delete the definition of this simulacrum? The change will not be reversible',
+        'i18n-current-defSim' : 'Details of the Simulacrum Definitions',
+        'i18n-search-defSim' : 'Search Simulacrums Definitions',
+        'i18n-edit-defSim' : 'Edit Simulacrum Definition',
 
         // MODAL
             // Campos Modal

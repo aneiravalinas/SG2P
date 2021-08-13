@@ -43,7 +43,7 @@ class DefSim_Validation extends Validator {
         }
 
         if(!$this->es_numerico($this->simulacro_id)) {
-            return $this->rellena_validation(false,'DEFSIM_ID_NOT_NUMERIC','DEF_SIM');
+            return $this->rellena_validation(false,'DFSIM_ID_NOT_NUMERIC','DEF_SIM');
         }
 
         return $this->rellena_validation(true,'00000','DEF_SIM');

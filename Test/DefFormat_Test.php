@@ -169,7 +169,7 @@ array_push($testDefFormat, $respTest);
  */
 
 // Ya existe una def. de formación con el nombre indicado en el mismo plan.
-$_POST = array('plan_id' => '1', 'nombre' => 'Formaciones del plan con formaciones', 'descripcion' => 'Descripcion');
+$_POST = array('plan_id' => '5', 'nombre' => 'Formaciones del plan con formaciones', 'descripcion' => 'Descripcion');
 $defFormat_service = new DefFormat_Service();
 $feedback = $defFormat_service->ADD();
 $respTest = obtenerRespuesta('DefFormat','ADD','ACCION','Ya existe una formación con el nombre indicado en el plan',

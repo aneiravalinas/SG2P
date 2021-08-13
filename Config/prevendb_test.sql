@@ -290,7 +290,8 @@ INSERT INTO FORMACION (`formacion_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (2,5,'Otra Formación del plan con formaciones','Descripción de la formación');
 
 INSERT INTO SIMULACRO (`simulacro_id`,`plan_id`,`nombre`,`descripcion`) VALUES
-(1,6,'Simulacros del plan con simulacros','Descripcion del simulacro');
+(1,6,'Simulacros del plan con simulacros','Descripcion del simulacro'),
+(2,6,'Otro Simulacro','Descripcion del simulacro');
 
 INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_implementacion`, `nombre_doc`) VALUES
 (1,2,1,'vigente','15-05-2021','nombre_doc');
@@ -307,7 +308,8 @@ INSERT INTO EDIFICIO_PROCEDIMIENTO (`edificio_procedimiento_id`, `edificio_id`, 
 INSERT INTO EDIFICIO_FORMACION (`edificio_formacion_id`,`edificio_id`,`formacion_id`,`estado`,`url_recurso`,`destinatarios`) VALUES
 (1,4,2,'vigente','recurso','destinatarios');
 
-
+INSERT INTO EDIFICIO_SIMULACRO (`edificio_simulacro_id`,`edificio_id`,`simulacro_id`,`url_recurso`,`destinatarios`,`resultado`) VALUES
+(1,4,1,'url/recurso','Todos','Resultado');
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';
 GRANT ALL PRIVILEGES ON prevendb_test.* TO 'prevenroot'@'localhost';

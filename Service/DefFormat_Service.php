@@ -93,7 +93,7 @@ class DefFormat_Service extends DefFormat_Validation {
         $format = $this->feedback['resource'];
         $this->feedback = $this->imp_formats_not_exist();
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $format['plan']);
+            $this->feedback['plan'] = array('plan_id' => $format['plan_id']);
             return $this->feedback;
         }
 
