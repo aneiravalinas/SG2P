@@ -2,7 +2,7 @@
 
 include_once './Model/Abstract_Model.php';
 
-class Build_Plan_Model extends Abstract_Model {
+class BuildPlan_Model extends Abstract_Model {
     var $atributos;
     var $edificio_id;
     var $plan_id;
@@ -38,7 +38,15 @@ class Build_Plan_Model extends Abstract_Model {
     }
 
     function SEARCH() {
-        // TODO: Implement SEARCH() method.
+        $this->query = "
+            SELECT * FROM EDIFICIO_PLAN
+            WHERE plan_id = '$this->plan_id' AND
+                  estado LIKE '%" . $this->estado . "%' AND
+                  fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
     }
 
     function seek() {
@@ -55,14 +63,5 @@ class Build_Plan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function searchByPlan() {
-        $this->query = "
-            SELECT * FROM EDIFICIO_PLAN
-            WHERE plan_id = '$this->plan_id'
-        ";
-
-        $this->get_results_from_query();
-        return $this->feedback;
-    }
 
 }

@@ -203,9 +203,9 @@ class DefPlan_Service extends DefPlan_Validation {
     }
 
     function building_assoc_not_exist() {
-        include_once './Model/Build_Plan_Model.php';
-        $build_plan_entity = new Build_Plan_Model();
-        $feedback = $build_plan_entity->searchByPlan();
+        include_once './Model/BuildPlan_Model.php';
+        $build_plan_entity = new BuildPlan_Model();
+        $feedback = $build_plan_entity->SEARCH();
         if($feedback['ok']) {
             if($feedback['code'] != 'QRY_EMPT') {
                 $feedback['ok'] = false;

@@ -652,6 +652,16 @@ arrayEN = {
             'DFSIM_NAM_LRG' : 'The name of the simulacrum must not exceed 50 characters',
             'DFSIM_NAM_FRMT' : 'The simulacrum name contains illegal characters',
 
+            // Fecha asignación
+            'BLDPLAN_DATEASSIGN_KO' : 'The assignment date is not in a valid format',
+
+            // Fecha implementación
+            'BLDPLAN_DATEIMPL_KO' : 'The implementation date is not in a valid format',
+
+            // Estado asignación entre Edificio y Plan
+            'BLDPLAN_STATE_EMPT' : 'Assignment status cannot be empty',
+            'BLDPLAN_STATE_KO' : 'The invalid status. Valid statuses are Pending, Implemented, and Expired',
+
 
 
     // INTERFACE
@@ -773,6 +783,7 @@ arrayEN = {
         'i18n-show-plans-deformats' : 'Formations Defs.',
         'i18n-show-plans-defsims' : 'Simulacrums Defs.',
         'i18n-edit-defPlan' : 'Edit Plan Def.',
+        'i18n-show-plans-bldplans' : 'Assigned Buildings',
 
         // DEF_DOCS VIEW
         'i18n-def-docs' : 'Document Definitions',

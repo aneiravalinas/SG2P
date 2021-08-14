@@ -96,6 +96,15 @@ class Show_DefPlans {
                                                 <span class="iconify" data-icon="fluent:textbox-more-24-filled" data-inline="false"></span>
                                             </button>
                                             <div class="dropdown-menu">
+                                                <a class="dropdown-item i18n-show-plans-bldplans" type="button" onclick="
+                                                        crearform('formenviar','post');
+                                                        insertacampo(document.formenviar,'plan_id','<?php echo $plan['plan_id'] ?>');
+                                                        insertacampo(document.formenviar,'controller','BuildPlan');
+                                                        insertacampo(document.formenviar,'action','show');
+                                                        enviaform(document.formenviar);">
+                                                    Edificios Asignados
+                                                </a>
+                                                <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item i18n-show-plans-defdocs" type="button" onclick="
                                                     crearform('formenviar','post');
                                                     insertacampo(document.formenviar,'plan_id','<?php echo $plan['plan_id'] ?>');

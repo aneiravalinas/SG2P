@@ -653,6 +653,16 @@ arrayGA = {
             'DFSIM_NAM_LRG' : 'O nome do simulacro non debe superar os 50 caracteres',
             'DFSIM_NAM_FRMT' : 'O nome do simulacro contén caracteres non permitidos',
 
+            // Fecha asignación
+            'BLDPLAN_DATEASSIGN_KO' : 'A data de asignación non ten un formato válido',
+
+            // Fecha implementación
+            'BLDPLAN_DATEIMPL_KO' : 'A data de implementación non ten un formato válido',
+
+            // Estado asignación entre Edificio y Plan
+            'BLDPLAN_STATE_EMPT' : 'O estado da asignación non pode ser vacío',
+            'BLDPLAN_STATE_KO' : 'O estado non é válido. Os estados válidos son Pendente, Implementado e Vencido',
+
 
 
 
@@ -775,6 +785,7 @@ arrayGA = {
         'i18n-show-plans-deformats' : 'Def. de Formacións',
         'i18n-show-plans-defsims' : 'Def. de Simulacros',
         'i18n-edit-defPlan' : 'Editar Def. do Plan',
+        'i18n-show-plans-bldplans' : 'Edificios Asignados',
 
         // DEF_DOCS VIEW
         'i18n-def-docs' : 'Definicións de Documentos',

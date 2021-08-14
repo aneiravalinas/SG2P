@@ -432,8 +432,8 @@ class Building_Service extends Building_Validation {
     }
 
     function has_not_plans() {
-        include_once './Model/Build_Plan_Model.php';
-        $build_plan_model = new Build_Plan_Model();
+        include_once './Model/BuildPlan_Model.php';
+        $build_plan_model = new BuildPlan_Model();
         $this->feedback = $build_plan_model->searchByBuildingID();
         if($this->feedback['ok']) {
             if($this->feedback['code'] != 'QRY_EMPT') {
