@@ -79,7 +79,7 @@ CREATE TABLE EDIFICIO_PLAN
 (
     `edificio_id` INT(10) NOT NULL,
     `plan_id` INT(10) NOT NULL,
-    `fecha_asignacion` DATE NOT NULL DEFAULT CURRENT_DATE ,
+    `fecha_asignacion` DATE NOT NULL,
     `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
     `estado` enum('pendiente', 'implementado', 'vencido') NOT NULL DEFAULT 'pendiente',
 
@@ -270,10 +270,10 @@ INSERT INTO RUTA (`ruta_id`, `plan_id`, `nombre`, `descripcion`) VALUES
 (1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta');
 
 INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_implementacion`, `nombre_doc`) VALUES
-(1,2,1,'vigente','15-05-2021','nombre_doc');
+(1,2,1,'vigente','2021/05/10','nombre_doc');
 
 INSERT INTO EDIFICIO_PLAN (`edificio_id`, `plan_id`, `fecha_asignacion`, `estado`) VALUES
-(2,1, '25-12-2020', 'pendiente');
+(2,1, '1992/12/25', 'pendiente');
 
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';

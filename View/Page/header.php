@@ -16,12 +16,14 @@
     <link href="./View/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="./View/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="./View/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
 
     <!-- Template Main CSS File -->
     <link href="./View/assets/css/style.css" rel="stylesheet">
 
     <!-- Custom CSS File -->
     <link href="./View/css/mystyle.css" rel="stylesheet"/>
+
 
     <!-- Custom JS Files -->
     <script type="text/javascript" src="./Locale/lang.js"></script>
@@ -40,6 +42,7 @@
     <script text="text/javascript" src="./View/js/validaciones_DefRoute.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_DefFormat.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_DefSim.js"></script>
+    <script text="text/javascript" src="./View/js/validaciones_BuildPlan.js"></script>
     <script type="text/javascript" src="./View/js/md5.js"></script>
 
 </head>

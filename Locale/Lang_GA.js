@@ -474,6 +474,17 @@ arrayGA = {
         'DFSIM_NAME_NOT_EXST' : 'Non existe unha definición de simulacro co nome indiccado neste plan',
         'DFSIM_NAME_KO' : 'Erro ó consultar por nome de simulacro',
 
+    // BUILD_PLAN
+
+        // SEARCH
+        'BLDPLAN_SEARCH_OK' : 'A búsqueda dos edificios asignados o plan realizouse correctamente',
+        'BLDPLAN_SEARCH_KO' : 'Erro ó recuperar os edificios asignados o plan',
+
+        // Búsqueda de Edificios candidatos
+        'BLDPLAN_CANDIDATES_EMPT' : 'Non hay edificios asignables ó plan',
+        'BLDPLAN_CANDIDATES_OK' : 'Búsqueda de edificios asignables ó plan Ok',
+        'BLDPLAN_CANDIDATES_KO' : 'Erro ó recuperar os edificios asignables ó plan',
+
 
         // Validaciones
 
@@ -841,6 +852,18 @@ arrayGA = {
         'i18n-search-defSim' : 'Buscar Def. de Simulacros',
         'i18n-edit-defSim' : 'Editar Def. do Simulacro',
 
+        // BUILDINGS_PLANS
+        'i18n-assign-bldplan' : 'Edificios Asignados',
+        'i18n-building' : 'Edificio',
+        'i18n-date_assign' : 'Fecha Asignación',
+        'i18n-state' : 'Estado',
+        'i18n-date_impl' : 'Fecha Implementación',
+        'i18n-pendiente' : 'PENDENTE',
+        'i18n-implementado' : 'IMPLEMENTADO',
+        'i18n-vencido' : 'VENCIDO',
+        'i18n-bldplan-empty' : 'O plan non ten edificios asignados',
+        'i18n-add-buildPlan' : 'Asignar Edificios',
+
 
         // MODAL
             // Campos Modal
@@ -874,6 +897,7 @@ arrayGA = {
             'm-ruta_id' : ' ID Ruta ',
             'm-formacion_id' : ' ID Formacion ',
             'm-simulacro_id' : ' ID Simulacro ',
+            'm-buildings[]' : ' Edificios ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',

@@ -474,6 +474,17 @@ arrayEN = {
         'DFSIM_NAME_NOT_EXST' : 'There is no definition of simulacrum with the name indicated in this plan',
         'DFSIM_NAME_KO' : 'Failed to query by simulacrum name',
 
+    // BUILD_PLAN
+
+        // SEARCH
+        'BLDPLAN_SEARCH_OK' : 'The search for buildings assigned to the plan was successful',
+        'BLDPLAN_SEARCH_KO' : 'Failed to retrieve the buildings assigned to the plan',
+
+        // Búsqueda de Edificios candidatos
+        'BLDPLAN_CANDIDATES_EMPT' : 'There are no buildings assignable to the plan',
+        'BLDPLAN_CANDIDATES_OK' : 'Search for buildings assignable to plan Ok',
+        'BLDPLAN_CANDIDATES_KO' : 'Failed to retrieve assignable buildings to plan',
+
         // Validaciones
 
             // Nombre de Usuario
@@ -839,6 +850,18 @@ arrayEN = {
         'i18n-search-defSim' : 'Search Simulacrums Definitions',
         'i18n-edit-defSim' : 'Edit Simulacrum Definition',
 
+        // BUILDINGS_PLANS
+        'i18n-assign-bldplan' : 'Assigned Buildings',
+        'i18n-building' : 'Building',
+        'i18n-date_assign' : 'Assignment Date',
+        'i18n-state' : 'Status',
+        'i18n-date_impl' : 'Implementation Date',
+        'i18n-pendiente' : 'PENDING',
+        'i18n-implementado' : 'IMPLEMENTED',
+        'i18n-vencido' : 'EXPIRED',
+        'i18n-bldplan-empty' : 'The plan has no buildings assigned',
+        'i18n-add-buildPlan' : 'Assign Buildings',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Warning!',
@@ -871,6 +894,7 @@ arrayEN = {
             'm-ruta_id' : ' Route ID ',
             'm-formacion_id' : ' Formation ID ',
             'm-simulacro_id' : ' Simulacrum ID ',
+            'm-buildings[]' : ' Buildings ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',

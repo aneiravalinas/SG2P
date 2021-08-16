@@ -230,8 +230,16 @@ abstract class Validator {
         }
     }
 
-    function validar_fecha($fecha) {
+    /*function validar_fecha($fecha) {
         if(preg_match('/^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/', $fecha)) {
+            return true;
+        } else {
+            return false;
+        }
+    }*/
+
+    function validar_fecha($fecha) {
+        if(preg_match('/^(\d{4})(\/|-)(0[1-9]|1[0-2])\2([0-2][0-9]|3[0-1])$/', $fecha)) {
             return true;
         } else {
             return false;

@@ -9,13 +9,28 @@ class BuildPlan_Validation extends Validator {
     var $fecha_asignacion;
     var $fecha_implementacion;
     var $estado;
+    var $buildings = array();
     const states = array('pendiente','implementado','vencido');
 
     function __construct() {
     }
 
     function validar_atributos_add() {
-        return $this->validar_EDIFICIO_ID();
+        if(empty($this->buildings)) {
+            return $this->rellena_validation(false,'BLD_ID_EMPT','BLD_PLAN');
+        }
+
+        $validacion = $this->rellena_validation(true,'00000','BLD_PLAN');
+        foreach($this->buildings as $building) {
+            $this->edificio_id = $building;
+            $validacion = $this->validar_EDIFICIO_ID();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        return $validacion;
+
     }
 
     function validar_atributos_edit() {
@@ -106,4 +121,5 @@ class BuildPlan_Validation extends Validator {
             return $this->rellena_validation(false,'BLDPLAN_STATE_KO','BLD_PLAN');
         }
     }
+
 }
