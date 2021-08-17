@@ -31,12 +31,14 @@ class ImpRoute_Model extends Abstract_Model {
         $this->query = "
             INSERT INTO PLANTA_RUTA 
             (
+                planta_ruta_id,
                 planta_id,
                 ruta_id,
                 estado,
                 fecha_implementacion,
                 nombre_doc
             ) VALUES (
+                '$this->planta_ruta_id',
                 '$this->planta_id',
                 '$this->ruta_id',
                 '$this->estado',
@@ -58,8 +60,7 @@ class ImpRoute_Model extends Abstract_Model {
         $this->query = "
             DELETE FROM PLANTA_RUTA
             WHERE
-                planta_id = '$this->planta_id' AND
-                ruta_id = '$this->ruta_id'
+                planta_ruta_id = '$this->planta_ruta_id'
         ";
 
         $this->execute_single_query();
@@ -88,6 +89,18 @@ class ImpRoute_Model extends Abstract_Model {
         $this->query = "
             SELECT * FROM PLANTA_RUTA
             WHERE ruta_id = '$this->ruta_id'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchRoutesFloors() {
+        $this->query = "
+            SELECT * FROM PLANTA_RUTA
+            WHERE
+                planta_id = '$this->planta_id' AND
+                ruta_id = '$this->ruta_id'
         ";
 
         $this->get_results_from_query();

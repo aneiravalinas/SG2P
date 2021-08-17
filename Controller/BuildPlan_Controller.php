@@ -46,8 +46,17 @@ class BuildPlan {
     }
 
     function add() {
-        var_dump($_POST);
-        end();
+        if($this->checkPermission()) {
+            $buildPlan_service = new BuildPlan_Service();
+            $feedback = $buildPlan_service->multipleADD();
+            if(isset($feedback['plan'])) {
+                new Message($feedback['code'], 'DefPlan', 'show', $feedback['plan']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
     }
 
 }

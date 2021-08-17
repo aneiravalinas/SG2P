@@ -11,10 +11,9 @@ class ImpSim_Model extends Abstract_Model {
     var $fecha_planificacion;
     var $url_recurso;
     var $destinatarios;
-    var $resultado;
 
     function __construct() {
-        $this->atributos = array('edificio_simulacro_id','simulacro_id','edificio_id','estado','fecha_planificacion','url_recurso','destinatarios','resultado');
+        $this->atributos = array('edificio_simulacro_id','simulacro_id','edificio_id','estado','fecha_planificacion','url_recurso','destinatarios');
         $this->fill_fields();
     }
 
@@ -29,7 +28,29 @@ class ImpSim_Model extends Abstract_Model {
     }
 
     function ADD() {
-        // TODO: Implement ADD() method.
+        $this->query = "
+            INSERT INTO EDIFICIO_SIMULACRO
+            (
+             edificio_simulacro_id,
+             edificio_id,
+             simulacro_id,
+             estado,
+             fecha_planificacion,
+             url_recurso,
+             destinatarios
+            ) VALUES (
+            '$this->edificio_simulacro_id',
+            '$this->edificio_id',
+            '$this->estado',
+            '$this->fecha_planificacion',
+            '$this->url_recurso',
+            '$this->destinatarios'
+            );
+        ";
+
+        $this->execute_single_query();
+        $this->edificio_simulacro_id = $this->id_autoincrement;
+        return $this->feedback;
     }
 
     function EDIT() {
@@ -37,7 +58,14 @@ class ImpSim_Model extends Abstract_Model {
     }
 
     function DELETE() {
-        // TODO: Implement DELETE() method.
+        $this->query = "
+            DELETE FROM EDIFICIO_SIMULACRO
+            WHERE
+                edificio_simulacro_id = '$this->edificio_simulacro_id'
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function SEARCH() {
@@ -56,6 +84,26 @@ class ImpSim_Model extends Abstract_Model {
 
         $this->get_results_from_query();
         return $this->feedback;
+    }
+
+    function searchSimsBuildings() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_SIMUALCRO
+            WHERE
+                edificio_id = '$this->edificio_id' AND
+                simulacro_id = '$this->simulacro_id'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function setAttributes($atributos) {
+        foreach($this->atributos as $atributo) {
+            if(isset($atributos[$atributo])) {
+                $this->$atributo = $atributos[$atributo];
+            }
+        }
     }
 
 

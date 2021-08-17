@@ -484,10 +484,46 @@ arrayES = {
         'BLDPLAN_SEARCH_OK' : 'La búsqueda de edificios asignados al plan se ha realizado correctamente',
         'BLDPLAN_SEARCH_KO' : 'Error al recuperar los edificios asignados al plan',
 
+        // ADD
+        'DFPLAN_ADD_NOT_DOCS' : 'El plan debe tener al menos una definición de documento para poder ser asignado',
+        'DFROUTE_EXST_FLRS_NOT_EXST' : 'El plan contiene definiciones de rutas y alguno de los edificios no tienen plantas asociadas',
+        'BLDPLAN_ADD_OK' : 'Se han asignados los edificios indicado al plan correctamente',
+        'BLDPLAN_ADD_KO' : 'Error al crear la asiganción entre los edificios y el plan',
+
+        // Directorios
+        'BLDPLAN_DIRPLAN_KO' : 'Error al crear el directorio raíz del Plan',
+        'BLDPLAN_DIRBLD_KO' : 'Error al crear el directorio del Edificio',
+        'BLDPLAN_DIRDOC_KO' : 'Error al crear el directorio de la definición del documento',
+
+        // Busq. Asociaciones Edificio - Plan
+        'BLDPLAN_EXST' : 'Ya existe una asignación entre el edificio y el plan indicados',
+        'BLDPLAN_NOT_EXST' : 'El edificio no está asignado al plan indicado',
+        'BLDPLAN_KO' : 'Error al consultar asignaciones entre planes y edificios',
+
+
+        // Implementaciones
+        'IMPDOC_ADD_KO' : 'Error al crear la implementación del documento',
+        'IMPDOC_DEL_KO' : 'Error al eliminar la implementación del documento',
+        'IMPPROC_ADD_KO' : 'Error al crear la implementación del procedimiento',
+        'IMPPROC_DEL_KO' : 'Error al eliminar la implementación del procedimiento',
+        'IMPROUTE_ADD_KO' : 'Error al crear la implementación de la ruta',
+        'IMPROUTE_DEL_KO' : 'Error al eliminar la implementación de la ruta',
+        'IMPFRMT_ADD_KO' : 'Error al crear la implementación de la formación',
+        'IMPFRMT_DEL_KO' : 'Error al eliminar la implementación de la formación',
+        'BLDPLAN_IMPADD_OK' : 'Se han creado las implementaciones correctamente',
+        'IMPSIM_ADD_KO' : 'Error al crear la implementación del simulacro',
+        'IMPSIM_DEL_KO' : 'Error al eliminar la implementación del simulacro',
+        'BLD_IMPDEL_OK' : 'Se han eliminado las implementaciones correctamente',
+
+
+
+
+
         // Búsqueda de Edificios candidatos
         'BLDPLAN_CANDIDATES_EMPT' : 'No hay edificios asignables al plan',
         'BLDPLAN_CANDIDATES_OK' : 'Búsqueda de edificios asignables al plan Ok',
         'BLDPLAN_CANDIDATES_KO' : 'Error al recuperar los edificios asignables al plan',
+
 
 
         // Validaciones

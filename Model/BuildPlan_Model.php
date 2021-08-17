@@ -80,7 +80,15 @@ class BuildPlan_Model extends Abstract_Model {
     }
 
     function seek() {
-        // TODO: Implement seek() method.
+        $this->query = "
+            SELECT * FROM EDIFICIO_PLAN
+            WHERE 
+                edificio_id = '$this->edificio_id' AND
+                plan_id = '$this->plan_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
     function searchByBuildingID() {
@@ -107,11 +115,12 @@ class BuildPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function setADD($edificio_id, $fecha_asignacion, $fecha_implementacion, $estado) {
-        $this->edificio_id = $edificio_id;
-        $this->fecha_asignacion = $fecha_asignacion;
-        $this->fecha_implementacion = $fecha_implementacion;
-        $this->estado = $estado;
+    function setAttributes($atributos) {
+        foreach($this->atributos as $atributo) {
+            if(isset($atributos[$atributo])) {
+                $this->$atributo = $atributos[$atributo];
+            }
+        }
     }
 
 }

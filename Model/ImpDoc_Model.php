@@ -30,12 +30,14 @@ class ImpDoc_Model extends Abstract_Model {
         $this->query = "
             INSERT INTO EDIFICIO_DOCUMENTO
             (
+             edificio_documento_id,
              edificio_id,
              documento_id,
              estado,
              fecha_implementacion,
              nombre_doc
             ) VALUES (
+            '$this->edificio_documento_id',
             '$this->edificio_id',
             '$this->documento_id',
             '$this->estado',
@@ -54,8 +56,14 @@ class ImpDoc_Model extends Abstract_Model {
     }
 
     function DELETE() {
-        // TODO: Implement DELETE() method.
+        $this->query = "
+            DELETE FROM EDIFICIO_DOCUMENTO
+            WHERE edificio_documento_id = '$this->edificio_documento_id'
+        ";
+        $this->execute_single_query();
+        return $this->feedback;
     }
+
 
     function SEARCH() {
         // TODO: Implement SEARCH() method.
@@ -69,6 +77,17 @@ class ImpDoc_Model extends Abstract_Model {
         $this->query = "
             SELECT * FROM EDIFICIO_DOCUMENTO
             WHERE documento_id = '$this->documento_id'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchDocsBuildings() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_DOCUMENTO
+            WHERE edificio_id = '$this->edificio_id' AND
+                  documento_id = '$this->documento_id'
         ";
 
         $this->get_results_from_query();

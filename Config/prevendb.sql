@@ -130,7 +130,7 @@ CREATE TABLE EDIFICIO_DOCUMENTO
     `edificio_documento_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `documento_id` INT(10) NOT NULL,
-    `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
+    `estado` enum('pendiente', 'implementado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NOT NULL,
 
@@ -144,7 +144,7 @@ CREATE TABLE EDIFICIO_PROCEDIMIENTO
     `edificio_procedimiento_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `procedimiento_id` INT(10) NOT NULL,
-    `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
+    `estado` enum('pendiente', 'implementado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NOT NULL,
 
@@ -158,7 +158,7 @@ CREATE TABLE PLANTA_RUTA
     `planta_ruta_id` INT(10) AUTO_INCREMENT,
     `planta_id` INT(10) NOT NULL,
     `ruta_id` INT(10) NOT NULL,
-    `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
+    `estado` enum('pendiente', 'implementado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NOT NULL,
 
@@ -184,7 +184,7 @@ CREATE TABLE EDIFICIO_SIMULACRO
     `edificio_simulacro_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `simulacro_id` INT(10) NOT NULL,
-    `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
+    `estado` enum('pendiente', 'implementado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
     `url_recurso` VARCHAR(20) NULL,
     `destinatarios` VARCHAR(100) NOT NULL,
@@ -212,9 +212,9 @@ CREATE TABLE EDIFICIO_FORMACION
     `edificio_formacion_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `formacion_id` INT(10) NOT NULL,
-    `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
+    `estado` enum('pendiente', 'implementado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
-    `url_recurso` VARCHAR(20) NULL,
+    `url_recurso` VARCHAR(20) NOT NULL,
     `destinatarios` VARCHAR(100) NOT NULL,
 
     CONSTRAINT `pk_edificio_formacion` PRIMARY KEY (`edificio_formacion_id`),
@@ -265,15 +265,6 @@ INSERT INTO ESPACIO (`espacio_id`, `planta_id`, `nombre`, `descripcion`, `foto_e
 
 INSERT INTO PLAN (`plan_id`, `nombre`, `descripcion`) VALUES
 (1,'Plan Uno','Descripcion Plan Uno');
-
-INSERT INTO RUTA (`ruta_id`, `plan_id`, `nombre`, `descripcion`) VALUES
-(1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta');
-
-INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_implementacion`, `nombre_doc`) VALUES
-(1,2,1,'vigente','2021/05/10','nombre_doc');
-
-INSERT INTO EDIFICIO_PLAN (`edificio_id`, `plan_id`, `fecha_asignacion`, `estado`) VALUES
-(2,1, '1992/12/25', 'pendiente');
 
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';

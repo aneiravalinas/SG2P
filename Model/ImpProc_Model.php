@@ -30,12 +30,14 @@ class ImpProc_Model extends Abstract_Model {
         $this->query = "
             INSERT INTO EDIFICIO_PROCEDIMIENTO 
             (
+                edificio_procedimiento_id,
                 edificio_id,
                 procedimiento_id,
                 estado,
                 fecha_implementacion,
                 nombre_doc
             ) VALUES (
+                '$this->edificio_procedimiento_id',
                 '$this->edificio_id',
                 '$this->procedimiento_id',
                 '$this->estado',
@@ -57,8 +59,7 @@ class ImpProc_Model extends Abstract_Model {
         $this->query = "
             DELETE FROM EDIFICIO_PROCEDIMIENTO
             WHERE
-                plan_id = '$this->plan_id' AND
-                procedimiento_id = '$this->procedimiento_id'
+                edificio_procedimiento_id = '$this->edificio_procedimiento_id'
         ";
 
         $this->execute_single_query();
@@ -77,6 +78,18 @@ class ImpProc_Model extends Abstract_Model {
         $this->query = "
             SELECT * FROM EDIFICIO_PROCEDIMIENTO
             WHERE procedimiento_id = '$this->procedimiento_id'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchProcsBuildings() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_PROCEDIMIENTO
+            WHERE 
+                edificio_id = '$this->edificio_id' AND
+                procedimiento_id = '$this->procedimiento_id'
         ";
 
         $this->get_results_from_query();

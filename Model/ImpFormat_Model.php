@@ -28,7 +28,30 @@ class ImpFormat_Model extends Abstract_Model {
     }
 
     function ADD() {
-        // TODO: Implement ADD() method.
+        $this->query = "
+            INSERT INTO EDIFICIO_FORMACION
+            (
+             edificio_formacion_id,
+             edificio_id,
+             formacion_id,
+             estado,
+             fecha_planificacion,
+             url_recurso,
+             destinatarios
+            ) VALUES (
+             '$this->edificio_formacion_id',
+             '$this->edificio_id',
+             '$this->formacion_id',
+             '$this->estado',
+             '$this->fecha_planificacion',
+             '$this->url_recurso',
+             '$this->destinatarios'
+            );
+        ";
+
+        $this->execute_single_query();
+        $this->edificio_formacion_id = $this->id_autoincrement;
+        return $this->feedback;
     }
 
     function EDIT() {
@@ -36,7 +59,14 @@ class ImpFormat_Model extends Abstract_Model {
     }
 
     function DELETE() {
-        // TODO: Implement DELETE() method.
+        $this->query = "
+            DELETE FROM EDIFICIO_FORMACION
+            WHERE
+                edificio_formacion_id = '$this->edificio_formacion_id'
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function SEARCH() {
@@ -55,5 +85,25 @@ class ImpFormat_Model extends Abstract_Model {
 
         $this->get_results_from_query();
         return $this->feedback;
+    }
+
+    function searchFormatsBuildings() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_FORMACION
+            WHERE
+                edificio_id = '$this->edificio_id' AND
+                formacion_id = '$this->formacion_id'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function setAttributes($atributos) {
+        foreach($this->atributos as $atributo) {
+            if(isset($atributos[$atributo])) {
+                $this->$atributo = $atributos[$atributo];
+            }
+        }
     }
 }

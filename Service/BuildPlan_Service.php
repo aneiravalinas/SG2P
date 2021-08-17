@@ -116,17 +116,21 @@ class BuildPlan_Service extends BuildPlan_Validation {
         if(!$this->feedback['ok']) {
             $this->feedback = $this->uploader->create_dir(plans_path, $plan['nombre']);
             if(!$this->feedback['ok']) {
+                $this->feedback['code'] = 'BLDPLAN_DIRPLAN_KO';
                 return $this->feedback;
             }
 
             $this->feedback = $this->ADD($this->buildings, $docs, plans_path . $plan['nombre']);
             if(!$this->feedback['ok']) {
+                $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
                 $this->uploader->delete(plans_path . $plan['nombre']);
                 return $this->feedback;
             }
         }
 
-        return $this->ADD($this->buildings, $docs, plans_path . $plan['nombre']);
+        $this->feedback = $this->ADD($this->buildings, $docs, plans_path . $plan['nombre']);
+        $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
+        return $this->feedback;
     }
 
     function ADD($buildings, $docs, $path) {
@@ -143,12 +147,19 @@ class BuildPlan_Service extends BuildPlan_Validation {
             return $this->feedback;
         }
 
-        $this->feedback = $this->uploader->create_dir($path . '/', $edificio_id);
+        $this->feedback = $this->bldPlan_not_exist($edificio_id);
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
 
-        $this->bldPlan_entity->setADD($edificio_id, date('Y-m-d'), default_data, 'pendiente');
+        $this->feedback = $this->uploader->create_dir($path . '/', $edificio_id);
+        if(!$this->feedback['ok']) {
+            $this->feedback['code'] = 'BLDPLAN_DIRBLD_KO';
+            return $this->feedback;
+        }
+
+        $this->bldPlan_entity->setAttributes(array('edificio_id' => $edificio_id, 'fecha_asignacion' => date('Y-m-d'),
+                                                'fecha_implementacion' => default_data, 'estado' => 'pendiente'));
         $this->feedback = $this->bldPlan_entity->ADD();
         if($this->feedback['ok']) {
             $this->feedback = $this->create_impDocs($edificio_id, $docs, $path . '/' . $edificio_id);
@@ -157,7 +168,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
                 if($this->feedback['ok']) {
                     return $this->feedback;
                 }
-                // TODO: Delete All implementations
+                $this->delete_impDocs($edificio_id, $docs);
             }
 
             $this->bldPlan_entity->edificio_id = $edificio_id;
@@ -185,6 +196,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         $doc = array_pop($docs);
         $feedback = $this->uploader->create_dir($path . '/', $doc['nombre']);
         if(!$feedback['ok']) {
+            $feedback['code'] = 'BLDPLAN_DIRDOC_KO';
             return $feedback;
         }
 
@@ -205,6 +217,55 @@ class BuildPlan_Service extends BuildPlan_Validation {
 
         return $feedback;
     }
+
+    function delete_impDocs($edificio_id, $docs) {
+        if(empty($docs)) {
+            $feedback = $this->searchProcsByPlan();
+            if($feedback['ok'] || $feedback['code'] == 'DFPLAN_PROC_NOT_EXST') {
+                return $this->delete_impProcs($edificio_id, $feedback['resource']);
+            }
+            return $feedback;
+        }
+
+        $doc = array_pop($docs);
+        $feedback = $this->searchImpDocs($edificio_id, $doc['documento_id']);
+        if($feedback['ok']) {
+            if($feedback['code'] == 'BLDPLAN_IMPDOCS_EMPT') {
+                return $this->delete_impDocs($edificio_id, $docs);
+            }
+
+            $imp_docs = $feedback['resource'];
+            $imps_deleted = array();
+            include_once './Model/ImpDoc_Model.php';
+            $impDoc_entity = new ImpDoc_Model();
+            foreach($imp_docs as $imp_doc) {
+                $impDoc_entity->setAttributes($imp_doc);
+                $feedback = $impDoc_entity->DELETE();
+                if(!$feedback['ok']) {
+                    if($feedback['code'] == 'QRY_KO') {
+                        $feedback['code'] = 'IMPDOC_DEL_KO';
+                    }
+                    break;
+                }
+                array_push($imps_deleted, $imp_doc);
+            }
+
+            if($feedback['ok']) {
+                $feedback = $this->delete_impDocs($edificio_id, $docs);
+                if($feedback['ok']) {
+                    return $feedback;
+                }
+            }
+
+            foreach($imps_deleted as $imp_deleted) {
+                $impDoc_entity->setAttributes($imp_deleted);
+                $impDoc_entity->ADD();
+            }
+        }
+
+        return $feedback;
+    }
+
 
     function create_impProcs($edificio_id, $procs, $path) {
         if(empty($procs)) {
@@ -249,6 +310,59 @@ class BuildPlan_Service extends BuildPlan_Validation {
 
     }
 
+    function delete_impProcs($edificio_id, $procs) {
+        if(empty($procs)) {
+            $feedbackRoutes = $this->searchRoutesByPlan();
+            if($feedbackRoutes['ok'] || $feedbackRoutes['code'] == 'DFPLAN_ROUTE_NOT_EXST') {
+                $feedbackFloors = $this->searchFloorsByBuilding($edificio_id);
+                if($feedbackFloors['ok'] || $feedbackFloors['code'] == 'BLD_FLR_NOT_EXST') {
+                    return $this->delete_impRoutes($edificio_id, $feedbackRoutes['resource'], $feedbackFloors['resource']);
+                } else {
+                    return $feedbackFloors;
+                }
+
+            }
+
+            return $feedbackRoutes;
+        }
+
+        $proc = array_pop($procs);
+        $feedback = $this->searchImpProcs($edificio_id, $proc['procedimiento_id']);
+        if($feedback['ok']) {
+            $imp_procs = $feedback['resource'];
+            $imps_deleted = array();
+            include_once './Model/ImpProc_Model.php';
+            $impProc_entity = new ImpProc_Model();
+
+            foreach($imp_procs as $imp_proc) {
+                $impProc_entity->setAttributes($imp_proc);
+                $feedback = $impProc_entity->DELETE();
+                if(!$feedback['ok']) {
+                    if($feedback['code'] == 'QRY_KO') {
+                        $feedback['code'] = 'IMPPROC_DEL_KO';
+                    }
+                    break;
+                }
+                array_push($imps_deleted, $imp_proc);
+            }
+
+            if($feedback['ok']) {
+                $feedback = $this->delete_impProcs($edificio_id, $procs);
+                if($feedback['ok']) {
+                    return $feedback;
+                }
+            }
+
+            foreach($imp_procs as $imp_proc) {
+                $impProc_entity->setAttributes($imp_proc);
+                $impProc_entity->ADD();
+            }
+        }
+
+        return $feedback;
+    }
+
+
     function create_impRoutes($edificio_id, $routes, $floors, $path) {
         if(empty($routes)) {
             $feedback = $this->searchFormatsByPlan();
@@ -262,17 +376,23 @@ class BuildPlan_Service extends BuildPlan_Validation {
         $floors_with_routes = array();
         include_once './Model/ImpRoute_Model.php';
         $impRoute_entity = new ImpRoute_Model();
+        $feedback['ok'] = true;
         foreach($floors as $floor) {
             $feedback = $this->uploader->create_dir($path . '/' . $route['nombre'] . '/', $floor['nombre']);
             if(!$feedback['ok']) break;
             $impRoute_entity->setAttributes(array('planta_id' => $floor['planta_id'], 'ruta_id' => $route['ruta_id'],
                                                 'estado' => 'pendiente', 'fecha_implementacion' => default_data, 'nombre_doc' => default_doc));
             $feedback = $impRoute_entity->ADD();
-            if(!$feedback['ok']) break;
+            if(!$feedback['ok']) {
+                if($feedback['code'] == 'QRY_KO') {
+                    $feedback['code'] = 'IMPROUTE_ADD_KO';
+                }
+                break;
+            }
             array_push($floors_with_routes, $floor['planta_id']);
         }
 
-        if(sizeof($floors_with_routes) == sizeof($floors)) {
+        if($feedback['ok']) {
             $feedback = $this->create_impRoutes($edificio_id, $routes, $floors, $path);
             if($feedback['ok']) {
                 return $feedback;
@@ -288,6 +408,56 @@ class BuildPlan_Service extends BuildPlan_Validation {
 
     }
 
+    function delete_impRoutes($edificio_id, $routes, $floors) {
+        if(empty($routes)) {
+            $feedback = $this->searchFormatsByPlan();
+            if($feedback['ok'] || $feedback['code'] == 'DFPLAN_FRMT_NOT_EXST') {
+                return $this->delete_impFormats($edificio_id, $feedback['resource']);
+            }
+            return $feedback;
+        }
+
+        $route = array_pop($routes);
+        $imps_deleted = array();
+        include_once './Model/ImpRoute_Model.php';
+        $impRoute_entity = new ImpRoute_Model();
+        $feedback['ok'] = true;
+        foreach($floors as $floor) {
+            $feedback = $this->searchImpRoutes($floor['planta_id'], $route['ruta_id']);
+            if($feedback['ok']) {
+                $imp_routes = $feedback['resource'];
+                foreach($imp_routes as $imp_route) {
+                    $impRoute_entity->setAttributes($imp_route);
+                    $feedback = $impRoute_entity->DELETE();
+                    if(!$feedback['ok']) {
+                        if($feedback['code'] == 'QRY_KO') {
+                            $feedback['code'] = 'IMPROUTE_DEL_KO';
+                        }
+                        break;
+                    }
+                    array_push($imps_deleted, $imp_route);
+                }
+                if(!$feedback['ok']) break;
+            } else {
+                return $feedback;
+            }
+        }
+
+        if($feedback['ok']) {
+            $feedback = $this->delete_impRoutes($edificio_id, $routes, $floors);
+            if($feedback['ok']) {
+                return $feedback;
+            }
+        }
+
+        foreach($imps_deleted as $imp_deleted) {
+            $impRoute_entity->setAttributes($imp_deleted);
+            $impRoute_entity->ADD();
+        }
+
+        return $feedback;
+    }
+
     function create_impFormat($edificio_id, $formations) {
         if(empty($formations)) {
             $feedback = $this->searchSimsByPlan();
@@ -297,11 +467,134 @@ class BuildPlan_Service extends BuildPlan_Validation {
             return $feedback;
         }
 
-        
+        $formation = array_pop($formations);
+        include_once './Model/ImpFormat_Model.php';
+        $impFormat_entity = new ImpFormat_Model();
+        $impFormat_entity->setAttributes(array('edificio_id' => $edificio_id, 'formacion_id' => $formation['formacion_id'],'estado' => 'pendiente',
+                                            'fecha_planificacion' => default_data, 'url_recurso' => default_url, 'destinatarios' => default_destinatarios));
+        $feedback = $impFormat_entity->ADD();
+        if($feedback['ok']) {
+            $feedback = $this->create_impFormat($edificio_id, $formations);
+            if($feedback['ok']) {
+                return $feedback;
+            }
+            $impFormat_entity->DELETE();
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'IMPFRMT_ADD_KO';
+        }
+
+        return $feedback;
+    }
+
+    function delete_impFormats($edificio_id, $formations) {
+        if(empty($formations)) {
+            $feedback = $this->searchSimsByPlan();
+            if($feedback['ok'] || $feedback['code'] == 'DFPLAN_SIM_NOT_EXST') {
+                return $this->delete_impSims($edificio_id, $feedback['resource']);
+            }
+            return $feedback;
+        }
+
+        $format = array_pop($formations);
+        $feedback = $this->searchImpFormats($edificio_id, $format['formacion_id']);
+        if($feedback['ok']) {
+            include_once './Model/ImpFormat_Model.php';
+            $impFormat_entity = new ImpFormat_Model();
+            $imp_formats = $feedback['resource'];
+            $imps_deleted = array();
+
+            foreach($imp_formats as $imp_format) {
+                $impFormat_entity->setAttributes($imp_format);
+                $feedback = $impFormat_entity->DELETE();
+                if(!$feedback['ok']) {
+                    if($feedback['code'] == 'QRY_KO') {
+                        $feedback['code'] = 'IMPFRMT_DEL_KO';
+                    }
+                    break;
+                }
+
+                array_push($imps_deleted, $imp_format);
+            }
+
+            if($feedback['ok']) {
+                $feedback = $this->delete_impFormats($edificio_id, $formations);
+                if($feedback['ok']) {
+                    return $feedback;
+                }
+            }
+
+            foreach($imps_deleted as $imp_deleted) {
+                $impFormat_entity->setAttributes($imp_deleted);
+                $impFormat_entity->ADD();
+            }
+        }
+
+        return $feedback;
     }
 
     function create_impSims($edificio_id, $simulacrums) {
+        if(empty($simulacrums)) {
+            return array('ok' => true, 'code' => 'BLDPLAN_IMPADD_OK');
+        }
 
+        $simulacrum = array_pop($simulacrums);
+        include_once './Model/ImpSim_Model.php';
+        $impSim_entity = new ImpSim_Model();
+        $impSim_entity->setAttributes(array('simulacro_id' => $simulacrum['simulacro_id'], 'edificio_id' => $edificio_id, 'estado' => 'pendiente',
+                                        'fecha_planificacion' => default_data, 'url_recurso' => default_url, 'destinatarios' => default_destinatarios));
+        $feedback = $impSim_entity->ADD();
+        if($feedback['ok']) {
+            $feedback = $this->create_impSims($edificio_id, $simulacrums);
+            if($feedback['ok']) {
+                return $feedback;
+            }
+            $impSim_entity->DELETE();
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'IMPSIM_ADD_KO';
+        }
+
+        return $feedback;
+    }
+
+    function delete_impSims($edificio_id, $simulacrums) {
+        if(empty($simulacrums)) {
+            return array('ok' => true, 'code' => 'BLD_IMPDEL_OK');
+        }
+
+        $simulacrum = array_pop($simulacrums);
+        $feedback = $this->searchImpSims($edificio_id, $simulacrum['simulacro_id']);
+        if($feedback['ok']) {
+            include_once './Model/ImpSim_Model.php';
+            $impSim_entity = new ImpSim_Model();
+            $imp_sims = $feedback['resource'];
+            $imps_deleted = array();
+
+            foreach($imp_sims as $imp_sim) {
+                $impSim_entity->setAttributes($imp_sim);
+                $feedback = $impSim_entity->DELETE();
+                if(!$feedback['ok']) {
+                    if($feedback['code'] == 'QRY_KO') {
+                        $feedback['code'] = 'IMPSIM_DEL_KO';
+                    }
+                    break;
+                }
+                array_push($imps_deleted, $imp_sim);
+            }
+
+            if($feedback['ok']) {
+                $feedback = $this->delete_impSims($edificio_id, $simulacrums);
+                if($feedback['ok']) {
+                    return $feedback;
+                }
+            }
+
+            foreach($imps_deleted as $imp_deleted) {
+                $impSim_entity->setAttributes($imp_deleted);
+                $impSim_entity->ADD();
+            }
+        }
+
+        return $feedback;
     }
 
     function seekByPlanID() {
@@ -460,6 +753,112 @@ class BuildPlan_Service extends BuildPlan_Validation {
             }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'BLD_SRCH_FLR_KO';
+        }
+
+        return $feedback;
+    }
+
+    function searchImpDocs($edificio_id, $doc_id) {
+        include_once './Model/ImpDoc_Model.php';
+        $impDoc_entity = new ImpDoc_Model();
+        $impDoc_entity->setAttributes(array('edificio_id' => $edificio_id, 'documento_id' => $doc_id));
+        $feedback = $impDoc_entity->searchDocsBuildings();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['code'] = 'BLDPLAN_IMPDOCS_EMPT';
+            } else {
+                $feedback['code'] = 'BLDPLAN_IMPDOCS_OK';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'BLDPLAN_IMPDOCS_KO';
+        }
+
+        return $feedback;
+    }
+
+    function searchImpProcs($edificio_id, $proc_id) {
+        include_once './Model/ImpProc_Model.php';
+        $impProc_entity = new ImpProc_Model();
+        $impProc_entity->setAttributes(array('edificio_id' => $edificio_id, 'procedimiento_id' => $proc_id));
+        $feedback = $impProc_entity->searchProcsBuildings();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['code'] = 'BLDPLAN_IMPPROCS_EMPT';
+            } else if($feedback['code'] == 'QRY_KO') {
+                $feedback['code'] = 'BLDPLAN_IMPPROCS_KO';
+            }
+        }
+
+        return $feedback;
+    }
+
+    function searchImpRoutes($planta_id, $ruta_id) {
+        include_once './Model/ImpRoute_Model.php';
+        $impRoute_entity = new ImpRoute_Model();
+        $impRoute_entity->setAttributes(array('planta_id' => $planta_id, 'ruta_id' => $ruta_id));
+        $feedback = $impRoute_entity->searchRoutesFloors();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['code'] = 'BLDPLAN_IMPROUTE_EMPT';
+            } else {
+                $feedback['code'] = 'BLDPLAN_IMPROUTE_OK';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'BLDPLAN_IMPROUTES_KO';
+        }
+
+        return $feedback;
+    }
+
+    function searchImpFormats($edificio_id, $format_id) {
+        include_once './Model/ImpFormat_Model.php';
+        $impFormat_entity = new ImpFormat_Model();
+        $impFormat_entity->setAttributes(array('edificio_id' => $edificio_id, 'formacion_id' => $format_id));
+        $feedback = $impFormat_entity->searchFormatsBuildings();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['code'] = 'BLDPLAN_IMPFRMT_EMPT';
+            } else {
+                $feedback['code'] = 'BLDPLAN_IMPFRMT_OK';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'BLDPLAN_IMPFRMT_KO';
+        }
+
+        return $feedback;
+    }
+
+    function searchImpSims($edificio_id, $sim_id) {
+        include_once './Model/ImpSim_Model.php';
+        $impSim_entity = new ImpSim_Model();
+        $impSim_entity->setAttributes(array('edificio_id' => $edificio_id, 'simulacro_id' => $sim_id));
+        $feedback = $impSim_entity->searchSimsBuildings();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['code'] = 'BLDPLAN_IMPSIM_EMPT';
+            } else {
+                $feedback['code'] = 'BLDPLAN_IMPSIM_OK';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'BLDPLAN_IMPSIM_KO';
+        }
+
+        return $feedback;
+    }
+
+
+    function bldPlan_not_exist($edificio_id) {
+        $this->bldPlan_entity->edificio_id = $edificio_id;
+        $feedback = $this->bldPlan_entity->seek();
+        if($feedback['ok']) {
+            if($feedback['code'] != 'QRY_EMPT') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'BLDPLAN_EXST';
+            } else {
+                $feedback['code'] = 'BLDPLAN_NOT_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'BLDPLAN_KO';
         }
 
         return $feedback;
