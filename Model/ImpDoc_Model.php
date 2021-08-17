@@ -27,7 +27,26 @@ class ImpDoc_Model extends Abstract_Model {
     }
 
     function ADD() {
-        // TODO: Implement ADD() method.
+        $this->query = "
+            INSERT INTO EDIFICIO_DOCUMENTO
+            (
+             edificio_id,
+             documento_id,
+             estado,
+             fecha_implementacion,
+             nombre_doc
+            ) VALUES (
+            '$this->edificio_id',
+            '$this->documento_id',
+            '$this->estado',
+            '$this->fecha_implementacion',
+            '$this->nombre_doc'
+            );
+        ";
+
+        $this->execute_single_query();
+        $this->edificio_documento_id = $this->id_autoincrement;
+        return $this->feedback;
     }
 
     function EDIT() {
@@ -56,5 +75,12 @@ class ImpDoc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function setAttributes($atributos) {
+        foreach($this->atributos as $atributo) {
+            if(isset($atributos[$atributo])) {
+                $this->$atributo = $atributos[$atributo];
+            }
+        }
+    }
 
 }

@@ -15,5 +15,6 @@
     define('default_space_photo','default.png');
     define('plans_path','./Uploads/Plans/');
     define('default_data', '0000-00-00');
+    define('default_doc', 'document_default');
 
 

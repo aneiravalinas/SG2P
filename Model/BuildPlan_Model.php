@@ -52,7 +52,15 @@ class BuildPlan_Model extends Abstract_Model {
     }
 
     function DELETE() {
-        // TODO: Implement DELETE() method.
+        $this->query = "
+            DELETE FROM EDIFICIO_PLAN
+            WHERE 
+                  edificio_id = '$this->edificio_id' AND
+                  plan_id = '$this->plan_id'
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function SEARCH() {

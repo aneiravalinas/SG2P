@@ -28,7 +28,26 @@ class ImpRoute_Model extends Abstract_Model {
     }
 
     function ADD() {
-        // TODO: Implement ADD() method.
+        $this->query = "
+            INSERT INTO PLANTA_RUTA 
+            (
+                planta_id,
+                ruta_id,
+                estado,
+                fecha_implementacion,
+                nombre_doc
+            ) VALUES (
+                '$this->planta_id',
+                '$this->ruta_id',
+                '$this->estado',
+                '$this->fecha_implementacion',
+                '$this->nombre_doc'
+            );
+        ";
+
+        $this->execute_single_query();
+        $this->planta_ruta_id = $this->id_autoincrement;
+        return $this->feedback;
     }
 
     function EDIT() {
@@ -36,7 +55,15 @@ class ImpRoute_Model extends Abstract_Model {
     }
 
     function DELETE() {
-        // TODO: Implement DELETE() method.
+        $this->query = "
+            DELETE FROM PLANTA_RUTA
+            WHERE
+                planta_id = '$this->planta_id' AND
+                ruta_id = '$this->ruta_id'
+        ";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function SEARCH() {
@@ -65,6 +92,14 @@ class ImpRoute_Model extends Abstract_Model {
 
         $this->get_results_from_query();
         return $this->feedback;
+    }
+
+    function setAttributes($atributos) {
+        foreach($this->atributos as $atributo) {
+            if(isset($atributos[$atributo])) {
+                $this->$atributo = $atributos[$atributo];
+            }
+        }
     }
 
 }
