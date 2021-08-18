@@ -31,7 +31,6 @@ class ImpFormat_Model extends Abstract_Model {
         $this->query = "
             INSERT INTO EDIFICIO_FORMACION
             (
-             edificio_formacion_id,
              edificio_id,
              formacion_id,
              estado,
@@ -39,7 +38,6 @@ class ImpFormat_Model extends Abstract_Model {
              url_recurso,
              destinatarios
             ) VALUES (
-             '$this->edificio_formacion_id',
              '$this->edificio_id',
              '$this->formacion_id',
              '$this->estado',

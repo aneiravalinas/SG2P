@@ -100,7 +100,7 @@ class Show_BuildPlan {
                             <?php endforeach; ?>
                             <?php if(empty($this->buildPlans)) :?>
                                 <tr>
-                                    <td colspan="3" class="text-center">
+                                    <td colspan="5" class="text-center">
                                         <span class="i18n-bldplan-empty">El plan no tiene edificios asignados</span>
                                     </td>
                                 </tr>

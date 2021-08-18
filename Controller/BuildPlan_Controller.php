@@ -50,7 +50,38 @@ class BuildPlan {
             $buildPlan_service = new BuildPlan_Service();
             $feedback = $buildPlan_service->multipleADD();
             if(isset($feedback['plan'])) {
-                new Message($feedback['code'], 'DefPlan', 'show', $feedback['plan']);
+                new Message($feedback['code'], 'BuildPlan', 'show', $feedback['plan']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function deleteForm() {
+        if($this->checkPermission()) {
+            $buildPlan_service = new BuildPlan_Service();
+            $feedback = $buildPlan_service->seek();
+            if($feedback['ok']) {
+                include_once './View/BuildPlans/Delete_BuildPlan_View.php';
+                new Delete_BuildPlan($feedback['plan'], $feedback['edificio']);
+            } else if(isset($feedback['plan'])) {
+                new Message($feedback['code'], 'BuildPlan', 'show', $feedback['plan']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function delete() {
+        if($this->checkPermission()) {
+            $buildPlan_service = new BuildPlan_Service();
+            $feedback =$buildPlan_service->DELETE();
+            if(isset($feedback['plan'])) {
+                new Message($feedback['code'], 'BuildPlan', 'show', $feedback['plan']);
             } else {
                 new Message($feedback['code'], 'DefPlan', 'show');
             }

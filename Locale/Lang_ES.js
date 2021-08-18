@@ -490,34 +490,39 @@ arrayES = {
         'BLDPLAN_ADD_OK' : 'Se han asignados los edificios indicado al plan correctamente',
         'BLDPLAN_ADD_KO' : 'Error al crear la asiganción entre los edificios y el plan',
 
+        // SEEK
+        'BLDPLAN_SEEK_OK' : 'Se han consultado los detalles de la asignación entre el Edificio y el Plan correctamente',
+        'BLDPLAN_SEEK_KO' : 'Error al consultar los detalles de la asignación entre el Edificio y el Plan indicados',
+
+        // DELETE
+        'BLDPLAN_DEL_OK' : 'Se ha eliminado con éxito la asignación entre el Edificio y el Plan indicados',
+        'BLDPLAN_DEL_KO' : 'Error al eliminar la asignación entre el Edificio y el Plan indicados',
+
         // Directorios
         'BLDPLAN_DIRPLAN_KO' : 'Error al crear el directorio raíz del Plan',
         'BLDPLAN_DIRBLD_KO' : 'Error al crear el directorio del Edificio',
-        'BLDPLAN_DIRDOC_KO' : 'Error al crear el directorio de la definición del documento',
+        'BLDPLAN_DIRDOC_KO' : 'Error al crear el directorio de la definición del Documento',
+        'BLDPLAN_DIRPROC_KO' : 'Error al crear el directorio de la definición del Procedimiento',
+        'BLDPLAN_DIRROUTE_KO' : 'Error al crear el directorio de la definición de la Ruta',
 
         // Busq. Asociaciones Edificio - Plan
-        'BLDPLAN_EXST' : 'Ya existe una asignación entre el edificio y el plan indicados',
+        'BLDPLAN_EXST' : 'Ya existe una asignación entre alguno de los edificios y el plan indicados',
         'BLDPLAN_NOT_EXST' : 'El edificio no está asignado al plan indicado',
         'BLDPLAN_KO' : 'Error al consultar asignaciones entre planes y edificios',
 
-
         // Implementaciones
-        'IMPDOC_ADD_KO' : 'Error al crear la implementación del documento',
-        'IMPDOC_DEL_KO' : 'Error al eliminar la implementación del documento',
-        'IMPPROC_ADD_KO' : 'Error al crear la implementación del procedimiento',
-        'IMPPROC_DEL_KO' : 'Error al eliminar la implementación del procedimiento',
-        'IMPROUTE_ADD_KO' : 'Error al crear la implementación de la ruta',
-        'IMPROUTE_DEL_KO' : 'Error al eliminar la implementación de la ruta',
-        'IMPFRMT_ADD_KO' : 'Error al crear la implementación de la formación',
-        'IMPFRMT_DEL_KO' : 'Error al eliminar la implementación de la formación',
+        'IMPDOC_ADD_KO' : 'Error al crear las implementaciones de los documentos',
+        'IMPDOC_DEL_KO' : 'Error al eliminar las implementaciones de los documentos',
+        'IMPPROC_ADD_KO' : 'Error al crear las implementaciones de los procedimientos',
+        'IMPPROC_DEL_KO' : 'Error al eliminar las implementaciones de los procedimientos',
+        'IMPROUTE_ADD_KO' : 'Error al crear las implementaciones de las rutas',
+        'IMPROUTE_DEL_KO' : 'Error al eliminar las implementaciones de las rutas',
+        'IMPFRMT_ADD_KO' : 'Error al crear las implementaciones de las formaciones',
+        'IMPFRMT_DEL_KO' : 'Error al eliminar las implementaciones de las formaciones',
         'BLDPLAN_IMPADD_OK' : 'Se han creado las implementaciones correctamente',
-        'IMPSIM_ADD_KO' : 'Error al crear la implementación del simulacro',
-        'IMPSIM_DEL_KO' : 'Error al eliminar la implementación del simulacro',
+        'IMPSIM_ADD_KO' : 'Error al crear las implementaciones de los simulacros',
+        'IMPSIM_DEL_KO' : 'Error al eliminar las implementaciones de los simulacros',
         'BLD_IMPDEL_OK' : 'Se han eliminado las implementaciones correctamente',
-
-
-
-
 
         // Búsqueda de Edificios candidatos
         'BLDPLAN_CANDIDATES_EMPT' : 'No hay edificios asignables al plan',
@@ -903,6 +908,7 @@ arrayES = {
         'i18n-vencido' : 'VENCIDO',
         'i18n-bldplan-empty' : 'El plan no tiene edificios asignados',
         'i18n-add-buildPlan' : 'Asignar Edificios',
+        'i18n-del-bldplan-confirm' : '¿Está seguro que desea eliminar esta asignación? El cambio no será reversible',
 
         // MODAL
             // Campos Modal

@@ -106,7 +106,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         }
 
         $docs = $this->feedback['resource'];
-        $validation = $this->validar_atributos_add();
+        $validation = $this->validar_BUILDINGS();
         if(!$validation['ok']) {
             $validation['plan'] = array('plan_id' => $plan['plan_id']);
             return $validation;
@@ -116,28 +116,28 @@ class BuildPlan_Service extends BuildPlan_Validation {
         if(!$this->feedback['ok']) {
             $this->feedback = $this->uploader->create_dir(plans_path, $plan['nombre']);
             if(!$this->feedback['ok']) {
+                $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
                 $this->feedback['code'] = 'BLDPLAN_DIRPLAN_KO';
                 return $this->feedback;
             }
 
             $this->feedback = $this->ADD($this->buildings, $docs, plans_path . $plan['nombre']);
             if(!$this->feedback['ok']) {
-                $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
                 $this->uploader->delete(plans_path . $plan['nombre']);
-                return $this->feedback;
             }
+        } else {
+            $this->feedback = $this->ADD($this->buildings, $docs, plans_path . $plan['nombre']);
         }
 
-        $this->feedback = $this->ADD($this->buildings, $docs, plans_path . $plan['nombre']);
         $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
         return $this->feedback;
     }
 
     function ADD($buildings, $docs, $path) {
         if(empty($buildings)) {
-            $feedback['ok'] = true;
-            $feedback['code'] = 'BLDPLAN_ADD_OK';
-            return $feedback;
+            $this->feedback['ok'] = true;
+            $this->feedback['code'] = 'BLDPLAN_ADD_OK';
+            return $this->feedback;
         }
 
 
@@ -180,6 +180,82 @@ class BuildPlan_Service extends BuildPlan_Validation {
         }
 
         $this->uploader->delete_all($path . '/' . $edificio_id);
+        return $this->feedback;
+    }
+
+    function DELETE() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $bld_plan = $this->feedback['resource'];
+        $plan = $this->feedback['plan'];
+        $building = $this->feedback['edificio'];
+
+        $this->feedback = $this->bldPlan_entity->DELETE();
+        if($this->feedback['ok']) {
+            $this->feedback = $this->searchDocsByPlan();
+            if($this->feedback['ok']) {
+                $docs = $this->feedback['resource'];
+                $this->feedback = $this->delete_impDocs($building['edificio_id'], $docs);
+                if($this->feedback['ok']) {
+                    $this->uploader->delete_all(plans_path . $plan['nombre'] . '/' . $building['edificio_id']);
+                    $this->feedback = $this->uploader->dir_is_empty(plans_path . $plan['nombre']);
+                    if($this->feedback['ok']) {
+                        $this->uploader->delete(plans_path . $plan['nombre']);
+                    }
+                    $this->feedback['code'] = 'BLDPLAN_DEL_OK';
+                    $this->feedback['plan'] = $plan;
+                    $this->feedback['edificio'] = $building;
+                    return $this->feedback;
+                }
+            }
+            $this->bldPlan_entity->setAttributes($bld_plan);
+            $this->bldPlan_entity->ADD();
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'BLDPLAN_DEL_KO';
+        }
+
+        $this->feedback['plan'] = $plan;
+        return $this->feedback;
+    }
+
+    function seek() {
+        $validation = $this->validar_PLAN_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByPlanID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $plan = $this->feedback['resource'];
+        $validation = $this->validar_EDIFICIO_ID();
+        if(!$validation['ok']) {
+            $validation['plan'] = array('plan_id' => $plan['plan_id']);
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByBuildingID($this->edificio_id);
+        if(!$this->feedback['ok']) {
+            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
+            return $this->feedback;
+        }
+
+        $building = $this->feedback['resource'];
+        $this->feedback = $this->seekBldPlan();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'BLDPLAN_SEEK_OK';
+            $this->feedback['plan'] = array('plan_id' => $plan['plan_id'], 'nombre' => $plan['nombre']);
+            $this->feedback['edificio'] = array('edificio_id' => $building['edificio_id'], 'nombre' => $building['nombre']);
+        } else if($this->feedback['code'] == 'BLDPLAN_KO') {
+            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
+            $this->feedback['code'] = 'BLDPLAN_SEEK_KO';
+        }
+
         return $this->feedback;
     }
 
@@ -288,6 +364,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         $proc = array_pop($procs);
         $feedback = $this->uploader->create_dir($path . '/', $proc['nombre']);
         if(!$feedback['ok']) {
+            $feedback['code'] = 'BLDPLAN_DIRPROC_KO';
             return $feedback;
         }
 
@@ -379,7 +456,10 @@ class BuildPlan_Service extends BuildPlan_Validation {
         $feedback['ok'] = true;
         foreach($floors as $floor) {
             $feedback = $this->uploader->create_dir($path . '/' . $route['nombre'] . '/', $floor['nombre']);
-            if(!$feedback['ok']) break;
+            if(!$feedback['ok']) {
+                $feedback['code'] = 'BLDPLAN_DIRROUTE_KO';
+                break;
+            }
             $impRoute_entity->setAttributes(array('planta_id' => $floor['planta_id'], 'ruta_id' => $route['ruta_id'],
                                                 'estado' => 'pendiente', 'fecha_implementacion' => default_data, 'nombre_doc' => default_doc));
             $feedback = $impRoute_entity->ADD();
@@ -389,7 +469,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
                 }
                 break;
             }
-            array_push($floors_with_routes, $floor['planta_id']);
+            array_push($floors_with_routes, $impRoute_entity->planta_ruta_id);
         }
 
         if($feedback['ok']) {
@@ -399,8 +479,8 @@ class BuildPlan_Service extends BuildPlan_Validation {
             }
         }
 
-        foreach($floors_with_routes as $floor) {
-            $impRoute_entity->setAttributes(array('planta_id' => $floor['planta_id'], 'ruta_id' => $route['ruta_id']));
+        foreach($floors_with_routes as $floor_route) {
+            $impRoute_entity->planta_ruta_id = $floor_route;
             $impRoute_entity->DELETE();
         }
 
@@ -863,4 +943,21 @@ class BuildPlan_Service extends BuildPlan_Validation {
 
         return $feedback;
     }
+
+    function seekBldPlan() {
+        $feedback = $this->bldPlan_entity->seek();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'BLDPLAN_NOT_EXST';
+            } else {
+                $feedback['code'] = 'BLDPLAN_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'BLDPLAN_KO';
+        }
+
+        return $feedback;
+    }
+
 }

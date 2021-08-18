@@ -31,7 +31,6 @@ class ImpSim_Model extends Abstract_Model {
         $this->query = "
             INSERT INTO EDIFICIO_SIMULACRO
             (
-             edificio_simulacro_id,
              edificio_id,
              simulacro_id,
              estado,
@@ -39,8 +38,8 @@ class ImpSim_Model extends Abstract_Model {
              url_recurso,
              destinatarios
             ) VALUES (
-            '$this->edificio_simulacro_id',
             '$this->edificio_id',
+            '$this->simulacro_id',
             '$this->estado',
             '$this->fecha_planificacion',
             '$this->url_recurso',
@@ -88,7 +87,7 @@ class ImpSim_Model extends Abstract_Model {
 
     function searchSimsBuildings() {
         $this->query = "
-            SELECT * FROM EDIFICIO_SIMUALCRO
+            SELECT * FROM EDIFICIO_SIMULACRO
             WHERE
                 edificio_id = '$this->edificio_id' AND
                 simulacro_id = '$this->simulacro_id'

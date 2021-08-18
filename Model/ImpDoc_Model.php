@@ -30,14 +30,12 @@ class ImpDoc_Model extends Abstract_Model {
         $this->query = "
             INSERT INTO EDIFICIO_DOCUMENTO
             (
-             edificio_documento_id,
              edificio_id,
              documento_id,
              estado,
              fecha_implementacion,
              nombre_doc
             ) VALUES (
-            '$this->edificio_documento_id',
             '$this->edificio_id',
             '$this->documento_id',
             '$this->estado',

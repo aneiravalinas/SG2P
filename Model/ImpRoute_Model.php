@@ -31,14 +31,12 @@ class ImpRoute_Model extends Abstract_Model {
         $this->query = "
             INSERT INTO PLANTA_RUTA 
             (
-                planta_ruta_id,
                 planta_id,
                 ruta_id,
                 estado,
                 fecha_implementacion,
                 nombre_doc
             ) VALUES (
-                '$this->planta_ruta_id',
                 '$this->planta_id',
                 '$this->ruta_id',
                 '$this->estado',

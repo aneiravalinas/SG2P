@@ -114,7 +114,6 @@ class Uploader {
             $file = $path . '/' . $file;
             if(is_dir($file)) {
                 $this->delete_all($file);
-                rmdir($file);
             } else {
                 unlink($file);
             }

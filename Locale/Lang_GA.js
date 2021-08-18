@@ -480,6 +480,46 @@ arrayGA = {
         'BLDPLAN_SEARCH_OK' : 'A búsqueda dos edificios asignados o plan realizouse correctamente',
         'BLDPLAN_SEARCH_KO' : 'Erro ó recuperar os edificios asignados o plan',
 
+        // ADD
+        'DFPLAN_ADD_NOT_DOCS' : 'O plan debe ter, polo menos, unha definición de documento pra poder ser asignado',
+        'DFROUTE_EXST_FLRS_NOT_EXST' : 'O plan contén definicións de rutas e algún dos edificios non teñen plantas asociadas',
+        'BLDPLAN_ADD_OK' : 'Asignáronse os edificios indicados ó plan correctamente',
+        'BLDPLAN_ADD_KO' : 'Erro ó crear as asignacións entre os edificios e o plan',
+
+        // SEEK
+        'BLDPLAN_SEEK_OK' : 'Consultáronse os detalles da asignación entre o Edificio e o Plan indicados correctamente',
+        'BLDPLAN_SEEK_KO' : 'Erro ó consultar os detalles da asignación entre o Edificio e o Plan indicados',
+
+        // DELETE
+        'BLDPLAN_DEL_OK' : 'Eliminouse con éxito a asignación entre o Edificio e o Plan indicados',
+        'BLDPLAN_DEL_KO' : 'Erro ó eliminar a asignación entre o Edificio e o Plan',
+
+        // Directorios
+        'BLDPLAN_DIRPLAN_KO' : 'Erro ó crear o directorio raíz do Plan',
+        'BLDPLAN_DIRBLD_KO' : 'Erro ó crear o directorio do Edificio',
+        'BLDPLAN_DIRDOC_KO' : 'Erro ó crear o directorio da definición do Documento',
+        'BLDPLAN_DIRPROC_KO' : 'Erro ó crear o directorio da definición do Procedemento',
+        'BLDPLAN_DIRROUTE_KO' : 'Erro ó crear o directorio da definición da Ruta',
+
+        // Busq. Asociaciones Edificio - Plan
+        'BLDPLAN_EXST' : 'Xa existe unha asignación entre o Edificio e o Plan indicado',
+        'BLDPLAN_NOT_EXST' : 'O plan non está asignado o edificio indicado',
+        'BLDPLAN_KO' : 'Erro ó consultar asignacións entre o edificio e o plan',
+
+        // Implementaciones
+        'IMPDOC_ADD_KO' : 'Erro ó crear as implementacións dos documentos',
+        'IMPDOC_DEL_KO' : 'Erro ó eliminar as implementacións dos documentos',
+        'IMPPROC_ADD_KO' : 'Erro ó crear as implementacións dos procedementos',
+        'IMPPROC_DEL_KO' : 'Erro ó eliminar as implementacións dos procedementos',
+        'IMPROUTE_ADD_KO' : 'Erro ó crear as implementacións das rutas',
+        'IMPROUTE_DEL_KO' : 'Erro ó eliminar as implementacións as rutas',
+        'IMPFRMT_ADD_KO' : 'Erro ó crear as implementacións das formacións',
+        'IMPFRMT_DEL_KO' : 'Erro ó eliminar as implementacións das formacións',
+        'BLDPLAN_IMPADD_OK' : 'As implementacións creáronse correctamente',
+        'IMPSIM_ADD_KO' : 'Erro ó crear as implementacións dos simulacros',
+        'IMPSIM_DEL_KO' : 'Erro ó eliminar as implementacións dos simulacros',
+        'BLD_IMPDEL_OK' : 'Elimináronse as implementacións correctamente',
+
         // Búsqueda de Edificios candidatos
         'BLDPLAN_CANDIDATES_EMPT' : 'Non hay edificios asignables ó plan',
         'BLDPLAN_CANDIDATES_OK' : 'Búsqueda de edificios asignables ó plan Ok',
@@ -863,6 +903,7 @@ arrayGA = {
         'i18n-vencido' : 'VENCIDO',
         'i18n-bldplan-empty' : 'O plan non ten edificios asignados',
         'i18n-add-buildPlan' : 'Asignar Edificios',
+        'i18n-del-bldplan-confirm' : '¿Está seguro de que desexa eliminar esta asignación? O cambio non será reversible',
 
 
         // MODAL

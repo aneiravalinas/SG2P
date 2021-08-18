@@ -480,6 +480,46 @@ arrayEN = {
         'BLDPLAN_SEARCH_OK' : 'The search for buildings assigned to the plan was successful',
         'BLDPLAN_SEARCH_KO' : 'Failed to retrieve the buildings assigned to the plan',
 
+        // ADD
+        'DFPLAN_ADD_NOT_DOCS' : 'The plan must have at least one document definition to be assigned',
+        'DFROUTE_EXST_FLRS_NOT_EXST' : 'The plan contains route definitions and some of the buildings do not have associated floors',
+        'BLDPLAN_ADD_OK' : 'The indicated buildings have been assigned to the plan correctly',
+        'BLDPLAN_ADD_KO' : 'Failed to create mapping between buildings and plan',
+
+        // SEEK
+        'BLDPLAN_SEEK_OK' : 'The details of the allocation between the Building and the Plan have been correctly consulted',
+        'BLDPLAN_SEEK_KO' : 'Error when consulting the details of the assignment between the indicated Building and Plan',
+
+        // DELETE
+        'BLDPLAN_DEL_OK' : 'The assignment between the indicated Building and Plan has been successfully removed',
+        'BLDPLAN_DEL_KO' : 'Error when deleting the assignment between the indicated Building and Plan',
+
+        // Directorios
+        'BLDPLAN_DIRPLAN_KO' : 'Failed to create Plan root directory',
+        'BLDPLAN_DIRBLD_KO' : 'Failed to create the Building directory',
+        'BLDPLAN_DIRDOC_KO' : 'Error creating directory of Document definition',
+        'BLDPLAN_DIRPROC_KO' : 'Error creating directory of Procedure definition',
+        'BLDPLAN_DIRROUTE_KO' : 'Error creating directory of Route definition',
+
+        // Busq. Asociaciones Edificio - Plan
+        'BLDPLAN_EXST' : 'There is already an allocation between any of the buildings and the indicated plan',
+        'BLDPLAN_NOT_EXST' : 'The building is not assigned to the indicated plan',
+        'BLDPLAN_KO' : 'Error when querying allocations between plans and buildings',
+
+        // Implementaciones
+        'IMPDOC_ADD_KO' : 'Error creating document deployments',
+        'IMPDOC_DEL_KO' : 'Failed to remove deployments from documents',
+        'IMPPROC_ADD_KO' : 'Error creating procedure implementations',
+        'IMPPROC_DEL_KO' : 'Failed to remove implementations of procedures',
+        'IMPROUTE_ADD_KO' : 'Error creating route implementations',
+        'IMPROUTE_DEL_KO' : 'Failed to remove deployments from routes',
+        'IMPFRMT_ADD_KO' : 'Error creating formations deployments',
+        'IMPFRMT_DEL_KO' : 'Failed to remove deployments from formations',
+        'BLDPLAN_IMPADD_OK' : 'Deployments have been created successfully',
+        'IMPSIM_ADD_KO' : 'Error creating simulacrums deployments',
+        'IMPSIM_DEL_KO' : 'Failed to remove simulacrums deployments',
+        'BLD_IMPDEL_OK' : 'Deployments have been removed successfully',
+
         // Búsqueda de Edificios candidatos
         'BLDPLAN_CANDIDATES_EMPT' : 'There are no buildings assignable to the plan',
         'BLDPLAN_CANDIDATES_OK' : 'Search for buildings assignable to plan Ok',
@@ -861,6 +901,7 @@ arrayEN = {
         'i18n-vencido' : 'EXPIRED',
         'i18n-bldplan-empty' : 'The plan has no buildings assigned',
         'i18n-add-buildPlan' : 'Assign Buildings',
+        'i18n-del-bldplan-confirm' : 'Are you sure you want to remove this assignment? The change will not be reversible',
 
         // MODAL
             // Campos Modal

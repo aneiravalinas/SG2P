@@ -30,14 +30,12 @@ class ImpProc_Model extends Abstract_Model {
         $this->query = "
             INSERT INTO EDIFICIO_PROCEDIMIENTO 
             (
-                edificio_procedimiento_id,
                 edificio_id,
                 procedimiento_id,
                 estado,
                 fecha_implementacion,
                 nombre_doc
             ) VALUES (
-                '$this->edificio_procedimiento_id',
                 '$this->edificio_id',
                 '$this->procedimiento_id',
                 '$this->estado',
