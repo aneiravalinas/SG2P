@@ -50,7 +50,14 @@ class ImpProc_Model extends Abstract_Model {
     }
 
     function EDIT() {
-        // TODO: Implement EDIT() method.
+        $this->query = "UPDATE EDIFICIO_PROCEDIMIENTO SET " .
+            ($this->fecha_implementacion == '' ? "" : "fecha_implementacion = '$this->fecha_implementacion', ") .
+            ($this->nombre_doc == '' ? "" : "nombre_doc = '$this->nombre_doc', ") .
+            ($this->estado == '' ? "" : "estado = '$this->estado'") .
+            " WHERE edificio_procedimiento_id = '$this->edificio_procedimiento_id'";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function DELETE() {

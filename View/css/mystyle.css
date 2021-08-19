@@ -104,14 +104,14 @@
     color: #124265 !important;
 }
 
-.i18n-pendiente {
+.pendiente {
     color: #cb7d18;
 }
 
-.i18n-vencido {
+.vencido {
     color: gray;
 }
 
-.i18n-implementado {
+.implementado {
     color: forestgreen;
 }

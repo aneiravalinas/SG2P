@@ -66,7 +66,7 @@ class Show_BuildPlan {
                                 <tr>
                                     <td><?php echo $buildPlan['nombre'] ?></td>
                                     <td><?php echo date_format(date_create($buildPlan['fecha_asignacion']), 'd/m/Y') ?></td>
-                                    <td class="i18n-<?php echo $buildPlan['estado'] ?>"></td>
+                                    <td class="i18n-<?php echo $buildPlan['estado'] ?> <?php echo $buildPlan['estado'] ?>"></td>
                                     <td><?php if($buildPlan['fecha_implementacion'] != default_data) echo date_format(date_create($buildPlan['fecha_implementacion']),'d/m/Y');?></td>
                                     <td class="text-center">
                                         <div class="btn-group px-md-2">
@@ -74,16 +74,17 @@ class Show_BuildPlan {
                                                 <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>
                                             </button>
                                             <div class="dropdown-menu">
-
-                                                <a class="dropdown-item i18n-edit" type="button" onclick="
+                                                <?php if($buildPlan['estado'] != 'vencido'): ?>
+                                                <a class="dropdown-item i18n-expire" type="button" onclick="
                                                     crearform('formenviar','post');
                                                     insertacampo(document.formenviar, 'plan_id','<?php echo $buildPlan['plan_id'] ?>');
                                                     insertacampo(document.formenviar, 'edificio_id','<?php echo $buildPlan['edificio_id'] ?>');
                                                     insertacampo(document.formenviar, 'controller','BuildPlan');
                                                     insertacampo(document.formenviar, 'action', 'editForm');
                                                     enviaform(document.formenviar);">
-                                                    Editar
+                                                    Vencer
                                                 </a>
+                                                <?php endif; ?>
                                                 <a class="dropdown-item i18n-delete" type="button" onclick="
                                                     crearform('formenviar','post');
                                                     insertacampo(document.formenviar, 'plan_id','<?php echo $buildPlan['plan_id'] ?>');

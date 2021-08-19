@@ -771,7 +771,7 @@ arrayEN = {
         'i18n-edificio_id' : 'Building ID',
         'i18n-responsable' : 'Manager',
         'i18n-ciudad' : 'City',
-        'i18n-buildings-empty' : 'There is no registered building yet',
+        'i18n-buildings-empty' : 'No buildings found',
         'i18n-add-building' : 'Add Building',
         'i18n-calle' : 'Street',
         'i18n-provincia' : 'Province',
@@ -789,7 +789,7 @@ arrayEN = {
         'i18n-floors' : 'Floors',
         'i18n-planta_id' : 'Floor ID',
         'i18n-num_planta' : 'Floor number',
-        'i18n-floors-empty' : 'This building does not have registered floors yet',
+        'i18n-floors-empty' : 'No floors found',
         'i18n-add-floor' : 'Add Building',
         'i18n-descripcion' : 'Description',
         'i18n-details-floor' : 'Floor Details',
@@ -801,7 +801,7 @@ arrayEN = {
         // SPACES VIEWS
         'i18n-spaces' : 'Spaces',
         'i18n-espacio_id' : 'Space ID',
-        'i18n-spaces-empty' : 'This floor does not have registered spaces yet',
+        'i18n-spaces-empty' : 'No spaces found',
         'i18n-add-space' : 'Add Space',
         'i18n-foto_espacio' : 'Space Photo',
         'i18n-del-space-confirm' : 'Are you sure you want to delete this space? The action will not be reversible',
@@ -823,7 +823,7 @@ arrayEN = {
 
         // DEF_PLANS VIEW
         'i18n-def-plans' : 'Definitions of Plans',
-        'i18n-def-plans-empty' : 'No plan definitions on file',
+        'i18n-def-plans-empty' : 'No plan definitions found',
         'i18n-plan_id' : 'ID Plan',
         'i18n-del-def-plan-confirm' : 'Are you sure you want to delete the definition of this plan? The action will not be reversible',
         'i18n-search-def-plan' : 'Search Plan Def.',
@@ -839,7 +839,7 @@ arrayEN = {
         // DEF_DOCS VIEW
         'i18n-def-docs' : 'Document Definitions',
         'i18n-visible' : 'Visible',
-        'i18n-def-docs-empty' : 'No registered document definitions',
+        'i18n-def-docs-empty' : 'No document definitions found',
         'i18n-add-defDoc' : 'Define Document',
         'i18n-yes': 'Yes',
         'i18n-no' : 'No',
@@ -852,7 +852,7 @@ arrayEN = {
         // DEF_PROCS VIEW
         'i18n-def-procs' : 'Definitions of Procedures',
         'i18n-procedimiento_id' : 'Procedure ID',
-        'i18n-def-procs-empty' : 'There are no registered procedure definitions',
+        'i18n-def-procs-empty' : 'No procedure definitions found',
         'i18n-add-defProc' : 'Define Procedure',
         'i18n-del-def-proc-confirm' : 'Are you sure you want to delete the definition of this procedure? The action will not be reversible',
         'i18n-current-defProc' : 'Details of the Procedure Def.',
@@ -862,7 +862,7 @@ arrayEN = {
         // DEF_ROUTES VIEW
         'i18n-def-routes' : 'Routes Definitions',
         'i18n-ruta_id' : 'Route ID',
-        'i18n-def-routes-empty' : 'No routes definitions registered',
+        'i18n-def-routes-empty' : 'No routes definitions found',
         'i18n-add-defRoute' : 'Route Definition',
         'i18n-del-def-route-confirm' : 'Are you sure you want to delete the definition of this route? The change will not be reversible',
         'i18n-current-defRoute' : 'Details of the Route Def.',
@@ -872,7 +872,7 @@ arrayEN = {
         // DEF_FORMATS VIEW
         'i18n-def-formats' : 'Formation Definitions',
         'i18n-formacion_id' : 'Formation ID',
-        'i18n-def-formats-empty' : 'There are no definitions of registered formations',
+        'i18n-def-formats-empty' : 'No formation definitions found',
         'i18n-add-defFormat' : 'Formation Definition',
         'i18n-del-def-format-confirm' : 'Are you sure you want to delete the definition of this formation? The change will not be reversible',
         'i18n-current-defFormat' : 'Details of the Formation Def.',
@@ -883,7 +883,7 @@ arrayEN = {
         // DEF_SIMS VIEW
         'i18n-def-sims' : 'Simulacrums Definitions',
         'i18n-simulacro_id' : 'Simulacrum ID',
-        'i18n-def-sims-empty' : 'No recorded simulacrum definitions',
+        'i18n-def-sims-empty' : 'No simulacrum definitions found',
         'i18n-add-defSim' : 'Simulacrum Definition',
         'i18n-del-def-sim-confirm' : 'Are you sure you want to delete the definition of this simulacrum? The change will not be reversible',
         'i18n-current-defSim' : 'Details of the Simulacrum Definitions',
@@ -899,9 +899,10 @@ arrayEN = {
         'i18n-pendiente' : 'PENDING',
         'i18n-implementado' : 'IMPLEMENTED',
         'i18n-vencido' : 'EXPIRED',
-        'i18n-bldplan-empty' : 'The plan has no buildings assigned',
+        'i18n-bldplan-empty' : 'No assigned buildings found',
         'i18n-add-buildPlan' : 'Assign Buildings',
         'i18n-del-bldplan-confirm' : 'Are you sure you want to remove this assignment? The change will not be reversible',
+        'i18n-expire' : 'Expire',
 
         // MODAL
             // Campos Modal

@@ -48,7 +48,15 @@ class BuildPlan_Model extends Abstract_Model {
     }
 
     function EDIT() {
-        // TODO: Implement EDIT() method.
+        $this->query = "UPDATE EDIFICIO_PLAN SET " .
+            ($this->fecha_implementacion == '' ? "" : "fecha_implementacion = '$this->fecha_implementacion', ") .
+            ($this->estado == '' ? "" : "estado = '$this->estado'") .
+            " WHERE 
+                edificio_id = '$this->edificio_id' AND
+                plan_id = '$this->plan_id'";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function DELETE() {
@@ -71,7 +79,8 @@ class BuildPlan_Model extends Abstract_Model {
             ON EDIFICIO_PLAN.edificio_id = EDIFICIO.edificio_id
             WHERE plan_id = '$this->plan_id' AND
                   estado LIKE '%" . $this->estado . "%' AND
-                  fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%'
+                  fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
+                  fecha_implementacion LIKE '%" . $this->fecha_implementacion . "%'
             ORDER BY estado, edificio_id
         ";
 

@@ -120,6 +120,8 @@ class BuildPlan_Validation extends Validator {
         if(!$this->en_valores($this->estado, self::states)) {
             return $this->rellena_validation(false,'BLDPLAN_STATE_KO','BLD_PLAN');
         }
+
+        return $this->rellena_validation(true,'00000','BLD_PLAN');
     }
 
 }

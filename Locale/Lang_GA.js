@@ -773,7 +773,7 @@ arrayGA = {
         'i18n-edificio_id' : 'ID Edificio',
         'i18n-responsable' : 'Responsable',
         'i18n-ciudad' : 'Cidade',
-        'i18n-buildings-empty' : 'Aínda non hay edificios rexitrados',
+        'i18n-buildings-empty' : 'Non se encontraron edificios',
         'i18n-add-building' : 'Engadir Edificio',
         'i18n-calle' : 'Calle',
         'i18n-provincia' : 'Provincia',
@@ -790,7 +790,7 @@ arrayGA = {
         'i18n-floors' : 'Plantas',
         'i18n-planta_id' : 'ID Planta',
         'i18n-num_planta' : 'Número de Planta',
-        'i18n-floors-empty' : 'Este edificio aínda non ten plantas rexistradas',
+        'i18n-floors-empty' : 'Non se encontraron plantas',
         'i18n-add-floor' : 'Engadir Planta',
         'i18n-descripcion' : 'Descripción',
         'i18n-details-floor' : 'Detalles da Planta',
@@ -803,7 +803,7 @@ arrayGA = {
         // SPACES VIEWS
         'i18n-spaces' : 'Espazos',
         'i18n-espacio_id' : 'ID Espazo',
-        'i18n-spaces-empty' : 'Esta planta non ten espazos rexistrados todavía',
+        'i18n-spaces-empty' : 'Non se encontraron espazos',
         'i18n-add-space' : 'Engadir Espazo',
         'i18n-foto_espacio' : 'Foto do Espazo',
         'i18n-del-space-confirm' : '¿Está seguro de que desexa eliminar este espazo? A acción non será reversible',
@@ -825,7 +825,7 @@ arrayGA = {
 
         // DEF_PLANS VIEW
         'i18n-def-plans' : 'Definicións de Plans',
-        'i18n-def-plans-empty' : 'Non hay definicións de plans rexistradas',
+        'i18n-def-plans-empty' : 'Non se encontraron definicións de plans',
         'i18n-plan_id' : 'ID Plan',
         'i18n-del-def-plan-confirm' : '¿Está seguro de que desexa eliminar a definición deste plan? A acción non será reversible',
         'i18n-search-def-plan' : 'Buscar Def. de Plans',
@@ -841,7 +841,7 @@ arrayGA = {
         // DEF_DOCS VIEW
         'i18n-def-docs' : 'Definicións de Documentos',
         'i18n-visible' : 'Visible',
-        'i18n-def-docs-empty' : 'Non hai definicións de documentos rexistrados',
+        'i18n-def-docs-empty' : 'Non se encontraron definicións de documentos',
         'i18n-add-defDoc' : 'Definir Documento',
         'i18n-yes': 'Sí',
         'i18n-no' : 'Non',
@@ -855,7 +855,7 @@ arrayGA = {
         // DEF_PROCS VIEW
         'i18n-def-procs' : 'Definicións de Procedementos',
         'i18n-procedimiento_id' : 'ID Procedemento',
-        'i18n-def-procs-empty' : 'Non hay definicións de procedementos rexistradas',
+        'i18n-def-procs-empty' : 'Non se encontraron definicións de procedementos',
         'i18n-add-defProc' : 'Definir Procedemento',
         'i18n-del-def-proc-confirm' : '¿Está seguro de que desexa eliminar a definición deste procedemento? A acción non será reversible',
         'i18n-current-defProc' : 'Detalles da Def. do Procedemento',
@@ -865,7 +865,7 @@ arrayGA = {
         // DEF_ROUTES VIEW
         'i18n-def-routes' : 'Definicións de Rutas',
         'i18n-ruta_id' : 'ID Ruta',
-        'i18n-def-routes-empty' : 'Non hay definicións de rutas rexistradas',
+        'i18n-def-routes-empty' : 'Non se encontraron definicións de rutas',
         'i18n-add-defRoute' : 'Definir Ruta',
         'i18n-del-def-route-confirm' : '¿Está seguro de que desexa eliminar a definición desta ruta? O cambio non será reversible',
         'i18n-current-defRoute' : 'Detalles da Def. da Ruta',
@@ -875,7 +875,7 @@ arrayGA = {
         // DEF_FORMATS VIEW
         'i18n-def-formats' : 'Definicións de Formacións',
         'i18n-formacion_id' : 'ID Formación',
-        'i18n-def-formats-empty' : 'Non hay definicións de formacións rexistradas',
+        'i18n-def-formats-empty' : 'Non se encontraron definicións de formacións',
         'i18n-add-defFormat' : 'Definir Formación',
         'i18n-del-def-format-confirm' : '¿Está seguro de que desexa eliminar a definición desta formación? O cambio non será reversible',
         'i18n-current-defFormat' : 'Detalles da Def. da Formación',
@@ -885,7 +885,7 @@ arrayGA = {
         // DEF_SIMS VIEW
         'i18n-def-sims' : 'Definicións de Simulacros',
         'i18n-simulacro_id' : 'ID Simulacro',
-        'i18n-def-sims-empty' : 'Non hay definicións de simulacros rexistradas',
+        'i18n-def-sims-empty' : 'Non se encontraron definicións de simulacros',
         'i18n-add-defSim' : 'Definir Simulacro',
         'i18n-del-def-sim-confirm' : '¿Está seguro que desexa eliminar a definición deste simulacro? O cambio non será reversible',
         'i18n-current-defSim' : 'Detalles da def. do Simulacro',
@@ -901,9 +901,10 @@ arrayGA = {
         'i18n-pendiente' : 'PENDENTE',
         'i18n-implementado' : 'IMPLEMENTADO',
         'i18n-vencido' : 'VENCIDO',
-        'i18n-bldplan-empty' : 'O plan non ten edificios asignados',
+        'i18n-bldplan-empty' : 'Non se encontraron asignacións con edificios',
         'i18n-add-buildPlan' : 'Asignar Edificios',
         'i18n-del-bldplan-confirm' : '¿Está seguro de que desexa eliminar esta asignación? O cambio non será reversible',
+        'i18n-expire' : 'Vencer',
 
 
         // MODAL

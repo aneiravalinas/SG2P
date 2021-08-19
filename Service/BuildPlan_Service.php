@@ -62,6 +62,67 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $this->feedback;
     }
 
+    function EDIT() {
+        $this->feedback = $this->seekPlan();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $plan = $this->feedback['resource'];
+        $validation = $this->validar_EDIFICIO_ID();
+        if(!$validation['ok']) {
+            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
+            return $validation;
+        }
+
+        array_push($this->buildings, $this->edificio_id);
+        $this->feedback = $this->expire_assignments();
+        $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
+
+        return $this->feedback;
+    }
+
+    function expire_assignments() {
+        if(empty($this->buildings)) {
+            $feedback['ok'] = true;
+            $feedback['code'] = 'BLDPLAN_EDTSTATE_OK';
+            return $feedback;
+        }
+
+        $this->edificio_id = array_pop($this->buildings);;
+        $feedback = $this->seekBldPlan();
+        if(!$feedback['ok']) {
+            return $feedback;
+        }
+
+        $bld_plan = $feedback['resource'];
+        if($bld_plan['estado'] == 'vencido') {
+            $feedback['ok'] = false;
+            $feedback['code'] = 'BLDPLAN_ALREADY_EXPIRED';
+            return $feedback;
+        }
+
+        $this->bldPlan_entity->setAttributes(array('plan_id' => $bld_plan['plan_id'], 'edificio_id' => $bld_plan['edificio_id'],
+                                                'estado' => 'vencido'));
+        $feedback = $this->bldPlan_entity->EDIT();
+        if($feedback['ok']) {
+            $feedback = $this->searchDocsByPlan();
+            if($feedback['code'] != 'DFPLAN_DOC_KO') {
+                $feedback = $this->expire_documents($bld_plan['edificio_id'], $feedback['resource']);
+                if($feedback['ok']) {
+                    return $feedback;
+                }
+            }
+
+            $this->bldPlan_entity->setAttributes($bld_plan);
+            $this->bldPlan_entity->EDIT();
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'BLDPLAN_EDTSTATE_KO';
+        }
+
+        return $feedback;
+    }
+
 
     function seekPlan() {
         $validation = $this->validar_PLAN_ID();
@@ -342,6 +403,51 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    function expire_documents($edificio_id,$docs) {
+        if(empty($docs)) {
+            $feedback = $this->searchProcsByPlan();
+            if($feedback['ok'] || $feedback['code'] = 'DFPLAN_PROCS_NOT_EXST') {
+                return $this->expire_procedures($edificio_id, $feedback['resource']);
+            }
+            return $feedback;
+        }
+
+        $doc = array_pop($docs);
+        $feedback = $this->searchImpDocs($edificio_id, $doc['documento_id']);
+        if(!$feedback['ok']) return $feedback;
+        if($feedback['code'] == 'BLDPLAN_IMPDOCS_EMPT') return $this->expire_documents($edificio_id,$docs);
+
+        $imp_docs = $feedback['resource'];
+        $docs_edited = array();
+        include_once './Model/ImpDoc_Model.php';
+        $impDoc_entity = new ImpDoc_Model();
+
+        foreach($imp_docs as $imp_doc) {
+            if($imp_doc['estado'] == 'vencido') continue;
+            $impDoc_entity->setAttributes($imp_doc);
+            $impDoc_entity->estado = "vencido";
+            $feedback = $impDoc_entity->EDIT();
+            if(!$feedback['ok']) {
+                if($feedback['code'] == 'QRY_KO') {
+                    $feedback['code'] = 'IMPDOC_EDTSTATE_KO';
+                }
+                break;
+            }
+            array_push($docs_edited, $imp_doc);
+        }
+
+        if($feedback['ok']) {
+            $feedback = $this->expire_documents($edificio_id, $docs);
+            if($feedback['ok']) return $feedback;
+        }
+
+        foreach($docs_edited as $doc_edited) {
+            $impDoc_entity->setAttributes($doc_edited);
+            $impDoc_entity->EDIT();
+        }
+
+        return $feedback;
+    }
 
     function create_impProcs($edificio_id, $procs, $path) {
         if(empty($procs)) {
@@ -434,6 +540,57 @@ class BuildPlan_Service extends BuildPlan_Validation {
                 $impProc_entity->setAttributes($imp_proc);
                 $impProc_entity->ADD();
             }
+        }
+
+        return $feedback;
+    }
+
+    function expire_procedures($edificio_id, $procs) {
+        if(empty($procs)) {
+            $feedbackRoutes = $this->searchRoutesByPlan();
+            if($feedbackRoutes['ok'] || $feedbackRoutes['code'] == 'DFPLAN_ROUTE_NOT_EXST') {
+                $feedbackFloors = $this->searchFloorsByBuilding($edificio_id);
+                if($feedbackFloors['ok'] || $feedbackFloors['code'] == 'BLD_FLR_NOT_EXST') {
+                    return $this->expire_routes($edificio_id, $feedbackRoutes['resource'], $feedbackFloors['resource']);
+                } else {
+                    return $feedbackFloors;
+                }
+
+            }
+
+            return $feedbackRoutes;
+        }
+
+        $proc = array_pop($procs);
+        $feedback = $this->searchImpProcs($edificio_id, $proc['procedimiento_id']);
+        if(!$feedback['ok']) return $feedback;
+        if($feedback['code'] == 'BLDPLAN_IMPPROCS_EMPT') return $this->expire_procedures($edificio_id, $procs);
+
+        $imp_procs = $feedback['resource'];
+        $procs_edited = array();
+        include_once './Model/ImpProc_Model.php';
+        $impProc_entity = new ImpProc_Model();
+
+        foreach($imp_procs as $imp_proc) {
+            if($imp_proc['estado'] == 'vencido') continue;
+            $impProc_entity->setAttributes($imp_proc);
+            $impProc_entity->estado = 'vencido';
+            $feedback = $impProc_entity->EDIT();
+            if(!$feedback['ok']) {
+                if($feedback['code'] == 'QRY_KO') $feedback['code'] = 'IMPPROC_EDTSTATE_KO';
+                break;
+            }
+            array_push($procs_edited, $imp_proc);
+        }
+
+        if($feedback['ok']) {
+            $feedback = $this->expire_procedures($edificio_id, $procs);
+            if($feedback['ok']) return $feedback;
+        }
+
+        foreach($procs_edited as $proc_edited) {
+            $impProc_entity->setAttributes($proc_edited);
+            $impProc_entity->EDIT();
         }
 
         return $feedback;
@@ -538,6 +695,55 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    function expire_routes($edificio_id, $routes, $floors) {
+        if(empty($routes)) {
+            $feedback = $this->searchFormatsByPlan();
+            if($feedback['ok'] || $feedback['code'] == 'DFPLAN_FRMT_NOT_EXST') {
+                return $this->expire_formations($edificio_id, $feedback['resource']);
+            }
+            return $feedback;
+        }
+
+        $route = array_pop($routes);
+        $feedback['ok'] = true;
+        $routes_edited = array();
+        include_once './Model/ImpRoute_Model.php';
+        $impRoute_entity = new ImpRoute_Model();
+
+        foreach($floors as $floor) {
+            $feedback = $this->searchImpRoutes($floor['planta_id'], $route['ruta_id']);
+            if(!$feedback['ok']) break;
+            if($feedback['code'] == 'BLDPLAN_IMPROUTE_EMPT') continue;
+            $imp_routes = $feedback['resource'];
+
+            foreach($imp_routes as $imp_route) {
+                if($imp_route['estado'] == 'vencido') continue;
+                $impRoute_entity->setAttributes($imp_route);
+                $impRoute_entity->estado = 'vencido';
+                $feedback = $impRoute_entity->EDIT();
+                if(!$feedback['ok']) {
+                    if($feedback['code'] == 'QRY_KO') $feedback['code'] = 'IMPROUTE_EDTSTATE_KO';
+                    break;
+                }
+                array_push($routes_edited, $imp_route);
+            }
+
+            if(!$feedback['ok']) break;
+        }
+
+        if($feedback['ok']) {
+            $feedback = $this->expire_routes($edificio_id, $routes, $floors);
+            if($feedback['ok']) return $feedback;
+        }
+
+        foreach($routes_edited as $route_edited) {
+            $impRoute_entity->setAttributes($route_edited);
+            $impRoute_entity->EDIT();
+        }
+
+        return $feedback;
+    }
+
     function create_impFormat($edificio_id, $formations) {
         if(empty($formations)) {
             $feedback = $this->searchSimsByPlan();
@@ -612,6 +818,50 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    function expire_formations($edificio_id, $formations) {
+        if(empty($formations)) {
+            $feedback = $this->searchSimsByPlan();
+            if($feedback['ok'] || $feedback['code'] == 'DFPLAN_SIM_NOT_EXST') {
+                return $this->expire_simulacrums($edificio_id, $feedback['resource']);
+            }
+            return $feedback;
+        }
+
+        $formation = array_pop($formations);
+        $feedback = $this->searchImpFormats($edificio_id, $formation['formacion_id']);
+        if(!$feedback['ok']) return $feedback;
+        if($feedback['code'] == 'BLDPLAN_IMPFRMT_EMPT') return $this->expire_formations($edificio_id, $formations);
+
+        $formations_edited = array();
+        $imp_formations = $feedback['resource'];
+        include_once './Model/ImpFormat_Model.php';
+        $impFormat_entity = new ImpFormat_Model();
+
+        foreach($imp_formations as $imp_formation) {
+            if($imp_formation['estado'] == 'vencido') continue;
+            $impFormat_entity->setAttributes($imp_formation);
+            $impFormat_entity->estado = 'vencido';
+            $feedback = $impFormat_entity->EDIT();
+            if(!$feedback['ok']) {
+                if($feedback['code'] == 'QRY_KO') $feedback['code'] = 'IMPFRMT_EDTSTATE_KO';
+                break;
+            }
+            array_push($formations_edited, $imp_formation);
+        }
+
+        if($feedback['ok']) {
+            $feedback = $this->expire_formations($edificio_id, $formations);
+            if($feedback['ok']) return $feedback;
+        }
+
+        foreach($imp_formations as $imp_formation) {
+            $impFormat_entity->setAttributes($imp_formation);
+            $impFormat_entity->EDIT();
+        }
+
+        return $feedback;
+    }
+
     function create_impSims($edificio_id, $simulacrums) {
         if(empty($simulacrums)) {
             return array('ok' => true, 'code' => 'BLDPLAN_IMPADD_OK');
@@ -672,6 +922,46 @@ class BuildPlan_Service extends BuildPlan_Validation {
                 $impSim_entity->setAttributes($imp_deleted);
                 $impSim_entity->ADD();
             }
+        }
+
+        return $feedback;
+    }
+
+    function expire_simulacrums($edificio_id, $simulacrums) {
+        if(empty($simulacrums)) {
+            return $this->expire_assignments();
+        }
+
+        $simulacrum = array_pop($simulacrums);
+        $feedback = $this->searchImpSims($edificio_id, $simulacrum['simulacro_id']);
+        if(!$feedback['ok']) return $feedback;
+        if($feedback['code'] == 'BLDPLAN_IMPSIM_EMPT') return $this->expire_simulacrums($edificio_id, $simulacrums);
+
+        $imp_sims = $feedback['resource'];
+        $sims_edited = array();
+        include_once './Model/ImpSim_Model.php';
+        $impSim_entity = new ImpSim_Model();
+
+        foreach($imp_sims as $imp_sim) {
+            if($imp_sim['estado'] == 'vencido') continue;
+            $impSim_entity->setAttributes($imp_sim);
+            $impSim_entity->estado = 'vencido';
+            $feedback = $impSim_entity->EDIT();
+            if(!$feedback['ok']) {
+                if($feedback['code'] == 'QRY_KO') $feedback['code'] = 'IMPSIM_EDTSTATE_KO';
+                break;
+            }
+            array_push($sims_edited, $imp_sim);
+        }
+
+        if($feedback['ok']) {
+            $feedback = $this->expire_simulacrums($edificio_id, $simulacrums);
+            if($feedback['ok']) return $feedback;
+        }
+
+        foreach($imp_sims as $imp_sim) {
+            $impSim_entity->setAttributes($imp_sim);
+            $impSim_entity->EDIT();
         }
 
         return $feedback;

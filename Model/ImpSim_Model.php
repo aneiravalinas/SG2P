@@ -53,7 +53,15 @@ class ImpSim_Model extends Abstract_Model {
     }
 
     function EDIT() {
-        // TODO: Implement EDIT() method.
+        $this->query = "UPDATE EDIFICIO_SIMULACRO SET " .
+            ($this->fecha_planificacion == '' ? "" : "fecha_planificacion = '$this->fecha_planificacion', ") .
+            ($this->url_recurso == '' ? "" : "url_recurso = '$this->url_recurso', ") .
+            ($this->destinatarios == '' ? "" : "destinatarios = '$this->destinatarios', ") .
+            ($this->estado == '' ? "" : "estado = '$this->estado'") .
+            " WHERE edificio_simulacro_id = '$this->edificio_simulacro_id'";
+
+        $this->execute_single_query();
+        return $this->feedback;
     }
 
     function DELETE() {
