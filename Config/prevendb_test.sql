@@ -229,13 +229,13 @@ CREATE TABLE NOTIFICACION
     `username` VARCHAR(20) NOT NULL,
     `edificio_id` INT(10) NOT NULL,
     `plan_id` INT(10) NOT NULL,
-    `leido` BIT NOT NULL DEFAULT 0,
+    `leido` enum('yes','no') DEFAULT 'no',
     `fecha` DATE NOT NULL DEFAULT CURRENT_DATE,
     `mensaje` VARCHAR(280) NOT NULL,
 
     CONSTRAINT `pk_notificacion` PRIMARY KEY (`id_notificacion`),
     CONSTRAINT `fk_notificacion_to_usuario` FOREIGN KEY (`username`) REFERENCES USUARIO (`username`),
-    CONSTRAINT `fk_notificacion_to_edificio_plan` FOREIGN KEY (`edificio_id`, `plan_id`) REFERENCES EDIFICIO_PLAN (`edificio_id`, `plan_id`)
+    CONSTRAINT `fk_notificacion_to_edificio_plan` FOREIGN KEY (`edificio_id`, `plan_id`) REFERENCES EDIFICIO_PLAN (`edificio_id`, `plan_id`) ON DELETE CASCADE
 );
 
 

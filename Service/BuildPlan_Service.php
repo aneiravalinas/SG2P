@@ -12,6 +12,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
     var $uploader;
     var $feedback = array();
     var $build_plans = array();
+    const msg_notification_add = 'Se ha asignado un nuevo plan';
 
     function __construct() {
         $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_implementacion','estado');
@@ -219,6 +220,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
             return $this->feedback;
         }
 
+        $building = $this->feedback['resource'];
         $this->feedback = $this->bldPlan_not_exist($edificio_id);
         if(!$this->feedback['ok']) {
             return $this->feedback;
@@ -238,6 +240,11 @@ class BuildPlan_Service extends BuildPlan_Validation {
             if($this->feedback['ok']) {
                 $this->feedback = $this->ADD($buildings, $docs, $path);
                 if($this->feedback['ok']) {
+                    include_once './Model/Notification_Model.php';
+                    $notification_entity = new Notification_Model();
+                    $notification_entity->setAttributes(array('username' => $building['username'], 'plan_id' => $this->plan_id,
+                                                            'edificio_id' => $edificio_id, 'mensaje' => self::msg_notification_add));
+                    $notification_entity->ADD();
                     return $this->feedback;
                 }
                 $this->delete_impDocs($edificio_id, $docs);
