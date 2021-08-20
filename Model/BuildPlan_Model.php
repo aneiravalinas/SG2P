@@ -124,6 +124,18 @@ class BuildPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function searchActivesByPlanID() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_PLAN
+            WHERE 
+                  plan_id = '$this->plan_id' AND
+                  estado != 'vencido'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
     function setAttributes($atributos) {
         foreach($this->atributos as $atributo) {
             if(isset($atributos[$atributo])) {

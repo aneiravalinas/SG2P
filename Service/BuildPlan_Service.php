@@ -11,6 +11,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
     var $defPlan_entity;
     var $uploader;
     var $feedback = array();
+    var $build_plans = array();
 
     function __construct() {
         $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_implementacion','estado');
@@ -63,51 +64,61 @@ class BuildPlan_Service extends BuildPlan_Validation {
     }
 
     function EDIT() {
-        $this->feedback = $this->seekPlan();
+        $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
 
-        $plan = $this->feedback['resource'];
-        $validation = $this->validar_EDIFICIO_ID();
-        if(!$validation['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
-            return $validation;
-        }
-
-        array_push($this->buildings, $this->edificio_id);
-        $this->feedback = $this->expire_assignments();
-        $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
-
-        return $this->feedback;
-    }
-
-    function expire_assignments() {
-        if(empty($this->buildings)) {
-            $feedback['ok'] = true;
-            $feedback['code'] = 'BLDPLAN_EDTSTATE_OK';
-            return $feedback;
-        }
-
-        $this->edificio_id = array_pop($this->buildings);;
-        $feedback = $this->seekBldPlan();
-        if(!$feedback['ok']) {
-            return $feedback;
-        }
-
-        $bld_plan = $feedback['resource'];
+        $bld_plan = $this->feedback['resource'];
         if($bld_plan['estado'] == 'vencido') {
             $feedback['ok'] = false;
             $feedback['code'] = 'BLDPLAN_ALREADY_EXPIRED';
             return $feedback;
         }
 
-        $this->bldPlan_entity->setAttributes(array('plan_id' => $bld_plan['plan_id'], 'edificio_id' => $bld_plan['edificio_id'],
-                                                'estado' => 'vencido'));
+        $this->build_plans = array($bld_plan);
+        $this->feedback = $this->expire_assignments();
+        $this->feedback['plan'] = array('plan_id' => $bld_plan['plan_id']);
+
+        return $this->feedback;
+    }
+
+    function expireAll() {
+        $this->feedback = $this->seekPlan();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $plan = $this->feedback['resource'];
+        $this->feedback = $this->searchActiveAssignmentsByPlan();
+        if(!$this->feedback['ok']) {
+            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
+            return $this->feedback;
+        }
+
+        foreach($this->feedback['resource'] as $build_plan) {
+            array_push($this->build_plans, $build_plan);
+        }
+        $this->feedback = $this->expire_assignments();
+        $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
+        return $this->feedback;
+    }
+
+    function expire_assignments() {
+        if(empty($this->build_plans)) {
+            $feedback['ok'] = true;
+            $feedback['code'] = 'BLDPLAN_EDTSTATE_OK';
+            return $feedback;
+        }
+
+        $bld_plan = array_pop($this->build_plans);
+        $this->bldPlan_entity->setAttributes($bld_plan);
+        $this->bldPlan_entity->estado = 'vencido';
         $feedback = $this->bldPlan_entity->EDIT();
+
         if($feedback['ok']) {
             $feedback = $this->searchDocsByPlan();
-            if($feedback['code'] != 'DFPLAN_DOC_KO') {
+            if($feedback['ok'] || $feedback['code'] == 'DFPLAN_DOC_NOT_EXST') {
                 $feedback = $this->expire_documents($bld_plan['edificio_id'], $feedback['resource']);
                 if($feedback['ok']) {
                     return $feedback;
@@ -283,12 +294,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
     }
 
     function seek() {
-        $validation = $this->validar_PLAN_ID();
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->seekByPlanID();
+        $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
@@ -1245,6 +1251,22 @@ class BuildPlan_Service extends BuildPlan_Validation {
             }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'BLDPLAN_KO';
+        }
+
+        return $feedback;
+    }
+
+    function searchActiveAssignmentsByPlan() {
+        $feedback = $this->bldPlan_entity->searchActivesByPlanID();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST';
+            } else {
+                $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_KO';
         }
 
         return $feedback;

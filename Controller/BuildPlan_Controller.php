@@ -136,4 +136,33 @@ class BuildPlan {
         }
     }
 
+    function expireAllForm() {
+        if($this->checkPermission()) {
+            $buildPlan_service = new BuildPlan_Service();
+            $feedback = $buildPlan_service->seekPlan();
+            if($feedback['ok']) {
+                include_once './View/BuildPlans/EditAll_BuildPlan_View.php';
+                new EditAll_BuildPlan($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function expireAll() {
+        if($this->checkPermission()) {
+            $buildPlan_service = new BuildPlan_Service();
+            $feedback = $buildPlan_service->expireAll();
+            if(isset($feedback['plan'])) {
+                new Message($feedback['code'],'BuildPlan','show',$feedback['plan']);
+            } else {
+                new Message($feedback['code'],'DefPlan','show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
 }

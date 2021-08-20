@@ -27,7 +27,17 @@ class Show_BuildPlan {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 flex-wrap d-flex justify-content-end" id="search_add">
+                    <div class="col-xl-7 col-lg-9 flex-wrap d-flex justify-content-between" id="search_add">
+                        <div>
+                            <button type="button" class="btn btn-outline-secondary i18n-expire_all" onclick="
+                                    crearform('formenviar','post');
+                                    insertacampo(document.formenviar,'plan_id','<?php echo $this->plan['plan_id'] ?>');
+                                    insertacampo(document.formenviar,'controller','BuildPlan');
+                                    insertacampo(document.formenviar,'action','expireAllForm');
+                                    enviaform(document.formenviar);">
+                                Vencer TODAS
+                            </button>
+                        </div>
                         <div>
                             <a type="button" onclick="
                                 crearform('formenviar','post');

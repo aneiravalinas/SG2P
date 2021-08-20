@@ -494,6 +494,23 @@ arrayGA = {
         'BLDPLAN_DEL_OK' : 'Eliminouse con éxito a asignación entre o Edificio e o Plan indicados',
         'BLDPLAN_DEL_KO' : 'Erro ó eliminar a asignación entre o Edificio e o Plan',
 
+        // VENCER ASIGNACIONES
+        'BLDPLAN_EDTSTATE_OK' : 'Vencéronse as asignacións correctamente',
+        'BLDPLAN_EDTSTATE_KO' : 'Erro ó vencer as asignacións',
+        'BLDPLAN_ALREADY_EXPIRED' : 'A asignación indicada xa se atopa vencida',
+
+        // Búsqueda de asignaciones Activas
+        'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST' : 'O plan indicado non ten asignacións activas',
+        'BLDPLAN_ASSIGN_ACTIVES_EXST' : 'O plan indicado ten asignacións activas',
+        'BLDPLAN_ASSIGN_ACTIVES_KO' : 'Erro ó consultar as asignacións activas do plan',
+
+        // Vencer Implementaciones
+        'IMPDOC_EDTSTATE_KO' : 'Erro ó vencer as implementacións dos documentos',
+        'IMPPROC_EDTSTATE_KO' : 'Erro ó vencer as implementacións dos procedementos',
+        'IMPROUTE_EDTSTATE_KO' : 'Erro ó vencer as implementacións das rutas',
+        'IMPFRMT_EDTSTATE_KO' : 'Erro ó vencer as implementacións das formacións',
+        'IMPSIM_EDTSTATE_KO' : 'Erro ó vencer as implementacións dos simulacros',
+
         // Directorios
         'BLDPLAN_DIRPLAN_KO' : 'Erro ó crear o directorio raíz do Plan',
         'BLDPLAN_DIRBLD_KO' : 'Erro ó crear o directorio do Edificio',
@@ -905,6 +922,8 @@ arrayGA = {
         'i18n-add-buildPlan' : 'Asignar Edificios',
         'i18n-del-bldplan-confirm' : '¿Está seguro de que desexa eliminar esta asignación? O cambio non será reversible',
         'i18n-expire' : 'Vencer',
+        'i18n-expire_all' : 'Vencer TODAS',
+        'i18n-expireAll-bldplan-confirm' : '¿Está seguro que desexa vencer TODAS as asignacións deste Plan? O cambio non será reversible',
 
 
         // MODAL

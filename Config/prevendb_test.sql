@@ -251,12 +251,14 @@ INSERT INTO EDIFICIO (`edificio_id`, `username`, `nombre`, `calle`, `ciudad`, `p
 (1,'sg2ped','Edificio Uno','Calle ejemplo 1','Ourense','Ourense','36687','987678765','default.png'),
 (2,'sg2ped2','Edificio Dos','Calle ejemplo 2','Ourense','Ourense','36687','987678766','default.png'),
 (3,'sg2ped','Edificio Tres','Calle ejemplo 3','Ourense','Ourense','36687','987678768','default.png'),
-(4,'sg2ped2','Edificio Cuatro','Calle ejemplo 4','Ourense','Ourense','36687','987678769','default.png');
+(4,'sg2ped2','Edificio Cuatro','Calle ejemplo 4','Ourense','Ourense','36687','987678769','default.png'),
+(5,'sg2ped2','Edificio con Planta','Calle ejemplo 4','Ourense','Ourense','36687','997678769','default.png');
 
 INSERT INTO PLANTA (`planta_id`, `edificio_id`, `nombre`, `num_planta`, `descripcion`, `foto_planta`) VALUES
 (1,1,'Planta Uno',1,'descripcion de la planta uno','default.png'),
 (2,1,'Planta Dos',2,'descripcion de la planta dos','default.png'),
-(3,1,'Planta Tres',3,'descripcion de la planta tres','default.png');
+(3,1,'Planta Tres',3,'descripcion de la planta tres','default.png'),
+(4,5,'Planta Tres',3,'descripcion de la planta tres','default.png');
 
 INSERT INTO ESPACIO (`espacio_id`, `planta_id`, `nombre`, `descripcion`, `foto_espacio`) VALUES
 (1,1,'Espacio Uno','Descripcion del espacio uno','default.png'),
@@ -269,35 +271,51 @@ INSERT INTO PLAN (`plan_id`, `nombre`, `descripcion`) VALUES
 (3,'Plan con Procedimientos','Descripcion Plan'),
 (4,'Plan con Rutas','Descripcion Plan'),
 (5,'Plan con Formaciones','Descripcion Plan'),
-(6,'Plan con Simulacros','Descripcion Plan');
+(6,'Plan con Simulacros','Descripcion Plan'),
+(7,'Plan Completo','Descripcion Plan'),
+(8,'Plan sin Documentos','Descripcion Plan'),
+(9,'Plan Vencido','Descripcion Plan');
 
 
 INSERT INTO DOCUMENTO (`documento_id`,`plan_id`,`nombre`,`descripcion`,`visible`) VALUES
 (1,2,'Documentos del plan con documentos','Descripcion del Documento','yes'),
-(2,2,'Nombre Documento','Descripcion','no');
+(2,2,'Nombre Documento','Descripcion','no'),
+(3,7,'Documento del Plan Completo','Descripcion','si'),
+(4,9,'Documento del Plan Vencido','Descripcion','si'),
+(5,1,'Documento del Plan Vencido','Descripcion','si');
 
 INSERT INTO PROCEDIMIENTO (`procedimiento_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (1,3,'Procedimiento del plan con procedimientos','Descripcion del Procedimiento'),
-(2,3,'Nombre Procedimiento','Descripcion del Procedimiento');
+(2,3,'Nombre Procedimiento','Descripcion del Procedimiento'),
+(3,7,'Procedimiento del Plan Completo','Descripcion del Procedimiento');
 
 INSERT INTO RUTA (`ruta_id`, `plan_id`, `nombre`, `descripcion`) VALUES
 (1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta'),
 (2,4,'Rutas del plan con rutas','Descripcion Rutas'),
-(3,1,'Otra Ruta del Plan Uno','Descripcion de la definicion de la ruta');
+(3,1,'Otra Ruta del Plan Uno','Descripcion de la definicion de la ruta'),
+(4,7,'Ruta del Plan Completo','Descripcion de la Ruta');
 
 INSERT INTO FORMACION (`formacion_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (1,5,'Formaciones del plan con formaciones','Descripción de la formación'),
-(2,5,'Otra Formación del plan con formaciones','Descripción de la formación');
+(2,5,'Otra Formación del plan con formaciones','Descripción de la formación'),
+(3,7,'Formación del Plan Completo','Descripción de la formación');
 
 INSERT INTO SIMULACRO (`simulacro_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (1,6,'Simulacros del plan con simulacros','Descripcion del simulacro'),
-(2,6,'Otro Simulacro','Descripcion del simulacro');
+(2,6,'Otro Simulacro','Descripcion del simulacro'),
+(3,7,'Simulacro del Plan Completo','Descripcion del simulacro');
 
 INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_implementacion`, `nombre_doc`) VALUES
 (1,2,1,'vigente','15-05-2021','nombre_doc');
 
 INSERT INTO EDIFICIO_PLAN (`edificio_id`, `plan_id`, `fecha_asignacion`, `estado`) VALUES
-(2,1, '25-12-2020', 'pendiente');
+(2,1, '25-12-2020', 'pendiente'),
+(1,9,'25-12-1992','vencido'),
+(2,9,'25-12-1992','vencido'),
+(3,9,'25-12-1992','vencido'),
+(4,9,'25-12-1992','vencido'),
+(5,9,'25-12-1992','vencido');
+
 
 INSERT INTO EDIFICIO_DOCUMENTO (`edificio_documento_id`, `edificio_id`, `documento_id`, `estado`, `nombre_doc`) VALUES
 (1,2,1,'vigente','doc.pdf');

@@ -498,6 +498,23 @@ arrayES = {
         'BLDPLAN_DEL_OK' : 'Se ha eliminado con éxito la asignación entre el Edificio y el Plan indicados',
         'BLDPLAN_DEL_KO' : 'Error al eliminar la asignación entre el Edificio y el Plan indicados',
 
+        // VENCER ASIGNACIONES
+        'BLDPLAN_EDTSTATE_OK' : 'Se han vencido las asignaciones correctamente',
+        'BLDPLAN_EDTSTATE_KO' : 'Error al vencer las asignaciones',
+        'BLDPLAN_ALREADY_EXPIRED' : 'La asignación indicada ya se encuentra vencida',
+
+        // Búsqueda de asignaciones Activas
+        'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST' : 'El plan indicado no tiene asignaciones activas',
+        'BLDPLAN_ASSIGN_ACTIVES_EXST' : 'El plan indicado tiene asignaciones activas',
+        'BLDPLAN_ASSIGN_ACTIVES_KO' : 'Error al consultar asignaciones activas del plan',
+
+        // Vencer Implementaciones
+        'IMPDOC_EDTSTATE_KO' : 'Error al vencer las implementaciones de los documentos',
+        'IMPPROC_EDTSTATE_KO' : 'Error al vencer las implementaciones de los procedimientos',
+        'IMPROUTE_EDTSTATE_KO' : 'Error al vencer las implementaciones de las rutas',
+        'IMPFRMT_EDTSTATE_KO' : 'Error al vencer las implementaciones de las formaciones',
+        'IMPSIM_EDTSTATE_KO' : 'Error al vencer las implementaciones de los simulacros',
+
         // Directorios
         'BLDPLAN_DIRPLAN_KO' : 'Error al crear el directorio raíz del Plan',
         'BLDPLAN_DIRBLD_KO' : 'Error al crear el directorio del Edificio',
@@ -910,6 +927,8 @@ arrayES = {
         'i18n-add-buildPlan' : 'Asignar Edificios',
         'i18n-del-bldplan-confirm' : '¿Está seguro que desea eliminar esta asignación? El cambio no será reversible',
         'i18n-expire' : 'Vencer',
+        'i18n-expire_all' : 'Vencer TODAS',
+        'i18n-expireAll-bldplan-confirm' : '¿Está seguro que desea vencer TODAS las asignaciones de este Plan? El cambio no será reversible',
 
         // MODAL
             // Campos Modal

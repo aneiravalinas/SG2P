@@ -20,6 +20,7 @@ class Test {
         include './Test/DefRoute_Test.php';
         include './Test/DefFormat_Test.php';
         include './Test/DefSim_Test.php';
+        include './Test/BuildPlan_Test.php';
 
         session_destroy();
 

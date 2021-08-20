@@ -494,6 +494,23 @@ arrayEN = {
         'BLDPLAN_DEL_OK' : 'The assignment between the indicated Building and Plan has been successfully removed',
         'BLDPLAN_DEL_KO' : 'Error when deleting the assignment between the indicated Building and Plan',
 
+        // VENCER ASIGNACIONES
+        'BLDPLAN_EDTSTATE_OK' : 'Assignments have expired successfully',
+        'BLDPLAN_EDTSTATE_KO' : 'Failed to expire assignments',
+        'BLDPLAN_ALREADY_EXPIRED' : 'The indicated assignment is already expired',
+
+        // Búsqueda de asignaciones Activas
+        'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST' : 'The indicated plan has no active assignments',
+        'BLDPLAN_ASSIGN_ACTIVES_EXST' : 'The indicated plan has active assignments',
+        'BLDPLAN_ASSIGN_ACTIVES_KO' : 'Failed to query active plan assignments',
+
+        // Vencer Implementaciones
+        'IMPDOC_EDTSTATE_KO' : 'Error expiring document implementations',
+        'IMPPROC_EDTSTATE_KO' : 'Error expiring procedure implementations',
+        'IMPROUTE_EDTSTATE_KO' : 'Error expiring routes implementations',
+        'IMPFRMT_EDTSTATE_KO' : 'Error expiring formations implementations',
+        'IMPSIM_EDTSTATE_KO' : 'Error expiring simulacrums implementations',
+
         // Directorios
         'BLDPLAN_DIRPLAN_KO' : 'Failed to create Plan root directory',
         'BLDPLAN_DIRBLD_KO' : 'Failed to create the Building directory',
@@ -903,6 +920,8 @@ arrayEN = {
         'i18n-add-buildPlan' : 'Assign Buildings',
         'i18n-del-bldplan-confirm' : 'Are you sure you want to remove this assignment? The change will not be reversible',
         'i18n-expire' : 'Expire',
+        'i18n-expire_all' : 'Expire ALL',
+        'i18n-expireAll-bldplan-confirm' : 'Are you sure you want to expire ALL assignments in this Plan? The change will not be reversible',
 
         // MODAL
             // Campos Modal
