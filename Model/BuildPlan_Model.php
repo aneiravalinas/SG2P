@@ -10,9 +10,10 @@ class BuildPlan_Model extends Abstract_Model {
     var $fecha_implementacion;
     var $estado;
     var $nombre_edificio;
+    var $nombre_plan;
 
     function __construct() {
-        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_impementacion','estado','nombre_edificio');
+        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_impementacion','estado','nombre_edificio','nombre_plan');
         $this->fill_fields();
     }
 
@@ -79,6 +80,7 @@ class BuildPlan_Model extends Abstract_Model {
             INNER JOIN EDIFICIO
             ON EDIFICIO_PLAN.edificio_id = EDIFICIO.edificio_id
             WHERE plan_id = '$this->plan_id' AND
+                  edificio_id LIKE '%" . $this->edificio_id . "%' AND
                   estado LIKE '%" . $this->estado . "%' AND
                   fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
                   fecha_implementacion LIKE '%" . $this->fecha_implementacion . "%' AND
@@ -132,6 +134,55 @@ class BuildPlan_Model extends Abstract_Model {
             WHERE 
                   plan_id = '$this->plan_id' AND
                   estado != 'vencido'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchBuildPlans() {
+        $this->query = "
+            SELECT EDIFICIO_PLAN.*, EDIFICIO.nombre AS nombre_edificio, PLAN.nombre AS nombre_plan
+            FROM EDIFICIO_PLAN
+            INNER JOIN EDIFICIO 
+                ON EDIFICIO.edificio_id = EDIFICIO_PLAN.edificio_id
+            INNER JOIN PLAN
+                ON PLAN.plan_id = EDIFICIO_PLAN.plan_id
+            WHERE plan_id LIKE '%" . $this->plan_id . "%' AND
+                  edificio_id LIKE '%" . $this->edificio_id . "%' AND
+                  estado LIKE '%" . $this->estado . "%' AND
+                  fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
+                  fecha_implementacion LIKE '%" . $this->fecha_implementacion . "%' AND
+                  EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
+                  PLAN.nombre LIKE '%" . $this->nombre_plan . "%' AND
+            ORDER BY estado, edificio_id, plan_id
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchBuildPlansByResp($username) {
+        $this->query = "
+            SELECT EDIFICIO_PLAN.*, EDIFICIO.nombre AS nombre_edificio, PLAN.nombre AS nombre_plan
+            FROM EDIFICIO_PLAN
+            INNER JOIN EDIFICIO 
+                ON EDIFICIO.edificio_id = EDIFICIO_PLAN.edificio_id
+            INNER JOIN PLAN
+                ON PLAN.plan_id = EDIFICIO_PLAN.plan_id
+            WHERE plan_id LIKE '%" . $this->plan_id . "%' AND
+                  edificio_id LIKE '%" . $this->edificio_id . "%' AND
+                  estado LIKE '%" . $this->estado . "%' AND
+                  fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
+                  fecha_implementacion LIKE '%" . $this->fecha_implementacion . "%' AND
+                  EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
+                  PLAN.nombre LIKE '%" . $this->nombre_plan . "%' AND
+                  edificio_id IN (
+                    SELECT edificio_id
+                    FROM EDIFICIO
+                    WHERE username = '$username'
+                  )
+            ORDER BY estado, edificio_id, plan_id
         ";
 
         $this->get_results_from_query();

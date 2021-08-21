@@ -28,7 +28,7 @@ class Search_BuildPlan {
                                     <input type="text" value="<?php echo $this->plan['plan_id'] ?>" class="form-control" id="plan_id" name="plan_id" disabled/>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="edificio_id" class="i18n-edificio_id">ID Simulacro</label>
+                                    <label for="edificio_id" class="i18n-edificio_id">ID Edificio</label>
                                     <input type="text" class="form-control" id="edificio_id" name="edificio_id" onblur="check_EDIFICIO_ID_SEARCH();"/>
                                 </div>
                             </div>
