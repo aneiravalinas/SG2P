@@ -73,6 +73,30 @@ $respTest = obtenerRespuesta('BuildPlan','SEARCH','ESTADO','Estado no permitido'
     'BLDPLAN_STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
+// Nombre Edificio Corto (menos de 3 caracteres)
+$_POST = array('plan_id' => '1', 'nombre_edificio' => 'aa');
+$buildPlan_service = new BuildPlan_Service();
+$feedback = $buildPlan_service->SEARCH();
+$respTest = obtenerRespuesta('BuildPlan','SEARCH','NOMBRE_EDIFICIO','Nombre Edificio corto',
+    'BLD_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testBuildPlan, $respTest);
+
+// Nombre Edificio largo (más de 60 caracteres)
+$_POST = array('plan_id' => '1', 'nombre_edificio' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+$buildPlan_service = new BuildPlan_Service();
+$feedback = $buildPlan_service->SEARCH();
+$respTest = obtenerRespuesta('BuildPlan','SEARCH','NOMBRE_EDIFICIO','Nombre Edificio largo',
+    'BLD_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testBuildPlan, $respTest);
+
+// Nombre Edificio Formato
+$_POST = array('plan_id' => '1', 'nombre_edificio' => 'edifici^+');
+$buildPlan_service = new BuildPlan_Service();
+$feedback = $buildPlan_service->SEARCH();
+$respTest = obtenerRespuesta('BuildPlan','SEARCH','NOMBRE_EDIFICIO','Nombre Edificio con caracteres no permitidos',
+    'BLD_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testBuildPlan, $respTest);
+
 /*
  *  --- SEARCH: ACCION ---
  */

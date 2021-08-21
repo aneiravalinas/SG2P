@@ -922,6 +922,7 @@ arrayEN = {
         'i18n-expire' : 'Expire',
         'i18n-expire_all' : 'Expire ALL',
         'i18n-expireAll-bldplan-confirm' : 'Are you sure you want to expire ALL assignments in this Plan? The change will not be reversible',
+        'i18n-nombre_edificio' : 'Building Name',
 
         // MODAL
             // Campos Modal
@@ -956,6 +957,7 @@ arrayEN = {
             'm-formacion_id' : ' Formation ID ',
             'm-simulacro_id' : ' Simulacrum ID ',
             'm-buildings[]' : ' Buildings ',
+            'm-nombre_edificio' : ' Building Name ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',

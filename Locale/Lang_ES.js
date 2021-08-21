@@ -929,6 +929,7 @@ arrayES = {
         'i18n-expire' : 'Vencer',
         'i18n-expire_all' : 'Vencer TODAS',
         'i18n-expireAll-bldplan-confirm' : '¿Está seguro que desea vencer TODAS las asignaciones de este Plan? El cambio no será reversible',
+        'i18n-nombre_edificio' : 'Nombre Edificio',
 
         // MODAL
             // Campos Modal
@@ -963,6 +964,7 @@ arrayES = {
             'm-formacion_id' : ' ID Formacion ',
             'm-simulacro_id' : ' ID Simulacro ',
             'm-buildings[]' : ' Edificios ',
+            'm-nombre_edificio' : ' Nombre Edificio ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',

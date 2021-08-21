@@ -14,7 +14,6 @@ class Show_BuildPlan {
         include './View/Page/header.php';
         ?>
 
-
         <!-- === SECTION TABLE === -->
 
         <section id="hero" class="d-flex align-items-center">
@@ -74,7 +73,7 @@ class Show_BuildPlan {
                             <tbody>
                             <?php foreach($this->buildPlans as $buildPlan): ?>
                                 <tr>
-                                    <td><?php echo $buildPlan['nombre'] ?></td>
+                                    <td><?php echo $buildPlan['nombre_edificio'] ?></td>
                                     <td><?php echo date_format(date_create($buildPlan['fecha_asignacion']), 'd/m/Y') ?></td>
                                     <td class="i18n-<?php echo $buildPlan['estado'] ?> <?php echo $buildPlan['estado'] ?>"></td>
                                     <td><?php if($buildPlan['fecha_implementacion'] != default_data) echo date_format(date_create($buildPlan['fecha_implementacion']),'d/m/Y');?></td>

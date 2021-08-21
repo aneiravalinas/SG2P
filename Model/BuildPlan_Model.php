@@ -9,9 +9,10 @@ class BuildPlan_Model extends Abstract_Model {
     var $fecha_asignacion;
     var $fecha_implementacion;
     var $estado;
+    var $nombre_edificio;
 
     function __construct() {
-        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_impementacion','estado');
+        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_impementacion','estado','nombre_edificio');
         $this->fill_fields();
     }
 
@@ -73,14 +74,15 @@ class BuildPlan_Model extends Abstract_Model {
 
     function SEARCH() {
         $this->query = "
-            SELECT EDIFICIO_PLAN.*, EDIFICIO.nombre
+            SELECT EDIFICIO_PLAN.*, EDIFICIO.nombre AS nombre_edificio
             FROM EDIFICIO_PLAN
             INNER JOIN EDIFICIO
             ON EDIFICIO_PLAN.edificio_id = EDIFICIO.edificio_id
             WHERE plan_id = '$this->plan_id' AND
                   estado LIKE '%" . $this->estado . "%' AND
                   fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
-                  fecha_implementacion LIKE '%" . $this->fecha_implementacion . "%'
+                  fecha_implementacion LIKE '%" . $this->fecha_implementacion . "%' AND
+                  EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%'
             ORDER BY estado, edificio_id
         ";
 
@@ -135,6 +137,7 @@ class BuildPlan_Model extends Abstract_Model {
         $this->get_results_from_query();
         return $this->feedback;
     }
+
 
     function setAttributes($atributos) {
         foreach($this->atributos as $atributo) {

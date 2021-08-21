@@ -15,7 +15,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
     const msg_notification_add = 'Se ha asignado un nuevo plan';
 
     function __construct() {
-        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_implementacion','estado');
+        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_implementacion','estado','nombre_edificio');
         $this->bldPlan_entity = new BuildPlan_Model();
         $this->defPlan_entity = new DefPlan_Model();
         $this->uploader = new Uploader();

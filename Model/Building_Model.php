@@ -159,4 +159,5 @@ class Building_Model extends Abstract_Model {
         $this->get_results_from_query();
         return $this->feedback;
     }
+
 }

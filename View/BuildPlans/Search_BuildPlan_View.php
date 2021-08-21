@@ -23,22 +23,30 @@ class Search_BuildPlan {
                     <div class="col-xl-7 col-lg-9">
                         <form name="formulariosearch" method="post">
                             <div class="row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="plan_id" class="i18n-plan_id">ID Plan</label>
                                     <input type="text" value="<?php echo $this->plan['plan_id'] ?>" class="form-control" id="plan_id" name="plan_id" disabled/>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="edificio_id" class="i18n-edificio_id">ID Simulacro</label>
                                     <input type="text" class="form-control" id="edificio_id" name="edificio_id" onblur="check_EDIFICIO_ID_SEARCH();"/>
                                 </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-8">
+                                    <label for="nombre_edificio" class="i18n-nombre_edificio">Nombre Edificio</label>
+                                    <input type="text" class="form-control" id="nombre_edificio" name="nombre_edificio" onblur="check_BLDPLAN_NOMBRE_EDIFICIO_SEARCH();"/>
+                                </div>
+
                                 <div class="form-group col-md-4">
                                     <label for="estado" class="i18n-state">Estado</label>
-                                        <select id="estado" name="estado" class="form-select">
-                                            <option value="" class="i18n-todos">Todos</option>
-                                            <option value="pendiente" class="i18n-pendiente">Pendiente</option>
-                                            <option value="implementado" class="i18n-implementado">Implementado</option>
-                                            <option value="vencido" class="i18n-vencido">Vencido</option>
-                                        </select>
+                                    <select id="estado" name="estado" class="form-select">
+                                        <option value="" class="i18n-todos">Todos</option>
+                                        <option value="pendiente" class="i18n-pendiente">Pendiente</option>
+                                        <option value="implementado" class="i18n-implementado">Implementado</option>
+                                        <option value="vencido" class="i18n-vencido">Vencido</option>
+                                    </select>
                                     </label>
                                 </div>
                             </div>

@@ -1,7 +1,8 @@
 
 
 function check_BLDPLAN_SEARCH() {
-    return check_EDIFICIO_ID_SEARCH();
+    return check_EDIFICIO_ID_SEARCH() &&
+            check_BLDPLAN_NOMBRE_EDIFICIO_SEARCH();
 }
 
 function check_FECHA_ASIGNACION() {
@@ -25,5 +26,15 @@ function check_BUILDINGS() {
         return true;
     } else {
         return false;
+    }
+}
+
+
+function check_BLDPLAN_NOMBRE_EDIFICIO_SEARCH() {
+    if(not_empty('nombre_edificio')) {
+        return check_letters_numbers_accents_spaces('nombre_edificio',60);
+    } else {
+        document.getElementById('nombre_edificio').style.borderColor = 'green';
+        return true;
     }
 }
