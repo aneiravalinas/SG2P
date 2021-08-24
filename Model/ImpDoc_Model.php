@@ -8,11 +8,11 @@ class ImpDoc_Model extends Abstract_Model {
     var $edificio_id;
     var $documento_id;
     var $estado;
-    var $fecha_implementacion;
+    var $fecha_cumplimentacion;
     var $nombre_doc;
 
     function __construct() {
-        $this->atributos = array('edificio_documento_id','edificio_id','documento_id','estado','fecha_implementacion','nombre_doc');
+        $this->atributos = array('edificio_documento_id','edificio_id','documento_id','estado','fecha_cumplimentacion','nombre_doc');
         $this->fill_fields();
     }
 
@@ -33,13 +33,13 @@ class ImpDoc_Model extends Abstract_Model {
              edificio_id,
              documento_id,
              estado,
-             fecha_implementacion,
+             fecha_cumplimentacion,
              nombre_doc
             ) VALUES (
             '$this->edificio_id',
             '$this->documento_id',
             '$this->estado',
-            '$this->fecha_implementacion',
+            '$this->fecha_cumplimentacion',
             '$this->nombre_doc'
             );
         ";
@@ -51,7 +51,7 @@ class ImpDoc_Model extends Abstract_Model {
 
     function EDIT() {
         $this->query = "UPDATE EDIFICIO_DOCUMENTO SET " .
-            ($this->fecha_implementacion == '' ? "" : "fecha_implementacion = '$this->fecha_implementacion', ") .
+            ($this->fecha_cumplimentacion == '' ? "" : "fecha_cumplimentacion = '$this->fecha_cumplimentacion', ") .
             ($this->nombre_doc == '' ? "" : "nombre_doc = '$this->nombre_doc', ") .
             ($this->estado == '' ? "" : "estado = '$this->estado'") .
             " WHERE edificio_documento_id = '$this->edificio_documento_id'";

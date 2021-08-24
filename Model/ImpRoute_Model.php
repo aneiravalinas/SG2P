@@ -9,11 +9,11 @@ class ImpRoute_Model extends Abstract_Model {
     var $planta_id;
     var $ruta_id;
     var $estado;
-    var $fecha_implementacion;
+    var $fecha_cumplimentacion;
     var $nombre_doc;
 
     function __construct() {
-        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_implementacion','nombre_doc');
+        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion','nombre_doc');
         $this->fill_fields();
     }
 
@@ -34,13 +34,13 @@ class ImpRoute_Model extends Abstract_Model {
                 planta_id,
                 ruta_id,
                 estado,
-                fecha_implementacion,
+                fecha_cumplimentacion,
                 nombre_doc
             ) VALUES (
                 '$this->planta_id',
                 '$this->ruta_id',
                 '$this->estado',
-                '$this->fecha_implementacion',
+                '$this->fecha_cumplimentacion',
                 '$this->nombre_doc'
             );
         ";
@@ -52,7 +52,7 @@ class ImpRoute_Model extends Abstract_Model {
 
     function EDIT() {
         $this->query = "UPDATE PLANTA_RUTA SET " .
-            ($this->fecha_implementacion == '' ? "" : "fecha_implementacion = '$this->fecha_implementacion', ") .
+            ($this->fecha_cumplimentacion == '' ? "" : "fecha_cumplimentacion = '$this->fecha_cumplimentacion', ") .
             ($this->nombre_doc == '' ? "" : "nombre_doc = '$this->nombre_doc', ") .
             ($this->estado == '' ? "" : "estado = '$this->estado'") .
             " WHERE planta_ruta_id = '$this->planta_ruta_id'";

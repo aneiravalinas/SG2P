@@ -58,15 +58,15 @@ $respTest = obtenerRespuesta('BuildPlan','SEARCH','FECHA_ASIGNACION','Formato fe
 array_push($testBuildPlan, $respTest);
 
 // Fecha implementación no válida
-$_POST = array('plan_id' => '1', 'edificio_id' => '1', 'fecha_asignacion' => '2012/12/25', 'fecha_implementacion' => '2012/12/33');
+$_POST = array('plan_id' => '1', 'edificio_id' => '1', 'fecha_asignacion' => '2012/12/25', 'fecha_cumplimentacion' => '2012/12/33');
 $buildPlan_service = new BuildPlan_Service();
 $feedback = $buildPlan_service->SEARCH();
-$respTest = obtenerRespuesta('BuildPlan','SEARCH','FECHA_IMPLEMENTACION','Formato fecha asignación no válida',
-    'BLDPLAN_DATEIMPL_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('BuildPlan','SEARCH','FECHA_CUMPLIMENTACION','Formato fecha asignación no válida',
+    'BLDPLAN_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
 // Estado no válido
-$_POST = array('plan_id' => '1', 'edificio_id' => '1', 'fecha_asignacion' => '2012/12/25', 'fecha_implementacion' => '2012/12/30', 'estado' => 'randomword');
+$_POST = array('plan_id' => '1', 'edificio_id' => '1', 'fecha_asignacion' => '2012/12/25', 'FECHA_CUMPLIMENTACION' => '2012/12/30', 'estado' => 'randomword');
 $buildPlan_service = new BuildPlan_Service();
 $feedback = $buildPlan_service->SEARCH();
 $respTest = obtenerRespuesta('BuildPlan','SEARCH','ESTADO','Estado no permitido',
@@ -102,7 +102,7 @@ array_push($testBuildPlan, $respTest);
  */
 
 // Búsqueda de edificios asignados Ok
-$_POST = array('plan_id' => '1', 'edificio_id' => '1', 'fecha_asignacion' => '2012/12/25', 'fecha_implementacion' => '2012/12/30', 'estado' => 'pendiente');
+$_POST = array('plan_id' => '1', 'edificio_id' => '1', 'fecha_asignacion' => '2012/12/25', 'fecha_cumplimentacion' => '2012/12/30', 'estado' => 'pendiente');
 $buildPlan_service = new BuildPlan_Service();
 $feedback = $buildPlan_service->SEARCH();
 $respTest = obtenerRespuesta('BuildPlan','SEARCH','ACCION','Búsqueda de edifcios asignados Ok',

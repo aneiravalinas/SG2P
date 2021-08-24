@@ -47,7 +47,7 @@ class Portal_Plans {
                                 <th scope="col" class="i18n-plan">Plan</th>
                                 <th scope="col" class="i18n-date_assign">Fecha Asignación</th>
                                 <th scope="col" class="i18n-state">Estado</th>
-                                <th scope="col" class="i18n-date_impl">Fecha Implementación</th>
+                                <th scope="col" class="i18n-date_comp">Fecha Implementación</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -57,7 +57,7 @@ class Portal_Plans {
                                     <td><?php echo $buildPlan['nombre_plan'] ?></td>
                                     <td><?php echo date_format(date_create($buildPlan['fecha_asignacion']), 'd/m/Y') ?></td>
                                     <td class="i18n-<?php echo $buildPlan['estado'] ?> <?php echo $buildPlan['estado'] ?>"></td>
-                                    <td><?php if($buildPlan['fecha_implementacion'] != default_data) echo date_format(date_create($buildPlan['fecha_implementacion']), 'd/m/Y'); ?></td>
+                                    <td><?php if($buildPlan['fecha_cumplimentacion'] != default_data) echo date_format(date_create($buildPlan['fecha_cumplimentacion']), 'd/m/Y'); ?></td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false">
                                             <span class="iconify" data-icon="fluent:textbox-more-24-filled" data-inline="false"></span>

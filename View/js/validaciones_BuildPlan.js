@@ -13,8 +13,8 @@ function check_FECHA_ASIGNACION() {
     }
 }
 
-function check_FECHA_IMPLEMENTACION() {
-    if(not_empty('fecha_implementacion',true)) {
+function check_fecha_cumplimentacion() {
+    if(not_empty('fecha_cumplimentacion',true)) {
         return true;
     } else {
         return false;

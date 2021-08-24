@@ -734,11 +734,11 @@ arrayEN = {
             'BLDPLAN_DATEASSIGN_KO' : 'The assignment date is not in a valid format',
 
             // Fecha implementación
-            'BLDPLAN_DATEIMPL_KO' : 'The implementation date is not in a valid format',
+            'BLDPLAN_DATECOMP_KO' : 'The completion date is not in a valid format',
 
             // Estado asignación entre Edificio y Plan
             'BLDPLAN_STATE_EMPT' : 'Assignment status cannot be empty',
-            'BLDPLAN_STATE_KO' : 'The invalid status. Valid statuses are Pending, Implemented, and Expired',
+            'BLDPLAN_STATE_KO' : 'The invalid status. Valid statuses are Pending, Completed, and Expired',
 
 
 
@@ -925,9 +925,9 @@ arrayEN = {
         'i18n-building' : 'Building',
         'i18n-date_assign' : 'Assignment Date',
         'i18n-state' : 'Status',
-        'i18n-date_impl' : 'Implementation Date',
+        'i18n-date_comp' : 'Completion Date',
         'i18n-pendiente' : 'PENDING',
-        'i18n-implementado' : 'IMPLEMENTED',
+        'i18n-cumplimentado' : 'COMPLETED',
         'i18n-vencido' : 'EXPIRED',
         'i18n-bldplan-empty' : 'No assigned buildings found',
         'i18n-add-buildPlan' : 'Assign Buildings',

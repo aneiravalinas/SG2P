@@ -6,10 +6,10 @@ class BuildingPlans_Validation extends Validator {
     var $edificio_id;
     var $plan_id;
     var $fecha_asignacion;
-    var $fecha_implementacion;
+    var $fecha_cumplimentacion;
     var $estado;
     var $nombre_edificio;
-    const states = array('pendiente','implementado','vencido');
+    const states = array('pendiente','cumplimentado','vencido');
 
     function __construct() {
 
@@ -31,8 +31,8 @@ class BuildingPlans_Validation extends Validator {
             }
         }
 
-        if($this->fecha_implementacion != '') {
-            $validacion = $this->validar_FECHA_IMPLEMENTACION();
+        if($this->fecha_cumplimentacion != '') {
+            $validacion = $this->validar_FECHA_CUMPLIMENTACION();
             if(!$validacion['ok']) {
                 return $validacion;
             }
@@ -84,9 +84,9 @@ class BuildingPlans_Validation extends Validator {
         return $this->rellena_validation(true,'00000','BLD_PLAN');
     }
 
-    function validar_FECHA_IMPLEMENTACION() {
-        if(!$this->validar_fecha($this->fecha_implementacion)) {
-            return $this->rellena_validation(false,'BLDPLAN_DATEIMPL_KO','BLD_PLAN');
+    function validar_FECHA_CUMPLIMENTACION() {
+        if(!$this->validar_fecha($this->fecha_cumplimentacion)) {
+            return $this->rellena_validation(false,'BLDPLAN_DATECOMP_KO','BLD_PLAN');
         }
 
         return $this->rellena_validation(true,'00000','BLD_PLAN');

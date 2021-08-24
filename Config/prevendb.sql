@@ -80,8 +80,8 @@ CREATE TABLE EDIFICIO_PLAN
     `edificio_id` INT(10) NOT NULL,
     `plan_id` INT(10) NOT NULL,
     `fecha_asignacion` DATE NOT NULL,
-    `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
-    `estado` enum('pendiente', 'implementado', 'vencido') NOT NULL DEFAULT 'pendiente',
+    `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
 
     CONSTRAINT `pk_edificio_plan` PRIMARY KEY (`edificio_id`, `plan_id`),
     CONSTRAINT `fk_edificio_plan_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
@@ -130,8 +130,8 @@ CREATE TABLE EDIFICIO_DOCUMENTO
     `edificio_documento_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `documento_id` INT(10) NOT NULL,
-    `estado` enum('pendiente', 'implementado', 'vencido') NOT NULL DEFAULT 'pendiente',
-    `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
+    `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NOT NULL,
 
     CONSTRAINT `pk_edificio_documento` PRIMARY KEY (`edificio_documento_id`),
@@ -144,8 +144,8 @@ CREATE TABLE EDIFICIO_PROCEDIMIENTO
     `edificio_procedimiento_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `procedimiento_id` INT(10) NOT NULL,
-    `estado` enum('pendiente', 'implementado', 'vencido') NOT NULL DEFAULT 'pendiente',
-    `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
+    `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NOT NULL,
 
     CONSTRAINT `pk_edificio_procedimiento` PRIMARY KEY (`edificio_procedimiento_id`),
@@ -158,8 +158,8 @@ CREATE TABLE PLANTA_RUTA
     `planta_ruta_id` INT(10) AUTO_INCREMENT,
     `planta_id` INT(10) NOT NULL,
     `ruta_id` INT(10) NOT NULL,
-    `estado` enum('pendiente', 'implementado', 'vencido') NOT NULL DEFAULT 'pendiente',
-    `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
+    `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NOT NULL,
 
     CONSTRAINT `pk_planta_ruta` PRIMARY KEY (`planta_ruta_id`),
@@ -184,7 +184,7 @@ CREATE TABLE EDIFICIO_SIMULACRO
     `edificio_simulacro_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `simulacro_id` INT(10) NOT NULL,
-    `estado` enum('pendiente', 'implementado', 'vencido') NOT NULL DEFAULT 'pendiente',
+    `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
     `url_recurso` VARCHAR(20) NOT NULL,
     `destinatarios` VARCHAR(100) NOT NULL,
@@ -211,7 +211,7 @@ CREATE TABLE EDIFICIO_FORMACION
     `edificio_formacion_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `formacion_id` INT(10) NOT NULL,
-    `estado` enum('pendiente', 'implementado', 'vencido') NOT NULL DEFAULT 'pendiente',
+    `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
     `url_recurso` VARCHAR(20) NOT NULL,
     `destinatarios` VARCHAR(100) NOT NULL,
@@ -263,7 +263,23 @@ INSERT INTO ESPACIO (`espacio_id`, `planta_id`, `nombre`, `descripcion`, `foto_e
 (3,1,'Espacio Tres','Descripcion del espacio tres','default.png');
 
 INSERT INTO PLAN (`plan_id`, `nombre`, `descripcion`) VALUES
-(1,'Plan Uno','Descripcion Plan Uno');
+(1,'Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil');
+
+INSERT INTO DOCUMENTO(`plan_id`, `documento_id`,`nombre`, `descripcion`) VALUES
+(1,1,'Documento 1 do Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil'),
+(1,2,'Documento 2 do Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil');
+
+INSERT INTO PROCEDIMIENTO(`plan_id`, `procedimiento_id`, `nombre`, `descripcion`) VALUES
+(1,1,'Procedemento 1 do Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil');
+
+INSERT INTO RUTA(`plan_id`, `ruta_id`, `nombre`, `descripcion`) VALUES
+(1,1,'Rutas do Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil');
+
+INSERT INTO FORMACION(`plan_id`, `formacion_id`, `nombre`, `descripcion`) VALUES
+(1,1,'Formacións do Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil');
+
+INSERT INTO SIMULACRO(`plan_id`, `simulacro_id`, `nombre`, `descripcion`) VALUES
+(1,1,'Simulacros do Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil');
 
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';

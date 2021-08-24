@@ -741,11 +741,11 @@ arrayES = {
             'BLDPLAN_DATEASSIGN_KO' : 'La fecha de asignación no tiene un formato válido',
 
             // Fecha implementación
-            'BLDPLAN_DATEIMPL_KO' : 'La fecha de implementación no tiene un formato válido',
+            'BLDPLAN_DATECOMP_KO' : 'La fecha de cumplimentacion no tiene un formato válido',
 
             // Estado asignación entre Edificio y Plan
             'BLDPLAN_STATE_EMPT' : 'El estado de la asignación no puede ser vacío',
-            'BLDPLAN_STATE_KO' : 'El estado no válido. Los estado válidos son Pendiente, Implementado y Vencido',
+            'BLDPLAN_STATE_KO' : 'El estado no válido. Los estado válidos son Pendiente, Cumplimentado y Vencido',
 
 
 
@@ -930,11 +930,11 @@ arrayES = {
         // BUILDINGS_PLANS
         'i18n-assign-bldplan' : 'Edificios Asignados',
         'i18n-building' : 'Edificio',
-        'i18n-date_assign' : 'Fecha Asignación',
+        'i18n-date_assign' : 'Fecha de Asignación',
         'i18n-state' : 'Estado',
-        'i18n-date_impl' : 'Fecha Implementación',
+        'i18n-date_comp' : 'Fecha de Cumplimentación',
         'i18n-pendiente' : 'PENDIENTE',
-        'i18n-implementado' : 'IMPLEMENTADO',
+        'i18n-cumplimentado' : 'CUMPLIMENTADO',
         'i18n-vencido' : 'VENCIDO',
         'i18n-bldplan-empty' : 'No se han encontrado asignaciones con edificios',
         'i18n-add-buildPlan' : 'Asignar Edificios',

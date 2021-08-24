@@ -44,7 +44,7 @@ class Search_BuildPlan {
                                     <select id="estado" name="estado" class="form-select">
                                         <option value="" class="i18n-todos">Todos</option>
                                         <option value="pendiente" class="i18n-pendiente">Pendiente</option>
-                                        <option value="implementado" class="i18n-implementado">Implementado</option>
+                                        <option value="cumplimentado" class="i18n-cumplimentado">cumplimentado</option>
                                         <option value="vencido" class="i18n-vencido">Vencido</option>
                                     </select>
                                 </div>
@@ -56,7 +56,7 @@ class Search_BuildPlan {
                                     <input type="date" class="form-control" id="fecha_asignacion" name="fecha_asignacion"/>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="fecha_implementacion" class="i18n-fecha_implementacion">Fecha Implementación</label>
+                                    <label for="fecha_cumplimentacion" class="i18n-fecha_cumplimentacion">Fecha Implementación</label>
                                     <input type="date" class="form-control" id="fecha_implementación" name="fecha_implementación"/>
                                 </div>
                             </div>

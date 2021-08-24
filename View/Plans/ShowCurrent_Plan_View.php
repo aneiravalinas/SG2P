@@ -59,9 +59,9 @@ class ShowCurrent_Plan {
                                             <span class="d-block att-value"><?php echo date_format(date_create($this->build_plan['fecha_asignacion']), 'd/m/Y') ?></span>
                                         </li>
                                         <li>
-                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-date_impl">Fecha Implementación</span>
-                                            <?php if($this->build_plan['fecha_implementacion'] != default_data): ?>
-                                            <span class="d-block att-value"><?php echo date_format(date_create($this->build_plan['fecha_implementacion']), 'd/m/Y') ?></span>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-date_comp">Fecha Implementación</span>
+                                            <?php if($this->build_plan['fecha_cumplimentacion'] != default_data): ?>
+                                            <span class="d-block att-value"><?php echo date_format(date_create($this->build_plan['fecha_cumplimentacion']), 'd/m/Y') ?></span>
                                             <?php endif; ?>
                                         </li>
                                     </ul>
@@ -97,8 +97,8 @@ class ShowCurrent_Plan {
                                     <li data-aos="fade-up">
                                         <?php if($this->definitions['documentos']['estado'] == 'pendiente') :?>
                                             <i class="iconify icon-help pendiente" data-icon="ant-design:exclamation-circle-outlined"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1"><span class="pendiente i18n-documentos"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                                        <?php elseif($this->definitions['documentos']['estado'] == 'implementado'): ?>
-                                            <i class="iconify icon-help implementado" data-icon="akar-icons:circle-check"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1"><span class="implementado i18n-documentos"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                                        <?php elseif($this->definitions['documentos']['estado'] == 'cumplimentado'): ?>
+                                            <i class="iconify icon-help cumplimentado" data-icon="akar-icons:circle-check"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1"><span class="cumplimentado i18n-documentos"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                                         <?php else: ?>
                                             <i class="iconify icon-help vencido" data-icon="ant-design:clock-circle-outlined"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1"><span class="vencido i18n-documentos"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                                         <?php endif; ?>
@@ -117,8 +117,8 @@ class ShowCurrent_Plan {
                                                                 enviaform(document.formenviar);">
                                                                 <span class="pendiente"><?php echo $documento['nombre'] ?></span>
                                                             </a>
-                                                        <?php elseif($documento['estado'] == 'implementado'): ?>
-                                                            <i class="iconify icon-help implementado" data-icon="akar-icons:circle-check"></i>
+                                                        <?php elseif($documento['estado'] == 'cumplimentado'): ?>
+                                                            <i class="iconify icon-help cumplimentado" data-icon="akar-icons:circle-check"></i>
                                                             <a onclick="
                                                                     crearform('formenviar', 'post');
                                                                     insertacampo(document.formenviar, 'documento_id', '<?php echo $documento['documento_id'] ?>');
@@ -126,7 +126,7 @@ class ShowCurrent_Plan {
                                                                     insertacampo(document.formenviar, 'controller', 'Document');
                                                                     insertacampo(document.formenviar, 'action', 'show');
                                                                     enviaform(document.formenviar);">
-                                                            <span class="implementado"><?php echo $documento['nombre'] ?></span>
+                                                            <span class="cumplimentado"><?php echo $documento['nombre'] ?></span>
                                                             </a>
                                                         <?php else: ?>
                                                             <i class="iconify icon-help vencido" data-icon="ant-design:clock-circle-outlined"></i>
@@ -152,8 +152,8 @@ class ShowCurrent_Plan {
                                         <li data-aos="fade-up">
                                             <?php if($this->definitions['procedimientos']['estado'] == 'pendiente') :?>
                                                 <i class="iconify icon-help pendiente" data-icon="ant-design:exclamation-circle-outlined"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-2"><span class="pendiente i18n-procedimientos"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                                            <?php elseif($this->definitions['procedimientos']['estado'] == 'implementado'): ?>
-                                                <i class="iconify icon-help implementado" data-icon="akar-icons:circle-check"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-2"><span class="implementado i18n-procedimientos"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                                            <?php elseif($this->definitions['procedimientos']['estado'] == 'cumplimentado'): ?>
+                                                <i class="iconify icon-help cumplimentado" data-icon="akar-icons:circle-check"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-2"><span class="cumplimentado i18n-procedimientos"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                                             <?php else: ?>
                                                 <i class="iconify icon-help vencido" data-icon="ant-design:clock-circle-outlined"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-2"><span class="vencido i18n-procedimientos"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                                             <?php endif; ?>
@@ -172,8 +172,8 @@ class ShowCurrent_Plan {
                                                                         enviaform(document.formenviar);">
                                                                     <span class="pendiente"><?php echo $procedimiento['nombre'] ?></span>
                                                                 </a>
-                                                            <?php elseif($procedimiento['estado'] == 'implementado'): ?>
-                                                                <i class="iconify icon-help implementado" data-icon="akar-icons:circle-check"></i>
+                                                            <?php elseif($procedimiento['estado'] == 'cumplimentado'): ?>
+                                                                <i class="iconify icon-help cumplimentado" data-icon="akar-icons:circle-check"></i>
                                                                 <a onclick="
                                                                         crearform('formenviar', 'post');
                                                                         insertacampo(document.formenviar, 'procedimiento_id', '<?php echo $procedimiento['procedimiento_id'] ?>');
@@ -181,7 +181,7 @@ class ShowCurrent_Plan {
                                                                         insertacampo(document.formenviar, 'controller', 'Procedure');
                                                                         insertacampo(document.formenviar, 'action', 'show');
                                                                         enviaform(document.formenviar);">
-                                                                    <span class="implementado"><?php echo $procedimiento['nombre'] ?></span>
+                                                                    <span class="cumplimentado"><?php echo $procedimiento['nombre'] ?></span>
                                                                 </a>
                                                             <?php else: ?>
                                                                 <i class="iconify icon-help vencido" data-icon="ant-design:clock-circle-outlined"></i>
@@ -207,8 +207,8 @@ class ShowCurrent_Plan {
                                         <li data-aos="fade-up">
                                             <?php if($this->definitions['rutas']['estado'] == 'pendiente') :?>
                                                 <i class="iconify icon-help pendiente" data-icon="ant-design:exclamation-circle-outlined"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-3"><span class="pendiente i18n-rutas"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                                            <?php elseif($this->definitions['rutas']['estado'] == 'implementado'): ?>
-                                                <i class="iconify icon-help implementado" data-icon="akar-icons:circle-check"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-3"><span class="implementado i18n-rutas"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                                            <?php elseif($this->definitions['rutas']['estado'] == 'cumplimentado'): ?>
+                                                <i class="iconify icon-help cumplimentado" data-icon="akar-icons:circle-check"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-3"><span class="cumplimentado i18n-rutas"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                                             <?php else: ?>
                                                 <i class="iconify icon-help vencido" data-icon="ant-design:clock-circle-outlined"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-3"><span class="vencido i18n-rutas"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                                             <?php endif; ?>
@@ -227,8 +227,8 @@ class ShowCurrent_Plan {
                                                                         enviaform(document.formenviar);">
                                                                     <span class="pendiente"><?php echo $ruta['nombre'] ?></span>
                                                                 </a>
-                                                            <?php elseif($ruta['estado'] == 'implementado'): ?>
-                                                                <i class="iconify icon-help implementado" data-icon="akar-icons:circle-check"></i>
+                                                            <?php elseif($ruta['estado'] == 'cumplimentado'): ?>
+                                                                <i class="iconify icon-help cumplimentado" data-icon="akar-icons:circle-check"></i>
                                                                 <a onclick="
                                                                         crearform('formenviar', 'post');
                                                                         insertacampo(document.formenviar, 'ruta_id', '<?php echo $ruta['ruta_id'] ?>');
@@ -236,7 +236,7 @@ class ShowCurrent_Plan {
                                                                         insertacampo(document.formenviar, 'controller', 'Route');
                                                                         insertacampo(document.formenviar, 'action', 'show');
                                                                         enviaform(document.formenviar);">
-                                                                    <span class="implementado"><?php echo $ruta['nombre'] ?></span>
+                                                                    <span class="cumplimentado"><?php echo $ruta['nombre'] ?></span>
                                                                 </a>
                                                             <?php else: ?>
                                                                 <i class="iconify icon-help vencido" data-icon="ant-design:clock-circle-outlined"></i>
@@ -262,8 +262,8 @@ class ShowCurrent_Plan {
                                         <li data-aos="fade-up">
                                             <?php if($this->definitions['formaciones']['estado'] == 'pendiente') :?>
                                                 <i class="iconify icon-help pendiente" data-icon="ant-design:exclamation-circle-outlined"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-4"><span class="pendiente i18n-formaciones"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                                            <?php elseif($this->definitions['formaciones']['estado'] == 'implementado'): ?>
-                                                <i class="iconify icon-help implementado" data-icon="akar-icons:circle-check"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-4"><span class="implementado i18n-formaciones"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                                            <?php elseif($this->definitions['formaciones']['estado'] == 'cumplimentado'): ?>
+                                                <i class="iconify icon-help cumplimentado" data-icon="akar-icons:circle-check"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-4"><span class="cumplimentado i18n-formaciones"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                                             <?php else: ?>
                                                 <i class="iconify icon-help vencido" data-icon="ant-design:clock-circle-outlined"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-4"><span class="vencido i18n-formaciones"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                                             <?php endif; ?>
@@ -282,8 +282,8 @@ class ShowCurrent_Plan {
                                                                         enviaform(document.formenviar);">
                                                                     <span class="pendiente"><?php echo $formacion['nombre'] ?></span>
                                                                 </a>
-                                                            <?php elseif($formacion['estado'] == 'implementado'): ?>
-                                                                <i class="iconify icon-help implementado" data-icon="akar-icons:circle-check"></i>
+                                                            <?php elseif($formacion['estado'] == 'cumplimentado'): ?>
+                                                                <i class="iconify icon-help cumplimentado" data-icon="akar-icons:circle-check"></i>
                                                                 <a onclick="
                                                                         crearform('formenviar', 'post');
                                                                         insertacampo(document.formenviar, 'formacion_id', '<?php echo $formacion['formacion_id'] ?>');
@@ -291,7 +291,7 @@ class ShowCurrent_Plan {
                                                                         insertacampo(document.formenviar, 'controller', 'Formation');
                                                                         insertacampo(document.formenviar, 'action', 'show');
                                                                         enviaform(document.formenviar);">
-                                                                    <span class="implementado"><?php echo $formacion['nombre'] ?></span>
+                                                                    <span class="cumplimentado"><?php echo $formacion['nombre'] ?></span>
                                                                 </a>
                                                             <?php else: ?>
                                                                 <i class="iconify icon-help vencido" data-icon="ant-design:clock-circle-outlined"></i>
@@ -317,8 +317,8 @@ class ShowCurrent_Plan {
                                         <li data-aos="fade-up">
                                             <?php if($this->definitions['simulacros']['estado'] == 'pendiente') :?>
                                                 <i class="iconify icon-help pendiente" data-icon="ant-design:exclamation-circle-outlined"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-5"><span class="pendiente i18n-simulacros"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                                            <?php elseif($this->definitions['simulacros']['estado'] == 'implementado'): ?>
-                                                <i class="iconify icon-help implementado" data-icon="akar-icons:circle-check"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-5"><span class="implementado i18n-simulacros"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                                            <?php elseif($this->definitions['simulacros']['estado'] == 'cumplimentado'): ?>
+                                                <i class="iconify icon-help cumplimentado" data-icon="akar-icons:circle-check"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-5"><span class="cumplimentado i18n-simulacros"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                                             <?php else: ?>
                                                 <i class="iconify icon-help vencido" data-icon="ant-design:clock-circle-outlined"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-5"><span class="vencido i18n-simulacros"></span><i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                                             <?php endif; ?>
@@ -337,8 +337,8 @@ class ShowCurrent_Plan {
                                                                         enviaform(document.formenviar);">
                                                                     <span class="pendiente"><?php echo $simulacro['nombre'] ?></span>
                                                                 </a>
-                                                            <?php elseif($simulacro['estado'] == 'implementado'): ?>
-                                                                <i class="iconify icon-help implementado" data-icon="akar-icons:circle-check"></i>
+                                                            <?php elseif($simulacro['estado'] == 'cumplimentado'): ?>
+                                                                <i class="iconify icon-help cumplimentado" data-icon="akar-icons:circle-check"></i>
                                                                 <a onclick="
                                                                         crearform('formenviar', 'post');
                                                                         insertacampo(document.formenviar, 'simulacro_id', '<?php echo $simulacro['simulacro_id'] ?>');
@@ -346,7 +346,7 @@ class ShowCurrent_Plan {
                                                                         insertacampo(document.formenviar, 'controller', 'Simulacrum');
                                                                         insertacampo(document.formenviar, 'action', 'show');
                                                                         enviaform(document.formenviar);">
-                                                                    <span class="implementado"><?php echo $simulacro['nombre'] ?></span>
+                                                                    <span class="cumplimentado"><?php echo $simulacro['nombre'] ?></span>
                                                                 </a>
                                                             <?php else: ?>
                                                                 <i class="iconify icon-help vencido" data-icon="ant-design:clock-circle-outlined"></i>
@@ -369,9 +369,19 @@ class ShowCurrent_Plan {
                                 </ul>
                             </div>
                         </div>
-                    </div>
 
-                </div>
+                        <div class="row justify-content-center">
+                            <div class="col text-center">
+                                <a class="btn-get-started i18n-back" type="button" onclick="
+                                        crearform('formenviar','post');
+                                        insertacampo(document.formenviar,'controller','Plan');
+                                        insertacampo(document.formenviar,'action','show');
+                                        enviaform(document.formenviar);">
+                                    Volver
+                                </a>
+                            </div>
+                        </div>
+                    </div>
             </section><!-- End Frequently Asked Questions Section -->
         </main>
 

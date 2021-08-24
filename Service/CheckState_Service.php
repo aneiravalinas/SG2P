@@ -211,10 +211,10 @@ class CheckState_Service {
             return 'pendiente';
         }
 
-        if($element['estado'] == 'implementado') {
+        if($element['estado'] == 'cumplimentado') {
             $estado = $this->check_state($elements);
             if($estado != 'pendiente') {
-                return 'implementado';
+                return 'cumplimentado';
             }
         }
 

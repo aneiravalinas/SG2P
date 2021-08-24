@@ -66,7 +66,7 @@ class Show_BuildPlan {
                                 <th scope="col" class="i18n-building">Edificio</th>
                                 <th scope="col" class="i18n-date_assign">Fecha Asignación</th>
                                 <th scope="col" class="i18n-state">Estado</th>
-                                <th scope="col" class="i18n-date_impl">Fecha Implementación</th>
+                                <th scope="col" class="i18n-date_comp">Fecha Implementación</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -76,7 +76,7 @@ class Show_BuildPlan {
                                     <td><?php echo $buildPlan['nombre_edificio'] ?></td>
                                     <td><?php echo date_format(date_create($buildPlan['fecha_asignacion']), 'd/m/Y') ?></td>
                                     <td class="i18n-<?php echo $buildPlan['estado'] ?> <?php echo $buildPlan['estado'] ?>"></td>
-                                    <td><?php if($buildPlan['fecha_implementacion'] != default_data) echo date_format(date_create($buildPlan['fecha_implementacion']),'d/m/Y');?></td>
+                                    <td><?php if($buildPlan['fecha_cumplimentacion'] != default_data) echo date_format(date_create($buildPlan['fecha_cumplimentacion']),'d/m/Y');?></td>
                                     <td class="text-center">
                                         <div class="btn-group px-md-2">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">

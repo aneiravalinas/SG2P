@@ -15,7 +15,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
     const msg_notification_add = 'Se ha asignado un nuevo plan';
 
     function __construct() {
-        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_implementacion','estado','nombre_edificio');
+        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_cumplimentacion','estado','nombre_edificio');
         $this->bldPlan_entity = new BuildPlan_Model();
         $this->defPlan_entity = new DefPlan_Model();
         $this->uploader = new Uploader();
@@ -233,7 +233,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         }
 
         $this->bldPlan_entity->setAttributes(array('edificio_id' => $edificio_id, 'fecha_asignacion' => date('Y-m-d'),
-                                                'fecha_implementacion' => default_data, 'estado' => 'pendiente'));
+                                                'fecha_cumplimentacion' => default_data, 'estado' => 'pendiente'));
         $this->feedback = $this->bldPlan_entity->ADD();
         if($this->feedback['ok']) {
             $this->feedback = $this->create_impDocs($edificio_id, $docs, $path . '/' . $edificio_id);
@@ -353,7 +353,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         include_once './Model/ImpDoc_Model.php';
         $impDoc_entity = new ImpDoc_Model();
         $impDoc_entity->setAttributes(array('edificio_id' => $edificio_id, 'documento_id' => $doc['documento_id'],
-                                            'estado' => 'pendiente', 'fecha_implementacion' => default_data, 'nombre_doc' => default_doc));
+                                            'estado' => 'pendiente', 'fecha_cumplimentacion' => default_data, 'nombre_doc' => default_doc));
         $feedback = $impDoc_entity->ADD();
         if($feedback['ok']) {
             $feedback = $this->create_impdocs($edificio_id, $docs, $path);
@@ -490,7 +490,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         include_once './Model/ImpProc_Model.php';
         $impProc_entity = new ImpProc_Model();
         $impProc_entity->setAttributes(array('edificio_id' => $edificio_id, 'procedimiento_id' => $proc['procedimiento_id'],
-                                                'estado' => 'pendiente', 'fecha_implementacion' => default_data, 'nombre_doc' => default_doc));
+                                                'estado' => 'pendiente', 'fecha_cumplimentacion' => default_data, 'nombre_doc' => default_doc));
         $feedback = $impProc_entity->ADD();
         if($feedback['ok']) {
             $feedback = $this->create_impProcs($edificio_id, $procs, $path);
@@ -631,7 +631,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
                 break;
             }
             $impRoute_entity->setAttributes(array('planta_id' => $floor['planta_id'], 'ruta_id' => $route['ruta_id'],
-                                                'estado' => 'pendiente', 'fecha_implementacion' => default_data, 'nombre_doc' => default_doc));
+                                                'estado' => 'pendiente', 'fecha_cumplimentacion' => default_data, 'nombre_doc' => default_doc));
             $feedback = $impRoute_entity->ADD();
             if(!$feedback['ok']) {
                 if($feedback['code'] == 'QRY_KO') {

@@ -80,8 +80,8 @@ CREATE TABLE EDIFICIO_PLAN
     `edificio_id` INT(10) NOT NULL,
     `plan_id` INT(10) NOT NULL,
     `fecha_asignacion` DATE NOT NULL DEFAULT CURRENT_DATE,
-    `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
-    `estado` enum('pendiente', 'implementado','vencido') NOT NULL DEFAULT 'pendiente',
+    `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `estado` enum('pendiente', 'cumplimentado','vencido') NOT NULL DEFAULT 'pendiente',
 
     CONSTRAINT `pk_edificio_plan` PRIMARY KEY (`edificio_id`, `plan_id`),
     CONSTRAINT `fk_edificio_plan_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
@@ -131,7 +131,7 @@ CREATE TABLE EDIFICIO_DOCUMENTO
     `edificio_id` INT(10) NOT NULL,
     `documento_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NOT NULL DEFAULT 'empty',
 
     CONSTRAINT `pk_edificio_documento` PRIMARY KEY (`edificio_documento_id`),
@@ -145,7 +145,7 @@ CREATE TABLE EDIFICIO_PROCEDIMIENTO
     `edificio_id` INT(10) NOT NULL,
     `procedimiento_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NOT NULL,
 
     CONSTRAINT `pk_edificio_procedimiento` PRIMARY KEY (`edificio_procedimiento_id`),
@@ -159,7 +159,7 @@ CREATE TABLE PLANTA_RUTA
     `planta_id` INT(10) NOT NULL,
     `ruta_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
-    `fecha_implementacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(20) NOT NULL,
 
     CONSTRAINT `pk_planta_ruta` PRIMARY KEY (`planta_ruta_id`),
@@ -305,7 +305,7 @@ INSERT INTO SIMULACRO (`simulacro_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (2,6,'Otro Simulacro','Descripcion del simulacro'),
 (3,7,'Simulacro del Plan Completo','Descripcion del simulacro');
 
-INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_implementacion`, `nombre_doc`) VALUES
+INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_cumplimentacion`, `nombre_doc`) VALUES
 (1,2,1,'vigente','15-05-2021','nombre_doc');
 
 INSERT INTO EDIFICIO_PLAN (`edificio_id`, `plan_id`, `fecha_asignacion`, `estado`) VALUES
