@@ -108,4 +108,18 @@ class DefFormat_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function searchBuildingPlanFormations($edificio_id) {
+        $this->query = "
+            SELECT * FROM FORMACION
+            WHERE plan_id = '$this->plan_id' AND
+                  formacion_id IN (
+                      SELECT formacion_id
+                      FROM EDIFICIO_FORMACION
+                      WHERE edificio_id = '$edificio_id'
+                  )";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
 }

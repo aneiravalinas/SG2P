@@ -107,4 +107,20 @@ class DefProc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function searchBuildingPlanProcedures($edificio_id) {
+        $this->query = "
+            SELECT * FROM PROCEDIMIENTO
+            WHERE
+                plan_id = '$this->plan_id' AND
+                procedimiento_id IN (
+                    SELECT procedimiento_id
+                    FROM EDIFICIO_PROCEDIMIENTO
+                    WHERE edificio_id = '$edificio_id'
+                )
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
 }

@@ -30,6 +30,15 @@ class Plan_Validation extends BuildingPlans_Validation {
         return $validacion;
     }
 
+    function validar_atributos_seek() {
+        $validation = $this->validar_EDIFICIO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        return $this->validar_PLAN_ID();
+    }
+
     function validar_NOMBRE_PLAN() {
         if(!$this->longitud_minima($this->nombre_plan, 5)) {
             return $this->rellena_validation(false, 'DFPLAN_NAM_SHRT', 'BLD_PLAN');

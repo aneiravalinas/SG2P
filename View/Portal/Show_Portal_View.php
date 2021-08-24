@@ -38,6 +38,7 @@ class Show_Portal {
                             </a>
                         </div>
                     </div>
+
                     <div class="col-lg-4 col-xl-3 col-sm-6 d-flex align-items-stretch panel-option" data-aos="zoom-in" data-aos-delay="200">
                         <div class="icon-box">
                             <a type="button" onclick="
@@ -50,6 +51,23 @@ class Show_Portal {
                                     <div class="icon"><i class="iconify icon-portal" data-icon="vs:floors" data-inline="false"></i></div>
                                     <h4 class="title i18n-floors">Plantas</h4>
                                     <span class="i18n-floors-info">Consulta la información de las plantas y de los espacios del edificio</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-xl-3 col-sm-6 d-flex align-items-stretch panel-option" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="icon-box">
+                            <a type="button" onclick="
+                                    crearform('formenviar','post');
+                                    insertacampo(document.formenviar,'edificio_id','<?php echo $this->building['edificio_id'] ?>');
+                                    insertacampo(document.formenviar,'action','showPortalPlans');
+                                    insertacampo(document.formenviar,'controller','Portal');
+                                    enviaform(document.formenviar);">
+                                <div>
+                                    <div class="icon"><i class="iconify icon-portal" data-icon="fluent:document-16-filled" data-inline="false"></i></div>
+                                    <h4 class="title i18n-prevent_plans">Planes de Prevención</h4>
+                                    <span class="i18n-prevent_plans-info">Consulta la información de los Planes de Prevención del Edificio</span>
                                 </div>
                             </a>
                         </div>

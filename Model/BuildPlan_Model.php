@@ -79,8 +79,8 @@ class BuildPlan_Model extends Abstract_Model {
             FROM EDIFICIO_PLAN
             INNER JOIN EDIFICIO
             ON EDIFICIO_PLAN.edificio_id = EDIFICIO.edificio_id
-            WHERE plan_id = '$this->plan_id' AND
-                  edificio_id LIKE '%" . $this->edificio_id . "%' AND
+            WHERE EDIFICIO_PLAN.plan_id = '$this->plan_id' AND
+                  EDIFICIO_PLAN.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                   estado LIKE '%" . $this->estado . "%' AND
                   fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
                   fecha_implementacion LIKE '%" . $this->fecha_implementacion . "%' AND
@@ -148,13 +148,13 @@ class BuildPlan_Model extends Abstract_Model {
                 ON EDIFICIO.edificio_id = EDIFICIO_PLAN.edificio_id
             INNER JOIN PLAN
                 ON PLAN.plan_id = EDIFICIO_PLAN.plan_id
-            WHERE plan_id LIKE '%" . $this->plan_id . "%' AND
-                  edificio_id LIKE '%" . $this->edificio_id . "%' AND
+            WHERE EDIFICIO_PLAN.plan_id LIKE '%" . $this->plan_id . "%' AND
+                  EDIFICIO_PLAN.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                   estado LIKE '%" . $this->estado . "%' AND
                   fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
                   fecha_implementacion LIKE '%" . $this->fecha_implementacion . "%' AND
                   EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
-                  PLAN.nombre LIKE '%" . $this->nombre_plan . "%' AND
+                  PLAN.nombre LIKE '%" . $this->nombre_plan . "%'
             ORDER BY estado, edificio_id, plan_id
         ";
 
@@ -170,19 +170,32 @@ class BuildPlan_Model extends Abstract_Model {
                 ON EDIFICIO.edificio_id = EDIFICIO_PLAN.edificio_id
             INNER JOIN PLAN
                 ON PLAN.plan_id = EDIFICIO_PLAN.plan_id
-            WHERE plan_id LIKE '%" . $this->plan_id . "%' AND
-                  edificio_id LIKE '%" . $this->edificio_id . "%' AND
+            WHERE EDIFICIO_PLAN.plan_id LIKE '%" . $this->plan_id . "%' AND
+                  EDIFICIO_PLAN.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                   estado LIKE '%" . $this->estado . "%' AND
                   fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
                   fecha_implementacion LIKE '%" . $this->fecha_implementacion . "%' AND
                   EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
                   PLAN.nombre LIKE '%" . $this->nombre_plan . "%' AND
-                  edificio_id IN (
-                    SELECT edificio_id
-                    FROM EDIFICIO
-                    WHERE username = '$username'
-                  )
+                  EDIFICIO.username = '$username'
             ORDER BY estado, edificio_id, plan_id
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchPortalPlans() {
+        $this->query = "
+            SELECT EDIFICIO_PLAN.*, PLAN.nombre AS nombre_plan
+            FROM EDIFICIO_PLAN
+            INNER JOIN PLAN
+                ON PLAN.plan_id = EDIFICIO_PLAN.plan_id
+            WHERE
+                edificio_id = '$this->edificio_id' AND
+                estado != 'vencido' AND
+                PLAN.nombre LIKE '%" . $this->nombre_plan . "%'
+            ORDER BY estado DESC, plan_id
         ";
 
         $this->get_results_from_query();

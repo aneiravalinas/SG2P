@@ -165,6 +165,18 @@ class Show_DefPlans {
                         </table>
                     </div>
                 </div>
+
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+                        <a class="btn-get-started i18n-back" type="button" onclick="
+                            crearform('formenviar','post');
+                            insertacampo(document.formenviar,'controller','Panel');
+                            insertacampo(document.formenviar,'action','deshboard');
+                            enviaform(document.formenviar);">
+                            Volver
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 

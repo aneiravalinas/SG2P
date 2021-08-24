@@ -12,7 +12,7 @@ class ImpProc_Model extends Abstract_Model {
     var $nombre_doc;
 
     function __construct() {
-        $this->atributos = array('edificio_procedimiento_id','edificio_id','procedimiento_id','etado','fecha_implementacion','nombre_doc');
+        $this->atributos = array('edificio_procedimiento_id','edificio_id','procedimiento_id','estado','fecha_implementacion','nombre_doc');
         $this->fill_fields();
     }
 

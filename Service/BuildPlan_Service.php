@@ -353,7 +353,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         include_once './Model/ImpDoc_Model.php';
         $impDoc_entity = new ImpDoc_Model();
         $impDoc_entity->setAttributes(array('edificio_id' => $edificio_id, 'documento_id' => $doc['documento_id'],
-                                            'estado' => 'pendiente','fecha_implementacion' => default_data, 'nombre_doc' => default_doc));
+                                            'estado' => 'pendiente', 'fecha_implementacion' => default_data, 'nombre_doc' => default_doc));
         $feedback = $impDoc_entity->ADD();
         if($feedback['ok']) {
             $feedback = $this->create_impdocs($edificio_id, $docs, $path);

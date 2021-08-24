@@ -542,6 +542,16 @@ arrayGA = {
         'BLDPLAN_CANDIDATES_OK' : 'Búsqueda de edificios asignables ó plan Ok',
         'BLDPLAN_CANDIDATES_KO' : 'Erro ó recuperar os edificios asignables ó plan',
 
+    // PLANS
+
+        // SEARCH
+        'PLAN_SEARCH_OK' : 'A búsqueda de plans realizouse correctamente',
+        'PLAN_SEARCH_KO' : 'Erro ó buscar plans',
+
+        // Búsqueda de Planes del Portal
+        'PRTL_PLANS_SEARCH_OK' : 'A búsqueda dos plans do portal realizouse correctamente',
+        'PRTL_PLANS_SEARCH_KO' : 'Erro ó buscar os plans do portal',
+
 
         // Validaciones
 
@@ -760,6 +770,7 @@ arrayGA = {
         'i18n-profile' : 'Meu Perfil',
         'i18n-buildings' : 'Edificios',
         'i18n-admin-plans' : 'Administrar Plans',
+        'i18n-manage-plans' : 'Xestionar Plans',
 
         // USER VIEWS
         'i18n-dni' : 'DNI',
@@ -839,6 +850,8 @@ arrayGA = {
         'i18n-portal-floors-empty' : 'Este edificio aínda non ten plantas rexistradas',
         'i18n-piso' : 'Piso número: ',
         'i18n-floor-spaces' : 'Espazos da Planta',
+        'i18n-prevent_plans' : 'Plans Prevención',
+        'i18n-prevent_plans-info' : 'Consulta a información dos Plans de Prevención do Edificio',
 
         // DEF_PLANS VIEW
         'i18n-def-plans' : 'Definicións de Plans',
@@ -925,6 +938,18 @@ arrayGA = {
         'i18n-expire_all' : 'Vencer TODAS',
         'i18n-expireAll-bldplan-confirm' : '¿Está seguro que desexa vencer TODAS as asignacións deste Plan? O cambio non será reversible',
         'i18n-nombre_edificio' : 'Nome Edificio',
+
+        // PLANS
+        'i18n-plan' : 'Plan',
+        'i18n-list-plans-empty' : 'Non se atoparon asignacións de plans',
+        'i18n-list-plans' : 'Listado de Plans',
+        'i18n-documentos' : 'Documentos',
+        'i18n-procedimientos' : 'Procedementos',
+        'i18n-rutas' : 'Rutas',
+        'i18n-formaciones' : 'Formacións',
+        'i18n-simulacros' : 'Simulacros',
+        'i18n-info_plan' : 'Información do Plan',
+        'i18n-elements_plan' : 'Elementos do Plan',
 
 
         // MODAL

@@ -92,4 +92,16 @@ class Portal {
             new Message($feedback['code'],'Portal','getPortal');
         }
     }
+
+    function showPortalPlans() {
+        include_once './Service/Plan_Service.php';
+        $plan_service = new Plan_Service();
+        $feedback = $plan_service->searchPortalPlans();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_Plans_View.php';
+            new Portal_Plans($feedback['resource'], $feedback['building']);
+        } else {
+            new Message($feedback['code'],'Portal','getPortal');
+        }
+    }
 }

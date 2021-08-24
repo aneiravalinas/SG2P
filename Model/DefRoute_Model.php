@@ -110,5 +110,22 @@ class DefRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function searchBuildingPlanRoutes($edificio_id) {
+        $this->query = "
+            SELECT * FROM RUTA
+            WHERE
+                plan_id = '$this->plan_id' AND
+                ruta_id IN (
+                    SELECT PLANTA_RUTA.ruta_id
+                    FROM PLANTA_RUTA
+                    INNER JOIN PLANTA
+                        ON PLANTA_RUTA.planta_id = PLANTA.planta_id
+                    WHERE PLANTA.edificio_id = '$edificio_id'   
+                )
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
 
 }

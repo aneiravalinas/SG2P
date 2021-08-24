@@ -113,4 +113,25 @@ class DefDoc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function searchBuildingPlanDocuments($edificio_id) {
+        $this->query = "
+            SELECT * FROM DOCUMENTO
+            WHERE
+                plan_id = '$this->plan_id' AND
+                documento_id IN (SELECT documento_id
+                                 FROM EDIFICIO_DOCUMENTO
+                                 WHERE edificio_id = '$edificio_id')   
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function setAttributes($atributos) {
+        foreach($this->atributos as $atributo) {
+            if(isset($atributos[$atributo])) {
+                $this->$atributo = $atributos[$atributo];
+            }
+        }
+    }
 }

@@ -43,6 +43,7 @@
     <script text="text/javascript" src="./View/js/validaciones_DefFormat.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_DefSim.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_BuildPlan.js"></script>
+    <script text="text/javascript" src="./View/js/validaciones_Plan.js"></script>
     <script type="text/javascript" src="./View/js/md5.js"></script>
 
 </head>

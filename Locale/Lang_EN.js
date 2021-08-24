@@ -542,6 +542,16 @@ arrayEN = {
         'BLDPLAN_CANDIDATES_OK' : 'Search for buildings assignable to plan Ok',
         'BLDPLAN_CANDIDATES_KO' : 'Failed to retrieve assignable buildings to plan',
 
+    // PLANS
+
+        // SEARCH
+        'PLAN_SEARCH_OK' : 'Plan search was successful',
+        'PLAN_SEARCH_KO' : 'Failed to search for plans',
+
+        // Búsqueda de Planes del Portal
+        'PRTL_PLANS_SEARCH_OK' : 'The portal plan search was successful',
+        'PRTL_PLANS_SEARCH_KO' : 'Failed to find portal plans',
+
         // Validaciones
 
             // Nombre de Usuario
@@ -757,7 +767,8 @@ arrayEN = {
         'i18n-users': 'Users',
         'i18n-profile' : 'My Profile',
         'i18n-buildings' : 'Buildings',
-        'i18n-admin-plans' : 'Manage Plans',
+        'i18n-admin-plans' : 'Administrate Plans',
+        'i18n-manage-plans' : 'Manage Plans',
 
         // USER VIEWS
         'i18n-dni' : 'DNI',
@@ -837,6 +848,8 @@ arrayEN = {
         'i18n-portal-floors-empty' : 'This building does not have registered floors yet',
         'i18n-piso' : 'Floor number: ',
         'i18n-floor-spaces' : 'Floor Spaces',
+        'i18n-prevent_plans' : 'Prevention Plans',
+        'i18n-prevent_plans-info' : 'Consult the information on the Building Prevention Plans',
 
         // DEF_PLANS VIEW
         'i18n-def-plans' : 'Definitions of Plans',
@@ -923,6 +936,18 @@ arrayEN = {
         'i18n-expire_all' : 'Expire ALL',
         'i18n-expireAll-bldplan-confirm' : 'Are you sure you want to expire ALL assignments in this Plan? The change will not be reversible',
         'i18n-nombre_edificio' : 'Building Name',
+
+        // PLANS
+        'i18n-plan' : 'Plan',
+        'i18n-list-plans-empty' : 'No Plan assignments found',
+        'i18n-list-plans' : 'List of Plans',
+        'i18n-documentos' : 'Documents',
+        'i18n-procedimientos' : 'Procedures',
+        'i18n-rutas' : 'Routes',
+        'i18n-formaciones' : 'Formations',
+        'i18n-simulacros' : 'Simulacrums',
+        'i18n-info_plan' : 'Plan Information',
+        'i18n-elements_plan' : 'Plan elements',
 
         // MODAL
             // Campos Modal

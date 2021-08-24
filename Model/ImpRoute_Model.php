@@ -112,6 +112,20 @@ class ImpRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function searchRoutesBuildings($edificio_id) {
+        $this->query = "
+            SELECT PLANTA_RUTA.*
+            FROM PLANTA_RUTA
+            INNER JOIN PLANTA
+                ON PLANTA_RUTA.planta_id = PLANTA.planta_id
+            WHERE ruta_id = '$this->ruta_id' AND
+                  PLANTA.edificio_id = '$edificio_id'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
     function setAttributes($atributos) {
         foreach($this->atributos as $atributo) {
             if(isset($atributos[$atributo])) {

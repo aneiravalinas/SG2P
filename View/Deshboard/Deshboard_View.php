@@ -67,6 +67,20 @@ class Deshboard {
                             </a>
                         </div>
                     </div>
+                        <div class="col-lg-4 col-sm-6 col-xl-3 d-flex align-items-stretch panel-option" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="icon-box">
+                                <a type="button" onclick="
+                                    crearform('formenviar','post');
+                                    insertacampo(document.formenviar,'action','show');
+                                    insertacampo(document.formenviar,'controller','Plan');
+                                    enviaform(document.formenviar);">
+                                    <div>
+                                        <div class="icon"><i class="iconify" data-icon="carbon:document-attachment"></i></div>
+                                        <h4 class="title i18n-manage-plans">Gestionar Planes</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     <?php endif; ?>
 
                     <?php if(es_resp_organizacion() || es_admin()): ?>

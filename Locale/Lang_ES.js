@@ -546,6 +546,16 @@ arrayES = {
         'BLDPLAN_CANDIDATES_OK' : 'Búsqueda de edificios asignables al plan Ok',
         'BLDPLAN_CANDIDATES_KO' : 'Error al recuperar los edificios asignables al plan',
 
+    // PLANS
+
+        // SEARCH
+        'PLAN_SEARCH_OK' : 'La búsqueda de planes se ha realizado correctamente',
+        'PLAN_SEARCH_KO' : 'Error al buscar planes',
+
+        // Búsqueda de Planes del Portal
+        'PRTL_PLANS_SEARCH_OK' : 'La búsqueda de planes del portal se ha realizado correctamente',
+        'PRTL_PLANS_SEARCH_KO' : 'Error al buscar los planes del portal',
+
 
 
         // Validaciones
@@ -766,6 +776,7 @@ arrayES = {
         'i18n-profile' : 'Mi Perfil',
         'i18n-buildings' : 'Edificios',
         'i18n-admin-plans' : 'Administrar Planes',
+        'i18n-manage-plans' : 'Gestionar Planes',
 
         // USER VIEWS
         'i18n-dni' : 'DNI',
@@ -845,6 +856,8 @@ arrayES = {
         'i18n-portal-floors-empty' : 'Este edificio no tiene plantas registradas todavía',
         'i18n-piso' : 'Piso número: ',
         'i18n-floor-spaces' : 'Espacios de la Planta',
+        'i18n-prevent_plans' : 'Planes de Prevención',
+        'i18n-prevent_plans-info' : 'Consulta la información de los Planes de Prevención del Edificio',
 
         // DEF_PLANS VIEW
         'i18n-def-plans' : 'Definiciones de Planes',
@@ -930,6 +943,20 @@ arrayES = {
         'i18n-expire_all' : 'Vencer TODAS',
         'i18n-expireAll-bldplan-confirm' : '¿Está seguro que desea vencer TODAS las asignaciones de este Plan? El cambio no será reversible',
         'i18n-nombre_edificio' : 'Nombre Edificio',
+
+        // PLANS
+        'i18n-plan' : 'Plan',
+        'i18n-list-plans-empty' : 'No se encontraron asignaciones de Planes',
+        'i18n-list-plans' : 'Listado de Planes',
+        'i18n-documentos' : 'Documentos',
+        'i18n-procedimientos' : 'Procedimientos',
+        'i18n-rutas' : 'Rutas',
+        'i18n-formaciones' : 'Formaciones',
+        'i18n-simulacros' : 'Simulacros',
+        'i18n-info_plan' : 'Información del Plan',
+        'i18n-elements_plan' : 'Elementos del Plan',
+
+
 
         // MODAL
             // Campos Modal

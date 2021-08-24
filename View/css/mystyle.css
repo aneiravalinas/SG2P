@@ -105,13 +105,25 @@
 }
 
 .pendiente {
-    color: #cb7d18;
+    color: #cb7d18 !important;
 }
 
 .vencido {
-    color: gray;
+    color: gray !important;
 }
 
 .implementado {
-    color: forestgreen;
+    color: forestgreen !important;
+}
+
+.hero-section {
+    min-height: auto !important;
+}
+
+.att-icon, .att-field {
+    color: #124265 !important;
+}
+
+.att-field, .att-value {
+    font-weight: bold !important;
 }

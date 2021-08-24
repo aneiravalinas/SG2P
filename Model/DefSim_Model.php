@@ -108,4 +108,19 @@ class DefSim_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function searchBuildingPlanSimulacrums($edificio_id) {
+        $this->query = "
+            SELECT * FROM SIMULACRO
+            WHERE
+                plan_id = '$this->plan_id' AND
+                simulacro_id IN (
+                    SELECT simulacro_id
+                    FROM EDIFICIO_SIMULACRO
+                    WHERE edificio_id = '$edificio_id'
+                )";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
 }
