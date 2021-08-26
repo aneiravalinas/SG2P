@@ -104,4 +104,16 @@ class Portal {
             new Message($feedback['code'],'Portal','getPortal');
         }
     }
+
+    function seekPortalPlan() {
+        include_once './Service/Plan_Service.php';
+        $plan_service = new Plan_Service();
+        $feedback = $plan_service->seekPortalPlan();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_ShowCurrent_Plan_View.php';
+            new Portal_ShowCurrent_Plan($feedback['resource'], $feedback['edificio'], $feedback['plan'], $feedback['definiciones']);
+        } else {
+            new Message($feedback['code'],'Portal','getPortal');
+        }
+    }
 }

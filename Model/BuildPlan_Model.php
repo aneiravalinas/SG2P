@@ -195,7 +195,7 @@ class BuildPlan_Model extends Abstract_Model {
                 edificio_id = '$this->edificio_id' AND
                 estado != 'vencido' AND
                 PLAN.nombre LIKE '%" . $this->nombre_plan . "%'
-            ORDER BY estado DESC, plan_id
+            ORDER BY estado DESC
         ";
 
         $this->get_results_from_query();

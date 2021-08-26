@@ -548,9 +548,43 @@ arrayGA = {
         'PLAN_SEARCH_OK' : 'A búsqueda de plans realizouse correctamente',
         'PLAN_SEARCH_KO' : 'Erro ó buscar plans',
 
+        // SEEK
+        'PLAN_SEEK_FRBD' : 'Non ten permisos pra consultar plans neste edificio',
+        'PLAN_SEEK_OK' : 'Consultáronse os detalles do plan correctamente',
+
         // Búsqueda de Planes del Portal
         'PRTL_PLANS_SEARCH_OK' : 'A búsqueda dos plans do portal realizouse correctamente',
         'PRTL_PLANS_SEARCH_KO' : 'Erro ó buscar os plans do portal',
+
+    // IMP_DOCS
+
+        // SEARCH
+        'IMPDOC_SEARCH_OK' : 'A búsqueda de cumplimentacións do documento realizouse correctamente',
+        'IMPDOC_SEARCH_KO' : 'Erro ó buscar cumplimentacións do documento',
+
+    // IMP_PROCS
+
+        // SEARCH
+        'IMPPROC_SEARCH_OK' : 'A búsqueda de cumplimentacións do procedemento realizouse correctamente',
+        'IMPPROC_SEARCH_KO' : 'Erro ó buscar cumplimentacións do procedimiento',
+
+    // IMP_ROUTES
+
+        // SEARCH
+        'IMPROUTE_SEARCH_OK' : 'A búsqueda de cumplimentacións da ruta realizouse correctamente',
+        'IMPROUTE_SEARCH_KO' : 'Erro ó buscar cumplimentacións da ruta',
+
+    // IMP_FORMAT
+
+        // SEARCH
+        'IMPFORMAT_SEARCH_OK' : 'A búsqueda de cumplimentacións da formación realizouse correctamente',
+        'IMPFORMAT_SEARCH_KO' : 'Erro ó buscar cumplimentacións da formación',
+
+    // IMP_SIM
+
+        // SEARCH
+        'IMPSIM_SEARCH_OK' : 'A búsqueda de cumplimentacións do simulacro realizouse correctamente',
+        'IMPSIM_SEARCH_KO' : 'Erro ó buscar cumplimentacións do simulacro',
 
 
         // Validaciones

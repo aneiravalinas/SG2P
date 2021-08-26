@@ -548,9 +548,43 @@ arrayEN = {
         'PLAN_SEARCH_OK' : 'Plan search was successful',
         'PLAN_SEARCH_KO' : 'Failed to search for plans',
 
+        // SEEK
+        'PLAN_SEEK_FRBD' : 'You do not have permission to consult plans in this building',
+        'PLAN_SEEK_OK' : 'Plan details were successfully consulted',
+
         // Búsqueda de Planes del Portal
         'PRTL_PLANS_SEARCH_OK' : 'The portal plan search was successful',
         'PRTL_PLANS_SEARCH_KO' : 'Failed to find portal plans',
+
+    // IMP_DOCS
+
+        // SEARCH
+        'IMPDOC_SEARCH_OK' : 'The search for document completions was successful',
+        'IMPDOC_SEARCH_KO' : 'Error looking for document completions',
+
+    // IMP_PROCS
+
+        // SEARCH
+        'IMPPROC_SEARCH_OK' : 'The search for completions of the procedure has been carried out correctly',
+        'IMPPROC_SEARCH_KO' : 'Error looking for procedure completions',
+
+    // IMP_ROUTES
+
+        // SEARCH
+        'IMPROUTE_SEARCH_OK' : 'The search for route completions was successful',
+        'IMPROUTE_SEARCH_KO' : 'Failed to search for route completions',
+
+    // IMP_FORMAT
+
+        // SEARCH
+        'IMPFORMAT_SEARCH_OK' : 'The search for formation completions has been carried out correctly',
+        'IMPFORMAT_SEARCH_KO' : 'Error when looking for formation completions',
+
+    // IMP_SIM
+
+        // SEARCH
+        'IMPSIM_SEARCH_OK' : 'The search for simulacrum completions has been carried out correctly',
+        'IMPSIM_SEARCH_KO' : 'Error when looking for simulacrum completions',
 
         // Validaciones
 

@@ -185,21 +185,21 @@ class BuildPlan_Service extends BuildPlan_Validation {
             return $validation;
         }
 
-        $this->feedback = $this->uploader->dir_exist(plans_path . $plan['nombre']);
+        $this->feedback = $this->uploader->dir_exist(plans_path . $plan['plan_id']);
         if(!$this->feedback['ok']) {
-            $this->feedback = $this->uploader->create_dir(plans_path, $plan['nombre']);
+            $this->feedback = $this->uploader->create_dir(plans_path, $plan['plan_id']);
             if(!$this->feedback['ok']) {
                 $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
                 $this->feedback['code'] = 'BLDPLAN_DIRPLAN_KO';
                 return $this->feedback;
             }
 
-            $this->feedback = $this->ADD($this->buildings, $docs, plans_path . $plan['nombre']);
+            $this->feedback = $this->ADD($this->buildings, $docs, plans_path . $plan['plan_id']);
             if(!$this->feedback['ok']) {
-                $this->uploader->delete(plans_path . $plan['nombre']);
+                $this->uploader->delete(plans_path . $plan['plan_id']);
             }
         } else {
-            $this->feedback = $this->ADD($this->buildings, $docs, plans_path . $plan['nombre']);
+            $this->feedback = $this->ADD($this->buildings, $docs, plans_path . $plan['plan_id']);
         }
 
         $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
@@ -279,10 +279,10 @@ class BuildPlan_Service extends BuildPlan_Validation {
                 $docs = $this->feedback['resource'];
                 $this->feedback = $this->delete_impDocs($building['edificio_id'], $docs);
                 if($this->feedback['ok']) {
-                    $this->uploader->delete_all(plans_path . $plan['nombre'] . '/' . $building['edificio_id']);
-                    $this->feedback = $this->uploader->dir_is_empty(plans_path . $plan['nombre']);
+                    $this->uploader->delete_all(plans_path . $plan['plan_id'] . '/' . $building['edificio_id']);
+                    $this->feedback = $this->uploader->dir_is_empty(plans_path . $plan['plan_id']);
                     if($this->feedback['ok']) {
-                        $this->uploader->delete(plans_path . $plan['nombre']);
+                        $this->uploader->delete(plans_path . $plan['plan_id']);
                     }
                     $this->feedback['code'] = 'BLDPLAN_DEL_OK';
                     $this->feedback['plan'] = $plan;
@@ -344,7 +344,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         }
 
         $doc = array_pop($docs);
-        $feedback = $this->uploader->create_dir($path . '/', $doc['nombre']);
+        $feedback = $this->uploader->create_dir($path . '/Documentos/', $doc['documento_id']);
         if(!$feedback['ok']) {
             $feedback['code'] = 'BLDPLAN_DIRDOC_KO';
             return $feedback;
@@ -481,7 +481,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         }
 
         $proc = array_pop($procs);
-        $feedback = $this->uploader->create_dir($path . '/', $proc['nombre']);
+        $feedback = $this->uploader->create_dir($path . '/Procedimientos/', $proc['procedimiento_id']);
         if(!$feedback['ok']) {
             $feedback['code'] = 'BLDPLAN_DIRPROC_KO';
             return $feedback;
@@ -625,7 +625,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         $impRoute_entity = new ImpRoute_Model();
         $feedback['ok'] = true;
         foreach($floors as $floor) {
-            $feedback = $this->uploader->create_dir($path . '/' . $route['nombre'] . '/', $floor['nombre']);
+            $feedback = $this->uploader->create_dir($path . '/Rutas/' . $route['ruta_id'] . '/', $floor['planta_id']);
             if(!$feedback['ok']) {
                 $feedback['code'] = 'BLDPLAN_DIRROUTE_KO';
                 break;

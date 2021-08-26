@@ -31,12 +31,25 @@ class Plan_Validation extends BuildingPlans_Validation {
     }
 
     function validar_atributos_seek() {
-        $validation = $this->validar_EDIFICIO_ID();
-        if(!$validation['ok']) {
-            return $validation;
+        $validacion = $this->validar_EDIFICIO_ID();
+        if(!$validacion['ok']) {
+            return $validacion;
         }
 
         return $this->validar_PLAN_ID();
+    }
+
+    function validar_atributos_search_portal() {
+        $validacion = $this->validar_EDIFICIO_ID();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        if($this->nombre_plan != '') {
+           $validacion = $this->validar_NOMBRE_PLAN();
+        }
+
+        return $validacion;
     }
 
     function validar_NOMBRE_PLAN() {

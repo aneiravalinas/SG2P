@@ -46,7 +46,7 @@ class Plan_Service extends Plan_Validation {
     }
 
     function searchPortalPlans() {
-        $validation = $this->validar_atributos_search();
+        $validation = $this->validar_atributos_search_portal();
         if(!$validation['ok']) {
             return $validation;
         }
@@ -122,6 +122,64 @@ class Plan_Service extends Plan_Validation {
         );
 
         return $this->feedback;
+    }
+
+    function seekPortalPlan() {
+        $validation = $this->validar_atributos_seek();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByBuildingID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $building = $this->feedback['resource'];
+
+        $this->feedback = $this->seekByPlanID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $plan = $this->feedback['resource'];
+
+        $this->feedback = $this->seekBldPlan();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $bld_plan = $this->feedback['resource'];
+
+        include_once './Service/CheckState_Service.php';
+        $checkState_service = new CheckState_Service($bld_plan['edificio_id'], $bld_plan['plan_id']);
+        $result = $checkState_service->checkStatePlan();
+        if(!$result['ok']) {
+            return $result;
+        }
+
+        $this->feedback['code'] = 'PLAN_SEEK_OK';
+        $this->feedback['edificio'] = $building;
+        $this->feedback['plan'] = $plan;
+        $this->feedback['definiciones'] = array(
+            'documentos' => $this->clear_not_visible_or_expired($checkState_service->documentos),
+            'procedimientos' => $this->clear_not_visible_or_expired($checkState_service->procedimientos),
+            'rutas' => $this->clear_not_visible_or_expired($checkState_service->rutas),
+            'formaciones' => $this->clear_not_visible_or_expired($checkState_service->formaciones),
+            'simulacros' => $this->clear_not_visible_or_expired($checkState_service->simulacros)
+        );
+
+        return $this->feedback;
+    }
+
+    function clear_not_visible_or_expired($elements) {
+        foreach($elements['elementos'] as $key => $element) {
+            if((isset($element['visible']) && $element['visible'] == 'no') || $element['estado'] == 'vencido') {
+                unset($elements[$key]);
+            }
+        }
+
+        return $elements;
     }
 
 
