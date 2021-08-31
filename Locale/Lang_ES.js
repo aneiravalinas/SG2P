@@ -587,6 +587,10 @@ arrayES = {
         'IMPDOC_IMPL_OK' : 'La cumplimentación del documento se ha completado correctamente',
         'IMPDOC_IMPL_KO' : 'Error al completar la cumplimentación del documento',
 
+        // Búsqueda de cumplimentaciones de documentos del portal
+        'PRTL_IMPDOC_SEARCH_OK' : 'La búsqueda de cumplimentaciones de documentos del portal se ha realizado correctamente',
+        'PRTL_IMPDOC_SEARCH_KO' : 'Error al buscar cumplimentaciones de documentos del portal',
+
         // Permisos
         'BLD_FRBD' : 'No dispone de los de los privilegios necesarios para realizar acciones sobre este edificio',
 
@@ -1057,7 +1061,7 @@ arrayES = {
         'i18n-nombre_doc' : 'Nombre Documento',
         'i18n-impdocs' : 'Cumplimentaciones del Documento',
         'i18n-info_doc' : 'Información del Documento',
-        'i18n-impdoc_id' : 'ID Cumplimentacion',
+        'i18n-cump_id' : 'ID Cumplimentacion',
         'i18n-add-impdoc' : 'Añadir Cumplimentaciones',
         'i18n-file_doc' : 'Fichero de la Cumplimentación',
         'i18n-nombre_defdoc' : 'Nombre del Documento',
@@ -1067,6 +1071,7 @@ arrayES = {
         'i18n-cump-doc' : 'Cumplimentar Documento',
         'i18n-actual-imp' : 'Cumplimentación Actual',
         'i18n-imp-details' : 'Detalles de la Cumplimentación',
+        'i18n-search-imps' : 'Buscar Cumplimentaciones',
 
 
 
@@ -1106,6 +1111,8 @@ arrayES = {
             'm-buildings[]' : ' Edificios ',
             'm-nombre_edificio' : ' Nombre Edificio ',
             'm-nombre_doc' : ' Fichero Cumplimentacion ',
+            'm-nombre_doc_field' : ' Nombre Documento ',
+            'm-cumplimentacion_id' : ' ID Cumplimentación ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',
@@ -1120,4 +1127,5 @@ arrayES = {
             'i18n-letters-numbers-accents-spaces' : 'sólo puede contener letras, números acentos y espacios',
             'i18n-chars-not_allow' : 'contiene caracteres no permitidos',
             'i18n-only-letters-numbers-hyphen' : 'sólo puede contener letras, números y guiones',
+            'i18n-filename-search-format' : 'Sólo puede contener letras, números, guiones, y sólo admite extensión .pdf',
 }

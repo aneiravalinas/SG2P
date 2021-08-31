@@ -579,6 +579,10 @@ arrayEN = {
         'IMPDOC_IMPL_OK' : 'The filling in of the document has been completed correctly',
         'IMPDOC_IMPL_KO' : 'Error completing the filling in of the document',
 
+        // Búsqueda de cumplimentaciones de documentos del portal
+        'PRTL_IMPDOC_SEARCH_OK' : 'The search for completions of portal documents has been carried out correctly',
+        'PRTL_IMPDOC_SEARCH_KO' : 'Error when searching for portal document completions',
+
         // Permisos
         'BLD_FRBD' : 'You do not have the necessary privileges to carry out actions on this building',
 
@@ -1045,13 +1049,17 @@ arrayEN = {
         'i18n-nombre_doc' : 'Document Name',
         'i18n-impdocs' : 'Document Completions',
         'i18n-info_doc' : 'Document Information',
-        'i18n-impdoc_id' : 'Completion ID',
+        'i18n-cump_id' : 'Completion ID',
         'i18n-add-impdoc' : 'Add Completions',
         'i18n-file_doc' : 'Completion File',
         'i18n-nombre_defdoc' : 'Document Name',
         'i18n-add-imp-doc-confirm' : 'Are you sure you want to add the following completion?',
         'i18n-del-imp-doc-confirm' : 'Are you sure you want to remove the completion of this document? The change will not be reversible',
         'i18n-expire-impdoc-confirm' : 'Are you sure you want to expire the completion of this document? The change will not be reversible',
+        'i18n-cump-doc' : 'Complete Document',
+        'i18n-actual-imp' : 'Current Completion',
+        'i18n-imp-details' : 'Completion Details',
+        'i18n-search-imps' : 'Search Completions',
 
         // MODAL
             // Campos Modal
@@ -1088,6 +1096,8 @@ arrayEN = {
             'm-buildings[]' : ' Buildings ',
             'm-nombre_edificio' : ' Building Name ',
             'm-nombre_doc' : ' File Completion ',
+            'm-nombre_doc_field' : ' Document Name ',
+            'm-cumplimentacion_id' : ' Completion ID ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',
@@ -1101,4 +1111,6 @@ arrayEN = {
             'i18n-cp-format' : 'must be a 5 digit number',
             'i18n-letters-numbers-accents-spaces' : 'can only contain letters, numbers, accents, and spaces',
             'i18n-chars-not_allow' : 'contains illegal characters',
+            'i18n-only-letters-numbers-hyphen' : 'can only contain letters, numbers and hyphens',
+            'i18n-filename-search-format' : 'It can only contain letters, numbers, hyphens, and only supports .pdf extension',
 }

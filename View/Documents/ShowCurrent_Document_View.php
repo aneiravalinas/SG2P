@@ -40,7 +40,7 @@ class ShowCurrent_Document {
                             <div class="col-lg-7">
                                 <ul>
                                     <li>
-                                        <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-impdoc_id">ID Cumplimentación</span>
+                                        <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-cump_id">ID Cumplimentación</span>
                                         <span class="d-block att-value"><?php echo $this->imp_doc['edificio_documento_id'] ?></span>
                                     </li>
                                     <li>

@@ -580,6 +580,10 @@ arrayGA = {
         'IMPDOC_IMPL_OK' : 'A cumplimentación do documento completouse correctamente',
         'IMPDOC_IMPL_KO' : 'Erro ó completar a cumplimentación do documento',
 
+        // Búsqueda de cumplimentaciones de documentos del portal
+        'PRTL_IMPDOC_SEARCH_OK' : 'A búsqueda de cumplimentacións de documentos do portal realizouse correctamente',
+        'PRTL_IMPDOC_SEARCH_KO' : 'Erro ó buscar cumplimentacións de documentos do portal',
+
         // Permisos
         'BLD_FRBD' : 'Non dispón dos privilexios necesarios para realizar accións neste edificio',
 
@@ -1046,13 +1050,17 @@ arrayGA = {
         'i18n-nombre_doc' : 'Nome Documento',
         'i18n-impdocs' : 'Cumplimentacións do Documento',
         'i18n-info_doc' : 'Información do Documento',
-        'i18n-impdoc_id' : 'ID Cumplimentacion',
+        'i18n-cump_id' : 'ID Cumplimentacion',
         'i18n-add-impdoc' : 'Engadir Cumplimentacións',
         'i18n-file_doc' : 'Ficheiro da Cumplimentación',
         'i18n-nombre_defdoc' : 'Nome do Documento',
         'i18n-add-imp-doc-confirm' : '¿Está seguro de que desexa engadir esta cumplimentación?',
         'i18n-del-imp-doc-confirm' : '¿Está seguro de que desexa eliminar a cumplimentación deste documento? O cambio non sera reversible',
         'i18n-expire-impdoc-confirm' : '¿Está seguro de que desexa vencer a cumplimentación deste documento? O cambio non será reversible',
+        'i18n-cump-doc' : 'Cumplimentar Documento',
+        'i18n-actual-imp' : 'Cumplimentación Actual',
+        'i18n-imp-details' : 'Detalles da Cumplimentación',
+        'i18n-search-imps' : 'Buscar Cumplimentacións',
 
 
         // MODAL
@@ -1090,6 +1098,8 @@ arrayGA = {
             'm-buildings[]' : ' Edificios ',
             'm-nombre_edificio' : ' Nome Edificio ',
             'm-nombre_doc' : ' Ficheiro Cumplimentacion ',
+            'm-nombre_doc_field' : ' Nome Documento ',
+            'm-cumplimentacion_id' : ' ID Cumplimentación ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',
@@ -1103,6 +1113,8 @@ arrayGA = {
             'i18n-cp-format' : 'debe ser un número de 5 díxitos',
             'i18n-letters-numbers-accents-spaces' : 'só pode conter letras, números, espacios e acentos',
             'i18n-chars-not_allow' : 'contén caracteres non permitidos',
+            'i18n-only-letters-numbers-hyphen' : 'só pode conter letras, números e guións',
+            'i18n-filename-search-format' : 'Só pode conter letras, números, guións, y só admite a extensión .pdf',
 
 
 }

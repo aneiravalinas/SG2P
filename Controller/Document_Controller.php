@@ -11,7 +11,7 @@ class Document {
     function show() {
         if(!es_registrado()) {
             $doc_service = new Document_Service();
-            $feedback = $doc_service->seekDocument();
+            $feedback = $doc_service->searchDocument();
             if($feedback['ok']) {
                 include_once './View/Documents/Show_Document_View.php';
                 new Show_Document($feedback['resource'], $feedback['document'], $feedback['building']);

@@ -244,6 +244,29 @@ function check_pattern(element, pattern) {
     }
 }
 
+function check_file_pdf_name(element, size) {
+    var correct = true;
+    var value = document.getElementById(element).value;
+    var name = document.getElementById(element).name;
+
+    if(value.size > size) {
+        openModal(name,'i18n-max-size');
+        correct = false;
+    }
+    var pattern = /^[a-zA-Z0-9_-]*(\.pdf)?$/;
+    if(!pattern.test(value)) {
+        openModal(name, 'i18n-filename-search-format');
+        correct = false;
+    }
+
+    if(correct) {
+        document.getElementById(element).style.borderColor = 'green';
+        return true;
+    } else {
+        document.getElementById(element).style.borderColor = 'red';
+        return false;
+    }
+}
 
 function check_only_numbers(element, size=null) {
     var correct = true;

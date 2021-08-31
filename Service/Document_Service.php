@@ -41,12 +41,7 @@ class Document_Service extends Document_Validation {
     }
 
     function searchImplements() {
-        $validation = $this->validar_DOCUMENTO_ID();
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->seekByDocID();
+        $this->feedback = $this->seekDocument();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
@@ -73,7 +68,7 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
-    function seekDocument() {
+    function searchDocument() {
         $validation = $this->validar_seek_document();
         if(!$validation['ok']) {
             return $validation;
@@ -176,13 +171,17 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
-    function addImpDocForm() {
+    function seekDocument() {
         $validation = $this->validar_DOCUMENTO_ID();
         if(!$validation['ok']) {
             return $validation;
         }
 
-        $this->feedback = $this->seekByDocID();
+        return $this->seekByDocID();
+    }
+
+    function addImpDocForm() {
+        $this->feedback = $this->seekDocument();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
@@ -199,12 +198,7 @@ class Document_Service extends Document_Validation {
     }
 
     function addDocumentForm() {
-        $validation = $this->validar_DOCUMENTO_ID();
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->seekByDocID();
+        $this->feedback = $this->seekDocument();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }

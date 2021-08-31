@@ -28,7 +28,7 @@ class Implement_ImpDoc {
                         <form name="formularioadd" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="form-group col-md-4">
-                                    <label for="edificio_documento_id" class="i18n-impdoc_id">ID Cumplimentación</label>
+                                    <label for="edificio_documento_id" class="i18n-cump_id">ID Cumplimentación</label>
                                     <input type="text" value="<?php echo $this->imp_doc['edificio_documento_id'] ?>" class="form-control" id="edificio_documento_id" name="edificio_documento_id" readonly/>
                                 </div>
                                 <div class="form-group col-md-4">

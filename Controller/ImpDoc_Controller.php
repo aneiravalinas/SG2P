@@ -161,5 +161,20 @@ class ImpDoc {
         }
     }
 
+    function searchForm() {
+        if($this->checkPermission()) {
+            $doc_service = new Document_Service();
+            $feedback = $doc_service->seekDocument();
+            if($feedback['ok']) {
+                include_once './View/ImpDocs/Search_ImpDoc_View.php';
+                new Search_ImpDoc($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
 
 }

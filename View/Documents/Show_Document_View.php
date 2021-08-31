@@ -108,7 +108,7 @@ class Show_Document {
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="i18n-impdoc_id text-center">ID Cumplimentacion</th>
+                                    <th scope="col" class="i18n-cump_id text-center">ID Cumplimentacion</th>
                                     <th scope="col" class="i18n-state text-center">Estado</th>
                                     <th scope="col" class="i18n-nombre_doc text-center">Nombre Documento</th>
                                     <th scope="col" class="i18n-date_comp text-center">Fecha Cumplimentación</th>
