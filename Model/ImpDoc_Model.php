@@ -10,9 +10,10 @@ class ImpDoc_Model extends Abstract_Model {
     var $estado;
     var $fecha_cumplimentacion;
     var $nombre_doc;
+    var $nombre_edificio;
 
     function __construct() {
-        $this->atributos = array('edificio_documento_id','edificio_id','documento_id','estado','fecha_cumplimentacion','nombre_doc');
+        $this->atributos = array('edificio_documento_id','edificio_id','documento_id','estado','fecha_cumplimentacion','nombre_doc','nombre_edificio');
         $this->fill_fields();
     }
 
@@ -71,11 +72,39 @@ class ImpDoc_Model extends Abstract_Model {
 
 
     function SEARCH() {
-        // TODO: Implement SEARCH() method.
+        $this->query = "
+            SELECT EDIFICIO_DOCUMENTO.*, EDIFICIO.nombre AS nombre_edificio
+            FROM EDIFICIO_DOCUMENTO
+            INNER JOIN EDIFICIO
+                ON EDIFICIO_DOCUMENTO.edificio_id = EDIFICIO.edificio_id
+            WHERE
+                edificio_documento_id LIKE '%" . $this->edificio_documento_id . "%' AND
+                EDIFICIO_DOCUMENTO.edificio_id LIKE '%" . $this->edificio_id . "%' AND
+                documento_id = '$this->documento_id' AND
+                estado LIKE '%" . $this->estado . "%' AND
+                fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
+                nombre_doc LIKE '%" . $this->nombre_doc . "%' AND
+                EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
     }
 
     function seek() {
-        // TODO: Implement seek() method.
+        $this->query = "
+            SELECT EDIFICIO_DOCUMENTO.*, EDIFICIO.nombre AS nombre_edificio, DOCUMENTO.nombre AS nombre_documento, DOCUMENTO.plan_id
+            FROM EDIFICIO_DOCUMENTO
+            INNER JOIN EDIFICIO
+                ON EDIFICIO_DOCUMENTO.edificio_id = EDIFICIO.edificio_id
+            INNER JOIN DOCUMENTO
+                ON EDIFICIO_DOCUMENTO.documento_id = DOCUMENTO.documento_id
+            WHERE
+                edificio_documento_id = '$this->edificio_documento_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
     function searchByDocID() {
@@ -93,6 +122,35 @@ class ImpDoc_Model extends Abstract_Model {
             SELECT * FROM EDIFICIO_DOCUMENTO
             WHERE edificio_id = '$this->edificio_id' AND
                   documento_id = '$this->documento_id'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchImpDocs() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_DOCUMENTO
+            WHERE
+                edificio_id = '$this->edificio_id' AND
+                documento_id = '$this->documento_id' AND
+                edificio_documento_id LIKE '%" . $this->edificio_documento_id . "%' AND
+                estado LIKE '%" . $this->estado . "%' AND
+                fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
+                nombre_doc LIKE '%" . $this->nombre_doc . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchActiveImpDocs() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_DOCUMENTO
+            WHERE
+                edificio_id = '$this->edificio_id' AND
+                documento_id = '$this->documento_id' AND
+                estado != 'vencido'
         ";
 
         $this->get_results_from_query();

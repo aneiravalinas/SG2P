@@ -6,6 +6,28 @@ class Uploader {
 
     }
 
+
+    function uploadFile($dir_path, $file_name) {
+        $temp = $_FILES['nombre_doc']['tmp_name'];
+        $feedback = $this->dir_exist($dir_path);
+        if(!$feedback['ok']) {
+            $feedback['ok'] = mkdir($dir_path, 0700, true);
+            if(!$feedback['ok']) {
+                $feedback['code'] = 'DIRFILE_IMPDIR_ADD_KO';
+            }
+        }
+
+        if(move_uploaded_file($temp, $dir_path . '/' . $file_name)) {
+            $feedback['ok'] = true;
+            $feedback['code'] = 'FILE_ADD_OK';
+        } else {
+            $feedback['ok'] = false;
+            $feedback['code'] = 'FILE_ADD_KO';
+        }
+
+        return $feedback;
+    }
+
     function uploadPhoto($dir_path, $field_name) {
         $temp = $_FILES[$field_name]['tmp_name'];
         $path = $_FILES[$field_name]['name'];

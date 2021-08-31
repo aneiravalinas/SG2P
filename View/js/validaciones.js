@@ -70,6 +70,26 @@ function check_letters_numbers(element, size) {
     }
 }
 
+function check_name_file(element) {
+    var correct = true;
+    var value = document.getElementById(element).value;
+    var name = document.getElementById(element).name;
+
+    var extension = value.substring(value.lastIndexOf('.')).toLowerCase();
+    if(extension !== '.pdf') {
+        openModal(name, 'i18n-ext-not-allowed');
+        correct = false;
+    }
+
+    if(correct) {
+        document.getElementById(element).style.borderColor = 'green';
+        return true;
+    } else {
+        document.getElementById(element).style.borderColor = 'red';
+        return false;
+    }
+}
+
 function check_dni(element) {
 
     var correct = true;

@@ -562,6 +562,53 @@ arrayEN = {
         'IMPDOC_SEARCH_OK' : 'The search for document completions was successful',
         'IMPDOC_SEARCH_KO' : 'Error looking for document completions',
 
+        // ADD
+        'IMPDOC_ADD_OK' : 'The document completions have been added correctly',
+        'IMPDOC_BLD_NOT_OWNED' : 'You do not have the necessary privileges to add completions in the indicated building',
+        'BLDDOC_ASSOC_NOT_VALID' : 'The association of the document plan with any of the indicated buildings is in an expired state',
+
+        // SEEK
+        'IMPDOC_SEEK_OK' : 'The details of the correct completion of the document have been consulted',
+        'IMPDOC_SEEK_KO' : 'Error when consulting the details of the completion of the document',
+
+        // EXPIRE
+        'IMPDOC_EXPIRE_OK' : 'Completion of the indicated document has been successfully expired',
+        'IMPDOC_EXPIRE_KO' : 'Error expiring the completion of the document',
+
+        // IMPLEMENTACION
+        'IMPDOC_IMPL_OK' : 'The filling in of the document has been completed correctly',
+        'IMPDOC_IMPL_KO' : 'Error completing the filling in of the document',
+
+        // Permisos
+        'BLD_FRBD' : 'You do not have the necessary privileges to carry out actions on this building',
+
+        // Búsqueda por id de cumplimentación del documento
+        'IMPDOCDID_NOT_EXST' : 'The completion of the indicated document does not exist',
+        'IMPDOCDID_EXST' : 'The completion of the document exists',
+        'IMPDOCDID_KO' : 'Error when consulting the completion of the document',
+
+        // Directorios
+        'DIRFILE_ROOT_NOT_EXST' : 'Definition base path does not exist',
+        'DIRFILE_IMP_ALR_EXST' : 'The directory of the completion already exists',
+        'DIRFILE_IMPDIR_ADD_KO' : 'Failed to create the filling directory',
+        'FILE_ADD_OK' : 'The file of the completion has been uploaded correctly',
+        'FILE_ADD_KO' : 'Error uploading the completion file',
+
+        // Búsqueda de asignaciones activas
+        'BLDDOC_ACTIVE_EMPT' : 'The plan to which the document belongs has no active associations with buildings',
+        'BLDDOC_ACTIVE_OK' : 'The plan that the document belongs to has active associations with buildings',
+        'BLDDOC_ACTIVE_KO' : 'Failed to query active plan associations with buildings',
+
+        // Búsqueda de cumplimentaciones del documento en un edificio
+        'IMPDOC_ACTIVE_EXST' : 'There are already active completions of this document in some of the buildings',
+        'IMPDOC_ACTIVE_NOT_EXST' : 'There are no active completions of this document',
+        'IMPDOC_ACTIVE_KO' : 'Error when consulting active completions',
+
+        // Asociación Documento - Edificio
+        'BLDDOC_NOT_EXST' : 'The indicated building has not been assigned the plan to which this document belongs',
+        'BLDDOC_EXST' : 'The indicated building is assigned the plan to which the document belongs',
+        'BLDDOC_KO' : 'Failed to query the association between the building and the document plan',
+
     // IMP_PROCS
 
         // SEARCH
@@ -585,6 +632,8 @@ arrayEN = {
         // SEARCH
         'IMPSIM_SEARCH_OK' : 'The search for simulacrum completions has been carried out correctly',
         'IMPSIM_SEARCH_KO' : 'Error when looking for simulacrum completions',
+        'DOC_SEEK_FRBD' : 'You do not have the necessary privileges to consult documents in this building',
+
 
         // Validaciones
 
@@ -773,6 +822,12 @@ arrayEN = {
             // Estado asignación entre Edificio y Plan
             'BLDPLAN_STATE_EMPT' : 'Assignment status cannot be empty',
             'BLDPLAN_STATE_KO' : 'The invalid status. Valid statuses are Pending, Completed, and Expired',
+
+            // NOMBRE_DOC
+            'FILENAME_EMPT' : 'The completion file cannot be empty',
+            'FILENAME_LRG' : 'The file name of the completion cannot exceed 50 characters',
+            'FILENAME_FRMT' : 'The file name of the completion can only contain letters, numbers and hyphens',
+            'FILENAME_EXT' : 'The completion file must be in pdf format',
 
 
 
@@ -983,6 +1038,21 @@ arrayEN = {
         'i18n-info_plan' : 'Plan Information',
         'i18n-elements_plan' : 'Plan elements',
 
+        // IMP_DOCS
+        'i18n-show-impdocs' : 'See Completions',
+        'i18n-implement' : 'Completions',
+        'i18n-imp-docs-empty' : 'No document completions were found',
+        'i18n-nombre_doc' : 'Document Name',
+        'i18n-impdocs' : 'Document Completions',
+        'i18n-info_doc' : 'Document Information',
+        'i18n-impdoc_id' : 'Completion ID',
+        'i18n-add-impdoc' : 'Add Completions',
+        'i18n-file_doc' : 'Completion File',
+        'i18n-nombre_defdoc' : 'Document Name',
+        'i18n-add-imp-doc-confirm' : 'Are you sure you want to add the following completion?',
+        'i18n-del-imp-doc-confirm' : 'Are you sure you want to remove the completion of this document? The change will not be reversible',
+        'i18n-expire-impdoc-confirm' : 'Are you sure you want to expire the completion of this document? The change will not be reversible',
+
         // MODAL
             // Campos Modal
             'modal-title' : '¡Warning!',
@@ -1017,6 +1087,7 @@ arrayEN = {
             'm-simulacro_id' : ' Simulacrum ID ',
             'm-buildings[]' : ' Buildings ',
             'm-nombre_edificio' : ' Building Name ',
+            'm-nombre_doc' : ' File Completion ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',

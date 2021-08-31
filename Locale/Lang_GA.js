@@ -561,6 +561,54 @@ arrayGA = {
         // SEARCH
         'IMPDOC_SEARCH_OK' : 'A búsqueda de cumplimentacións do documento realizouse correctamente',
         'IMPDOC_SEARCH_KO' : 'Erro ó buscar cumplimentacións do documento',
+        'DOC_SEEK_FRBD' : 'Non dispón dos privilexios necesarios pra consultar documentos neste edificio',
+
+        // ADD
+        'IMPDOC_ADD_OK' : 'Engadíronse as cumplimentacións do documento correctamente',
+        'IMPDOC_BLD_NOT_OWNED' : 'Non dispón dos privilexios necesarios pra engadir cumplimentacións neste edificio',
+        'BLDDOC_ASSOC_NOT_VALID' : 'A asociación do plan do documento con algún dos edificios indicados atópase en estado vencido',
+
+        // SEEK
+        'IMPDOC_SEEK_OK' : 'Consultáronse os detalles da cumplimentación do documento correctamente',
+        'IMPDOC_SEEK_KO' : 'Erro ó consultar os detalles da cumplimentación do documento',
+
+        // EXPIRE
+        'IMPDOC_EXPIRE_OK' : 'Venceuse correctamente a cumplimentación do documento',
+        'IMPDOC_EXPIRE_KO' : 'Erro ó vencer a cumplimentación do documento',
+
+        // IMPLEMENTACION
+        'IMPDOC_IMPL_OK' : 'A cumplimentación do documento completouse correctamente',
+        'IMPDOC_IMPL_KO' : 'Erro ó completar a cumplimentación do documento',
+
+        // Permisos
+        'BLD_FRBD' : 'Non dispón dos privilexios necesarios para realizar accións neste edificio',
+
+        // Búsqueda por id de cumplimentación del documento
+        'IMPDOCDID_NOT_EXST' : 'A cumplimentación do documento indicada non existe',
+        'IMPDOCDID_EXST' : 'A cumplimentación do documento existe',
+        'IMPDOCDID_KO' : 'Erro ó consultar a cumplimentación do documento',
+
+        // Directorios
+        'DIRFILE_ROOT_NOT_EXST' : 'A ruta base da definición non existe',
+        'DIRFILE_IMP_ALR_EXST' : 'O directorio da cumplimentación xa existe',
+        'DIRFILE_IMPDIR_ADD_KO' : 'Erro ó crear o directorio da cumplimentación',
+        'FILE_ADD_OK' : 'Subeuse o ficheiro da cumplimentación correctamente',
+        'FILE_ADD_KO' : 'Erro ó subir o ficheiro da cumplimentación',
+
+        // Búsqueda de asignaciones activas
+        'BLDDOC_ACTIVE_EMPT' : 'O plan ó que pertence o documento non ten asociacións activas con edificios',
+        'BLDDOC_ACTIVE_OK' : 'O plan ó que pertence o documento ten asociacións activas con edificios',
+        'BLDDOC_ACTIVE_KO' : 'Erro ó consultar asociacións activas con edificios',
+
+        // Búsqueda de cumplimentaciones del documento en un edificio
+        'IMPDOC_ACTIVE_EXST' : 'Xa existen cumplimentacións activas deste docuemnto nalgún dos edificios',
+        'IMPDOC_ACTIVE_NOT_EXST' : 'Non existen cumplimentacións activas deste documento',
+        'IMPDOC_ACTIVE_KO' : 'Erro ó consultar cumplimentacións activas',
+
+        // Asociación Documento - Edificio
+        'BLDDOC_NOT_EXST' : 'O edificio indicado non ten asignado o plan ó que pertence o documento',
+        'BLDDOC_EXST' : 'O edificio indicado ten asignado o plan ó que pertence o documento',
+        'BLDDOC_KO' : 'Erro ó consultar a asociación entre o edificio e o plan do documento',
 
     // IMP_PROCS
 
@@ -775,6 +823,12 @@ arrayGA = {
             'BLDPLAN_STATE_EMPT' : 'O estado da asignación non pode ser vacío',
             'BLDPLAN_STATE_KO' : 'O estado non é válido. Os estados válidos son Pendente, Cumplimentado e Vencido',
 
+            // NOMBRE_DOC
+            'FILENAME_EMPT' : 'O ficheiro da cumplimentación non pode estar vacío',
+            'FILENAME_LRG' : 'O nome do ficheiro da cumplimentación non pode superar os 50 caracteres',
+            'FILENAME_FRMT' : 'O nome do ficherio da cumplimentación só pode contener letras, números e guións',
+            'FILENAME_EXT' : 'O ficheiro da cumplimentación debe estar en formato pdf',
+
 
 
 
@@ -985,6 +1039,21 @@ arrayGA = {
         'i18n-info_plan' : 'Información do Plan',
         'i18n-elements_plan' : 'Elementos do Plan',
 
+        // IMP_DOCS
+        'i18n-show-impdocs' : 'Ver Cumplimentacións',
+        'i18n-implement' : 'Cumplimentar',
+        'i18n-imp-docs-empty' : 'Non se atoparon cumplimentacións do documento',
+        'i18n-nombre_doc' : 'Nome Documento',
+        'i18n-impdocs' : 'Cumplimentacións do Documento',
+        'i18n-info_doc' : 'Información do Documento',
+        'i18n-impdoc_id' : 'ID Cumplimentacion',
+        'i18n-add-impdoc' : 'Engadir Cumplimentacións',
+        'i18n-file_doc' : 'Ficheiro da Cumplimentación',
+        'i18n-nombre_defdoc' : 'Nome do Documento',
+        'i18n-add-imp-doc-confirm' : '¿Está seguro de que desexa engadir esta cumplimentación?',
+        'i18n-del-imp-doc-confirm' : '¿Está seguro de que desexa eliminar a cumplimentación deste documento? O cambio non sera reversible',
+        'i18n-expire-impdoc-confirm' : '¿Está seguro de que desexa vencer a cumplimentación deste documento? O cambio non será reversible',
+
 
         // MODAL
             // Campos Modal
@@ -1020,6 +1089,7 @@ arrayGA = {
             'm-simulacro_id' : ' ID Simulacro ',
             'm-buildings[]' : ' Edificios ',
             'm-nombre_edificio' : ' Nome Edificio ',
+            'm-nombre_doc' : ' Ficheiro Cumplimentacion ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',

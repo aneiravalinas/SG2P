@@ -127,3 +127,17 @@
 .att-field, .att-value {
     font-weight: bold !important;
 }
+
+.icon-pdf-form {
+    height: 25px;
+    width: 25px;
+    color: #bd3417;
+}
+
+.icon-pdf {
+    color: #bd3417;
+}
+
+.name_doc {
+    font-size: large;
+}

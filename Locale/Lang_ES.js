@@ -528,18 +528,18 @@ arrayES = {
         'BLDPLAN_KO' : 'Error al consultar asignaciones entre planes y edificios',
 
         // Implementaciones
-        'IMPDOC_ADD_KO' : 'Error al crear las implementaciones de los documentos',
-        'IMPDOC_DEL_KO' : 'Error al eliminar las implementaciones de los documentos',
-        'IMPPROC_ADD_KO' : 'Error al crear las implementaciones de los procedimientos',
-        'IMPPROC_DEL_KO' : 'Error al eliminar las implementaciones de los procedimientos',
-        'IMPROUTE_ADD_KO' : 'Error al crear las implementaciones de las rutas',
-        'IMPROUTE_DEL_KO' : 'Error al eliminar las implementaciones de las rutas',
-        'IMPFRMT_ADD_KO' : 'Error al crear las implementaciones de las formaciones',
-        'IMPFRMT_DEL_KO' : 'Error al eliminar las implementaciones de las formaciones',
-        'BLDPLAN_IMPADD_OK' : 'Se han creado las implementaciones correctamente',
-        'IMPSIM_ADD_KO' : 'Error al crear las implementaciones de los simulacros',
-        'IMPSIM_DEL_KO' : 'Error al eliminar las implementaciones de los simulacros',
-        'BLD_IMPDEL_OK' : 'Se han eliminado las implementaciones correctamente',
+        'IMPDOC_ADD_KO' : 'Error al crear las cumplimentaciones de los documentos',
+        'IMPDOC_DEL_KO' : 'Error al eliminar las cumplimentaciones de los documentos',
+        'IMPPROC_ADD_KO' : 'Error al crear las cumplimentaciones de los procedimientos',
+        'IMPPROC_DEL_KO' : 'Error al eliminar las cumplimentaciones de los procedimientos',
+        'IMPROUTE_ADD_KO' : 'Error al crear las cumplimentaciones de las rutas',
+        'IMPROUTE_DEL_KO' : 'Error al eliminar las cumplimentaciones de las rutas',
+        'IMPFRMT_ADD_KO' : 'Error al crear las cumplimentaciones de las formaciones',
+        'IMPFRMT_DEL_KO' : 'Error al eliminar las cumplimentaciones de las formaciones',
+        'BLDPLAN_IMPADD_OK' : 'Se han creado las cumplimentaciones correctamente',
+        'IMPSIM_ADD_KO' : 'Error al crear las cumplimentaciones de los simulacros',
+        'IMPSIM_DEL_KO' : 'Error al eliminar las cumplimentaciones de los simulacros',
+        'BLD_IMPDEL_OK' : 'Se han eliminado las cumplimentaciones correctamente',
 
         // Búsqueda de Edificios candidatos
         'BLDPLAN_CANDIDATES_EMPT' : 'No hay edificios asignables al plan',
@@ -566,6 +566,56 @@ arrayES = {
         // SEARCH
         'IMPDOC_SEARCH_OK' : 'La búsqueda de cumplimentaciones del documento se ha realizado correctamente',
         'IMPDOC_SEARCH_KO' : 'Error al buscar cumplimentaciones del documento',
+
+        // ADD
+        'IMPDOC_ADD_OK' : 'Se han añadido las cumplimentaciones del documento correctamente',
+        'IMPDOC_BLD_NOT_OWNED' : 'No dispone de los privilegios necesarios para añadir cumplimentaciones en el edificio indicado',
+        'BLDDOC_ASSOC_NOT_VALID' : 'La asociación del plan del documento con alguno de los edificios indicados se encuentra en estado vencido',
+
+        // SEEK
+        'IMPDOC_SEEK_OK' : 'Se han consultado los detalles de la cumplimentación del documento correctamente',
+        'IMPDOC_SEEK_KO' : 'Error al consultar los detalles de la cumplimentación del documento',
+
+        // DELETE
+        'IMPDOC_DEL_OK' : 'Se ha eliminado la cumplimentación del documento correctamente',
+
+        // EXPIRE
+        'IMPDOC_EXPIRE_OK' : 'Se ha vencido correctamente la cumplimentación del documento indicada',
+        'IMPDOC_EXPIRE_KO' : 'Error al vencer la cumplimentación del documento',
+
+        // IMPLEMENTACION
+        'IMPDOC_IMPL_OK' : 'La cumplimentación del documento se ha completado correctamente',
+        'IMPDOC_IMPL_KO' : 'Error al completar la cumplimentación del documento',
+
+        // Permisos
+        'BLD_FRBD' : 'No dispone de los de los privilegios necesarios para realizar acciones sobre este edificio',
+
+        // Búsqueda por id de cumplimentación del documento
+        'IMPDOCDID_NOT_EXST' : 'La cumplimentación del documento indicada no existe',
+        'IMPDOCDID_EXST' : 'La cumplimentación del documento existe',
+        'IMPDOCDID_KO' : 'Error al consultar la cumplimentación del documento',
+
+        // Directorios
+        'DIRFILE_ROOT_NOT_EXST' : 'La ruta base de la definición no existe',
+        'DIRFILE_IMP_ALR_EXST' : 'El directorio de la cumplimentación ya existe',
+        'DIRFILE_IMPDIR_ADD_KO' : 'Error al crear el directorio de la cumplimentación',
+        'FILE_ADD_OK' : 'Se ha subido el fichero de la cumplimentación correctamente',
+        'FILE_ADD_KO' : 'Error al subir el fichero de la cumplimentación',
+
+        // Búsqueda de asignaciones activas
+        'BLDDOC_ACTIVE_EMPT' : 'El plan al que pertenece el documento no tiene asociaciones activas con edificios',
+        'BLDDOC_ACTIVE_OK' : 'El plan al que pertenece el documento tiene asociaciones activas con edificios',
+        'BLDDOC_ACTIVE_KO' : 'Error al consultar asociaciones activas del plan con edificios',
+
+        // Búsqueda de cumplimentaciones del documento en un edificio
+        'IMPDOC_ACTIVE_EXST' : 'Ya existen cumplimentaciones activas de este documento en alguno de los edificios',
+        'IMPDOC_ACTIVE_NOT_EXST' : 'No existen cumplimentaciones activas de este documento',
+        'IMPDOC_ACTIVE_KO' : 'Error al consultar cumplimentaciones activas',
+
+        // Asociación Documento - Edificio
+        'BLDDOC_NOT_EXST' : 'El edificio indicado no tiene asignado el plan al que pertenece este documento',
+        'BLDDOC_EXST' : 'El edificio indicado tiene asignado el plan al que pertenece el documento',
+        'BLDDOC_KO' : 'Error al consultar la asociación entre el edificio y el plan del documento',
 
     // IMP_PROCS
 
@@ -785,6 +835,12 @@ arrayES = {
             'BLDPLAN_STATE_EMPT' : 'El estado de la asignación no puede ser vacío',
             'BLDPLAN_STATE_KO' : 'El estado no válido. Los estado válidos son Pendiente, Cumplimentado y Vencido',
 
+            // NOMBRE_DOC
+            'FILENAME_EMPT' : 'El fichero de la cumplimentación no puede ser vacío',
+            'FILENAME_LRG' : 'El nombre del fichero de la cumplimentación no puede superar los 50 caracteres',
+            'FILENAME_FRMT' : 'El nombre del fichero de la cumplimentación sólo puede contener letras, números y guiones',
+            'FILENAME_EXT' : 'El fichero de la cumplimentación debe estar en formato pdf',
+
 
 
 
@@ -994,6 +1050,25 @@ arrayES = {
         'i18n-info_plan' : 'Información del Plan',
         'i18n-elements_plan' : 'Elementos del Plan',
 
+        // IMP_DOCS
+        'i18n-show-impdocs' : 'Ver Cumplimentaciones',
+        'i18n-implement' : 'Cumplimentar',
+        'i18n-imp-docs-empty' : 'No se han encontrado cumplimentaciones del documento',
+        'i18n-nombre_doc' : 'Nombre Documento',
+        'i18n-impdocs' : 'Cumplimentaciones del Documento',
+        'i18n-info_doc' : 'Información del Documento',
+        'i18n-impdoc_id' : 'ID Cumplimentacion',
+        'i18n-add-impdoc' : 'Añadir Cumplimentaciones',
+        'i18n-file_doc' : 'Fichero de la Cumplimentación',
+        'i18n-nombre_defdoc' : 'Nombre del Documento',
+        'i18n-add-imp-doc-confirm' : '¿Está seguro que desea añadir la siguiente cumplimentación?',
+        'i18n-del-imp-doc-confirm' : '¿Está seguro que desea eliminar la cumplimentación de este documento? El cambio no será reversible',
+        'i18n-expire-impdoc-confirm' : '¿Está seguro que desea vencer la cumplimentación de este documento? El cambio no será reversible',
+        'i18n-cump-doc' : 'Cumplimentar Documento',
+        'i18n-actual-imp' : 'Cumplimentación Actual',
+        'i18n-imp-details' : 'Detalles de la Cumplimentación',
+
+
 
 
         // MODAL
@@ -1030,6 +1105,7 @@ arrayES = {
             'm-simulacro_id' : ' ID Simulacro ',
             'm-buildings[]' : ' Edificios ',
             'm-nombre_edificio' : ' Nombre Edificio ',
+            'm-nombre_doc' : ' Fichero Cumplimentacion ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',
@@ -1043,4 +1119,5 @@ arrayES = {
             'i18n-cp-format' : 'debe ser un número de 5 dígitos',
             'i18n-letters-numbers-accents-spaces' : 'sólo puede contener letras, números acentos y espacios',
             'i18n-chars-not_allow' : 'contiene caracteres no permitidos',
+            'i18n-only-letters-numbers-hyphen' : 'sólo puede contener letras, números y guiones',
 }

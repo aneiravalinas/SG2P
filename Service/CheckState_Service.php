@@ -2,6 +2,7 @@
 
 class CheckState_Service {
     const definiciones = array('documentos', 'procedimientos', 'rutas', 'formaciones', 'simulacros');
+    const msg_cump = 'El plan ha sido cumplimentado';
     var $edificio_id;
     var $plan_id;
     var $documentos;
@@ -11,7 +12,7 @@ class CheckState_Service {
     var $simulacros;
     var $resultado;
 
-    function __construct($edificio_id, $plan_id) {
+    function __construct($edificio_id = '', $plan_id = '') {
         $this->edificio_id = $edificio_id;
         $this->plan_id = $plan_id;
         $this->init_attributes();
@@ -33,6 +34,43 @@ class CheckState_Service {
             'estado' => '',
             'elementos' => array()
         );
+    }
+
+    function update_plan_state() {
+        $feedback = $this->checkStatePlan();
+        if($feedback['ok']) {
+            include_once './Model/BuildPlan_Model.php';
+            $buildPlan_entity = new BuildPlan_Model();
+            $buildPlan_entity->setAttributes(array('edificio_id' => $this->edificio_id, 'plan_id' => $this->plan_id));
+            $build_plan = $buildPlan_entity->seek()['resource'];
+            if($feedback['estado'] == 'pendiente') {
+                $buildPlan_entity->setAttributes(array('fecha_cumplimentacion' => default_data, 'estado' => 'pendiente'));
+            } else if($feedback['estado'] == 'cumplimentado') {
+                $buildPlan_entity->setAttributes(array('fecha_cumplimentacion' => date('Y-m-d'), 'estado' => 'cumplimentado'));
+            } else {
+                $buildPlan_entity->estado = 'vencido';
+            }
+            $buildPlan_entity->EDIT();
+            if($feedback['estado'] == 'cumplimentado' && $feedback['estado'] != $build_plan['estado']) {
+                $this->notificate_resp_org();
+            }
+        }
+    }
+
+    function notificate_resp_org() {
+        include_once './Model/User_Model.php';
+        $user_entity = new User_Model();
+        $feedback = $user_entity->searchByRol('organizacion');
+        if($feedback['ok']) {
+            include_once './Model/Notification_Model.php';
+            $notification_entity = new Notification_Model();
+            $notification_entity->setAttributes(array('edificio_id' => $this->edificio_id, 'plan_id' => $this->plan_id, 'mensaje' => self::msg_cump));
+            $managers = $feedback['resource'];
+            foreach($managers as $manager) {
+                $notification_entity->username = $manager['username'];
+                $notification_entity->ADD();
+            }
+        }
     }
 
     function checkStatePlan() {

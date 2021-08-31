@@ -93,6 +93,7 @@ class Show_BuildPlan {
                                                     enviaform(document.formenviar);">
                                                     Vencer
                                                 </a>
+                                                    <div class="dropdown-divider"></div>
                                                 <?php endif; ?>
                                                 <a class="dropdown-item i18n-delete" type="button" onclick="
                                                     crearform('formenviar','post');

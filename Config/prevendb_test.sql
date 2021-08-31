@@ -132,7 +132,7 @@ CREATE TABLE EDIFICIO_DOCUMENTO
     `documento_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
     `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
-    `nombre_doc` VARCHAR(20) NOT NULL DEFAULT 'empty',
+    `nombre_doc` VARCHAR(50) NOT NULL DEFAULT 'empty',
 
     CONSTRAINT `pk_edificio_documento` PRIMARY KEY (`edificio_documento_id`),
     CONSTRAINT `fk_edificio_documento_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
@@ -146,7 +146,7 @@ CREATE TABLE EDIFICIO_PROCEDIMIENTO
     `procedimiento_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
     `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
-    `nombre_doc` VARCHAR(20) NOT NULL,
+    `nombre_doc` VARCHAR(50) NOT NULL,
 
     CONSTRAINT `pk_edificio_procedimiento` PRIMARY KEY (`edificio_procedimiento_id`),
     CONSTRAINT `fk_edificio_procedimiento_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
@@ -160,7 +160,7 @@ CREATE TABLE PLANTA_RUTA
     `ruta_id` INT(10) NOT NULL,
     `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
     `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
-    `nombre_doc` VARCHAR(20) NOT NULL,
+    `nombre_doc` VARCHAR(50) NOT NULL,
 
     CONSTRAINT `pk_planta_ruta` PRIMARY KEY (`planta_ruta_id`),
     CONSTRAINT `fk_planta_ruta_to_planta` FOREIGN KEY (`planta_id`) REFERENCES PLANTA (`planta_id`),

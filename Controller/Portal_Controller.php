@@ -116,4 +116,30 @@ class Portal {
             new Message($feedback['code'],'Portal','getPortal');
         }
     }
+
+    function seekPortalDocument() {
+        include_once './Service/Document_Service.php';
+        $document_service = new Document_Service();
+        $feedback = $document_service->seekPortalDocument();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_ShowCurrent_Document_View.php';
+            new Portal_ShowCurrent_Document($feedback['resource'], $feedback['document'], $feedback['building']);
+        } else if(isset($feedback['return'])) {
+            new Message($feedback['code'], 'Portal', 'seekPortalPlan', $feedback['return']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'getPortal');
+        }
+    }
+
+    function seekPortalImpDoc() {
+        include_once './Service/Document_Service.php';
+        $document_service = new Document_Service();
+        $feedback = $document_service->seekPortalImpDoc();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_ShowCurrent_ImpDoc_View.php';
+            new Portal_ShowCurrent_ImpDoc($feedback['resource']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'getPortal');
+        }
+    }
 }

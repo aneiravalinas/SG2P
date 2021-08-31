@@ -13,7 +13,7 @@ class BuildPlan_Model extends Abstract_Model {
     var $nombre_plan;
 
     function __construct() {
-        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_impementacion','estado','nombre_edificio','nombre_plan');
+        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_cumplimentacion','estado','nombre_edificio','nombre_plan');
         $this->fill_fields();
     }
 
@@ -130,9 +130,12 @@ class BuildPlan_Model extends Abstract_Model {
 
     function searchActivesByPlanID() {
         $this->query = "
-            SELECT * FROM EDIFICIO_PLAN
+            SELECT EDIFICIO_PLAN.*, EDIFICIO.nombre AS nombre_edificio 
+            FROM EDIFICIO_PLAN
+            INNER JOIN EDIFICIO
+                ON EDIFICIO_PLAN.edificio_id = EDIFICIO.edificio_id
             WHERE 
-                  plan_id = '$this->plan_id' AND
+                  EDIFICIO_PLAN.plan_id = '$this->plan_id' AND
                   estado != 'vencido'
         ";
 
@@ -201,7 +204,6 @@ class BuildPlan_Model extends Abstract_Model {
         $this->get_results_from_query();
         return $this->feedback;
     }
-
 
     function setAttributes($atributos) {
         foreach($this->atributos as $atributo) {

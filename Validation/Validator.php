@@ -191,6 +191,11 @@ abstract class Validator {
         return in_array($extension,$extensiones);
     }
 
+    function extension_fichero($string) {
+        $extension = pathinfo($string)['extension'];
+        return $extension == 'pdf';
+    }
+
     function max_tamanho_imagen($image, $size) {
         return ($_FILES[$image]['size'] <= $size);
     }
@@ -199,6 +204,15 @@ abstract class Validator {
         $name = $_FILES[$image]['name'];
         $filename = pathinfo($name)['filename'];
 
+        if(preg_match('/[^a-zA-Z0-9\-\_]/', $filename)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function formato_nombre_fichero($string) {
+        $filename = pathinfo($string)['filename'];
         if(preg_match('/[^a-zA-Z0-9\-\_]/', $filename)) {
             return false;
         } else {
