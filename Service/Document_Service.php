@@ -152,7 +152,7 @@ class Document_Service extends Document_Validation {
             return $this->feedback;
         }
 
-        $this->feedback = $this->seekDocBuilding($document['documento_id']);
+        $this->feedback = $this->seekDocBuilding($document['plan_id']);
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
