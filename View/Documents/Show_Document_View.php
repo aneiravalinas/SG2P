@@ -85,8 +85,9 @@ class Show_Document {
                                 <a type="button" onclick="
                                     crearform('formenviar','post');
                                     insertacampo(document.formenviar,'documento_id','<?php echo $this->document['documento_id'] ?>');
+                                    insertacampo(document.formenviar,'edificio_id','<?php echo $this->building['edificio_id'] ?>');
                                     insertacampo(document.formenviar,'controller','Document');
-                                    insertacampo(document.formenviar,'action','searchImpDocsForm');
+                                    insertacampo(document.formenviar,'action','searchForm');
                                     enviaform(document.formenviar);">
                                     <span class="iconify option_button" data-icon="fluent:search-square-24-filled" data-inline="false"></span>
                                 </a>

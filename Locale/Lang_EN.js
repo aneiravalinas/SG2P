@@ -578,6 +578,7 @@ arrayEN = {
         // IMPLEMENTACION
         'IMPDOC_IMPL_OK' : 'The filling in of the document has been completed correctly',
         'IMPDOC_IMPL_KO' : 'Error completing the filling in of the document',
+        'COMPL_EXPIRED' : 'The action cannot be performed, the completion is expired',
 
         // Búsqueda de cumplimentaciones de documentos del portal
         'PRTL_IMPDOC_SEARCH_OK' : 'The search for completions of portal documents has been carried out correctly',
@@ -585,6 +586,10 @@ arrayEN = {
 
         // Permisos
         'BLD_FRBD' : 'You do not have the necessary privileges to carry out actions on this building',
+
+        // Búsqueda de cumplimentaciones por documento y edificio
+        'BLDDOCS_SEARCH_OK' : 'The search for completions was successful',
+        'BLDDOCS_SEARCH_KO' : 'Error searching for completions',
 
         // Búsqueda por id de cumplimentación del documento
         'IMPDOCDID_NOT_EXST' : 'The completion of the indicated document does not exist',

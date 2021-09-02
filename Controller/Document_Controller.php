@@ -159,4 +159,19 @@ class Document {
         }
     }
 
+    function searchForm() {
+        if(!es_registrado()) {
+            $doc_service = new Document_Service();
+            $feedback = $doc_service->searchDocumentForm();
+            if($feedback['ok']) {
+                include_once './View/Documents/Search_Document_View.php';
+                new Search_Document($feedback['document'], $feedback['building']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
 }

@@ -579,6 +579,7 @@ arrayGA = {
         // IMPLEMENTACION
         'IMPDOC_IMPL_OK' : 'A cumplimentación do documento completouse correctamente',
         'IMPDOC_IMPL_KO' : 'Erro ó completar a cumplimentación do documento',
+        'COMPL_EXPIRED' : 'Non se pode realizar a acción, a cumplimentación atópase vencida',
 
         // Búsqueda de cumplimentaciones de documentos del portal
         'PRTL_IMPDOC_SEARCH_OK' : 'A búsqueda de cumplimentacións de documentos do portal realizouse correctamente',
@@ -586,6 +587,10 @@ arrayGA = {
 
         // Permisos
         'BLD_FRBD' : 'Non dispón dos privilexios necesarios para realizar accións neste edificio',
+
+        // Búsqueda de cumplimentaciones por documento y edificio
+        'BLDDOCS_SEARCH_OK' : 'A búsqueda de cumplimentacións de documentos realizouse correctamente',
+        'BLDDOCS_SEARCH_KO' : 'Erro ó buscar cumplimentacións',
 
         // Búsqueda por id de cumplimentación del documento
         'IMPDOCDID_NOT_EXST' : 'A cumplimentación do documento indicada non existe',

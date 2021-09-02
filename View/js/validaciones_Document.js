@@ -5,6 +5,11 @@ function check_IMPDOC_SEARCH() {
         check_BUILDING_NAME_SEARCH();
 }
 
+function check_DOC_SEARCH() {
+    return check_EDIFICIO_DOCUMENTO_ID_SEARCH() &&
+        check_NOMBRE_DOC_SEARCH();
+}
+
 function check_NOMBRE_DOC() {
     if(not_empty('nombre_doc')) {
         return check_name_file('nombre_doc');

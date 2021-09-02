@@ -586,6 +586,7 @@ arrayES = {
         // IMPLEMENTACION
         'IMPDOC_IMPL_OK' : 'La cumplimentación del documento se ha completado correctamente',
         'IMPDOC_IMPL_KO' : 'Error al completar la cumplimentación del documento',
+        'COMPL_EXPIRED' : 'No se puede realizar la acción, la cumplimentación se encuentra vencida',
 
         // Búsqueda de cumplimentaciones de documentos del portal
         'PRTL_IMPDOC_SEARCH_OK' : 'La búsqueda de cumplimentaciones de documentos del portal se ha realizado correctamente',
@@ -593,6 +594,10 @@ arrayES = {
 
         // Permisos
         'BLD_FRBD' : 'No dispone de los de los privilegios necesarios para realizar acciones sobre este edificio',
+
+        // Búsqueda de cumplimentaciones por documento y edificio
+        'BLDDOCS_SEARCH_OK' : 'La búsqueda de cumplimentaciones se ha realizado correctamente',
+        'BLDDOCS_SEARCH_KO' : 'Error al buscar cumplimentaciones',
 
         // Búsqueda por id de cumplimentación del documento
         'IMPDOCDID_NOT_EXST' : 'La cumplimentación del documento indicada no existe',
@@ -611,7 +616,7 @@ arrayES = {
         'BLDDOC_ACTIVE_OK' : 'El plan al que pertenece el documento tiene asociaciones activas con edificios',
         'BLDDOC_ACTIVE_KO' : 'Error al consultar asociaciones activas del plan con edificios',
 
-        // Búsqueda de cumplimentaciones del documento en un edificio
+        // Búsqueda de cumplimentaciones activas del documento en un edificio
         'IMPDOC_ACTIVE_EXST' : 'Ya existen cumplimentaciones activas de este documento en alguno de los edificios',
         'IMPDOC_ACTIVE_NOT_EXST' : 'No existen cumplimentaciones activas de este documento',
         'IMPDOC_ACTIVE_KO' : 'Error al consultar cumplimentaciones activas',

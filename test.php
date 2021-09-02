@@ -5,6 +5,10 @@ include './COMMON/Auth.php';
     session_start();
     $_SESSION['test'] = true;
 
+    if(!defined('plans_path')) {
+        define('plans_path','./Uploads/Test/');
+    }
+
     include_once './Controller/Test_Controller.php';
 
     $controller = new Test();

@@ -6,6 +6,9 @@ if(!isset($_SESSION)) {
     session_start();
 }
 $_SESSION['test'] = false;
+if(!defined('plans_path')) {
+    define('plans_path','./Uploads/Plans/');
+}
 
 if (isAuthenticated()) {
 	$requested_controller = isset($_REQUEST['controller']) ? $_REQUEST['controller'] : 'Portal';

@@ -60,19 +60,19 @@ class Document_Validation extends Validator {
         }
 
         if($this->nombre_doc != '') {
-            $validacion = $this->validar_NOMBRE_DOC();
+            $validacion = $this->validar_NOMBRE_DOC_SEARCH();
         }
 
         return $validacion;
     }
 
-    function validar_seek_document() {
-        $validacion = $this->validar_EDIFICIO_ID();
+    function validar_doc_and_building() {
+        $validacion = $this->validar_DOCUMENTO_ID();
         if(!$validacion['ok']) {
             return $validacion;
         }
 
-        return $this->validar_DOCUMENTO_ID();
+        return $this->validar_EDIFICIO_ID();
     }
 
     function validar_atributos_add() {
@@ -161,8 +161,9 @@ class Document_Validation extends Validator {
             return $this->rellena_validation(false, 'FILENAME_EMPT', 'IMP_DOC');
         }
 
-        if(!$this->longitud_maxima($this->nombre_doc, 50))
+        if(!$this->longitud_maxima($this->nombre_doc, 50)) {
             return $this->rellena_validation(false, 'FILENAME_LRG', 'IMP_DOC');
+        }
 
         if(!$this->formato_nombre_fichero($this->nombre_doc)) {
             return $this->rellena_validation(false, 'FILENAME_FRMT', 'IMP_DOC');
@@ -172,6 +173,18 @@ class Document_Validation extends Validator {
             return $this->rellena_validation(false, 'FILENAME_EXT', 'IMP_DOC');
         }
 
+
+        return $this->rellena_validation(true, '00000', 'IMP_DOC');
+    }
+
+    function validar_NOMBRE_DOC_SEARCH() {
+        if(!$this->longitud_maxima($this->nombre_doc, 50)) {
+            return $this->rellena_validation(false, 'FILENAME_LRG', 'IMP_DOC');
+        }
+
+        if(!$this->nombre_doc_search($this->nombre_doc)) {
+            return $this->rellena_validation(false, 'FILENAME_FRMT', 'IMP_DOC');
+        }
 
         return $this->rellena_validation(true, '00000', 'IMP_DOC');
     }

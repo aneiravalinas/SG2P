@@ -211,6 +211,14 @@ abstract class Validator {
         }
     }
 
+    function nombre_doc_search($nombre_doc) {
+        if(preg_match('/^[a-zA-Z0-9_-]*(\.pdf)?$/', $nombre_doc)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function formato_nombre_fichero($string) {
         $filename = pathinfo($string)['filename'];
         if(preg_match('/[^a-zA-Z0-9\-\_]/', $filename)) {

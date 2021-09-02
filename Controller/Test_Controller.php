@@ -22,6 +22,7 @@ class Test {
         include './Test/DefSim_Test.php';
         include './Test/BuildPlan_Test.php';
         include './Test/Plan_Test.php';
+        include './Test/Document_Test.php';
 
         session_destroy();
 
