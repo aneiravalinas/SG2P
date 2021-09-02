@@ -584,6 +584,10 @@ arrayEN = {
         'PRTL_IMPDOC_SEARCH_OK' : 'The search for completions of portal documents has been carried out correctly',
         'PRTL_IMPDOC_SEARCH_KO' : 'Error when searching for portal document completions',
 
+        // Búsqueda de más de una cumplimentación de documento en el edificio
+        'IMPDOC_UNIQ' : 'Completion cannot be removed. There must always be at least one completion of the document',
+        'IMPDOC_NOT_UNIQ' : 'There is more than one completion of the document in the building',
+
         // Permisos
         'BLD_FRBD' : 'You do not have the necessary privileges to carry out actions on this building',
 

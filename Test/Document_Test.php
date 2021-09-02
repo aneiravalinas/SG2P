@@ -1024,7 +1024,17 @@ $respTest = obtenerRespuesta('Document', 'DELETE', 'ACCION', 'El usuario no tien
     'BLD_FRBD', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
+// La cumplimentación a eliminar es la única del documento en ese edificio
+$_SESSION['username'] = 'sg2ped2';
+$_POST = array('edificio_documento_id' => '2');
+$document_service = new Document_Service();
+$feedback = $document_service->DELETE();
+$respTest = obtenerRespuesta('Document', 'DELETE', 'ACCION', 'La cumplimentación a eliminar es la única del documento en ese edificio',
+    'IMPDOC_UNIQ', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testDocument, $respTest);
+
 // Cumplimentación eliminada Ok
+$_SESSION['username'] = 'sg2ped';
 $_POST = array('edificio_documento_id' => $imp_doc_id);
 $document_service = new Document_Service();
 $feedback = $document_service->DELETE();

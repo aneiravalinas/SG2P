@@ -586,11 +586,14 @@ arrayES = {
         // IMPLEMENTACION
         'IMPDOC_IMPL_OK' : 'La cumplimentación del documento se ha completado correctamente',
         'IMPDOC_IMPL_KO' : 'Error al completar la cumplimentación del documento',
-        'COMPL_EXPIRED' : 'No se puede realizar la acción, la cumplimentación se encuentra vencida',
 
         // Búsqueda de cumplimentaciones de documentos del portal
         'PRTL_IMPDOC_SEARCH_OK' : 'La búsqueda de cumplimentaciones de documentos del portal se ha realizado correctamente',
         'PRTL_IMPDOC_SEARCH_KO' : 'Error al buscar cumplimentaciones de documentos del portal',
+
+        // Búsqueda de más de una cumplimentación de documento en el edificio
+        'IMPDOC_UNIQ' : 'No se puede eliminar la cumplimentación. Siempre debe existir al menos una cumplimentación del documento',
+        'IMPDOC_NOT_UNIQ' : 'Existen más de una cumplimentación del documento en el edificio',
 
         // Permisos
         'BLD_FRBD' : 'No dispone de los de los privilegios necesarios para realizar acciones sobre este edificio',

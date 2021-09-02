@@ -330,8 +330,9 @@ INSERT INTO EDIFICIO_PLAN (`edificio_id`, `plan_id`, `fecha_asignacion`, `estado
 
 INSERT INTO EDIFICIO_DOCUMENTO (`edificio_documento_id`, `edificio_id`, `documento_id`, `estado`, `nombre_doc`) VALUES
 (1,2,1,'pendiente','doc.pdf'),
+(2,6,6,'pendiente','doc.pdf'),
 (3,2,1,'vencido','document_default'),
-(2,6,6,'pendiente','doc.pdf');
+(4,7,8,'vencido','document_default');
 
 INSERT INTO EDIFICIO_PROCEDIMIENTO (`edificio_procedimiento_id`, `edificio_id`, `procedimiento_id`, `estado`, `nombre_doc`) VALUES
 (1,3,1,'pendiente','doc.pdf');

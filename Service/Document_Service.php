@@ -395,6 +395,12 @@ class Document_Service extends Document_Validation {
 
         $imp_doc = $this->feedback['resource'];
         $path = $imp_doc['path'];
+
+        $this->feedback = $this->check_more_than_one_impdocs($imp_doc['edificio_id'], $imp_doc['documento_id']);
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
         $this->feedback = $this->impDoc_entity->DELETE();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPDOC_DEL_OK';
@@ -610,6 +616,23 @@ class Document_Service extends Document_Validation {
             }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'IMPDOC_ACTIVE_KO';
+        }
+
+        return $feedback;
+    }
+
+    function check_more_than_one_impdocs($edificio_id, $doc_id) {
+        $this->impDoc_entity->setAttributes(array('edificio_id' => $edificio_id, 'documento_id' => $doc_id));
+        $feedback = $this->impDoc_entity->searchDocsBuildings();
+        if($feedback['ok']) {
+            if(count($feedback['resource']) <= 1) {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'IMPDOC_UNIQ';
+            } else {
+                $feedback['code'] = 'IMPDOC_NOT_UNIQ';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'IMPDOC_SEARCH_KO';
         }
 
         return $feedback;
