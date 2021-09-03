@@ -586,6 +586,7 @@ arrayES = {
         // IMPLEMENTACION
         'IMPDOC_IMPL_OK' : 'La cumplimentación del documento se ha completado correctamente',
         'IMPDOC_IMPL_KO' : 'Error al completar la cumplimentación del documento',
+        'COMPL_EXPIRED' : 'La cumplimentación se encuentra vencida y no se puede modificar',
 
         // Búsqueda de cumplimentaciones de documentos del portal
         'PRTL_IMPDOC_SEARCH_OK' : 'La búsqueda de cumplimentaciones de documentos del portal se ha realizado correctamente',

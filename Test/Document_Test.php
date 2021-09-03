@@ -665,14 +665,6 @@ $respTest = obtenerRespuesta('Document', 'ADD_DOCUMENT_FORM', 'ACCION', 'El usua
     'BLD_FRBD', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
-// La asignación del plan con el edificio se encuentra vencida
-$_POST = array('documento_id' => '4', 'edificio_id' => '1');
-$document_service = new Document_Service();
-$feedback = $document_service->addDocumentForm();
-$respTest = obtenerRespuesta('Document', 'ADD_DOCUMENT_FORM', 'ACCION', 'La asignación del plan con el edificio se encuentra vencida',
-    'BLDDOC_ASSOC_NOT_VALID', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testDocument, $respTest);
-
 // ADD_DOCUMENT_FORM Ok
 $_SESSION['username'] = 'sg2ped2';
 $_POST = array('documento_id' => '6', 'edificio_id' => '6');

@@ -226,22 +226,12 @@ class Document_Service extends Document_Validation {
             return $this->feedback;
         }
 
-        $document = $this->feedback['document'];
         $building = $this->feedback['building'];
-        $bld_plan = $this->feedback['resource'];
 
         if(es_resp_edificio() && $building['username'] != getUser()) {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'BLD_FRBD';
             unset($this->feedback['resource'], $this->feedback['document'], $this->feedback['building']);
-            return $this->feedback;
-        }
-
-        if($bld_plan['estado'] == 'vencido') {
-            $this->feedback['ok'] = false;
-            $this->feedback['code'] = 'BLDDOC_ASSOC_NOT_VALID';
-            $this->feedback['return'] = array('documento_id' => $document['documento_id'],
-                                                'edificio_id' => $building['edificio_id']);
         }
 
         return $this->feedback;
@@ -398,6 +388,7 @@ class Document_Service extends Document_Validation {
 
         $this->feedback = $this->check_more_than_one_impdocs($imp_doc['edificio_id'], $imp_doc['documento_id']);
         if(!$this->feedback['ok']) {
+            $this->feedback['return'] = array('edificio_id' => $imp_doc['edificio_id'], 'documento_id' => $imp_doc['documento_id']);
             return $this->feedback;
         }
 

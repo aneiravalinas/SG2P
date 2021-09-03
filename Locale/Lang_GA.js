@@ -579,6 +579,7 @@ arrayGA = {
         // IMPLEMENTACION
         'IMPDOC_IMPL_OK' : 'A cumplimentación do documento completouse correctamente',
         'IMPDOC_IMPL_KO' : 'Erro ó completar a cumplimentación do documento',
+        'COMPL_EXPIRED' : 'A cumplimentación atópase vencida e non se pode modificar',
 
         // Búsqueda de cumplimentaciones de documentos del portal
         'PRTL_IMPDOC_SEARCH_OK' : 'A búsqueda de cumplimentacións de documentos do portal realizouse correctamente',
