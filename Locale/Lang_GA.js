@@ -566,7 +566,6 @@ arrayGA = {
         // ADD
         'IMPDOC_ADD_OK' : 'Engadíronse as cumplimentacións do documento correctamente',
         'IMPDOC_BLD_NOT_OWNED' : 'Non dispón dos privilexios necesarios pra engadir cumplimentacións neste edificio',
-        'BLDDOC_ASSOC_NOT_VALID' : 'A asociación do plan do documento con algún dos edificios indicados atópase en estado vencido',
 
         // SEEK
         'IMPDOC_SEEK_OK' : 'Consultáronse os detalles da cumplimentación do documento correctamente',
@@ -596,10 +595,14 @@ arrayGA = {
         'BLDDOCS_SEARCH_OK' : 'A búsqueda de cumplimentacións de documentos realizouse correctamente',
         'BLDDOCS_SEARCH_KO' : 'Erro ó buscar cumplimentacións',
 
+        // Búsqueda de asignaciones por plan
+        'BLDPLAN_ASSIGN_NOT_EXST' : 'Non se atoparon asignacións do plan con edificios',
+        'BLDPLAN_ASSIGN_EXST' : 'Atopáronse asignacions do plan con edificios',
+
         // Búsqueda por id de cumplimentación del documento
-        'IMPDOCDID_NOT_EXST' : 'A cumplimentación do documento indicada non existe',
-        'IMPDOCDID_EXST' : 'A cumplimentación do documento existe',
-        'IMPDOCDID_KO' : 'Erro ó consultar a cumplimentación do documento',
+        'IMPDOCID_NOT_EXST' : 'A cumplimentación do documento indicada non existe',
+        'IMPDOCID_EXST' : 'A cumplimentación do documento existe',
+        'IMPDOCID_KO' : 'Erro ó consultar a cumplimentación do documento',
 
         // Directorios
         'DIRFILE_ROOT_NOT_EXST' : 'A ruta base da definición non existe',

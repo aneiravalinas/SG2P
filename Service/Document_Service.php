@@ -210,7 +210,7 @@ class Document_Service extends Document_Validation {
         }
 
         $doc = $this->feedback['resource'];
-        $this->feedback = $this->searchActiveBuildPlans($doc['plan_id']);
+        $this->feedback = $this->searchBuildPlans($doc['plan_id']);
         if($this->feedback['ok']) {
             $this->feedback['document'] = $doc;
         } else {
@@ -366,6 +366,13 @@ class Document_Service extends Document_Validation {
 
         $this->feedback = $this->seekByImpDocID();
         if($this->feedback['ok']) {
+            $imp_doc = $this->feedback['resource'];
+            if($imp_doc['estado'] == 'vencido') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'IMPDOCID_NOT_EXST';
+                unset($this->feedback['resource']);
+                return $this->feedback;
+            }
             $this->feedback['code'] = 'PORTAL_IMPDOC_SEEK_OK';
             $imp_doc = $this->feedback['resource'];
             $this->feedback['resource']['path'] = plans_path . $imp_doc['plan_id'] . '/' . $imp_doc['edificio_id'] . '/Documentos/' . $imp_doc['documento_id'] . '/' .
@@ -488,7 +495,7 @@ class Document_Service extends Document_Validation {
         if($feedback['ok']) {
             if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'IMPDOCDID_NOT_EXST';
+                $feedback['code'] = 'IMPDOCID_NOT_EXST';
             } else {
                 $feedback['code'] = 'IMPDOCID_EXST';
             }
@@ -554,30 +561,21 @@ class Document_Service extends Document_Validation {
         return $feedback;
     }
 
-    function clear_expired($documents) {
-        foreach($documents as $document) {
-            if($document['estado'] == 'vencido') {
-                unset($documents[$document]);
-            }
-        }
 
-        return $documents;
-    }
-
-    function searchActiveBuildPlans($plan_id) {
+    function searchBuildPlans($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $buildPlan_entity = new BuildPlan_Model();
         $buildPlan_entity->plan_id = $plan_id;
-        $feedback = $buildPlan_entity->searchActivesByPlanID();
+        $feedback = $buildPlan_entity->searchByPlanID();
         if($feedback['ok']) {
             if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'BLDDOC_ACTIVE_EMPT';
+                $feedback['code'] = 'BLDPLAN_ASSIGN_NOT_EXST';
             } else {
-                $feedback['code'] = 'BLDDOC_ACTIVE_OK';
+                $feedback['code'] = 'BLDPLAN_ASSIGN_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
-            $feedback['code'] = 'BLDDOC_ACTIVE_KO';
+            $feedback['code'] = 'BLDPLAN_KO';
         }
 
         return $feedback;

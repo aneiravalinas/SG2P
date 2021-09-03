@@ -565,7 +565,6 @@ arrayEN = {
         // ADD
         'IMPDOC_ADD_OK' : 'The document completions have been added correctly',
         'IMPDOC_BLD_NOT_OWNED' : 'You do not have the necessary privileges to add completions in the indicated building',
-        'BLDDOC_ASSOC_NOT_VALID' : 'The association of the document plan with any of the indicated buildings is in an expired state',
 
         // SEEK
         'IMPDOC_SEEK_OK' : 'The details of the correct completion of the document have been consulted',
@@ -595,10 +594,14 @@ arrayEN = {
         'BLDDOCS_SEARCH_OK' : 'The search for completions was successful',
         'BLDDOCS_SEARCH_KO' : 'Error searching for completions',
 
+        // Búsqueda de asignaciones por plan
+        'BLDPLAN_ASSIGN_NOT_EXST' : 'No plan assignments found with buildings',
+        'BLDPLAN_ASSIGN_EXST' : 'Plan assignments found with buildings',
+
         // Búsqueda por id de cumplimentación del documento
-        'IMPDOCDID_NOT_EXST' : 'The completion of the indicated document does not exist',
-        'IMPDOCDID_EXST' : 'The completion of the document exists',
-        'IMPDOCDID_KO' : 'Error when consulting the completion of the document',
+        'IMPDOCID_NOT_EXST' : 'The completion of the indicated document does not exist',
+        'IMPDOCID_EXST' : 'The completion of the document exists',
+        'IMPDOCID_KO' : 'Error when consulting the completion of the document',
 
         // Directorios
         'DIRFILE_ROOT_NOT_EXST' : 'Definition base path does not exist',

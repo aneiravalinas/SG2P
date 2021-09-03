@@ -570,7 +570,6 @@ arrayES = {
         // ADD
         'IMPDOC_ADD_OK' : 'Se han añadido las cumplimentaciones del documento correctamente',
         'IMPDOC_BLD_NOT_OWNED' : 'No dispone de los privilegios necesarios para añadir cumplimentaciones en el edificio indicado',
-        'BLDDOC_ASSOC_NOT_VALID' : 'La asociación del plan del documento con alguno de los edificios indicados se encuentra en estado vencido',
 
         // SEEK
         'IMPDOC_SEEK_OK' : 'Se han consultado los detalles de la cumplimentación del documento correctamente',
@@ -592,6 +591,10 @@ arrayES = {
         'PRTL_IMPDOC_SEARCH_OK' : 'La búsqueda de cumplimentaciones de documentos del portal se ha realizado correctamente',
         'PRTL_IMPDOC_SEARCH_KO' : 'Error al buscar cumplimentaciones de documentos del portal',
 
+        // Búsqueda de asignaciones por plan
+        'BLDPLAN_ASSIGN_NOT_EXST' : 'No se han encontrado asignaciones del plan con edificios',
+        'BLDPLAN_ASSIGN_EXST' : 'Se han encontrado asignaciones del plan con edificios',
+
         // Búsqueda de más de una cumplimentación de documento en el edificio
         'IMPDOC_UNIQ' : 'No se puede eliminar la cumplimentación. Siempre debe existir al menos una cumplimentación del documento',
         'IMPDOC_NOT_UNIQ' : 'Existen más de una cumplimentación del documento en el edificio',
@@ -604,9 +607,9 @@ arrayES = {
         'BLDDOCS_SEARCH_KO' : 'Error al buscar cumplimentaciones',
 
         // Búsqueda por id de cumplimentación del documento
-        'IMPDOCDID_NOT_EXST' : 'La cumplimentación del documento indicada no existe',
-        'IMPDOCDID_EXST' : 'La cumplimentación del documento existe',
-        'IMPDOCDID_KO' : 'Error al consultar la cumplimentación del documento',
+        'IMPDOCID_NOT_EXST' : 'La cumplimentación del documento indicada no existe',
+        'IMPDOCID_EXST' : 'La cumplimentación del documento existe',
+        'IMPDOCID_KO' : 'Error al consultar la cumplimentación del documento',
 
         // Directorios
         'DIRFILE_ROOT_NOT_EXST' : 'La ruta base de la definición no existe',

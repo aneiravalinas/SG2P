@@ -205,6 +205,19 @@ class BuildPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    function searchByPlanID() {
+        $this->query = "
+            SELECT EDIFICIO_PLAN.*, EDIFICIO.nombre AS nombre_edificio
+            FROM EDIFICIO_PLAN
+            INNER JOIN EDIFICIO
+                ON EDIFICIO.edificio_id = EDIFICIO_PLAN.edificio_id
+            WHERE plan_id = '$this->plan_id';
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
     function setAttributes($atributos) {
         foreach($this->atributos as $atributo) {
             if(isset($atributos[$atributo])) {

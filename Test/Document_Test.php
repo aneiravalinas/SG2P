@@ -77,7 +77,7 @@ $_POST = array('edificio_documento_id' => '1111111');
 $document_service = new Document_Service();
 $feedback = $document_service->seek();
 $respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'ACCION', 'La cumplimentación no existe',
-    'IMPDOCDID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'IMPDOCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // El usuario no tiene permisos para consultar la cumplimentación
@@ -574,20 +574,20 @@ $respTest = obtenerRespuesta('Document', 'ADD_IMPDOC_FORM', 'ACCION', 'El Docume
     'DFDOCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
-// El plan del documento no tiene asignaciones activas con edificios
-$_POST = array('documento_id' => '4');
+// El plan del documento no tiene asignaciones con edificios
+$_POST = array('documento_id' => '2');
 $document_service = new Document_Service();
 $feedback = $document_service->addImpDocForm();
-$respTest = obtenerRespuesta('Document', 'ADD_IMPDOC_FORM', 'ACCION', 'El plan del documento no tiene asignaciones activas con edificios',
-    'BLDDOC_ACTIVE_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'ADD_IMPDOC_FORM', 'ACCION', 'El plan del documento no tiene asignaciones con edificios',
+    'BLDPLAN_ASSIGN_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // El plan del documento tiene asignaciones activas
 $_POST = array('documento_id' => '5');
 $document_service = new Document_Service();
 $feedback = $document_service->addImpDocForm();
-$respTest = obtenerRespuesta('Document', 'ADD_IMPDOC_FORM', 'ACCION', 'El plan del documento tiene asignaciones activas',
-    'BLDDOC_ACTIVE_OK', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'ADD_IMPDOC_FORM', 'ACCION', 'El plan del documento tiene asignaciones',
+    'BLDPLAN_ASSIGN_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 
@@ -808,7 +808,15 @@ $_POST = array('edificio_documento_id' => '111111111111111111');
 $document_service = new Document_Service();
 $feedback = $document_service->seekPortalImpDoc();
 $respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_IMPDOC', 'ACCION', 'La cumplimentación del documento no existe',
-    'IMPDOCDID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'IMPDOCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testDocument, $respTest);
+
+// La cumplimentación está vencida
+$_POST = array('edificio_documento_id' => '3');
+$document_service = new Document_Service();
+$feedback = $document_service->seekPortalImpDoc();
+$respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_IMPDOC', 'ACCION', 'La cumplimentación está vencida',
+    'IMPDOCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // Detalles de la cumplimentación del portal Ok
@@ -850,7 +858,7 @@ $_POST = array('edificio_documento_id' => '1111111');
 $document_service = new Document_Service();
 $feedback = $document_service->implement();
 $respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'ACCION', 'La cumplimentación no existe',
-    'IMPDOCDID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'IMPDOCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // El usuario no tiene permisos para consultar la cumplimentación
@@ -953,7 +961,7 @@ $_POST = array('edificio_documento_id' => '1111111');
 $document_service = new Document_Service();
 $feedback = $document_service->expire();
 $respTest = obtenerRespuesta('Document', 'EXPIRE', 'ACCION', 'La cumplimentación no existe',
-    'IMPDOCDID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'IMPDOCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // El usuario no tiene permisos para consultar la cumplimentación
@@ -1003,7 +1011,7 @@ $_POST = array('edificio_documento_id' => '1111111');
 $document_service = new Document_Service();
 $feedback = $document_service->DELETE();
 $respTest = obtenerRespuesta('Document', 'DELETE', 'ACCION', 'La cumplimentación no existe',
-    'IMPDOCDID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'IMPDOCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // El usuario no tiene permisos para consultar la cumplimentación
