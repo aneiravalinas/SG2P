@@ -96,6 +96,17 @@ class Show_DefProcs {
                                                 </a>
                                             </div>
                                         </div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false"
+                                                    onclick="
+                                                            crearform('formenviar','post');
+                                                            insertacampo(document.formenviar,'procedimiento_id','<?php echo $proc['procedimiento_id'] ?>');
+                                                            insertacampo(document.formenviar,'controller','ImpProc');
+                                                            insertacampo(document.formenviar,'action','show');
+                                                            enviaform(document.formenviar);">
+                                                <span class="iconify" data-icon="fluent:textbox-more-24-filled" data-inline="false"></span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

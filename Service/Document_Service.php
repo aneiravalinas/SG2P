@@ -83,12 +83,13 @@ class Document_Service extends Document_Validation {
 
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
-            $validation['return'] = array('plan_id' => $document['plan_id'], 'edificio_id' => $building['edificio_id']);
+            $validation['return'] = array('documento_id' => $document['documento_id'], 'edificio_id' => $building['edificio_id']);
             return $validation;
         }
 
         $doc_state = $this->get_document_state();
         if(!$doc_state['ok']) {
+            $doc_state['return'] = array('documento_id' => $document['documento_id'], 'edificio_id' => $building['edificio_id']);
             return $doc_state;
         }
 
@@ -99,7 +100,7 @@ class Document_Service extends Document_Validation {
             $this->feedback['document'] = $document;
             $this->feedback['building'] = $building;
         } else {
-            $this->feedback['return'] = array('plan_id' => $document['plan_id'], 'edificio_id' => $building['edificio_id']);
+            $this->feedback['return'] = array('documento_id' => $document['documento_id'], 'edificio_id' => $building['edificio_id']);
             if($this->feedback['code'] == 'QRY_KO') {
                 $this->feedback['code'] = 'IMPDOC_SEARCH_KO';
             }
@@ -132,6 +133,13 @@ class Document_Service extends Document_Validation {
         $doc_state = $this->get_document_state();
         if(!$doc_state['ok']) {
             return $doc_state;
+        }
+
+        if($doc_state['estado'] == 'vencido') {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'DFDOCID_NOT_EXST';
+            unset($this->feedback['resource'], $this->feedback['document'], $this->feedback['building']);
+            return $this->feedback;
         }
 
         $document['estado'] = $doc_state['estado'];
@@ -640,7 +648,7 @@ class Document_Service extends Document_Validation {
         }
 
         include_once './Service/CheckState_Service.php';
-        $checkState_service = new CheckState_Service($this->edificio_id, $this->documento_id);
+        $checkState_service = new CheckState_Service();
         $estado = $checkState_service->check_state($feedback['resource']);
         return array('ok' => true, 'estado' => $estado);
     }

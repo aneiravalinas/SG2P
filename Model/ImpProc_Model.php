@@ -10,9 +10,10 @@ class ImpProc_Model extends Abstract_Model {
     var $estado;
     var $fecha_cumplimentacion;
     var $nombre_doc;
+    var $nombre_edificio;
 
     function __construct() {
-        $this->atributos = array('edificio_procedimiento_id','edificio_id','procedimiento_id','estado','fecha_cumplimentacion','nombre_doc');
+        $this->atributos = array('edificio_procedimiento_id','edificio_id','procedimiento_id','estado','fecha_cumplimentacion','nombre_doc', 'nombre_edificio');
         $this->fill_fields();
     }
 
@@ -72,7 +73,39 @@ class ImpProc_Model extends Abstract_Model {
     }
 
     function SEARCH() {
-        // TODO: Implement SEARCH() method.
+        $this->query = "
+            SELECT EDIFICIO_PROCEDIMIENTO.*, EDIFICIO.nombre AS nombre_edificio
+            FROM EDIFICIO_PROCEDIMIENTO
+            INNER JOIN EDIFICIO
+                ON EDIFICIO_PROCEDIMIENTO.edificio_id = EDIFICIO.edificio_id
+            WHERE
+                procedimiento_id = '$this->procedimiento_id' AND
+                edificio_procedimiento_id LIKE '%" . $this->edificio_procedimiento_id . "%' AND
+                EDIFICIO_PROCEDIMIENTO.edificio_id LIKE '%" . $this->edificio_id . "%' AND
+                estado LIKE '%" . $this->estado . "%' AND
+                fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
+                nombre_doc LIKE '%". $this->nombre_doc . "%' AND
+                EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchImpProcs() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_PROCEDIMIENTO
+            WHERE
+                edificio_id = '$this->edificio_id' AND
+                procedimiento_id = '$this->procedimiento_id' AND
+                edificio_procedimiento_id LIKE '%" . $this->edificio_procedimiento_id . "%' AND
+                estado LIKE '%" . $this->estado . "%' AND
+                fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
+                nombre_doc LIKE '%" . $this->nombre_doc . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
     }
 
     function seek() {

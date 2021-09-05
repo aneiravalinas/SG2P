@@ -130,9 +130,9 @@ CREATE TABLE EDIFICIO_DOCUMENTO
     `edificio_documento_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `documento_id` INT(10) NOT NULL,
-    `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
+    `estado` enum('pendiente','cumplimentado','vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
-    `nombre_doc` VARCHAR(50) NOT NULL DEFAULT 'empty',
+    `nombre_doc` VARCHAR(50) NOT NULL,
 
     CONSTRAINT `pk_edificio_documento` PRIMARY KEY (`edificio_documento_id`),
     CONSTRAINT `fk_edificio_documento_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
@@ -144,7 +144,7 @@ CREATE TABLE EDIFICIO_PROCEDIMIENTO
     `edificio_procedimiento_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `procedimiento_id` INT(10) NOT NULL,
-    `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
+    `estado` enum('pendiente','cumplimentado','vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(50) NOT NULL,
 
@@ -158,7 +158,7 @@ CREATE TABLE PLANTA_RUTA
     `planta_ruta_id` INT(10) AUTO_INCREMENT,
     `planta_id` INT(10) NOT NULL,
     `ruta_id` INT(10) NOT NULL,
-    `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
+    `estado` enum('pendiente','cumplimentado','vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(50) NOT NULL,
 
@@ -184,7 +184,7 @@ CREATE TABLE EDIFICIO_SIMULACRO
     `edificio_simulacro_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `simulacro_id` INT(10) NOT NULL,
-    `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
+    `estado` enum('pendiente','cumplimentado','vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
     `url_recurso` VARCHAR(20) NULL,
     `destinatarios` VARCHAR(100) NOT NULL,
@@ -212,7 +212,7 @@ CREATE TABLE EDIFICIO_FORMACION
     `edificio_formacion_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `formacion_id` INT(10) NOT NULL,
-    `estado` enum('vigente', 'vencido') NOT NULL DEFAULT 'vigente',
+    `estado` enum('pendiente','cumplimentado','vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
     `url_recurso` VARCHAR(20) NULL,
     `destinatarios` VARCHAR(100) NOT NULL,
@@ -289,7 +289,8 @@ INSERT INTO DOCUMENTO (`documento_id`,`plan_id`,`nombre`,`descripcion`,`visible`
 (5,1,'Otro Documento','Descripcion','si'),
 (6,10,'Documento con Cumplimentaciones','Descripcion','si'),
 (7,10,'Documento no Visible','Descripcion','no'),
-(8,11,'Documento del Plan Asignado','Descripcion','si');
+(8,11,'Documento del Plan Asignado','Descripcion','si'),
+(9,10,'Documento Vencido','Descripcion','si');
 
 INSERT INTO PROCEDIMIENTO (`procedimiento_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (1,3,'Procedimiento del plan con procedimientos','Descripcion del Procedimiento'),
@@ -332,7 +333,8 @@ INSERT INTO EDIFICIO_DOCUMENTO (`edificio_documento_id`, `edificio_id`, `documen
 (1,2,1,'pendiente','doc.pdf'),
 (2,6,6,'pendiente','doc.pdf'),
 (3,2,1,'vencido','document_default'),
-(4,7,8,'vencido','document_default');
+(4,7,8,'vencido','document_default'),
+(5,6,9,'vencido','document_default');
 
 INSERT INTO EDIFICIO_PROCEDIMIENTO (`edificio_procedimiento_id`, `edificio_id`, `procedimiento_id`, `estado`, `nombre_doc`) VALUES
 (1,3,1,'pendiente','doc.pdf');

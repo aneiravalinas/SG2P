@@ -16,7 +16,7 @@ class Document {
                 include_once './View/Documents/Show_Document_View.php';
                 new Show_Document($feedback['resource'], $feedback['document'], $feedback['building']);
             } else if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Plan', 'showCurrent', $feedback['return']);
+                new Message($feedback['code'], 'Document', 'show', $feedback['return']);
             } else {
                 new Message($feedback['code'], 'Plan', 'show');
             }

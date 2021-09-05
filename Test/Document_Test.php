@@ -447,8 +447,16 @@ $respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_DOCUMENT', 'ACCION', 'El p
     'BLDDOC_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
+// El estado del documento en el edificio se encuentra en estado vencido
+$_POST = array('documento_id' => '9', 'edificio_id' => '6');
+$document_service = new Document_Service();
+$feedback = $document_service->seekPortalDocument();
+$respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_DOCUMENT', 'ACCION', 'El estado del documento en el edificio se encuentra en estado vencido',
+    'DFDOCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testDocument, $respTest);
+
 // Búsqueda de cumplimentaciones de documentos del portal Ok
-$_POST = array('documento_id' => '5', 'edificio_id' => '2');
+$_POST = array('documento_id' => '6', 'edificio_id' => '6');
 $document_service = new Document_Service();
 $feedback = $document_service->seekPortalDocument();
 $respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_DOCUMENT', 'ACCION', 'Búsqueda de cumplimentaciones de documentos del portal Ok',

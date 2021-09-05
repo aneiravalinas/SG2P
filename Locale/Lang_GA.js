@@ -632,6 +632,15 @@ arrayGA = {
         'IMPPROC_SEARCH_OK' : 'A búsqueda de cumplimentacións do procedemento realizouse correctamente',
         'IMPPROC_SEARCH_KO' : 'Erro ó buscar cumplimentacións do procedimiento',
 
+        // Búsqueda de cumplimentaciones por edificio y procedimiento
+        'BLDPROCS_SEARCH_OK' : 'A búsqueda de cumplimentacións realizouse correctamente',
+        'BLDPROCS_SEARCH_KO' : 'Erro ó buscar cumplimentacións',
+
+        // Búsqueda asociación edificio - plan
+        'BLDPROC_NOT_EXST' : 'O plan ó que pertence o procedemento non está asignado o edificio indicado',
+        'BLDPROC_EXST' : 'O plan ó que pertence o procedemento está asignado o edificio indicado',
+        'BLDPROC_KO' : 'Error ó consultar a asociación entre o edificio e o plan do procedemento',
+
     // IMP_ROUTES
 
         // SEARCH
@@ -844,6 +853,10 @@ arrayGA = {
             'FILENAME_LRG' : 'O nome do ficheiro da cumplimentación non pode superar os 50 caracteres',
             'FILENAME_FRMT' : 'O nome do ficherio da cumplimentación só pode contener letras, números e guións',
             'FILENAME_EXT' : 'O ficheiro da cumplimentación debe estar en formato pdf',
+
+            // ID Procedimiento
+            'IMPPROC_ID_EMPT' : 'O id da cumplimentación do procedemento non pode ser vacío',
+            'IMPPROC_ID_NOT_NUMERIC' : 'O id da cumplimentación do procedemento debe ser numérico',
 
 
 
@@ -1073,6 +1086,11 @@ arrayGA = {
         'i18n-actual-imp' : 'Cumplimentación Actual',
         'i18n-imp-details' : 'Detalles da Cumplimentación',
         'i18n-search-imps' : 'Buscar Cumplimentacións',
+
+        // IMP_PROCS
+        'i18n-impprocs' : 'Cumplimentacións do Procedemento',
+        'i18n-imp-procs-empty' : 'Non se atoparon cumplimentacións do procedemento',
+        'i18n-info_proc' : 'Información do Procedemento',
 
 
         // MODAL

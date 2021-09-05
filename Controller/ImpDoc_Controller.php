@@ -19,7 +19,7 @@ class ImpDoc {
                 include_once './View/ImpDocs/Show_ImpDocs_View.php';
                 new Show_ImpDocs($feedback['resource'], $feedback['document']);
             } else if(isset($feedback['document'])) {
-                new Message($feedback['code'], 'DefDoc', 'show', $feedback['document']);
+                new Message($feedback['code'], 'ImpDoc', 'show', $feedback['document']);
             } else {
                 new Message($feedback['code'], 'DefPlan', 'show');
             }

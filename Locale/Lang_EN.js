@@ -631,6 +631,15 @@ arrayEN = {
         'IMPPROC_SEARCH_OK' : 'The search for completions of the procedure has been carried out correctly',
         'IMPPROC_SEARCH_KO' : 'Error looking for procedure completions',
 
+        // Búsqueda de cumplimentaciones por edificio y procedimiento
+        'BLDPROCS_SEARCH_OK' : 'The search for completions was successful',
+        'BLDPROCS_SEARCH_KO' : 'Error searching for completions',
+
+        // Búsqueda asociación edificio - plan
+        'BLDPROC_NOT_EXST' : 'El plan al que pertenece el procedimiento no está asignado al edificio indicado',
+        'BLDPROC_EXST' : 'El plan al que pertenece el procedimiento está asignado al edificio indicado',
+        'BLDPROC_KO' : 'Error al consultar la asociación entre el plan del procedimiento y el edificio',
+
     // IMP_ROUTES
 
         // SEARCH
@@ -844,6 +853,10 @@ arrayEN = {
             'FILENAME_LRG' : 'The file name of the completion cannot exceed 50 characters',
             'FILENAME_FRMT' : 'The file name of the completion can only contain letters, numbers and hyphens',
             'FILENAME_EXT' : 'The completion file must be in pdf format',
+
+            // ID Procedimiento
+            'IMPPROC_ID_EMPT' : 'The id of the procedure completion cannot be empty',
+            'IMPPROC_ID_NOT_NUMERIC' : 'The id of the procedure completion must be numeric',
 
 
 
@@ -1072,6 +1085,11 @@ arrayEN = {
         'i18n-actual-imp' : 'Current Completion',
         'i18n-imp-details' : 'Completion Details',
         'i18n-search-imps' : 'Search Completions',
+
+        // IMP_PROCS
+        'i18n-impprocs' : 'Completions of the Procedure',
+        'i18n-imp-procs-empty' : 'No completions of the procedure have been found',
+        'i18n-info_proc' : 'Procedure Information',
 
         // MODAL
             // Campos Modal
