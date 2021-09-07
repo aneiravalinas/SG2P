@@ -27,4 +27,64 @@ class ImpProc {
             new Message('FRB_ACCS', 'Panel', 'deshboard');
         }
     }
+
+    function addForm() {
+        if($this->checkPermission()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->addImpProcForm();
+            if($feedback['ok']) {
+                include_once './View/ImpProcs/Add_ImpProc_View.php';
+                new Add_ImpProc($feedback['resource'], $feedback['procedure']);
+            } else if(isset($feedback['procedure'])) {
+                new Message($feedback['code'], 'ImpProc', 'show', $feedback['procedure']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function add() {
+        if($this->checkPermission()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->addImpProc();
+            if(isset($feedback['procedure'])) {
+                new Message($feedback['code'], 'ImpProc', 'show', $feedback['procedure']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function deleteForm() {
+        if($this->checkPermission()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->seek();
+            if($feedback['ok']) {
+               include_once './View/ImpProcs/Delete_ImpProc_View.php';
+               new Delete_ImpProc($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function delete() {
+        if($this->checkPermission()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->DELETE();
+            if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'ImpProc', 'show', array('procedimiento_id' => $feedback['return']['procedimiento_id']));
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
 }

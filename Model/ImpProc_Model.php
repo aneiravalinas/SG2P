@@ -109,7 +109,19 @@ class ImpProc_Model extends Abstract_Model {
     }
 
     function seek() {
-        // TODO: Implement seek() method.
+        $this->query = "
+            SELECT EDIFICIO_PROCEDIMIENTO.*, EDIFICIO.username, EDIFICIO.nombre AS nombre_edificio, PROCEDIMIENTO.nombre AS nombre_procedimiento, PROCEDIMIENTO.plan_id
+            FROM EDIFICIO_PROCEDIMIENTO
+            INNER JOIN EDIFICIO
+                ON EDIFICIO_PROCEDIMIENTO.edificio_id = EDIFICIO.edificio_id
+            INNER JOIN PROCEDIMIENTO
+                ON EDIFICIO_PROCEDIMIENTO.procedimiento_id = PROCEDIMIENTO.procedimiento_id
+            WHERE
+                edificio_procedimiento_id = '$this->edificio_procedimiento_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
     function searchByProcID() {
@@ -128,6 +140,19 @@ class ImpProc_Model extends Abstract_Model {
             WHERE 
                 edificio_id = '$this->edificio_id' AND
                 procedimiento_id = '$this->procedimiento_id'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchActiveImpProcs() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_PROCEDIMIENTO
+            WHERE
+                procedimiento_id = '$this->procedimiento_id' AND
+                edificio_id = '$this->edificio_id' AND
+                estado != 'vencido'
         ";
 
         $this->get_results_from_query();

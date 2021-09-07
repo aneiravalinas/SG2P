@@ -632,6 +632,34 @@ arrayGA = {
         'IMPPROC_SEARCH_OK' : 'A búsqueda de cumplimentacións do procedemento realizouse correctamente',
         'IMPPROC_SEARCH_KO' : 'Erro ó buscar cumplimentacións do procedimiento',
 
+        // ADD
+        'IMPPROC_ADD_OK' : 'A cumplimentación do procedemento rexistrouse correctamente',
+
+        // DELETE
+        'IMPPROC_DEL_OK' : 'A cumplimentación do procedemento eliminouse correctamente',
+
+        // SEEK
+        'IMPPROC_SEEK_OK' : 'Obtéronse os detalles da cumplimentación do procedemento correctamente',
+        'IMPPROC_SEEK_KO' : 'Erro ó obter os detalles da cumplimentación do procedemento',
+
+        // Búsqueda por ID de Cumplimentación
+        'IMPPROCID_NOT_EXST' : 'A cumplimentación do procedemento non existe',
+        'IMPPROCID_EXST' : 'O ID da cumplimentación do procedemento existe',
+        'IMPPROCID_KO' : 'Erro ó consultar por ID da cumplimentación do procedemento',
+
+        // Búsqueda de cumplimentación única
+        'IMPPROC_UNIQ' : 'Non se pode eliminar a cumplimentación. Sempre debe existir polo menos unha cumplimentación do procedemento no edificio',
+        'IMPPROC_NOT_UNIQ' : 'Atopáronse máis dunha cumplimentación do procedemento no edificio',
+
+        // Búsqueda de cumplimentaciones de procedimientos del Portal
+        'PRTL_IMPPROC_SEARCH_OK' : 'A búsqueda de cumplimentacións do procedemento do portal realizouse correctamente',
+        'PRTL_IMPPROC_SEARCH_KO' : 'Erro ó buscar cumplimentacións do procedemento do portal',
+
+        // Búsqueda de cumplimentaciones activas de un procedimiento en un edificio
+        'IMPPROC_ACTIVE_EXST' : 'Non se puido realizar a acción. Atopáronse cumplimentacións activas deste procedemento',
+        'IMPPROC_ACTITVE_NOT_EXST' : 'Non se atoparon cumplimentacións activas deste procedemento',
+        'IMPPROC_ACTIVE_KO' : 'Erro ó consultar as cumplimentacións activas do procedemento',
+
         // Búsqueda de cumplimentaciones por edificio y procedimiento
         'BLDPROCS_SEARCH_OK' : 'A búsqueda de cumplimentacións realizouse correctamente',
         'BLDPROCS_SEARCH_KO' : 'Erro ó buscar cumplimentacións',
@@ -1076,10 +1104,10 @@ arrayGA = {
         'i18n-impdocs' : 'Cumplimentacións do Documento',
         'i18n-info_doc' : 'Información do Documento',
         'i18n-cump_id' : 'ID Cumplimentacion',
-        'i18n-add-impdoc' : 'Engadir Cumplimentacións',
+        'i18n-add-implements' : 'Engadir Cumplimentacións',
         'i18n-file_doc' : 'Ficheiro da Cumplimentación',
         'i18n-nombre_defdoc' : 'Nome do Documento',
-        'i18n-add-imp-doc-confirm' : '¿Está seguro de que desexa engadir esta cumplimentación?',
+        'i18n-add-implement-confirm' : '¿Está seguro de que desexa engadir esta cumplimentación?',
         'i18n-del-imp-doc-confirm' : '¿Está seguro de que desexa eliminar a cumplimentación deste documento? O cambio non sera reversible',
         'i18n-expire-impdoc-confirm' : '¿Está seguro de que desexa vencer a cumplimentación deste documento? O cambio non será reversible',
         'i18n-cump-doc' : 'Cumplimentar Documento',
@@ -1091,6 +1119,7 @@ arrayGA = {
         'i18n-impprocs' : 'Cumplimentacións do Procedemento',
         'i18n-imp-procs-empty' : 'Non se atoparon cumplimentacións do procedemento',
         'i18n-info_proc' : 'Información do Procedemento',
+        'i18n-del-imp-proc-confirm' : '¿Está seguro de que desexa eliminar a cumplimentación deste procedemento? O cambio non será reversible',
 
 
         // MODAL

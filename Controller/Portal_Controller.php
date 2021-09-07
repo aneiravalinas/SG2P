@@ -142,4 +142,18 @@ class Portal {
             new Message($feedback['code'], 'Portal', 'getPortal');
         }
     }
+
+    function seekPortalProcedure() {
+        include_once './Service/Procedure_Service.php';
+        $procedure_service = new Procedure_Service();
+        $feedback = $procedure_service->seekPortalProcedure();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_ShowCurrent_Procedure_View.php';
+            new Portal_ShowCurrent_Procedure($feedback['resource'], $feedback['procedure'], $feedback['building']);
+        } else if(isset($feedback['return'])) {
+            new Message($feedback['code'], 'Portal', 'seekPortalPlan', $feedback['return']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'getPortal');
+        }
+    }
 }

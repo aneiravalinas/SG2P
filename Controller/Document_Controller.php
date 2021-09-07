@@ -32,8 +32,6 @@ class Document {
             if($feedback['ok']) {
                 include_once './View/Documents/Add_Document_View.php';
                 new Add_Document($feedback['document'], $feedback['building']);
-            } else if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Document', 'show', $feedback['return']);
             } else {
                 new Message($feedback['code'], 'Plan', 'show');
             }

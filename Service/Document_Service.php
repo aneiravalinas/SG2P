@@ -135,15 +135,16 @@ class Document_Service extends Document_Validation {
             return $doc_state;
         }
 
+        $building = $this->feedback['building'];
         if($doc_state['estado'] == 'vencido') {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'DFDOCID_NOT_EXST';
+            $this->feedback['return'] = array('plan_id' => $document['plan_id'], 'edificio_id' => $building['edificio_id']);
             unset($this->feedback['resource'], $this->feedback['document'], $this->feedback['building']);
             return $this->feedback;
         }
 
         $document['estado'] = $doc_state['estado'];
-        $building = $this->feedback['building'];
         $this->feedback = $this->impDoc_entity->searchActiveImpDocs();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'PRTL_IMPDOC_SEARCH_OK';
@@ -222,7 +223,7 @@ class Document_Service extends Document_Validation {
         if($this->feedback['ok']) {
             $this->feedback['document'] = $doc;
         } else {
-            $this->feedback['document'] = array('plan_id' => $doc['plan_id']);
+            $this->feedback['document'] = array('documento_id' => $doc['documento_id']);
         }
 
         return $this->feedback;
@@ -341,21 +342,13 @@ class Document_Service extends Document_Validation {
         $this->feedback = $this->seekByImpDocID();
         if($this->feedback['ok']) {
             $imp_doc = $this->feedback['resource'];
-            if(es_resp_edificio()) {
-                $this->edificio_id = $imp_doc['edificio_id'];
-                $this->feedback = $this->seekByBuildingID();
-                if(!$this->feedback['ok']) {
-                    return $this->feedback;
-                }
-
-                if($this->feedback['resource']['username'] != getUser()) {
-                    $this->feedback['ok'] = false;
-                    $this->feedback['code'] = 'BLD_FRBD';
-                    return $this->feedback;
-                } else {
-                    $this->feedback['resource'] = $imp_doc;
-                }
+            if(es_resp_edificio() && $imp_doc['username'] != getUser()) {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'BLD_FRBD';
+                unset($this->feedback['resource']);
+                return $this->feedback;
             }
+
             $this->feedback['resource']['path'] = plans_path . $imp_doc['plan_id'] . '/' . $imp_doc['edificio_id'] . '/Documentos/' . $imp_doc['documento_id'] . '/' .
                                         $imp_doc['edificio_documento_id'];
             $this->feedback['code'] = 'IMPDOC_SEEK_OK';

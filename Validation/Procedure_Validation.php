@@ -75,6 +75,15 @@ class Procedure_Validation extends Validator {
         return $this->validar_EDIFICIO_ID();
     }
 
+    function validar_atributos_add() {
+        $validation = $this->validar_PROCEDIMIENTO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        return $this->validar_BUILDINGS();
+    }
+
     function validar_EDIFICIO_PROCEDIMIENTO_ID() {
         if(!$this->no_vacio($this->edificio_procedimiento_id)) {
             return $this->rellena_validation(false, 'IMPPROC_ID_EMPT', 'IMP_PROC');

@@ -1,18 +1,19 @@
 <?php
 
-class Add_ImpDoc {
+class Add_ImpProc {
     var $buildings;
-    var $document;
+    var $procedure;
 
-    function __construct($buildings, $document) {
+    function __construct($buildings, $procedure) {
         $this->buildings = $buildings;
-        $this->document = $document;
+        $this->procedure = $procedure;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
+        include_once './View/Page/header.php';
         ?>
+
 
         <!-- ======= FORM SECTION ====== --->
 
@@ -20,8 +21,8 @@ class Add_ImpDoc {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1><?php echo $this->document['nombre'] ?></h1>
-                        <h2 class="mb-4 i18n-add-impdoc">Añadir Cumplimentaciones</h2>
+                        <h1><?php echo $this->procedure['nombre'] ?></h1>
+                        <h2 class="mb-4 i18n-add-implements">Añadir Cumplimentaciones</h2>
                     </div>
 
                     <div class="col-xl-7 col-lg-9">
@@ -29,11 +30,11 @@ class Add_ImpDoc {
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="plan_id" class="i18n-plan_id">Plan ID</label>
-                                    <input type="text" value="<?php echo $this->document['plan_id'] ?>" class="form-control" id="plan_id" name="plan_id" disabled/>
+                                    <input type="text" value="<?php echo $this->procedure['plan_id'] ?>" class="form-control" id="plan_id" name="plan_id" disabled/>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="documento_id" class="i18n-documento_id">ID Documento</label>
-                                    <input type="text" value="<?php echo $this->document['documento_id'] ?>" class="form-control" id="documento_id" name="documento_id" disabled/>
+                                    <label for="procedimiento_id" class="i18n-procedimiento_id">ID Procedimiento</label>
+                                    <input type="text" value="<?php echo $this->procedure['procedimiento_id'] ?>" class="form-control" id="procedimiento_id" name="procedimiento_id" disabled/>
                                 </div>
                             </div>
 
@@ -46,9 +47,9 @@ class Add_ImpDoc {
                                             data-live-search="true"
                                             data-live-search-placeholder="Search...">
                                         <?php foreach($this->buildings as $building): ?>
-                                        <option value="<?php echo $building['edificio_id'] ?>">
-                                            <?php echo $building['nombre_edificio'] ?>
-                                        </option>
+                                            <option value="<?php echo $building['edificio_id'] ?>">
+                                                <?php echo $building['nombre_edificio'] ?>
+                                            </option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -58,15 +59,15 @@ class Add_ImpDoc {
                                 <div class="col d-flex justify-content-between flex-wrap">
                                     <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
                                         crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'documento_id', '<?php echo $this->document['documento_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','ImpDoc');
+                                        insertacampo(document.formenviar,'procedimiento_id', '<?php echo $this->procedure['procedimiento_id'] ?>');
+                                        insertacampo(document.formenviar,'controller','ImpProc');
                                         insertacampo(document.formenviar,'action','show');
                                         enviaform(document.formenviar);">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
-                                        insertacampo(document.formularioadd,'documento_id', '<?php echo $this->document['documento_id'] ?>');
-                                        insertacampo(document.formularioadd,'controller','ImpDoc');
+                                        insertacampo(document.formularioadd,'procedimiento_id', '<?php echo $this->procedure['procedimiento_id'] ?>');
+                                        insertacampo(document.formularioadd,'controller','ImpProc');
                                         insertacampo(document.formularioadd,'action','add');
                                         enviaformcorrecto(document.formularioadd,check_BUILDINGS());">
                                         Enviar

@@ -93,7 +93,7 @@ class ImpDoc_Model extends Abstract_Model {
 
     function seek() {
         $this->query = "
-            SELECT EDIFICIO_DOCUMENTO.*, EDIFICIO.nombre AS nombre_edificio, DOCUMENTO.nombre AS nombre_documento, DOCUMENTO.plan_id
+            SELECT EDIFICIO_DOCUMENTO.*, EDIFICIO.username, EDIFICIO.nombre AS nombre_edificio, DOCUMENTO.nombre AS nombre_documento, DOCUMENTO.plan_id
             FROM EDIFICIO_DOCUMENTO
             INNER JOIN EDIFICIO
                 ON EDIFICIO_DOCUMENTO.edificio_id = EDIFICIO.edificio_id

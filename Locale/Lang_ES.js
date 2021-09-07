@@ -528,17 +528,17 @@ arrayES = {
         'BLDPLAN_KO' : 'Error al consultar asignaciones entre planes y edificios',
 
         // Implementaciones
-        'IMPDOC_ADD_KO' : 'Error al crear las cumplimentaciones de los documentos',
-        'IMPDOC_DEL_KO' : 'Error al eliminar las cumplimentaciones de los documentos',
-        'IMPPROC_ADD_KO' : 'Error al crear las cumplimentaciones de los procedimientos',
-        'IMPPROC_DEL_KO' : 'Error al eliminar las cumplimentaciones de los procedimientos',
-        'IMPROUTE_ADD_KO' : 'Error al crear las cumplimentaciones de las rutas',
-        'IMPROUTE_DEL_KO' : 'Error al eliminar las cumplimentaciones de las rutas',
-        'IMPFRMT_ADD_KO' : 'Error al crear las cumplimentaciones de las formaciones',
-        'IMPFRMT_DEL_KO' : 'Error al eliminar las cumplimentaciones de las formaciones',
+        'IMPDOC_ADD_KO' : 'Error al crear la cumplimentación del documento',
+        'IMPDOC_DEL_KO' : 'Error al eliminar la cumplimentación del documento',
+        'IMPPROC_ADD_KO' : 'Error al crear la cumplimentación del procedimiento',
+        'IMPPROC_DEL_KO' : 'Error al eliminar la cumplimentación del procedimiento',
+        'IMPROUTE_ADD_KO' : 'Error al crear la cumplimentación de la ruta',
+        'IMPROUTE_DEL_KO' : 'Error al eliminar la cumplimentación de la ruta',
+        'IMPFRMT_ADD_KO' : 'Error al crear la cumplimentación de la formación',
+        'IMPFRMT_DEL_KO' : 'Error al eliminar la cumplimentación de la formación',
         'BLDPLAN_IMPADD_OK' : 'Se han creado las cumplimentaciones correctamente',
-        'IMPSIM_ADD_KO' : 'Error al crear las cumplimentaciones de los simulacros',
-        'IMPSIM_DEL_KO' : 'Error al eliminar las cumplimentaciones de los simulacros',
+        'IMPSIM_ADD_KO' : 'Error al crear la cumplimentación del simulacro',
+        'IMPSIM_DEL_KO' : 'Error al eliminar la cumplimentación del simulacro',
         'BLD_IMPDEL_OK' : 'Se han eliminado las cumplimentaciones correctamente',
 
         // Búsqueda de Edificios candidatos
@@ -568,7 +568,7 @@ arrayES = {
         'IMPDOC_SEARCH_KO' : 'Error al buscar cumplimentaciones del documento',
 
         // ADD
-        'IMPDOC_ADD_OK' : 'Se han añadido las cumplimentaciones del documento correctamente',
+        'IMPDOC_ADD_OK' : 'Se ha registrado la cumplimentación del procedimiento correctamente',
         'IMPDOC_BLD_NOT_OWNED' : 'No dispone de los privilegios necesarios para añadir cumplimentaciones en el edificio indicado',
 
         // SEEK
@@ -624,7 +624,7 @@ arrayES = {
         'BLDDOC_ACTIVE_KO' : 'Error al consultar asociaciones activas del plan con edificios',
 
         // Búsqueda de cumplimentaciones activas del documento en un edificio
-        'IMPDOC_ACTIVE_EXST' : 'Ya existen cumplimentaciones activas de este documento en alguno de los edificios',
+        'IMPDOC_ACTIVE_EXST' : 'No se ha podido realizar la acción. Se han encontrado cumplimentaciones activas de este documento',
         'IMPDOC_ACTIVE_NOT_EXST' : 'No existen cumplimentaciones activas de este documento',
         'IMPDOC_ACTIVE_KO' : 'Error al consultar cumplimentaciones activas',
 
@@ -638,6 +638,34 @@ arrayES = {
         // SEARCH
         'IMPPROC_SEARCH_OK' : 'La búsqueda de cumplimentaciones del procedimiento se ha realizado correctamente',
         'IMPPROC_SEARCH_KO' : 'Error al buscar cumplimentaciones del procedimiento',
+
+        // ADD
+        'IMPPROC_ADD_OK' : 'Se ha registrado la cumplimentación del procedimiento correctamente',
+
+        // DELETE
+        'IMPPROC_DEL_OK' : 'La cumplimentación del procedimiento se ha eliminado correctamente',
+
+        // SEEK
+        'IMPPROC_SEEK_OK' : 'Se han obtenido los detalles de la cumplimentación del procedimiento correctamente',
+        'IMPPROC_SEEK_KO' : 'Error al obtener los detalles de la cumplimentación del procedimiento',
+
+        // Búsqueda por ID de Cumplimentación
+        'IMPPROCID_NOT_EXST' : 'La cumplimentación del procedimiento no existe',
+        'IMPPROCID_EXST' : 'El ID de la cumplimentación del procedimiento existe',
+        'IMPPROCID_KO' : 'Error al consultar por ID de la cumplimentación del procedimiento',
+
+        // Búsqueda de cumplimentación única
+        'IMPPROC_UNIQ' : 'No se puede eliminar la cumplimentación. Siempre debe existir al menos una cumplimentación del procedimiento en el edificio',
+        'IMPPROC_NOT_UNIQ' : 'Se encontraron más de una cumplimentación del procedimiento en el edificio',
+
+        // Búsqueda de cumplimentaciones de procedimientos del Portal
+        'PRTL_IMPPROC_SEARCH_OK' : 'La búsqueda de cumplimentaciones del procedimiento del portal se ha realizado correctamente',
+        'PRTL_IMPPROC_SEARCH_KO' : 'Error al buscar cumplimentaciones del procedimiento del portal',
+
+        // Búsqueda de cumplimentaciones activas de un procedimiento en un edificio
+        'IMPPROC_ACTIVE_EXST' : 'No se ha podido realizar la acción. Se han encontrado cumplimentaciones activas de este procedimiento',
+        'IMPPROC_ACTITVE_NOT_EXST' : 'No se han encontrado cumplimentaciones activas de este procedimiento',
+        'IMPPROC_ACTIVE_KO' : 'Error al consultar las cumplimentaciones activas del procedimiento',
 
         // Búsqueda de cumplimentaciones por edificio y procedimiento
         'BLDPROCS_SEARCH_OK' : 'La búsqueda de cumplimentaciones se ha realizado correctamente',
@@ -1087,10 +1115,10 @@ arrayES = {
         'i18n-impdocs' : 'Cumplimentaciones del Documento',
         'i18n-info_doc' : 'Información del Documento',
         'i18n-cump_id' : 'ID Cumplimentacion',
-        'i18n-add-impdoc' : 'Añadir Cumplimentaciones',
+        'i18n-add-implements' : 'Añadir Cumplimentaciones',
         'i18n-file_doc' : 'Fichero de la Cumplimentación',
         'i18n-nombre_defdoc' : 'Nombre del Documento',
-        'i18n-add-imp-doc-confirm' : '¿Está seguro que desea añadir la siguiente cumplimentación?',
+        'i18n-add-implement-confirm' : '¿Está seguro que desea añadir la siguiente cumplimentación?',
         'i18n-del-imp-doc-confirm' : '¿Está seguro que desea eliminar la cumplimentación de este documento? El cambio no será reversible',
         'i18n-expire-impdoc-confirm' : '¿Está seguro que desea vencer la cumplimentación de este documento? El cambio no será reversible',
         'i18n-cump-doc' : 'Cumplimentar Documento',
@@ -1102,6 +1130,7 @@ arrayES = {
         'i18n-impprocs' : 'Cumplimentaciones del Procedimiento',
         'i18n-imp-procs-empty' : 'No se han encontrado cumplimentaciones del procedimiento',
         'i18n-info_proc' : 'Información del Procedimiento',
+        'i18n-del-imp-proc-confirm' : '¿Está seguro que desea eliminar la cumplimentación de este procedimiento? El cambio no será reversible',
 
 
 

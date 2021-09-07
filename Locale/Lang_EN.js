@@ -631,6 +631,34 @@ arrayEN = {
         'IMPPROC_SEARCH_OK' : 'The search for completions of the procedure has been carried out correctly',
         'IMPPROC_SEARCH_KO' : 'Error looking for procedure completions',
 
+        // ADD
+        'IMPPROC_ADD_OK' : 'Completion of the procedure has been recorded successfully',
+
+        // DELETE
+        'IMPPROC_DEL_OK' : 'Procedure completion has been successfully removed',
+
+        // SEEK
+        'IMPPROC_SEEK_OK' : 'The details of completing the procedure have been obtained correctly',
+        'IMPPROC_SEEK_KO' : 'Failed to get the details of the procedure completion',
+
+        // Búsqueda por ID de Cumplimentación
+        'IMPPROCID_NOT_EXST' : 'The completion of the procedure does not exist',
+        'IMPPROCID_EXST' : 'The procedure completion ID exists',
+        'IMPPROCID_KO' : 'Error when querying by ID of the procedure completion',
+
+        // Búsqueda de cumplimentación única
+        'IMPPROC_UNIQ' : 'Completion cannot be removed. There must always be at least one completion of the procedure in the building',
+        'IMPPROC_NOT_UNIQ' : 'More than one completion of the procedure was found in the building',
+
+        // Búsqueda de cumplimentaciones de procedimientos del Portal
+        'PRTL_IMPPROC_SEARCH_OK' : 'The search for completions of the portal procedure has been carried out correctly',
+        'PRTL_IMPPROC_SEARCH_KO' : 'Failed to search for portal procedure completions',
+
+        // Búsqueda de cumplimentaciones activas de un procedimiento en un edificio
+        'IMPPROC_ACTIVE_EXST' : 'The action could not be performed. Active completions of this procedure have been found',
+        'IMPPROC_ACTITVE_NOT_EXST' : 'No active completions of this procedure have been found',
+        'IMPPROC_ACTIVE_KO' : 'Error when querying the active completions of the procedure',
+
         // Búsqueda de cumplimentaciones por edificio y procedimiento
         'BLDPROCS_SEARCH_OK' : 'The search for completions was successful',
         'BLDPROCS_SEARCH_KO' : 'Error searching for completions',
@@ -1075,10 +1103,10 @@ arrayEN = {
         'i18n-impdocs' : 'Document Completions',
         'i18n-info_doc' : 'Document Information',
         'i18n-cump_id' : 'Completion ID',
-        'i18n-add-impdoc' : 'Add Completions',
+        'i18n-add-implements' : 'Add Completions',
         'i18n-file_doc' : 'Completion File',
         'i18n-nombre_defdoc' : 'Document Name',
-        'i18n-add-imp-doc-confirm' : 'Are you sure you want to add the following completion?',
+        'i18n-add-implement-confirm' : 'Are you sure you want to add the following completion?',
         'i18n-del-imp-doc-confirm' : 'Are you sure you want to remove the completion of this document? The change will not be reversible',
         'i18n-expire-impdoc-confirm' : 'Are you sure you want to expire the completion of this document? The change will not be reversible',
         'i18n-cump-doc' : 'Complete Document',
@@ -1090,6 +1118,7 @@ arrayEN = {
         'i18n-impprocs' : 'Completions of the Procedure',
         'i18n-imp-procs-empty' : 'No completions of the procedure have been found',
         'i18n-info_proc' : 'Procedure Information',
+        'i18n-del-imp-proc-confirm' : 'Are you sure you want to remove the completion of this procedure? The change will not be reversible',
 
         // MODAL
             // Campos Modal
