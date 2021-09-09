@@ -584,6 +584,10 @@ arrayGA = {
         'PRTL_IMPDOC_SEARCH_OK' : 'A búsqueda de cumplimentacións de documentos do portal realizouse correctamente',
         'PRTL_IMPDOC_SEARCH_KO' : 'Erro ó buscar cumplimentacións de documentos do portal',
 
+        // Detalles de cumplimentacines del portal
+        'PRTL_IMPDOC_SEEK_OK' : 'Consultáronse os detalles da cumplimentación do procedemento do portal correctamente',
+        'PRTL_IMPDOC_SEEK_KO' : 'Erro ó consultar os detalles da cumplimentación do procedemento do portal',
+
         // Búsqueda de más de una cumplimentación de documento en el edificio
         'IMPDOC_UNIQ' : 'Non se pode eliminar a cumplimentación. Sempre debe haber polo menos unha cumplimentación do documento',
         'IMPDOC_NOT_UNIQ' : 'Existen máis dunha cumplimentación do documento no edificio',
@@ -641,6 +645,14 @@ arrayGA = {
         // SEEK
         'IMPPROC_SEEK_OK' : 'Obtéronse os detalles da cumplimentación do procedemento correctamente',
         'IMPPROC_SEEK_KO' : 'Erro ó obter os detalles da cumplimentación do procedemento',
+
+        // EXPIRE
+        'IMPPROC_EXPIRE_OK' : 'Venceuse correctamente a cumplimentación do procedemento indicado',
+        'IMPPROC_EXPIRE_KO' : 'Produciuse un error ó vencer a cumplimentación do procedemento',
+
+        // IMPLEMENT
+        'IMPPROC_IMPL_OK' : 'A cumplimentación do procedemento completouse correctamente',
+        'IMPPROC_IMPL_KO' : 'Erro ó completar a cumplimentación do procedemento',
 
         // Búsqueda por ID de Cumplimentación
         'IMPPROCID_NOT_EXST' : 'A cumplimentación do procedemento non existe',
@@ -1120,6 +1132,8 @@ arrayGA = {
         'i18n-imp-procs-empty' : 'Non se atoparon cumplimentacións do procedemento',
         'i18n-info_proc' : 'Información do Procedemento',
         'i18n-del-imp-proc-confirm' : '¿Está seguro de que desexa eliminar a cumplimentación deste procedemento? O cambio non será reversible',
+        'i18n-expire-impproc-confirm' : '¿Está seguro de que desexa vencer a cumplimentación deste procedemento? O cambio non será reversible',
+        'i18n-cump-proc' : 'Cumplimentar Procedemento',
 
 
         // MODAL

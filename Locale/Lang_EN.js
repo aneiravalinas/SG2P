@@ -583,6 +583,10 @@ arrayEN = {
         'PRTL_IMPDOC_SEARCH_OK' : 'The search for completions of portal documents has been carried out correctly',
         'PRTL_IMPDOC_SEARCH_KO' : 'Error when searching for portal document completions',
 
+        // Detalles de cumplimentacines del portal
+        'PRTL_IMPDOC_SEEK_OK' : 'The details of completing the portal procedure have been consulted correctly',
+        'PRTL_IMPDOC_SEEK_KO' : 'Error when consulting the details of the completion of the portal procedure',
+
         // Búsqueda de más de una cumplimentación de documento en el edificio
         'IMPDOC_UNIQ' : 'Completion cannot be removed. There must always be at least one completion of the document',
         'IMPDOC_NOT_UNIQ' : 'There is more than one completion of the document in the building',
@@ -640,6 +644,14 @@ arrayEN = {
         // SEEK
         'IMPPROC_SEEK_OK' : 'The details of completing the procedure have been obtained correctly',
         'IMPPROC_SEEK_KO' : 'Failed to get the details of the procedure completion',
+
+        // EXPIRE
+        'IMPPROC_EXPIRE_OK' : 'Completion of the indicated procedure has been successfully completed',
+        'IMPPROC_EXPIRE_KO' : 'An error occurred when completing the procedure.',
+
+        // IMPLEMENT
+        'IMPPROC_IMPL_OK' : 'Procedure completion has been completed successfully',
+        'IMPPROC_IMPL_KO' : 'Error completing the procedure completion',
 
         // Búsqueda por ID de Cumplimentación
         'IMPPROCID_NOT_EXST' : 'The completion of the procedure does not exist',
@@ -1119,6 +1131,8 @@ arrayEN = {
         'i18n-imp-procs-empty' : 'No completions of the procedure have been found',
         'i18n-info_proc' : 'Procedure Information',
         'i18n-del-imp-proc-confirm' : 'Are you sure you want to remove the completion of this procedure? The change will not be reversible',
+        'i18n-expire-impproc-confirm' : 'Are you sure you want to beat the completion of this procedure? The change will not be reversible',
+        'i18n-cump-proc' : 'Complete Procedure',
 
         // MODAL
             // Campos Modal

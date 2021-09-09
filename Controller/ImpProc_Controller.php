@@ -87,4 +87,92 @@ class ImpProc {
             new Message('FRB_ACCS', 'Panel', 'deshboard');
         }
     }
+
+    function expireForm() {
+        if($this->checkPermission()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->seek();
+            if($feedback['ok']) {
+                include_once './View/ImpProcs/Expire_ImpProc_View.php';
+                new Expire_ImpProc($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function expire() {
+        if($this->checkPermission()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->expire();
+            if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'ImpProc', 'show', array('procedimiento_id' => $feedback['return']['procedimiento_id']));
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshbaord');
+        }
+    }
+
+    function implementForm() {
+        if($this->checkPermission()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->seek();
+            if($feedback['ok']) {
+                include_once './View/ImpProcs/Implement_ImpProc_View.php';
+                new Implement_ImpProc($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function implement() {
+        if($this->checkPermission()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->implement();
+            if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'ImpProc', 'show', array('procedimiento_id' => $feedback['return']['procedimiento_id']));
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function showCurrent() {
+        if($this->checkPermission()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->seek();
+            if($feedback['ok']) {
+                include_once './View/ImpProcs/ShowCurrent_ImpProc_View.php';
+                new ShowCurrent_ImpProc($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function searchForm() {
+        if($this->checkPermission()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->seekProcedure();
+            if($feedback['ok']) {
+                include_once './View/ImpProcs/Search_ImpProc_View.php';
+                new Search_ImpProc($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
 }

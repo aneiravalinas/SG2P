@@ -40,7 +40,7 @@ class Procedure_Validation extends Validator {
         }
 
         if($this->nombre_doc != '') {
-            $validation = $this->validar_NOMBRE_DOC();
+            $validation = $this->validar_NOMBRE_DOC_SEARCH();
         }
 
         return $validation;

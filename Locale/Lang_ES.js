@@ -591,6 +591,10 @@ arrayES = {
         'PRTL_IMPDOC_SEARCH_OK' : 'La búsqueda de cumplimentaciones de documentos del portal se ha realizado correctamente',
         'PRTL_IMPDOC_SEARCH_KO' : 'Error al buscar cumplimentaciones de documentos del portal',
 
+        // Detalles de cumplimentacines del portal
+        'PRTL_IMPDOC_SEEK_OK' : 'Se han consultado los detalles de la cumplimentación del procedimiento del portal correctamente',
+        'PRTL_IMPDOC_SEEK_KO' : 'Error al consultar los detalles de la cumplimentación del procedimiento del portal',
+
         // Búsqueda de asignaciones por plan
         'BLDPLAN_ASSIGN_NOT_EXST' : 'No se han encontrado asignaciones del plan con edificios',
         'BLDPLAN_ASSIGN_EXST' : 'Se han encontrado asignaciones del plan con edificios',
@@ -648,6 +652,14 @@ arrayES = {
         // SEEK
         'IMPPROC_SEEK_OK' : 'Se han obtenido los detalles de la cumplimentación del procedimiento correctamente',
         'IMPPROC_SEEK_KO' : 'Error al obtener los detalles de la cumplimentación del procedimiento',
+
+        // EXPIRE
+        'IMPPROC_EXPIRE_OK' : 'Se ha vencido correctamente la cumplimentación del procedimiento indicada',
+        'IMPPROC_EXPIRE_KO' : 'Se ha producido un error al vencer la cumplimentación del procedimiento',
+
+        // IMPLEMENT
+        'IMPPROC_IMPL_OK' : 'La cumplimentación del procedimiento se ha completado correctamente',
+        'IMPPROC_IMPL_KO' : 'Error al completar la cumplimentación del procedimiento',
 
         // Búsqueda por ID de Cumplimentación
         'IMPPROCID_NOT_EXST' : 'La cumplimentación del procedimiento no existe',
@@ -1131,7 +1143,8 @@ arrayES = {
         'i18n-imp-procs-empty' : 'No se han encontrado cumplimentaciones del procedimiento',
         'i18n-info_proc' : 'Información del Procedimiento',
         'i18n-del-imp-proc-confirm' : '¿Está seguro que desea eliminar la cumplimentación de este procedimiento? El cambio no será reversible',
-
+        'i18n-expire-impproc-confirm' : '¿Está seguro que desea vencer la cumplimentación de este procedimiento? El cambio no será reversible',
+        'i18n-cump-proc' : 'Cumplimentar Procedimiento',
 
 
 

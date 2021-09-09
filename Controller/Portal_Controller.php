@@ -156,4 +156,16 @@ class Portal {
             new Message($feedback['code'], 'Portal', 'getPortal');
         }
     }
+
+    function seekPortalImpProc() {
+        include_once './Service/Procedure_Service.php';
+        $procedure_service = new Procedure_Service();
+        $feedback = $procedure_service->seekPortalImpProc();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_ShowCurrent_ImpProc_View.php';
+            new Portal_ShowCurrent_ImpProc($feedback['resource']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'getPortal');
+        }
+    }
 }

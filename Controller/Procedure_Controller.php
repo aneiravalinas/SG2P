@@ -74,7 +74,95 @@ class Procedure {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->DELETE();
             if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'ImpProc', 'show', $feedback['return']);
+                new Message($feedback['code'], 'Procedure', 'show', $feedback['return']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function expireForm() {
+        if(!es_registrado()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->seek();
+            if($feedback['ok']) {
+                include_once './View/Procedures/Expire_Procedure_View.php';
+                new Expire_Procedure($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function expire() {
+        if(!es_registrado()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->expire();
+            if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'Procedure', 'show', $feedback['return']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function implementForm() {
+        if(!es_registrado()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->seek();
+            if($feedback['ok']) {
+                include_once './View/Procedures/Implement_Procedure_View.php';
+                new Implement_Procedure($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function implement() {
+        if(!es_registrado()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->implement();
+            if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'Procedure', 'show', $feedback['return']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function showCurrent() {
+        if(!es_registrado()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->seek();
+            if($feedback['ok']) {
+                include_once './View/Procedures/ShowCurrent_Procedure_View.php';
+                new ShowCurrent_Procedure($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function searchForm() {
+        if(!es_registrado()) {
+            $proc_service = new Procedure_Service();
+            $feedback = $proc_service->searchProcedureForm();
+            if($feedback['ok']) {
+                include_once './View/Procedures/Search_Procedure_View.php';
+                new Search_Procedure($feedback['procedure'], $feedback['building']);
             } else {
                 new Message($feedback['code'], 'Plan', 'show');
             }

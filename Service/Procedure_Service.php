@@ -154,6 +154,24 @@ class Procedure_Service extends Procedure_Validation {
         return $this->feedback;
     }
 
+    function searchProcedureForm() {
+        $this->feedback = $this->searchProcAndBuilding();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        if(es_resp_edificio()) {
+            $building = $this->feedback['building'];
+            if($building['username'] != getUser()) {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'BLD_FRBD';
+                unset($this->feedback['resource'], $this->feedback['procedure'], $this->feedback['building']);
+            }
+        }
+
+        return $this->feedback;
+    }
+
     function addImpProcForm() {
         $this->feedback = $this->seekProcedure();
         if(!$this->feedback['ok']) {
@@ -334,6 +352,103 @@ class Procedure_Service extends Procedure_Validation {
         return $this->feedback;
     }
 
+    function seekPortalImpProc() {
+        $validation = $this->validar_EDIFICIO_PROCEDIMIENTO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByImpProcID();
+        if($this->feedback['ok']) {
+            $imp_proc = $this->feedback['resource'];
+            if($imp_proc['estado'] == 'vencido') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'IMPPROCID_NOT_EXST';
+                unset($this->feedback['resource']);
+                return $this->feedback;
+            }
+            $this->feedback['code'] = 'PRTL_IMPPROC_SEEK_OK';
+            $this->feedback['resource']['path'] = plans_path . $imp_proc['plan_id'] . '/' . $imp_proc['edificio_id'] . '/Procedimientos/' .
+                                                    $imp_proc['procedimiento_id'] . '/' . $imp_proc['edificio_procedimiento_id'];
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'PRTL_IMPPROC_SEEK_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function expire() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $imp_proc = $this->feedback['resource'];
+        $this->impProc_entity->estado = 'vencido';
+        $this->feedback = $this->impProc_entity->EDIT();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'IMPPROC_EXPIRE_OK';
+            $this->update_plan_state($imp_proc['edificio_id'], $imp_proc['plan_id']);
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPPROC_EXPIRE_KO';
+        }
+
+        $this->feedback['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
+        return $this->feedback;
+    }
+
+    function implement() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $imp_proc = $this->feedback['resource'];
+        if($imp_proc['estado'] == 'vencido') {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'COMPL_EXPIRED';
+            return $this->feedback;
+        }
+
+        $validation = $this->validar_NOMBRE_DOC();
+        if(!$validation['ok']) {
+            $validation['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
+            return $validation;
+        }
+
+        include_once './Service/Uploader_Service.php';
+        $uploader = new Uploader();
+        if(!$_SESSION['test']) {
+            $this->feedback = $uploader->uploadFile($imp_proc['path'], $this->nombre_doc);
+            if(!$this->feedback['ok']) {
+                $this->feedback['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
+                return $this->feedback;
+            }
+        }
+
+        $this->impProc_entity->setAttributes(array('fecha_cumplimentacion' => date('Y-m-d'),
+                                                    'nombre_doc' => $this->nombre_doc, 'estado' => 'cumplimentado'));
+        $this->feedback = $this->impProc_entity->EDIT();
+        if($this->feedback['ok']) {
+            if($imp_proc['nombre_doc'] != default_doc && $imp_proc['nombre_doc'] != $this->nombre_doc) {
+                $uploader->delete($imp_proc['path'] . '/' . $imp_proc['nombre_doc']);
+            }
+            $this->feedback['code'] = 'IMPPROC_IMPL_OK';
+            $this->update_plan_state($imp_proc['edificio_id'], $imp_proc['plan_id']);
+        } else {
+            $uploader->delete($imp_proc['path'] . '/' . $this->nombre_doc);
+            if($uploader->dir_is_empty($imp_proc['path'])['ok']) {
+                $uploader->delete($imp_proc['path']);
+            }
+            if($this->feedback['code'] == 'QRY_KO') {
+                $this->feedback['code'] = 'IMPPROC_IMPL_KO';
+            }
+        }
+
+        $this->feedback['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
+        return $this->feedback;
+    }
+
     function seekProcedure() {
         $validation = $this->validar_PROCEDIMIENTO_ID();
         if(!$validation['ok']) {
@@ -507,7 +622,7 @@ class Procedure_Service extends Procedure_Validation {
     }
 
     function check_more_than_one_impprocs($edificio_id, $proc_id) {
-        $this->impProc_entity->setAttributes(array('edificio_id' => $edificio_id, $proc_id => $proc_id));
+        $this->impProc_entity->setAttributes(array('edificio_id' => $edificio_id, 'procedimiento_id' => $proc_id));
         $feedback = $this->impProc_entity->searchProcsBuildings();
         if($feedback['ok']) {
             if(count($feedback['resource']) <= 1) {

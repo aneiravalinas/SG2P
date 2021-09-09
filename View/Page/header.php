@@ -45,6 +45,7 @@
     <script text="text/javascript" src="./View/js/validaciones_BuildPlan.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_Plan.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_Document.js"></script>
+    <script text="text/javascript" src="./View/js/validaciones_Procedure.js"></script>
     <script type="text/javascript" src="./View/js/md5.js"></script>
 
 </head>

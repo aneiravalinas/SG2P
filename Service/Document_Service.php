@@ -374,12 +374,12 @@ class Document_Service extends Document_Validation {
                 unset($this->feedback['resource']);
                 return $this->feedback;
             }
-            $this->feedback['code'] = 'PORTAL_IMPDOC_SEEK_OK';
+            $this->feedback['code'] = 'PRTL_IMPDOC_SEEK_OK';
             $imp_doc = $this->feedback['resource'];
             $this->feedback['resource']['path'] = plans_path . $imp_doc['plan_id'] . '/' . $imp_doc['edificio_id'] . '/Documentos/' . $imp_doc['documento_id'] . '/' .
                 $imp_doc['edificio_documento_id'];
         } else if($this->feedback['code'] == 'IMPDOCID_KO') {
-            $this->feedback['code'] = 'PORTAL_IMPDOC_SEEK_KO';
+            $this->feedback['code'] = 'PRTL_IMPDOC_SEEK_KO';
         }
 
         return $this->feedback;
@@ -479,7 +479,7 @@ class Document_Service extends Document_Validation {
             $this->update_plan_state($imp_doc['edificio_id'], $imp_doc['plan_id']);
         } else {
             $uploader->delete($imp_doc['path'] . '/' . $this->nombre_doc);
-            if($uploader->dir_is_empty($imp_doc['path']['ok'])) {
+            if($uploader->dir_is_empty($imp_doc['path'])['ok']) {
                 $uploader->delete($imp_doc['path']);
             }
             if($this->feedback['code'] == 'QRY_KO') {

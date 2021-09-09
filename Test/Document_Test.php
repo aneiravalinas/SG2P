@@ -832,7 +832,7 @@ $_POST = array('edificio_documento_id' => '1');
 $document_service = new Document_Service();
 $feedback = $document_service->seekPortalImpDoc();
 $respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_IMPDOC', 'ACCION', 'Detalles de la cumplimentación del portal Ok',
-    'PORTAL_IMPDOC_SEEK_OK', $_POST, $feedback['code'], $numTest, $numFallos);
+    'PRTL_IMPDOC_SEEK_OK', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 
