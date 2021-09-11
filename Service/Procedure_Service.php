@@ -610,6 +610,7 @@ class Procedure_Service extends Procedure_Validation {
         $feedback = $this->impProc_entity->seek();
         if($feedback['ok']) {
             if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['ok'] = false;
                 $feedback['code'] = 'IMPPROCID_NOT_EXST';
             } else {
                 $feedback['code'] = 'IMPPROCID_EXST';

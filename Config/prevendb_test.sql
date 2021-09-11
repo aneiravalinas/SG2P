@@ -277,7 +277,7 @@ INSERT INTO PLAN (`plan_id`, `nombre`, `descripcion`) VALUES
 (7,'Plan Completo','Descripcion Plan'),
 (8,'Plan sin Documentos','Descripcion Plan'),
 (9,'Plan Vencido','Descripcion Plan'),
-(10,'Plan con cumplimentaciones de docs', 'descripcion'),
+(10,'Plan con cumplimentaciones', 'descripcion'),
 (11,'Plan Asignado', 'descripcion');
 
 
@@ -296,7 +296,10 @@ INSERT INTO PROCEDIMIENTO (`procedimiento_id`,`plan_id`,`nombre`,`descripcion`) 
 (1,3,'Procedimiento del plan con procedimientos','Descripcion del Procedimiento'),
 (2,3,'Nombre Procedimiento','Descripcion del Procedimiento'),
 (3,7,'Procedimiento del Plan Completo','Descripcion del Procedimiento'),
-(4,11,'Procedimiento del Plan Asignado','Descripcion del Procedimiento');
+(4,11,'Procedimiento del Plan Asignado','Descripcion del Procedimiento'),
+(5,10,'Procedimiento del Plan con cumplimentaciones','Descripcion del Procedimiento'),
+(6,9,'Procedimiento del Plan vencido','Descripcion del Procedimiento'),
+(7,10,'Procedimiento Vencido','Descripcion del Procedimiento');
 
 INSERT INTO RUTA (`ruta_id`, `plan_id`, `nombre`, `descripcion`) VALUES
 (1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta'),
@@ -339,7 +342,9 @@ INSERT INTO EDIFICIO_DOCUMENTO (`edificio_documento_id`, `edificio_id`, `documen
 
 INSERT INTO EDIFICIO_PROCEDIMIENTO (`edificio_procedimiento_id`, `edificio_id`, `procedimiento_id`, `estado`, `nombre_doc`) VALUES
 (1,3,1,'pendiente','doc.pdf'),
-(2,7,4,'vencido','document_default');
+(2,6,7,'vencido','document_default'),
+(3,6,5,'pendiente','document_default'),
+(4,7,4,'vencido','document_default');
 
 INSERT INTO EDIFICIO_FORMACION (`edificio_formacion_id`,`edificio_id`,`formacion_id`,`estado`,`url_recurso`,`destinatarios`) VALUES
 (1,4,2,'pendiente','recurso','destinatarios');
