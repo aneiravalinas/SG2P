@@ -686,6 +686,19 @@ arrayEN = {
         'IMPROUTE_SEARCH_OK' : 'The search for route completions was successful',
         'IMPROUTE_SEARCH_KO' : 'Failed to search for route completions',
 
+        // Búsqueda de cumplimentaciones del Portal
+        'PRTL_IMPROUTE_SEARCH_OK' : 'The search for completions of the route in the portal has been carried out correctly',
+        'PRTL_IMPROUTE_SEARCH_KO' : 'Error when consulting the route completions in the portal',
+
+        // Búsqueda asociación edificio - ruta
+        'BLDROUTE_NOT_EXST' : 'The plan to which the route belongs is not assigned to the indicated building',
+        'BLDROUTE_EXST' : 'The plan to which the route belongs is assigned to the indicated building',
+        'BLDROUTE_KO' : 'Failed to query the association between the route plan and the building',
+
+        // Búsqueda de cumplimentaciones por edificio y ruta
+        'BLDROUTES_SEARCH_OK' : 'The search for completions was successful',
+        'BLDROUTES_SEARCH_KO' : 'Error searching for completions',
+
     // IMP_FORMAT
 
         // SEARCH
@@ -897,6 +910,10 @@ arrayEN = {
             // ID Procedimiento
             'IMPPROC_ID_EMPT' : 'The id of the procedure completion cannot be empty',
             'IMPPROC_ID_NOT_NUMERIC' : 'The id of the procedure completion must be numeric',
+
+            // ID Ruta
+            'IMPROUTE_ID_EMPT' : 'The id of the route completion cannot be empty',
+            'IMPROUTE_ID_NOT_NUMERIC' : 'The id of the route completion must be numeric',
 
 
 
@@ -1133,6 +1150,12 @@ arrayEN = {
         'i18n-del-imp-proc-confirm' : 'Are you sure you want to remove the completion of this procedure? The change will not be reversible',
         'i18n-expire-impproc-confirm' : 'Are you sure you want to beat the completion of this procedure? The change will not be reversible',
         'i18n-cump-proc' : 'Complete Procedure',
+
+        // IMP_ROUTES
+        'i18n-improutes' : 'Route Completions',
+        'i18n-nombre_planta' : 'Floor Name',
+        'i18n-imp-routes-empty' : 'Route completions have not been found',
+        'i18n-info_route' : 'Route Information',
 
         // MODAL
             // Campos Modal

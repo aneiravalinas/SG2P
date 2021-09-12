@@ -694,6 +694,19 @@ arrayES = {
         'IMPROUTE_SEARCH_OK' : 'La búsqueda de cumplimentaciones de la ruta se ha realizado correctamente',
         'IMPROUTE_SEARCH_KO' : 'Error al buscar cumplimentaciones de la ruta',
 
+        // Búsqueda de cumplimentaciones del Portal
+        'PRTL_IMPROUTE_SEARCH_OK' : 'La búsqueda de cumplimentaciones de la ruta en el portal se ha realizado correctamente',
+        'PRTL_IMPROUTE_SEARCH_KO' : 'Error al consultas las cumplimentaciones de la ruta en el portal',
+
+        // Búsqueda asociación edificio - ruta
+        'BLDROUTE_NOT_EXST' : 'El plan al que pertenece la ruta no está asignado al edificio indicado',
+        'BLDROUTE_EXST' : 'El plan al que pertenece la ruta está asignado al edificio indicado',
+        'BLDROUTE_KO' : 'Error al consultar la asociación entre el plan de la ruta y el edificio',
+
+        // Búsqueda de cumplimentaciones por edificio y ruta
+        'BLDROUTES_SEARCH_OK' : 'La búsqueda de cumplimentaciones se ha realizado correctamente',
+        'BLDROUTES_SEARCH_KO' : 'Error al buscar cumplimentaciones',
+
     // IMP_FORMAT
 
         // SEARCH
@@ -909,6 +922,10 @@ arrayES = {
             // ID Procedimiento
             'IMPPROC_ID_EMPT' : 'El id de la cumplimentación del procedimiento no puede ser vacío',
             'IMPPROC_ID_NOT_NUMERIC' : 'El id de la cumplimentación del procedimiento debe ser numérico',
+
+            // ID Ruta
+            'IMPROUTE_ID_EMPT' : 'El id de la cumplimentación de la ruta no puede ser vacío',
+            'IMPROUTE_ID_NOT_NUMERIC' : 'El id de la cumplimentación de la ruta debe ser numérico',
 
 
 
@@ -1145,6 +1162,12 @@ arrayES = {
         'i18n-del-imp-proc-confirm' : '¿Está seguro que desea eliminar la cumplimentación de este procedimiento? El cambio no será reversible',
         'i18n-expire-impproc-confirm' : '¿Está seguro que desea vencer la cumplimentación de este procedimiento? El cambio no será reversible',
         'i18n-cump-proc' : 'Cumplimentar Procedimiento',
+
+        // IMP_ROUTES
+        'i18n-improutes' : 'Cumplimentaciones de la Ruta',
+        'i18n-nombre_planta' : 'Nombre Planta',
+        'i18n-imp-routes-empty' : 'No se han encontrado cumplimentaciones de la ruta',
+        'i18n-info_route' : 'Información de la Ruta',
 
 
 

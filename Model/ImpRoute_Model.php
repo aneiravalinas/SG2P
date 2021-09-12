@@ -11,9 +11,12 @@ class ImpRoute_Model extends Abstract_Model {
     var $estado;
     var $fecha_cumplimentacion;
     var $nombre_doc;
+    var $nombre_planta;
+    var $nombre_edificio;
+    var $edificio_id;
 
     function __construct() {
-        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion','nombre_doc');
+        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion','nombre_doc','nombre_planta', 'nombre_edificio', 'edificio_id');
         $this->fill_fields();
     }
 
@@ -73,7 +76,66 @@ class ImpRoute_Model extends Abstract_Model {
     }
 
     function SEARCH() {
-        // TODO: Implement SEARCH() method.
+        $this->query = "
+            SELECT PLANTA_RUTA.*, PLANTA.nombre as nombre_planta, EDIFICIO.nombre AS nombre_edificio
+            FROM PLANTA_RUTA
+            INNER JOIN PLANTA
+                ON PLANTA_RUTA.planta_id = PLANTA.planta_id
+            INNER JOIN EDIFICIO
+                ON EDIFICIO.edificio_id = PLANTA.edificio_id
+            WHERE
+                PLANTA_RUTA.ruta_id = '$this->ruta_id' AND
+                planta_ruta_id LIKE '%" . $this->planta_ruta_id . "%' AND
+                PLANTA_RUTA.planta_id LIKE '%" . $this->planta_id . "%' AND
+                estado LIKE '%" . $this->estado . "%' AND
+                fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
+                nombre_doc LIKE '%" . $this->nombre_doc . "%' AND
+                EDIFICIO.edificio_id LIKE '%" . $this->edificio_id . "%' AND
+                PLANTA.nombre LIKE '%" . $this->nombre_planta . "%' AND
+                EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchImpRoutes() {
+        $this->query = "
+            SELECT PLANTA_RUTA.*, PLANTA.nombre AS nombre_planta
+            FROM PLANTA_RUTA
+            INNER JOIN PLANTA
+                ON PLANTA_RUTA.planta_id = PLANTA.planta_id
+            WHERE   
+                ruta_id = '$this->ruta_id' AND
+                PLANTA.edificio_id = '$this->edificio_id' AND
+                planta_ruta_id LIKE '%" . $this->planta_ruta_id . "%' AND
+                PLANTA_RUTA.planta_id LIKE '%" . $this->planta_id . "%' AND
+                estado LIKE '%" . $this->estado . "%' AND
+                fecha_cumplimentacion LIKE '%" .$this->fecha_cumplimentacion . "%' AND
+                nombre_doc LIKE '%" . $this->nombre_doc . "%' AND
+                PLANTA.nombre LIKE '%" . $this->nombre_planta . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchActiveImpRoutes() {
+        $this->query = "
+            SELECT PLANTA_RUTA.*, PLANTA.nombre AS nombre_planta
+            FROM PLANTA_RUTA
+            INNER JOIN PLANTA
+                ON PLANTA_RUTA.planta_id = PLANTA.planta_id
+            WHERE
+                ruta_id = '$this->ruta_id' AND
+                PLANTA.edificio_id = '$this->edificio_id' AND
+                PLANTA.nombre LIKE '%" . $this->nombre_planta . "%' AND
+                fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
+                nombre_doc LIKE '%" . $this->nombre_doc . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
     }
 
     function seek() {

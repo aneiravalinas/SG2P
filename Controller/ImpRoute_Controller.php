@@ -1,0 +1,30 @@
+<?php
+
+class ImpRoute {
+
+    function __construct() {
+        include './View/Page/Message_View.php';
+        include './Service/Route_Service.php';
+    }
+
+    function checkPermission() {
+        return (es_resp_organizacion() || es_admin());
+    }
+
+    function show() {
+        if($this->checkPermission()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->searchImpRoutes();
+            if($feedback['ok']) {
+                include_once './View/ImpRoutes/Show_ImpRoutes_View.php';
+                new Show_ImpRoutes($feedback['resource'], $feedback['route']);
+            } else if(isset($feedback['route'])) {
+                new Message($feedback['code'], 'ImpRoute', 'show', $feedback['route']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+}

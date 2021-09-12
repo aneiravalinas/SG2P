@@ -96,6 +96,17 @@ class Show_DefRoutes {
                                                 </a>
                                             </div>
                                         </div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false"
+                                                    onclick="
+                                                            crearform('formenviar','post');
+                                                            insertacampo(document.formenviar,'ruta_id','<?php echo $route['ruta_id'] ?>');
+                                                            insertacampo(document.formenviar,'controller','ImpRoute');
+                                                            insertacampo(document.formenviar,'action','show');
+                                                            enviaform(document.formenviar);">
+                                                <span class="iconify" data-icon="fluent:textbox-more-24-filled" data-inline="false"></span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

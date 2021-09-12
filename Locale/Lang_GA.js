@@ -687,6 +687,19 @@ arrayGA = {
         'IMPROUTE_SEARCH_OK' : 'A búsqueda de cumplimentacións da ruta realizouse correctamente',
         'IMPROUTE_SEARCH_KO' : 'Erro ó buscar cumplimentacións da ruta',
 
+        // Búsqueda de cumplimentaciones del Portal
+        'PRTL_IMPROUTE_SEARCH_OK' : 'A búsqueda das cumplimentacións da ruta no portal realizouse correctamente',
+        'PRTL_IMPROUTE_SEARCH_KO' : 'Erro ó consultar as cumplimentacións da ruta no portal',
+
+        // Búsqueda asociación edificio - ruta
+        'BLDROUTE_NOT_EXST' : 'O plan ó que pertence a ruta non está asignado o edificio indicado',
+        'BLDROUTE_EXST' : 'O plan ó que pertence a ruta está asignado o edificio indicado',
+        'BLDROUTE_KO' : 'Erro ó consultar a asignación entre o plan da ruta e o edificio',
+
+        // Búsqueda de cumplimentaciones por edificio y ruta
+        'BLDROUTES_SEARCH_OK' : 'A búsqueda de cumplimentacións realizouse correctamente',
+        'BLDROUTES_SEARCH_KO' : 'Erro ó buscar cumplimentacións',
+
     // IMP_FORMAT
 
         // SEARCH
@@ -897,6 +910,10 @@ arrayGA = {
             // ID Procedimiento
             'IMPPROC_ID_EMPT' : 'O id da cumplimentación do procedemento non pode ser vacío',
             'IMPPROC_ID_NOT_NUMERIC' : 'O id da cumplimentación do procedemento debe ser numérico',
+
+            // ID Ruta
+            'IMPROUTE_ID_EMPT' : 'O id da cumplimentación da ruta non pode estar vacío',
+            'IMPROUTE_ID_NOT_NUMERIC' : 'O id da cumplimentación da ruta debe ser numérico',
 
 
 
@@ -1134,6 +1151,12 @@ arrayGA = {
         'i18n-del-imp-proc-confirm' : '¿Está seguro de que desexa eliminar a cumplimentación deste procedemento? O cambio non será reversible',
         'i18n-expire-impproc-confirm' : '¿Está seguro de que desexa vencer a cumplimentación deste procedemento? O cambio non será reversible',
         'i18n-cump-proc' : 'Cumplimentar Procedemento',
+
+        // IMP_ROUTES
+        'i18n-improutes' : 'Cumplimentacións da Ruta',
+        'i18n-nombre_planta' : 'Nome Planta',
+        'i18n-imp-routes-empty' : 'Non se atoparon cumplimentacións da ruta',
+        'i18n-info_route' : 'Información da Ruta',
 
 
         // MODAL

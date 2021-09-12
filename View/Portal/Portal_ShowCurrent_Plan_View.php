@@ -222,8 +222,8 @@ class Portal_ShowCurrent_Plan {
                                                                     crearform('formenviar', 'post');
                                                                     insertacampo(document.formenviar, 'ruta_id', '<?php echo $ruta['ruta_id'] ?>');
                                                                     insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                                                    insertacampo(document.formenviar, 'controller', 'Route');
-                                                                    insertacampo(document.formenviar, 'action', 'show');
+                                                                    insertacampo(document.formenviar, 'controller', 'Portal');
+                                                                    insertacampo(document.formenviar, 'action', 'seekPortalRoute');
                                                                     enviaform(document.formenviar);">
                                                                     <span class="pendiente"><?php echo $ruta['nombre'] ?></span>
                                                                 </a>
@@ -233,8 +233,8 @@ class Portal_ShowCurrent_Plan {
                                                                     crearform('formenviar', 'post');
                                                                     insertacampo(document.formenviar, 'ruta_id', '<?php echo $ruta['ruta_id'] ?>');
                                                                     insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                                                    insertacampo(document.formenviar, 'controller', 'Route');
-                                                                    insertacampo(document.formenviar, 'action', 'show');
+                                                                    insertacampo(document.formenviar, 'controller', 'Portal');
+                                                                    insertacampo(document.formenviar, 'action', 'seekPortalRoute');
                                                                     enviaform(document.formenviar);">
                                                                     <span class="cumplimentado"><?php echo $ruta['nombre'] ?></span>
                                                                 </a>
@@ -244,8 +244,8 @@ class Portal_ShowCurrent_Plan {
                                                                     crearform('formenviar', 'post');
                                                                     insertacampo(document.formenviar, 'ruta_id', '<?php echo $ruta['ruta_id'] ?>');
                                                                     insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                                                    insertacampo(document.formenviar, 'controller', 'Route');
-                                                                    insertacampo(document.formenviar, 'action', 'show');
+                                                                    insertacampo(document.formenviar, 'controller', 'Portal');
+                                                                    insertacampo(document.formenviar, 'action', 'seekPortalRoute');
                                                                     enviaform(document.formenviar);">
                                                                     <span class="vencido"><?php echo $ruta['nombre'] ?></span>
                                                                 </a>

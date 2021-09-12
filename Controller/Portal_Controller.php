@@ -168,4 +168,18 @@ class Portal {
             new Message($feedback['code'], 'Portal', 'getPortal');
         }
     }
+
+    function seekPortalRoute() {
+        include_once './Service/Route_Service.php';
+        $route_service = new Route_Service();
+        $feedback = $route_service->seekPortalRoute();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_ShowCurrent_Route_View.php';
+            new Portal_ShowCurrent_Route($feedback['resource'], $feedback['route'], $feedback['building']);
+        } else if(isset($feedback['return'])) {
+            new Message($feedback['code'], 'Portal', 'seekPortalPlan', $feedback['return']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'getPortal');
+        }
+    }
 }
