@@ -159,6 +159,197 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    function addRouteForm() {
+        $this->feedback = $this->searchRouteAndBuilding();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $building = $this->feedback['building'];
+        $route = $this->feedback['route'];
+        if(es_resp_edificio() && $building['username'] != getUser()) {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'BLD_FRBD';
+            unset($this->feedback['resource'], $this->feedback['building'], $this->feedback['route']);
+            return $this->feedback;
+        }
+
+        $this->feedback = $this->searchBuildingFloors();
+        if(!$this->feedback['ok']) {
+            if($this->feedback['code'] == 'BLD_NOT_FLOORS') {
+                $this->feedback['code'] = 'BLD_FLOOR_EMPT';
+                $this->feedback['return'] = array('ruta_id' => $route['ruta_id'], 'edificio_id' => $building['edificio_id']);
+            }
+        } else {
+            $this->feedback['route'] = $route;
+            $this->feedback['building'] = $building;
+        }
+
+        return $this->feedback;
+    }
+
+    function addRoute() {
+        $validation = $this->validar_atributos_addRoute();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByRouteID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $route = $this->feedback['resource'];
+        $this->feedback = $this->seekByFloorID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $floor = $this->feedback['resource'];
+        $this->edificio_id = $floor['edificio_id'];
+        $this->feedback = $this->seekByBuildingID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $building = $this->feedback['resource'];
+        if(es_resp_edificio() && $building['username'] != getUser()) {
+            $this->feedback['code'] = false;
+            $this->feedback['code'] = 'BLD_FRBD';
+            unset($this->feedback['resource']);
+            return $this->feedback;
+        }
+
+        $this->feedback = $this->seekPlanBuilding($route['plan_id']);
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $this->impRoute_entity->setAttributes(array('nombre_doc' => default_doc, 'fecha_cumplimentacion' => default_data, 'estado' => 'pendiente'));
+        $this->feedback = $this->impRoute_entity->ADD();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'IMPROUTE_ADD_OK';
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPROUTE_ADD_KO';
+        }
+
+        $this->feedback['return'] = array('edificio_id' => $building['edificio_id'], 'ruta_id' => $route['ruta_id']);
+        return $this->feedback;
+    }
+
+    function addImpRouteForm() {
+        $this->feedback = $this->seekRoute();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $route = $this->feedback['resource'];
+        $this->feedback = $this->searchBuildPlans($route['plan_id']);
+        if($this->feedback['ok']) {
+            $this->feedback['route'] = $route;
+        } else {
+            $this->feedback['route'] = array('ruta_id' => $route['ruta_id']);
+        }
+
+        return $this->feedback;
+    }
+
+    function addImpRoute() {
+        $validation = $this->validar_atributos_add();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByRouteID();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $route = $this->feedback['resource'];
+        $this->feedback = $this->ADD($route);
+        $this->feedback['route'] = array('ruta_id' => $route['ruta_id']);
+        return $this->feedback;
+    }
+
+    function ADD($route) {
+        if(empty($this->buildings)) {
+            $feedback['ok'] = true;
+            $feedback['code'] = 'IMPROUTE_ADD_OK';
+            return $feedback;
+        }
+
+        $this->edificio_id = array_pop($this->buildings);
+        $feedback = $this->seekByBuildingID();
+        if(!$feedback['ok']) {
+            return $feedback;
+        }
+
+        $building = $feedback['resource'];
+        if(es_resp_edificio() && $building['username'] != getUser()) {
+            $feedback['ok'] = false;
+            $feedback['code'] = 'BLD_FRBD';
+            unset($feedback['resource']);
+            return $feedback;
+        }
+
+        $feedback = $this->seekPlanBuilding($route['plan_id']);
+        if(!$feedback['ok']) {
+            return $feedback;
+        }
+
+        $feedback = $this->searchBuildingFloors();
+        if(!$feedback['ok']) {
+            return $feedback;
+        }
+
+        $floors = $feedback['resource'];
+        include_once './Service/Uploader_Service.php';
+        $uploader = new Uploader();
+        $path = plans_path . $route['plan_id'] . '/' . $this->edificio_id . '/Rutas/';
+        $def_dir_created = false;
+        if(!$uploader->dir_exist($path . $route['ruta_id'])['ok']) {
+            $feedback = $uploader->create_dir($path, $this->ruta_id);
+            if(!$feedback['ok']) {
+                $feedback['building'] = array('edificio_id' => $building['edificio_id']);
+                $feedback['code'] = 'BLDPLAN_DIRROUTE_KO';
+                return $feedback;
+            }
+            $def_dir_created = true;
+        }
+
+        $created_imp_floors = array();
+        foreach($floors as $floor) {
+            $this->impRoute_entity->setAttributes(array('ruta_id' => $route['ruta_id'], 'planta_id' => $floor['planta_id'], 'nombre_doc' => default_doc,
+                                                                'fecha_cumplimentacion' => default_data, 'estado' => 'pendiente'));
+            $feedback = $this->impRoute_entity->ADD();
+            if(!$feedback['ok']) {
+                if($feedback['code'] == 'QRY_KO') {
+                    $feedback['code'] = 'IMPROUTE_ADD_KO';
+                }
+                break;
+            }
+            array_push($created_imp_floors, $this->impRoute_entity->planta_ruta_id);
+        }
+
+        if(sizeof($floors) == sizeof($created_imp_floors)) {
+            $feedback = $this->ADD($route);
+            if($feedback['ok']) {
+                return $feedback;
+            }
+        }
+
+        foreach($created_imp_floors as $imp_floor) {
+            $this->impRoute_entity->planta_ruta_id = $imp_floor;
+            $this->impRoute_entity->DELETE();
+        }
+
+        if($def_dir_created) {
+            $uploader->delete($path . $route['ruta_id']);
+        }
+
+        return $feedback;
+    }
+
     function seekRoute() {
         $validation = $this->validar_RUTA_ID();
         if(!$validation['ok']) {
@@ -250,6 +441,44 @@ class Route_Service extends Route_Validation {
         return $feedback;
     }
 
+    function searchBuildPlans($plan_id) {
+        include_once './Model/BuildPlan_Model.php';
+        $bldPlan_entity = new BuildPlan_Model();
+        $bldPlan_entity->plan_id = $plan_id;
+        $feedback = $bldPlan_entity->searchByPlanID();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'BLDPLAN_ASSIGN_NOT_EXST';
+            } else {
+                $feedback['code'] = 'BLDPLAN_ASSIGN_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'BLDPLAN_KO';
+        }
+
+        return $feedback;
+    }
+
+    function searchBuildingFloors() {
+        include_once './Model/Floor_Model.php';
+        $floor_entity = new Floor_Model();
+        $floor_entity->edificio_id = $this->edificio_id;
+        $feedback = $floor_entity->searchByBuildingID();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'BLD_NOT_FLOORS';
+            } else {
+                $feedback['code'] = 'BLD_FLOORS_OK';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'BLD_FLOORS_KO';
+        }
+
+        return $feedback;
+    }
+
     function get_route_state() {
         $feedback = $this->search_all_improutes();
         if(!$feedback['ok']) {
@@ -268,6 +497,24 @@ class Route_Service extends Route_Validation {
             $feedback['code'] = 'BLDROUTES_SEARCH_OK';
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'BLDROUTES_SEARCH_KO';
+        }
+
+        return $feedback;
+    }
+
+    function seekByFloorID() {
+        include_once './Model/Floor_Model.php';
+        $floor_entity = new Floor_Model();
+        $feedback = $floor_entity->seek();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'FLRID_NOT_EXST';
+            } else {
+                $feedback['code'] = 'FLRID_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'FLRID_KO';
         }
 
         return $feedback;

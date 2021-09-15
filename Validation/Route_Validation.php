@@ -98,6 +98,24 @@ class Route_Validation extends Validator {
         return $this->validar_EDIFICIO_ID();
     }
 
+    function validar_atributos_add() {
+        $validation = $this->validar_RUTA_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        return $this->validar_BUILDINGS();
+    }
+
+    function validar_atributos_addRoute() {
+        $validation = $this->validar_RUTA_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        return $this->validar_PLANTA_ID();
+    }
+
     function validar_PLANTA_RUTA_ID() {
         if(!$this->no_vacio($this->planta_ruta_id)) {
             return $this->rellena_validation(false, 'IMPROUTE_ID_EMPT', 'IMP_ROUTE');

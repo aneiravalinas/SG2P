@@ -686,6 +686,15 @@ arrayEN = {
         'IMPROUTE_SEARCH_OK' : 'The search for route completions was successful',
         'IMPROUTE_SEARCH_KO' : 'Failed to search for route completions',
 
+        // ADD
+        'IMPROUTE_ADD_OK' : 'The completion of the route has been registered correctly',
+        'BLD_FLOOR_EMPT' : 'Route completions cannot be registered in this building as it does not have assigned floors',
+
+        // Búsqueda de plantas del edificio
+        'BLD_NOT_FLOORS' : 'Completion could not be added. Some of the indicated buildings do not have registered floors',
+        'BLD_FLOORS_OK' : 'Building floor search Ok',
+        'BLD_FLOORS_KO' : 'Failed to find the floors of the building',
+
         // Búsqueda de cumplimentaciones del Portal
         'PRTL_IMPROUTE_SEARCH_OK' : 'The search for completions of the route in the portal has been carried out correctly',
         'PRTL_IMPROUTE_SEARCH_KO' : 'Error when consulting the route completions in the portal',

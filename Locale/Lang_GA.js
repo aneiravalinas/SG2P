@@ -687,6 +687,15 @@ arrayGA = {
         'IMPROUTE_SEARCH_OK' : 'A búsqueda de cumplimentacións da ruta realizouse correctamente',
         'IMPROUTE_SEARCH_KO' : 'Erro ó buscar cumplimentacións da ruta',
 
+        // ADD
+        'IMPROUTE_ADD_OK' : 'Rexistrouse a cumplimentación da ruta correctamente',
+        'BLD_FLOOR_EMPT' : 'Non se poden rexistrar cumplimentacións de rutas neste edificio ó non ter plantas asignadas',
+
+        // Búsqueda de plantas del edificio
+        'BLD_NOT_FLOORS' : 'Non se puido engadir a cumplimentación. Algún dos edificios non ten plantas rexistradas',
+        'BLD_FLOORS_OK' : 'Búsqueda das plantas do edificio Ok',
+        'BLD_FLOORS_KO' : 'Erro ó buscar as plantas do edificio',
+
         // Búsqueda de cumplimentaciones del Portal
         'PRTL_IMPROUTE_SEARCH_OK' : 'A búsqueda das cumplimentacións da ruta no portal realizouse correctamente',
         'PRTL_IMPROUTE_SEARCH_KO' : 'Erro ó consultar as cumplimentacións da ruta no portal',

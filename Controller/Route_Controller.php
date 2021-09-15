@@ -23,4 +23,35 @@ class Route {
             new Message('FRB_ACCS', 'Panel', 'deshboard');
         }
     }
+
+    function addForm() {
+        if(!es_registrado()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->addRouteForm();
+            if($feedback['ok']) {
+                include_once './View/Routes/Add_Route_View.php';
+                new Add_Route($feedback['resource'], $feedback['route'], $feedback['building']);
+            } else if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'Route', 'show', $feedback['return']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function add() {
+        if(!es_registrado()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->addRoute();
+            if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'Route', 'show', $feedback['return']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
 }

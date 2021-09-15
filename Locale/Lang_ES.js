@@ -694,6 +694,15 @@ arrayES = {
         'IMPROUTE_SEARCH_OK' : 'La búsqueda de cumplimentaciones de la ruta se ha realizado correctamente',
         'IMPROUTE_SEARCH_KO' : 'Error al buscar cumplimentaciones de la ruta',
 
+        // ADD
+        'IMPROUTE_ADD_OK' : 'Se ha registrado la cumplimentación de la ruta correctamente',
+        'BLD_FLOOR_EMPT' : 'No se pueden registrar cumplimentaciones de rutas en este edificio al no tener plantas asignadas',
+
+        // Búsqueda de plantas del edificio
+        'BLD_NOT_FLOORS' : 'No se ha podido añadir la cumplimentación. Alguno de los edificios indicados no tienen plantas registradas',
+        'BLD_FLOORS_OK' : 'Búsqueda de plantas del edificio Ok',
+        'BLD_FLOORS_KO' : 'Error al buscar las plantas del edificio',
+
         // Búsqueda de cumplimentaciones del Portal
         'PRTL_IMPROUTE_SEARCH_OK' : 'La búsqueda de cumplimentaciones de la ruta en el portal se ha realizado correctamente',
         'PRTL_IMPROUTE_SEARCH_KO' : 'Error al consultas las cumplimentaciones de la ruta en el portal',

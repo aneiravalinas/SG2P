@@ -620,16 +620,17 @@ class BuildPlan_Service extends BuildPlan_Validation {
         }
 
         $route = array_pop($routes);
+        $feedback = $this->uploader->create_dir($path . '/Rutas/', $route['ruta_id'] );
+        if(!$feedback['ok']) {
+            $feedback['code'] = 'BLDPLAN_DIRROUTE_KO';
+            return $feedback;
+        }
+
         $floors_with_routes = array();
         include_once './Model/ImpRoute_Model.php';
         $impRoute_entity = new ImpRoute_Model();
         $feedback['ok'] = true;
         foreach($floors as $floor) {
-            $feedback = $this->uploader->create_dir($path . '/Rutas/' . $route['ruta_id'] . '/', $floor['planta_id']);
-            if(!$feedback['ok']) {
-                $feedback['code'] = 'BLDPLAN_DIRROUTE_KO';
-                break;
-            }
             $impRoute_entity->setAttributes(array('planta_id' => $floor['planta_id'], 'ruta_id' => $route['ruta_id'],
                                                 'estado' => 'pendiente', 'fecha_cumplimentacion' => default_data, 'nombre_doc' => default_doc));
             $feedback = $impRoute_entity->ADD();
