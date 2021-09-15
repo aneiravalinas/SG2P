@@ -690,6 +690,19 @@ arrayEN = {
         'IMPROUTE_ADD_OK' : 'The completion of the route has been registered correctly',
         'BLD_FLOOR_EMPT' : 'Route completions cannot be registered in this building as it does not have assigned floors',
 
+        // SEEK
+        'IMPROUTE_SEEK_OK' : 'The details of the completion of the route have been consulted correctly',
+        'IMPROUTE_SEEK_KO' : 'Error when consulting the details of the completion of the route',
+
+        // EXPIRE
+        'IMPROUTE_EXPIRE_OK' : 'The completion of the route has been successfully expired',
+        'IMPROUTE_EXPIRE_KO' : 'Error when expiring the route completion',
+
+        // Búsqueda por ID de Cumplimentación
+        'IMPROUTEID_NOT_EXST' : 'The completion of the indicated route does not exist',
+        'IMPROUTEID_EXST' : 'The completion of the route exists',
+        'IMPROUTEID_KO' : 'Error when querying for completion id',
+
         // Búsqueda de plantas del edificio
         'BLD_NOT_FLOORS' : 'Completion could not be added. Some of the indicated buildings do not have registered floors',
         'BLD_FLOORS_OK' : 'Building floor search Ok',
@@ -1165,6 +1178,7 @@ arrayEN = {
         'i18n-nombre_planta' : 'Floor Name',
         'i18n-imp-routes-empty' : 'Route completions have not been found',
         'i18n-info_route' : 'Route Information',
+        'i18n-expire-improute-confirm' : 'Are you sure you want to beat the completion of this route? The change will not be reversible',
 
         // MODAL
             // Campos Modal

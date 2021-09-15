@@ -139,7 +139,21 @@ class ImpRoute_Model extends Abstract_Model {
     }
 
     function seek() {
-        // TODO: Implement seek() method.
+        $this->query = "
+            SELECT PLANTA_RUTA.*, PLANTA.nombre AS nombre_planta, PLANTA.edificio_id, EDIFICIO.username, RUTA.nombre AS nombre_ruta, RUTA.plan_id
+            FROM PLANTA_RUTA
+            INNER JOIN PLANTA
+                ON PLANTA_RUTA.planta_id = PLANTA.planta_id
+            INNER JOIN EDIFICIO
+                ON PLANTA.edificio_id = EDIFICIO.edificio_id
+            INNER JOIN RUTA
+                ON PLANTA_RUTA.ruta_id = RUTA.ruta_id
+            WHERE
+                planta_ruta_id = '$this->planta_ruta_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
     function searchByPlantaID() {

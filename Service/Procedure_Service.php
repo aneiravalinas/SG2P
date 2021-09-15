@@ -345,7 +345,7 @@ class Procedure_Service extends Procedure_Validation {
             $this->feedback['resource']['path'] = plans_path . $imp_proc['plan_id'] . '/' . $imp_proc['edificio_id'] . '/Procedimientos/' .
                                                     $imp_proc['procedimiento_id'] . '/' . $imp_proc['edificio_procedimiento_id'];
             $this->feedback['code'] = 'IMPPROC_SEEK_OK';
-        } else if($this->feedback['code'] == 'IMPPROC_KO') {
+        } else if($this->feedback['code'] == 'IMPPROCID_KO') {
             $this->feedback['code'] = 'IMPPROC_SEEK_KO';
         }
 

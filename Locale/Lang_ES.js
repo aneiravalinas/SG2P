@@ -698,6 +698,19 @@ arrayES = {
         'IMPROUTE_ADD_OK' : 'Se ha registrado la cumplimentación de la ruta correctamente',
         'BLD_FLOOR_EMPT' : 'No se pueden registrar cumplimentaciones de rutas en este edificio al no tener plantas asignadas',
 
+        // SEEK
+        'IMPROUTE_SEEK_OK' : 'Se han consultado los detalles de la cumplimentación de la ruta correctamente',
+        'IMPROUTE_SEEK_KO' : 'Error al consultar los detalles de la cumplimentación de la ruta',
+
+        // EXPIRE
+        'IMPROUTE_EXPIRE_OK' : 'La cumplimentación de la ruta se ha vencido correctamente',
+        'IMPROUTE_EXPIRE_KO' : 'Error al vencer la cumplimentación de la ruta',
+
+        // Búsqueda por ID de Cumplimentación
+        'IMPROUTEID_NOT_EXST' : 'La cumplimentación de la ruta indicada no existe',
+        'IMPROUTEID_EXST' : 'La cumplimentación de la ruta existe',
+        'IMPROUTEID_KO' : 'Error al consultar por id de cumplimentación',
+
         // Búsqueda de plantas del edificio
         'BLD_NOT_FLOORS' : 'No se ha podido añadir la cumplimentación. Alguno de los edificios indicados no tienen plantas registradas',
         'BLD_FLOORS_OK' : 'Búsqueda de plantas del edificio Ok',
@@ -1177,6 +1190,7 @@ arrayES = {
         'i18n-nombre_planta' : 'Nombre Planta',
         'i18n-imp-routes-empty' : 'No se han encontrado cumplimentaciones de la ruta',
         'i18n-info_route' : 'Información de la Ruta',
+        'i18n-expire-improute-confirm' : '¿Está seguro que desea vencer la cumplimentación de esta ruta? El cambio no será reversible',
 
 
 

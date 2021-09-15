@@ -350,6 +350,52 @@ class Route_Service extends Route_Validation {
         return $feedback;
     }
 
+    function seek() {
+        $validation = $this->validar_PLANTA_RUTA_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByImpRouteID();
+        if($this->feedback['ok']) {
+            $imp_route = $this->feedback['resource'];
+            if(es_resp_edificio() && $imp_route['username'] != getUser()) {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'BLD_FRBD';
+                unset($this->feedback['resource']);
+                return $this->feedback;
+            }
+
+            $this->feedback['resource']['path'] = plans_path . $imp_route['plan_id'] . '/' . $imp_route['edificio_id'] . '/Procedimientos/' .
+                                                        $imp_route['ruta_id'] . '/' . $imp_route['planta_ruta_id'];
+            $this->feedback['code'] = 'IMPROUTE_SEEK_OK';
+        } else if($this->feedback['code'] == 'IMPROUTEID_KO') {
+            $this->feedback['code'] = 'IMPROUTE_SEEK_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function expire() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $imp_route = $this->feedback['resource'];
+        $this->impRoute_entity->estado = 'vencido';
+        $this->feedback = $this->impRoute_entity->EDIT();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'IMPROUTE_EXPIRE_OK';
+            $this->update_plan_state($imp_route['edificio_id'], $imp_route['plan_id']);
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPROUTE_EXPIRE_KO';
+        }
+
+        $this->feedback['return'] = array('edificio_id' => $imp_route['edificio_id'], 'ruta_id' => $imp_route['ruta_id']);
+        return $this->feedback;
+    }
+
     function seekRoute() {
         $validation = $this->validar_RUTA_ID();
         if(!$validation['ok']) {
@@ -518,5 +564,27 @@ class Route_Service extends Route_Validation {
         }
 
         return $feedback;
+    }
+
+    function seekByImpRouteID() {
+        $feedback = $this->impRoute_entity->seek();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMP') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'IMPROUTEID_NOT_EXST';
+            } else {
+                $feedback['code'] = 'IMPROUTEID_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'IMPROUTEID_KO';
+        }
+
+        return $feedback;
+    }
+
+    function update_plan_state($edificio_id, $plan_id) {
+        include_once './Service/CheckState_Service.php';
+        $checkState_service = new CheckState_Service($edificio_id, $plan_id);
+        $checkState_service->update_plan_state();
     }
 }

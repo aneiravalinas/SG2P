@@ -58,4 +58,33 @@ class ImpRoute {
             new Message('FRB_ACCS', 'Panel', 'deshboard');
         }
     }
+
+    function expireForm() {
+        if($this->checkPermission()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->seek();
+            if($feedback['ok']) {
+                include_once './View/ImpRoutes/Expire_ImpRoute_View.php';
+                new Expire_ImpRoute($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function expire() {
+        if($this->checkPermission()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->expire();
+            if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'ImpRoute', 'show', array('ruta_id' => $feedback['return']['ruta_id']));
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
 }
