@@ -698,6 +698,17 @@ arrayEN = {
         'IMPROUTE_EXPIRE_OK' : 'The completion of the route has been successfully expired',
         'IMPROUTE_EXPIRE_KO' : 'Error when expiring the route completion',
 
+        // IMPLEMENT
+        'IMPROUTE_IMPL_OK' : 'The completion of the route has been completed successfully',
+        'IMPROUTE_IMPL_KO' : 'Error completing the completion of the route',
+
+        // DELETE
+        'IMPROUTE_DEL_OK' : 'Route completion has been successfully removed',
+
+        // Búsqueda de cumplimentación de ruta única en el edificio
+        'IMPROUTE_UNIQ' : 'Completion cannot be removed. There must always be at least one completion of the route in the building',
+        'IMPROUTE_NOT_UNIQ' : 'The completion of the route is not unique',
+
         // Búsqueda por ID de Cumplimentación
         'IMPROUTEID_NOT_EXST' : 'The completion of the indicated route does not exist',
         'IMPROUTEID_EXST' : 'The completion of the route exists',
@@ -1179,6 +1190,8 @@ arrayEN = {
         'i18n-imp-routes-empty' : 'Route completions have not been found',
         'i18n-info_route' : 'Route Information',
         'i18n-expire-improute-confirm' : 'Are you sure you want to beat the completion of this route? The change will not be reversible',
+        'i18n-cump-route' : 'Complete Route',
+        'i18n-del-imp-route-confirm' : 'Are you sure you want to remove the completion of this route? The change will not be reversible',
 
         // MODAL
             // Campos Modal

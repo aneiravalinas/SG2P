@@ -169,7 +169,7 @@ class CheckState_Service {
         return $this->procedimientos;
     }
 
-    function checkStateRoutes() {
+    /*function checkStateRoutes() {
         $feedback = $this->searchBuildingPlanRoutes();
         if(!$feedback['ok']) {
             $this->rutas['ok'] = false;
@@ -190,6 +190,66 @@ class CheckState_Service {
 
         $this->rutas['estado'] = $this->check_state($this->rutas['elementos']);
         return $this->rutas;
+    }*/
+
+    function checkStateRoutes() {
+        $feedback = $this->searchBuildingPlanRoutes();
+        if(!$feedback['ok']) {
+            $this->rutas['ok'] = false;
+            $this->rutas['code'] = $feedback['code'];
+            return $this->rutas;
+        }
+
+        $this->rutas['elementos'] = $feedback['resource'];
+        $floors = $this->searchBuildingFloors();
+        if(!$floors['ok']) {
+            $this->rutas['ok'] = false;
+            $this->rutas['code'] = $floors['code'];
+            return $this->rutas;
+        }
+
+        foreach($this->rutas['elementos'] as $index => $ruta) {
+            $feedback = $this->get_state_route($ruta['ruta_id'], $floors['resource']);
+            if(!$feedback['ok']) {
+                $this->rutas['ok'] = false;
+                $this->rutas['code'] = $feedback['code'];
+                return $this->rutas;
+            }
+            $this->rutas['elementos'][$index]['estado'] = $feedback['estado'];
+        }
+
+        $this->rutas['estado'] = $this->check_state($this->rutas['elementos']);
+        return $this->rutas;
+    }
+
+    function get_state_route($ruta_id, $floors) {
+        $floors_states = array();
+        foreach($floors as $floor) {
+            $feedback = $this->searchImpRoutesByFloor($ruta_id, $floor['planta_id']);
+            if(!$feedback['ok']) {
+                return $feedback;
+            }
+            array_push($floors_states, $this->check_state($feedback['resource']));
+        }
+
+        $state = array('ok' => true, 'estado' => '');
+        foreach($floors_states as $floor_state) {
+            if($floor_state == 'pendiente') {
+                $state['estado'] = 'pendiente';
+                return $state;
+            }
+
+            if($state['estado'] != '') {
+                if($state['estado'] != $floor_state) {
+                    $state['estado'] = 'pendiente';
+                    return $state;
+                }
+            } else {
+                $state['estado'] = $floor_state;
+            }
+        }
+
+        return $state;
     }
 
 
@@ -384,7 +444,7 @@ class CheckState_Service {
         return $feedback;
     }
 
-    function searchBuildingImpRoutes($ruta_id) {
+    /*function searchBuildingImpRoutes($ruta_id) {
         include_once './Model/ImpRoute_Model.php';
         $impRoute_entity = new ImpRoute_Model();
         $impRoute_entity->ruta_id = $ruta_id;
@@ -396,7 +456,7 @@ class CheckState_Service {
         }
 
         return $feedback;
-    }
+    }*/
 
     function searchBuildingImpFormations($formacion_id) {
         include_once './Model/ImpFormat_Model.php';
@@ -423,6 +483,38 @@ class CheckState_Service {
             $feedback['code'] = 'IMPSIM_SEARCH_OK';
         } else {
             $feedback['code'] = 'IMPSIM_SEARCH_KO';
+        }
+
+        return $feedback;
+    }
+
+    function searchBuildingFloors() {
+        include_once './Model/Floor_Model.php';
+        $floor_entity = new Floor_Model();
+        $floor_entity->edificio_id = $this->edificio_id;
+        $feedback = $floor_entity->searchByBuildingID();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['code'] = 'FLRID_NOT_EXST';
+            } else {
+                $feedback['code'] = 'FLR_SRCH_OK';
+            }
+        } else {
+            $feedback['code'] = 'FLR_SRCH_KO';
+        }
+
+        return $feedback;
+    }
+
+    function searchImpRoutesByFloor($ruta_id, $planta_id) {
+        include_once './Model/ImpRoute_Model.php';
+        $impRoute_entity = new ImpRoute_Model();
+        $impRoute_entity->setAttributes(array('ruta_id' => $ruta_id, 'planta_id' => $planta_id));
+        $feedback = $impRoute_entity->searchRoutesFloors();
+        if($feedback['ok']) {
+            $feedback['code'] = 'IMPROUTE_SEARCH_OK';
+        } else {
+            $feedback['code'] = 'IMPROUTE_SEARCH_KO';
         }
 
         return $feedback;

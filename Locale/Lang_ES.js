@@ -706,6 +706,17 @@ arrayES = {
         'IMPROUTE_EXPIRE_OK' : 'La cumplimentación de la ruta se ha vencido correctamente',
         'IMPROUTE_EXPIRE_KO' : 'Error al vencer la cumplimentación de la ruta',
 
+        // IMPLEMENT
+        'IMPROUTE_IMPL_OK' : 'La cumplimentación de la ruta se ha completado correctamente',
+        'IMPROUTE_IMPL_KO' : 'Error al completar la cumplimentación de la ruta',
+
+        // DELETE
+        'IMPROUTE_DEL_OK' : 'La cumplimentación de la ruta se ha eliminado correctamente',
+
+        // Búsqueda de cumplimentación de ruta única en el edificio
+        'IMPROUTE_UNIQ' : 'No se puede eliminar la cumplimentación. Siempre debe existir por lo menos una cumplimentación de la ruta en el edificio',
+        'IMPROUTE_NOT_UNIQ' : 'La cumplimentación de la ruta no es única',
+
         // Búsqueda por ID de Cumplimentación
         'IMPROUTEID_NOT_EXST' : 'La cumplimentación de la ruta indicada no existe',
         'IMPROUTEID_EXST' : 'La cumplimentación de la ruta existe',
@@ -1191,6 +1202,8 @@ arrayES = {
         'i18n-imp-routes-empty' : 'No se han encontrado cumplimentaciones de la ruta',
         'i18n-info_route' : 'Información de la Ruta',
         'i18n-expire-improute-confirm' : '¿Está seguro que desea vencer la cumplimentación de esta ruta? El cambio no será reversible',
+        'i18n-cump-route' : 'Cumplimentar Ruta',
+        'i18n-del-imp-route-confirm' : '¿Está seguro que desea eliminar la cumplimentación de esta ruta? El cambio no será reversible',
 
 
 

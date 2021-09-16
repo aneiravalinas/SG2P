@@ -83,4 +83,62 @@ class Route {
             new Message('FRB_ACCS', 'Panel', 'deshboard');
         }
     }
+
+    function implementForm() {
+        if(!es_registrado()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->seek();
+            if($feedback['ok']) {
+                include_once './View/Routes/Implement_Route_View.php';
+                new Implement_Route($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function implement() {
+        if(!es_registrado()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->implement();
+            if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'Route', 'show', $feedback['return']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function deleteForm() {
+        if(!es_registrado()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->seek();
+            if($feedback['ok']) {
+                include_once './View/Routes/Delete_Route_View.php';
+                new Delete_Route($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function delete() {
+        if(!es_registrado()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->DELETE();
+            if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'Route', 'show', $feedback['return']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
 }

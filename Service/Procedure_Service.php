@@ -407,6 +407,7 @@ class Procedure_Service extends Procedure_Validation {
         if($imp_proc['estado'] == 'vencido') {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'COMPL_EXPIRED';
+            $this->feedback['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
             return $this->feedback;
         }
 
