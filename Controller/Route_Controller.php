@@ -27,7 +27,7 @@ class Route {
     function addForm() {
         if(!es_registrado()) {
             $route_service = new Route_Service();
-            $feedback = $route_service->addRouteForm();
+            $feedback = $route_service->dataRouteForm();
             if($feedback['ok']) {
                 include_once './View/Routes/Add_Route_View.php';
                 new Add_Route($feedback['resource'], $feedback['route'], $feedback['building']);
@@ -133,6 +133,38 @@ class Route {
             $route_service = new Route_Service();
             $feedback = $route_service->DELETE();
             if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'Route', 'show', $feedback['return']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function showCurrent() {
+        if(!es_registrado()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->seek();
+            if($feedback['ok']) {
+                include_once './View/Routes/ShowCurrent_Route_View.php';
+                new ShowCurrent_Route($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function searchForm() {
+        if(!es_registrado()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->dataRouteForm();
+            if($feedback['ok']) {
+                include_once './View/Routes/Search_Route_View.php';
+                new Search_Route($feedback['resource'], $feedback['building'], $feedback['route']);
+            } else if(isset($feedback['return'])) {
                 new Message($feedback['code'], 'Route', 'show', $feedback['return']);
             } else {
                 new Message($feedback['code'], 'Plan', 'show');

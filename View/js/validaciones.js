@@ -21,11 +21,10 @@ function encrypt() {
 function not_empty(element, show=false) {
     var correct;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
     if((value == null) || (value.length == 0)) {
         if(show) {
-            openModal(name,'i18n-not-empty');
+            openModal(element,'i18n-not-empty');
         }
         correct = false;
     } else {
@@ -49,15 +48,14 @@ function not_empty(element, show=false) {
 function check_letters_numbers(element, size) {
     var correct = true;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
     if(value.length > size) {
-        openModal(name,'i18n-max-size');
+        openModal(element,'i18n-max-size');
         correct = false;
     }
     var pattern = /^[A-zÀ-ú0-9]+$/;
     if(!pattern.test(value)) {
-        openModal(name,'i18n-only-letters-numbers');
+        openModal(element,'i18n-only-letters-numbers');
         correct = false;
     }
 
@@ -73,11 +71,10 @@ function check_letters_numbers(element, size) {
 function check_name_file(element) {
     var correct = true;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
     var extension = value.substring(value.lastIndexOf('.')).toLowerCase();
     if(extension !== '.pdf') {
-        openModal(name, 'i18n-ext-not-allowed');
+        openModal(element, 'i18n-ext-not-allowed');
         correct = false;
     }
 
@@ -97,7 +94,6 @@ function check_dni(element) {
     var validChars = 'TRWAGMYFPDXBNJZSQVHLCKET';
     var nifRexp = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i;
     var nieRexp = /^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]$/i;
-    var name = document.getElementById(element).name;
     var str = document.getElementById(element).value.toString().toUpperCase();
 
     if (!nifRexp.test(str) && !nieRexp.test(str)){
@@ -117,7 +113,7 @@ function check_dni(element) {
             correct = true;
         }
         else{
-            openModal(name, 'i18n-generic-format');
+            openModal(element, 'i18n-generic-format');
             correct =  false;
         }
     }
@@ -136,16 +132,15 @@ function check_dni(element) {
 function check_letters_spaces_accents(element, size) {
     var correct = true;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
     if(value.length > size) {
-        openModal(name,'i18n-max-size');
+        openModal(element,'i18n-max-size');
         correct = false;
     }
 
     var pattern = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
     if(!pattern.test(value)) {
-        openModal(name,'i18n-letters-spaces-accents-format');
+        openModal(element,'i18n-letters-spaces-accents-format');
         correct = false;
     }
 
@@ -161,11 +156,10 @@ function check_letters_spaces_accents(element, size) {
 function check_phone(element) {
     var correct = true;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
     var pattern = /^[6-9][0-9]{8}$/;
 
     if(!pattern.test(value)) {
-        openModal(name,'i18n-generic-format');
+        openModal(element,'i18n-generic-format');
         correct = false;
     }
 
@@ -181,16 +175,15 @@ function check_phone(element) {
 function check_email(element, size) {
     var correct = true;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
     if(value.length > size) {
-        openModal(name,'i18n-max-size');
+        openModal(element,'i18n-max-size');
         correct = false;
     }
 
     var pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     if(!pattern.test(value)) {
-        openModal(name, 'i18n-generic-format');
+        openModal(element, 'i18n-generic-format');
         correct = false;
     }
 
@@ -206,7 +199,6 @@ function check_email(element, size) {
 function check_enum(element, values) {
     var correct = false;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
     for(var i = 0; i < values.length; i++) {
         if(values[i] === value) {
@@ -220,7 +212,7 @@ function check_enum(element, values) {
         return true;
     } else {
         document.getElementById(element).style.borderColor = 'red';
-        openModal(name,'i18n-wrong-enum');
+        openModal(element,'i18n-wrong-enum');
         return false;
     }
 }
@@ -228,10 +220,9 @@ function check_enum(element, values) {
 function check_pattern(element, pattern) {
     var correct = true;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
     if(!pattern.test(value)) {
-        openModal(name,'i18n-generic-format');
+        openModal(element,'i18n-generic-format');
         correct = false;
     }
 
@@ -247,15 +238,14 @@ function check_pattern(element, pattern) {
 function check_file_pdf_name(element, size) {
     var correct = true;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
     if(value.size > size) {
-        openModal(name,'i18n-max-size');
+        openModal(element,'i18n-max-size');
         correct = false;
     }
     var pattern = /^[a-zA-Z0-9_-]*(\.pdf)?$/;
     if(!pattern.test(value)) {
-        openModal(name, 'i18n-filename-search-format');
+        openModal(element, 'i18n-filename-search-format');
         correct = false;
     }
 
@@ -271,17 +261,16 @@ function check_file_pdf_name(element, size) {
 function check_only_numbers(element, size=null) {
     var correct = true;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
     var pattern = /^[0-9]+$/;
     if(!pattern.test(value)) {
-        openModal(name,'i18n-numbers-format');
+        openModal(element,'i18n-numbers-format');
         correct = false;
     }
 
     if(size != null) {
         if(value.length > size) {
-            openModal(name,'i18n-max-size');
+            openModal(element,'i18n-max-size');
             correct = false;
         }
     }
@@ -304,7 +293,7 @@ function check_imagen(element) {
         if(allowed_extensions.includes(extension)) {
             return true;
         } else {
-            openModal(document.getElementById(element).name,'i18n-ext-not-allowed');
+            openModal(element,'i18n-ext-not-allowed');
             return false;
         }
     }
@@ -316,16 +305,15 @@ function check_imagen(element) {
 function check_letters_numbers_accents_spaces(element, size) {
     var correct = true;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
     if(value.length > size) {
-        openModal(name,'i18n-max-size');
+        openModal(element,'i18n-max-size');
         correct = false;
     }
 
     var pattern = /^[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+$/g;
     if(!pattern.test(value)) {
-        openModal(name,'i18n-letters-numbers-accents-spaces');
+        openModal(element,'i18n-letters-numbers-accents-spaces');
         correct = false;
     }
 
@@ -341,17 +329,16 @@ function check_letters_numbers_accents_spaces(element, size) {
 function check_text(element,size=null) {
     var correct = true;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
     var pattern = /^[,¡!¿?./&ª\-_ºA-z0-9À-ú\s\t\n\u00f1\u00d1]+$/g;
     if(!pattern.test(value)) {
-        openModal(name,'i18n-chars-not_allow');
+        openModal(element,'i18n-chars-not_allow');
         correct = false;
     }
 
     if(size != null) {
         if(value.length > size) {
-            openModal(name,'i18n-max-size');
+            openModal(element,'i18n-max-size');
             correct = false;
         }
     }
@@ -368,11 +355,10 @@ function check_text(element,size=null) {
 function check_codigo_postal(element) {
     var correct = true;
     var value = document.getElementById(element).value;
-    var name = document.getElementById(element).name;
 
     var pattern = /^[0-9]{5}$/;
     if(!pattern.test(value)) {
-        openModal(name,'i18n-cp-format');
+        openModal(element,'i18n-cp-format');
         correct = false;
     }
 

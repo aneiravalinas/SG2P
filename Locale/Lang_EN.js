@@ -1225,11 +1225,12 @@ arrayEN = {
             'm-ruta_id' : ' Route ID ',
             'm-formacion_id' : ' Formation ID ',
             'm-simulacro_id' : ' Simulacrum ID ',
-            'm-buildings[]' : ' Buildings ',
+            'm-buildings' : ' Buildings ',
             'm-nombre_edificio' : ' Building Name ',
             'm-nombre_doc' : ' File Completion ',
             'm-nombre_doc_field' : ' Document Name ',
             'm-cumplimentacion_id' : ' Completion ID ',
+            'm-nombre_planta' : ' Floor Name ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',

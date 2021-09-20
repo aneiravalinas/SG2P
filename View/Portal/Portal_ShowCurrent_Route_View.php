@@ -87,7 +87,7 @@ class Portal_ShowCurrent_Route {
                                 insertacampo(document.formenviar,'ruta_id','<?php echo $this->route['ruta_id'] ?>');
                                 insertacampo(document.formenviar,'edificio_id','<?php echo $this->building['edificio_id'] ?>');
                                 insertacampo(document.formenviar,'controller','Portal');
-                                insertacampo(document.formenviar,'action','searchRouteForm');
+                                insertacampo(document.formenviar,'action','searchPortalRouteForm');
                                 enviaform(document.formenviar);">
                                 <span class="iconify option_button" data-icon="fluent:search-square-24-filled" data-inline="false"></span>
                             </a>

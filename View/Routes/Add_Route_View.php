@@ -47,8 +47,8 @@ class Add_Route {
                                     <input type="text" value="<?php echo $this->building['nombre'] ?>" class="form-control" id="nombre_edificio" name="nombre_edificio" disabled/>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="planta_id" class="i18n-nombre_planta">Nombre Planta</label>
-                                    <select class="form-select" id="planta_id" name="planta_id">
+                                    <label for="nombre_planta" class="i18n-nombre_planta">Nombre Planta</label>
+                                    <select class="form-select" id="nombre_planta" name="planta_id">
                                         <?php foreach($this->floors as $floor): ?>
                                             <option value="<?php echo $floor['planta_id'] ?>">
                                                 <?php echo $floor['nombre'] ?>

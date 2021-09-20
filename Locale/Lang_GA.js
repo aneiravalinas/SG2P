@@ -1227,11 +1227,12 @@ arrayGA = {
             'm-ruta_id' : ' ID Ruta ',
             'm-formacion_id' : ' ID Formacion ',
             'm-simulacro_id' : ' ID Simulacro ',
-            'm-buildings[]' : ' Edificios ',
+            'm-buildings' : ' Edificios ',
             'm-nombre_edificio' : ' Nome Edificio ',
             'm-nombre_doc' : ' Ficheiro Cumplimentacion ',
             'm-nombre_doc_field' : ' Nome Documento ',
             'm-cumplimentacion_id' : ' ID Cumplimentación ',
+            'm-nombre_planta' : ' Nome Planta ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',

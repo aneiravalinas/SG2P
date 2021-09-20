@@ -52,11 +52,11 @@ class Search_BuildPlan {
 
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="fecha_asignacion" class="i18n-fecha_asignacion">Fecha Asignación</label>
+                                    <label for="fecha_asignacion" class="i18n-date_assign">Fecha Asignación</label>
                                     <input type="date" class="form-control" id="fecha_asignacion" name="fecha_asignacion"/>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="fecha_cumplimentacion" class="i18n-fecha_cumplimentacion">Fecha Implementación</label>
+                                    <label for="fecha_cumplimentacion" class="i18n-date_comp">Fecha Implementación</label>
                                     <input type="date" class="form-control" id="fecha_cumplimentacion" name="fecha_cumplimentacion"/>
                                 </div>
                             </div>

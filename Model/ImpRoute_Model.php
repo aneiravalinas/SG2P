@@ -112,8 +112,7 @@ class ImpRoute_Model extends Abstract_Model {
                 PLANTA_RUTA.planta_id LIKE '%" . $this->planta_id . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
                 fecha_cumplimentacion LIKE '%" .$this->fecha_cumplimentacion . "%' AND
-                nombre_doc LIKE '%" . $this->nombre_doc . "%' AND
-                PLANTA.nombre LIKE '%" . $this->nombre_planta . "%'
+                nombre_doc LIKE '%" . $this->nombre_doc . "%'
         ";
 
         $this->get_results_from_query();
@@ -129,9 +128,10 @@ class ImpRoute_Model extends Abstract_Model {
             WHERE
                 ruta_id = '$this->ruta_id' AND
                 PLANTA.edificio_id = '$this->edificio_id' AND
-                PLANTA.nombre LIKE '%" . $this->nombre_planta . "%' AND
+                PLANTA_RUTA.planta_id LIKE '%" . $this->planta_id . "%' AND
                 fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
-                nombre_doc LIKE '%" . $this->nombre_doc . "%'
+                nombre_doc LIKE '%" . $this->nombre_doc . "%' AND
+                estado != 'vencido'
         ";
 
         $this->get_results_from_query();

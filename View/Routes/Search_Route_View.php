@@ -1,12 +1,14 @@
 <?php
 
-class Search_Procedure {
-    var $procedure;
+class Search_Route {
+    var $floors;
     var $building;
+    var $route;
 
-    function __construct($procedure, $building) {
-        $this->procedure = $procedure;
+    function __construct($floors, $building, $route) {
+        $this->floors = $floors;
         $this->building = $building;
+        $this->route = $route;
         $this->render();
     }
 
@@ -19,7 +21,7 @@ class Search_Procedure {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1><?php echo $this->procedure['nombre'] ?></h1>
+                        <h1><?php echo $this->route['nombre'] ?></h1>
                         <h2 class="mb-4 i18n-search-imps">Buscar Cumplimentaciones</h2>
                     </div>
 
@@ -35,7 +37,7 @@ class Search_Procedure {
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label for="cumplimentacion_id" class="i18n-cump_id">ID Cumplimentacion</label>
-                                    <input type="text" class="form-control" id="cumplimentacion_id" name="edificio_procedimiento_id" onblur="check_CUMPLIMENTACION_ID_SEARCH();"/>
+                                    <input type="text" class="form-control" id="cumplimentacion_id" name="planta_ruta_id" onblur="check_CUMPLIMENTACION_ID_SEARCH();"/>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="fecha_cumplimentacion" class="i18n-date_comp">Fecha Cumplimentación</label>
@@ -53,30 +55,40 @@ class Search_Procedure {
                             </div>
 
                             <div class="row">
-                                <div class="form-group col">
+                                <div class="form-group col-md-6">
                                     <label for="nombre_doc_field" class="i18n-nombre_doc">Nombre Documento</label>
                                     <input type="text" class="form-control" id="nombre_doc_field" name="nombre_doc" onblur="check_NOMBRE_DOC_SEARCH();"/>
                                 </div>
-
+                                <div class="form-group col-md-6">
+                                    <label for="nombre_planta" class="i18n-nombre_planta">Nombre Planta</label>
+                                    <select class="form-select" id="nombre_planta" name="planta_id">
+                                        <option value="" class="i18n-todos"></option>
+                                        <?php foreach($this->floors as $floor): ?>
+                                        <option value="<?php echo $floor['planta_id'] ?>">
+                                            <?php echo $floor['nombre'] ?>
+                                        </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
                                     <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
                                         crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'procedimiento_id', '<?php echo $this->procedure['procedimiento_id'] ?>');
+                                        insertacampo(document.formenviar,'ruta_id', '<?php echo $this->route['ruta_id'] ?>');
                                         insertacampo(document.formenviar,'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','Procedure');
+                                        insertacampo(document.formenviar,'controller','Route');
                                         insertacampo(document.formenviar,'action','show');
                                         enviaform(document.formenviar);">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
-                                        insertacampo(document.formulariosearch,'procedimiento_id', '<?php echo $this->procedure['procedimiento_id'] ?>');
+                                        insertacampo(document.formulariosearch,'ruta_id', '<?php echo $this->route['ruta_id'] ?>');
                                         insertacampo(document.formulariosearch,'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                        insertacampo(document.formulariosearch,'controller','Procedure');
+                                        insertacampo(document.formulariosearch,'controller','Route');
                                         insertacampo(document.formulariosearch,'action','show');
-                                        enviaformcorrecto(document.formulariosearch, check_PROC_SEARCH());">
+                                        enviaformcorrecto(document.formulariosearch, check_ROUTE_SEARCH());">
                                         Enviar
                                     </a>
                                 </div>

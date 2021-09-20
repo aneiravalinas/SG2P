@@ -37,7 +37,7 @@ class Implement_ImpDoc {
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="edificio_id" class="i18n-edificio_id">ID Edificio</label>
-                                    <input type="text" value="<?php echo $this->imp_doc['edificio_id'] ?>" class="form-control" id="nombre" name="nombre" disabled/>
+                                    <input type="text" value="<?php echo $this->imp_doc['edificio_id'] ?>" class="form-control" id="edificio_id" name="edificio_id" disabled/>
                                 </div>
                             </div>
 

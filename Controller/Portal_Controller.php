@@ -177,7 +177,31 @@ class Portal {
             include_once './View/Portal/Portal_ShowCurrent_Route_View.php';
             new Portal_ShowCurrent_Route($feedback['resource'], $feedback['route'], $feedback['building']);
         } else if(isset($feedback['return'])) {
-            new Message($feedback['code'], 'Portal', 'seekPortalPlan', $feedback['return']);
+            new Message($feedback['code'], 'Portal', 'seekPortalRoute', $feedback['return']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'getPortal');
+        }
+    }
+
+    function seekPortalImpRoute() {
+        include_once './Service/Route_Service.php';
+        $route_service = new Route_Service();
+        $feedback = $route_service->seekPortalImpRoute();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_ShowCurrent_ImpRoute_View.php';
+            new Portal_ShowCurrent_ImpRoute($feedback['resource']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'getPortal');
+        }
+    }
+
+    function searchPortalRouteForm() {
+        include_once './Service/Route_Service.php';
+        $route_service = new Route_Service();
+        $feedback = $route_service->searchPortalRouteForm();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_Search_Route_View.php';
+            new Portal_Search_Route($feedback['resource'],$feedback['route'], $feedback['building']);
         } else {
             new Message($feedback['code'], 'Portal', 'getPortal');
         }

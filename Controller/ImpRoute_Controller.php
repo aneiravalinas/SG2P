@@ -145,4 +145,34 @@ class ImpRoute {
             new Message('FRB_ACCS', 'Panel', 'deshboard');
         }
     }
+
+    function showCurrent() {
+        if($this->checkPermission()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->seek();
+            if($feedback['ok']) {
+                include_once './View/ImpRoutes/ShowCurrent_ImpRoute_View.php';
+                new ShowCurrent_ImpRoute($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function searchForm() {
+        if($this->checkPermission()) {
+            $route_service = new Route_Service();
+            $feedback = $route_service->seekRoute();
+            if($feedback['ok']) {
+                include_once './View/ImpRoutes/Search_ImpRoute_View.php';
+                new Search_ImpRoute($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
 }

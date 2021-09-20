@@ -34,7 +34,7 @@ class Search_Document {
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label for="edificio_documento_id" class="i18n-cump_id">ID Cumplimentacion</label>
-                                    <input type="text" class="form-control" id="edificio_documento_id" name="cumplimentacion_id" onblur="check_EDIFICIO_DOCUMENTO_ID_SEARCH();"/>
+                                    <input type="text" class="form-control" id="edificio_documento_id" name="cumplimentacion_id" onblur="check_CUMPLIMENTACION_ID_SEARCH();"/>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="fecha_cumplimentacion" class="i18n-date_comp">Fecha Cumplimentación</label>

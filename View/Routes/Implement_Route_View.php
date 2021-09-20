@@ -32,12 +32,12 @@ class Implement_Route {
                                     <input type="text" value="<?php echo $this->imp_route['planta_ruta_id'] ?>" class="form-control" id="planta_ruta_id" name="planta_ruta_id" readonly/>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="ruta_id" class="i18n-ruta_id_id">ID Ruta</label>
+                                    <label for="ruta_id" class="i18n-ruta_id">ID Ruta</label>
                                     <input type="text" value="<?php echo $this->imp_route['ruta_id'] ?>" class="form-control" id="ruta_id" name="ruta_id" disabled/>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="edificio_id" class="i18n-edificio_id">ID Edificio</label>
-                                    <input type="text" value="<?php echo $this->imp_route['edificio_id'] ?>" class="form-control" id="nombre" name="nombre" disabled/>
+                                    <input type="text" value="<?php echo $this->imp_route['edificio_id'] ?>" class="form-control" id="edificio_id" name="edificio_id" disabled/>
                                 </div>
                             </div>
 

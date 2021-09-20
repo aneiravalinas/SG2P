@@ -133,14 +133,13 @@ class Route_Service extends Route_Validation {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'DFROUTEID_NOT_EXST';
             unset($this->feedback['resource'], $this->feedback['route'], $this->feedback['building']);
-            $this->feedback['return'] = array('plan_id' => $route['plan_id'], 'edificio_id' => $building['edificio_id']);
             return $this->feedback;
         }
 
         $route['estado'] = $route_state['estado'];
         $validation = $this->validar_atributos_search_portal();
         if(!$validation['ok']) {
-            $validation['return'] = array('plan_id' => $route['plan_id'], 'edificio_id' => $building['edificio_id']);
+            $validation['return'] = array('ruta_id' => $route['ruta_id'], 'edificio_id' => $building['edificio_id']);
             return $validation;
         }
 
@@ -150,7 +149,7 @@ class Route_Service extends Route_Validation {
             $this->feedback['route'] = $route;
             $this->feedback['building'] = $building;
         } else {
-            $this->feedback['return'] = array('plan_id' => $route['plan_id'], 'edificio_id' => $building['edificio_id']);
+            $this->feedback['return'] = array('ruta_id' => $route['ruta_id'], 'edificio_id' => $building['edificio_id']);
             if($this->feedback['code'] == 'QRY_KO') {
                 $this->feedback['code'] = 'PRTL_IMPROUTE_SEARCH_KO';
             }
@@ -159,7 +158,7 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
-    function addRouteForm() {
+    function dataRouteForm() {
         $this->feedback = $this->searchRouteAndBuilding();
         if(!$this->feedback['ok']) {
             return $this->feedback;
@@ -185,6 +184,32 @@ class Route_Service extends Route_Validation {
             $this->feedback['building'] = $building;
         }
 
+        return $this->feedback;
+    }
+
+    function searchPortalRouteForm() {
+        $this->feedback = $this->searchRouteAndBuilding();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $route = $this->feedback['route'];
+        $building = $this->feedback['building'];
+        $bld_plan = $this->feedback['resource'];
+        if($bld_plan['estado'] == 'vencido') {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'BLDROUTE_NOT_EXST';
+            unset($this->feedback['resource'], $this->feedback['route'], $this->feedback['building']);
+            return $this->feedback;
+        }
+
+        $this->feedback = $this->searchBuildingFloors();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $this->feedback['building'] = $building;
+        $this->feedback['route'] = $route;
         return $this->feedback;
     }
 
@@ -371,6 +396,31 @@ class Route_Service extends Route_Validation {
             $this->feedback['code'] = 'IMPROUTE_SEEK_OK';
         } else if($this->feedback['code'] == 'IMPROUTEID_KO') {
             $this->feedback['code'] = 'IMPROUTE_SEEK_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function seekPortalImpRoute() {
+        $validation = $this->validar_PLANTA_RUTA_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByImpRouteID();
+        if($this->feedback['ok']) {
+            $imp_route = $this->feedback['resource'];
+            if($imp_route['estado'] == 'vencido') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'IMPROUTEID_NOT_EXST';
+                unset($this->feedback['resource']);
+                return $this->feedback;
+            }
+            $this->feedback['code'] = 'PRTL_IMPROUTE_SEEK_OK';
+            $this->feedback['resource']['path'] = plans_path . $imp_route['plan_id'] . '/' . $imp_route['edificio_id'] . '/Rutas/' .
+                                                    $imp_route['ruta_id'] . '/' . $imp_route['planta_ruta_id'];
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'PRTL_IMPROUTE_SEEK_KO';
         }
 
         return $this->feedback;

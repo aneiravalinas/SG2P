@@ -1239,11 +1239,12 @@ arrayES = {
             'm-ruta_id' : ' ID Ruta ',
             'm-formacion_id' : ' ID Formacion ',
             'm-simulacro_id' : ' ID Simulacro ',
-            'm-buildings[]' : ' Edificios ',
+            'm-buildings' : ' Edificios ',
             'm-nombre_edificio' : ' Nombre Edificio ',
             'm-nombre_doc' : ' Fichero Cumplimentacion ',
             'm-nombre_doc_field' : ' Nombre Documento ',
             'm-cumplimentacion_id' : ' ID Cumplimentación ',
+            'm-nombre_planta' : ' Nombre Planta ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',
