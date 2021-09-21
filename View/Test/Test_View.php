@@ -27,7 +27,7 @@ class Test_View {
 
                 <?php foreach($this->test['resultado'] as $entity => $testEntity) :?>
                     <div class="row mt-5 pt-5">
-                        <div class="col-xl-7 col-lg-9">
+                        <div class="col-xl-9 col-lg-9">
                             <h3>Entidad <?php echo $entity ?></h3>
                         </div>
                     </div>

@@ -24,6 +24,7 @@ class Test {
         include './Test/Plan_Test.php';
         include './Test/Document_Test.php';
         include './Test/Procedure_Test.php';
+        include './Test/Route_Test.php';
 
         session_destroy();
 

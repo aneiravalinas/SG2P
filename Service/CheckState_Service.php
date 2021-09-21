@@ -233,20 +233,24 @@ class CheckState_Service {
         }
 
         $state = array('ok' => true, 'estado' => '');
-        foreach($floors_states as $floor_state) {
-            if($floor_state == 'pendiente') {
-                $state['estado'] = 'pendiente';
-                return $state;
-            }
-
-            if($state['estado'] != '') {
-                if($state['estado'] != $floor_state) {
+        if(!empty($floors_states)) {
+            foreach($floors_states as $floor_state) {
+                if($floor_state == 'pendiente') {
                     $state['estado'] = 'pendiente';
                     return $state;
                 }
-            } else {
-                $state['estado'] = $floor_state;
+
+                if($state['estado'] != '') {
+                    if($state['estado'] != $floor_state) {
+                        $state['estado'] = 'pendiente';
+                        return $state;
+                    }
+                } else {
+                    $state['estado'] = $floor_state;
+                }
             }
+        } else {
+            $state['estado'] = 'vencido';
         }
 
         return $state;

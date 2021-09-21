@@ -260,7 +260,8 @@ INSERT INTO PLANTA (`planta_id`, `edificio_id`, `nombre`, `num_planta`, `descrip
 (1,1,'Planta Uno',1,'descripcion de la planta uno','default.png'),
 (2,1,'Planta Dos',2,'descripcion de la planta dos','default.png'),
 (3,1,'Planta Tres',3,'descripcion de la planta tres','default.png'),
-(4,5,'Planta Tres',3,'descripcion de la planta tres','default.png');
+(4,5,'Planta Tres',3,'descripcion de la planta tres','default.png'),
+(5,7,'Planta del Edificio con asignaciones',1,'descripcion','default.png');
 
 INSERT INTO ESPACIO (`espacio_id`, `planta_id`, `nombre`, `descripcion`, `foto_espacio`) VALUES
 (1,1,'Espacio Uno','Descripcion del espacio uno','default.png'),
@@ -305,7 +306,9 @@ INSERT INTO RUTA (`ruta_id`, `plan_id`, `nombre`, `descripcion`) VALUES
 (1,1,'Rutas del Plan Uno','Descripcion de la definicion de la ruta'),
 (2,4,'Rutas del plan con rutas','Descripcion Rutas'),
 (3,1,'Otra Ruta del Plan Uno','Descripcion de la definicion de la ruta'),
-(4,7,'Ruta del Plan Completo','Descripcion de la Ruta');
+(4,7,'Ruta del Plan Completo','Descripcion de la Ruta'),
+(5,9,'Ruta del Plan Vencido','Descripcion de la Ruta'),
+(6,11,'Ruta del Plan Vencido','Descripcion de la Ruta');
 
 INSERT INTO FORMACION (`formacion_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (1,5,'Formaciones del plan con formaciones','Descripción de la formación'),
@@ -318,12 +321,16 @@ INSERT INTO SIMULACRO (`simulacro_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (3,7,'Simulacro del Plan Completo','Descripcion del simulacro');
 
 INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_cumplimentacion`, `nombre_doc`) VALUES
-(1,2,1,'vigente','15-05-2021','nombre_doc');
+(1,2,1,'pendiente','15-05-2021','document_default'),
+(2,4,1,'pendiente','15-05-2021','document_default'),
+(3,4,1,'vencido','15-05-2021','document_default'),
+(4,5,6,'vencido','15-05-2021','document_default');
 
 INSERT INTO EDIFICIO_PLAN (`edificio_id`, `plan_id`, `fecha_asignacion`, `estado`) VALUES
 (2,1, '25-12-2020', 'pendiente'),
 (6,10, '25-12-2020', 'pendiente'),
 (7,11, '25-12-2020', 'pendiente'),
+(5,1, '25-12-2020', 'pendiente'),
 (1,9,'25-12-1992','vencido'),
 (2,9,'25-12-1992','vencido'),
 (3,9,'25-12-1992','vencido'),

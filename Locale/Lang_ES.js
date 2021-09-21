@@ -724,6 +724,7 @@ arrayES = {
 
         // Búsqueda de plantas del edificio
         'BLD_NOT_FLOORS' : 'No se ha podido añadir la cumplimentación. Alguno de los edificios indicados no tienen plantas registradas',
+        'BLD_FLOORS_SEARCH_EMPT': 'El edificio indicado no tiene plantas registradas',
         'BLD_FLOORS_OK' : 'Búsqueda de plantas del edificio Ok',
         'BLD_FLOORS_KO' : 'Error al buscar las plantas del edificio',
 

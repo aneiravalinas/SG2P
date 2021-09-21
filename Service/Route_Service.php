@@ -174,14 +174,12 @@ class Route_Service extends Route_Validation {
         }
 
         $this->feedback = $this->searchBuildingFloors();
-        if(!$this->feedback['ok']) {
-            if($this->feedback['code'] == 'BLD_NOT_FLOORS') {
-                $this->feedback['code'] = 'BLD_FLOOR_EMPT';
-                $this->feedback['return'] = array('ruta_id' => $route['ruta_id'], 'edificio_id' => $building['edificio_id']);
-            }
-        } else {
+
+        if($this->feedback['ok']) {
             $this->feedback['route'] = $route;
             $this->feedback['building'] = $building;
+        } else {
+            $this->feedback['return'] = array('ruta_id' => $route['ruta_id'], 'edificio_id' => $building['edificio_id']);
         }
 
         return $this->feedback;
@@ -204,12 +202,9 @@ class Route_Service extends Route_Validation {
         }
 
         $this->feedback = $this->searchBuildingFloors();
-        if(!$this->feedback['ok']) {
-            return $this->feedback;
-        }
-
         $this->feedback['building'] = $building;
         $this->feedback['route'] = $route;
+
         return $this->feedback;
     }
 
@@ -324,6 +319,9 @@ class Route_Service extends Route_Validation {
 
         $feedback = $this->searchBuildingFloors();
         if(!$feedback['ok']) {
+            if($feedback['code'] == 'BLD_FLOORS_SEARCH_EMPT') {
+                $feedback['code'] = 'BLD_NOT_FLOORS';
+            }
             return $feedback;
         }
 
@@ -649,7 +647,7 @@ class Route_Service extends Route_Validation {
         if($feedback['ok']) {
             if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'BLD_NOT_FLOORS';
+                $feedback['code'] = 'BLD_FLOORS_SEARCH_EMPT';
             } else {
                 $feedback['code'] = 'BLD_FLOORS_OK';
             }
@@ -662,7 +660,7 @@ class Route_Service extends Route_Validation {
 
     function get_route_state() {
         $feedback = $this->searchBuildingFloors();
-        if(!$feedback['ok']) {
+        if(!$feedback['ok'] && $feedback['code'] != 'BLD_FLOORS_SEARCH_EMPT') {
             return $feedback;
         }
 
@@ -715,7 +713,7 @@ class Route_Service extends Route_Validation {
     function seekByImpRouteID() {
         $feedback = $this->impRoute_entity->seek();
         if($feedback['ok']) {
-            if($feedback['code'] == 'QRY_EMP') {
+            if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
                 $feedback['code'] = 'IMPROUTEID_NOT_EXST';
             } else {

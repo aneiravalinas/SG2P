@@ -717,6 +717,7 @@ arrayGA = {
 
         // Búsqueda de plantas del edificio
         'BLD_NOT_FLOORS' : 'Non se puido engadir a cumplimentación. Algún dos edificios non ten plantas rexistradas',
+        'BLD_FLOORS_SEARCH_EMPT': 'O edificio indicado non ten plantas rexistradas',
         'BLD_FLOORS_OK' : 'Búsqueda das plantas do edificio Ok',
         'BLD_FLOORS_KO' : 'Erro ó buscar as plantas do edificio',
 

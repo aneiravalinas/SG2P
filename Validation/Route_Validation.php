@@ -21,8 +21,8 @@ class Route_Validation extends Validator {
 
     function validar_atributos_search_portal() {
         $validacion = $this->rellena_validation(true, '00000', 'IMP_ROUTE');
-        if($this->nombre_planta != '') {
-            $validacion = $this->validar_NOMBRE_PLANTA();
+        if($this->planta_id != '') {
+            $validacion = $this->validar_PLANTA_ID();
             if(!$validacion['ok']) {
                 return $validacion;
             }
@@ -55,13 +55,6 @@ class Route_Validation extends Validator {
             }
         }
 
-        if($this->planta_id != '') {
-            $validacion = $this->validar_PLANTA_ID();
-            if(!$validacion['ok']) {
-                return $validacion;
-            }
-        }
-
         if($this->estado != '') {
             $validacion = $this->validar_ESTADO();
         }
@@ -73,6 +66,13 @@ class Route_Validation extends Validator {
         $validacion = $this->validar_atributos_search();
         if(!$validacion['ok']) {
             return $validacion;
+        }
+
+        if($this->nombre_planta != '') {
+            $validacion = $this->validar_NOMBRE_PLANTA();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
         }
 
         if($this->edificio_id != '') {

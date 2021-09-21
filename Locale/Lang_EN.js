@@ -716,6 +716,7 @@ arrayEN = {
 
         // Búsqueda de plantas del edificio
         'BLD_NOT_FLOORS' : 'Completion could not be added. Some of the indicated buildings do not have registered floors',
+        'BLD_FLOORS_SEARCH_EMPT': 'The indicated building does not have registered floors',
         'BLD_FLOORS_OK' : 'Building floor search Ok',
         'BLD_FLOORS_KO' : 'Failed to find the floors of the building',
 
