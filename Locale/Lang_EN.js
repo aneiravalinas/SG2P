@@ -739,6 +739,19 @@ arrayEN = {
         'IMPFORMAT_SEARCH_OK' : 'The search for formation completions has been carried out correctly',
         'IMPFORMAT_SEARCH_KO' : 'Error when looking for formation completions',
 
+        // Detalles de la Formación del Portal
+        'PRTL_IMPFORMAT_SEARCH_OK' : 'The details of the formation on the portal have been obtained correctly',
+        'PRTL_IMPFORMAT_SEARCH_KO' : 'Failed to get the formation details from the portal',
+
+        // Búsqueda asociación edificio - formacion
+        'BLDFORMAT_NOT_EXST' : 'The plan to which the formation belongs is not assigned to the indicated building',
+        'BLDFORMAT_EXST' : 'The plan to which the formation belongs is assigned to the indicated building',
+        'BLDFORMAT_KO' : 'Error when consulting the association between the formation plan and the building',
+
+        // Búsqueda de cumplimentaciones
+        'BLDFORMATS_SEARCH_OK' : 'The completions of the formation in the building have been consulted correctly',
+        'BLDFORMATS_SEARCH_KO' : 'Error when consulting the formation completions in the building',
+
     // IMP_SIM
 
         // SEARCH
@@ -948,6 +961,23 @@ arrayEN = {
             // ID Ruta
             'IMPROUTE_ID_EMPT' : 'The id of the route completion cannot be empty',
             'IMPROUTE_ID_NOT_NUMERIC' : 'The id of the route completion must be numeric',
+
+            // Fecha Planificación
+            'PLANNING_DATE_EMPT' : 'The planning date cannot be empty',
+            'PLANNING_DATE_KO' : 'The entered planning date is in the wrong format',
+            'PLANNING_DATE_PAST' : 'The planning date entered is a past date',
+
+            // Destinatarios
+            'RECIPIENTS_EMPT' : 'Recipients field cannot be empty',
+            'RECIPIENTS_LRG' : 'The recipients field cannot exceed 80 characters',
+            'RECIPIENTS_FRMT' : 'Recipients field contains illegal characters',
+
+            // URL
+            'URL_FRMT' : 'The URL of the resource entered is in an incorrect format',
+
+            // ID Formación
+            'IMPFORMAT_ID_EMPT' : 'The formation completion id cannot be empty',
+            'IMPFORMAT_ID_NOT_NUMERIC' : 'The id of the completion of the formation must be numeric',
 
 
 
@@ -1193,6 +1223,12 @@ arrayEN = {
         'i18n-expire-improute-confirm' : 'Are you sure you want to beat the completion of this route? The change will not be reversible',
         'i18n-cump-route' : 'Complete Route',
         'i18n-del-imp-route-confirm' : 'Are you sure you want to remove the completion of this route? The change will not be reversible',
+
+        // IMP_FORMATS
+        'i18n-impformats' : 'Formation Completions',
+        'i18n-planning_date' : 'Planning Date',
+        'i18n-imp-formats-empty' : 'No formation completions found',
+        'i18n-info_format' : 'Formation Information',
 
         // MODAL
             // Campos Modal

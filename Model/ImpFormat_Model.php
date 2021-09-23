@@ -11,9 +11,10 @@ class ImpFormat_Model extends Abstract_Model {
     var $fecha_planificacion;
     var $url_recurso;
     var $destinatarios;
+    var $nombre_edificio;
 
     function __construct() {
-        $this->atributos = array('edificio_formacion_id','edificio_id','formacion_id','estado','fecha_planificacion','url_recurso','destinatarios');
+        $this->atributos = array('edificio_formacion_id','edificio_id','formacion_id','estado','fecha_planificacion','url_recurso','destinatarios','nombre_edificio');
         $this->fill_fields();
     }
 
@@ -76,7 +77,36 @@ class ImpFormat_Model extends Abstract_Model {
     }
 
     function SEARCH() {
-        // TODO: Implement SEARCH() method.
+        $this->query = "
+            SELECT EDIFICIO_FORMACION.*, EDIFICIO.nombre AS nombre_edificio
+            FROM EDIFICIO_FORMACION
+            INNER JOIN EDIFICIO
+                ON EDIFICIO_FORMACION.edificio_id = EDIFICIO.edificio_id
+            WHERE
+                formacion_id = '$this->formacion_id' AND
+                edificio_formacion_id LIKE '%" . $this->edificio_formacion_id . "%' AND
+                EDIFICIO_FORMACION.edificio_id LIKE '%" . $this->edificio_id . "%' AND
+                EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
+                estado LIKE '%" . $this->estado . "%' AND
+                fecha_planificacion LIKE '%" . $this->fecha_planificacion . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchImpFormats() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_FORMACION
+            WHERE
+                edificio_id = '$this->edificio_id' AND
+                formacion_id = '$this->formacion_id' AND
+                estado LIKE '%" . $this->estado . "%' AND
+                fecha_planificacion LIKE '%" . $this->fecha_planificacion . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
     }
 
     function seek() {
@@ -99,6 +129,19 @@ class ImpFormat_Model extends Abstract_Model {
             WHERE
                 edificio_id = '$this->edificio_id' AND
                 formacion_id = '$this->formacion_id'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchActiveImpFormats() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_FORMACION
+            WHERE
+                edificio_id = '$this->edificio_id' AND
+                formacion_id = '$this->formacion_id' AND
+                estado != 'vencido'
         ";
 
         $this->get_results_from_query();

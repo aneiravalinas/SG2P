@@ -747,6 +747,23 @@ arrayES = {
         'IMPFORMAT_SEARCH_OK' : 'La búsqueda de cumplimentaciones de la formación se ha realizado correctamente',
         'IMPFORMAT_SEARCH_KO' : 'Error al buscar cumplimentaciones de la formación',
 
+        // ADD
+        'IMPFORMAT_ADD_OK' : 'Se ha registrado la cumplimentación de la formación correctamente',
+        'IMPFORMAT_ADD_KO' : 'Se ha producido un error al crar la cumplimentación de la formación',
+
+        // Detalles de la Formación del Portal
+        'PRTL_IMPFORMAT_SEARCH_OK' : 'Se ha obtenido los detalles de la formación en el portal correctamente',
+        'PRTL_IMPFORMAT_SEARCH_KO' : 'Error al obtener los detalles de la formación del portal',
+
+        // Búsqueda asociación edificio - formacion
+        'BLDFORMAT_NOT_EXST' : 'El plan al que pertenece la formación no está asignado al edificio indicado',
+        'BLDFORMAT_EXST' : 'El plan al que pertenece la formación está asignado al edificio indicado',
+        'BLDFORMAT_KO' : 'Error al consultar la asociación entre el plan de la formación y el edificio',
+
+        // Búsqueda de cumplimentaciones
+        'BLDFORMATS_SEARCH_OK' : 'Se han consultado las cumplimentaciones de la formación en el edificio correctamente',
+        'BLDFORMATS_SEARCH_KO' : 'Error al consultar las cumplimentaciones de la formación en el edificio',
+
     // IMP_SIM
 
         // SEARCH
@@ -960,6 +977,24 @@ arrayES = {
             // ID Ruta
             'IMPROUTE_ID_EMPT' : 'El id de la cumplimentación de la ruta no puede ser vacío',
             'IMPROUTE_ID_NOT_NUMERIC' : 'El id de la cumplimentación de la ruta debe ser numérico',
+
+            // Fecha Planificación
+            'PLANNING_DATE_EMPT' : 'La fecha de planificación no puede ser vacía',
+            'PLANNING_DATE_KO' : 'La fecha de planificación introducida tiene un formato incorrecto',
+            'PLANNING_DATE_PAST' : 'La fecha de planificación introducida es una fecha pasada',
+
+            // Destinatarios
+            'RECIPIENTS_EMPT' : 'El campo destinatarios no puede ser vacío',
+            'RECIPIENTS_LRG' : 'El campo destinatarios no puede superar los 80 caracteres',
+            'RECIPIENTS_FRMT' : 'El campo destinatarios contiene caracteres no permitidos',
+
+            // URL
+            'URL_FRMT' : 'La URL del recurso introducido tiene un formato incorrecto',
+
+            // ID Formación
+            'IMPFORMAT_ID_EMPT' : 'El id de la cumplimentación de la formación no puede ser vacío',
+            'IMPFORMAT_ID_NOT_NUMERIC' : 'El id de la cumplimentación de la formación debe ser numérico',
+
 
 
 
@@ -1205,6 +1240,12 @@ arrayES = {
         'i18n-expire-improute-confirm' : '¿Está seguro que desea vencer la cumplimentación de esta ruta? El cambio no será reversible',
         'i18n-cump-route' : 'Cumplimentar Ruta',
         'i18n-del-imp-route-confirm' : '¿Está seguro que desea eliminar la cumplimentación de esta ruta? El cambio no será reversible',
+
+        // IMP_FORMATS
+        'i18n-impformats' : 'Cumplimentaciones de la Formación',
+        'i18n-planning_date' : 'Fecha Planificación',
+        'i18n-imp-formats-empty' : 'No se han encontrado cumplimentaciones de la formación',
+        'i18n-info_format' : 'Información de la Formación',
 
 
 

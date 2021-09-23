@@ -277,8 +277,8 @@ class Portal_ShowCurrent_Plan {
                                                                     crearform('formenviar', 'post');
                                                                     insertacampo(document.formenviar, 'formacion_id', '<?php echo $formacion['formacion_id'] ?>');
                                                                     insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                                                    insertacampo(document.formenviar, 'controller', 'Formation');
-                                                                    insertacampo(document.formenviar, 'action', 'show');
+                                                                    insertacampo(document.formenviar, 'controller', 'Portal');
+                                                                    insertacampo(document.formenviar, 'action', 'seekPortalFormation');
                                                                     enviaform(document.formenviar);">
                                                                     <span class="pendiente"><?php echo $formacion['nombre'] ?></span>
                                                                 </a>
@@ -288,8 +288,8 @@ class Portal_ShowCurrent_Plan {
                                                                     crearform('formenviar', 'post');
                                                                     insertacampo(document.formenviar, 'formacion_id', '<?php echo $formacion['formacion_id'] ?>');
                                                                     insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                                                    insertacampo(document.formenviar, 'controller', 'Formation');
-                                                                    insertacampo(document.formenviar, 'action', 'show');
+                                                                    insertacampo(document.formenviar, 'controller', 'Portal');
+                                                                    insertacampo(document.formenviar, 'action', 'seekPortalFormation');
                                                                     enviaform(document.formenviar);">
                                                                     <span class="cumplimentado"><?php echo $formacion['nombre'] ?></span>
                                                                 </a>
@@ -299,8 +299,8 @@ class Portal_ShowCurrent_Plan {
                                                                     crearform('formenviar', 'post');
                                                                     insertacampo(document.formenviar, 'formacion_id', '<?php echo $formacion['formacion_id'] ?>');
                                                                     insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                                                    insertacampo(document.formenviar, 'controller', 'Formation');
-                                                                    insertacampo(document.formenviar, 'action', 'show');
+                                                                    insertacampo(document.formenviar, 'controller', 'Portal');
+                                                                    insertacampo(document.formenviar, 'action', 'seekPortalFormation');
                                                                     enviaform(document.formenviar);">
                                                                     <span class="vencido"><?php echo $formacion['nombre'] ?></span>
                                                                 </a>

@@ -97,6 +97,17 @@ class Show_DefFormats {
                                                 </a>
                                             </div>
                                         </div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false"
+                                                    onclick="
+                                                            crearform('formenviar','post');
+                                                            insertacampo(document.formenviar,'formacion_id','<?php echo $format['formacion_id'] ?>');
+                                                            insertacampo(document.formenviar,'controller','ImpFormat');
+                                                            insertacampo(document.formenviar,'action','show');
+                                                            enviaform(document.formenviar);">
+                                                <span class="iconify" data-icon="fluent:textbox-more-24-filled" data-inline="false"></span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

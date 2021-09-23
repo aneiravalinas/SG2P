@@ -268,4 +268,19 @@ abstract class Validator {
         }
     }
 
+    function validar_fecha_futura($fecha) {
+        $fecha_actual = new DateTime();
+        $fecha_entrada = new DateTime($fecha);
+
+        return $fecha_entrada >= $fecha_actual;
+    }
+
+    function validar_url($url) {
+        if(preg_match('/^(ftp|http|https):\/\/[^ "\']+$/', $url)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

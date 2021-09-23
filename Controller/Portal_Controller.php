@@ -206,4 +206,18 @@ class Portal {
             new Message($feedback['code'], 'Portal', 'getPortal');
         }
     }
+
+    function seekPortalFormation() {
+        include_once './Service/Formation_Service.php';
+        $format_service = new Formation_Service();
+        $feedback = $format_service->seekPortalFormation();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_ShowCurrent_Formation_View.php';
+            new Portal_ShowCurrent_Formation($feedback['resource'], $feedback['formation'], $feedback['building']);
+        } else if(isset($feedback['return'])) {
+            new Message($feedback['code'], 'Portal', 'seekPortalFormation', $feedback['return']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'getPortal');
+        }
+    }
 }
