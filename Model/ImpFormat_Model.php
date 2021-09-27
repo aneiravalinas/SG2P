@@ -110,7 +110,19 @@ class ImpFormat_Model extends Abstract_Model {
     }
 
     function seek() {
-        // TODO: Implement seek() method.
+        $this->query = "
+            SELECT EDIFICIO_FORMACION.*, EDIFICIO.username, EDIFICIO.nombre AS nombre_edificio, FORMACION.nombre AS nombre_formacion, FORMACION.plan_id
+            FROM EDIFICIO_FORMACION
+            INNER JOIN EDIFICIO 
+                ON EDIFICIO_FORMACION.edificio_id = EDIFICIO.edificio_id
+            INNER JOIN FORMACION
+                ON EDIFICIO_FORMACION.formacion_id = FORMACION.formacion_id
+            WHERE
+                edificio_formacion_id = '$this->edificio_formacion_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
     function searchByFormatID() {

@@ -53,4 +53,106 @@ class Formation {
             new Message('FRB_ACCS', 'Panel', 'deshboard');
         }
     }
+
+    function deleteForm() {
+        if(!es_registrado()) {
+            $format_service = new Formation_Service();
+            $feedback = $format_service->seek();
+            if($feedback['ok']) {
+                include_once './View/Formations/Delete_Formation_View.php';
+                new Delete_Formation($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function delete() {
+        if(!es_registrado()) {
+            $format_service = new Formation_Service();
+            $feedback = $format_service->DELETE();
+            if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'Formation', 'show', $feedback['return']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function expireForm() {
+        if(!es_registrado()) {
+            $format_service = new Formation_Service();
+            $feedback = $format_service->seek();
+            if($feedback['ok']) {
+                include_once './View/Formations/Expire_Formation_View.php';
+                new Expire_Formation($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function expire() {
+        if(!es_registrado()) {
+            $format_service = new Formation_Service();
+            $feedback = $format_service->expire();
+            if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'Formation', 'show', $feedback['return']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function implementForm() {
+        if(!es_registrado()) {
+            $format_service = new Formation_Service();
+            $feedback = $format_service->seek();
+            if($feedback['ok']) {
+                include_once './View/Formations/Implement_Formation_View.php';
+                new Implement_Formation($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function implement() {
+        if(!es_registrado()) {
+            $format_service = new Formation_Service();
+            $feedback = $format_service->implement();
+            if(isset($feedback['return'])) {
+                new Message($feedback['code'], 'Formation', 'show', $feedback['return']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function showCurrent() {
+        if(!es_registrado()) {
+            $format_service = new Formation_Service();
+            $feedback = $format_service->seek();
+            if($feedback['ok']) {
+                include_once './View/Formations/ShowCurrent_Formation_View.php';
+                new ShowCurrent_Formation($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
 }

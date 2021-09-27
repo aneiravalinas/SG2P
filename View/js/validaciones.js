@@ -370,3 +370,44 @@ function check_codigo_postal(element) {
         return false;
     }
 }
+
+function check_URL(element) {
+    var correct = true;
+    var value = document.getElementById(element).value;
+
+    var pattern = /^(ftp|http|https):\/\/[^ "']+$/;
+    if(!pattern.test(value)) {
+        openModal(element, 'i18n-url-format');
+        correct = false;
+    }
+
+    if(correct) {
+        document.getElementById(element).style.borderColor = 'green';
+        return true;
+    } else {
+        document.getElementById(element).style.borderColor = 'red';
+        return false;
+    }
+}
+
+function check_fecha_mayor_actual(element) {
+    var correct = true;
+    var fecha_actual = new Date();
+    var fecha = new Date(document.getElementById(element).value);
+    fecha_actual.setHours(0,0,0,0);
+
+    if(fecha < fecha_actual) {
+        openModal(element, 'i18n-fecha-menor-actual');
+        correct = false;
+    }
+
+    if(correct) {
+        document.getElementById(element).style.borderColor = 'green';
+        return true;
+    } else {
+        document.getElementById(element).style.borderColor = 'red';
+        return false;
+    }
+
+
+}

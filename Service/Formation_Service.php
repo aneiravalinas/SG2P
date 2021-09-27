@@ -247,6 +247,108 @@ class Formation_Service extends Formation_Validation {
         return $feedback;
     }
 
+    function DELETE() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $imp_format = $this->feedback['resource'];
+        $this->feedback = $this->check_more_than_one_impformats($imp_format['edificio_id'], $imp_format['formacion_id']);
+        if(!$this->feedback['ok']) {
+            $this->feedback['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
+            return $this->feedback;
+        }
+
+        $this->feedback = $this->impFormat_entity->DELETE();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'IMPFORMAT_DEL_OK';
+            $this->update_plan_state($imp_format['edificio_id'], $imp_format['plan_id']);
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPFORMAT_DEL_KO';
+        }
+
+        $this->feedback['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
+        return $this->feedback;
+    }
+
+    function seek() {
+        $validation = $this->validar_EDIFICIO_FORMACION_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByImpFormatID();
+        if($this->feedback['ok']) {
+            $imp_format = $this->feedback['resource'];
+            if(es_resp_edificio() && $imp_format['username'] != getUser()) {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'BLD_FRBD';
+                unset($this->feedback['resource']);
+                return $this->feedback;
+            }
+
+            $this->feedback['code'] = 'IMPFORMAT_SEEK_OK';
+        } else if($this->feedback['code'] = 'IMPFORMATID_KO') {
+            $this->feedback['code'] = 'IMPFORMAT_SEEK_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function expire() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $imp_format = $this->feedback['resource'];
+        $this->impFormat_entity->estado = 'vencido';
+        $this->feedback = $this->impFormat_entity->EDIT();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'IMPFORMAT_EXPIRE_OK';
+            $this->update_plan_state($imp_format['edificio_id'], $imp_format['plan_id']);
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPFORMAT_EXPIRE_KO';
+        }
+
+        $this->feedback['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
+        return $this->feedback;
+    }
+
+    function implement() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $imp_format = $this->feedback['resource'];
+        if($imp_format['estado'] == 'vencido') {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'COMPL_EXPIRED';
+            $this->feedback['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
+            return $this->feedback;
+        }
+
+        $validation = $this->validar_atributos_implement();
+        if(!$validation['ok']) {
+            $validation['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
+            return $validation;
+        }
+
+        $this->impFormat_entity->estado = 'cumplimentado';
+        $this->feedback = $this->impFormat_entity->EDIT();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'IMPFORMAT_IMPL_OK';
+            $this->update_plan_state($imp_format['edificio_id'], $imp_format['plan_id']);
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPFORMAT_IMPL_KO';
+        }
+
+        $this->feedback['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
+        return$this->feedback;
+    }
+
     function searchFormatAndBuilding() {
         $validation = $this->validar_format_and_building();
         if(!$validation['ok']) {
@@ -338,6 +440,22 @@ class Formation_Service extends Formation_Validation {
         return $feedback;
     }
 
+    function seekByImpFormatID() {
+        $feedback = $this->impFormat_entity->seek();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'IMPFORMATID_NOT_EXST';
+            } else {
+                $feedback['code'] = 'IMPFORMATID_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'IMPFORMATID_KO';
+        }
+
+        return $feedback;
+    }
+
     function get_formation_state() {
         $feedback = $this->search_all_impformats();
         if(!$feedback['ok']) {
@@ -381,6 +499,23 @@ class Formation_Service extends Formation_Validation {
             }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'BLDPLAN_KO';
+        }
+
+        return $feedback;
+    }
+
+    function check_more_than_one_impformats($edificio_id, $formacion_id) {
+        $this->impFormat_entity->setAttributes(array('edificio_id' => $edificio_id, 'formacion_id' => $formacion_id));
+        $feedback = $this->impFormat_entity->searchFormatsBuildings();
+        if($feedback['ok']) {
+            if(count($feedback['resource']) <= 1) {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'IMPFORMAT_UNIQ';
+            } else {
+                $feedback['code'] = 'IMPFORMAT_NOT_UNIQ';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'IMPFORMAT_SEARCH_KO';
         }
 
         return $feedback;

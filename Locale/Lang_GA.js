@@ -740,6 +740,35 @@ arrayGA = {
         'IMPFORMAT_SEARCH_OK' : 'A búsqueda de cumplimentacións da formación realizouse correctamente',
         'IMPFORMAT_SEARCH_KO' : 'Erro ó buscar cumplimentacións da formación',
 
+        // ADD
+        'IMPFORMAT_ADD_OK' : 'A cumplimentación da formación rexistrouse correctamente',
+        'IMPFORMAT_ADD_KO' : 'Producíuse un erro ó consultar a cumplimentación da formación',
+
+        // DELETE
+        'IMPFORMAT_DEL_OK' : 'A cumplimentación da formación eliminouse correctamente',
+        'IMPFORMAT_DEL_KO' : 'Produciuse un erro ó eliminar a cumplimentación da formación',
+
+        // SEEK
+        'IMPFORMAT_SEEK_OK' : 'Consultáronse os detalles da cumplimentación da formación correctamente',
+        'IMPFORMAT_SEEK_KO' : 'Producíuse un erro ó consultar os detalles da cumplimentación da formación',
+
+        // EXPIRE
+        'IMPFORMAT_EXPIRE_OK' : 'Venceuse a cumplimentación da formación correctamente',
+        'IMPFORMAT_EXPIRE_KO' : 'Error ó vencer a cumplimentación da formación',
+
+        // IMPLEMENT
+        'IMPFORMAT_IMPL_OK' : 'Cumplimentouse a formación correctamente',
+        'IMPFORMAT_IMPL_KO' : 'Error ó cumplimentar a formación',
+
+        // Consulta de cumplimentación única
+        'IMPFORMAT_UNIQ' : 'Non se pode eliminar a cumplimentación. Sempre debe existir polo menos unha cumplimentación da formación no edificio',
+        'IMPFORMAT_NOT_UNIQ' : 'A cumplimentación da formación no edificio non é única',
+
+        // Consulta por ID de Cumplimentación
+        'IMPFORMATID_NOT_EXST' : 'O id da cumplimentación da formación indicada non existe',
+        'IMPFORMATID_EXST' : 'O id da cumplimentación da formación existe',
+        'IMPFORMATID_KO' : 'Erro ó consultar por id de cumplimentación da formación',
+
         // Detalles de la Formación del Portal
         'PRTL_IMPFORMAT_SEARCH_OK' : 'Obtivéronse os detalles da formación do portal correctamente',
         'PRTL_IMPFORMAT_SEARCH_KO' : 'Erro ó obter os detalles da formación do portal',
@@ -969,7 +998,7 @@ arrayGA = {
 
             // Destinatarios
             'RECIPIENTS_EMPT' : 'O campo destinatarios non pode ser vacío',
-            'RECIPIENTS_LRG' : 'O campo destinatarios non pode superar os 80 caracteres',
+            'RECIPIENTS_LRG' : 'O campo destinatarios non pode superar os 200 caracteres',
             'RECIPIENTS_FRMT' : 'O campo destinatarios contén caracteres non permitidos',
 
             // URL
@@ -1230,7 +1259,12 @@ arrayGA = {
         'i18n-planning_date' : 'Fecha Planificación',
         'i18n-imp-formats-empty' : 'Non se atoparon cumplimentacións da formación',
         'i18n-info_format' : 'Información da Formación',
-
+        'i18n-del-imp-format-confirm' : '¿Está seguro de que desexa eliminar a cumplimentación desta formación? O cambio non será reversible',
+        'i18n-expire-impformat-confirm' : '¿Está seguro de que desexa vencer a cumplimentación desta formación? O cambio non será reversible',
+        'i18n-current_planning_date' : 'Fecha de Planificación Actual',
+        'i18n-url_recurso' : 'URL Recurso',
+        'i18n-destinatarios' : 'Destinatarios',
+        'i18n-enlace_url' : 'Acceder ó Recurso',
 
         // MODAL
             // Campos Modal
@@ -1270,6 +1304,9 @@ arrayGA = {
             'm-nombre_doc_field' : ' Nome Documento ',
             'm-cumplimentacion_id' : ' ID Cumplimentación ',
             'm-nombre_planta' : ' Nome Planta ',
+            'm-url_recurso' : ' URL Recurso ',
+            'm-fecha_planificacion' : ' Fecha Planificación ',
+            'm-destinatarios' : ' Destinatarios ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede o tamaño máximo',
@@ -1285,6 +1322,7 @@ arrayGA = {
             'i18n-chars-not_allow' : 'contén caracteres non permitidos',
             'i18n-only-letters-numbers-hyphen' : 'só pode conter letras, números e guións',
             'i18n-filename-search-format' : 'Só pode conter letras, números, guións, y só admite a extensión .pdf',
-
+            'i18n-url-format' : 'contén caracteres non permitidos ou estase a especificar un protocolo distinto a http, https o ftp',
+            'i18n-fecha-menor-actual' : 'debe ser maior ou igual a fecha actual',
 
 }

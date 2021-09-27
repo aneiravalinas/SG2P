@@ -186,8 +186,8 @@ CREATE TABLE EDIFICIO_SIMULACRO
     `simulacro_id` INT(10) NOT NULL,
     `estado` enum('pendiente','cumplimentado','vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
-    `url_recurso` VARCHAR(20) NULL,
-    `destinatarios` VARCHAR(100) NOT NULL,
+    `url_recurso` VARCHAR(200) NULL,
+    `destinatarios` VARCHAR(200) NOT NULL,
     `resultado` TEXT NULL,
 
     CONSTRAINT `pk_edificio_simulacro` PRIMARY KEY (`edificio_simulacro_id`),
@@ -214,8 +214,8 @@ CREATE TABLE EDIFICIO_FORMACION
     `formacion_id` INT(10) NOT NULL,
     `estado` enum('pendiente','cumplimentado','vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
-    `url_recurso` VARCHAR(20) NULL,
-    `destinatarios` VARCHAR(100) NOT NULL,
+    `url_recurso` VARCHAR(200) NULL,
+    `destinatarios` VARCHAR(200) NOT NULL,
 
     CONSTRAINT `pk_edificio_formacion` PRIMARY KEY (`edificio_formacion_id`),
     CONSTRAINT `fk_edificio_formacion_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),

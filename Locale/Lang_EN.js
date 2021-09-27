@@ -739,6 +739,35 @@ arrayEN = {
         'IMPFORMAT_SEARCH_OK' : 'The search for formation completions has been carried out correctly',
         'IMPFORMAT_SEARCH_KO' : 'Error when looking for formation completions',
 
+        // ADD
+        'IMPFORMAT_ADD_OK' : 'Successful completion of the formation has been recorded',
+        'IMPFORMAT_ADD_KO' : 'An error occurred while creating the formation completion',
+
+        // DELETE
+        'IMPFORMAT_DEL_OK' : 'Formation completion has been successfully removed',
+        'IMPFORMAT_DEL_KO' : 'Error when eliminating the completion of the formation',
+
+        // SEEK
+        'IMPFORMAT_SEEK_OK' : 'The details of completing the formation have been consulted correctly',
+        'IMPFORMAT_SEEK_KO' : 'An error occurred while checking the details of completing the formation',
+
+        // EXPIRE
+        'IMPFORMAT_EXPIRE_OK' : 'Completion of the formation has been successfully completed',
+        'IMPFORMAT_EXPIRE_KO' : 'Error when completing the formation completion',
+
+        // IMPLEMENT
+        'IMPFORMAT_IMPL_OK' : 'The formation has been completed correctly',
+        'IMPFORMAT_IMPL_KO' : 'Error completing the formation',
+
+        // Consulta de cumplimentación única
+        'IMPFORMAT_UNIQ' : 'Completion cannot be removed. There must always be at least one completion of the formation in the building',
+        'IMPFORMAT_NOT_UNIQ' : 'Completing formation in the building is not unique',
+
+        // Consulta por ID de Cumplimentación
+        'IMPFORMATID_NOT_EXST' : 'The id of the completion of the formation indicated does not exist',
+        'IMPFORMATID_EXST' : 'The formation completion id exists',
+        'IMPFORMATID_KO' : 'Error when querying for formation completion id',
+
         // Detalles de la Formación del Portal
         'PRTL_IMPFORMAT_SEARCH_OK' : 'The details of the formation on the portal have been obtained correctly',
         'PRTL_IMPFORMAT_SEARCH_KO' : 'Failed to get the formation details from the portal',
@@ -969,7 +998,7 @@ arrayEN = {
 
             // Destinatarios
             'RECIPIENTS_EMPT' : 'Recipients field cannot be empty',
-            'RECIPIENTS_LRG' : 'The recipients field cannot exceed 80 characters',
+            'RECIPIENTS_LRG' : 'The recipients field cannot exceed 200 characters',
             'RECIPIENTS_FRMT' : 'Recipients field contains illegal characters',
 
             // URL
@@ -1229,6 +1258,12 @@ arrayEN = {
         'i18n-planning_date' : 'Planning Date',
         'i18n-imp-formats-empty' : 'No formation completions found',
         'i18n-info_format' : 'Formation Information',
+        'i18n-del-imp-format-confirm' : 'Are you sure you want to eliminate the completion of this formation? The change will not be reversible',
+        'i18n-expire-impformat-confirm' : 'Are you sure you want to beat the completion of this formation? The change will not be reversible',
+        'i18n-current_planning_date' : 'Current Planning Date',
+        'i18n-url_recurso' : 'Resource URL',
+        'i18n-destinatarios' : 'Recipients',
+        'i18n-enlace_url' : 'Access the Resource',
 
         // MODAL
             // Campos Modal
@@ -1268,6 +1303,9 @@ arrayEN = {
             'm-nombre_doc_field' : ' Document Name ',
             'm-cumplimentacion_id' : ' Completion ID ',
             'm-nombre_planta' : ' Floor Name ',
+            'm-url_recurso' : ' Resource URL ',
+            'm-fecha_planificacion' : ' Planning Date ',
+            'm-destinatarios' : ' Recipients ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',
@@ -1283,4 +1321,6 @@ arrayEN = {
             'i18n-chars-not_allow' : 'contains illegal characters',
             'i18n-only-letters-numbers-hyphen' : 'can only contain letters, numbers and hyphens',
             'i18n-filename-search-format' : 'It can only contain letters, numbers, hyphens, and only supports .pdf extension',
+            'i18n-url-format' : 'contains illegal characters or a protocol other than http, https or ftp is being specified',
+            'i18n-fecha-menor-actual' : 'must be greater than or equal to the current date',
 }

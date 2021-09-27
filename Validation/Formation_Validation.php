@@ -79,6 +79,23 @@ class Formation_Validation extends Validator {
         return $this->validar_BUILDINGS();
     }
 
+    function validar_atributos_implement() {
+        if($this->url_recurso != '') {
+            $validacion = $this->validar_URL_RECURSO();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        $validacion = $this->validar_FECHA_PLANIFICACION();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
+        return $this->validar_DESTINATARIOS();
+
+    }
+
     function validar_EDIFICIO_FORMACION_ID() {
         if(!$this->no_vacio($this->edificio_formacion_id)) {
             return $this->rellena_validation(false, 'IMPFORMAT_ID_EMPT', 'IMP_FORMAT');
@@ -164,7 +181,7 @@ class Formation_Validation extends Validator {
             return $this->rellena_validation(false, 'RECIPIENTS_EMPT', 'IMP_FORMAT');
         }
 
-        if(!$this->longitud_maxima($this->destinatarios, 80)) {
+        if(!$this->longitud_maxima($this->destinatarios, 200)) {
             return $this->rellena_validation(false, 'RECIPIENTS_LRG', 'IMP_FORMAT');
         }
 

@@ -749,7 +749,32 @@ arrayES = {
 
         // ADD
         'IMPFORMAT_ADD_OK' : 'Se ha registrado la cumplimentación de la formación correctamente',
-        'IMPFORMAT_ADD_KO' : 'Se ha producido un error al crar la cumplimentación de la formación',
+        'IMPFORMAT_ADD_KO' : 'Se ha producido un error al crear la cumplimentación de la formación',
+
+        // DELETE
+        'IMPFORMAT_DEL_OK' : 'La cumplimentación de la formación se ha eliminado correctamente',
+        'IMPFORMAT_DEL_KO' : 'Error al eliminar la cumplimentación de la formación',
+
+        // SEEK
+        'IMPFORMAT_SEEK_OK' : 'Se han consultado los detalles de la cumplimentación de la formación correctamente',
+        'IMPFORMAT_SEEK_KO' : 'Se ha producido un error al consultar los detalles de la cumplimentación de la formación',
+
+        // EXPIRE
+        'IMPFORMAT_EXPIRE_OK' : 'Se ha vencido la cumplimentación de la formación correctamente',
+        'IMPFORMAT_EXPIRE_KO' : 'Error al vencer la cumplimentación de la formación',
+
+        // IMPLEMENT
+        'IMPFORMAT_IMPL_OK' : 'Se ha cumplimentado la formación correctamente',
+        'IMPFORMAT_IMPL_KO' : 'Error al cumplimentar la formación',
+
+        // Consulta de cumplimentación única
+        'IMPFORMAT_UNIQ' : 'No se puede eliminar la cumplimentación. Siempre debe existir al menos una cumplimentación de la formación en el edificio',
+        'IMPFORMAT_NOT_UNIQ' : 'La cumplimentación de la formación en el edificio no es única',
+
+        // Consulta por ID de Cumplimentación
+        'IMPFORMATID_NOT_EXST' : 'El id de la cumplimentación de la formación indicado no existe',
+        'IMPFORMATID_EXST' : 'El id de la cumplimentación de la formación existe',
+        'IMPFORMATID_KO' : 'Error al consultar por id de cumplimentación de formación',
 
         // Detalles de la Formación del Portal
         'PRTL_IMPFORMAT_SEARCH_OK' : 'Se ha obtenido los detalles de la formación en el portal correctamente',
@@ -985,7 +1010,7 @@ arrayES = {
 
             // Destinatarios
             'RECIPIENTS_EMPT' : 'El campo destinatarios no puede ser vacío',
-            'RECIPIENTS_LRG' : 'El campo destinatarios no puede superar los 80 caracteres',
+            'RECIPIENTS_LRG' : 'El campo destinatarios no puede superar los 200 caracteres',
             'RECIPIENTS_FRMT' : 'El campo destinatarios contiene caracteres no permitidos',
 
             // URL
@@ -1246,6 +1271,12 @@ arrayES = {
         'i18n-planning_date' : 'Fecha Planificación',
         'i18n-imp-formats-empty' : 'No se han encontrado cumplimentaciones de la formación',
         'i18n-info_format' : 'Información de la Formación',
+        'i18n-del-imp-format-confirm' : '¿Está seguro que desea eliminar la cumplimentación de esta formación? El cambio no será reversible',
+        'i18n-expire-impformat-confirm' : '¿Está seguro que desea vencer la cumplimentación de esta formación? El cambio no será reversible',
+        'i18n-current_planning_date' : 'Fecha de Planificación Actual',
+        'i18n-url_recurso' : 'URL Recurso',
+        'i18n-destinatarios' : 'Destinatarios',
+        'i18n-enlace_url' : 'Acceder al Recurso',
 
 
 
@@ -1287,6 +1318,9 @@ arrayES = {
             'm-nombre_doc_field' : ' Nombre Documento ',
             'm-cumplimentacion_id' : ' ID Cumplimentación ',
             'm-nombre_planta' : ' Nombre Planta ',
+            'm-url_recurso' : ' URL Recurso ',
+            'm-fecha_planificacion' : ' Fecha Planificación ',
+            'm-destinatarios' : ' Destinatarios ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',
@@ -1302,4 +1336,6 @@ arrayES = {
             'i18n-chars-not_allow' : 'contiene caracteres no permitidos',
             'i18n-only-letters-numbers-hyphen' : 'sólo puede contener letras, números y guiones',
             'i18n-filename-search-format' : 'Sólo puede contener letras, números, guiones, y sólo admite extensión .pdf',
+            'i18n-url-format' : 'contiene caracteres no permitidos o se está especificando un protocolo distinto a http, https o ftp',
+            'i18n-fecha-menor-actual' : 'debe ser mayor o igual a la fecha actual',
 }
