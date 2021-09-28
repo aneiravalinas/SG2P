@@ -760,6 +760,10 @@ arrayGA = {
         'IMPFORMAT_IMPL_OK' : 'Cumplimentouse a formación correctamente',
         'IMPFORMAT_IMPL_KO' : 'Error ó cumplimentar a formación',
 
+        // SEEK PORTAL
+        'PRTL_IMPFORMAT_SEEK_OK' : 'Consultáronse os detalles da cumplimentación da formación do portal correctamente',
+        'PRTL_IMPFORMAT_SEEK_KO' : 'Error ó consultar os detalles da cumplimentación da formación do portal',
+
         // Consulta de cumplimentación única
         'IMPFORMAT_UNIQ' : 'Non se pode eliminar a cumplimentación. Sempre debe existir polo menos unha cumplimentación da formación no edificio',
         'IMPFORMAT_NOT_UNIQ' : 'A cumplimentación da formación no edificio non é única',

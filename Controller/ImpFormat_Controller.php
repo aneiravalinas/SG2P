@@ -160,4 +160,19 @@ class ImpFormat {
             new Message('FRB_ACCS', 'Panel', 'deshboard');
         }
     }
+
+    function searchForm() {
+        if($this->checkPermission()) {
+            $format_service = new Formation_Service();
+            $feedback = $format_service->seekFormation();
+            if($feedback['ok']) {
+                include_once './View/ImpFormats/Search_ImpFormat_View.php';
+                new Search_ImpFormat($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'DefPlan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
 }

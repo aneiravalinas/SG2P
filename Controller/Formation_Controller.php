@@ -27,7 +27,7 @@ class Formation {
     function addForm() {
         if(!es_registrado()) {
             $format_service = new Formation_Service();
-            $feedback = $format_service->addFormationForm();
+            $feedback = $format_service->formationForm();
             if($feedback['ok']) {
                 include_once './View/Formations/Add_Formation_View.php';
                 new Add_Formation($feedback['formation'], $feedback['building']);
@@ -148,6 +148,21 @@ class Formation {
             if($feedback['ok']) {
                 include_once './View/Formations/ShowCurrent_Formation_View.php';
                 new ShowCurrent_Formation($feedback['resource']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS', 'Panel', 'deshboard');
+        }
+    }
+
+    function searchForm() {
+        if(!es_registrado()) {
+            $format_service = new Formation_Service();
+            $feedback = $format_service->formationForm();
+            if($feedback['ok']) {
+                include_once './View/Formations/Search_Formation_View.php';
+                new Search_Formation($feedback['formation'], $feedback['building']);
             } else {
                 new Message($feedback['code'], 'Plan', 'show');
             }

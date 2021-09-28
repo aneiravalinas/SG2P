@@ -135,6 +135,13 @@ class Formation_Service extends Formation_Validation {
         }
 
         $formation['estado'] = $format_state['estado'];
+
+        $validation = $this->validar_atributos_search_portal();
+        if(!$validation['ok']) {
+            $validation['return'] = array('formacion_id' => $formation['formacion_id'], 'edificio_id' => $building['edificio_id']);
+            return $validation;
+        }
+
         $this->feedback = $this->impFormat_entity->searchActiveImpFormats();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'PRTL_IMPFORMAT_SEARCH_OK';
@@ -167,7 +174,7 @@ class Formation_Service extends Formation_Validation {
         return $this->feedback;
     }
 
-    function addFormationForm() {
+    function formationForm() {
         $this->feedback = $this->searchFormatAndBuilding();
         if(!$this->feedback['ok']) {
             return $this->feedback;
@@ -291,6 +298,29 @@ class Formation_Service extends Formation_Validation {
             $this->feedback['code'] = 'IMPFORMAT_SEEK_OK';
         } else if($this->feedback['code'] = 'IMPFORMATID_KO') {
             $this->feedback['code'] = 'IMPFORMAT_SEEK_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function seekPortalImpFormat() {
+        $validation = $this->validar_EDIFICIO_FORMACION_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByImpFormatID();
+        if($this->feedback['ok']) {
+            $imp_format = $this->feedback['resource'];
+            if($imp_format['estado'] == 'vencido') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'IMPFORMATID_NOT_EXST';
+                unset($this->feedback['resource']);
+            } else {
+                $this->feedback['code'] = 'PRTL_IMPFORMAT_SEEK_OK';
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'PRTL_IMPFORMAT_SEEK_KO';
         }
 
         return $this->feedback;

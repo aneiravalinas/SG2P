@@ -153,6 +153,7 @@ class ImpFormat_Model extends Abstract_Model {
             WHERE
                 edificio_id = '$this->edificio_id' AND
                 formacion_id = '$this->formacion_id' AND
+                estado LIKE '%" . $this->estado . "%' AND
                 estado != 'vencido'
         ";
 

@@ -767,6 +767,10 @@ arrayES = {
         'IMPFORMAT_IMPL_OK' : 'Se ha cumplimentado la formación correctamente',
         'IMPFORMAT_IMPL_KO' : 'Error al cumplimentar la formación',
 
+        // SEEK PORTAL
+        'PRTL_IMPFORMAT_SEEK_OK' : 'Se han consultado los detalles de la cumplimentación de la formación del portal correctamente',
+        'PRTL_IMPFORMAT_SEEK_KO' : 'Error al consultar los detalles de la cumplimentación de la formación del portal',
+
         // Consulta de cumplimentación única
         'IMPFORMAT_UNIQ' : 'No se puede eliminar la cumplimentación. Siempre debe existir al menos una cumplimentación de la formación en el edificio',
         'IMPFORMAT_NOT_UNIQ' : 'La cumplimentación de la formación en el edificio no es única',

@@ -4,6 +4,12 @@ function check_FORMATION_IMPLEMENT() {
         check_FECHA_PLANIFICACION();
 }
 
+function check_IMPFORMAT_SEARCH() {
+    return check_CUMPLIMENTACION_ID_SEARCH() &&
+        check_EDIFICIO_ID_SEARCH() &&
+        check_BUILDING_NAME_SEARCH();
+}
+
 function check_RECURSO() {
     if(not_empty('url_recurso')) {
         return check_URL('url_recurso');

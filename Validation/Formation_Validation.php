@@ -35,7 +35,7 @@ class Formation_Validation extends Validator {
         }
 
         if($this->fecha_planificacion != '') {
-            $validacion = $this->validar_FECHA_PLANIFICACION();
+            $validacion = $this->validar_FECHA_PLANIFICACION_SEARCH();
         }
 
         return $validacion;
@@ -56,6 +56,15 @@ class Formation_Validation extends Validator {
 
         if($this->nombre_edificio != '') {
             $validacion = $this->validar_NOMBRE_EDIFICIO();
+        }
+
+        return $validacion;
+    }
+
+    function validar_atributos_search_portal() {
+        $validacion = $this->rellena_validation(true, '00000', 'IMP_FORMAT');
+        if($this->estado != '') {
+            $validacion = $this->validar_ESTADO_PORTAL();
         }
 
         return $validacion;
@@ -144,17 +153,34 @@ class Formation_Validation extends Validator {
         return $this->rellena_validation(true,'00000','IMP_FORMAT');
     }
 
+    function validar_ESTADO_PORTAL() {
+        if(!$this->en_valores($this->estado, array('pendiente', 'cumplimentado'))) {
+            return $this->rellena_validation(false,'STATE_KO','IMP_FORMAT');
+        }
+
+        return $this->rellena_validation(true, 'STATE_OK', 'IMP_FORMAT');
+    }
+
     function validar_FECHA_PLANIFICACION() {
         if(!$this->no_vacio($this->fecha_planificacion)) {
             return $this->rellena_validation(false, 'PLANNING_DATE_EMPT', 'IMP_FORMAT');
         }
 
-        if(!$this->validar_fecha($this->fecha_planificacion)) {
-            return $this->rellena_validation(false, 'PLANNING_DATE_KO', 'IMP_FORMAT');
+        $validacion = $this->validar_FECHA_PLANIFICACION_SEARCH();
+        if(!$validacion['ok']) {
+            return $validacion;
         }
 
         if(!$this->validar_fecha_futura($this->fecha_planificacion)) {
             return $this->rellena_validation(false, 'PLANNING_DATE_PAST','IMP_FORMAT');
+        }
+
+        return $this->rellena_validation(true, '00000', 'IMP_FORMAT');
+    }
+
+    function validar_FECHA_PLANIFICACION_SEARCH() {
+        if(!$this->validar_fecha($this->fecha_planificacion)) {
+            return $this->rellena_validation(false, 'PLANNING_DATE_KO', 'IMP_FORMAT');
         }
 
         return $this->rellena_validation(true, '00000', 'IMP_FORMAT');

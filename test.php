@@ -2,6 +2,7 @@
 
 include './COMMON/Auth.php';
 
+    session_destroy();
     session_start();
     $_SESSION['test'] = true;
 

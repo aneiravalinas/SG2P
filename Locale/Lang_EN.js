@@ -759,6 +759,10 @@ arrayEN = {
         'IMPFORMAT_IMPL_OK' : 'The formation has been completed correctly',
         'IMPFORMAT_IMPL_KO' : 'Error completing the formation',
 
+        // SEEK PORTAL
+        'PRTL_IMPFORMAT_SEEK_OK' : 'The details of completing the portal formation have been consulted correctly',
+        'PRTL_IMPFORMAT_SEEK_KO' : 'Error when consulting the details of the completion of the portal formation',
+
         // Consulta de cumplimentación única
         'IMPFORMAT_UNIQ' : 'Completion cannot be removed. There must always be at least one completion of the formation in the building',
         'IMPFORMAT_NOT_UNIQ' : 'Completing formation in the building is not unique',

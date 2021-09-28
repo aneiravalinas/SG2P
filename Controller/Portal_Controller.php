@@ -220,4 +220,16 @@ class Portal {
             new Message($feedback['code'], 'Portal', 'getPortal');
         }
     }
+
+    function seekPortalImpFormat() {
+        include_once './Service/Formation_Service.php';
+        $format_service = new Formation_Service();
+        $feedback = $format_service->seekPortalImpFormat();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_ShowCurrent_ImpFormat_View.php';
+            new Portal_ShowCurrent_ImpFormat($feedback['resource']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'getPortal');
+        }
+    }
 }
