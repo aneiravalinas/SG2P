@@ -270,7 +270,9 @@ abstract class Validator {
 
     function validar_fecha_futura($fecha) {
         $fecha_actual = new DateTime();
+        $fecha_actual = $fecha_actual->format('Y/m/d');
         $fecha_entrada = new DateTime($fecha);
+        $fecha_entrada = $fecha_entrada->format('Y/m/d');
 
         return $fecha_entrada >= $fecha_actual;
     }

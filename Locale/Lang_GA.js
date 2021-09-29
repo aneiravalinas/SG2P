@@ -1007,6 +1007,7 @@ arrayGA = {
 
             // URL
             'URL_FRMT' : 'A URL do recurso introducida ten un formato incorrecto',
+            'URL_LRG' : 'A lonxitude da URL non debe superar os 200 caracteres',
 
             // ID Formación
             'IMPFORMAT_ID_EMPT' : 'O id da cumplimentación da formación non pode ser vacío',

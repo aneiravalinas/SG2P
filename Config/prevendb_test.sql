@@ -188,7 +188,6 @@ CREATE TABLE EDIFICIO_SIMULACRO
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
     `url_recurso` VARCHAR(200) NULL,
     `destinatarios` VARCHAR(200) NOT NULL,
-    `resultado` TEXT NULL,
 
     CONSTRAINT `pk_edificio_simulacro` PRIMARY KEY (`edificio_simulacro_id`),
     CONSTRAINT `fk_edificio_simulacro_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
@@ -313,7 +312,10 @@ INSERT INTO RUTA (`ruta_id`, `plan_id`, `nombre`, `descripcion`) VALUES
 INSERT INTO FORMACION (`formacion_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (1,5,'Formaciones del plan con formaciones','Descripción de la formación'),
 (2,5,'Otra Formación del plan con formaciones','Descripción de la formación'),
-(3,7,'Formación del Plan Completo','Descripción de la formación');
+(3,7,'Formación del Plan Completo','Descripción de la formación'),
+(4,1,'Formación del Plan Uno','Descripción de la formación'),
+(5,9,'Formación con asignación vencida','Descripción de la formación'),
+(6,1,'Formación Vencida','Descripción de la formación');
 
 INSERT INTO SIMULACRO (`simulacro_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (1,6,'Simulacros del plan con simulacros','Descripcion del simulacro'),
@@ -354,10 +356,14 @@ INSERT INTO EDIFICIO_PROCEDIMIENTO (`edificio_procedimiento_id`, `edificio_id`, 
 (4,7,4,'vencido','document_default');
 
 INSERT INTO EDIFICIO_FORMACION (`edificio_formacion_id`,`edificio_id`,`formacion_id`,`estado`,`url_recurso`,`destinatarios`) VALUES
-(1,4,2,'pendiente','recurso','destinatarios');
+(1,4,2,'pendiente','recurso','destinatarios'),
+(2,2,1,'pendiente','recurso','destinatarios'),
+(3,2,1,'vencido','recurso','destinatarios'),
+(4,2,1,'vencido','recurso','destinatarios'),
+(5,2,4,'pendiente','recurso','destinatarios');
 
-INSERT INTO EDIFICIO_SIMULACRO (`edificio_simulacro_id`,`edificio_id`,`simulacro_id`,`url_recurso`,`destinatarios`,`resultado`) VALUES
-(1,4,1,'url/recurso','Todos','Resultado');
+INSERT INTO EDIFICIO_SIMULACRO (`edificio_simulacro_id`,`edificio_id`,`simulacro_id`,`url_recurso`,`destinatarios`) VALUES
+(1,4,1,'url/recurso','Todos');
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';
 GRANT ALL PRIVILEGES ON prevendb_test.* TO 'prevenroot'@'localhost';

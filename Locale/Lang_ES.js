@@ -1019,6 +1019,7 @@ arrayES = {
 
             // URL
             'URL_FRMT' : 'La URL del recurso introducido tiene un formato incorrecto',
+            'URL_LRG' : 'La longitud de la URL no debe superar los 200 caracteres',
 
             // ID Formación
             'IMPFORMAT_ID_EMPT' : 'El id de la cumplimentación de la formación no puede ser vacío',

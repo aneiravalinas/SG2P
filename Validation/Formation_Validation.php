@@ -219,6 +219,10 @@ class Formation_Validation extends Validator {
     }
 
     function validar_URL_RECURSO() {
+        if(!$this->longitud_maxima($this->url_recurso, 200)) {
+            return $this->rellena_validation(false, 'URL_LRG', 'IMP_FORMAT');
+        }
+
         if(!$this->validar_url($this->url_recurso)) {
             return $this->rellena_validation(false, 'URL_FRMT', 'IMP_FORMAT');
         }

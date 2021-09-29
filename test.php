@@ -2,7 +2,9 @@
 
 include './COMMON/Auth.php';
 
+if(isset($_SESSION)) {
     session_destroy();
+}
     session_start();
     $_SESSION['test'] = true;
 

@@ -296,7 +296,7 @@ class Formation_Service extends Formation_Validation {
             }
 
             $this->feedback['code'] = 'IMPFORMAT_SEEK_OK';
-        } else if($this->feedback['code'] = 'IMPFORMATID_KO') {
+        } else if($this->feedback['code'] == 'IMPFORMATID_KO') {
             $this->feedback['code'] = 'IMPFORMAT_SEEK_KO';
         }
 

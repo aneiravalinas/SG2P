@@ -1007,6 +1007,7 @@ arrayEN = {
 
             // URL
             'URL_FRMT' : 'The URL of the resource entered is in an incorrect format',
+            'URL_LRG' : 'The length of the URL must not exceed 200 characters',
 
             // ID Formación
             'IMPFORMAT_ID_EMPT' : 'The formation completion id cannot be empty',
