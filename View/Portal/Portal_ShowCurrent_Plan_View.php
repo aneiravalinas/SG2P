@@ -332,8 +332,8 @@ class Portal_ShowCurrent_Plan {
                                                                     crearform('formenviar', 'post');
                                                                     insertacampo(document.formenviar, 'simulacro_id', '<?php echo $simulacro['simulacro_id'] ?>');
                                                                     insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                                                    insertacampo(document.formenviar, 'controller', 'Simulacrum');
-                                                                    insertacampo(document.formenviar, 'action', 'show');
+                                                                    insertacampo(document.formenviar, 'controller', 'Portal');
+                                                                    insertacampo(document.formenviar, 'action', 'seekPortalSimulacrum');
                                                                     enviaform(document.formenviar);">
                                                                     <span class="pendiente"><?php echo $simulacro['nombre'] ?></span>
                                                                 </a>
@@ -343,8 +343,8 @@ class Portal_ShowCurrent_Plan {
                                                                     crearform('formenviar', 'post');
                                                                     insertacampo(document.formenviar, 'simulacro_id', '<?php echo $simulacro['simulacro_id'] ?>');
                                                                     insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                                                    insertacampo(document.formenviar, 'controller', 'Simulacrum');
-                                                                    insertacampo(document.formenviar, 'action', 'show');
+                                                                    insertacampo(document.formenviar, 'controller', 'Portal');
+                                                                    insertacampo(document.formenviar, 'action', 'seekPortalSimulacrum');
                                                                     enviaform(document.formenviar);">
                                                                     <span class="cumplimentado"><?php echo $simulacro['nombre'] ?></span>
                                                                 </a>
@@ -354,8 +354,8 @@ class Portal_ShowCurrent_Plan {
                                                                     crearform('formenviar', 'post');
                                                                     insertacampo(document.formenviar, 'simulacro_id', '<?php echo $simulacro['simulacro_id'] ?>');
                                                                     insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                                                    insertacampo(document.formenviar, 'controller', 'Simulacrum');
-                                                                    insertacampo(document.formenviar, 'action', 'show');
+                                                                    insertacampo(document.formenviar, 'controller', 'Portal');
+                                                                    insertacampo(document.formenviar, 'action', 'seekPortalSimulacrum');
                                                                     enviaform(document.formenviar);">
                                                                     <span class="vencido"><?php echo $simulacro['nombre'] ?></span>
                                                                 </a>

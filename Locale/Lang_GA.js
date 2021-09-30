@@ -792,6 +792,22 @@ arrayGA = {
         'IMPSIM_SEARCH_OK' : 'A búsqueda de cumplimentacións do simulacro realizouse correctamente',
         'IMPSIM_SEARCH_KO' : 'Erro ó buscar cumplimentacións do simulacro',
 
+        // ADD
+        'IMPSIM_ADD_OK' : 'Rexistrouse a cumplimentación do simulacro correctamente',
+
+        // Detalles del simulacro del portal
+        'PRTL_IMPSIM_SEARCH_OK' : 'Consultáronse os detalles do simulacro do portal correctamente',
+        'PRTL_IMPSIM_SEARCH_KO' : 'Error ó consultar os detalles do simulacro do portal',
+
+        // Consulta de la asignación entre el plan del simulacro y el edificio
+        'BLDSIM_NOT_EXST' : 'O plan ó que pertence o simulacro non está asignado ó edificio indicado',
+        'BLDSIM_EXST' : 'O plan ó que pertence o simulacro está asignado ó edificio indicado',
+        'BLDSIM_KO' : 'Error ó consultar a asociación entre o plan do simulacro e o edificio',
+
+        // Búsqueda de cumplimentaciones
+        'BLDSIMS_SEARCH_OK' : 'Consultáronse as cumplimentacións do simulacro no edificio correctamente',
+        'BLDSIMS_SEARCH_KO' : 'Error ó consultar as cumplimentacións do simulacro no edificio',
+
 
         // Validaciones
 
@@ -1270,6 +1286,11 @@ arrayGA = {
         'i18n-url_recurso' : 'URL Recurso',
         'i18n-destinatarios' : 'Destinatarios',
         'i18n-enlace_url' : 'Acceder ó Recurso',
+
+        // IMP_SIMS
+        'i18n-impsim' : 'Cumplimentacións do Simulacro',
+        'i18n-imp-sims-empty' : 'Non se atoparon cumplimentacións do simulacro',
+        'i18n-info_sim' : 'Información do Simulacro',
 
         // MODAL
             // Campos Modal

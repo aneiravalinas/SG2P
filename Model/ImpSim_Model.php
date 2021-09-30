@@ -11,9 +11,10 @@ class ImpSim_Model extends Abstract_Model {
     var $fecha_planificacion;
     var $url_recurso;
     var $destinatarios;
+    var $nombre_edificio;
 
     function __construct() {
-        $this->atributos = array('edificio_simulacro_id','simulacro_id','edificio_id','estado','fecha_planificacion','url_recurso','destinatarios');
+        $this->atributos = array('edificio_simulacro_id','simulacro_id','edificio_id','estado','fecha_planificacion','url_recurso','destinatarios','nombre_edificio');
         $this->fill_fields();
     }
 
@@ -76,7 +77,50 @@ class ImpSim_Model extends Abstract_Model {
     }
 
     function SEARCH() {
-        // TODO: Implement SEARCH() method.
+        $this->query = "
+            SELECT EDIFICIO_SIMULACRO.*, EDIFICIO.nombre AS nombre_edificio
+            FROM EDIFICIO_SIMULACRO
+            INNER JOIN EDIFICIO
+                ON EDIFICIO_SIMULACRO.edificio_id = EDIFICIO.edificio_id
+            WHERE
+                simulacro_id = '$this->simulacro_id' AND
+                edificio_simulacro_id LIKE '%" . $this->edificio_simulacro_id . "%' AND
+                EDIFICIO_SIMULACRO.edificio_id LIKE '%" . $this->edificio_id . "%' AND
+                EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
+                estado LIKE '%" . $this->estado . "%' AND
+                fecha_planificacion LIKE '%" . $this->fecha_planificacion . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchImpSims() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_SIMULACRO
+            WHERE
+                edificio_id = '$this->edificio_id' AND
+                simulacro_id = '$this->simulacro_id' AND
+                estado LIKE '%" . $this->estado . "%' AND
+                fecha_planificacion LIKE '%" . $this->fecha_planificacion . "%'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
+    }
+
+    function searchActiveImpSims() {
+        $this->query = "
+            SELECT * FROM EDIFICIO_SIMULACRO
+            WHERE
+                edificio_id = '$this->edificio_id' AND
+                simulacro_id = '$this->simulacro_id' AND
+                estado LIKE '%" . $this->estado . "%' AND
+                estado != 'vencido'
+        ";
+
+        $this->get_results_from_query();
+        return $this->feedback;
     }
 
     function seek() {

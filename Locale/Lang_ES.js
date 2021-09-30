@@ -799,6 +799,22 @@ arrayES = {
         'IMPSIM_SEARCH_OK' : 'La búsqueda de cumplimentaciones del simulacro se ha realizado correctamente',
         'IMPSIM_SEARCH_KO' : 'Error al buscar cumplimentaciones del simulacro',
 
+        // ADD
+        'IMPSIM_ADD_OK' : 'Se ha registrado la cumplimentación del simulacro correctamente',
+
+        // Detalles del simulacro del portal
+        'PRTL_IMPSIM_SEARCH_OK' : 'Se han consultado los detalles del simulacro del portal correctamente',
+        'PRTL_IMPSIM_SEARCH_KO' : 'Error al consultar los detalles del simulacro del portal',
+
+        // Consulta de la asignación entre el plan del simulacro y el edificio
+        'BLDSIM_NOT_EXST' : 'El plan al que pertenece el simulacro no está asignado al edificio indicado',
+        'BLDSIM_EXST' : 'El plan al que pertenece el simulacro está asignado al edificio indicado',
+        'BLDSIM_KO' : 'Error al consultar la asociación entre el plan del simulacro y el edificio',
+
+        // Búsqueda de cumplimentaciones
+        'BLDSIMS_SEARCH_OK' : 'Se han consultado las cumplimentaciones del simulacro en el edificio correctamente',
+        'BLDSIMS_SEARCH_KO' : 'Error al consultar las cumplimentaciones del simulacro en el edificio',
+
 
 
 
@@ -1282,6 +1298,11 @@ arrayES = {
         'i18n-url_recurso' : 'URL Recurso',
         'i18n-destinatarios' : 'Destinatarios',
         'i18n-enlace_url' : 'Acceder al Recurso',
+
+        // IMP_SIMS
+        'i18n-impsim' : 'Cumplimentaciones del Simulacro',
+        'i18n-imp-sims-empty' : 'No se han encontrado cumplimentaciones del simulacro',
+        'i18n-info_sim' : 'Información del Simulacro',
 
 
 

@@ -792,6 +792,22 @@ arrayEN = {
         'IMPSIM_SEARCH_KO' : 'Error when looking for simulacrum completions',
         'DOC_SEEK_FRBD' : 'You do not have the necessary privileges to consult documents in this building',
 
+        // ADD
+        'IMPSIM_ADD_OK' : 'The completion of the simulacrum has been recorded correctly',
+
+        // Detalles del simulacro del portal
+        'PRTL_IMPSIM_SEARCH_OK' : 'The details of the simulacrum of the portal have been consulted correctly',
+        'PRTL_IMPSIM_SEARCH_KO' : 'Failed to check the details of the simulacrum of the portal',
+
+        // Consulta de la asignación entre el plan del simulacro y el edificio
+        'BLDSIM_NOT_EXST' : 'The plan to which the simulacrum belongs is not assigned to the indicated building',
+        'BLDSIM_EXST' : 'The plan to which the simulacrum belongs is assigned to the indicated building',
+        'BLDSIM_KO' : 'Failed to query association between simulacrum plan and building',
+
+        // Búsqueda de cumplimentaciones
+        'BLDSIMS_SEARCH_OK' : 'The completions of the simulacrum in the building have been consulted correctly',
+        'BLDSIMS_SEARCH_KO' : 'Error when consulting the completions of the simulacrum in the building',
+
 
         // Validaciones
 
@@ -1269,6 +1285,11 @@ arrayEN = {
         'i18n-url_recurso' : 'Resource URL',
         'i18n-destinatarios' : 'Recipients',
         'i18n-enlace_url' : 'Access the Resource',
+
+        // IMP_SIMS
+        'i18n-impsim' : 'Simulacrum Completions',
+        'i18n-imp-sims-empty' : 'No completions of the simulacrum have been found',
+        'i18n-info_sim' : 'Simulacrum Information',
 
         // MODAL
             // Campos Modal
