@@ -10,13 +10,14 @@ class ImpRoute_Model extends Abstract_Model {
     var $ruta_id;
     var $estado;
     var $fecha_cumplimentacion;
+    var $fecha_vencimiento;
     var $nombre_doc;
     var $nombre_planta;
     var $nombre_edificio;
     var $edificio_id;
 
     function __construct() {
-        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion','nombre_doc','nombre_planta', 'nombre_edificio', 'edificio_id');
+        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion','fecha_vencimiento','nombre_doc','nombre_planta', 'nombre_edificio', 'edificio_id');
         $this->fill_fields();
     }
 
@@ -38,12 +39,14 @@ class ImpRoute_Model extends Abstract_Model {
                 ruta_id,
                 estado,
                 fecha_cumplimentacion,
+                fecha_vencimiento,
                 nombre_doc
             ) VALUES (
                 '$this->planta_id',
                 '$this->ruta_id',
                 '$this->estado',
                 '$this->fecha_cumplimentacion',
+                '$this->fecha_vencimiento',
                 '$this->nombre_doc'
             );
         ";
@@ -56,6 +59,7 @@ class ImpRoute_Model extends Abstract_Model {
     function EDIT() {
         $this->query = "UPDATE PLANTA_RUTA SET " .
             ($this->fecha_cumplimentacion == '' ? "" : "fecha_cumplimentacion = '$this->fecha_cumplimentacion', ") .
+            ($this->fecha_vencimiento == '' ? "" : "fecha_vencimiento = '$this->fecha_vencimiento', ") .
             ($this->nombre_doc == '' ? "" : "nombre_doc = '$this->nombre_doc', ") .
             ($this->estado == '' ? "" : "estado = '$this->estado'") .
             " WHERE planta_ruta_id = '$this->planta_ruta_id'";
@@ -89,6 +93,7 @@ class ImpRoute_Model extends Abstract_Model {
                 PLANTA_RUTA.planta_id LIKE '%" . $this->planta_id . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
                 fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
+                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
                 nombre_doc LIKE '%" . $this->nombre_doc . "%' AND
                 EDIFICIO.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                 PLANTA.nombre LIKE '%" . $this->nombre_planta . "%' AND
@@ -112,6 +117,7 @@ class ImpRoute_Model extends Abstract_Model {
                 PLANTA_RUTA.planta_id LIKE '%" . $this->planta_id . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
                 fecha_cumplimentacion LIKE '%" .$this->fecha_cumplimentacion . "%' AND
+                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
                 nombre_doc LIKE '%" . $this->nombre_doc . "%'
         ";
 

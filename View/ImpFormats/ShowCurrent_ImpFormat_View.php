@@ -60,24 +60,30 @@ class ShowCurrent_ImpFormat {
                                 </div>
                                 <div class="col-lg-6 pt-4 pt-lg-0">
                                     <ul>
+                                        <?php if($this->imp_format['fecha_planificacion'] != default_data) :?>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-planning_date">Fecha Planificación</span>
-                                            <?php if($this->imp_format['fecha_planificacion'] != default_data) :?>
-                                                <span class="d-block att-value"><?php echo date_format(date_create($this->imp_format['fecha_planificacion']),'d/m/Y');?></span>
-                                            <?php endif; ?>
+                                            <span class="d-block att-value"><?php echo date_format(date_create($this->imp_format['fecha_planificacion']),'d/m/Y');?></span>
                                         </li>
+                                        <?php endif; ?>
+                                        <?php if($this->imp_format['fecha_vencimiento'] != default_data) :?>
+                                            <li>
+                                                <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-date_expire">Fecha Vencimiento</span>
+                                                <span class="d-block att-value"><?php echo date_format(date_create($this->imp_format['fecha_vencimiento']),'d/m/Y');?></span>
+                                            </li>
+                                        <?php endif; ?>
+                                        <?php if($this->imp_format['url_recurso'] != default_url) :?>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-url_recurso">URL Recurso</span>
-                                            <?php if($this->imp_format['url_recurso'] != default_url) :?>
-                                                <span class="d-block att-value"><a href="<?php echo $this->imp_format['url_recurso'] ?>"><span class="i18n-enlace_url">Acceder al Recurso</span></a></span>
-                                            <?php endif; ?>
+                                            <span class="d-block att-value"><a href="<?php echo $this->imp_format['url_recurso'] ?>"><span class="i18n-enlace_url">Acceder al Recurso</span></a></span>
                                         </li>
+                                        <?php endif; ?>
+                                        <?php if($this->imp_format['destinatarios'] != default_destinatarios) :?>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-destinatarios">Destinatarios</span>
-                                            <?php if($this->imp_format['destinatarios'] != default_destinatarios) :?>
                                             <p><?php echo $this->imp_format['destinatarios'] ?>
-                                                <?php endif; ?>
                                         </li>
+                                        <?php endif; ?>
                                     </ul>
                                 </div>
                             </div>

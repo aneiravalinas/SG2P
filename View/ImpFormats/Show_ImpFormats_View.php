@@ -25,7 +25,7 @@ class Show_ImpFormats {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-9 flex-wrap d-flex justify-content-end" id="search_add">
+                    <div class="col-xl-10 flex-wrap d-flex justify-content-end" id="search_add">
                         <div>
                             <a type="button" onclick="
                                 crearform('formenviar','post');
@@ -48,13 +48,14 @@ class Show_ImpFormats {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-9 table-responsive" id="col-table">
+                    <div class="col-xl-10 table-responsive" id="col-table">
                         <table class="table table-hover">
                             <thead>
                             <tr>
                                 <th scope="col" class="text-center i18n-nombre_edificio">Nombre Edificio</th>
                                 <th scope="col" class="text-center i18n-state">Estado</th>
                                 <th scope="col" class="text-center i18n-planning_date">Fecha Planificación</th>
+                                <th scope="col" class="text-center i18hn-date_expire">Fecha Vencimiento</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -64,6 +65,7 @@ class Show_ImpFormats {
                                     <td class="text-center"><?php echo $imp_format['nombre_edificio'] ?></td>
                                     <td class="text-center i18n-<?php echo $imp_format['estado'] ?> <?php echo $imp_format['estado'] ?>"></td>
                                     <td class="text-center"><?php if($imp_format['fecha_planificacion'] != default_data) echo date_format(date_create($imp_format['fecha_planificacion']),'d/m/Y');?></td>
+                                    <td class="text-center"><?php if($imp_format['fecha_vencimiento'] != default_data) echo date_format(date_create($imp_format['fecha_vencimiento']),'d/m/Y');?></td>
                                     <td class="text-center">
                                         <div class="btn-group px-md-2">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
@@ -114,7 +116,7 @@ class Show_ImpFormats {
                             <?php endforeach; ?>
                             <?php if(empty($this->imp_formats)) :?>
                                 <tr>
-                                    <td colspan="4" class="text-center">
+                                    <td colspan="5" class="text-center">
                                         <span class="i18n-imp-formats-empty">No se han encontrado cumplimentaciones de la formación</span>
                                     </td>
                                 </tr>

@@ -23,22 +23,14 @@ class Search_BuildPlan {
                     <div class="col-xl-7 col-lg-9">
                         <form name="formulariosearch" method="post">
                             <div class="row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="plan_id" class="i18n-plan_id">ID Plan</label>
                                     <input type="text" value="<?php echo $this->plan['plan_id'] ?>" class="form-control" id="plan_id" name="plan_id" disabled/>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="edificio_id" class="i18n-edificio_id">ID Edificio</label>
                                     <input type="text" class="form-control" id="edificio_id" name="edificio_id" onblur="check_EDIFICIO_ID_SEARCH();"/>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group col-md-8">
-                                    <label for="nombre_edificio" class="i18n-nombre_edificio">Nombre Edificio</label>
-                                    <input type="text" class="form-control" id="nombre_edificio" name="nombre_edificio" onblur="check_BLDPLAN_NOMBRE_EDIFICIO_SEARCH();"/>
-                                </div>
-
                                 <div class="form-group col-md-4">
                                     <label for="estado" class="i18n-state">Estado</label>
                                     <select id="estado" name="estado" class="form-select">
@@ -51,13 +43,24 @@ class Search_BuildPlan {
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col">
+                                    <label for="nombre_edificio" class="i18n-nombre_edificio">Nombre Edificio</label>
+                                    <input type="text" class="form-control" id="nombre_edificio" name="nombre_edificio" onblur="check_BLDPLAN_NOMBRE_EDIFICIO_SEARCH();"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
                                     <label for="fecha_asignacion" class="i18n-date_assign">Fecha Asignación</label>
                                     <input type="date" class="form-control" id="fecha_asignacion" name="fecha_asignacion"/>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="fecha_cumplimentacion" class="i18n-date_comp">Fecha Implementación</label>
                                     <input type="date" class="form-control" id="fecha_cumplimentacion" name="fecha_cumplimentacion"/>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="fecha_vencimiento" class="i18n-date_expire">Fecha Vencimiento</label>
+                                    <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento"/>
                                 </div>
                             </div>
 

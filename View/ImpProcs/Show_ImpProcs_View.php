@@ -25,7 +25,7 @@ class Show_ImpProcs {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-9 flex-wrap d-flex justify-content-end" id="search_add">
+                    <div class="col-xl-10 flex-wrap d-flex justify-content-end" id="search_add">
                         <div>
                             <a type="button" onclick="
                                 crearform('formenviar','post');
@@ -48,7 +48,7 @@ class Show_ImpProcs {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-9 table-responsive" id="col-table">
+                    <div class="col-xl-10 table-responsive" id="col-table">
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -116,7 +116,7 @@ class Show_ImpProcs {
                             <?php endforeach; ?>
                             <?php if(empty($this->imp_procs)) :?>
                                 <tr>
-                                    <td colspan="4" class="text-center">
+                                    <td colspan="5" class="text-center">
                                         <span class="i18n-imp-procs-empty">No se han encontrado cumplimentaciones del procedimiento</span>
                                     </td>
                                 </tr>

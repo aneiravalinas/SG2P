@@ -97,6 +97,7 @@ class Portal_ShowCurrent_Formation {
                                         enviaform(document.formulariosearch);">
                                     <span class="iconify option_button" data-icon="fluent:search-square-24-filled" data-inline="false"></span>
                                 </a>
+                            </form>
                         </div>
                     </div>
 

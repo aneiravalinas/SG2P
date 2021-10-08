@@ -7,6 +7,7 @@ class BuildingPlans_Validation extends Validator {
     var $plan_id;
     var $fecha_asignacion;
     var $fecha_cumplimentacion;
+    var $fecha_vencimiento;
     var $estado;
     var $nombre_edificio;
     const states = array('pendiente','cumplimentado','vencido');
@@ -33,6 +34,13 @@ class BuildingPlans_Validation extends Validator {
 
         if($this->fecha_cumplimentacion != '') {
             $validacion = $this->validar_FECHA_CUMPLIMENTACION();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->fecha_vencimiento != '') {
+            $validacion = $this->validar_FECHA_VENCIMIENTO();
             if(!$validacion['ok']) {
                 return $validacion;
             }
@@ -90,6 +98,14 @@ class BuildingPlans_Validation extends Validator {
         }
 
         return $this->rellena_validation(true,'00000','BLD_PLAN');
+    }
+
+    function validar_FECHA_VENCIMIENTO() {
+        if(!$this->validar_fecha($this->fecha_vencimiento)) {
+            return $this->rellena_validation(false, 'DATEEXPIRE_KO','BLD_PLAN');
+        }
+
+        return $this->rellena_validation(true, '00000', 'BLD_PLAN');
     }
 
     function validar_ESTADO() {

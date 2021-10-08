@@ -45,4 +45,31 @@ class Plan {
             new Message('FRB_ACCS','Panel','deshboard');
         }
     }
+
+    function expireForm() {
+        if(!es_registrado()) {
+            include_once './Service/BuildPlan_Service.php';
+            $bldPlan_service = new BuildPlan_Service();
+            $feedback = $bldPlan_service->seek();
+            if($feedback['ok']) {
+                include_once './View/Plans/Expire_Plan_View.php';
+                new Expire_Plan($feedback['plan'], $feedback['edificio']);
+            } else {
+                new Message($feedback['code'], 'Plan', 'show');
+            }
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
+
+    function expire() {
+        if(!es_registrado()) {
+            include_once './Service/BuildPlan_Service.php';
+            $bldPlan_service = new BuildPlan_Service();
+            $feedback = $bldPlan_service->EDIT();
+            new Message($feedback['code'], 'Plan', 'show');
+        } else {
+            new Message('FRB_ACCS','Panel','deshboard');
+        }
+    }
 }

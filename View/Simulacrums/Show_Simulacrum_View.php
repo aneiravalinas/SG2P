@@ -81,7 +81,7 @@ class Show_Simulacrum {
                     </div>
 
                     <div class="row justify-content-center">
-                        <div class="col-xl-9 flex-wrap d-flex justify-content-end" id="search_add">
+                        <div class="col-xl-10 flex-wrap d-flex justify-content-end" id="search_add">
                             <div>
                                 <a type="button" onclick="
                                     crearform('formenviar','post');
@@ -106,13 +106,14 @@ class Show_Simulacrum {
                     </div>
 
                     <div class="row justify-content-center">
-                        <div class="col-xl-9 table-responsive" id="col-table">
+                        <div class="col-xl-10 table-responsive" id="col-table">
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th scope="col" class="i18n-cump_id text-center">ID Cumplimentacion</th>
                                     <th scope="col" class="i18n-state text-center">Estado</th>
                                     <th scope="col" class="i18n-planning_date text-center">Fecha Planificación</th>
+                                    <th scope="col" class="18n-date_expire text-center">Fecha Vencimiento</th>
                                     <th scope="col"></th>
                                 </tr>
                                 </thead>
@@ -122,6 +123,7 @@ class Show_Simulacrum {
                                         <td class="text-center"><?php echo $imp_sim['edificio_simulacro_id'] ?></td>
                                         <td class="text-center i18n-<?php echo $imp_sim['estado'] ?> <?php echo $imp_sim['estado'] ?>"></td>
                                         <td class="text-center"><?php if($imp_sim['fecha_planificacion'] != default_data) echo date_format(date_create($imp_sim['fecha_planificacion']),'d/m/Y');?></td>
+                                        <td class="text-center"><?php if($imp_sim['fecha_vencimiento'] != default_data) echo date_format(date_create($imp_sim['fecha_vencimiento']),'d/m/Y');?></td>
                                         <td class="text-center">
                                             <div class="btn-group px-md-2">
                                                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
@@ -172,7 +174,7 @@ class Show_Simulacrum {
                                 <?php endforeach; ?>
                                 <?php if(empty($this->imp_sims)) :?>
                                     <tr>
-                                        <td colspan="4" class="text-center">
+                                        <td colspan="5" class="text-center">
                                             <span class="i18n-imp-sims-empty">No se han encontrado cumplimentaciones del simulacro</span>
                                         </td>
                                     </tr>

@@ -8,6 +8,7 @@ class Formation_Validation extends Validator {
     var $formacion_id;
     var $estado;
     var $fecha_planificacion;
+    var $fecha_vencimiento;
     var $url_recurso;
     var $destinatarios;
     var $nombre_edificio;
@@ -29,6 +30,13 @@ class Formation_Validation extends Validator {
 
         if($this->estado != '') {
             $validacion = $this->validar_ESTADO();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->fecha_vencimiento != '') {
+            $validacion = $this->validar_FECHA_VENCIMIENTO();
             if(!$validacion['ok']) {
                 return $validacion;
             }
@@ -184,6 +192,14 @@ class Formation_Validation extends Validator {
         }
 
         return $this->rellena_validation(true, '00000', 'IMP_FORMAT');
+    }
+
+    function validar_FECHA_VENCIMIENTO() {
+        if(!$this->validar_fecha($this->fecha_vencimiento)) {
+            return $this->rellena_validation(false, 'DATEEXPIRE_KO','IMP_FORMAT');
+        }
+
+        return $this->rellena_validation(true, '00000', 'IMP_ROUTE');
     }
 
     function validar_NOMBRE_EDIFICIO() {

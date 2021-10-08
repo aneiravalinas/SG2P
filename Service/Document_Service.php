@@ -12,7 +12,7 @@ class Document_Service extends Document_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('edificio_documento_id','edificio_id','documento_id','estado','fecha_cumplimentacion','nombre_edificio', 'nombre_doc');
+        $this->atributos = array('edificio_documento_id','edificio_id','documento_id','estado','fecha_cumplimentacion','fecha_vencimiento','nombre_edificio', 'nombre_doc');
         $this->defDoc_entity = new DefDoc_Model();
         $this->impDoc_entity = new ImpDoc_Model();
         $this->fill_fields();
@@ -219,7 +219,7 @@ class Document_Service extends Document_Validation {
         }
 
         $doc = $this->feedback['resource'];
-        $this->feedback = $this->searchBuildPlans($doc['plan_id']);
+        $this->feedback = $this->searchActiveBuildPlans($doc['plan_id']);
         if($this->feedback['ok']) {
             $this->feedback['document'] = $doc;
         } else {
@@ -288,6 +288,14 @@ class Document_Service extends Document_Validation {
             return $feedback;
         }
 
+        $bld_plan = $feedback['resource'];
+        if($bld_plan['estado'] == 'vencido') {
+            $feedback['ok'] = false;
+            $feedback['code'] = 'BLDPLAN_EXPIRED';
+            $feedback['building'] = array('edificio_id' => $building['edificio_id']);
+            return $feedback;
+        }
+
         $feedback = $this->doc_building_actives_not_exist();
         if(!$feedback['ok']) {
             $feedback['building'] = array('edificio_id' => $building['edificio_id']);
@@ -308,7 +316,7 @@ class Document_Service extends Document_Validation {
             $def_dir_created = true;
         }
 
-        $this->impDoc_entity->setAttributes(array('edificio_id' => $this->edificio_id, 'nombre_doc' => default_doc,
+        $this->impDoc_entity->setAttributes(array('edificio_id' => $this->edificio_id, 'nombre_doc' => default_doc, 'fecha_vencimiento' => default_data,
                                                     'fecha_cumplimentacion' => default_data, 'estado' => 'pendiente'));
         $feedback = $this->impDoc_entity->ADD();
         if($feedback['ok']) {
@@ -394,10 +402,12 @@ class Document_Service extends Document_Validation {
         $imp_doc = $this->feedback['resource'];
         $path = $imp_doc['path'];
 
-        $this->feedback = $this->check_more_than_one_impdocs($imp_doc['edificio_id'], $imp_doc['documento_id']);
-        if(!$this->feedback['ok']) {
-            $this->feedback['return'] = array('edificio_id' => $imp_doc['edificio_id'], 'documento_id' => $imp_doc['documento_id']);
-            return $this->feedback;
+        if(es_resp_edificio()) {
+            $this->feedback = $this->check_more_than_one_impdocs($imp_doc['edificio_id'], $imp_doc['documento_id']);
+            if(!$this->feedback['ok']) {
+                $this->feedback['return'] = array('edificio_id' => $imp_doc['edificio_id'], 'documento_id' => $imp_doc['documento_id']);
+                return $this->feedback;
+            }
         }
 
         $this->feedback = $this->impDoc_entity->DELETE();
@@ -427,6 +437,7 @@ class Document_Service extends Document_Validation {
 
         $imp_doc = $this->feedback['resource'];
         $this->impDoc_entity->estado = 'vencido';
+        $this->impDoc_entity->fecha_vencimiento = date('Y-m-d');
         $this->feedback = $this->impDoc_entity->EDIT();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPDOC_EXPIRE_OK';
@@ -563,20 +574,20 @@ class Document_Service extends Document_Validation {
     }
 
 
-    function searchBuildPlans($plan_id) {
+    function searchActiveBuildPlans($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $buildPlan_entity = new BuildPlan_Model();
         $buildPlan_entity->plan_id = $plan_id;
-        $feedback = $buildPlan_entity->searchByPlanID();
+        $feedback = $buildPlan_entity->searchActivesByPlanID();
         if($feedback['ok']) {
             if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'BLDPLAN_ASSIGN_NOT_EXST';
+                $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST';
             } else {
-                $feedback['code'] = 'BLDPLAN_ASSIGN_EXST';
+                $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
-            $feedback['code'] = 'BLDPLAN_KO';
+            $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_KO';
         }
 
         return $feedback;
@@ -642,7 +653,7 @@ class Document_Service extends Document_Validation {
 
         include_once './Service/CheckState_Service.php';
         $checkState_service = new CheckState_Service();
-        $estado = $checkState_service->check_state($feedback['resource']);
+        $estado = $checkState_service->get_state_element($feedback['resource']);
         return array('ok' => true, 'estado' => $estado);
     }
 

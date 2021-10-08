@@ -8,6 +8,7 @@ class Procedure_Validation extends Validator {
     var $procedimiento_id;
     var $estado;
     var $fecha_cumplimentacion;
+    var $fecha_vencimiento;
     var $nombre_doc;
     var $buildings = array();
     var $nombre_edificio;
@@ -34,6 +35,13 @@ class Procedure_Validation extends Validator {
 
         if($this->fecha_cumplimentacion != '') {
             $validation = $this->validar_FECHA_CUMPLIMENTACION();
+            if(!$validation['ok']) {
+                return $validation;
+            }
+        }
+
+        if($this->fecha_vencimiento != '') {
+            $validation = $this->validar_FECHA_VENCIMIENTO();
             if(!$validation['ok']) {
                 return $validation;
             }
@@ -138,6 +146,14 @@ class Procedure_Validation extends Validator {
         }
 
         return $this->rellena_validation(true,'00000','IMP_PROC');
+    }
+
+    function validar_FECHA_VENCIMIENTO() {
+        if(!$this->validar_fecha($this->fecha_vencimiento)) {
+            return $this->rellena_validation(false, 'DATEEXPIRE_KO','IMP_PROC');
+        }
+
+        return $this->rellena_validation(true, '00000', 'IMP_PROC');
     }
 
     function validar_NOMBRE_EDIFICIO() {

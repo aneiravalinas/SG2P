@@ -805,7 +805,7 @@ $_POST = array('ruta_id' => '2');
 $route_service = new Route_Service();
 $feedback = $route_service->addImpRouteForm();
 $respTest = obtenerRespuesta('Route', 'ADD_IMPROUTE_FORM', 'ACCION', 'El plan de la ruta no tiene edificios asignados',
-    'BLDPLAN_ASSIGN_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 // ADD_IMPROUTE_FORM Ok
@@ -813,7 +813,7 @@ $_POST = array('ruta_id' => '1');
 $route_service = new Route_Service();
 $feedback = $route_service->addImpRouteForm();
 $respTest = obtenerRespuesta('Route', 'ADD_IMPROUTE_FORM', 'ACCION', 'ADD_IMPROUTE_FORM Ok',
-    'BLDPLAN_ASSIGN_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'BLDPLAN_ASSIGN_ACTIVES_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 /*
@@ -1229,12 +1229,12 @@ $respTest = obtenerRespuesta('Route', 'DELETE', 'ACCION', 'El usuario no tiene p
 array_push($testRoute, $respTest);
 
 // Sólo existe una cumplimentación de la ruta en el edificio
-$_SESSION['rol'] = 'organizacion';
+$_SESSION['username'] = 'sg2ped';
 
 $_POST = array('planta_ruta_id' => '1');
 $route_service = new Route_Service();
 $feedback = $route_service->DELETE();
-$respTest = obtenerRespuesta('Route', 'DELETE', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
+$respTest = obtenerRespuesta('Route', 'DELETE', 'ACCION', 'Sólo existe una cumplimentación de la ruta en el edificio',
     'IMPROUTE_UNIQ', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 

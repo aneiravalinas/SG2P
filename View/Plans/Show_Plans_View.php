@@ -23,7 +23,7 @@ class Show_Plans {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 flex-wrap d-flex justify-content-end" id="search_add">
+                    <div class="col-xl-9 flex-wrap d-flex justify-content-end" id="search_add">
                         <div>
                             <a type="button" onclick="
                                 crearform('formenviar','post');
@@ -37,35 +37,49 @@ class Show_Plans {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 table-responsive" id="col-table">
+                    <div class="col-xl-9 table-responsive" id="col-table">
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col" class="i18n-building">Edificio</th>
-                                <th scope="col" class="i18n-plan">Plan</th>
-                                <th scope="col" class="i18n-state">Estado</th>
-                                <th scope="col" class="i18n-date_assign">Fecha Asignación</th>
+                                <th scope="col" class="i18n-building text-center">Edificio</th>
+                                <th scope="col" class="i18n-plan text-center">Plan</th>
+                                <th scope="col" class="i18n-state text-center">Estado</th>
+                                <th scope="col" class="i18n-date_assign text-center">Fecha Asignación</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach($this->buildPlans as $buildPlan): ?>
                                 <tr>
-                                    <td><?php echo $buildPlan['nombre_edificio'] ?></td>
-                                    <td><?php echo $buildPlan['nombre_plan'] ?></td>
-                                    <td class="i18n-<?php echo $buildPlan['estado'] ?> <?php echo $buildPlan['estado'] ?>"></td>
-                                    <td><?php echo date_format(date_create($buildPlan['fecha_asignacion']), 'd/m/Y') ?></td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false"
-                                        onclick="
-                                            crearform('formenviar','post');
-                                            insertacampo(document.formenviar, 'edificio_id', '<?php echo $buildPlan['edificio_id'] ?>');
-                                            insertacampo(document.formenviar, 'plan_id', '<?php echo $buildPlan['plan_id'] ?>');
-                                            insertacampo(document.formenviar, 'controller', 'Plan');
-                                            insertacampo(document.formenviar, 'action', 'showCurrent');
-                                            enviaform(document.formenviar);">
-                                            <span class="iconify" data-icon="fluent:textbox-more-24-filled" data-inline="false"></span>
-                                        </button>
+                                    <td class="text-center"><?php echo $buildPlan['nombre_edificio'] ?></td>
+                                    <td class="text-center"><?php echo $buildPlan['nombre_plan'] ?></td>
+                                    <td class="i18n-<?php echo $buildPlan['estado'] ?> <?php echo $buildPlan['estado'] ?> text-center"></td>
+                                    <td class="text-center"><?php echo date_format(date_create($buildPlan['fecha_asignacion']), 'd/m/Y') ?></td>
+                                    <td class="text-center">
+                                        <div class="btn-group px-md-2">
+                                            <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false"
+                                                    onclick="
+                                                            crearform('formenviar','post');
+                                                            insertacampo(document.formenviar, 'edificio_id', '<?php echo $buildPlan['edificio_id'] ?>');
+                                                            insertacampo(document.formenviar, 'plan_id', '<?php echo $buildPlan['plan_id'] ?>');
+                                                            insertacampo(document.formenviar, 'controller', 'Plan');
+                                                            insertacampo(document.formenviar, 'action', 'showCurrent');
+                                                            enviaform(document.formenviar);">
+                                                <span class="iconify" data-icon="fluent:textbox-more-24-filled" data-inline="false"></span>
+                                            </button>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false"
+                                                    onclick="
+                                                            crearform('formenviar','post');
+                                                            insertacampo(document.formenviar, 'edificio_id', '<?php echo $buildPlan['edificio_id'] ?>');
+                                                            insertacampo(document.formenviar, 'plan_id', '<?php echo $buildPlan['plan_id'] ?>');
+                                                            insertacampo(document.formenviar, 'controller', 'Plan');
+                                                            insertacampo(document.formenviar, 'action', 'expireForm');
+                                                            enviaform(document.formenviar);">
+                                                <span class="iconify" data-icon="ant-design:clock-circle-outlined" data-inline="false"></span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

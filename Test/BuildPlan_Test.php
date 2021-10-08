@@ -322,13 +322,27 @@ array_push($testBuildPlan, $respTest);
  *  --- SEEK: ACCIONES ---
  */
 
+// Usuario no es responsable del edificio
+$_SESSION['rol'] = 'edificio';
+$_SESSION['username'] = 'sg2ped';
+
+$_POST = array('plan_id' => '1', 'edificio_id' => '2');
+$buildPlan_service = new BuildPlan_Service();
+$feedback = $buildPlan_service->seek();
+$respTest = obtenerRespuesta('BuildPlan','SEEK','ACCION','Usuario no es responsable del edificio',
+    'BLD_FRBD', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testBuildPlan, $respTest);
+
 // Edificio y Plan no están asociados
+$_SESSION['rol'] = 'organizacion';
+
 $_POST = array('plan_id' => '8', 'edificio_id' => '1');
 $buildPlan_service = new BuildPlan_Service();
 $feedback = $buildPlan_service->seek();
 $respTest = obtenerRespuesta('BuildPlan','SEEK','ACCION','El plan no está asignado al edificio',
     'BLDPLAN_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
+
 
 // Edificio y Plan asignados
 $_POST = array('plan_id' => '1', 'edificio_id' => '2');
@@ -338,6 +352,7 @@ $respTest = obtenerRespuesta('BuildPlan','SEEK','ACCION','Plan asignado al Edifi
     'BLDPLAN_SEEK_OK', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
+unset($_SESSION['rol'], $_SESSION['username']);
 
 /*
  *  --- SEEK_PLAN: VALIDACIONES ---
@@ -447,13 +462,27 @@ array_push($testBuildPlan, $respTest);
  *  --- EDIT: ACCIONES ---
  */
 
+// Usuario no es responsable del edificio
+$_SESSION['rol'] = 'edificio';
+$_SESSION['username'] = 'sg2ped';
+
+$_POST = array('plan_id' => '1', 'edificio_id' => '2');
+$buildPlan_service = new BuildPlan_Service();
+$feedback = $buildPlan_service->EDIT();
+$respTest = obtenerRespuesta('BuildPlan','EDIT','ACCION','Usuario no es responsable del edificio',
+    'BLD_FRBD', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testBuildPlan, $respTest);
+
 // Edificio y Plan no están asociados
+$_SESSION['rol'] = 'organizacion';
+
 $_POST = array('plan_id' => '8', 'edificio_id' => '1');
 $buildPlan_service = new BuildPlan_Service();
 $feedback = $buildPlan_service->EDIT();
 $respTest = obtenerRespuesta('BuildPlan','EDIT','ACCION','El plan no está asignado al edificio',
     'BLDPLAN_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
+
 
 // Asignación ya vencida
 $_POST = array('plan_id' => '9', 'edificio_id' => '1');
@@ -470,6 +499,7 @@ $feedback = $buildPlan_service->EDIT();
 $respTest = obtenerRespuesta('BuildPlan','EDIT','ACCION','Asignación vencida OK',
     'BLDPLAN_EDTSTATE_OK', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
+unset($_SESSION['rol'], $_SESSION['username']);
 
 /*
  *  --- EXPIRE_ALL: VALIDACIONES ---
@@ -584,7 +614,20 @@ $respTest = obtenerRespuesta('BuildPlan','DELETE','ACCION','El edificio no exist
     'BLDID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
+// Usuario no es responsable del edificio
+$_SESSION['rol'] = 'edificio';
+$_SESSION['username'] = 'sg2ped';
+
+$_POST = array('plan_id' => '1', 'edificio_id' => '2');
+$buildPlan_service = new BuildPlan_Service();
+$feedback = $buildPlan_service->DELETE();
+$respTest = obtenerRespuesta('BuildPlan','DELETE','ACCION','Usuario no es responsable del edificio',
+    'BLD_FRBD', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testBuildPlan, $respTest);
+
 // Edificio y Plan no están asociados
+$_SESSION['rol'] = 'organizacion';
+
 $_POST = array('plan_id' => '8', 'edificio_id' => '1');
 $buildPlan_service = new BuildPlan_Service();
 $feedback = $buildPlan_service->DELETE();
@@ -592,7 +635,7 @@ $respTest = obtenerRespuesta('BuildPlan','DELETE','ACCION','El plan no está asi
     'BLDPLAN_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
-// Asignación Eliminada OK 'plan_id' => '7', 'buildings' => array('1', '5')
+// Asignación Eliminada OK
 $_POST = array('plan_id' => '7', 'edificio_id' => '1');
 $buildPlan_service = new BuildPlan_Service();
 $feedback = $buildPlan_service->DELETE();
@@ -604,6 +647,7 @@ array_push($testBuildPlan, $respTest);
 $_POST = array('plan_id' => '7', 'edificio_id' => '5');
 $buildPlan_service = new BuildPlan_Service();
 $feedback = $buildPlan_service->DELETE();
+unset($_SESSION['rol'], $_SESSION['username']);
 
 //------------------------------------------------------------------------------
 //Fin test Asignación de Edificios

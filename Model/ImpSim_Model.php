@@ -9,12 +9,13 @@ class ImpSim_Model extends Abstract_Model {
     var $simulacro_id;
     var $estado;
     var $fecha_planificacion;
+    var $fecha_vencimiento;
     var $url_recurso;
     var $destinatarios;
     var $nombre_edificio;
 
     function __construct() {
-        $this->atributos = array('edificio_simulacro_id','simulacro_id','edificio_id','estado','fecha_planificacion','url_recurso','destinatarios','nombre_edificio');
+        $this->atributos = array('edificio_simulacro_id','simulacro_id','edificio_id','estado','fecha_planificacion','fecha_vencimiento','url_recurso','destinatarios','nombre_edificio');
         $this->fill_fields();
     }
 
@@ -36,6 +37,7 @@ class ImpSim_Model extends Abstract_Model {
              simulacro_id,
              estado,
              fecha_planificacion,
+             fecha_vencimiento,
              url_recurso,
              destinatarios
             ) VALUES (
@@ -43,6 +45,7 @@ class ImpSim_Model extends Abstract_Model {
             '$this->simulacro_id',
             '$this->estado',
             '$this->fecha_planificacion',
+            '$this->fecha_vencimiento',
             '$this->url_recurso',
             '$this->destinatarios'
             );
@@ -56,6 +59,7 @@ class ImpSim_Model extends Abstract_Model {
     function EDIT() {
         $this->query = "UPDATE EDIFICIO_SIMULACRO SET " .
             ($this->fecha_planificacion == '' ? "" : "fecha_planificacion = '$this->fecha_planificacion', ") .
+            ($this->fecha_vencimiento == '' ? "" : "fecha_vencimiento = '$this->fecha_vencimiento', ") .
             ($this->url_recurso == '' ? "" : "url_recurso = '$this->url_recurso', ") .
             ($this->destinatarios == '' ? "" : "destinatarios = '$this->destinatarios', ") .
             ($this->estado == '' ? "" : "estado = '$this->estado'") .
@@ -88,6 +92,7 @@ class ImpSim_Model extends Abstract_Model {
                 EDIFICIO_SIMULACRO.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                 EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
+                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
                 fecha_planificacion LIKE '%" . $this->fecha_planificacion . "%'
         ";
 
@@ -102,6 +107,7 @@ class ImpSim_Model extends Abstract_Model {
                 edificio_id = '$this->edificio_id' AND
                 simulacro_id = '$this->simulacro_id' AND
                 estado LIKE '%" . $this->estado . "%' AND
+                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
                 fecha_planificacion LIKE '%" . $this->fecha_planificacion . "%'
         ";
 
@@ -115,8 +121,9 @@ class ImpSim_Model extends Abstract_Model {
             WHERE
                 edificio_id = '$this->edificio_id' AND
                 simulacro_id = '$this->simulacro_id' AND
-                estado LIKE '%" . $this->estado . "%' AND
+                fecha_planificacion LIKE '%" . $this->fecha_planificacion . "%' AND
                 estado != 'vencido'
+            ORDER BY estado DESC, fecha_planificacion DESC
         ";
 
         $this->get_results_from_query();
@@ -124,7 +131,19 @@ class ImpSim_Model extends Abstract_Model {
     }
 
     function seek() {
-        // TODO: Implement seek() method.
+        $this->query = "
+            SELECT EDIFICIO_SIMULACRO.*, EDIFICIO.username, EDIFICIO.nombre AS nombre_edificio, SIMULACRO.nombre AS nombre_simulacro, SIMULACRO.plan_id
+            FROM EDIFICIO_SIMULACRO
+            INNER JOIN EDIFICIO 
+                ON EDIFICIO_SIMULACRO.edificio_id = EDIFICIO.edificio_id
+            INNER JOIN SIMULACRO
+                ON EDIFICIO_SIMULACRO.simulacro_id = SIMULACRO.simulacro_id
+            WHERE
+                edificio_simulacro_id = '$this->edificio_simulacro_id'
+        ";
+
+        $this->get_one_result_from_query();
+        return $this->feedback;
     }
 
     function searchBySimID() {

@@ -12,7 +12,7 @@ class Route_Service extends Route_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion','nombre_doc','nombre_planta', 'nombre_edificio', 'edificio_id');
+        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion','fecha_vencimiento','nombre_doc','nombre_planta', 'nombre_edificio', 'edificio_id');
         $this->impRoute_entity = new ImpRoute_Model();
         $this->defRoute_entity = new DefRoute_Model();
         $this->fill_fields();
@@ -246,7 +246,8 @@ class Route_Service extends Route_Validation {
             return $this->feedback;
         }
 
-        $this->impRoute_entity->setAttributes(array('nombre_doc' => default_doc, 'fecha_cumplimentacion' => default_data, 'estado' => 'pendiente'));
+        $this->impRoute_entity->setAttributes(array('nombre_doc' => default_doc, 'fecha_cumplimentacion' => default_data,
+                                                        'fecha_vencimiento' => default_data, 'estado' => 'pendiente'));
         $this->feedback = $this->impRoute_entity->ADD();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPROUTE_ADD_OK';
@@ -265,7 +266,7 @@ class Route_Service extends Route_Validation {
         }
 
         $route = $this->feedback['resource'];
-        $this->feedback = $this->searchBuildPlans($route['plan_id']);
+        $this->feedback = $this->searchActiveBuildPlans($route['plan_id']);
         if($this->feedback['ok']) {
             $this->feedback['route'] = $route;
         } else {
@@ -318,6 +319,14 @@ class Route_Service extends Route_Validation {
             return $feedback;
         }
 
+        $bld_plan = $feedback['resource'];
+        if($bld_plan['estado'] == 'vencido') {
+            $feedback['ok'] = false;
+            $feedback['code'] = 'BLDPLAN_EXPIRED';
+            $feedback['building'] = array('edificio_id' => $building['edificio_id']);
+            return $feedback;
+        }
+
         $feedback = $this->searchBuildingFloors();
         if(!$feedback['ok']) {
             if($feedback['code'] == 'BLD_FLOORS_SEARCH_EMPT') {
@@ -344,7 +353,7 @@ class Route_Service extends Route_Validation {
         $created_imp_floors = array();
         foreach($floors as $floor) {
             $this->impRoute_entity->setAttributes(array('ruta_id' => $route['ruta_id'], 'planta_id' => $floor['planta_id'], 'nombre_doc' => default_doc,
-                                                                'fecha_cumplimentacion' => default_data, 'estado' => 'pendiente'));
+                                                                'fecha_cumplimentacion' => default_data, 'fecha_vencimiento' => default_data, 'estado' => 'pendiente'));
             $feedback = $this->impRoute_entity->ADD();
             if(!$feedback['ok']) {
                 if($feedback['code'] == 'QRY_KO') {
@@ -433,6 +442,7 @@ class Route_Service extends Route_Validation {
 
         $imp_route = $this->feedback['resource'];
         $this->impRoute_entity->estado = 'vencido';
+        $this->impRoute_entity->fecha_vencimiento = date('Y-m-d');
         $this->feedback = $this->impRoute_entity->EDIT();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPROUTE_EXPIRE_OK';
@@ -507,10 +517,12 @@ class Route_Service extends Route_Validation {
         $imp_route = $this->feedback['resource'];
         $path = $imp_route['path'];
 
-        $this->feedback = $this->check_more_than_one_improutes($imp_route['edificio_id'], $imp_route['ruta_id']);
-        if(!$this->feedback['ok']) {
-            $this->feedback['return'] = array('edificio_id' => $imp_route['edificio_id'], 'ruta_id' => $imp_route['ruta_id']);
-            return $this->feedback;
+        if(es_resp_edificio()) {
+            $this->feedback = $this->check_more_than_one_improutes($imp_route['edificio_id'], $imp_route['ruta_id']);
+            if(!$this->feedback['ok']) {
+                $this->feedback['return'] = array('edificio_id' => $imp_route['edificio_id'], 'ruta_id' => $imp_route['ruta_id']);
+                return $this->feedback;
+            }
         }
 
         $this->feedback = $this->impRoute_entity->DELETE();
@@ -621,20 +633,20 @@ class Route_Service extends Route_Validation {
         return $feedback;
     }
 
-    function searchBuildPlans($plan_id) {
+    function searchActiveBuildPlans($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $bldPlan_entity = new BuildPlan_Model();
         $bldPlan_entity->plan_id = $plan_id;
-        $feedback = $bldPlan_entity->searchByPlanID();
+        $feedback = $bldPlan_entity->searchActivesByPlanID();
         if($feedback['ok']) {
             if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'BLDPLAN_ASSIGN_NOT_EXST';
+                $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST';
             } else {
-                $feedback['code'] = 'BLDPLAN_ASSIGN_EXST';
+                $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
-            $feedback['code'] = 'BLDPLAN_KO';
+            $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_KO';
         }
 
         return $feedback;
@@ -670,28 +682,6 @@ class Route_Service extends Route_Validation {
         return $checkState_service->get_state_route($this->ruta_id, $feedback['resource']);
     }
 
-    /*function get_route_state() {
-        $feedback = $this->search_all_improutes();
-        if(!$feedback['ok']) {
-            return $feedback;
-        }
-
-        include_once './Service/CheckState_Service.php';
-        $checkState_service = new CheckState_Service();
-        $estado = $checkState_service->check_state($feedback['resource']);
-        return array('ok' => true, 'estado' => $estado);
-    }*/
-
-    /*function search_all_improutes() {
-        $feedback = $this->impRoute_entity->searchRoutesBuildings($this->edificio_id);
-        if($feedback['ok']) {
-            $feedback['code'] = 'BLDROUTES_SEARCH_OK';
-        } else if($feedback['code'] == 'QRY_KO') {
-            $feedback['code'] = 'BLDROUTES_SEARCH_KO';
-        }
-
-        return $feedback;
-    }*/
 
     function seekByFloorID() {
         include_once './Model/Floor_Model.php';

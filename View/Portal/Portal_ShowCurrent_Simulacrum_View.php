@@ -83,20 +83,17 @@ class Portal_ShowCurrent_Simulacrum {
                     <div class="row justify-content-center">
                         <div class="col-xl-9 flex-wrap d-flex justify-content-end" id="search_add">
                             <form class="form-inline" name="formulariosearch" method="post">
-                                <span class="i18n-state d-block">Estado</span>
-                                <select id="estado" name="estado" class="form-select form-select-sm d-inline w-auto">
-                                    <option value="" class="i18n-todos">Todos</option>
-                                    <option value="pendiente" class="i18n-pendiente">Pendiente</option>
-                                    <option value="cumplimentado" class="i18n-cumplimentado">Cumplimentado</option>
-                                </select>
+                                <span class="i18n-planning_date d-block">Fecha Planificación</span>
+                                <input type="date" class="form-control form-control-sm d-inline w-auto" id="fecha_planificacion" name="fecha_planificacion"/>
                                 <a type="button" onclick="
-                                    insertacampo(document.formulariosearch, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                    insertacampo(document.formulariosearch, 'simulacro_id', '<?php echo $this->simulacrum['simulacro_id'] ?>');
-                                    insertacampo(document.formulariosearch, 'controller', 'Portal');
-                                    insertacampo(document.formulariosearch, 'action','seekPortalSimulacrum');
-                                    enviaform(document.formulariosearch);">
+                                        insertacampo(document.formulariosearch, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
+                                        insertacampo(document.formulariosearch, 'simulacro_id', '<?php echo $this->simulacrum['simulacro_id'] ?>');
+                                        insertacampo(document.formulariosearch, 'controller', 'Portal');
+                                        insertacampo(document.formulariosearch, 'action','seekPortalSimulacrum');
+                                        enviaform(document.formulariosearch);">
                                     <span class="iconify option_button" data-icon="fluent:search-square-24-filled" data-inline="false"></span>
                                 </a>
+                            </form>
                         </div>
                     </div>
 

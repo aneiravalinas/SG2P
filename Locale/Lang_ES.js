@@ -570,6 +570,7 @@ arrayES = {
         // ADD
         'IMPDOC_ADD_OK' : 'Se ha registrado la cumplimentación del procedimiento correctamente',
         'IMPDOC_BLD_NOT_OWNED' : 'No dispone de los privilegios necesarios para añadir cumplimentaciones en el edificio indicado',
+        'BLDPLAN_EXPIRED' : 'No se puede realizar la acción. La asignación entre el plan y el edificio se encuentra vencida',
 
         // SEEK
         'IMPDOC_SEEK_OK' : 'Se han consultado los detalles de la cumplimentación del documento correctamente',
@@ -802,6 +803,34 @@ arrayES = {
         // ADD
         'IMPSIM_ADD_OK' : 'Se ha registrado la cumplimentación del simulacro correctamente',
 
+        // DELETE
+        'IMPSIM_DEL_OK' : 'La cumplimentación del simulacro se ha eliminado correctamente',
+
+        // SEEK
+        'IMPSIM_SEEK_OK' : 'Se han consultado los detalles de la cumplimentación del simulacro correctamente',
+        'IMPSIM_SEEK_KO' : 'Error al consultar los detalles de la cumplimentación del simulacro',
+
+        // EXPIRE
+        'IMPSIM_EXPIRE_OK' : 'Se ha vencido la cumplimentación del simulacro correctamente',
+        'IMPSIM_EXPIRE_KO' : 'Error al vencer la cumplimentación del simulacro',
+
+        // IMPLEMENT
+        'IMPSIM_IMPL_OK' : 'La cumplimentación del simulacro se ha completado correctamente',
+        'IMPSIM_IMPL_KO' : 'Error al completar la cumplimentación del simulacro',
+
+        // PORTAL SEEK
+        'PRTL_IMPSIM_SEEK_OK' : 'Se han consultado los detalles de la cumplimentación del simulacro del portal correctamente',
+        'PRTL_IMPSIM_SEEK_KO' : 'Error al consultar los detalles de la cumplimentación del simulacro del portal',
+
+        // Consulta por ID de Cumplimentación
+        'IMPSIMID_NOT_EXST' : 'El id de la cumplimentación del simulacro no existe',
+        'IMPSIMID_EXST' : 'El id de la cumplimentación del simulacro existe',
+        'IMPSIMID_KO' : 'Error al consultar por el id de la cumplimentación del simulacro',
+
+        // Consulta de cumplimentación única
+        'IMPSIM_UNIQ' : 'No se puede eliminar la cumplimentación. Siempre debe existir al menos una cumplimentación del simulacro en el edificio',
+        'IMPSIM_NOT_UNIQ' : 'La cumplimentación no es única',
+
         // Detalles del simulacro del portal
         'PRTL_IMPSIM_SEARCH_OK' : 'Se han consultado los detalles del simulacro del portal correctamente',
         'PRTL_IMPSIM_SEARCH_KO' : 'Error al consultar los detalles del simulacro del portal',
@@ -1028,6 +1057,9 @@ arrayES = {
             'PLANNING_DATE_KO' : 'La fecha de planificación introducida tiene un formato incorrecto',
             'PLANNING_DATE_PAST' : 'La fecha de planificación introducida es una fecha pasada',
 
+            // Fecha Vencimiento
+            'DATEEXPIRE_KO' : 'La fecha de vencimiento introducida tiene un formato incorrecto',
+
             // Destinatarios
             'RECIPIENTS_EMPT' : 'El campo destinatarios no puede ser vacío',
             'RECIPIENTS_LRG' : 'El campo destinatarios no puede superar los 200 caracteres',
@@ -1225,9 +1257,9 @@ arrayES = {
         // BUILDINGS_PLANS
         'i18n-assign-bldplan' : 'Edificios Asignados',
         'i18n-building' : 'Edificio',
-        'i18n-date_assign' : 'Fecha de Asignación',
+        'i18n-date_assign' : 'Fecha Asignación',
         'i18n-state' : 'Estado',
-        'i18n-date_comp' : 'Fecha de Cumplimentación',
+        'i18n-date_comp' : 'Fecha Cumplimentación',
         'i18n-pendiente' : 'PENDIENTE',
         'i18n-cumplimentado' : 'CUMPLIMENTADO',
         'i18n-vencido' : 'VENCIDO',
@@ -1238,6 +1270,7 @@ arrayES = {
         'i18n-expire_all' : 'Vencer TODAS',
         'i18n-expireAll-bldplan-confirm' : '¿Está seguro que desea vencer TODAS las asignaciones de este Plan? El cambio no será reversible',
         'i18n-nombre_edificio' : 'Nombre Edificio',
+        'i18n-date_expire' : 'Fecha Vencimiento',
 
         // PLANS
         'i18n-plan' : 'Plan',
@@ -1298,11 +1331,15 @@ arrayES = {
         'i18n-url_recurso' : 'URL Recurso',
         'i18n-destinatarios' : 'Destinatarios',
         'i18n-enlace_url' : 'Acceder al Recurso',
+        'i18n-cump-form' : 'Cumplimentar Formación',
 
         // IMP_SIMS
         'i18n-impsim' : 'Cumplimentaciones del Simulacro',
         'i18n-imp-sims-empty' : 'No se han encontrado cumplimentaciones del simulacro',
         'i18n-info_sim' : 'Información del Simulacro',
+        'i18n-del-imp-sim-confirm' : '¿Está seguro que desea eliminar la cumplimentación de este simulacro? El cambio no será reversible',
+        'i18n-expire-impsim-confirm' : '¿Está seguro que desea vencer la cumplimentación de este simulacro? El cambio no será reversible',
+        'i18n-cump-sim' : 'Cumplimentar Simulacro',
 
 
 

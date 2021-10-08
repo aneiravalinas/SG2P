@@ -521,7 +521,7 @@ $_POST = array('procedimiento_id' => '1');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->addImpProcForm();
 $respTest = obtenerRespuesta('Procedure', 'ADD_IMPPROC_FORM', 'ACCION', 'El plan del procedimiento no tiene asignaciones con edificios',
-    'BLDPLAN_ASSIGN_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 // El plan del procedimiento tiene asignaciones con edificios
@@ -529,7 +529,7 @@ $_POST = array('procedimiento_id' => '5');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->addImpProcForm();
 $respTest = obtenerRespuesta('Procedure', 'ADD_IMPPROC_FORM', 'ACCION', 'El plan del procedimiento tiene asignaciones con edificios',
-    'BLDPLAN_ASSIGN_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'BLDPLAN_ASSIGN_ACTIVES_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 /*

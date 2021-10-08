@@ -12,7 +12,7 @@ class Formation_Service extends Formation_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('edificio_formacion_id', 'edificio_id', 'formacion_id', 'estado', 'fecha_planificacion', 'url_recurso', 'destinatarios', 'nombre_edificio');
+        $this->atributos = array('edificio_formacion_id', 'edificio_id', 'formacion_id', 'estado', 'fecha_planificacion', 'fecha_vencimiento', 'url_recurso', 'destinatarios', 'nombre_edificio');
         $this->defFormat_entity = new DefFormat_Model();
         $this->impFormat_entity = new ImpFormat_Model();
         $this->fill_fields();
@@ -164,7 +164,7 @@ class Formation_Service extends Formation_Validation {
         }
 
         $formation = $this->feedback['resource'];
-        $this->feedback = $this->searchBuildPlans($formation['plan_id']);
+        $this->feedback = $this->searchActiveBuildPlans($formation['plan_id']);
         if($this->feedback['ok']) {
             $this->feedback['formation'] = $formation;
         } else {
@@ -233,8 +233,16 @@ class Formation_Service extends Formation_Validation {
             return $feedback;
         }
 
+        $bld_plan = $feedback['resource'];
+        if($bld_plan['estado'] == 'vencido') {
+            $feedback['ok'] = false;
+            $feedback['code'] = 'BLDPLAN_EXPIRED';
+            $feedback['building'] = array('edificio_id' => $building['edificio_id']);
+            return $feedback;
+        }
+
         $this->impFormat_entity->setAttributes(array('edificio_id' => $this->edificio_id, 'fecha_planificacion' => default_data, 'destinatarios' => default_destinatarios,
-                                                            'url_recurso' => default_url, 'estado' => 'pendiente'));
+                                                            'fecha_vencimiento' => default_data, 'url_recurso' => default_url, 'estado' => 'pendiente'));
         $feedback = $this->impFormat_entity->ADD();
         if($feedback['ok']) {
             $edificio_formacion_id = $this->impFormat_entity->edificio_formacion_id;
@@ -261,10 +269,12 @@ class Formation_Service extends Formation_Validation {
         }
 
         $imp_format = $this->feedback['resource'];
-        $this->feedback = $this->check_more_than_one_impformats($imp_format['edificio_id'], $imp_format['formacion_id']);
-        if(!$this->feedback['ok']) {
-            $this->feedback['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
-            return $this->feedback;
+        if(es_resp_edificio()) {
+            $this->feedback = $this->check_more_than_one_impformats($imp_format['edificio_id'], $imp_format['formacion_id']);
+            if(!$this->feedback['ok']) {
+                $this->feedback['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
+                return $this->feedback;
+            }
         }
 
         $this->feedback = $this->impFormat_entity->DELETE();
@@ -334,6 +344,7 @@ class Formation_Service extends Formation_Validation {
 
         $imp_format = $this->feedback['resource'];
         $this->impFormat_entity->estado = 'vencido';
+        $this->impFormat_entity->fecha_vencimiento = date('Y-m-d');
         $this->feedback = $this->impFormat_entity->EDIT();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPFORMAT_EXPIRE_OK';
@@ -494,7 +505,7 @@ class Formation_Service extends Formation_Validation {
 
         include_once './Service/CheckState_Service.php';
         $checkState_service = new CheckState_Service();
-        $estado = $checkState_service->check_state($feedback['resource']);
+        $estado = $checkState_service->get_state_element($feedback['resource']);
         return array('ok' => true, 'estado' => $estado);
     }
 
@@ -515,20 +526,20 @@ class Formation_Service extends Formation_Validation {
         $checkState_service->update_plan_state();
     }
 
-    function searchBuildPlans($plan_id) {
+    function searchActiveBuildPlans($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $bldPlan_entity = new BuildPlan_Model();
         $bldPlan_entity->plan_id = $plan_id;
-        $feedback = $bldPlan_entity->searchByPlanID();
+        $feedback = $bldPlan_entity->searchActivesByPlanID();
         if($feedback['ok']) {
             if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'BLDPLAN_ASSIGN_NOT_EXST';
+                $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST';
             } else {
-                $feedback['code'] = 'BLDPLAN_ASSIGN_EXST';
+                $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
-            $feedback['code'] = 'BLDPLAN_KO';
+            $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_KO';
         }
 
         return $feedback;

@@ -419,7 +419,7 @@ $_POST = array('formacion_id' => '1');
 $format_service = new Formation_Service();
 $feedback = $format_service->addImpFormatForm();
 $respTest = obtenerRespuesta('Formation', 'ADD_IMPFORMAT_FORM', 'ACCION', 'El plan de la formación no está asignado a ningún edificio',
-    'BLDPLAN_ASSIGN_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 // El plan de la formacion tiene edificios asignados
@@ -427,7 +427,7 @@ $_POST = array('formacion_id' => '4');
 $format_service = new Formation_Service();
 $feedback = $format_service->addImpFormatForm();
 $respTest = obtenerRespuesta('Formation', 'ADD_IMPFORMAT_FORM', 'ACCION', 'El plan de la formacion tiene edificios asignados',
-    'BLDPLAN_ASSIGN_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'BLDPLAN_ASSIGN_ACTIVES_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 /*

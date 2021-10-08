@@ -9,12 +9,13 @@ class ImpFormat_Model extends Abstract_Model {
     var $formacion_id;
     var $estado;
     var $fecha_planificacion;
+    var $fecha_vencimiento;
     var $url_recurso;
     var $destinatarios;
     var $nombre_edificio;
 
     function __construct() {
-        $this->atributos = array('edificio_formacion_id','edificio_id','formacion_id','estado','fecha_planificacion','url_recurso','destinatarios','nombre_edificio');
+        $this->atributos = array('edificio_formacion_id','edificio_id','formacion_id','estado','fecha_planificacion','fecha_vencimiento','url_recurso','destinatarios','nombre_edificio');
         $this->fill_fields();
     }
 
@@ -36,6 +37,7 @@ class ImpFormat_Model extends Abstract_Model {
              formacion_id,
              estado,
              fecha_planificacion,
+             fecha_vencimiento,
              url_recurso,
              destinatarios
             ) VALUES (
@@ -43,6 +45,7 @@ class ImpFormat_Model extends Abstract_Model {
              '$this->formacion_id',
              '$this->estado',
              '$this->fecha_planificacion',
+             '$this->fecha_vencimiento',
              '$this->url_recurso',
              '$this->destinatarios'
             );
@@ -56,6 +59,7 @@ class ImpFormat_Model extends Abstract_Model {
     function EDIT() {
         $this->query = "UPDATE EDIFICIO_FORMACION SET " .
             ($this->fecha_planificacion == '' ? "" : "fecha_planificacion = '$this->fecha_planificacion', ") .
+            ($this->fecha_vencimiento == '' ? "" : "fecha_vencimiento = '$this->fecha_vencimiento', ") .
             ($this->url_recurso == '' ? "" : "url_recurso = '$this->url_recurso', ") .
             ($this->destinatarios == '' ? "" : "destinatarios = '$this->destinatarios', ") .
             ($this->estado == '' ? "" : "estado = '$this->estado'") .
@@ -88,6 +92,7 @@ class ImpFormat_Model extends Abstract_Model {
                 EDIFICIO_FORMACION.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                 EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
+                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
                 fecha_planificacion LIKE '%" . $this->fecha_planificacion . "%'
         ";
 
@@ -102,6 +107,7 @@ class ImpFormat_Model extends Abstract_Model {
                 edificio_id = '$this->edificio_id' AND
                 formacion_id = '$this->formacion_id' AND
                 estado LIKE '%" . $this->estado . "%' AND
+                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
                 fecha_planificacion LIKE '%" . $this->fecha_planificacion . "%'
         ";
 

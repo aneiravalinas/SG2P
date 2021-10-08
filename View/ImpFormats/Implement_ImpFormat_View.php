@@ -21,7 +21,7 @@ class Implement_ImpFormat {
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
                         <h1><?php echo $this->imp_format['nombre_formacion'] ?></h1>
-                        <h2 class="mb-4 i18n-cump-proc">Cumplimentar Procedimiento</h2>
+                        <h2 class="mb-4 i18n-cump-form">Cumplimentar Formacion</h2>
                     </div>
 
                     <div class="col-xl-7 col-lg-9">

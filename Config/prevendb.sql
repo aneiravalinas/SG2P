@@ -81,6 +81,7 @@ CREATE TABLE EDIFICIO_PLAN
     `plan_id` INT(10) NOT NULL,
     `fecha_asignacion` DATE NOT NULL,
     `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `fecha_vencimiento` DATE NOT NULL DEFAULT '00-00-0000',
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
 
     CONSTRAINT `pk_edificio_plan` PRIMARY KEY (`edificio_id`, `plan_id`),
@@ -132,6 +133,7 @@ CREATE TABLE EDIFICIO_DOCUMENTO
     `documento_id` INT(10) NOT NULL,
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `fecha_vencimiento` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(50) NOT NULL,
 
     CONSTRAINT `pk_edificio_documento` PRIMARY KEY (`edificio_documento_id`),
@@ -146,6 +148,7 @@ CREATE TABLE EDIFICIO_PROCEDIMIENTO
     `procedimiento_id` INT(10) NOT NULL,
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `fecha_vencimiento` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(50) NOT NULL,
 
     CONSTRAINT `pk_edificio_procedimiento` PRIMARY KEY (`edificio_procedimiento_id`),
@@ -160,6 +163,7 @@ CREATE TABLE PLANTA_RUTA
     `ruta_id` INT(10) NOT NULL,
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `fecha_vencimiento` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(50) NOT NULL,
 
     CONSTRAINT `pk_planta_ruta` PRIMARY KEY (`planta_ruta_id`),
@@ -186,6 +190,7 @@ CREATE TABLE EDIFICIO_SIMULACRO
     `simulacro_id` INT(10) NOT NULL,
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `fecha_vencimiento` DATE NOT NULL DEFAULT '00-00-0000',
     `url_recurso` VARCHAR(200) NOT NULL,
     `destinatarios` VARCHAR(200) NOT NULL,
 
@@ -213,6 +218,7 @@ CREATE TABLE EDIFICIO_FORMACION
     `formacion_id` INT(10) NOT NULL,
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
+    `fecha_vencimiento` DATE NOT NULL DEFAULT '00-00-0000',
     `url_recurso` VARCHAR(200) NOT NULL,
     `destinatarios` VARCHAR(200) NOT NULL,
 

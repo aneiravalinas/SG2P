@@ -246,4 +246,16 @@ class Portal {
             new Message($feedback['code'], 'Portal', 'getPortal');
         }
     }
+
+    function seekPortalImpSim() {
+        include_once './Service/Simulacrum_Service.php';
+        $sim_service = new Simulacrum_Service();
+        $feedback = $sim_service->seekPortalImpSim();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_ShowCurrent_ImpSim_View.php';
+            new Portal_ShowCurrent_ImpSim($feedback['resource']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'getPortal');
+        }
+    }
 }

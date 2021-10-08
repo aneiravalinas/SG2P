@@ -8,6 +8,7 @@ class Route_Validation extends Validator {
     var $ruta_id;
     var $estado;
     var $fecha_cumplimentacion;
+    var $fecha_vencimiento;
     var $nombre_doc;
     var $nombre_planta;
     var $nombre_edificio;
@@ -50,6 +51,13 @@ class Route_Validation extends Validator {
 
         if($this->planta_ruta_id != '') {
             $validacion = $this->validar_PLANTA_RUTA_ID();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->fecha_vencimiento != '') {
+            $validacion = $this->validar_FECHA_VENCIMIENTO();
             if(!$validacion['ok']) {
                 return $validacion;
             }
@@ -182,6 +190,14 @@ class Route_Validation extends Validator {
         }
 
         return $this->rellena_validation(true,'00000','IMP_ROUTE');
+    }
+
+    function validar_FECHA_VENCIMIENTO() {
+        if(!$this->validar_fecha($this->fecha_vencimiento)) {
+            return $this->rellena_validation(false, 'DATEEXPIRE_KO','IMP_ROUTE');
+        }
+
+        return $this->rellena_validation(true, '00000', 'IMP_ROUTE');
     }
 
 

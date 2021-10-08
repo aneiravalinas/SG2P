@@ -15,7 +15,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
     const msg_notification_add = 'Se ha asignado un nuevo plan';
 
     function __construct() {
-        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_cumplimentacion','estado','nombre_edificio');
+        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_cumplimentacion','fecha_vencimiento','estado','nombre_edificio');
         $this->bldPlan_entity = new BuildPlan_Model();
         $this->defPlan_entity = new DefPlan_Model();
         $this->uploader = new Uploader();
@@ -115,6 +115,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         $bld_plan = array_pop($this->build_plans);
         $this->bldPlan_entity->setAttributes($bld_plan);
         $this->bldPlan_entity->estado = 'vencido';
+        $this->bldPlan_entity->fecha_vencimiento = date('Y-m-d');
         $feedback = $this->bldPlan_entity->EDIT();
 
         if($feedback['ok']) {
@@ -320,6 +321,14 @@ class BuildPlan_Service extends BuildPlan_Validation {
         }
 
         $building = $this->feedback['resource'];
+
+        if(es_resp_edificio() && $building['username'] != getUser()) {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'BLD_FRBD';
+            unset($this->feedback['resource']);
+            return $this->feedback;
+        }
+
         $this->feedback = $this->seekBldPlan();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'BLDPLAN_SEEK_OK';
@@ -352,7 +361,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
 
         include_once './Model/ImpDoc_Model.php';
         $impDoc_entity = new ImpDoc_Model();
-        $impDoc_entity->setAttributes(array('edificio_id' => $edificio_id, 'documento_id' => $doc['documento_id'],
+        $impDoc_entity->setAttributes(array('edificio_id' => $edificio_id, 'documento_id' => $doc['documento_id'], 'fecha_vencimiento' => default_data,
                                             'estado' => 'pendiente', 'fecha_cumplimentacion' => default_data, 'nombre_doc' => default_doc));
         $feedback = $impDoc_entity->ADD();
         if($feedback['ok']) {
@@ -439,6 +448,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
             if($imp_doc['estado'] == 'vencido') continue;
             $impDoc_entity->setAttributes($imp_doc);
             $impDoc_entity->estado = "vencido";
+            $impDoc_entity->fecha_vencimiento = date('Y-m-d');
             $feedback = $impDoc_entity->EDIT();
             if(!$feedback['ok']) {
                 if($feedback['code'] == 'QRY_KO') {
@@ -489,7 +499,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
 
         include_once './Model/ImpProc_Model.php';
         $impProc_entity = new ImpProc_Model();
-        $impProc_entity->setAttributes(array('edificio_id' => $edificio_id, 'procedimiento_id' => $proc['procedimiento_id'],
+        $impProc_entity->setAttributes(array('edificio_id' => $edificio_id, 'procedimiento_id' => $proc['procedimiento_id'], 'fecha_vencimiento' => default_data,
                                                 'estado' => 'pendiente', 'fecha_cumplimentacion' => default_data, 'nombre_doc' => default_doc));
         $feedback = $impProc_entity->ADD();
         if($feedback['ok']) {
@@ -588,6 +598,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
             if($imp_proc['estado'] == 'vencido') continue;
             $impProc_entity->setAttributes($imp_proc);
             $impProc_entity->estado = 'vencido';
+            $impProc_entity->fecha_vencimiento = date('Y-m-d');
             $feedback = $impProc_entity->EDIT();
             if(!$feedback['ok']) {
                 if($feedback['code'] == 'QRY_KO') $feedback['code'] = 'IMPPROC_EDTSTATE_KO';
@@ -631,7 +642,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         $impRoute_entity = new ImpRoute_Model();
         $feedback['ok'] = true;
         foreach($floors as $floor) {
-            $impRoute_entity->setAttributes(array('planta_id' => $floor['planta_id'], 'ruta_id' => $route['ruta_id'],
+            $impRoute_entity->setAttributes(array('planta_id' => $floor['planta_id'], 'ruta_id' => $route['ruta_id'], 'fecha_vencimiento' => default_data,
                                                 'estado' => 'pendiente', 'fecha_cumplimentacion' => default_data, 'nombre_doc' => default_doc));
             $feedback = $impRoute_entity->ADD();
             if(!$feedback['ok']) {
@@ -734,6 +745,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
                 if($imp_route['estado'] == 'vencido') continue;
                 $impRoute_entity->setAttributes($imp_route);
                 $impRoute_entity->estado = 'vencido';
+                $impRoute_entity->fecha_vencimiento = date('Y-m-d');
                 $feedback = $impRoute_entity->EDIT();
                 if(!$feedback['ok']) {
                     if($feedback['code'] == 'QRY_KO') $feedback['code'] = 'IMPROUTE_EDTSTATE_KO';
@@ -770,7 +782,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         $formation = array_pop($formations);
         include_once './Model/ImpFormat_Model.php';
         $impFormat_entity = new ImpFormat_Model();
-        $impFormat_entity->setAttributes(array('edificio_id' => $edificio_id, 'formacion_id' => $formation['formacion_id'],'estado' => 'pendiente',
+        $impFormat_entity->setAttributes(array('edificio_id' => $edificio_id, 'formacion_id' => $formation['formacion_id'],'estado' => 'pendiente', 'fecha_vencimiento' => default_data,
                                             'fecha_planificacion' => default_data, 'url_recurso' => default_url, 'destinatarios' => default_destinatarios));
         $feedback = $impFormat_entity->ADD();
         if($feedback['ok']) {
@@ -855,6 +867,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
             if($imp_formation['estado'] == 'vencido') continue;
             $impFormat_entity->setAttributes($imp_formation);
             $impFormat_entity->estado = 'vencido';
+            $impFormat_entity->fecha_vencimiento = date('Y-m-d');
             $feedback = $impFormat_entity->EDIT();
             if(!$feedback['ok']) {
                 if($feedback['code'] == 'QRY_KO') $feedback['code'] = 'IMPFRMT_EDTSTATE_KO';
@@ -884,7 +897,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         $simulacrum = array_pop($simulacrums);
         include_once './Model/ImpSim_Model.php';
         $impSim_entity = new ImpSim_Model();
-        $impSim_entity->setAttributes(array('simulacro_id' => $simulacrum['simulacro_id'], 'edificio_id' => $edificio_id, 'estado' => 'pendiente',
+        $impSim_entity->setAttributes(array('simulacro_id' => $simulacrum['simulacro_id'], 'edificio_id' => $edificio_id, 'estado' => 'pendiente', 'fecha_vencimiento' => default_data,
                                         'fecha_planificacion' => default_data, 'url_recurso' => default_url, 'destinatarios' => default_destinatarios));
         $feedback = $impSim_entity->ADD();
         if($feedback['ok']) {
@@ -960,6 +973,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
             if($imp_sim['estado'] == 'vencido') continue;
             $impSim_entity->setAttributes($imp_sim);
             $impSim_entity->estado = 'vencido';
+            $impSim_entity->fecha_vencimiento = date('Y-m-d');
             $feedback = $impSim_entity->EDIT();
             if(!$feedback['ok']) {
                 if($feedback['code'] == 'QRY_KO') $feedback['code'] = 'IMPSIM_EDTSTATE_KO';

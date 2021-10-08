@@ -587,7 +587,7 @@ $_POST = array('documento_id' => '2');
 $document_service = new Document_Service();
 $feedback = $document_service->addImpDocForm();
 $respTest = obtenerRespuesta('Document', 'ADD_IMPDOC_FORM', 'ACCION', 'El plan del documento no tiene asignaciones con edificios',
-    'BLDPLAN_ASSIGN_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // El plan del documento tiene asignaciones activas
@@ -595,7 +595,7 @@ $_POST = array('documento_id' => '5');
 $document_service = new Document_Service();
 $feedback = $document_service->addImpDocForm();
 $respTest = obtenerRespuesta('Document', 'ADD_IMPDOC_FORM', 'ACCION', 'El plan del documento tiene asignaciones',
-    'BLDPLAN_ASSIGN_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+    'BLDPLAN_ASSIGN_ACTIVES_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 

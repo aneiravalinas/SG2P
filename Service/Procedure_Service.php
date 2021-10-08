@@ -12,7 +12,7 @@ class Procedure_Service extends Procedure_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('edificio_procedimiento_id','edificio_id','procedimiento_id','estado','fecha_cumplimentacion','nombre_doc', 'nombre_edificio');
+        $this->atributos = array('edificio_procedimiento_id','edificio_id','procedimiento_id','estado','fecha_cumplimentacion','fecha_vencimiento','nombre_doc', 'nombre_edificio');
         $this->defProc_entity = new DefProc_Model();
         $this->impProc_entity = new ImpProc_Model();
         $this->fill_fields();
@@ -179,7 +179,7 @@ class Procedure_Service extends Procedure_Validation {
         }
 
         $procedure = $this->feedback['resource'];
-        $this->feedback = $this->searchBuildPlans($procedure['plan_id']);
+        $this->feedback = $this->searchActiveBuildPlans($procedure['plan_id']);
         if($this->feedback['ok']) {
             $this->feedback['procedure'] = $procedure;
         } else {
@@ -248,6 +248,14 @@ class Procedure_Service extends Procedure_Validation {
             return $feedback;
         }
 
+        $bld_plan = $feedback['resource'];
+        if($bld_plan['estado'] == 'vencido') {
+            $feedback['ok'] = false;
+            $feedback['code'] = 'BLDPLAN_EXPIRED';
+            $feedback['building'] = array('edificio_id' => $building['edificio_id']);
+            return $feedback;
+        }
+
         $feedback = $this->proc_building_actives_not_exist();
         if(!$feedback['ok']) {
             $feedback['building'] = array('edificio_id' => $building['edificio_id']);
@@ -268,7 +276,7 @@ class Procedure_Service extends Procedure_Validation {
             $def_dir_crated = true;
         }
 
-        $this->impProc_entity->setAttributes(array('edificio_id' => $this->edificio_id, 'nombre_doc' => default_doc,
+        $this->impProc_entity->setAttributes(array('edificio_id' => $this->edificio_id, 'nombre_doc' => default_doc, 'fecha_vencimiento' => default_data,
                                                     'fecha_cumplimentacion' => default_data, 'estado' => 'pendiente'));
         $feedback = $this->impProc_entity->ADD();
         if($feedback['ok']) {
@@ -302,10 +310,12 @@ class Procedure_Service extends Procedure_Validation {
         $imp_proc = $this->feedback['resource'];
         $path = $imp_proc['path'];
 
-        $this->feedback = $this->check_more_than_one_impprocs($imp_proc['edificio_id'], $imp_proc['procedimiento_id']);
-        if(!$this->feedback['ok']) {
-            $this->feedback['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
-            return $this->feedback;
+        if(es_resp_edificio()) {
+            $this->feedback = $this->check_more_than_one_impprocs($imp_proc['edificio_id'], $imp_proc['procedimiento_id']);
+            if(!$this->feedback['ok']) {
+                $this->feedback['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
+                return $this->feedback;
+            }
         }
 
         $this->feedback = $this->impProc_entity->DELETE();
@@ -385,6 +395,7 @@ class Procedure_Service extends Procedure_Validation {
 
         $imp_proc = $this->feedback['resource'];
         $this->impProc_entity->estado = 'vencido';
+        $this->impProc_entity->fecha_vencimiento = date('Y-m-d');
         $this->feedback = $this->impProc_entity->EDIT();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPPROC_EXPIRE_OK';
@@ -556,7 +567,7 @@ class Procedure_Service extends Procedure_Validation {
 
         include_once './Service/CheckState_Service.php';
         $checkState_service = new CheckState_Service();
-        $estado = $checkState_service->check_state($feedback['resource']);
+        $estado = $checkState_service->get_state_element($feedback['resource']);
         return array('ok' => true, 'estado' => $estado);
     }
 
@@ -571,20 +582,20 @@ class Procedure_Service extends Procedure_Validation {
         return $feedback;
     }
 
-    function searchBuildPlans($plan_id) {
+    function searchActiveBuildPlans($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $bldPlan_entity = new BuildPlan_Model();
         $bldPlan_entity->plan_id = $plan_id;
-        $feedback = $bldPlan_entity->searchByPlanID();
+        $feedback = $bldPlan_entity->searchActivesByPlanID();
         if($feedback['ok']) {
             if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'BLDPLAN_ASSIGN_NOT_EXST';
+                $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST';
             } else {
-                $feedback['code'] = 'BLDPLAN_ASSIGN_EXST';
+                $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
-            $feedback['code'] = 'BLDPLAN_KO';
+            $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_KO';
         }
 
         return $feedback;

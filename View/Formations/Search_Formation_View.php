@@ -48,7 +48,7 @@ class Search_Formation {
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="estado" class="i18n-state">Estado</label>
                                     <select id="estado" name="estado" class="form-select">
                                         <option value="" class="i18n-todos">Todos</option>
@@ -57,9 +57,13 @@ class Search_Formation {
                                         <option value="vencido" class="i18n-vencido">Vencido</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="fecha_planificacion" class="i18n-planning_date">Fecha Planificación</label>
-                                    <input type="date" class="form-control" id="fecha_planificacion" name="fecha_cumplimentacion"/>
+                                    <input type="date" class="form-control" id="fecha_planificacion" name="fecha_planificacion"/>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="fecha_vencimiento" class="i18n-date_expire">Fecha Vencimiento</label>
+                                    <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento"/>
                                 </div>
                             </div>
 

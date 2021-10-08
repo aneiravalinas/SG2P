@@ -33,15 +33,11 @@ class Search_Procedure {
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="cumplimentacion_id" class="i18n-cump_id">ID Cumplimentacion</label>
                                     <input type="text" class="form-control" id="cumplimentacion_id" name="edificio_procedimiento_id" onblur="check_CUMPLIMENTACION_ID_SEARCH();"/>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="fecha_cumplimentacion" class="i18n-date_comp">Fecha Cumplimentación</label>
-                                    <input type="date" class="form-control" id="fecha_cumplimentacion" name="fecha_cumplimentacion"/>
-                                </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="estado" class="i18n-state">Estado</label>
                                     <select id="estado" name="estado" class="form-select">
                                         <option value="" class="i18n-todos">Todos</option>
@@ -57,7 +53,17 @@ class Search_Procedure {
                                     <label for="nombre_doc_field" class="i18n-nombre_doc">Nombre Documento</label>
                                     <input type="text" class="form-control" id="nombre_doc_field" name="nombre_doc" onblur="check_NOMBRE_DOC_SEARCH();"/>
                                 </div>
+                            </div>
 
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_cumplimentacion" class="i18n-date_comp">Fecha Cumplimentación</label>
+                                    <input type="date" class="form-control" id="fecha_cumplimentacion" name="fecha_cumplimentacion"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_vencimiento" class="i18n-date_expire">Fecha Vencimiento</label>
+                                    <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento"/>
+                                </div>
                             </div>
 
                             <div class="row">

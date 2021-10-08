@@ -53,6 +53,12 @@ class ShowCurrent_ImpRoute {
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-planta_id">ID Planta</span>
                                             <span class="d-block att-value"><?php echo $this->imp_route['planta_id'] ?></span>
                                         </li>
+                                        <?php if($this->imp_route['fecha_vencimiento'] != default_data) :?>
+                                            <li>
+                                                <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-date_expire">Fecha Vencimiento</span>
+                                                <span class="d-block att-value"><?php echo date_format(date_create($this->imp_route['fecha_vencimiento']),'d/m/Y');?></span>
+                                            </li>
+                                        <?php endif; ?>
                                     </ul>
                                 </div>
                                 <div class="col-lg-5 pt-4 pt-lg-0">
@@ -61,20 +67,20 @@ class ShowCurrent_ImpRoute {
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-state">Estado</span>
                                             <span class="d-block att-value i18n-<?php echo $this->imp_route['estado'] ?> <?php echo $this->imp_route['estado'] ?>">PENDIENTE</span>
                                         </li>
+                                        <?php if($this->imp_route['fecha_cumplimentacion'] != default_data) :?>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-date_comp">Fecha Cumplimentación</span>
-                                            <?php if($this->imp_route['fecha_cumplimentacion'] != default_data) :?>
-                                                <span class="d-block att-value"><?php echo date_format(date_create($this->imp_route['fecha_cumplimentacion']),'d/m/Y');?></span>
-                                            <?php endif; ?>
+                                            <span class="d-block att-value"><?php echo date_format(date_create($this->imp_route['fecha_cumplimentacion']),'d/m/Y');?></span>
                                         </li>
+                                        <?php endif; ?>
+                                        <?php if($this->imp_route['nombre_doc'] != default_doc) :?>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-file_doc">Fichero de la Cumplimentación</span>
-                                            <?php if($this->imp_route['nombre_doc'] != default_doc) :?>
                                                 <a href="<?php echo $this->imp_route['path'] . '/' . $this->imp_route['nombre_doc']; ?>" class="d-block">
                                                     <span class="iconify icon-pdf" data-icon="bi:file-earmark-pdf-fill"></span><span class="name_doc"><?php echo $this->imp_route['nombre_doc'] ?></span>
                                                 </a>
-                                            <?php endif; ?>
                                         </li>
+                                        <?php endif; ?>
                                     </ul>
                                 </div>
                             </div>

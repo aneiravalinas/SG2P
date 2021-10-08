@@ -8,6 +8,7 @@ class Document_Validation extends Validator {
     var $documento_id;
     var $estado;
     var $fecha_cumplimentacion;
+    var $fecha_vencimiento;
     var $nombre_doc;
     var $nombre_edificio;
     var $buildings;
@@ -54,6 +55,13 @@ class Document_Validation extends Validator {
 
         if($this->fecha_cumplimentacion != '') {
             $validacion = $this->validar_FECHA_CUMPLIMENTACION();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->fecha_vencimiento != '') {
+            $validacion = $this->validar_FECHA_VENCIMIENTO();
             if(!$validacion['ok']) {
                 return $validacion;
             }
@@ -138,6 +146,14 @@ class Document_Validation extends Validator {
         }
 
         return $this->rellena_validation(true,'00000','IMP_DOC');
+    }
+
+    function validar_FECHA_VENCIMIENTO() {
+        if(!$this->validar_fecha($this->fecha_vencimiento)) {
+            return $this->rellena_validation(false, 'DATEEXPIRE_KO','IMP_DOC');
+        }
+
+        return $this->rellena_validation(true, '00000', 'IMP_DOC');
     }
 
     function validar_NOMBRE_EDIFICIO() {

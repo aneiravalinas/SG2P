@@ -9,11 +9,12 @@ class ImpProc_Model extends Abstract_Model {
     var $procedimiento_id;
     var $estado;
     var $fecha_cumplimentacion;
+    var $fecha_vencimiento;
     var $nombre_doc;
     var $nombre_edificio;
 
     function __construct() {
-        $this->atributos = array('edificio_procedimiento_id','edificio_id','procedimiento_id','estado','fecha_cumplimentacion','nombre_doc', 'nombre_edificio');
+        $this->atributos = array('edificio_procedimiento_id','edificio_id','procedimiento_id','estado','fecha_cumplimentacion','fecha_vencimiento','nombre_doc', 'nombre_edificio');
         $this->fill_fields();
     }
 
@@ -35,12 +36,14 @@ class ImpProc_Model extends Abstract_Model {
                 procedimiento_id,
                 estado,
                 fecha_cumplimentacion,
+                fecha_vencimiento,
                 nombre_doc
             ) VALUES (
                 '$this->edificio_id',
                 '$this->procedimiento_id',
                 '$this->estado',
                 '$this->fecha_cumplimentacion',
+                '$this->fecha_vencimiento',
                 '$this->nombre_doc'
             );
         ";
@@ -53,6 +56,7 @@ class ImpProc_Model extends Abstract_Model {
     function EDIT() {
         $this->query = "UPDATE EDIFICIO_PROCEDIMIENTO SET " .
             ($this->fecha_cumplimentacion == '' ? "" : "fecha_cumplimentacion = '$this->fecha_cumplimentacion', ") .
+            ($this->fecha_vencimiento == '' ? "" : "fecha_vencimiento = '$this->fecha_vencimiento', ") .
             ($this->nombre_doc == '' ? "" : "nombre_doc = '$this->nombre_doc', ") .
             ($this->estado == '' ? "" : "estado = '$this->estado'") .
             " WHERE edificio_procedimiento_id = '$this->edificio_procedimiento_id'";
@@ -84,6 +88,7 @@ class ImpProc_Model extends Abstract_Model {
                 EDIFICIO_PROCEDIMIENTO.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
                 fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
+                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
                 nombre_doc LIKE '%". $this->nombre_doc . "%' AND
                 EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%'
         ";
@@ -101,6 +106,7 @@ class ImpProc_Model extends Abstract_Model {
                 edificio_procedimiento_id LIKE '%" . $this->edificio_procedimiento_id . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
                 fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
+                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
                 nombre_doc LIKE '%" . $this->nombre_doc . "%'
         ";
 

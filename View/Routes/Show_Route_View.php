@@ -81,7 +81,7 @@ class Show_Route {
                     </div>
 
                     <div class="row justify-content-center">
-                        <div class="col-xl-9 flex-wrap d-flex justify-content-end" id="search_add">
+                        <div class="col-xl-11 flex-wrap d-flex justify-content-end" id="search_add">
                             <div>
                                 <a type="button" onclick="
                                     crearform('formenviar','post');
@@ -106,7 +106,7 @@ class Show_Route {
                     </div>
 
                     <div class="row justify-content-center">
-                        <div class="col-xl-9 table-responsive" id="col-table">
+                        <div class="col-xl-11 table-responsive" id="col-table">
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
@@ -115,6 +115,7 @@ class Show_Route {
                                     <th scope="col" class="i18n-state text-center">Estado</th>
                                     <th scope="col" class="i18n-nombre_doc text-center">Nombre Documento</th>
                                     <th scope="col" class="i18n-date_comp text-center">Fecha Cumplimentación</th>
+                                    <th scope="col" class="i18n-date_expire text-center">Fecha Vencimiento</th>
                                     <th scope="col"></th>
                                 </tr>
                                 </thead>
@@ -126,6 +127,7 @@ class Show_Route {
                                         <td class="text-center i18n-<?php echo $imp_route['estado'] ?> <?php echo $imp_route['estado'] ?>"></td>
                                         <td class="text-center"><?php if($imp_route['nombre_doc'] != default_doc) echo $imp_route['nombre_doc']; ?></td>
                                         <td class="text-center"><?php if($imp_route['fecha_cumplimentacion'] != default_data) echo date_format(date_create($imp_route['fecha_cumplimentacion']),'d/m/Y');?></td>
+                                        <td class="text-center"><?php if($imp_route['fecha_vencimiento'] != default_data) echo date_format(date_create($imp_route['fecha_vencimiento']),'d/m/Y');?></td>
                                         <td class="text-center">
                                             <div class="btn-group px-md-2">
                                                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
@@ -176,7 +178,7 @@ class Show_Route {
                                 <?php endforeach; ?>
                                 <?php if(empty($this->imp_routes)) :?>
                                     <tr>
-                                        <td colspan="6" class="text-center">
+                                        <td colspan="7" class="text-center">
                                             <span class="i18n-imp-routes-empty">No se han encontrado cumplimentaciones de la Ruta</span>
                                         </td>
                                     </tr>

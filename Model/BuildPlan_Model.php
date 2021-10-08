@@ -8,12 +8,13 @@ class BuildPlan_Model extends Abstract_Model {
     var $plan_id;
     var $fecha_asignacion;
     var $fecha_cumplimentacion;
+    var $fecha_vencimiento;
     var $estado;
     var $nombre_edificio;
     var $nombre_plan;
 
     function __construct() {
-        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_cumplimentacion','estado','nombre_edificio','nombre_plan');
+        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_cumplimentacion', 'fecha_vencimiento', 'estado','nombre_edificio','nombre_plan');
         $this->fill_fields();
     }
 
@@ -52,6 +53,7 @@ class BuildPlan_Model extends Abstract_Model {
     function EDIT() {
         $this->query = "UPDATE EDIFICIO_PLAN SET " .
             ($this->fecha_cumplimentacion == '' ? "" : "fecha_cumplimentacion = '$this->fecha_cumplimentacion', ") .
+            ($this->fecha_vencimiento == '' ? "" : "fecha_vencimiento = '$this->fecha_vencimiento', ") .
             ($this->estado == '' ? "" : "estado = '$this->estado'") .
             " WHERE 
                 edificio_id = '$this->edificio_id' AND
@@ -84,6 +86,7 @@ class BuildPlan_Model extends Abstract_Model {
                   estado LIKE '%" . $this->estado . "%' AND
                   fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
                   fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
+                  fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
                   EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%'
             ORDER BY estado, edificio_id
         ";
@@ -156,6 +159,7 @@ class BuildPlan_Model extends Abstract_Model {
                   estado LIKE '%" . $this->estado . "%' AND
                   fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
                   fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
+                  fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
                   EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
                   PLAN.nombre LIKE '%" . $this->nombre_plan . "%'
             ORDER BY estado, edificio_id, plan_id
@@ -178,6 +182,7 @@ class BuildPlan_Model extends Abstract_Model {
                   estado LIKE '%" . $this->estado . "%' AND
                   fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
                   fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
+                  fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
                   EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
                   PLAN.nombre LIKE '%" . $this->nombre_plan . "%' AND
                   EDIFICIO.username = '$username'

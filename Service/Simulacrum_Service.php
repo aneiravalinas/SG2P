@@ -12,7 +12,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('edificio_simulacro_id','simulacro_id','edificio_id','estado','fecha_planificacion','url_recurso','destinatarios','nombre_edificio');
+        $this->atributos = array('edificio_simulacro_id','simulacro_id','edificio_id','estado','fecha_planificacion','fecha_vencimiento','url_recurso','destinatarios','nombre_edificio');
         $this->defSim_entity = new DefSim_Model();
         $this->impSim_entity = new ImpSim_Model();
         $this->fill_fields();
@@ -162,7 +162,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         }
 
         $simulacrum = $this->feedback['resource'];
-        $this->feedback = $this->searchBuildPlans($simulacrum['plan_id']);
+        $this->feedback = $this->searchActiveBuildPlans($simulacrum['plan_id']);
         if($this->feedback['ok']) {
             $this->feedback['simulacrum'] = $simulacrum;
         } else {
@@ -231,8 +231,16 @@ class Simulacrum_Service extends Simulacrum_Validation {
             return $feedback;
         }
 
+        $bld_plan = $feedback['resource'];
+        if($bld_plan['estado'] == 'vencido') {
+            $feedback['ok'] = false;
+            $feedback['code'] = 'BLDPLAN_EXPIRED';
+            $feedback['building'] = array('edificio_id' => $building['edificio_id']);
+            return $feedback;
+        }
+
         $this->impSim_entity->setAttributes(array('edificio_id' => $this->edificio_id, 'fecha_planificacion' => default_data, 'destinatarios' => default_destinatarios,
-                                                    'url_recurso' => default_url, 'estado' => 'pendiente'));
+                                                    'fecha_vencimiento' => default_data, 'url_recurso' => default_url, 'estado' => 'pendiente'));
         $feedback = $this->impSim_entity->ADD();
         if($feedback['ok']) {
             $edificio_simulacro_id = $this->impSim_entity->edificio_simulacro_id;
@@ -250,6 +258,134 @@ class Simulacrum_Service extends Simulacrum_Validation {
 
         $feedback['building'] = array('edificio_id' => $building['edificio_id']);
         return $feedback;
+    }
+
+    function DELETE() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $imp_sim = $this->feedback['resource'];
+        if(es_resp_edificio()) {
+            $this->feedback = $this->check_more_than_one_impsims($imp_sim['edificio_id'], $imp_sim['simulacro_id']);
+            if(!$this->feedback['ok']) {
+                $this->feedback['return'] = array('edificio_id' => $imp_sim['edificio_id'], 'simulacro_id' => $imp_sim['simulacro_id']);
+                return $this->feedback;
+            }
+        }
+
+        $this->feedback = $this->impSim_entity->DELETE();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'IMPSIM_DEL_OK';
+            $this->update_plan_state($imp_sim['edificio_id'], $imp_sim['plan_id']);
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPSIM_DEL_KO';
+        }
+
+        $this->feedback['return'] = array('edificio_id' => $imp_sim['edificio_id'], 'simulacro_id' => $imp_sim['simulacro_id']);
+        return $this->feedback;
+    }
+
+    function expire() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $imp_sim = $this->feedback['resource'];
+        $this->impSim_entity->estado = 'vencido';
+        $this->impSim_entity->fecha_vencimiento = date('Y-m-d');
+        $this->feedback = $this->impSim_entity->EDIT();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'IMPSIM_EXPIRE_OK';
+            $this->update_plan_state($imp_sim['edificio_id'], $imp_sim['plan_id']);
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPSIM_EXPIRE_KO';
+        }
+
+        $this->feedback['return'] = array('edificio_id' => $imp_sim['edificio_id'], 'simulacro_id' => $imp_sim['simulacro_id']);
+        return $this->feedback;
+    }
+
+    function implement() {
+        $this->feedback = $this->seek();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $imp_sim = $this->feedback['resource'];
+        if($imp_sim['estado'] == 'vencido') {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'COMPL_EXPIRED';
+            $this->feedback['return'] = array('edificio_id' => $imp_sim['edificio_id'], 'simulacro_id' => $imp_sim['simulacro_id']);
+            return $this->feedback;
+        }
+
+        $validation = $this->validar_atributos_implement();
+        if(!$validation['ok']) {
+            $validation['return'] = array('edificio_id' => $imp_sim['edificio_id'], 'simulacro_id' => $imp_sim['simulacro_id']);
+            return $validation;
+        }
+
+        $this->impSim_entity->estado = 'cumplimentado';
+        $this->feedback = $this->impSim_entity->EDIT();
+        if($this->feedback['ok']) {
+            $this->feedback['code'] = 'IMPSIM_IMPL_OK';
+            $this->update_plan_state($imp_sim['edificio_id'], $imp_sim['plan_id']);
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPSIM_IMPL_KO';
+        }
+
+        $this->feedback['return'] = array('edificio_id' => $imp_sim['edificio_id'], 'simulacro_id' => $imp_sim['simulacro_id']);
+        return $this->feedback;
+    }
+
+    function seek() {
+        $validation = $this->validar_EDIFICIO_SIMULACRO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByImpSimID();
+        if($this->feedback['ok']) {
+            $imp_sim = $this->feedback['resource'];
+            if(es_resp_edificio() && $imp_sim['username'] != getUser()) {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'BLD_FRBD';
+                unset($this->feedback['resource']);
+                return $this->feedback;
+            }
+
+            $this->feedback['code'] = 'IMPSIM_SEEK_OK';
+        } else if($this->feedback['code'] == 'IMPSIMID_KO') {
+            $this->feedback['code'] = 'IMPSIM_SEEK_KO';
+        }
+
+        return $this->feedback;
+    }
+
+    function seekPortalImpSim() {
+        $validation = $this->validar_EDIFICIO_SIMULACRO_ID();
+        if(!$validation['ok']) {
+            return $validation;
+        }
+
+        $this->feedback = $this->seekByImpSimID();
+        if($this->feedback['ok']) {
+            $imp_sim = $this->feedback['resource'];
+            if($imp_sim['estado'] == 'vencido') {
+                $this->feedback['ok'] = false;
+                $this->feedback['code'] = 'IMPSIMID_NOT_EXST';
+                unset($this->feedback['resource']);
+            } else {
+                $this->feedback['code'] = 'PRTL_IMPSIM_SEEK_OK';
+            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'PRTL_IMPSIM_SEEK_KO';
+        }
+
+        return $this->feedback;
     }
 
     function searchSimAndBuilding() {
@@ -343,6 +479,22 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $feedback;
     }
 
+    function seekByImpSimID() {
+        $feedback = $this->impSim_entity->seek();
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'IMPSIMID_NOT_EXST';
+            } else {
+                $feedback['code'] = 'IMPSIMID_EXST';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'IMPSIMID_KO';
+        }
+
+        return $feedback;
+    }
+
     function get_simulacrum_state() {
         $feedback = $this->search_all_impsims();
         if(!$feedback['ok']) {
@@ -351,7 +503,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
 
         include_once './Service/CheckState_Service.php';
         $checkState_service = new CheckState_Service();
-        $estado = $checkState_service->check_state($feedback['resource']);
+        $estado = $checkState_service->get_state_element($feedback['resource']);
         return array('ok' => true, 'estado' => $estado);
     }
 
@@ -366,20 +518,20 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $feedback;
     }
 
-    function searchBuildPlans($plan_id) {
+    function searchActiveBuildPlans($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $bldPlan_entity = new BuildPlan_Model();
         $bldPlan_entity->plan_id = $plan_id;
-        $feedback = $bldPlan_entity->searchByPlanID();
+        $feedback = $bldPlan_entity->searchActivesByPlanID();
         if($feedback['ok']) {
             if($feedback['code'] == 'QRY_EMPT') {
                 $feedback['ok'] = false;
-                $feedback['code'] = 'BLDPLAN_ASSIGN_NOT_EXST';
+                $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_NOT_EXST';
             } else {
-                $feedback['code'] = 'BLDPLAN_ASSIGN_EXST';
+                $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_EXST';
             }
         } else if($feedback['code'] == 'QRY_KO') {
-            $feedback['code'] = 'BLDPLAN_KO';
+            $feedback['code'] = 'BLDPLAN_ASSIGN_ACTIVES_KO';
         }
 
         return $feedback;
@@ -389,6 +541,23 @@ class Simulacrum_Service extends Simulacrum_Validation {
         include_once './Service/CheckState_Service.php';
         $checkState_service = new CheckState_Service($edificio_id, $plan_id);
         $checkState_service->update_plan_state();
+    }
+
+    function check_more_than_one_impsims($edificio_id, $simulacro_id) {
+        $this->impSim_entity->setAttributes(array('edificio_id' => $edificio_id, 'simulacro_id' => $simulacro_id));
+        $feedback = $this->impSim_entity->searchSimsBuildings();
+        if($feedback['ok']) {
+            if(count($feedback['resource']) <= 1) {
+                $feedback['ok'] = false;
+                $feedback['code'] = 'IMPSIM_UNIQ';
+            } else {
+                $feedback['code'] = 'IMPSIM_NOT_UNIQ';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'IMPSIM_SEARCH_KO';
+        }
+
+        return $feedback;
     }
 
 }

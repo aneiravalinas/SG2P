@@ -58,12 +58,12 @@ class Portal_ShowCurrent_Plan {
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-date_assign">Fecha Asignación</span>
                                             <span class="d-block att-value"><?php echo date_format(date_create($this->build_plan['fecha_asignacion']), 'd/m/Y') ?></span>
                                         </li>
+                                        <?php if($this->build_plan['fecha_cumplimentacion'] != default_data): ?>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-date_comp">Fecha Implementación</span>
-                                            <?php if($this->build_plan['fecha_cumplimentacion'] != default_data): ?>
-                                                <span class="d-block att-value"><?php echo date_format(date_create($this->build_plan['fecha_cumplimentacion']), 'd/m/Y') ?></span>
-                                            <?php endif; ?>
+                                            <span class="d-block att-value"><?php echo date_format(date_create($this->build_plan['fecha_cumplimentacion']), 'd/m/Y') ?></span>
                                         </li>
+                                        <?php endif; ?>
                                     </ul>
                                 </div>
                                 <div class="col-lg-8 pt-4 pt-lg-0">

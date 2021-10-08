@@ -565,6 +565,7 @@ arrayEN = {
         // ADD
         'IMPDOC_ADD_OK' : 'The document completions have been added correctly',
         'IMPDOC_BLD_NOT_OWNED' : 'You do not have the necessary privileges to add completions in the indicated building',
+        'BLDPLAN_EXPIRED' : 'The action cannot be performed. The allocation between the plan and the building is expired',
 
         // SEEK
         'IMPDOC_SEEK_OK' : 'The details of the correct completion of the document have been consulted',
@@ -795,6 +796,34 @@ arrayEN = {
         // ADD
         'IMPSIM_ADD_OK' : 'The completion of the simulacrum has been recorded correctly',
 
+        // DELETE
+        'IMPSIM_DEL_OK' : 'The completion of the simulacrum has been successfully removed',
+
+        // SEEK
+        'IMPSIM_SEEK_OK' : 'The details of completing the simulacrum have been consulted correctly',
+        'IMPSIM_SEEK_KO' : 'Error when consulting the details of the completion of the simulacrum',
+
+        // EXPIRE
+        'IMPSIM_EXPIRE_OK' : 'The completion of the simulacrum has been successfully completed',
+        'IMPSIM_EXPIRE_KO' : 'Error when completing the simulacrum',
+
+        // IMPLEMENT
+        'IMPSIM_IMPL_OK' : 'The completion of the simulacrum has been completed successfully',
+        'IMPSIM_IMPL_KO' : 'Error completing the completion of the simulacrum',
+
+        // PORTAL SEEK
+        'PRTL_IMPSIM_SEEK_OK' : 'The details of completing the simulacrum of the portal have been consulted correctly',
+        'PRTL_IMPSIM_SEEK_KO' : 'Error when consulting the details of the completion of the simulacrum of the portal',
+
+        // Consulta por ID de Cumplimentación
+        'IMPSIMID_NOT_EXST' : 'The id of the simulacrum completion does not exist',
+        'IMPSIMID_EXST' : 'The id of the simulacrum completion exists',
+        'IMPSIMID_KO' : 'Error when querying for the id of the simulacrum completion',
+
+        // Consulta de cumplimentación única
+        'IMPSIM_UNIQ' : 'Completion cannot be removed. There must always be at least one simulacrum completion in the building',
+        'IMPSIM_NOT_UNIQ' : 'Completion is not unique',
+
         // Detalles del simulacro del portal
         'PRTL_IMPSIM_SEARCH_OK' : 'The details of the simulacrum of the portal have been consulted correctly',
         'PRTL_IMPSIM_SEARCH_KO' : 'Failed to check the details of the simulacrum of the portal',
@@ -993,6 +1022,7 @@ arrayEN = {
             // Fecha implementación
             'BLDPLAN_DATECOMP_KO' : 'The completion date is not in a valid format',
 
+
             // Estado asignación entre Edificio y Plan
             'BLDPLAN_STATE_EMPT' : 'Assignment status cannot be empty',
             'BLDPLAN_STATE_KO' : 'The invalid status. Valid statuses are Pending, Completed, and Expired',
@@ -1015,6 +1045,9 @@ arrayEN = {
             'PLANNING_DATE_EMPT' : 'The planning date cannot be empty',
             'PLANNING_DATE_KO' : 'The entered planning date is in the wrong format',
             'PLANNING_DATE_PAST' : 'The planning date entered is a past date',
+
+            // Fecha Vencimiento
+            'DATEEXPIRE_KO' : 'The expiration date entered is in the wrong format',
 
             // Destinatarios
             'RECIPIENTS_EMPT' : 'Recipients field cannot be empty',
@@ -1225,6 +1258,7 @@ arrayEN = {
         'i18n-expire_all' : 'Expire ALL',
         'i18n-expireAll-bldplan-confirm' : 'Are you sure you want to expire ALL assignments in this Plan? The change will not be reversible',
         'i18n-nombre_edificio' : 'Building Name',
+        'i18n-date_expire' : 'Expiration Date',
 
         // PLANS
         'i18n-plan' : 'Plan',
@@ -1285,11 +1319,15 @@ arrayEN = {
         'i18n-url_recurso' : 'Resource URL',
         'i18n-destinatarios' : 'Recipients',
         'i18n-enlace_url' : 'Access the Resource',
+        'i18n-cump-form' : 'Complete Formation',
 
         // IMP_SIMS
         'i18n-impsim' : 'Simulacrum Completions',
         'i18n-imp-sims-empty' : 'No completions of the simulacrum have been found',
         'i18n-info_sim' : 'Simulacrum Information',
+        'i18n-del-imp-sim-confirm' : 'Are you sure you want to remove the completion of this simulacrum? The change will not be reversible',
+        'i18n-expire-impsim-confirm' : 'Are you sure you want to beat the completion of this simulacrum? The change will not be reversible',
+        'i18n-cump-sim' : 'Complete Simulacrum',
 
         // MODAL
             // Campos Modal
