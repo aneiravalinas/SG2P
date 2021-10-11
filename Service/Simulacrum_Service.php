@@ -12,7 +12,8 @@ class Simulacrum_Service extends Simulacrum_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('edificio_simulacro_id','simulacro_id','edificio_id','estado','fecha_planificacion','fecha_vencimiento','url_recurso','destinatarios','nombre_edificio');
+        $this->atributos = array('edificio_simulacro_id','simulacro_id','edificio_id','estado','fecha_planificacion', 'fecha_planificacion_inicio','fecha_planificacion_fin',
+            'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'url_recurso','destinatarios','nombre_edificio');
         $this->defSim_entity = new DefSim_Model();
         $this->impSim_entity = new ImpSim_Model();
         $this->fill_fields();
@@ -150,6 +151,22 @@ class Simulacrum_Service extends Simulacrum_Validation {
             if($this->feedback['code'] == 'QRY_KO') {
                 $this->feedback['code'] = 'PRTL_IMPSIM_SEARCH_KO';
             }
+        }
+
+        return $this->feedback;
+    }
+
+    function searchPortalSimulacrumForm() {
+        $this->feedback = $this->searchSimAndBuilding();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $bld_plan = $this->feedback['resource'];
+        if($bld_plan['estado'] == 'vencido') {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'BLDSIM_NOT_EXST';
+            unset($this->feedback['resource'], $this->feedback['simulacrum'], $this->feedback['building']);
         }
 
         return $this->feedback;

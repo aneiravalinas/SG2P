@@ -1062,6 +1062,24 @@ arrayEN = {
             'IMPFORMAT_ID_EMPT' : 'The formation completion id cannot be empty',
             'IMPFORMAT_ID_NOT_NUMERIC' : 'The id of the completion of the formation must be numeric',
 
+            // Fecha Planificación Inicial
+            'START_PLANNING_DATE_KO' : 'The initial planning date is in an incorrect format',
+
+            // Fecha Planificación Final
+            'END_PLANNING_DATE_KO' : 'Final planning date is in the wrong format',
+
+            // Fecha Vencimiento Inicial
+            'START_DATEEXPIRE_KO' : 'The initial expire date is in the wrong format',
+
+            // Fecha Vencimiento Final
+            'END_DATEEXPIRE_KO' : 'The final expire date is in the wrong format',
+
+            // Fecha Cumplimentación Inicial
+            'START_DATECOMP_KO' : 'The initial completion date is in the wrong format',
+
+            // Fecha Cumplimentación Final
+            'END_DATECOMP_KO' : 'The final completion date is in an incorrect format',
+
 
 
     // INTERFACE
@@ -1307,6 +1325,8 @@ arrayEN = {
         'i18n-expire-improute-confirm' : 'Are you sure you want to beat the completion of this route? The change will not be reversible',
         'i18n-cump-route' : 'Complete Route',
         'i18n-del-imp-route-confirm' : 'Are you sure you want to remove the completion of this route? The change will not be reversible',
+        'i18n-start_date_comp' : 'Initial Completion Date',
+        'i18n-end_date_comp' : 'Final Completion Date',
 
         // IMP_FORMATS
         'i18n-impformats' : 'Formation Completions',
@@ -1328,6 +1348,10 @@ arrayEN = {
         'i18n-del-imp-sim-confirm' : 'Are you sure you want to remove the completion of this simulacrum? The change will not be reversible',
         'i18n-expire-impsim-confirm' : 'Are you sure you want to beat the completion of this simulacrum? The change will not be reversible',
         'i18n-cump-sim' : 'Complete Simulacrum',
+        'i18n-start_planning_date' : 'Initial Planning Date',
+        'i18n-end_planning_date' : 'Final Planning Date',
+        'i18n-start_date_expire' : 'Initial Expiration Date',
+        'i18n-end_date_expire' : 'Final Expiration Date',
 
         // MODAL
             // Campos Modal

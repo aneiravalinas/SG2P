@@ -1061,6 +1061,24 @@ arrayGA = {
             'IMPFORMAT_ID_EMPT' : 'O id da cumplimentación da formación non pode ser vacío',
             'IMPFORMAT_ID_NOT_NUMERIC' : 'O id da cumplimentación da formación debe ser numérico',
 
+            // Fecha Planificación Inicial
+            'START_PLANNING_DATE_KO' : 'A data de planificación inicial ten un formato incorrecto',
+
+            // Fecha Planificación Final
+            'END_PLANNING_DATE_KO' : 'A data de planificación final ten un formato incorrecto',
+
+            // Fecha Vencimiento Inicial
+            'START_DATEEXPIRE_KO' : 'A data de vencemento inicial ten un formato incorrecto',
+
+            // Fecha Vencimiento Final
+            'END_DATEEXPIRE_KO' : 'A data de vencemento final ten un formato incorrecto',
+
+            // Fecha Cumplimentación Inicial
+            'START_DATECOMP_KO' : 'A data de cumplimentación inicial ten un formato incorrecto',
+
+            // Fecha Cumplimentación Final
+            'END_DATECOMP_KO' : 'A data de cumplimentación final ten un formato incorrecto',
+
 
 
 
@@ -1307,6 +1325,8 @@ arrayGA = {
         'i18n-expire-improute-confirm' : '¿Está seguro de que desexa vencer a cumplimentación desta ruta? O cambio non será reversible',
         'i18n-cump-route' : 'Cumplimentar Ruta',
         'i18n-del-imp-route-confirm' : '¿Está seguro que desexa eliminar a cumplimentación desta ruta? O cambio non será reversible',
+        'i18n-start_date_comp' : 'Data Cumplimentación Inicial',
+        'i18n-end_date_comp' : 'Data Cumplimentación Final',
 
         // IMP_FORMATS
         'i18n-impformats' : 'Cumplimentacións da Formación',
@@ -1328,6 +1348,10 @@ arrayGA = {
         'i18n-del-imp-sim-confirm' : '¿Está seguro de que desexa eliminar a cumplimentación deste simulacro? O cambio non será reversible',
         'i18n-expire-impsim-confirm' : '¿Está seguro de que desexa vencer a cumplimentación deste simulacro? O cambio non será reversible',
         'i18n-cump-sim' : 'Cumplimentar Simulacro',
+        'i18n-start_planning_date' : 'Data Planificación Inicial',
+        'i18n-end_planning_date' : 'Data Planificación Final',
+        'i18n-start_date_expire' : 'Data Vencemento Inicial',
+        'i18n-end_date_expire' : 'Data Vencemento Final',
 
         // MODAL
             // Campos Modal

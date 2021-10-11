@@ -12,7 +12,8 @@ class Formation_Service extends Formation_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('edificio_formacion_id', 'edificio_id', 'formacion_id', 'estado', 'fecha_planificacion', 'fecha_vencimiento', 'url_recurso', 'destinatarios', 'nombre_edificio');
+        $this->atributos = array('edificio_formacion_id', 'edificio_id', 'formacion_id', 'estado', 'fecha_planificacion', 'fecha_planificacion_inicio', 'fecha_planificacion_fin',
+            'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'url_recurso', 'destinatarios', 'nombre_edificio');
         $this->defFormat_entity = new DefFormat_Model();
         $this->impFormat_entity = new ImpFormat_Model();
         $this->fill_fields();
@@ -184,6 +185,22 @@ class Formation_Service extends Formation_Validation {
         if(es_resp_edificio() && $building['username'] != getUser()) {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'BLD_FRBD';
+            unset($this->feedback['resource'], $this->feedback['formation'], $this->feedback['building']);
+        }
+
+        return $this->feedback;
+    }
+
+    function searchPortalFormationForm() {
+        $this->feedback = $this->searchFormatAndBuilding();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
+        $bld_plan = $this->feedback['resource'];
+        if($bld_plan['estado'] == 'vencido') {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'BLDFORMAT_NOT_EXST';
             unset($this->feedback['resource'], $this->feedback['formation'], $this->feedback['building']);
         }
 

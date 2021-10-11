@@ -153,16 +153,44 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_IMPLEMENTS', 'ESTADO', 'Estado 
     'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
-// Fecha de cumplimentación inválida
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992-12/25');
+// Fecha de cumplimentación inicial inválida
+$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992-12/25');
 $document_service = new Document_Service();
 $feedback = $document_service->searchImplements();
-$respTest = obtenerRespuesta('Document', 'SEARCH_IMPLEMENTS', 'FECHA_CUMPLIMENTACION', 'Fecha de cumplimentación inválida',
-    'DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'SEARCH_IMPLEMENTS', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha de cumplimentación inicial inválida',
+    'START_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testDocument, $respTest);
+
+// Fecha de cumplimentación final inválida
+$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992-12/25');
+$document_service = new Document_Service();
+$feedback = $document_service->searchImplements();
+$respTest = obtenerRespuesta('Document', 'SEARCH_IMPLEMENTS', 'FECHA_CUMPLIMENTACION_FIN', 'Fecha de cumplimentación final inválida',
+    'END_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testDocument, $respTest);
+
+// Fecha de vencimiento inicial inválida
+$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992-12/25');
+$document_service = new Document_Service();
+$feedback = $document_service->searchImplements();
+$respTest = obtenerRespuesta('Document', 'SEARCH_IMPLEMENTS', 'FECHA_VENCIMIENTO_INICIO', 'Fecha de vencimiento inicial inválida',
+    'START_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testDocument, $respTest);
+
+// Fecha de vencimiento final inválida
+$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992-12/25');
+$document_service = new Document_Service();
+$feedback = $document_service->searchImplements();
+$respTest = obtenerRespuesta('Document', 'SEARCH_IMPLEMENTS', 'FECHA_VENCIMIENTO_FINAL', 'Fecha de vencimiento final inválida',
+    'END_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // Nombre de Documento largo (más de 50 caracteres)
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
                 'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $document_service = new Document_Service();
 $feedback = $document_service->searchImplements();
@@ -171,7 +199,8 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_IMPLEMENTS', 'NOMBRE_DOC', 'Nom
 array_push($testDocument, $respTest);
 
 // Formato nombre documento incorrecto
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf.pdf');
 $document_service = new Document_Service();
 $feedback = $document_service->searchImplements();
@@ -180,7 +209,8 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_IMPLEMENTS', 'NOMBRE_DOC', 'For
 array_push($testDocument, $respTest);
 
 // ID Edificio no numérico
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf', 'edificio_id' => 'aaa');
 $document_service = new Document_Service();
 $feedback = $document_service->searchImplements();
@@ -189,7 +219,8 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_IMPLEMENTS', 'EDIFICIO_ID', 'ID
 array_push($testDocument, $respTest);
 
 // Nombre de Edificio corto (menos de 3 caracteres)
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'aa');
 $document_service = new Document_Service();
 $feedback = $document_service->searchImplements();
@@ -198,7 +229,8 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_IMPLEMENTS', 'NOMBRE_EDIFICIO',
 array_push($testDocument, $respTest);
 
 // Nombre de Edificio largo (más de 60 caracteres)
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $document_service = new Document_Service();
 $feedback = $document_service->searchImplements();
@@ -207,7 +239,8 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_IMPLEMENTS', 'NOMBRE_EDIFICIO',
 array_push($testDocument, $respTest);
 
 // Nombre de Edificio con caracteres no permitidos
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'Nombre de Ed^ficio');
 $document_service = new Document_Service();
 $feedback = $document_service->searchImplements();
@@ -220,7 +253,8 @@ array_push($testDocument, $respTest);
  */
 
 // Búsqueda de cumplimentaciones Ok
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'Nombre de Edificio');
 $document_service = new Document_Service();
 $feedback = $document_service->searchImplements();
@@ -325,16 +359,44 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'ESTADO', 'Estado de
     'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
-// Fecha de cumplimentación inválida
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992-12/25');
+// Fecha de cumplimentación inicial inválida
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992-12/25');
 $document_service = new Document_Service();
 $feedback = $document_service->searchDocument();
-$respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'FECHA_CUMPLIMENTACION', 'Fecha de cumplimentación inválida',
-    'DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha de cumplimentación inicial inválida',
+    'START_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testDocument, $respTest);
+
+// Fecha de cumplimentacion final inválida
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+        'fecha_cumplimentacion_fin' => '1992/12-25');
+$document_service = new Document_Service();
+$feedback = $document_service->searchDocument();
+$respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'FECHA_CUMPLIMENTACION_FIN', 'Fecha de cumplimentacion final inválida',
+    'END_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testDocument, $respTest);
+
+// Fecha de vencimiento inicial inválida
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12-25');
+$document_service = new Document_Service();
+$feedback = $document_service->searchDocument();
+$respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'FECHA_VENCIMIENTO_INICIO', 'Fecha de vencimiento inicial inválida',
+    'START_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testDocument, $respTest);
+
+// Fecha de vencimiento final inválida
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_final' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12-25');
+$document_service = new Document_Service();
+$feedback = $document_service->searchDocument();
+$respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'FECHA_VENCIMIENTO_FIN', 'Fecha de vencimiento final inválida',
+    'END_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // Nombre de Documento largo (más de 50 caracteres)
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $document_service = new Document_Service();
 $feedback = $document_service->searchDocument();
@@ -343,7 +405,8 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'NOMBRE_DOC', 'Nombr
 array_push($testDocument, $respTest);
 
 // Formato nombre documento incorrecto
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf.pdf');
 $document_service = new Document_Service();
 $feedback = $document_service->searchDocument();
@@ -356,7 +419,8 @@ array_push($testDocument, $respTest);
  */
 
 // Búsqueda de Cumplimentaciones Ok
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf');
 $document_service = new Document_Service();
 $feedback = $document_service->searchDocument();

@@ -8,7 +8,11 @@ class Route_Validation extends Validator {
     var $ruta_id;
     var $estado;
     var $fecha_cumplimentacion;
+    var $fecha_cumplimentacion_inicio;
+    var $fecha_cumplimentacion_fin;
     var $fecha_vencimiento;
+    var $fecha_vencimiento_inicio;
+    var $fecha_vencimiento_fin;
     var $nombre_doc;
     var $nombre_planta;
     var $nombre_edificio;
@@ -24,13 +28,6 @@ class Route_Validation extends Validator {
         $validacion = $this->rellena_validation(true, '00000', 'IMP_ROUTE');
         if($this->planta_id != '') {
             $validacion = $this->validar_PLANTA_ID();
-            if(!$validacion['ok']) {
-                return $validacion;
-            }
-        }
-
-        if($this->fecha_cumplimentacion != '') {
-            $validacion = $this->validar_FECHA_CUMPLIMENTACION();
             if(!$validacion['ok']) {
                 return $validacion;
             }
@@ -56,8 +53,29 @@ class Route_Validation extends Validator {
             }
         }
 
-        if($this->fecha_vencimiento != '') {
-            $validacion = $this->validar_FECHA_VENCIMIENTO();
+        if($this->fecha_cumplimentacion_inicio != '') {
+            $validacion = $this->validar_FECHA_CUMPLIMENTACION_INICIO();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->fecha_cumplimentacion_fin != '') {
+            $validacion = $this->validar_FECHA_CUMPLIMENTACION_FIN();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->fecha_vencimiento_inicio != '') {
+            $validacion = $this->validar_FECHA_VENCIMIENTO_INICIO();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->fecha_vencimiento_fin != '') {
+            $validacion = $this->validar_FECHA_VENCIMIENTO_FIN();
             if(!$validacion['ok']) {
                 return $validacion;
             }
@@ -184,17 +202,33 @@ class Route_Validation extends Validator {
         return $this->rellena_validation(true,'00000','IMP_ROUTE');
     }
 
-    function validar_FECHA_CUMPLIMENTACION() {
-        if(!$this->validar_fecha($this->fecha_cumplimentacion)) {
-            return $this->rellena_validation(false,'DATECOMP_KO','IMP_ROUTE');
+    function validar_FECHA_CUMPLIMENTACION_INICIO() {
+        if(!$this->validar_fecha($this->fecha_cumplimentacion_inicio)) {
+            return $this->rellena_validation(false, 'START_DATECOMP_KO', 'IMP_ROUTE');
         }
 
-        return $this->rellena_validation(true,'00000','IMP_ROUTE');
+        return $this->rellena_validation(true, '00000', 'IMP_ROUTE');
     }
 
-    function validar_FECHA_VENCIMIENTO() {
-        if(!$this->validar_fecha($this->fecha_vencimiento)) {
-            return $this->rellena_validation(false, 'DATEEXPIRE_KO','IMP_ROUTE');
+    function validar_FECHA_CUMPLIMENTACION_FIN() {
+        if(!$this->validar_fecha($this->fecha_cumplimentacion_fin)) {
+            return $this->rellena_validation(false, 'END_DATECOMP_KO', 'IMP_ROUTE');
+        }
+
+        return $this->rellena_validation(true, '00000', 'IMP_ROUTE');
+    }
+
+    function validar_FECHA_VENCIMIENTO_INICIO() {
+        if(!$this->validar_fecha($this->fecha_vencimiento_inicio)) {
+            return $this->rellena_validation(false, 'START_DATEEXPIRE_KO', 'IMP_ROUTE');
+        }
+
+        return $this->rellena_validation(true, '00000', 'IMP_ROUTE');
+    }
+
+    function validar_FECHA_VENCIMIENTO_FIN() {
+        if(!$this->validar_fecha($this->fecha_vencimiento_fin)) {
+            return $this->rellena_validation(false, 'END_DATEEXPIRE_KO', 'IMP_ROUTE');
         }
 
         return $this->rellena_validation(true, '00000', 'IMP_ROUTE');

@@ -18,5 +18,7 @@
     define('default_doc', 'document_default');
     define('default_url', 'defaulturl/defaulturl');
     define('default_destinatarios', 'defaultdestinatarios');
+    define('min_date', '0000-00-00');
+    define('max_date', '9999-12-30');
 
 

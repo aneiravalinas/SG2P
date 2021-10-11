@@ -82,22 +82,15 @@ class Portal_ShowCurrent_Formation {
 
                     <div class="row justify-content-center">
                         <div class="col-xl-9 flex-wrap d-flex justify-content-end" id="search_add">
-                            <form class="form-inline" name="formulariosearch" method="post">
-                                <span class="i18n-state d-block">Estado</span>
-                                <select id="estado" name="estado" class="form-select form-select-sm d-inline w-auto">
-                                    <option value="" class="i18n-todos">Todos</option>
-                                    <option value="pendiente" class="i18n-pendiente">Pendiente</option>
-                                    <option value="cumplimentado" class="i18n-cumplimentado">Cumplimentado</option>
-                                </select>
-                                <a type="button" onclick="
-                                        insertacampo(document.formulariosearch, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                        insertacampo(document.formulariosearch, 'formacion_id', '<?php echo $this->formation['formacion_id'] ?>');
-                                        insertacampo(document.formulariosearch, 'controller', 'Portal');
-                                        insertacampo(document.formulariosearch, 'action','seekPortalFormation');
-                                        enviaform(document.formulariosearch);">
-                                    <span class="iconify option_button" data-icon="fluent:search-square-24-filled" data-inline="false"></span>
-                                </a>
-                            </form>
+                            <a type="button" onclick="
+                                    crearform('formenviar', 'post');
+                                    insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
+                                    insertacampo(document.formenviar, 'formacion_id', '<?php echo $this->formation['formacion_id'] ?>');
+                                    insertacampo(document.formenviar, 'controller', 'Portal');
+                                    insertacampo(document.formenviar, 'action','searchPortalFormationForm');
+                                    enviaform(document.formenviar);">
+                                <span class="iconify option_button" data-icon="fluent:search-square-24-filled" data-inline="false"></span>
+                            </a>
                         </div>
                     </div>
 

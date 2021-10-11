@@ -233,6 +233,18 @@ class Portal {
         }
     }
 
+    function searchPortalFormationForm() {
+        include_once './Service/Formation_Service.php';
+        $format_service = new Formation_Service();
+        $feedback = $format_service->searchPortalFormationForm();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_Search_Formation_View.php';
+            new Portal_Search_Formation($feedback['formation'], $feedback['building']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'getPortal');
+        }
+    }
+
     function seekPortalSimulacrum() {
         include_once './Service/Simulacrum_Service.php';
         $sim_service = new Simulacrum_Service();
@@ -254,6 +266,18 @@ class Portal {
         if($feedback['ok']) {
             include_once './View/Portal/Portal_ShowCurrent_ImpSim_View.php';
             new Portal_ShowCurrent_ImpSim($feedback['resource']);
+        } else {
+            new Message($feedback['code'], 'Portal', 'getPortal');
+        }
+    }
+
+    function searchPortalSimulacrumForm() {
+        include_once './Service/Simulacrum_Service.php';
+        $sim_service = new Simulacrum_Service();
+        $feedback = $sim_service->searchPortalSimulacrumForm();
+        if($feedback['ok']) {
+            include_once './View/Portal/Portal_Search_Simulacrum_View.php';
+            new Portal_Search_Simulacrum($feedback['simulacrum'], $feedback['building']);
         } else {
             new Message($feedback['code'], 'Portal', 'getPortal');
         }

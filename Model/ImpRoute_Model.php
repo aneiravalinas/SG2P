@@ -10,14 +10,19 @@ class ImpRoute_Model extends Abstract_Model {
     var $ruta_id;
     var $estado;
     var $fecha_cumplimentacion;
+    var $fecha_cumplimentacion_inicio;
+    var $fecha_cumplimentacion_fin;
     var $fecha_vencimiento;
+    var $fecha_vencimiento_inicio;
+    var $fecha_vencimiento_fin;
     var $nombre_doc;
     var $nombre_planta;
     var $nombre_edificio;
     var $edificio_id;
 
     function __construct() {
-        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion','fecha_vencimiento','nombre_doc','nombre_planta', 'nombre_edificio', 'edificio_id');
+        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
+            'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'nombre_doc','nombre_planta', 'nombre_edificio', 'edificio_id');
         $this->fill_fields();
     }
 
@@ -92,8 +97,10 @@ class ImpRoute_Model extends Abstract_Model {
                 planta_ruta_id LIKE '%" . $this->planta_ruta_id . "%' AND
                 PLANTA_RUTA.planta_id LIKE '%" . $this->planta_id . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
-                fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
-                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
+                fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
+                                                    . ($this->fecha_vencimiento_fin == '' ? max_date : $this->fecha_vencimiento_fin) ."' AND
+                fecha_cumplimentacion BETWEEN '" . ($this->fecha_cumplimentacion_inicio == '' ? min_date : $this->fecha_cumplimentacion_inicio) . "' AND '"
+                                                    . ($this->fecha_cumplimentacion_fin == '' ? max_date : $this->fecha_cumplimentacion_fin) ."' AND
                 nombre_doc LIKE '%" . $this->nombre_doc . "%' AND
                 EDIFICIO.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                 PLANTA.nombre LIKE '%" . $this->nombre_planta . "%' AND
@@ -116,8 +123,10 @@ class ImpRoute_Model extends Abstract_Model {
                 planta_ruta_id LIKE '%" . $this->planta_ruta_id . "%' AND
                 PLANTA_RUTA.planta_id LIKE '%" . $this->planta_id . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
-                fecha_cumplimentacion LIKE '%" .$this->fecha_cumplimentacion . "%' AND
-                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
+                fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
+                                                    . ($this->fecha_vencimiento_fin == '' ? max_date : $this->fecha_vencimiento_fin) ."' AND
+                fecha_cumplimentacion BETWEEN '" . ($this->fecha_cumplimentacion_inicio == '' ? min_date : $this->fecha_cumplimentacion_inicio) . "' AND '"
+                                                    . ($this->fecha_cumplimentacion_fin == '' ? max_date : $this->fecha_cumplimentacion_fin) ."' AND
                 nombre_doc LIKE '%" . $this->nombre_doc . "%'
         ";
 
@@ -135,7 +144,6 @@ class ImpRoute_Model extends Abstract_Model {
                 ruta_id = '$this->ruta_id' AND
                 PLANTA.edificio_id = '$this->edificio_id' AND
                 PLANTA_RUTA.planta_id LIKE '%" . $this->planta_id . "%' AND
-                fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
                 nombre_doc LIKE '%" . $this->nombre_doc . "%' AND
                 estado != 'vencido'
         ";

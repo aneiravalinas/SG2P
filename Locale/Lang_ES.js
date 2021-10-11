@@ -1073,6 +1073,24 @@ arrayES = {
             'IMPFORMAT_ID_EMPT' : 'El id de la cumplimentación de la formación no puede ser vacío',
             'IMPFORMAT_ID_NOT_NUMERIC' : 'El id de la cumplimentación de la formación debe ser numérico',
 
+            // Fecha Planificación Inicial
+            'START_PLANNING_DATE_KO' : 'La fecha de planificación inicial tiene un formato incorrecto',
+
+            // Fecha Planificación Final
+            'END_PLANNING_DATE_KO' : 'La fecha de planificación final tiene un formato incorrecto',
+
+            // Fecha Vencimiento Inicial
+            'START_DATEEXPIRE_KO' : 'La fecha de vencimiento inicial tiene un formato incorrecto',
+
+            // Fecha Vencimiento Final
+            'END_DATEEXPIRE_KO' : 'La fecha de vencimiento final tiene un formato incorrecto',
+
+            // Fecha Cumplimentación Inicial
+            'START_DATECOMP_KO' : 'La fecha de cumplimentación inicial tiene un formato incorrecto',
+
+            // Fecha Cumplimentación Final
+            'END_DATECOMP_KO' : 'La fecha de cumplimentación final tiene un formato incorrecto',
+
 
 
 
@@ -1319,6 +1337,8 @@ arrayES = {
         'i18n-expire-improute-confirm' : '¿Está seguro que desea vencer la cumplimentación de esta ruta? El cambio no será reversible',
         'i18n-cump-route' : 'Cumplimentar Ruta',
         'i18n-del-imp-route-confirm' : '¿Está seguro que desea eliminar la cumplimentación de esta ruta? El cambio no será reversible',
+        'i18n-start_date_comp' : 'Fecha Cumplimentación Inicial',
+        'i18n-end_date_comp' : 'Fecha Cumplimentación Final',
 
         // IMP_FORMATS
         'i18n-impformats' : 'Cumplimentaciones de la Formación',
@@ -1340,6 +1360,10 @@ arrayES = {
         'i18n-del-imp-sim-confirm' : '¿Está seguro que desea eliminar la cumplimentación de este simulacro? El cambio no será reversible',
         'i18n-expire-impsim-confirm' : '¿Está seguro que desea vencer la cumplimentación de este simulacro? El cambio no será reversible',
         'i18n-cump-sim' : 'Cumplimentar Simulacro',
+        'i18n-start_planning_date' : 'Fecha Planificación Inicial',
+        'i18n-end_planning_date' : 'Fecha Planificación Final',
+        'i18n-start_date_expire' : 'Fecha Vencimiento Inicial',
+        'i18n-end_date_expire' : 'Fecha Vencimiento Final',
 
 
 

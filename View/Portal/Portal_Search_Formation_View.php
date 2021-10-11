@@ -1,13 +1,11 @@
 <?php
 
-class Portal_Search_Route {
-    var $floors;
-    var $route;
+class Portal_Search_Formation {
+    var $formation;
     var $building;
 
-    function __construct($floors, $route, $building) {
-        $this->floors = $floors;
-        $this->route = $route;
+    function __construct($formation, $building) {
+        $this->formation = $formation;
         $this->building = $building;
         $this->render();
     }
@@ -21,7 +19,7 @@ class Portal_Search_Route {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1><?php echo $this->route['nombre'] ?></h1>
+                        <h1><?php echo $this->formation['nombre'] ?></h1>
                         <h2 class="mb-4 i18n-search-imps">Buscar Cumplimentaciones</h2>
                     </div>
 
@@ -35,23 +33,13 @@ class Portal_Search_Route {
                             </div>
 
                             <div class="row">
-                                <div class="form-group col">
-                                    <label for="nombre_planta" class="i18n-nombre_planta">Nombre Planta</label>
-                                    <select class="form-select" id="nombre_planta" name="planta_id">
-                                        <option value="" class="i18n-todos"></option>
-                                        <?php foreach($this->floors as $floor): ?>
-                                            <option value="<?php echo $floor['planta_id'] ?>">
-                                                <?php echo $floor['nombre'] ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_planificacion_inicio" class="i18n-start_planning_date">Fecha Planificación Inicial</label>
+                                    <input type="date" class="form-control" id="fecha_planificacion_inicio" name="fecha_planificacion_inicio"/>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group col">
-                                    <label for="nombre_doc_field" class="i18n-nombre_doc">Nombre Documento</label>
-                                    <input type="text" class="form-control" id="nombre_doc_field" name="nombre_doc" onblur="check_NOMBRE_DOC_SEARCH();"/>
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_planificacion_fin" class="i18n-end_planning_date">Fecha Planificación Final</label>
+                                    <input type="date" class="form-control" id="fecha_planificacion_fin" name="fecha_planificacion_fin"/>
                                 </div>
                             </div>
 
@@ -59,19 +47,19 @@ class Portal_Search_Route {
                                 <div class="col d-flex justify-content-between flex-wrap">
                                     <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
                                         crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'ruta_id', '<?php echo $this->route['ruta_id'] ?>');
+                                        insertacampo(document.formenviar,'formacion_id', '<?php echo $this->formation['formacion_id'] ?>');
                                         insertacampo(document.formenviar,'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
                                         insertacampo(document.formenviar,'controller','Portal');
-                                        insertacampo(document.formenviar,'action','seekPortalRoute');
+                                        insertacampo(document.formenviar,'action','seekPortalFormation');
                                         enviaform(document.formenviar);">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
-                                        insertacampo(document.formulariosearch,'ruta_id', '<?php echo $this->route['ruta_id'] ?>');
+                                        insertacampo(document.formulariosearch,'formacion_id', '<?php echo $this->formation['formacion_id'] ?>');
                                         insertacampo(document.formulariosearch,'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
                                         insertacampo(document.formulariosearch,'controller','Portal');
-                                        insertacampo(document.formulariosearch,'action','seekPortalRoute');
-                                        enviaformcorrecto(document.formulariosearch, check_NOMBRE_DOC_SEARCH());">
+                                        insertacampo(document.formulariosearch,'action','seekPortalFormation');
+                                        enviaform(document.formulariosearch);">
                                         Enviar
                                     </a>
                                 </div>
@@ -83,7 +71,9 @@ class Portal_Search_Route {
         </section>
 
 
+
 <?php
         include './View/Page/footer.php';
     }
-}?>
+}
+?>

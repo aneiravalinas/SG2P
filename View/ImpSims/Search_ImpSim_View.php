@@ -49,12 +49,23 @@ class Search_ImpSim {
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="fecha_planificacion" class="i18n-planning_date">Fecha Planificación</label>
-                                    <input type="date" class="form-control" id="fecha_planificacion" name="fecha_planificacion"/>
+                                    <label for="fecha_planificacion_inicio" class="i18n-start_planning_date">Fecha Planificación Inicial</label>
+                                    <input type="date" class="form-control" id="fecha_planificacion_inicio" name="fecha_planificacion_inicio"/>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="fecha_vencimiento" class="i18n-date_expire">Fecha Vencimiento</label>
-                                    <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento"/>
+                                    <label for="fecha_planificacion_fin" class="i18n-end_planning_date">Fecha Planificación Final</label>
+                                    <input type="date" class="form-control" id="fecha_planificacion_fin" name="fecha_planificacion_fin"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_vencimiento_inicio" class="i18n-start_date_expire">Fecha Vencimiento Inicial</label>
+                                    <input type="date" class="form-control" id="fecha_vencimiento_inicio" name="fecha_vencimiento_inicio"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_vencimiento_fin" class="i18n-end_date_expire">Fecha Vencimiento Final</label>
+                                    <input type="date" class="form-control" id="fecha_vencimiento_fin" name="fecha_vencimiento_fin"/>
                                 </div>
                             </div>
 

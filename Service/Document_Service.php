@@ -12,7 +12,8 @@ class Document_Service extends Document_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('edificio_documento_id','edificio_id','documento_id','estado','fecha_cumplimentacion','fecha_vencimiento','nombre_edificio', 'nombre_doc');
+        $this->atributos = array('edificio_documento_id','edificio_id','documento_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
+            'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'nombre_edificio', 'nombre_doc');
         $this->defDoc_entity = new DefDoc_Model();
         $this->impDoc_entity = new ImpDoc_Model();
         $this->fill_fields();

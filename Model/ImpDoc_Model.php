@@ -9,12 +9,17 @@ class ImpDoc_Model extends Abstract_Model {
     var $documento_id;
     var $estado;
     var $fecha_cumplimentacion;
+    var $fecha_cumplimentacion_inicio;
+    var $fecha_cumplimentacion_fin;
     var $fecha_vencimiento;
+    var $fecha_vencimiento_inicio;
+    var $fecha_vencimiento_fin;
     var $nombre_doc;
     var $nombre_edificio;
 
     function __construct() {
-        $this->atributos = array('edificio_documento_id','edificio_id','documento_id','estado','fecha_cumplimentacion','fecha_vencimiento','nombre_doc','nombre_edificio');
+        $this->atributos = array('edificio_documento_id','edificio_id','documento_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
+            'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'nombre_doc','nombre_edificio');
         $this->fill_fields();
     }
 
@@ -86,8 +91,10 @@ class ImpDoc_Model extends Abstract_Model {
                 EDIFICIO_DOCUMENTO.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                 documento_id = '$this->documento_id' AND
                 estado LIKE '%" . $this->estado . "%' AND
-                fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
-                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
+                fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
+                                                    . ($this->fecha_vencimiento_fin == '' ? max_date : $this->fecha_vencimiento_fin) ."' AND
+                fecha_cumplimentacion BETWEEN '" . ($this->fecha_cumplimentacion_inicio == '' ? min_date : $this->fecha_cumplimentacion_inicio) . "' AND '"
+                                                    . ($this->fecha_cumplimentacion_fin == '' ? max_date : $this->fecha_cumplimentacion_fin) ."' AND
                 nombre_doc LIKE '%" . $this->nombre_doc . "%' AND
                 EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%'
         ";
@@ -141,8 +148,10 @@ class ImpDoc_Model extends Abstract_Model {
                 documento_id = '$this->documento_id' AND
                 edificio_documento_id LIKE '%" . $this->edificio_documento_id . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
-                fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
-                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
+                fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
+                                                    . ($this->fecha_vencimiento_fin == '' ? max_date : $this->fecha_vencimiento_fin) ."' AND
+                fecha_cumplimentacion BETWEEN '" . ($this->fecha_cumplimentacion_inicio == '' ? min_date : $this->fecha_cumplimentacion_inicio) . "' AND '"
+                                                        . ($this->fecha_cumplimentacion_fin == '' ? max_date : $this->fecha_cumplimentacion_fin) ."' AND
                 nombre_doc LIKE '%" . $this->nombre_doc . "%'
         ";
 

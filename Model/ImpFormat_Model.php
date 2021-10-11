@@ -13,9 +13,14 @@ class ImpFormat_Model extends Abstract_Model {
     var $url_recurso;
     var $destinatarios;
     var $nombre_edificio;
+    var $fecha_planificacion_inicio;
+    var $fecha_planificacion_fin;
+    var $fecha_vencimiento_inicio;
+    var $fecha_vencimiento_fin;
 
     function __construct() {
-        $this->atributos = array('edificio_formacion_id','edificio_id','formacion_id','estado','fecha_planificacion','fecha_vencimiento','url_recurso','destinatarios','nombre_edificio');
+        $this->atributos = array('edificio_formacion_id','edificio_id','formacion_id','estado','fecha_planificacion', 'fecha_planificacion_inicio', 'fecha_planificacion_fin',
+            'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'url_recurso','destinatarios','nombre_edificio');
         $this->fill_fields();
     }
 
@@ -91,9 +96,11 @@ class ImpFormat_Model extends Abstract_Model {
                 edificio_formacion_id LIKE '%" . $this->edificio_formacion_id . "%' AND
                 EDIFICIO_FORMACION.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                 EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
-                estado LIKE '%" . $this->estado . "%' AND
-                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
-                fecha_planificacion LIKE '%" . $this->fecha_planificacion . "%'
+                fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
+                                                    . ($this->fecha_vencimiento_fin == '' ? max_date : $this->fecha_vencimiento_fin) ."' AND
+                fecha_planificacion BETWEEN '" . ($this->fecha_planificacion_inicio == '' ? min_date : $this->fecha_planificacion_inicio) . "' AND '"
+                                                    . ($this->fecha_planificacion_fin == '' ? max_date : $this->fecha_planificacion_fin) ."' AND
+                estado LIKE '%" . $this->estado . "%'
         ";
 
         $this->get_results_from_query();
@@ -106,9 +113,11 @@ class ImpFormat_Model extends Abstract_Model {
             WHERE
                 edificio_id = '$this->edificio_id' AND
                 formacion_id = '$this->formacion_id' AND
-                estado LIKE '%" . $this->estado . "%' AND
-                fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
-                fecha_planificacion LIKE '%" . $this->fecha_planificacion . "%'
+                fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
+                                                    . ($this->fecha_vencimiento_fin == '' ? max_date : $this->fecha_vencimiento_fin) ."' AND
+                fecha_planificacion BETWEEN '" . ($this->fecha_planificacion_inicio == '' ? min_date : $this->fecha_planificacion_inicio) . "' AND '"
+                                                    . ($this->fecha_planificacion_fin == '' ? max_date : $this->fecha_planificacion_fin) ."' AND
+                estado LIKE '%" . $this->estado . "%'
         ";
 
         $this->get_results_from_query();
@@ -159,7 +168,8 @@ class ImpFormat_Model extends Abstract_Model {
             WHERE
                 edificio_id = '$this->edificio_id' AND
                 formacion_id = '$this->formacion_id' AND
-                estado LIKE '%" . $this->estado . "%' AND
+                fecha_planificacion BETWEEN '" . ($this->fecha_planificacion_inicio == '' ? min_date : $this->fecha_planificacion_inicio) . "' AND '"
+                                                    . ($this->fecha_planificacion_fin == '' ? max_date : $this->fecha_planificacion_fin) ."' AND
                 estado != 'vencido'
         ";
 

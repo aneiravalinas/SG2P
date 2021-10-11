@@ -12,7 +12,8 @@ class Procedure_Service extends Procedure_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('edificio_procedimiento_id','edificio_id','procedimiento_id','estado','fecha_cumplimentacion','fecha_vencimiento','nombre_doc', 'nombre_edificio');
+        $this->atributos = array('edificio_procedimiento_id','edificio_id','procedimiento_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
+            'fecha_vencimiento','fecha_vencimiento_inicio', 'fecha_vencimiento_fin','nombre_doc', 'nombre_edificio');
         $this->defProc_entity = new DefProc_Model();
         $this->impProc_entity = new ImpProc_Model();
         $this->fill_fields();

@@ -8,7 +8,11 @@ class Procedure_Validation extends Validator {
     var $procedimiento_id;
     var $estado;
     var $fecha_cumplimentacion;
+    var $fecha_cumplimentacion_inicio;
+    var $fecha_cumplimentacion_fin;
     var $fecha_vencimiento;
+    var $fecha_vencimiento_inicio;
+    var $fecha_vencimiento_fin;
     var $nombre_doc;
     var $buildings = array();
     var $nombre_edificio;
@@ -33,15 +37,29 @@ class Procedure_Validation extends Validator {
             }
         }
 
-        if($this->fecha_cumplimentacion != '') {
-            $validation = $this->validar_FECHA_CUMPLIMENTACION();
+        if($this->fecha_cumplimentacion_inicio != '') {
+            $validation = $this->validar_FECHA_CUMPLIMENTACION_INICIO();
             if(!$validation['ok']) {
                 return $validation;
             }
         }
 
-        if($this->fecha_vencimiento != '') {
-            $validation = $this->validar_FECHA_VENCIMIENTO();
+        if($this->fecha_cumplimentacion_fin != '') {
+            $validation = $this->validar_FECHA_CUMPLIMENTACION_FIN();
+            if(!$validation['ok']) {
+                return $validation;
+            }
+        }
+
+        if($this->fecha_vencimiento_inicio != '') {
+            $validation = $this->validar_FECHA_VENCIMIENTO_INICIO();
+            if(!$validation['ok']) {
+                return $validation;
+            }
+        }
+
+        if($this->fecha_vencimiento_fin != '') {
+            $validation = $this->validar_FECHA_VENCIMIENTO_FIN();
             if(!$validation['ok']) {
                 return $validation;
             }
@@ -140,17 +158,33 @@ class Procedure_Validation extends Validator {
         return $this->rellena_validation(true,'00000','IMP_PROC');
     }
 
-    function validar_FECHA_CUMPLIMENTACION() {
-        if(!$this->validar_fecha($this->fecha_cumplimentacion)) {
-            return $this->rellena_validation(false,'DATECOMP_KO','IMP_PROC');
+    function validar_FECHA_CUMPLIMENTACION_INICIO() {
+        if(!$this->validar_fecha($this->fecha_cumplimentacion_inicio)) {
+            return $this->rellena_validation(false, 'START_DATECOMP_KO', 'IMP_PROC');
         }
 
-        return $this->rellena_validation(true,'00000','IMP_PROC');
+        return $this->rellena_validation(true, '00000', 'IMP_PROC');
     }
 
-    function validar_FECHA_VENCIMIENTO() {
-        if(!$this->validar_fecha($this->fecha_vencimiento)) {
-            return $this->rellena_validation(false, 'DATEEXPIRE_KO','IMP_PROC');
+    function validar_FECHA_CUMPLIMENTACION_FIN() {
+        if(!$this->validar_fecha($this->fecha_cumplimentacion_fin)) {
+            return $this->rellena_validation(false, 'END_DATECOMP_KO', 'IMP_PROC');
+        }
+
+        return $this->rellena_validation(true, '00000', 'IMP_PROC');
+    }
+
+    function validar_FECHA_VENCIMIENTO_INICIO() {
+        if(!$this->validar_fecha($this->fecha_vencimiento_inicio)) {
+            return $this->rellena_validation(false, 'START_DATEEXPIRE_KO', 'IMP_PROC');
+        }
+
+        return $this->rellena_validation(true, '00000', 'IMP_PROC');
+    }
+
+    function validar_FECHA_VENCIMIENTO_FIN() {
+        if(!$this->validar_fecha($this->fecha_vencimiento_fin)) {
+            return $this->rellena_validation(false, 'END_DATEEXPIRE_KO', 'IMP_PROC');
         }
 
         return $this->rellena_validation(true, '00000', 'IMP_PROC');

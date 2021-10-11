@@ -12,7 +12,8 @@ class Route_Service extends Route_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion','fecha_vencimiento','nombre_doc','nombre_planta', 'nombre_edificio', 'edificio_id');
+        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
+            'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'nombre_doc','nombre_planta', 'nombre_edificio', 'edificio_id');
         $this->impRoute_entity = new ImpRoute_Model();
         $this->defRoute_entity = new DefRoute_Model();
         $this->fill_fields();

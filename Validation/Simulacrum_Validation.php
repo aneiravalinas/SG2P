@@ -12,6 +12,10 @@ class Simulacrum_Validation extends Validator {
     var $url_recurso;
     var $destinatarios;
     var $nombre_edificio;
+    var $fecha_planificacion_inicio;
+    var $fecha_planificacion_fin;
+    var $fecha_vencimiento_inicio;
+    var $fecha_vencimiento_fin;
     var $buildings = array();
     const states = array('pendiente','cumplimentado','vencido');
 
@@ -19,7 +23,11 @@ class Simulacrum_Validation extends Validator {
     }
 
     function validar_atributos_search(){
-        $validacion = $this->rellena_validation(true, '00000', 'IMP_SIM');
+        $validacion = $this->validar_atributos_search_portal();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
+
         if($this->edificio_simulacro_id != '') {
             $validacion = $this->validar_EDIFICIO_SIMULACRO_ID();
             if(!$validacion['ok']) {
@@ -34,15 +42,15 @@ class Simulacrum_Validation extends Validator {
             }
         }
 
-        if($this->fecha_vencimiento != '') {
-            $validacion = $this->validar_FECHA_VENCIMIENTO();
+        if($this->fecha_vencimiento_inicio != '') {
+            $validacion = $this->validar_FECHA_VENCIMIENTO_INICIO();
             if(!$validacion['ok']) {
                 return $validacion;
             }
         }
 
-        if($this->fecha_planificacion != '') {
-            $validacion = $this->validar_FECHA_PLANIFICACION_SEARCH();
+        if($this->fecha_vencimiento_fin != '') {
+            $validacion = $this->validar_FECHA_VENCIMIENTO_FIN();
         }
 
         return $validacion;
@@ -71,8 +79,15 @@ class Simulacrum_Validation extends Validator {
     function validar_atributos_search_portal() {
         $validacion = $this->rellena_validation(true, '00000', 'IMP_SIM');
 
-        if($this->fecha_planificacion != '') {
-            $validacion = $this->validar_FECHA_PLANIFICACION_SEARCH();
+        if($this->fecha_planificacion_inicio != '') {
+            $validacion = $this->validar_FECHA_PLANIFICACION_INICIO();
+            if(!$validacion['ok']) {
+                return $validacion;
+            }
+        }
+
+        if($this->fecha_planificacion_fin != '') {
+            $validacion = $this->validar_FECHA_PLANIFICACION_FIN();
         }
 
         return $validacion;
@@ -160,22 +175,14 @@ class Simulacrum_Validation extends Validator {
         return $this->rellena_validation(true,'00000','IMP_SIM');
     }
 
-    function validar_ESTADO_PORTAL() {
-        if(!$this->en_valores($this->estado, array('pendiente', 'cumplimentado'))) {
-            return $this->rellena_validation(false,'STATE_KO','IMP_SIM');
-        }
-
-        return $this->rellena_validation(true, 'STATE_OK', 'IMP_SIM');
-    }
 
     function validar_FECHA_PLANIFICACION() {
         if(!$this->no_vacio($this->fecha_planificacion)) {
             return $this->rellena_validation(false, 'PLANNING_DATE_EMPT', 'IMP_SIM');
         }
 
-        $validacion = $this->validar_FECHA_PLANIFICACION_SEARCH();
-        if(!$validacion['ok']) {
-            return $validacion;
+        if(!$this->validar_fecha($this->fecha_planificacion)) {
+            return $this->rellena_validation(false, 'PLANNING_DATE_KO', 'IMP_SIM');
         }
 
         if(!$this->validar_fecha_futura($this->fecha_planificacion)) {
@@ -185,17 +192,33 @@ class Simulacrum_Validation extends Validator {
         return $this->rellena_validation(true, '00000', 'IMP_SIM');
     }
 
-    function validar_FECHA_PLANIFICACION_SEARCH() {
-        if(!$this->validar_fecha($this->fecha_planificacion)) {
-            return $this->rellena_validation(false, 'PLANNING_DATE_KO', 'IMP_SIM');
+    function validar_FECHA_PLANIFICACION_INICIO() {
+        if(!$this->validar_fecha($this->fecha_planificacion_inicio)) {
+            return $this->rellena_validation(false, 'START_PLANNING_DATE_KO', 'IMP_SIM');
         }
 
         return $this->rellena_validation(true, '00000', 'IMP_SIM');
     }
 
-    function validar_FECHA_VENCIMIENTO() {
-        if(!$this->validar_fecha($this->fecha_vencimiento)) {
-            return $this->rellena_validation(false, 'DATEEXPIRE_KO','IMP_SIM');
+    function validar_FECHA_PLANIFICACION_FIN() {
+        if(!$this->validar_fecha($this->fecha_planificacion_fin)) {
+            return $this->rellena_validation(false, 'END_PLANNING_DATE_KO', 'IMP_SIM');
+        }
+
+        return $this->rellena_validation(true, '00000', 'IMP_SIM');
+    }
+
+    function validar_FECHA_VENCIMIENTO_INICIO() {
+        if(!$this->validar_fecha($this->fecha_vencimiento_inicio)) {
+            return $this->rellena_validation(false, 'START_DATEEXPIRE_KO', 'IMP_SIM');
+        }
+
+        return $this->rellena_validation(true, '00000', 'IMP_SIM');
+    }
+
+    function validar_FECHA_VENCIMIENTO_FIN() {
+        if(!$this->validar_fecha($this->fecha_vencimiento_fin)) {
+            return $this->rellena_validation(false, 'END_DATEEXPIRE_KO');
         }
 
         return $this->rellena_validation(true, '00000', 'IMP_SIM');

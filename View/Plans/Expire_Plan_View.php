@@ -33,7 +33,6 @@ class Expire_Plan {
                     <div class="col-xl-7 col-lg-9 d-flex justify-content-between flex-wrap">
                         <a class="btn-get-started i18n-cancelar" type="button" onclick="
                             crearform('formenviar','post');
-                            insertacampo(document.formenviar,'plan_id', '<?php echo $this->plan['plan_id'] ?>');
                             insertacampo(document.formenviar,'controller','Plan');
                             insertacampo(document.formenviar,'action','show');
                             enviaform(document.formenviar);">
