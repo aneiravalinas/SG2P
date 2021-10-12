@@ -57,16 +57,44 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_IMPFORMATS', 'ESTADO', 'Estado
     'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
-// Formato Fecha incorrecto
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion' => '2014/12-25');
+// Fecha Planificación inicial no válida
+$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12-25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchImpFormats();
-$respTest = obtenerRespuesta('Formation', 'SEARCH_IMPFORMATS', 'FECHA_PLANIFICACION', 'Formato Fecha incorrecto',
-    'PLANNING_DATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'SEARCH_IMPFORMATS', 'FECHA_PLANIFICACION_INICIO', 'Fecha Planificación inicial no válida',
+    'START_PLANNING_DATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testFormation, $respTest);
+
+// Fecha Planificación final no válida
+$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+                    'fecha_planificacion_fin' => '2014/12-25');
+$format_service = new Formation_Service();
+$feedback = $format_service->searchImpFormats();
+$respTest = obtenerRespuesta('Formation', 'SEARCH_IMPFORMATS', 'FECHA_PLANIFICACION_FIN', 'Fecha Planificación final no válida',
+    'END_PLANNING_DATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testFormation, $respTest);
+
+// Fecha Vencimiento inicial no válida
+$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12-25');
+$format_service = new Formation_Service();
+$feedback = $format_service->searchImpFormats();
+$respTest = obtenerRespuesta('Formation', 'SEARCH_IMPFORMATS', 'FECHA_VENCIMIENTO_INICIO', 'Fecha Vencimiento inicial no válida',
+    'START_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testFormation, $respTest);
+
+// Fecha Vencimiento final no válida
+$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12-25');
+$format_service = new Formation_Service();
+$feedback = $format_service->searchImpFormats();
+$respTest = obtenerRespuesta('Formation', 'SEARCH_IMPFORMATS', 'FECHA_VENCIMIENTO_FIN', 'Fecha Vencimiento final no válida',
+    'END_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 // ID Edificio no numérico
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion' => '2014/12/25', 'edificio_id' => 'aa');
+$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => 'aa');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchImpFormats();
 $respTest = obtenerRespuesta('Formation', 'SEARCH_IMPFORMATS', 'EDIFICIO_ID', 'ID Edificio no numérico',
@@ -74,7 +102,8 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_IMPFORMATS', 'EDIFICIO_ID', 'I
 array_push($testFormation, $respTest);
 
 // Nombre edificio corto (menos de 3 caracteres)
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion' => '2014/12/25', 'edificio_id' => '1',
+$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
                         'nombre_edificio' => 'aa');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchImpFormats();
@@ -83,7 +112,8 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_IMPFORMATS', 'NOMBRE_EDIFICIO'
 array_push($testFormation, $respTest);
 
 // Nombre Edificio largo (más de 60 caracteres)
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion' => '2014/12/25', 'edificio_id' => '1',
+$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
     'nombre_edificio' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchImpFormats();
@@ -92,7 +122,8 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_IMPFORMATS', 'NOMBRE_EDIFICIO'
 array_push($testFormation, $respTest);
 
 // Nombre Edificio con caracteres no permitidos
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion' => '2014/12/25', 'edificio_id' => '1',
+$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
     'nombre_edificio' => 'Nombrê Edificio');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchImpFormats();
@@ -106,7 +137,8 @@ array_push($testFormation, $respTest);
  */
 
 // La búsqueda de cumplimentaciones se realiza correctamente
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion' => '2014/12/25', 'edificio_id' => '1',
+$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
     'nombre_edificio' => 'Nombre Edificio');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchImpFormats();
@@ -212,12 +244,39 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'ESTADO', 'Estado 
     'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
-// Formato Fecha incorrecto
-$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion' => '2014/12-25');
+// Fecha Planificación inicial no válida
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12-25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchFormation();
-$respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'FECHA_PLANIFICACION', 'Formato Fecha incorrecto',
-    'PLANNING_DATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'FECHA_PLANIFICACION_INICIO', 'Fecha Planificación inicial no válida',
+    'START_PLANNING_DATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testFormation, $respTest);
+
+// Fecha Planificación final no válida
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+                'fecha_planificacion_fin' => '2014/12-25');
+$format_service = new Formation_Service();
+$feedback = $format_service->searchFormation();
+$respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'FECHA_PLANIFICACION_FIN', 'Fecha Planificación final no válida',
+    'END_PLANNING_DATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testFormation, $respTest);
+
+// Fecha Vencimiento inicial no válida
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12-25');
+$format_service = new Formation_Service();
+$feedback = $format_service->searchFormation();
+$respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'FECHA_VENCIMIENTO_INICIO', 'Fecha Vencimiento inicial no válida',
+    'START_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testFormation, $respTest);
+
+// Fecha Vencimiento final no valida
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12-25');
+$format_service = new Formation_Service();
+$feedback = $format_service->searchFormation();
+$respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'FECHA_VENCIMIENTO_FIN', 'Fecha Vencimiento final no valida',
+    'END_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 /*
@@ -225,7 +284,8 @@ array_push($testFormation, $respTest);
  */
 
 // La búsqueda se realiza correctamente
-$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion' => '2014/12/25');
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchFormation();
 $respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'ACCION', 'La búsqueda se realiza correctamente',
@@ -320,20 +380,29 @@ array_push($testFormation, $respTest);
  *  --- SEEK_PORTAL_FORMATION: VALIDACIONES ---
  */
 
-// Estado no permitido
-$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'estado' => 'vencido');
+// Fecha Planificación inicial no válida
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '2014/12-25');
 $format_service = new Formation_Service();
 $feedback = $format_service->seekPortalFormation();
-$respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_FORMATION', 'ESTADO', 'Estado no permitido',
-    'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_FORMATION', 'FECHA_PLANIFICACION_INICIO', 'Fecha Planificación inicial no válida',
+    'START_PLANNING_DATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
+
+// Fecha Planificación final no válida
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '2014/12/25', 'fecha_planificacion_fin' => '2014/12-25');
+$format_service = new Formation_Service();
+$feedback = $format_service->seekPortalFormation();
+$respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_FORMATION', 'FECHA_PLANIFICACION_FIN', 'Fecha Planificación final no válida',
+    'END_PLANNING_DATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testFormation, $respTest);
+
 
 /*
  *  --- SEEK_PORTAL_FORMATION: ACCIONES ---
  */
 
 // Consulta de los detalles de la formación del portal Ok
-$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'estado' => 'cumplimentado');
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '2014/12/25', 'fecha_planificacion_fin' => '2014/12/25');
 $format_service = new Formation_Service();
 $feedback = $format_service->seekPortalFormation();
 $respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_FORMATION', 'ACCION', 'Consulta de los detalles de la formación del portal Ok',

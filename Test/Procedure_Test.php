@@ -99,17 +99,46 @@ $respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'ESTADO', 'Estado n
     'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
-// Fecha de cumplimentación no válida
-$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992-12/25');
+// Fecha de cumplimentación inicial inválida
+$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992-12/25');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'FECHA_CUMPLIMENTACION', 'Fecha de cumplimentación no válida',
-    'DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha de cumplimentación inicial inválida',
+    'START_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
+// Fecha de cumplimentacion final inválida
+$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+                    'fecha_cumplimentacion_fin' => '1992-12/25');
+$proc_service = new Procedure_Service();
+$feedback = $proc_service->searchImpProcs();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'FECHA_CUMPLIMENTACION_FIN', 'Fecha de cumplimentacion final inválida',
+    'END_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testProcedure, $respTest);
+
+// Fecha vencimiento inicial inválida
+$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12-25');
+$proc_service = new Procedure_Service();
+$feedback = $proc_service->searchImpProcs();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'FECHA_VENCIMIENTO_INICIO', 'Fecha vencimiento inicial inválida',
+    'START_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testProcedure, $respTest);
+
+// Fecha vencimiento final inválida
+$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12-25');
+$proc_service = new Procedure_Service();
+$feedback = $proc_service->searchImpProcs();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'FECHA_VENCIMIENTO_FIN', 'Fecha vencimiento final inválida',
+    'END_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testProcedure, $respTest);
+
+
 // Nombre DOC largo (más de 50 caracteres)
-$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
-                    'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente',
+    'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25',
+    'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchImpProcs();
 $respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'NOMBRE_DOC', 'Nombre de Documento largo',
@@ -117,7 +146,8 @@ $respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'NOMBRE_DOC', 'Nomb
 array_push($testProcedure, $respTest);
 
 // Nombre DOC formato
-$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'documento.php');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchImpProcs();
@@ -126,7 +156,8 @@ $respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'NOMBRE_DOC', 'Nomb
 array_push($testProcedure, $respTest);
 
 // ID Edificio no numérico
-$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'documento.pdf', 'edificio_id' => 'aaa');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchImpProcs();
@@ -135,7 +166,8 @@ $respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'EDIFICIO_ID', 'ID 
 array_push($testProcedure, $respTest);
 
 // Nombre Edificio corto (menos de 3 caracteres)
-$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'documento.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'aa');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchImpProcs();
@@ -144,7 +176,8 @@ $respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'NOMBRE_EDIFICIO', 
 array_push($testProcedure, $respTest);
 
 // Nombre Edificio largo (más de 60 caracteres)
-$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'documento.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchImpProcs();
@@ -153,7 +186,8 @@ $respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'NOMBRE_EDIFICIO', 
 array_push($testProcedure, $respTest);
 
 // Nombre de Edificio formato incorrecto
-$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'documento.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'edific^o');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchImpProcs();
@@ -166,7 +200,8 @@ array_push($testProcedure, $respTest);
  */
 
 // Búsqueda de cumplimentaciones Ok
-$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'documento.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'edificio');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchImpProcs();
@@ -268,21 +303,48 @@ array_push($testProcedure, $respTest);
 $_POST = array('procedimiento_id' => '4', 'edificio_id' => '7', 'edificio_procedimiento_id' => '2', 'estado' => 'estado');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchProcedure();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE', 'IMPPROC_ID_NOT_NUMERIC', 'Estado no contemplado',
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE', 'ESTADO', 'Estado no contemplado',
     'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
-// Fecha Cumplimentación no válida
-$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7', 'edificio_procedimiento_id' => '2', 'estado' => 'vencido', 'fecha_cumplimentacion' => '2012-12/25');
+// Fecha cumplimentación inicial no válida
+$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7', 'edificio_procedimiento_id' => '2', 'estado' => 'vencido', 'fecha_cumplimentacion_inicio' => '2012-12/25');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchProcedure();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE', 'IMPPROC_ID_NOT_NUMERIC', 'Fecha Cumplimentación no válida',
-    'DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha cumplimentación inicial no válida',
+    'START_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
+// Fecha cumplimentación final no válida
+$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7', 'edificio_procedimiento_id' => '2', 'estado' => 'vencido', 'fecha_cumplimentacion_inicio' => '2012/12/25',
+                    'fecha_cumplimentacion_fin' => '2012-12/25');
+$proc_service = new Procedure_Service();
+$feedback = $proc_service->searchProcedure();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE', 'FECHA_CUMPLIMENTACION_FIN', 'Fecha cumplimentación final no válida',
+    'END_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testProcedure, $respTest);
+
+// Fecha vencimiento inicial no válido
+$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7', 'edificio_procedimiento_id' => '2', 'estado' => 'vencido', 'fecha_cumplimentacion_inicio' => '2012/12/25',
+    'fecha_cumplimentacion_fin' => '2012/12/25', 'fecha_vencimiento_inicio' => '2012-12/25');
+$proc_service = new Procedure_Service();
+$feedback = $proc_service->searchProcedure();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE', 'FECHA_VENCIMIENTO_INICIO', 'Fecha vencimiento inicial no válido',
+    'START_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testProcedure, $respTest);
+
+// Fecha vencimiento final no válido
+$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7', 'edificio_procedimiento_id' => '2', 'estado' => 'vencido', 'fecha_cumplimentacion_inicio' => '2012/12/25',
+    'fecha_cumplimentacion_fin' => '2012/12/25', 'fecha_vencimiento_inicio' => '2012/12/25', 'fecha_vencimiento_fin' => '2012-12/25');
+$proc_service = new Procedure_Service();
+$feedback = $proc_service->searchProcedure();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE', 'FECHA_VENCIMIENTO_FIN', 'Fecha vencimiento final no válido',
+    'END_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testProcedure, $respTest);
 
 // Nombre DOC largo (más de 50 caracteres)
-$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7', 'edificio_procedimiento_id' => '2', 'estado' => 'vencido', 'fecha_cumplimentacion' => '1992/12/25',
+$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7', 'edificio_procedimiento_id' => '2', 'estado' => 'vencido', 'fecha_cumplimentacion_inicio' => '2012/12/25',
+    'fecha_cumplimentacion_fin' => '2012/12/25', 'fecha_vencimiento_inicio' => '2012/12/25', 'fecha_vencimiento_fin' => '2012/12/25',
     'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchProcedure();
@@ -291,7 +353,8 @@ $respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE', 'NOMBRE_DOC', 'Nom
 array_push($testProcedure, $respTest);
 
 // Nombre DOC formato
-$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7', 'edificio_procedimiento_id' => '2', 'estado' => 'vencido',
+$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7', 'edificio_procedimiento_id' => '2', 'estado' => 'vencido', 'fecha_cumplimentacion_inicio' => '2012/12/25',
+    'fecha_cumplimentacion_fin' => '2012/12/25', 'fecha_vencimiento_inicio' => '2012/12/25', 'fecha_vencimiento_fin' => '2012/12/25',
     'nombre_doc' => 'documento.php');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchProcedure();
@@ -304,7 +367,8 @@ array_push($testProcedure, $respTest);
  */
 
 // Búsqueda de cumplimentaciones Ok
-$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7', 'edificio_procedimiento_id' => '2', 'estado' => 'vencido',
+$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7', 'edificio_procedimiento_id' => '2', 'estado' => 'vencido', 'fecha_cumplimentacion_inicio' => '2012/12/25',
+    'fecha_cumplimentacion_fin' => '2012/12/25', 'fecha_vencimiento_inicio' => '2012/12/25', 'fecha_vencimiento_fin' => '2012/12/25',
     'nombre_doc' => 'documento.pdf');
 $proc_service = new Procedure_Service();
 $feedback = $proc_service->searchProcedure();
