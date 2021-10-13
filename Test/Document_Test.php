@@ -823,6 +823,13 @@ $respTest = obtenerRespuesta('Document', 'ADD_IMPDOC', 'ACCION', 'El plan del do
     'BLDDOC_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
+// La asignación entre el plan del documento y el edificio está vencida
+$_POST = array('documento_id' => '4', 'buildings' => array('1'));
+$document_service = new Document_Service();
+$feedback = $document_service->addImpDoc();
+$respTest = obtenerRespuesta('Document', 'ADD_IMPDOC', 'ACCION', 'La asignación entre el plan del documento y el edificio está vencida',
+    'BLDPLAN_EXPIRED', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testDocument, $respTest);
 
 // Ya existen cumplimentaciones activas del documento en el edificio indicado
 $_SESSION['username'] = 'sg2ped2';

@@ -665,6 +665,14 @@ $respTest = obtenerRespuesta('Formation', 'ADD_IMPFORMAT', 'ACCION', 'El plan de
     'BLDFORMAT_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
+// La asignación entre el plan de la formación y el edificio está vencida
+$_POST = array('formacion_id' => '5', 'buildings' => array('1'));
+$format_service = new Formation_Service();
+$feedback = $format_service->addImpFormat();
+$respTest = obtenerRespuesta('Formation', 'ADD_IMPFORMAT', 'ACCION', 'La asignación entre el plan de la formación y el edificio está vencida',
+    'BLDPLAN_EXPIRED', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testFormation, $respTest);
+
 // Cumplimentación añadida correctamente
 $_SESSION['username'] = 'sg2ped2';
 

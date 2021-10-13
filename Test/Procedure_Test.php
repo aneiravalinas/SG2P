@@ -762,6 +762,14 @@ $respTest = obtenerRespuesta('Procedure', 'ADD', 'ACCION', 'El plan del procedim
     'BLDPROC_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
+// La asignación entre el plan del procedimiento y el edificio está vencida
+$_POST = array('procedimiento_id' => '6', 'buildings' => array('1'));
+$proc_service = new Procedure_Service();
+$feedback = $proc_service->addImpProc();
+$respTest = obtenerRespuesta('Procedure', 'ADD', 'ACCION', 'La asignación entre el plan del procedimiento y el edificio está vencida',
+    'BLDPLAN_EXPIRED', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testProcedure, $respTest);
+
 // El edificio tiene cumplimentaciones activas del procedimiento
 $_SESSION['username'] = 'sg2ped2';
 

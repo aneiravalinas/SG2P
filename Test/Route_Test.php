@@ -950,8 +950,16 @@ $_SESSION['username'] = 'sg2ped';
 $_POST = array('ruta_id' => '1', 'buildings' => array('1'));
 $route_service = new Route_Service();
 $feedback = $route_service->addImpRoute();
-$respTest = obtenerRespuesta('Route', 'ADD_IMPROUTE', 'ACCION', 'EEl plan de la ruta no está asignado al edificio',
+$respTest = obtenerRespuesta('Route', 'ADD_IMPROUTE', 'ACCION', 'El plan de la ruta no está asignado al edificio',
     'BLDROUTE_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testRoute, $respTest);
+
+// La asignación entre el plan de la ruta y el edificio está vencida
+$_POST = array('ruta_id' => '5', 'buildings' => array('1'));
+$route_service = new Route_Service();
+$feedback = $route_service->addImpRoute();
+$respTest = obtenerRespuesta('Route', 'ADD_IMPROUTE', 'ACCION', 'La asignación entre el plan de la ruta y el edificio está vencida',
+    'BLDPLAN_EXPIRED', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 // El edificio no tiene plantas asociadas
