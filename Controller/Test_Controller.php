@@ -26,6 +26,7 @@ class Test {
         include './Test/Procedure_Test.php';
         include './Test/Route_Test.php';
         include './Test/Formation_Test.php';
+        include './Test/Simulacrum_Test.php';
 
         session_destroy();
 

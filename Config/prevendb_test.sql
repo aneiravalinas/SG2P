@@ -326,7 +326,9 @@ INSERT INTO FORMACION (`formacion_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 INSERT INTO SIMULACRO (`simulacro_id`,`plan_id`,`nombre`,`descripcion`) VALUES
 (1,6,'Simulacros del plan con simulacros','Descripcion del simulacro'),
 (2,6,'Otro Simulacro','Descripcion del simulacro'),
-(3,7,'Simulacro del Plan Completo','Descripcion del simulacro');
+(3,7,'Simulacro del Plan Completo','Descripcion del simulacro'),
+(4,1,'Simulacro del Plan Uno','Descripcion del simulacro'),
+(5,9,'Simulacro con asignación vencida','Descripcion del simulacro');
 
 INSERT INTO PLANTA_RUTA (`planta_ruta_id`, `planta_id`, `ruta_id`, `estado`, `fecha_cumplimentacion`, `nombre_doc`) VALUES
 (1,2,1,'pendiente','15-05-2021','document_default'),
@@ -368,8 +370,10 @@ INSERT INTO EDIFICIO_FORMACION (`edificio_formacion_id`,`edificio_id`,`formacion
 (4,2,1,'vencido','recurso','destinatarios'),
 (5,2,4,'pendiente','recurso','destinatarios');
 
-INSERT INTO EDIFICIO_SIMULACRO (`edificio_simulacro_id`,`edificio_id`,`simulacro_id`,`url_recurso`,`destinatarios`) VALUES
-(1,4,1,'url/recurso','Todos');
+INSERT INTO EDIFICIO_SIMULACRO (`edificio_simulacro_id`,`edificio_id`,`simulacro_id`,`estado`,`url_recurso`,`destinatarios`) VALUES
+(1,4,1,'pendiente','url/recurso','Todos'),
+(2,2,4,'pendiente','url/recurso','Todos'),
+(3,2,4,'vencido','url/recurso','Todos');
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';
 GRANT ALL PRIVILEGES ON prevendb_test.* TO 'prevenroot'@'localhost';

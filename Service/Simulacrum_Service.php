@@ -195,7 +195,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
             return $this->feedback;
         }
 
-        $building = $this->feedback['resource'];
+        $building = $this->feedback['building'];
         if(es_resp_edificio() && $building['username'] != getUser()) {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'BLD_FRBD';
