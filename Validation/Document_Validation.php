@@ -21,7 +21,7 @@ class Document_Validation extends Validator {
     function __construct() {
     }
 
-    function validar_atributos_searchImplements() {
+    function validar_atributos_searchCompletions() {
         $validacion = $this->validar_atributos_search();
         if(!$validacion['ok']) {
             return $validacion;

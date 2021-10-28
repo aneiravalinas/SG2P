@@ -99,7 +99,7 @@ class Implement_ImpFormat {
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
                                         insertacampo(document.formularioadd,'controller','ImpFormat');
                                         insertacampo(document.formularioadd,'action','implement');
-                                        enviaformcorrecto(document.formularioadd,check_FORMATION_IMPLEMENT());">
+                                        enviaformcorrecto(document.formularioadd, check_SIM_FORMAT_IMPLEMENT());">
                                         Enviar
                                     </a>
                                 </div>

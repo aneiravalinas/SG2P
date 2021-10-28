@@ -1289,6 +1289,7 @@ arrayEN = {
         'i18n-simulacros' : 'Simulacrums',
         'i18n-info_plan' : 'Plan Information',
         'i18n-elements_plan' : 'Plan elements',
+        'i18n-nombre_plan' : 'Plan Name',
 
         // IMP_DOCS
         'i18n-show-impdocs' : 'See Completions',
@@ -1300,7 +1301,7 @@ arrayEN = {
         'i18n-cump_id' : 'Completion ID',
         'i18n-add-implements' : 'Add Completions',
         'i18n-file_doc' : 'Completion File',
-        'i18n-nombre_defdoc' : 'Document Name',
+        'i18n-documento' : 'Document',
         'i18n-add-implement-confirm' : 'Are you sure you want to add the following completion?',
         'i18n-del-imp-doc-confirm' : 'Are you sure you want to remove the completion of this document? The change will not be reversible',
         'i18n-expire-impdoc-confirm' : 'Are you sure you want to expire the completion of this document? The change will not be reversible',
@@ -1394,6 +1395,7 @@ arrayEN = {
             'm-url_recurso' : ' Resource URL ',
             'm-fecha_planificacion' : ' Planning Date ',
             'm-destinatarios' : ' Recipients ',
+            'm-nombre_plan' : ' Plan Name ',
 
             // Mensajes Modal
             'i18n-max-size' : 'exceeds the maximum size',

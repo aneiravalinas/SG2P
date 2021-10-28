@@ -106,7 +106,7 @@ class Search_Route {
                                         insertacampo(document.formulariosearch,'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
                                         insertacampo(document.formulariosearch,'controller','Route');
                                         insertacampo(document.formulariosearch,'action','show');
-                                        enviaformcorrecto(document.formulariosearch, check_ROUTE_SEARCH());">
+                                        enviaformcorrecto(document.formulariosearch, check_DOC_PROC_ROUTE_SEARCH());">
                                         Enviar
                                     </a>
                                 </div>

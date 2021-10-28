@@ -88,7 +88,7 @@ class Route_Validation extends Validator {
         return $validacion;
     }
 
-    function validar_atributos_search_implements() {
+    function validar_atributos_searchCompletions() {
         $validacion = $this->validar_atributos_search();
         if(!$validacion['ok']) {
             return $validacion;

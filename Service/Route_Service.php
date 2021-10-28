@@ -39,20 +39,26 @@ class Route_Service extends Route_Validation {
         }
     }
 
-    function searchImpRoutes() {
+    /*
+     *  - Busca Cumplimentaciones de una Ruta
+     *      1. Valida y busca la ruta por ID.
+     *      2. Valida el resto de atributos utilizados como filtro.
+     *      3. Recupera las cumplimentaciones de la Ruta que cumplan con los criterios de filtrado.
+     */
+    function searchCompletions() {
         $this->feedback = $this->seekRoute();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
 
         $route = $this->feedback['resource'];
-        $validation = $this->validar_atributos_search_implements();
+        $validation = $this->validar_atributos_searchCompletions();
         if(!$validation['ok']) {
             $validation['route'] = array('ruta_id' => $route['ruta_id']);
             return $validation;
         }
 
-        $this->feedback = $this->impRoute_entity->SEARCH();
+        $this->feedback = $this->impRoute_entity->searchCompletions();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPROUTE_SEARCH_OK';
             $this->feedback['route'] = $route;
@@ -66,6 +72,15 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los detalles de la Ruta en un Edificio.
+     *  - Los detalles de la Ruta incluyen los datos de la Definición de la Ruta junto con sus cumplimentaciones en las Plantas del Edificio.
+     *      1. Valida y busca la ruta y el edificio por ID, y comprueba que el plan de la ruta está asociado al edificio.
+     *      2. Comprueba que el usuario tenga permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador').
+     *      3. Valida el resto de atributos utilizados en la búsqueda (filtrado)
+     *      4. Calcula el estado de la ruta en el edificio.
+     *      5. Realiza la búsqueda.
+     */
     function searchRoute() {
         $this->feedback = $this->searchRouteAndBuilding();
         if(!$this->feedback['ok']) {
@@ -94,7 +109,7 @@ class Route_Service extends Route_Validation {
         }
 
         $route['estado'] = $route_state['estado'];
-        $this->feedback = $this->impRoute_entity->searchImpRoutes();
+        $this->feedback = $this->impRoute_entity->SEARCH();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPROUTE_SEARCH_OK';
             $this->feedback['route'] = $route;
@@ -109,6 +124,15 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los detalles de la Ruta en el Edificio del Portal.
+     *  - Los detalles de la Ruta incluyen los datos de la Definición de la Ruta junto con sus cumplimentaciones ACTIVAS en el Edificio.
+     *      1. Valida y busca la ruta y el edificio por ID, y comprueba que el plan de la ruta está asociado al edificio.
+     *      2. Verifica que la asiganción entre el plan de la ruta y el edificio está ACTIVA.
+     *      3. Se calcula el estado de la Ruta en el Edificio y comprueba que está ACTIVO.
+     *      4. Valida el resto de atributos utilizados en la búsqueda (filtrado).
+     *      5. Recupera las cumplimentaciones ACTIVAS de la Ruta en el Edificio que cumplan con los criterios de filtrado.
+     */
     function seekPortalRoute() {
         $this->feedback = $this->searchRouteAndBuilding();
         if(!$this->feedback['ok']) {
@@ -160,7 +184,11 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
-    function dataRouteForm() {
+    /*
+     *  Valida y busca una Ruta y un Edificio por ID, comprueba que existe una asociación entre el Plan de la Ruta y el Edificio, verifica que el usuario
+     *  tenga permisos sobre el edificio y recupera las Plantas del Edificio.
+     */
+    function routeForm() {
         $this->feedback = $this->searchRouteAndBuilding();
         if(!$this->feedback['ok']) {
             return $this->feedback;
@@ -187,6 +215,10 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  Valida y busca una Ruta y un Edificio por ID, comprueba que existe una asociación ACTIVA entre el Plan de la Ruta y el Edificio y recupera
+     *  las Plantas asociadas al Edificio.
+     */
     function searchPortalRouteForm() {
         $this->feedback = $this->searchRouteAndBuilding();
         if(!$this->feedback['ok']) {
@@ -210,6 +242,13 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Añade una Cumplimentación en estado PENDIENTE de una Ruta en una de las Plantas del Edificio.
+     *      1. Valida los IDs de Ruta y de Planta y comprueba que existen.
+     *      2. Comprueba que el usuario tiene permisos sobre el Edificio al que pertenece la Planta.
+     *      3. Verifica que el Pan de la Ruta está asignado al Edificio al que pertenece la Planta.
+     *      4. Crea la cumplimentación y recalcula el estado del Plan en el Edificio.
+     */
     function addRoute() {
         $validation = $this->validar_atributos_addRoute();
         if(!$validation['ok']) {
@@ -252,6 +291,7 @@ class Route_Service extends Route_Validation {
         $this->feedback = $this->impRoute_entity->ADD();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPROUTE_ADD_OK';
+            $this->update_plan_state($building['edificio_id'], $route['plan_id']);
         } else if($this->feedback['code'] == 'QRY_KO') {
             $this->feedback['code'] = 'IMPROUTE_ADD_KO';
         }
@@ -260,6 +300,7 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca una Ruta por ID y recupera los Edificios que tengan una asignación ACTIVA con el Plan de la Ruta.
     function addImpRouteForm() {
         $this->feedback = $this->seekRoute();
         if(!$this->feedback['ok']) {
@@ -277,6 +318,11 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  1. Valida y busca una Definición de Ruta por ID.
+     *  2. Valida los Edificios por ID.
+     *  3. Llama a la función ADD para añadir las cumplimentaciones de la Ruta en cada una de las Plantas de los Edificios.
+     */
     function addImpRoute() {
         $validation = $this->validar_atributos_add();
         if(!$validation['ok']) {
@@ -294,6 +340,18 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Crea una Cumplimentación en estado Pendiente de la Ruta que se pasa como parámetro en cada uno de los Edificios.
+     *  - Para cada uno de los Edificios:
+     *      1. Comprueba que el edificio existe.
+     *      2. Valida que el usuario que realiza la acción tiene permisos sobre el Edificio.
+     *      3. Comprueba que existe una asociación ACTIVA entre el Plan de la Ruta y el Edifico.
+     *      4. Recupera las Plantas del Edificio y crea el directorio de la Definición de la Ruta dentro del directorio Uploads.
+     *          - Ejemplo de ruta de directorios: Uploads/PLAN_ID/EDIFICIO_ID/Rutas/RUTA_ID/
+     *      5. Crea una cumplimentación en estado Pendiente para cada una de las Plantas.
+     *      6. Recalcula el estado del Plan en el Edificio.
+     *  - En caso de que se produzca un error al crear alguna de las cumplimentaciones, deshace TODOS los cambios realizados hasta el momento.
+     */
     function ADD($route) {
         if(empty($this->buildings)) {
             $feedback['ok'] = true;
@@ -368,6 +426,7 @@ class Route_Service extends Route_Validation {
         if(sizeof($floors) == sizeof($created_imp_floors)) {
             $feedback = $this->ADD($route);
             if($feedback['ok']) {
+                $this->update_plan_state($building['edificio_id'], $route['plan_id']);
                 return $feedback;
             }
         }
@@ -384,6 +443,13 @@ class Route_Service extends Route_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Consulta la información de la cumplimentación de una Ruta.
+     *      1. Valida y busca una cumplimentación por ID.
+     *      2. Comprueba que el usuario tenga permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. Genera la ruta para acceder al fichero de la cumplimentación.
+     *          - Formato de la Ruta: Uploads/PLAN_ID/EDIFICIO_ID/Rutas/RUTA_ID/CUMPLIMENTACION_ID/NOMBRE_FICHERO
+     */
     function seek() {
         $validation = $this->validar_PLANTA_RUTA_ID();
         if(!$validation['ok']) {
@@ -410,6 +476,13 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Consulta la información de la cumplimentación de una Ruta del Portal.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Verifica que la cumplimentación esté ACTIVA (Pendiente o Cumplimentada).
+     *      3. Genera la ruta para acceder al fichero de la cumplimentación.
+     *          - Formato de la ruta: Uploads/PLAN_ID/EDIFICIO_ID/Rutas/RUTA_ID/CUMPLIMENTACION_ID/NOMBRE_FICHERO
+     */
     function seekPortalImpRoute() {
         $validation = $this->validar_PLANTA_RUTA_ID();
         if(!$validation['ok']) {
@@ -435,6 +508,13 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Modifica el estado de la cumplimentación de una Ruta a 'vencido'
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. Modifica el estado de la cumplimentación y añade la fecha actual como fecha de vencimiento.
+     *      4. Actualiza el estado del Plan en el Edificio.
+     */
     function expire() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -456,6 +536,16 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Cumplimenta la cumplimentación de una Ruta, subiendo el fichero asociado.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. Verifica que la cumplimentación está ACTIVA (estado Pendiente o Cumplimentado).
+     *      4. Valida el fichero (nombre y extensión).
+     *      5. Carga el fichero en el servidor, creando el directorio de la cumplimentación en caso de que no exista.
+     *      6. Modifica el estado, el nombre del fichero y la fecha de cumplimentación.
+     *      7. Elimina el fichero anterior asociado a la cumplimentación en caso de que existiera y actualiza el estado del Plan en el Edificio.
+     */
     function implement() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -509,6 +599,14 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Elimina la cumplimentación de una Ruta
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. En caso de que el rol del usuario sea 'edificio', verifica que la cumplimentación a eliminar no sea la única cumplimentación de la Ruta en el Edificio.
+     *      4. Elimina la cumplimentación y el fichero asociado.
+     *      5. Actualiza el estado del Plan en el Edificio.
+     */
     function DELETE() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -543,6 +641,7 @@ class Route_Service extends Route_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca la Definición de una Ruta por ID.
     function seekRoute() {
         $validation = $this->validar_RUTA_ID();
         if(!$validation['ok']) {
@@ -552,6 +651,7 @@ class Route_Service extends Route_Validation {
         return $this->seekByRouteID();
     }
 
+    // Valida y busca una Ruta y un Edificio por ID, y comprueba que existe una asociación entre el Plan de la Ruta y el Edificio.
     function searchRouteAndBuilding() {
         $validation = $this->validar_route_and_building();
         if(!$validation['ok']) {
@@ -580,6 +680,7 @@ class Route_Service extends Route_Validation {
         return $feedback;
     }
 
+    // Búsqueda de la Definición de una Ruta por ID.
     function seekByRouteID() {
         $feedback = $this->defRoute_entity->seek();
         if($feedback['ok']) {
@@ -596,6 +697,7 @@ class Route_Service extends Route_Validation {
         return $feedback;
     }
 
+    // Búsqueda de un Edificio por ID.
     function seekByBuildingID() {
         include_once './Model/Building_Model.php';
         $building_entity = new Building_Model();
@@ -615,6 +717,7 @@ class Route_Service extends Route_Validation {
         return $feedback;
     }
 
+    // Búsqueda de asignación entre Plan y Edificio por IDs.
     function seekPlanBuilding($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $buildPlan_entity = new BuildPlan_Model();
@@ -634,6 +737,7 @@ class Route_Service extends Route_Validation {
         return $feedback;
     }
 
+    // Búsqueda de asociaciones ACTIVAS (Pendiente o Cumplimentado) Edificio - Plan por ID de Plan.
     function searchActiveBuildPlans($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $bldPlan_entity = new BuildPlan_Model();
@@ -653,6 +757,7 @@ class Route_Service extends Route_Validation {
         return $feedback;
     }
 
+    // Búsqueda de Plantas por Edificio.
     function searchBuildingFloors() {
         include_once './Model/Floor_Model.php';
         $floor_entity = new Floor_Model();
@@ -672,6 +777,11 @@ class Route_Service extends Route_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Obtención del estado de una Ruta en un Edificio.
+     *      1. Recupera las plantas del Edificio.
+     *      2. Obtiene el estado de la Ruta en el Edificio.
+     */
     function get_route_state() {
         $feedback = $this->searchBuildingFloors();
         if(!$feedback['ok'] && $feedback['code'] != 'BLD_FLOORS_SEARCH_EMPT') {
@@ -684,6 +794,7 @@ class Route_Service extends Route_Validation {
     }
 
 
+    // Búsqueda de Planta por ID.
     function seekByFloorID() {
         include_once './Model/Floor_Model.php';
         $floor_entity = new Floor_Model();
@@ -702,6 +813,7 @@ class Route_Service extends Route_Validation {
         return $feedback;
     }
 
+    // Búsqueda de Cumplimentación por ID.
     function seekByImpRouteID() {
         $feedback = $this->impRoute_entity->seek();
         if($feedback['ok']) {
@@ -718,12 +830,14 @@ class Route_Service extends Route_Validation {
         return $feedback;
     }
 
+    // Cálculo y actualización del estado de un Plan en un Edificio.
     function update_plan_state($edificio_id, $plan_id) {
         include_once './Service/CheckState_Service.php';
         $checkState_service = new CheckState_Service($edificio_id, $plan_id);
         $checkState_service->update_plan_state();
     }
 
+    // Consulta el número de cumplimentaciones de una Ruta en un Edificio mayor que 1.
     function check_more_than_one_improutes($edificio_id, $ruta_id) {
         $this->impRoute_entity->ruta_id = $ruta_id;
         $feedback = $this->impRoute_entity->searchRoutesBuildings($edificio_id);

@@ -27,7 +27,7 @@ class Procedure {
     function addForm() {
         if(!es_registrado()) {
             $proc_service = new Procedure_Service();
-            $feedback = $proc_service->addProcedureForm();
+            $feedback = $proc_service->procedureForm();
             if($feedback['ok']) {
                 include_once './View/Procedures/Add_Procedure_View.php';
                 new Add_Procedure($feedback['procedure'], $feedback['building']);
@@ -159,7 +159,7 @@ class Procedure {
     function searchForm() {
         if(!es_registrado()) {
             $proc_service = new Procedure_Service();
-            $feedback = $proc_service->searchProcedureForm();
+            $feedback = $proc_service->procedureForm();
             if($feedback['ok']) {
                 include_once './View/Procedures/Search_Procedure_View.php';
                 new Search_Procedure($feedback['procedure'], $feedback['building']);

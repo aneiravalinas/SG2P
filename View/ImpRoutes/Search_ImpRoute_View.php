@@ -102,7 +102,7 @@ class Search_ImpRoute {
                                         insertacampo(document.formulariosearch,'ruta_id', '<?php echo $this->route['ruta_id'] ?>');
                                         insertacampo(document.formulariosearch,'controller','ImpRoute');
                                         insertacampo(document.formulariosearch,'action','show');
-                                        enviaformcorrecto(document.formulariosearch, check_IMPROUTE_SEARCH());">
+                                        enviaformcorrecto(document.formulariosearch, check_CUMP_ROUTE_SEARCH());">
                                         Enviar
                                     </a>
                                 </div>

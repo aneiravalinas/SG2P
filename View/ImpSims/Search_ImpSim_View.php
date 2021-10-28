@@ -90,7 +90,7 @@ class Search_ImpSim {
                                         insertacampo(document.formulariosearch,'simulacro_id', '<?php echo $this->simulacrum['simulacro_id'] ?>');
                                         insertacampo(document.formulariosearch,'controller','ImpSim');
                                         insertacampo(document.formulariosearch,'action','show');
-                                        enviaformcorrecto(document.formulariosearch, check_IMPFORMAT_SEARCH());">
+                                        enviaformcorrecto(document.formulariosearch, check_CUMP_SIM_FORMAT_SEARCH());">
                                         Enviar
                                     </a>
                                 </div>

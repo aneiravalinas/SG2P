@@ -14,7 +14,7 @@ class ImpFormat {
     function show() {
         if($this->checkPermission()) {
             $format_service = new Formation_Service();
-            $feedback = $format_service->searchImpFormats();
+            $feedback = $format_service->searchCompletions();
             if($feedback['ok']) {
                 include_once './View/ImpFormats/Show_ImpFormats_View.php';
                 new Show_ImpFormats($feedback['resource'], $feedback['formation']);

@@ -34,6 +34,7 @@ class ImpSim_Model extends Abstract_Model {
         }
     }
 
+    // Registra una Cumplimentación.
     function ADD() {
         $this->query = "
             INSERT INTO EDIFICIO_SIMULACRO
@@ -61,6 +62,7 @@ class ImpSim_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Modifica los datos de una cumplimentación.
     function EDIT() {
         $this->query = "UPDATE EDIFICIO_SIMULACRO SET " .
             ($this->fecha_planificacion == '' ? "" : "fecha_planificacion = '$this->fecha_planificacion', ") .
@@ -74,6 +76,7 @@ class ImpSim_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Elimina una cumplimentación.
     function DELETE() {
         $this->query = "
             DELETE FROM EDIFICIO_SIMULACRO
@@ -85,7 +88,8 @@ class ImpSim_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function SEARCH() {
+    // Busca cumplimentaciones de un Simulacro que cumpla con los criterios establecidos.
+    function searchCompletions() {
         $this->query = "
             SELECT EDIFICIO_SIMULACRO.*, EDIFICIO.nombre AS nombre_edificio
             FROM EDIFICIO_SIMULACRO
@@ -108,7 +112,8 @@ class ImpSim_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function searchImpSims() {
+    // Busca cumplimentaciones de un Simulacro en un Edificio que cumpla con los criterios establecidos.
+    function SEARCH() {
         $this->query = "
             SELECT * FROM EDIFICIO_SIMULACRO
             WHERE
@@ -126,6 +131,7 @@ class ImpSim_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Consulta cumplimentaciones ACTIVAS (Pendientes o Cumplimentadas) de un Simulacro en un Edificio.
     function searchActiveImpSims() {
         $this->query = "
             SELECT * FROM EDIFICIO_SIMULACRO
@@ -142,7 +148,7 @@ class ImpSim_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-
+    // Consulta datos de una cumplimentación por ID.
     function seek() {
         $this->query = "
             SELECT EDIFICIO_SIMULACRO.*, EDIFICIO.username, EDIFICIO.nombre AS nombre_edificio, SIMULACRO.nombre AS nombre_simulacro, SIMULACRO.plan_id
@@ -159,6 +165,7 @@ class ImpSim_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Recupera cumplimentaciones por ID de Simulacro.
     function searchBySimID() {
         $this->query = "
             SELECT * FROM EDIFICIO_SIMULACRO
@@ -169,6 +176,7 @@ class ImpSim_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Recupera cumplimentaciones por ID de Simulacro e ID de Edificio.
     function searchSimsBuildings() {
         $this->query = "
             SELECT * FROM EDIFICIO_SIMULACRO

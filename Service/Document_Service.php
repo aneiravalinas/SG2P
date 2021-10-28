@@ -1,5 +1,7 @@
 <?php
 
+// Última Revisión : 2021-10-19
+
 include_once './Validation/Document_Validation.php';
 include_once './Model/DefDoc_Model.php';
 include_once './Model/ImpDoc_Model.php';
@@ -39,20 +41,26 @@ class Document_Service extends Document_Validation {
         }
     }
 
-    function searchImplements() {
+    /*
+     *  - Busca Cumplimentaciones de un Documento.
+     *      1. Valida y busca el documento por ID.
+     *      2. Valida resto de atributos utilizados como filtro.
+     *      3. Recupera las cumplimentaciones del Documento que cumplan con los datos de filtrado.
+     */
+    function searchCompletions() {
         $this->feedback = $this->seekDocument();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
 
         $doc = $this->feedback['resource'];
-        $validation = $this->validar_atributos_searchImplements();
+        $validation = $this->validar_atributos_searchCompletions();
         if(!$validation['ok']) {
             $validation['document'] = array('plan_id' => $doc['plan_id']);
             return $validation;
         }
 
-        $this->feedback = $this->impDoc_entity->SEARCH();
+        $this->feedback = $this->impDoc_entity->searchCompletions();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPDOC_SEARCH_OK';
             $this->feedback['document'] = array('plan_id' => $doc['plan_id'],
@@ -67,6 +75,15 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los detalles del Documento en un Edificio.
+     *  - Los detalles del Documento incluyen los datos de la Definición del Documento junto con sus cumplimentaciones en el Edificio.
+     *      1. Valida y busca el documento y el edificio por ID, y comprueba que el plan del documento esté asociado al edificio.
+     *      2. Comprueba que el usuario tenga permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador'.
+     *      3. Valida el resto de atributos utilizados en la búsqueda (filtrado).
+     *      4. Calcula el estado del documento en el edificio.
+     *      5. Realiza la búsqueda.
+     */
     function searchDocument() {
         $this->feedback = $this->searchDocAndBuilding();
         if(!$this->feedback['ok']) {
@@ -95,7 +112,7 @@ class Document_Service extends Document_Validation {
         }
 
         $document['estado'] = $doc_state['estado'];
-        $this->feedback = $this->impDoc_entity->searchImpDocs();
+        $this->feedback = $this->impDoc_entity->SEARCH();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPDOC_SEARCH_OK';
             $this->feedback['document'] = $document;
@@ -110,11 +127,21 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los detalles del Documento en el Edificio del Portal.
+     *  - Los detalles del Documento incluyen los datos de la Definición del Documento junto con sus cumplimentaciones ACTIVAS en el Edificio.
+     *      1. Valida y busca el documento y el edificio por ID, y comprueba que el plan del documento esté asociado al edificio.
+     *      2. Comprueba que el documento sea 'visible'.
+     *      3. Verifica que la asignación del plan del documento y el edificio esté ACTIVA.
+     *      4. Se obtiene dinámicamente el estado del Documento en el Edificio, y comprueba que este esté ACTIVO.
+     *      5. Recupera las cumplimentaciones ACTIVAS del Documento en el Edificio.
+     */
     function seekPortalDocument() {
         $this->feedback = $this->searchDocAndBuilding();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
+
         $document = $this->feedback['document'];
         if($document['visible'] == 'no') {
             $this->feedback['ok'] = false;
@@ -161,6 +188,7 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca una Definición de Documento por ID.
     function seekDocument() {
         $validation = $this->validar_DOCUMENTO_ID();
         if(!$validation['ok']) {
@@ -170,21 +198,8 @@ class Document_Service extends Document_Validation {
         return $this->seekByDocID();
     }
 
-    function searchDocumentForm() {
-        $this->feedback = $this->searchDocAndBuilding();
-        if(!$this->feedback['ok']) {
-            return $this->feedback;
-        }
 
-        if(es_resp_edificio() && $this->feedback['building']['username'] != getUser()) {
-            $this->feedback['ok'] = false;
-            $this->feedback['code'] = 'BLD_FRBD';
-            unset($this->feedback['resource'], $this->feedback['document'], $this->feedback['building']);
-        }
-
-        return $this->feedback;
-    }
-
+    // Valida y busca un Documento y un Edificio por ID, y comprueba que existe una asociación entre el Plan del Documento y el Edificio.
     function searchDocAndBuilding() {
         $validation = $this->validar_doc_and_building();
         if(!$validation['ok']) {
@@ -213,6 +228,7 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
+    // Valida y buscar una Definición de Documento por ID, y recupera los Edificios que tengan una asignación ACTIVA con el Plan del Documento.
     function addImpDocForm() {
         $this->feedback = $this->seekDocument();
         if(!$this->feedback['ok']) {
@@ -230,14 +246,17 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
-    function addDocumentForm() {
+    /*
+     *  Valida y busca un Documento y un Edificio por ID, comprueba que existe una asociación entre el Plan del Documento y el Edificio,
+     *  y comprueba que el usuario tenga permisos sobre el edificio.
+     */
+    function documentForm() {
         $this->feedback = $this->searchDocAndBuilding();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
 
         $building = $this->feedback['building'];
-
         if(es_resp_edificio() && $building['username'] != getUser()) {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'BLD_FRBD';
@@ -247,6 +266,11 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  1. Valida y busca una Definición de Documento por ID.
+     *  2. Valida los Edificios por ID.
+     *  3. Llama a la función ADD para añadir las cumplimentaciones del Documento en los Edificios.
+     */
     function addImpDoc() {
         $validation = $this->validar_atributos_add();
         if(!$validation['ok']) {
@@ -264,6 +288,18 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  Crea una Cumplimentación en estado PENDIENTE del Documento que se pasa como parámetro en cada uno de los Edificios.
+     *  Para cada uno de los Edificios:
+     *      1. Comprueba que el edificio existe.
+     *      2. Valida que el usuario que realiza la acción tiene permisos sobre el edificio.
+     *      3. Comprueba que existe una asociación ACTIVA entre el Plan del Documento y el Edificio.
+     *      4. Verifica que NO existan cumplimentaciones ACTIVAS del Documento en el Edificio.
+     *      5. Si no existe, crea el directorio de la definición del Documento dentro del directorio Uploads.
+     *              - Ejemplo de ruta de directorios: Uploads/PLAN_ID/EDIFICIO_ID/Documentos/DOCUMENTO_ID/.
+     *      6. Añade la Cumplimentación y recalcula el estado del Plan en el Edificio.
+     *  En caso de que se produzca un error al crear alguna de las cumplimentaciones, deshace TODOS los cambios realizados hasta el momento.
+     */
     function ADD($document) {
         if(empty($this->buildings)) {
             $feedback['ok'] = true;
@@ -342,6 +378,13 @@ class Document_Service extends Document_Validation {
         return $feedback;
     }
 
+    /*
+     *  Consulta la información de cumplimentación de un Documento.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. Genera la ruta para acceder al fichero de la cumplimentación.
+     *          - Formato de la ruta: Uploads/PLAN_ID/EDIFICIO_ID/Documentos/DOCUMENTO_ID/CUMPLIMENTACION_ID/NOMBRE_FICHERO.
+     */
     function seek() {
         $validation = $this->validar_EDIFICIO_DOCUMENTO_ID();
         if(!$validation['ok']) {
@@ -368,6 +411,13 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  Consulta la información de cumplimentación de un Documento del Portal.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Verifica que la cumplimentación esté ACTIVA (Pendiente o Cumplimentada)
+     *      3. Genera la ruta para acceder al fichero de la cumplimentación.
+     *          - Formato de la ruta: Uploads/PLAN_ID/EDIFICIO_ID/Documentos/DOCUMENTO_ID/CUMPLIMENTACION_ID/NOMBRE_FICHERO.
+     */
     function seekPortalImpDoc() {
         $validation = $this->validar_EDIFICIO_DOCUMENTO_ID();
         if(!$validation['ok']) {
@@ -394,6 +444,14 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  Elimina la cumplimentación de un Documento.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. En caso de que rol del usuario sea 'edificio', verifica que la cumplimentación a eliminar no sea la única cumplimentación del Documento en el Edificio.
+     *      4. Elimina la cumplimentación y el fichero asociado.
+     *      5. Actualiza el estado del Plan en el Edificio.
+     */
     function DELETE() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -430,6 +488,13 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  Modifica el estado de la cumplimentación de un Documento a 'vencido'.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. Modifica el estado de la cumplimentación y añade la fecha actual como fecha de vencimiento.
+     *      4. Actualiza el estado del Plan en el Edificio.
+     */
     function expire() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -451,6 +516,16 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  Cumplimenta la cumplimentación de un Documento, subiendo el fichero asociado.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. Verifica que la cumplimentación esté ACTIVA (estado Pendiente o Cumplimentado)
+     *      4. Valida el fichero (nombre y extensión)
+     *      5. Carga el fichero en el servidor, creando el directorio de la cumplimentación en caso de que no exista.
+     *      6. Modifica el estado, el nombre del fichero y la fecha de cumplimentación.
+     *      7. Elimina el fichero anterior asociado a la cumplimentación en caso de que existiera y actualiza el estado del Plan en el Edificio.
+     */
     function implement() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -503,6 +578,7 @@ class Document_Service extends Document_Validation {
         return $this->feedback;
     }
 
+    // Búsqueda de Cumplimentación de Documento por ID
     function seekByImpDocID() {
         $feedback = $this->impDoc_entity->seek();
         if($feedback['ok']) {
@@ -519,6 +595,7 @@ class Document_Service extends Document_Validation {
         return $feedback;
     }
 
+    // Búsqueda de Definición de Documento por ID.
     function seekByDocID() {
         $this->defDoc_entity->documento_id = $this->documento_id;
         $feedback = $this->defDoc_entity->seek();
@@ -536,6 +613,7 @@ class Document_Service extends Document_Validation {
         return $feedback;
     }
 
+    // Búsqueda de Edificio por ID
     function seekByBuildingID() {
         include_once './Model/Building_Model.php';
         $building_entity = new Building_Model();
@@ -555,6 +633,7 @@ class Document_Service extends Document_Validation {
         return $feedback;
     }
 
+    // Búsqueda de asignación Edificio - Plan por ID (ID Edificio + ID Plan)
     function seekPlanBuilding($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $buildPlan_entity = new BuildPlan_Model();
@@ -575,6 +654,7 @@ class Document_Service extends Document_Validation {
     }
 
 
+    // Búsqueda de asociaciones ACTIVAS (Pendiente o Cumplimentado) Edificio - Plan por ID de Plan.
     function searchActiveBuildPlans($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $buildPlan_entity = new BuildPlan_Model();
@@ -595,6 +675,7 @@ class Document_Service extends Document_Validation {
     }
 
 
+    // Búsqueda de TODAS las cumplimentaciones de un Documento en un Edificio.
     function search_all_impdocs() {
         $feedback = $this->impDoc_entity->searchDocsBuildings();
         if($feedback['ok']) {
@@ -606,6 +687,7 @@ class Document_Service extends Document_Validation {
         return $feedback;
     }
 
+    // Búsqueda de cumplimentaciones ACTIVAS (Pendiente o Cumplimentado) de un Documento en un Edificio.
     function doc_building_actives_not_exist() {
         $this->impDoc_entity->edificio_id = $this->edificio_id;
         $feedback = $this->impDoc_entity->searchActiveImpDocs();
@@ -623,6 +705,7 @@ class Document_Service extends Document_Validation {
         return $feedback;
     }
 
+    // Consulta de número de cumplimentaciones de un Documento en un Edificio mayor que 1.
     function check_more_than_one_impdocs($edificio_id, $doc_id) {
         $this->impDoc_entity->setAttributes(array('edificio_id' => $edificio_id, 'documento_id' => $doc_id));
         $feedback = $this->impDoc_entity->searchDocsBuildings();
@@ -640,11 +723,18 @@ class Document_Service extends Document_Validation {
         return $feedback;
     }
 
+    // Cálculo y actualización del estado de un Plan en un Edificio.
     function update_plan_state($edificio_id, $plan_id) {
         include_once './Service/CheckState_Service.php';
         $checkState_service = new CheckState_Service($edificio_id, $plan_id);
         $checkState_service->update_plan_state();
     }
+
+    /*
+     *  Obtención del estado de un Documento en un Edificio.
+     *      1. Recupera todas las cumplimentaciones del Documento en el Edificio.
+     *      2. Calcula el estado del Documento en función de las cumplimentaciones recuperadas.
+     */
 
     function get_document_state() {
         $feedback = $this->search_all_impdocs();

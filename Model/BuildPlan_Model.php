@@ -95,6 +95,7 @@ class BuildPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Recupera la información de la asignación entre un Plan y un Edificio filtrando por ID.
     function seek() {
         $this->query = "
             SELECT * FROM EDIFICIO_PLAN
@@ -146,6 +147,9 @@ class BuildPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera la información de las asignaciones entre Plan y Edificio, junto con el nombre del Edificio y el nombre del Plan.
+     */
     function searchBuildPlans() {
         $this->query = "
             SELECT EDIFICIO_PLAN.*, EDIFICIO.nombre AS nombre_edificio, PLAN.nombre AS nombre_plan
@@ -169,6 +173,10 @@ class BuildPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera la información de las asignaciones entre Plan y Edificio, junto con el nombre del Edificio y el nombre del Plan, donde el plan esté asignado al usuario
+     *    en sesión.
+     */
     function searchBuildPlansByResp($username) {
         $this->query = "
             SELECT EDIFICIO_PLAN.*, EDIFICIO.nombre AS nombre_edificio, PLAN.nombre AS nombre_plan
@@ -193,6 +201,7 @@ class BuildPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Recupera la información de las asignaciones ACTIVAS entre Planes y el Edificio del Portal, junto con el nombre del Plan.
     function searchPortalPlans() {
         $this->query = "
             SELECT EDIFICIO_PLAN.*, PLAN.nombre AS nombre_plan
@@ -204,19 +213,6 @@ class BuildPlan_Model extends Abstract_Model {
                 estado != 'vencido' AND
                 PLAN.nombre LIKE '%" . $this->nombre_plan . "%'
             ORDER BY estado DESC
-        ";
-
-        $this->get_results_from_query();
-        return $this->feedback;
-    }
-
-    function searchByPlanID() {
-        $this->query = "
-            SELECT EDIFICIO_PLAN.*, EDIFICIO.nombre AS nombre_edificio
-            FROM EDIFICIO_PLAN
-            INNER JOIN EDIFICIO
-                ON EDIFICIO.edificio_id = EDIFICIO_PLAN.edificio_id
-            WHERE plan_id = '$this->plan_id';
         ";
 
         $this->get_results_from_query();

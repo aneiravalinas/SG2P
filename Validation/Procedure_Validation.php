@@ -72,7 +72,7 @@ class Procedure_Validation extends Validator {
         return $validation;
     }
 
-    function validar_atributos_search_implements() {
+    function validar_atributos_searchCompletions() {
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
             return $validation;

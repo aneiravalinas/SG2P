@@ -39,20 +39,26 @@ class Procedure_Service extends Procedure_Validation {
         }
     }
 
-    function searchImpProcs() {
+    /*
+     *  - Busca cumplimentaciones de un Procedimiento.
+     *      1. Valida y busca un Procedimiento por ID.
+     *      2. Valida atributos a usar en el filtrado.
+     *      3. Recupera las cumplimentaciones del Procedimiento que cumplan con las condiciones de filtrado.
+     */
+    function searchCompletions() {
         $this->feedback = $this->seekProcedure();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
 
         $proc = $this->feedback['resource'];
-        $validation = $this->validar_atributos_search_implements();
+        $validation = $this->validar_atributos_searchCompletions();
         if(!$validation['ok']) {
             $validation['procedure'] = array('procedimiento_id' => $proc['procedimiento_id']);
             return $validation;
         }
 
-        $this->feedback = $this->impProc_entity->SEARCH();
+        $this->feedback = $this->impProc_entity->searchCompletions();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPPROC_SEARCH_OK';
             $this->feedback['procedure'] = $proc;
@@ -66,6 +72,15 @@ class Procedure_Service extends Procedure_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los detalles de un Procedimiento en un Edificio.
+     *  - Los detalles de un Procedimiento incluyen los datos de la Definición del Procedimiento junto con sus cumplimentaciones en el Edificio.
+     *      1. Valida y busca el procedimiento y el edificio por ID, y comprueba que el plan del procedimiento está asociado al edificio.
+     *      2. Comprueba que el usuario tenga permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador').
+     *      3. Valida el resto de atributos utilizados en la búsqueda (filtrado)
+     *      4. Calcula el estado del procedimiento en el edificio.
+     *      5. Realiza la búsqueda.
+     */
     function searchProcedure() {
         $this->feedback = $this->searchProcAndBuilding();
         if(!$this->feedback['ok']) {
@@ -94,7 +109,7 @@ class Procedure_Service extends Procedure_Validation {
         }
 
         $procedure['estado'] = $proc_state['estado'];
-        $this->feedback = $this->impProc_entity->searchImpProcs();
+        $this->feedback = $this->impProc_entity->SEARCH();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPPROC_SEARCH_OK';
             $this->feedback['procedure'] = $procedure;
@@ -109,6 +124,14 @@ class Procedure_Service extends Procedure_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los detalles del Procedimiento en el Edificio del Portal.
+     *  - Los detalles del Procedimiento incluyen los datos de la Definición del Procedimiento junto con sus cumplimentaciones ACTIVAS en el Edificio.
+     *      1. Valida y busca el procedimiento y el edificio por ID, y comprueba que el plan del procedimiento esté asociado al edificio.
+     *      2. Comprueba que la asignación del plan del procedimiento y el edificio esté ACTIVA.
+     *      3. Se obtiene dinámicamente el estado del Procedimiento en el Edificio, y compruebe que este se encuentre ACTIVO.
+     *      4. Recupera las cumplimentaciones ACTIVAS del Procedimiento en el Edificio.
+     */
     function seekPortalProcedure() {
         $this->feedback = $this->searchProcAndBuilding();
         if(!$this->feedback['ok']) {
@@ -155,24 +178,27 @@ class Procedure_Service extends Procedure_Validation {
         return $this->feedback;
     }
 
-    function searchProcedureForm() {
+    /*
+     *  - Valida y busca un Procedimiento y un Edificio por ID, comprueba que el plan del procedimiento esté asignado al edificio y que el usuario tenga permisos sobre
+     *    el edificio.
+     */
+    function procedureForm() {
         $this->feedback = $this->searchProcAndBuilding();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
 
-        if(es_resp_edificio()) {
-            $building = $this->feedback['building'];
-            if($building['username'] != getUser()) {
-                $this->feedback['ok'] = false;
-                $this->feedback['code'] = 'BLD_FRBD';
-                unset($this->feedback['resource'], $this->feedback['procedure'], $this->feedback['building']);
-            }
+        $building = $this->feedback['building'];
+        if(es_resp_edificio() && $building['username'] != getUser()) {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'BLD_FRBD';
+            unset($this->feedback['resource'], $this->feedback['procedure'], $this->feedback['building']);
         }
 
         return $this->feedback;
     }
 
+    // Valida y busca una Definición del Procedimiento por ID, y recupera los Edificios que tengan una asignación ACTIVA con el Plan del Procedimiento.
     function addImpProcForm() {
         $this->feedback = $this->seekProcedure();
         if(!$this->feedback['ok']) {
@@ -190,6 +216,11 @@ class Procedure_Service extends Procedure_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  1. Valida y busca una Definicón de Procedimiento por ID.
+     *  2. Valida los Edificios por ID.
+     *  3. Llama a la función ADD para añadir las cumplimentaciones del Procedimiento en los Edificios.
+     */
     function addImpProc() {
         $validation = $this->validar_atributos_add();
         if(!$validation['ok']) {
@@ -207,22 +238,18 @@ class Procedure_Service extends Procedure_Validation {
         return $this->feedback;
     }
 
-    function addProcedureForm() {
-        $this->feedback = $this->searchProcAndBuilding();
-        if(!$this->feedback['ok']) {
-            return $this->feedback;
-        }
-
-        $building = $this->feedback['building'];
-        if(es_resp_edificio() && $building['username'] != getUser()) {
-            $this->feedback['ok'] = false;
-            $this->feedback['code'] = 'BLD_FRBD';
-            unset($this->feedback['resource'], $this->feedback['procedure'], $this->feedback['building']);
-        }
-
-        return $this->feedback;
-    }
-
+    /*
+     *  Crea una Cumplimentación en estado PENDIENTE del Procedimiento que se pasa como parámetro en cada uno de los Edificios.
+     *  Para cada uno de los Edificios:
+     *      1. Comprueba que el edificio existe.
+     *      2. Valida que el usuario que realiza la acción tiene permisos sobre el edificio.
+     *      3. Comprueba que existe una asociación ACTIVA entre el Plan del Procedimiento y el Edificio.
+     *      4. Verifica que NO existen cumplimentaciones ACTIVAS del Procedimiento en el Edificio.
+     *      5. Si no existe, crea el directorio de la definición del Procedimiento dentro dle directorio Uploads.
+     *              - Ejemplo de ruta de directorios: Uploads/PLAN_ID/EDIFICIO_ID/Procedimientos/PROCEDIMIENTO_ID/.
+     *      6. Recalcula el estado del Plan en el Edificio.
+     *  En caso de que se produzca un error al crear alguna de las cumplimentaciones, deshace TODOS los cambios realizados hasta el momento.
+     */
     function ADD($procedure) {
         if(empty($this->buildings)) {
             $feedback['ok'] = true;
@@ -302,6 +329,14 @@ class Procedure_Service extends Procedure_Validation {
         return $feedback;
     }
 
+    /*
+     *  Elimina la cumplimentación de un Procedimiento.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. En caso de que el rol del usuario sea 'edificio', verifica que la cumplimentación a eliminar no sea la única cumplimentación del Procedimiento en el Edificio.
+     *      4. Elimina la cumplimentación y el fichero asociado.
+     *      5. Actualiza el estado del Plan en el Edificio.
+     */
     function DELETE() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -337,6 +372,13 @@ class Procedure_Service extends Procedure_Validation {
     }
 
 
+    /*
+     *  Consulta la información de la cumplimentación de un Procedimiento.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. Genera la ruta para acceder al fichero de la cumplimentación.
+     *          - Formato de la ruta: Uploads/PLAN_ID/EDIFICIO_ID/Procedimientos/PROCEDIMIENTO_ID/CUMPLIMENTACION_ID/NOMBRE_FICHERO
+     */
     function seek() {
         $validation = $this->validar_EDIFICIO_PROCEDIMIENTO_ID();
         if(!$validation['ok']) {
@@ -363,6 +405,13 @@ class Procedure_Service extends Procedure_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  Consulta la información de la cumplimentación de un Procedimiento del Portal.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Verifica que la cumplimentación esté ACTIVA (Pendiente o Cumplimentada)
+     *      3. Genera la ruta para acceder al fichero de la cumplimentación.
+     *          - Formato de la ruta: Uploads/PLAN_ID/EDIFICIO_ID/Procedimientos/PROCEDIMIENTO_ID/CUMPLIMENTACION_ID/NOMBRE_FICHERO
+     */
     function seekPortalImpProc() {
         $validation = $this->validar_EDIFICIO_PROCEDIMIENTO_ID();
         if(!$validation['ok']) {
@@ -388,6 +437,13 @@ class Procedure_Service extends Procedure_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  Modifica el estado de la cumplimentación de un Procedimiento a 'vencido'.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. Modifica el estado de la cumplimentación y añade la fecha actual como fecha de vencimiento.
+     *      4. Actualiza el estado del Plan en el Edificio.
+     */
     function expire() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -409,6 +465,16 @@ class Procedure_Service extends Procedure_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  Cumplimenta la cumplimentación de un Procedimiento, subiendo el fichero asociado.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador').
+     *      3. Verifica que la cumplimentación esté ACTIVA (estado Pendiente o Cumplimentado)
+     *      4. Valida el fichero (nombre y extensión)
+     *      5. Carga el fichero en el servidor, creando el directorio de la cumplimentación en caso de que no exista.
+     *      6. Modifica el estado, el nombre del fichero y la fecha de cumplimentación.
+     *      7. Elimina el fichero anterior asociado a la cumplimentación en caso de qeu existiera y actualiza el estado del Plan en el Edificio.
+     */
     function implement() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -462,6 +528,7 @@ class Procedure_Service extends Procedure_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca una Definición de Procedimiento por ID.
     function seekProcedure() {
         $validation = $this->validar_PROCEDIMIENTO_ID();
         if(!$validation['ok']) {
@@ -472,6 +539,7 @@ class Procedure_Service extends Procedure_Validation {
     }
 
 
+    // Recupera uan definición de Procedimiento por ID.
     function seekByProcID() {
         $feedback = $this->defProc_entity->seek();
         if($feedback['ok']) {
@@ -488,6 +556,7 @@ class Procedure_Service extends Procedure_Validation {
         return $feedback;
     }
 
+    // Valida y busca un Procedimiento y un Edificio por ID, y comprueba que existe una asociación entre el Plan del Procedimiento y el Edificio.
     function searchProcAndBuilding() {
         $validation = $this->validar_proc_and_building();
         if(!$validation['ok']) {
@@ -516,6 +585,7 @@ class Procedure_Service extends Procedure_Validation {
         return $feedback;
     }
 
+    // Recupera la información de un Edificio por ID.
     function seekByBuildingID() {
         include_once './Model/Building_Model.php';
         $building_entity = new Building_Model();
@@ -535,6 +605,7 @@ class Procedure_Service extends Procedure_Validation {
         return $feedback;
     }
 
+    // Recupera la información de la asociación entre un Plan y un Edificio por ID.
     function seekPlanBuilding($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $buildPlan_entity = new BuildPlan_Model();
@@ -554,12 +625,18 @@ class Procedure_Service extends Procedure_Validation {
         return $feedback;
     }
 
+    // Cálculo y actualización del estado de un Plan en un Edificio.
     function update_plan_state($edificio_id, $plan_id) {
         include_once './Service/CheckState_Service.php';
         $checkState_service = new CheckState_Service($edificio_id, $plan_id);
         $checkState_service->update_plan_state();
     }
 
+    /*
+     *  Obtención del estado de un Procedimiento en un Edificio.
+     *      1. Recupera todas las cumplimentaciones del Procedimiento en el Edificio.
+     *      2. Calcula el estado del Procedimiento en función de las cumplimentaciones recuperadas.
+     */
     function get_procedure_state() {
         $feedback = $this->search_all_impprocs();
         if(!$feedback['ok']) {
@@ -572,6 +649,7 @@ class Procedure_Service extends Procedure_Validation {
         return array('ok' => true, 'estado' => $estado);
     }
 
+    // Búsqueda de TODAS las cumplimentaciones de un Procedimiento en un Edificio.
     function search_all_impprocs() {
         $feedback = $this->impProc_entity->searchProcsBuildings();
         if($feedback['ok']) {
@@ -602,6 +680,7 @@ class Procedure_Service extends Procedure_Validation {
         return $feedback;
     }
 
+    // Búsqueda de cumplimentaciones ACTIVAS (Pendiente o Cumplimentado) de un Procedimiento en un Edificio.
     function proc_building_actives_not_exist() {
         $this->impProc_entity->edificio_id = $this->edificio_id;
         $feedback = $this->impProc_entity->searchActiveImpProcs();
@@ -619,6 +698,7 @@ class Procedure_Service extends Procedure_Validation {
         return $feedback;
     }
 
+    // Búsqueda de Cumplimentación de Procedimiento por ID.
     function seekByImpProcID() {
         $feedback = $this->impProc_entity->seek();
         if($feedback['ok']) {
@@ -635,6 +715,7 @@ class Procedure_Service extends Procedure_Validation {
         return $feedback;
     }
 
+    // Consulta de número de cumplimentaciones de un Procedimiento en un Edificio mayor que 1.
     function check_more_than_one_impprocs($edificio_id, $proc_id) {
         $this->impProc_entity->setAttributes(array('edificio_id' => $edificio_id, 'procedimiento_id' => $proc_id));
         $feedback = $this->impProc_entity->searchProcsBuildings();

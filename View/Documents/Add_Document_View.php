@@ -38,7 +38,7 @@ class Add_Document {
 
                             <div class="row">
                                 <div class="form-group col">
-                                    <label for="nombre_defdoc" class="i18n-nombre_defdoc">Nombre del Documento</label>
+                                    <label for="nombre_defdoc" class="i18n-documento">Documento</label>
                                     <input type="text" class="form-control" value="<?php echo $this->document['nombre'] ?>" id="nombre_defdoc" name="nombre_defdoc" disabled/>
                                 </div>
                             </div>

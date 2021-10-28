@@ -14,7 +14,7 @@ class ImpSim {
     function show() {
         if($this->checkPermission()) {
             $sim_service = new Simulacrum_Service();
-            $feedback = $sim_service->searchImpSims();
+            $feedback = $sim_service->searchCompletions();
             if($feedback['ok']) {
                 include_once './View/ImpSims/Show_ImpSims_View.php';
                 new Show_ImpSims($feedback['resource'], $feedback['simulacrum']);

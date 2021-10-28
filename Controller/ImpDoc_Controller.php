@@ -14,7 +14,7 @@ class ImpDoc {
     function show() {
         if($this->checkPermission()) {
             $doc_service = new Document_Service();
-            $feedback = $doc_service->searchImplements();
+            $feedback = $doc_service->searchCompletions();
             if($feedback['ok']) {
                 include_once './View/ImpDocs/Show_ImpDocs_View.php';
                 new Show_ImpDocs($feedback['resource'], $feedback['document']);

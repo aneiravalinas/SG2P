@@ -33,6 +33,7 @@ class ImpProc_Model extends Abstract_Model {
         }
     }
 
+    // Registra una Cumplimentación.
     function ADD() {
         $this->query = "
             INSERT INTO EDIFICIO_PROCEDIMIENTO 
@@ -58,6 +59,7 @@ class ImpProc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Modifica datos de una cumplimentación.
     function EDIT() {
         $this->query = "UPDATE EDIFICIO_PROCEDIMIENTO SET " .
             ($this->fecha_cumplimentacion == '' ? "" : "fecha_cumplimentacion = '$this->fecha_cumplimentacion', ") .
@@ -70,6 +72,7 @@ class ImpProc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Elimina una Cumplimentación
     function DELETE() {
         $this->query = "
             DELETE FROM EDIFICIO_PROCEDIMIENTO
@@ -81,7 +84,8 @@ class ImpProc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function SEARCH() {
+    // Busca Cumplimentaciones de un Procedimiento que cumplan con los criterios establecidos.
+    function searchCompletions() {
         $this->query = "
             SELECT EDIFICIO_PROCEDIMIENTO.*, EDIFICIO.nombre AS nombre_edificio
             FROM EDIFICIO_PROCEDIMIENTO
@@ -104,7 +108,8 @@ class ImpProc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function searchImpProcs() {
+    // Busca Cumplimentaciones de un Procedimiento en un Edificio que cumplan con los criterios establecidos.
+    function SEARCH() {
         $this->query = "
             SELECT * FROM EDIFICIO_PROCEDIMIENTO
             WHERE
@@ -123,6 +128,7 @@ class ImpProc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Consulta datos de una cumplimentación por ID.
     function seek() {
         $this->query = "
             SELECT EDIFICIO_PROCEDIMIENTO.*, EDIFICIO.username, EDIFICIO.nombre AS nombre_edificio, PROCEDIMIENTO.nombre AS nombre_procedimiento, PROCEDIMIENTO.plan_id
@@ -139,6 +145,7 @@ class ImpProc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Busca cumplimentaciones de un Procedimiento.
     function searchByProcID() {
         $this->query = "
             SELECT * FROM EDIFICIO_PROCEDIMIENTO
@@ -149,6 +156,7 @@ class ImpProc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Busca cumplimentaciones de un Procedimiento en un Edificio.
     function searchProcsBuildings() {
         $this->query = "
             SELECT * FROM EDIFICIO_PROCEDIMIENTO
@@ -161,6 +169,7 @@ class ImpProc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Busca cumplimentaciones Activas (Pendientes o Cumplimentadas) de un Procedimiento en un Edificio.
     function searchActiveImpProcs() {
         $this->query = "
             SELECT * FROM EDIFICIO_PROCEDIMIENTO

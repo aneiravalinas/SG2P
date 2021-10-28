@@ -34,6 +34,7 @@ class ImpFormat_Model extends Abstract_Model {
         }
     }
 
+    // Registra una Cumplimentación
     function ADD() {
         $this->query = "
             INSERT INTO EDIFICIO_FORMACION
@@ -61,6 +62,7 @@ class ImpFormat_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Modifica datos de una cumplimentación
     function EDIT() {
         $this->query = "UPDATE EDIFICIO_FORMACION SET " .
             ($this->fecha_planificacion == '' ? "" : "fecha_planificacion = '$this->fecha_planificacion', ") .
@@ -74,6 +76,7 @@ class ImpFormat_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Elimina una cumplimentación
     function DELETE() {
         $this->query = "
             DELETE FROM EDIFICIO_FORMACION
@@ -85,7 +88,8 @@ class ImpFormat_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function SEARCH() {
+    // Busca cumplimentaciones de una Formación que cumpla con los criterios establecidos
+    function searchCompletions() {
         $this->query = "
             SELECT EDIFICIO_FORMACION.*, EDIFICIO.nombre AS nombre_edificio
             FROM EDIFICIO_FORMACION
@@ -107,7 +111,8 @@ class ImpFormat_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function searchImpFormats() {
+    // Busa cumplimentaciones de una Formación en un Edificio que cumpla con los criterios establecidos
+    function SEARCH() {
         $this->query = "
             SELECT * FROM EDIFICIO_FORMACION
             WHERE
@@ -124,6 +129,7 @@ class ImpFormat_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Consulta datos de una cumplimentación por ID.
     function seek() {
         $this->query = "
             SELECT EDIFICIO_FORMACION.*, EDIFICIO.username, EDIFICIO.nombre AS nombre_edificio, FORMACION.nombre AS nombre_formacion, FORMACION.plan_id
@@ -140,6 +146,7 @@ class ImpFormat_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Consulta datos de una cumplimentación por ID de Formación.
     function searchByFormatID() {
         $this->query = "
             SELECT * FROM EDIFICIO_FORMACION
@@ -150,6 +157,7 @@ class ImpFormat_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Consulta datos de una cumplimentación por ID de Formación.
     function searchFormatsBuildings() {
         $this->query = "
             SELECT * FROM EDIFICIO_FORMACION
@@ -162,6 +170,7 @@ class ImpFormat_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Consulta cumplimentaciones ACTIVAS (Pendientes o Cumplimentadas) de una Formación en un Edificio.
     function searchActiveImpFormats() {
         $this->query = "
             SELECT * FROM EDIFICIO_FORMACION

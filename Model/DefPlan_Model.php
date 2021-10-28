@@ -72,6 +72,7 @@ class DefPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Recupera la información de un Plan filtrando por ID.
     function seek() {
         $this->query = "
             SELECT * FROM PLAN

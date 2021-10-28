@@ -1301,6 +1301,7 @@ arrayES = {
         'i18n-simulacros' : 'Simulacros',
         'i18n-info_plan' : 'Información del Plan',
         'i18n-elements_plan' : 'Elementos del Plan',
+        'i18n-nombre_plan' : 'Nombre Plan',
 
         // IMP_DOCS
         'i18n-show-impdocs' : 'Ver Cumplimentaciones',
@@ -1312,7 +1313,7 @@ arrayES = {
         'i18n-cump_id' : 'ID Cumplimentacion',
         'i18n-add-implements' : 'Añadir Cumplimentaciones',
         'i18n-file_doc' : 'Fichero de la Cumplimentación',
-        'i18n-nombre_defdoc' : 'Nombre del Documento',
+        'i18n-documento' : 'Documento',
         'i18n-add-implement-confirm' : '¿Está seguro que desea añadir la siguiente cumplimentación?',
         'i18n-del-imp-doc-confirm' : '¿Está seguro que desea eliminar la cumplimentación de este documento? El cambio no será reversible',
         'i18n-expire-impdoc-confirm' : '¿Está seguro que desea vencer la cumplimentación de este documento? El cambio no será reversible',
@@ -1408,6 +1409,7 @@ arrayES = {
             'm-url_recurso' : ' URL Recurso ',
             'm-fecha_planificacion' : ' Fecha Planificación ',
             'm-destinatarios' : ' Destinatarios ',
+            'm-nombre_plan' : ' Nombre Plan ',
 
             // Mensajes Modal
             'i18n-max-size' : 'excede el tamaño máximo',

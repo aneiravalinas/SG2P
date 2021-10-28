@@ -14,7 +14,7 @@ class ImpProc {
     function show() {
         if($this->checkPermission()) {
             $proc_service = new Procedure_Service();
-            $feedback = $proc_service->searchImpProcs();
+            $feedback = $proc_service->searchCompletions();
             if($feedback['ok']) {
                 include_once './View/ImpProcs/Show_ImpProcs_View.php';
                 new Show_ImpProcs($feedback['resource'], $feedback['procedure']);

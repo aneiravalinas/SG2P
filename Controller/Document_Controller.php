@@ -28,7 +28,7 @@ class Document {
     function addForm() {
         if(!es_registrado()) {
             $doc_service = new Document_Service();
-            $feedback = $doc_service->addDocumentForm();
+            $feedback = $doc_service->documentForm();
             if($feedback['ok']) {
                 include_once './View/Documents/Add_Document_View.php';
                 new Add_Document($feedback['document'], $feedback['building']);
@@ -160,7 +160,7 @@ class Document {
     function searchForm() {
         if(!es_registrado()) {
             $doc_service = new Document_Service();
-            $feedback = $doc_service->searchDocumentForm();
+            $feedback = $doc_service->documentForm();
             if($feedback['ok']) {
                 include_once './View/Documents/Search_Document_View.php';
                 new Search_Document($feedback['document'], $feedback['building']);

@@ -33,6 +33,7 @@ class ImpDoc_Model extends Abstract_Model {
         }
     }
 
+    // Registra una cumplimentación.
     function ADD() {
         $this->query = "
             INSERT INTO EDIFICIO_DOCUMENTO
@@ -58,6 +59,7 @@ class ImpDoc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Modifica datos de una cumplimentación.
     function EDIT() {
         $this->query = "UPDATE EDIFICIO_DOCUMENTO SET " .
             ($this->fecha_cumplimentacion == '' ? "" : "fecha_cumplimentacion = '$this->fecha_cumplimentacion', ") .
@@ -70,6 +72,7 @@ class ImpDoc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Elimina una cumplimentación.
     function DELETE() {
         $this->query = "
             DELETE FROM EDIFICIO_DOCUMENTO
@@ -80,7 +83,8 @@ class ImpDoc_Model extends Abstract_Model {
     }
 
 
-    function SEARCH() {
+    // Busca cumplimentaciones de un Documento que cumplan con los criterios establecidos.
+    function searchCompletions() {
         $this->query = "
             SELECT EDIFICIO_DOCUMENTO.*, EDIFICIO.nombre AS nombre_edificio
             FROM EDIFICIO_DOCUMENTO
@@ -103,6 +107,7 @@ class ImpDoc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Consulta datos de una cumplimentación por ID.
     function seek() {
         $this->query = "
             SELECT EDIFICIO_DOCUMENTO.*, EDIFICIO.username, EDIFICIO.nombre AS nombre_edificio, DOCUMENTO.nombre AS nombre_documento, DOCUMENTO.plan_id
@@ -119,6 +124,7 @@ class ImpDoc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Busca cumplimentaciones de un Documento.
     function searchByDocID() {
         $this->query = "
             SELECT * FROM EDIFICIO_DOCUMENTO
@@ -129,6 +135,7 @@ class ImpDoc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Busca cumplimentaciones de un Documento en un Edificio.
     function searchDocsBuildings() {
         $this->query = "
             SELECT * FROM EDIFICIO_DOCUMENTO
@@ -140,7 +147,8 @@ class ImpDoc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function searchImpDocs() {
+    // Busca cumplimentaciones de un Documento en un Edificio que cumplan con los criterios establecidos.
+    function SEARCH() {
         $this->query = "
             SELECT * FROM EDIFICIO_DOCUMENTO
             WHERE
@@ -159,6 +167,7 @@ class ImpDoc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Busca cumplimentaciones Activas (Pendientes o Cumplimentadas) de un Documento en un Edificio
     function searchActiveImpDocs() {
         $this->query = "
             SELECT * FROM EDIFICIO_DOCUMENTO

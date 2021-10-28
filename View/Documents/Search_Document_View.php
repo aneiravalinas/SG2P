@@ -92,7 +92,7 @@ class Search_Document {
                                         insertacampo(document.formulariosearch,'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
                                         insertacampo(document.formulariosearch,'controller','Document');
                                         insertacampo(document.formulariosearch,'action','show');
-                                        enviaformcorrecto(document.formulariosearch, check_DOC_SEARCH());">
+                                        enviaformcorrecto(document.formulariosearch, check_DOC_PROC_ROUTE_SEARCH());">
                                         Enviar
                                     </a>
                                 </div>

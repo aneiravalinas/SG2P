@@ -120,6 +120,7 @@ class Building_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Recupera la información de un Edificio filtrando por ID.
     function seek() {
         $this->query = "
             SELECT * FROM EDIFICIO

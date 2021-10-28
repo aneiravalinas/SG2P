@@ -26,7 +26,7 @@ class Portal_Plans {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 flex-wrap d-flex justify-content-end" id="search_add">
+                    <div class="col-xl-9 flex-wrap d-flex justify-content-end" id="search_add">
                         <form class="form-inline" name="formulariosearch" method="post">
                             <input class="form-control-sm" type="search" name="nombre_plan" id="nombre_plan" placeholder="Nombre del Plan" onblur="check_NOMBRE_PLAN_SEARCH();"/>
                             <a type="button" onclick="
@@ -40,25 +40,25 @@ class Portal_Plans {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 table-responsive" id="col-table">
+                    <div class="col-xl-9 table-responsive" id="col-table">
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col" class="i18n-plan">Plan</th>
-                                <th scope="col" class="i18n-date_assign">Fecha Asignación</th>
-                                <th scope="col" class="i18n-state">Estado</th>
-                                <th scope="col" class="i18n-date_comp">Fecha Implementación</th>
+                                <th scope="col" class="i18n-plan text-center">Plan</th>
+                                <th scope="col" class="i18n-date_assign text-center">Fecha Asignación</th>
+                                <th scope="col" class="i18n-state text-center">Estado</th>
+                                <th scope="col" class="i18n-date_comp text-center">Fecha Implementación</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach($this->buildPlans as $buildPlan): ?>
                                 <tr>
-                                    <td><?php echo $buildPlan['nombre_plan'] ?></td>
-                                    <td><?php echo date_format(date_create($buildPlan['fecha_asignacion']), 'd/m/Y') ?></td>
-                                    <td class="i18n-<?php echo $buildPlan['estado'] ?> <?php echo $buildPlan['estado'] ?>"></td>
-                                    <td><?php if($buildPlan['fecha_cumplimentacion'] != default_data) echo date_format(date_create($buildPlan['fecha_cumplimentacion']), 'd/m/Y'); ?></td>
-                                    <td>
+                                    <td class="text-center"><?php echo $buildPlan['nombre_plan'] ?></td>
+                                    <td class="text-center"><?php echo date_format(date_create($buildPlan['fecha_asignacion']), 'd/m/Y') ?></td>
+                                    <td class="i18n-<?php echo $buildPlan['estado'] ?> <?php echo $buildPlan['estado'] ?> text-center"></td>
+                                    <td class="text-center"><?php if($buildPlan['fecha_cumplimentacion'] != default_data) echo date_format(date_create($buildPlan['fecha_cumplimentacion']), 'd/m/Y'); ?></td>
+                                    <td class="text-center">
                                         <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false" onclick="
                                                     crearform('formenviar', 'post');
                                                     insertacampo(document.formenviar, 'edificio_id', '<?php echo $buildPlan['edificio_id'] ?>');

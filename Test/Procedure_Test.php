@@ -47,63 +47,63 @@ array_push($testProcedure, $respTest);
 
 
 /*
- *  --- SEARCH_IMPPROCS: VALIDACIONES (Procedimiento) ---
+ *  --- SEARCH_COMPLETIONS: VALIDACIONES (Procedimiento) ---
  */
 
 // ID Procedimiento vacío
 $_POST = array('procedimiento_id' => '');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'PROCEDIMIENTO_ID', 'ID de procedimiento vacío',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'PROCEDIMIENTO_ID', 'ID de procedimiento vacío',
     'DFPROC_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 // ID Procedimiento no numérico
 $_POST = array('procedimiento_id' => 'aa');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'PROCEDIMIENTO_ID', 'ID de procedimiento no numérico',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'PROCEDIMIENTO_ID', 'ID de procedimiento no numérico',
     'DFPROC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 /*
- *  --- SEARCH_IMPPROCS: ACCIONES (Procedimiento) ---
+ *  --- SEARCH_COMPLETIONS: ACCIONES (Procedimiento) ---
  */
 
 // El procedimiento no existe
 $_POST = array('procedimiento_id' => '1111111111111111111');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'ACCION', 'El procedimiento no existe',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'ACCION', 'El procedimiento no existe',
     'DFPROCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 
 /*
- *  --- SEARCH_IMPPROCS: VALIDACIONES ---
+ *  --- SEARCH_COMPLETIONS: VALIDACIONES ---
  */
 
 // ID de Cumplimentación no numérico
 $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => 'aaa');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'EDIFICIO_PROCEDIMIENTO_ID', 'ID de Cumplimentación no numérico',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'EDIFICIO_PROCEDIMIENTO_ID', 'ID de Cumplimentación no numérico',
     'IMPPROC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 // Estado no permitido
 $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'estado');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'ESTADO', 'Estado no permitido',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'ESTADO', 'Estado no permitido',
     'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 // Fecha de cumplimentación inicial inválida
 $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992-12/25');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha de cumplimentación inicial inválida',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha de cumplimentación inicial inválida',
     'START_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -111,8 +111,8 @@ array_push($testProcedure, $respTest);
 $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
                     'fecha_cumplimentacion_fin' => '1992-12/25');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'FECHA_CUMPLIMENTACION_FIN', 'Fecha de cumplimentacion final inválida',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENTACION_FIN', 'Fecha de cumplimentacion final inválida',
     'END_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -120,8 +120,8 @@ array_push($testProcedure, $respTest);
 $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12-25');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'FECHA_VENCIMIENTO_INICIO', 'Fecha vencimiento inicial inválida',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIENTO_INICIO', 'Fecha vencimiento inicial inválida',
     'START_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -129,8 +129,8 @@ array_push($testProcedure, $respTest);
 $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12-25');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'FECHA_VENCIMIENTO_FIN', 'Fecha vencimiento final inválida',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIENTO_FIN', 'Fecha vencimiento final inválida',
     'END_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -140,8 +140,8 @@ $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'e
     'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25',
     'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'NOMBRE_DOC', 'Nombre de Documento largo',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'NOMBRE_DOC', 'Nombre de Documento largo',
     'FILENAME_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -150,8 +150,8 @@ $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'e
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'documento.php');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'NOMBRE_DOC', 'Nombre de Documento con formato incorrecto',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'NOMBRE_DOC', 'Nombre de Documento con formato incorrecto',
     'FILENAME_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -160,8 +160,8 @@ $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'e
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'documento.pdf', 'edificio_id' => 'aaa');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'EDIFICIO_ID', 'ID Edificio no numérico',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'EDIFICIO_ID', 'ID Edificio no numérico',
     'BLD_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -170,8 +170,8 @@ $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'e
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'documento.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'aa');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'NOMBRE_EDIFICIO', 'Nombre Edificio corto',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre Edificio corto',
     'BLD_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -180,8 +180,8 @@ $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'e
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'documento.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'NOMBRE_EDIFICIO', 'Nombre Edificio largo',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre Edificio largo',
     'BLD_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -190,13 +190,13 @@ $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'e
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'documento.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'edific^o');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'NOMBRE_EDIFICIO', 'Nombre Edificio largo',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre Edificio largo',
     'BLD_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 /*
- *  --- SEARCH_IMPPROCS: ACCIONES ---
+ *  --- SEARCH_COMPLETIONS: ACCIONES ---
  */
 
 // Búsqueda de cumplimentaciones Ok
@@ -204,8 +204,8 @@ $_POST = array('procedimiento_id' => '1', 'edificio_procedimiento_id' => '1', 'e
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'documento.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'edificio');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->searchImpProcs();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_IMPPROCS', 'ACCION', 'Búsqueda de cumplimentaciones Ok',
+$feedback = $proc_service->searchCompletions();
+$respTest = obtenerRespuesta('Procedure', 'SEARCH_COMPLETIONS', 'ACCION', 'Búsqueda de cumplimentaciones Ok',
     'IMPPROC_SEARCH_OK', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -467,93 +467,6 @@ $respTest = obtenerRespuesta('Procedure', 'SEEK_PORTAL_PROCEDURE', 'ACCION', 'B�
     'PRTL_IMPPROC_SEARCH_OK', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
-/*
- *  --- SEARCH_PROCEDURE_FORM: VALIDACIONES ---
- */
-
-// ID Procedimiento vacío
-$_POST = array('procedimiento_id' => '');
-$proc_service = new Procedure_Service();
-$feedback = $proc_service->searchProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE_FORM', 'PROCEDIMIENTO_ID', 'ID Procedimiento vacío',
-    'DFPROC_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testProcedure, $respTest);
-
-// ID Procedimiento no numérico
-$_POST = array('procedimiento_id' => 'aaaa');
-$proc_service = new Procedure_Service();
-$feedback = $proc_service->searchProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE_FORM', 'PROCEDIMIENTO_ID', 'ID Procedimiento no numérico',
-    'DFPROC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testProcedure, $respTest);
-
-// ID Edificio vacío
-$_POST = array('procedimiento_id' => '1', 'edificio_id' => '');
-$proc_service = new Procedure_Service();
-$feedback = $proc_service->searchProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE_FORM', 'EDIFICIO_ID', 'ID Edificio vacío',
-    'BLD_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testProcedure, $respTest);
-
-// ID Edificio no numérico
-$_POST = array('procedimiento_id' => '1', 'edificio_id' => 'aa');
-$proc_service = new Procedure_Service();
-$feedback = $proc_service->searchProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE_FORM', 'EDIFICIO_ID', 'ID Edificio no numérico',
-    'BLD_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testProcedure, $respTest);
-
-
-/*
- *  --- SEARCH_PROCEDURE_FORM: ACCIONES ---
- */
-
-// El Procedimiento no existe
-$_POST = array('procedimiento_id' => '11111111111111111111111', 'edificio_id' => '1');
-$proc_service = new Procedure_Service();
-$feedback = $proc_service->searchProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE_FORM', 'ACCION', 'El procedimiento no existe',
-    'DFPROCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testProcedure, $respTest);
-
-// El Edificio no existe
-$_POST = array('procedimiento_id' => '1', 'edificio_id' => '11111111111111111111');
-$proc_service = new Procedure_Service();
-$feedback = $proc_service->searchProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE_FORM', 'ACCION', 'El edificio no existe',
-    'BLDID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testProcedure, $respTest);
-
-// El plan del procedimiento no está asignado al edificio
-$_POST = array('procedimiento_id' => '1', 'edificio_id' => '1');
-$proc_service = new Procedure_Service();
-$feedback = $proc_service->searchProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE_FORM', 'ACCION', 'El plan del procedimiento no está asignado al edificio',
-    'BLDPROC_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testProcedure, $respTest);
-
-// El usuario no tiene permisos para consultar procedimientos en el edificio
-$_SESSION['rol'] = 'edificio';
-$_SESSION['username'] = 'sg2ped2';
-
-$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7');
-$proc_service = new Procedure_Service();
-$feedback = $proc_service->searchProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE_FORM', 'ACCION', 'El usuario no tiene permisos para consultar procedimientos en el edificio',
-    'BLD_FRBD', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testProcedure, $respTest);
-
-// Plan del procedimiento asignado al edificio
-$_SESSION['username'] = 'sg2ped';
-$_POST = array('procedimiento_id' => '4', 'edificio_id' => '7');
-$proc_service = new Procedure_Service();
-$feedback = $proc_service->searchProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'SEARCH_PROCEDURE_FORM', 'ACCION', 'Plan del procedimiento asignado al edificio Ok.',
-    'BLDPROC_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testProcedure, $respTest);
-
-unset($_SESSION['username'], $_SESSION['rol']);
-
 
 /*
  *  --- ADD_IMPPROC_FORM: VALIDACIONES ---
@@ -597,38 +510,38 @@ $respTest = obtenerRespuesta('Procedure', 'ADD_IMPPROC_FORM', 'ACCION', 'El plan
 array_push($testProcedure, $respTest);
 
 /*
- *  --- ADD_PROCEDURE_FORM: VALIDACIONES ---
+ *  --- PROCEDURE_FORM: VALIDACIONES ---
  */
 
 // ID Procedimiento vacío
 $_POST = array('procedimiento_id' => '');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->addProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'ADD_PROCEDURE_FORM', 'PROCEDIMIENTO_ID', 'ID Procedimiento vacío',
+$feedback = $proc_service->procedureForm();
+$respTest = obtenerRespuesta('Procedure', 'PROCEDURE_FORM', 'PROCEDIMIENTO_ID', 'ID Procedimiento vacío',
     'DFPROC_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 // ID Procedimiento no numérico
 $_POST = array('procedimiento_id' => 'aaaa');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->addProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'ADD_PROCEDURE_FORM', 'PROCEDIMIENTO_ID', 'ID Procedimiento no numérico',
+$feedback = $proc_service->procedureForm();
+$respTest = obtenerRespuesta('Procedure', 'PROCEDURE_FORM', 'PROCEDIMIENTO_ID', 'ID Procedimiento no numérico',
     'DFPROC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 // ID Edificio vacío
 $_POST = array('procedimiento_id' => '1', 'edificio_id' => '');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->addProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'ADD_PROCEDURE_FORM', 'EDIFICIO_ID', 'ID Edificio vacío',
+$feedback = $proc_service->procedureForm();
+$respTest = obtenerRespuesta('Procedure', 'PROCEDURE_FORM', 'EDIFICIO_ID', 'ID Edificio vacío',
     'BLD_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 // ID Edificio no numérico
 $_POST = array('procedimiento_id' => '1', 'edificio_id' => 'aa');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->addProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'ADD_PROCEDURE_FORM', 'EDIFICIO_ID', 'ID Edificio no numérico',
+$feedback = $proc_service->procedureForm();
+$respTest = obtenerRespuesta('Procedure', 'PROCEDURE_FORM', 'EDIFICIO_ID', 'ID Edificio no numérico',
     'BLD_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -639,24 +552,24 @@ array_push($testProcedure, $respTest);
 // El Procedimiento no existe
 $_POST = array('procedimiento_id' => '11111111111111111111111', 'edificio_id' => '1');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->addProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'ADD_PROCEDURE_FORM', 'ACCION', 'El procedimiento no existe',
+$feedback = $proc_service->procedureForm();
+$respTest = obtenerRespuesta('Procedure', 'PROCEDURE_FORM', 'ACCION', 'El procedimiento no existe',
     'DFPROCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 // El Edificio no existe
 $_POST = array('procedimiento_id' => '1', 'edificio_id' => '11111111111111111111');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->addProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'ADD_PROCEDURE_FORM', 'ACCION', 'El edificio no existe',
+$feedback = $proc_service->procedureForm();
+$respTest = obtenerRespuesta('Procedure', 'PROCEDURE_FORM', 'ACCION', 'El edificio no existe',
     'BLDID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
 // El plan del procedimiento no está asignado al edificio
 $_POST = array('procedimiento_id' => '1', 'edificio_id' => '1');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->addProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'ADD_PROCEDURE_FORM', 'ACCION', 'El plan del procedimiento no está asignado al edificio',
+$feedback = $proc_service->procedureForm();
+$respTest = obtenerRespuesta('Procedure', 'PROCEDURE_FORM', 'ACCION', 'El plan del procedimiento no está asignado al edificio',
     'BLDPROC_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -666,8 +579,8 @@ $_SESSION['username'] = 'sg2ped2';
 
 $_POST = array('procedimiento_id' => '4', 'edificio_id' => '7');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->addProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'ADD_PROCEDURE_FORM', 'ACCION', 'El usuario no tiene permisos para consultar procedimientos en el edificio',
+$feedback = $proc_service->procedureForm();
+$respTest = obtenerRespuesta('Procedure', 'PROCEDURE_FORM', 'ACCION', 'El usuario no tiene permisos para consultar procedimientos en el edificio',
     'BLD_FRBD', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 
@@ -676,8 +589,8 @@ $_SESSION['username'] = 'sg2ped';
 
 $_POST = array('procedimiento_id' => '4', 'edificio_id' => '7');
 $proc_service = new Procedure_Service();
-$feedback = $proc_service->addProcedureForm();
-$respTest = obtenerRespuesta('Procedure', 'ADD_PROCEDURE_FORM', 'ACCION', 'Plan del procedimiento asignado al edificio Ok',
+$feedback = $proc_service->procedureForm();
+$respTest = obtenerRespuesta('Procedure', 'PROCEDURE_FORM', 'ACCION', 'Plan del procedimiento asignado al edificio Ok',
     'BLDPROC_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testProcedure, $respTest);
 

@@ -35,20 +35,26 @@ class Simulacrum_Service extends Simulacrum_Validation {
         }
     }
 
-    function searchImpSims() {
+    /*
+     *  - Busca Cumplimentaciones de un Simulacro.
+     *      1. Valida y busca un simulacro por ID.
+     *      2. Valida el resto de atribtuos utilizados como filtro.
+     *      3. Recupera las cumplimentaciones del Simulacro que cumplan con los datos de filtrado.
+     */
+    function searchCompletions() {
         $this->feedback = $this->seekSimulacrum();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
 
         $simulacrum = $this->feedback['resource'];
-        $validation = $this->validar_atributos_search_implements();
+        $validation = $this->validar_atributos_searchCompletions();
         if(!$validation['ok']) {
             $validation['return'] = array('simulacro_id' => $simulacrum['simulacro_id']);
             return $validation;
         }
 
-        $this->feedback = $this->impSim_entity->SEARCH();
+        $this->feedback = $this->impSim_entity->searchCompletions();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPSIM_SEARCH_OK';
             $this->feedback['simulacrum'] = $simulacrum;
@@ -62,6 +68,15 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los detalles de un Simulacro en un Edificio.
+     *  - Los detalles del Simulacro incluyen los datos de la Definición del Simulacro junto con sus cumplimentaciones en el Edificio.
+     *      1. Valida y busca el simulacro y el edificio por ID, y comprueba que el plan del simulacro está asociado al edificio.
+     *      2. Comprueba que el usuario tenga permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador').
+     *      3. Valida el resto de atributos utilizados en la búsqueda (filtrado).
+     *      4. Calcula el estado del Simulacro en el Edificio.
+     *      5. Realiza la búsqueda.
+     */
     function searchSimulacrum() {
         $this->feedback = $this->searchSimAndBuilding();
         if(!$this->feedback['ok']) {
@@ -90,7 +105,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         }
 
         $simulacrum['estado'] = $sim_state['estado'];
-        $this->feedback = $this->impSim_entity->searchImpSims();
+        $this->feedback = $this->impSim_entity->SEARCH();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPSIM_SEARCH_OK';
             $this->feedback['simulacrum'] = $simulacrum;
@@ -105,6 +120,14 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los detalles del Simulacro en el Edificio del Portal.
+     *  - Los detalles del Simulacro incluyen los datos de la Definición del Simulacro junto con sus cumplimentaciones ACTIVAS en el Edificio.
+     *      1. Valida y busca el simulacro y el edificio por ID, y comprueba que el plan del simulacro tenga una asociación ACTIVA con el Edificio.
+     *      2. Se obtiene dinámicamente el estado del Simulacro en el Edificio, y comprueba que este esté ACTIVO.
+     *      3. Valida los atributos utilizados como filtrado.
+     *      4. Recupera las cumplimentaciones ACITVAS que cumplan con los datos de filtrado.
+     */
     function seekPortalSimulacrum() {
         $this->feedback = $this->searchSimAndBuilding();
         if(!$this->feedback['ok']) {
@@ -156,6 +179,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca el simulacro y el edificio por ID, y comprueba que el plan del simulacro tenga una asociación ACTIVA con el Edificio.
     function searchPortalSimulacrumForm() {
         $this->feedback = $this->searchSimAndBuilding();
         if(!$this->feedback['ok']) {
@@ -172,6 +196,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca una Definición de Simulacro por ID, y recupera los Edificios que tengan una asignación ACTIVA con el Plan del Simulacro.
     function addImpSimForm() {
         $this->feedback = $this->seekSimulacrum();
         if(!$this->feedback['ok']) {
@@ -189,6 +214,10 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  Valida y busca un Simulacro y un Edificio por ID, comprueba que existe una asociación entre el Plan del Simulacro y el Edificio,
+     *  y comprueba que el usuario tenga permisos sobre el edificio.
+     */
     function simulacrumForm() {
         $this->feedback = $this->searchSimAndBuilding();
         if(!$this->feedback['ok']) {
@@ -205,6 +234,11 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  1. Valida y busca una Definición de Simulacro por ID.
+     *  2. Valida los Edificios por ID.
+     *  3. Llama a la función ADD para añadir las cumplimentaciones del Simulacro en los Edificios.
+     */
     function addImpSim() {
         $validation = $this->validar_atributos_add();
         if(!$validation['ok']) {
@@ -222,6 +256,14 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Crea una Cumplimentación en estado PENDIENTE del Simulacro que se pasa como parámetro en cada uno de los Edificios.
+     *  - Para cada uno de los Edificios:
+     *      1. Comprueba que el edificio existe.
+     *      2. Valida que el usuario que realiza la acción tiene permisos sobre el edificio.
+     *      3. Comprueba que exista una asociación ACTIVA entre el Plan del Simulacro y el Edificio.
+     *      4. Añade la cumplimentación y recalcula el estado del Plan en el Edificio.
+     */
     function ADD($simulacrum) {
         if(empty($this->buildings)) {
             $feedback['ok'] = true;
@@ -277,6 +319,13 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Elimina la cumplimentación de un Simulacro.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. En caso de que el rol del usuario sea 'edificio', verifica que la cumplimentación a eliminar no sea la única cumplimentación del Simulacro en el Edificio.
+     *      4. Elimina la cumplimentación y actualiza el estado del Plan en el Edificio.
+     */
     function DELETE() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -304,6 +353,13 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Modifica el estado de la cumplimentación de un Simulacro a 'vencido'.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador').
+     *      3. Modifica el estado de la cumplimentación y añade la fecha actual como fecha de vencimiento.
+     *      4. Actualiza el estado del Plan en el Edificio.
+     */
     function expire() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -325,6 +381,14 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Cumplimenta la cumplimentación de un Simulacro.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. Verifica que la cumplimentación esté ACTIVA (estado Pendiente o Cumplimentado).
+     *      4. Valida los valores de los atributos necesarios para la cumplimentación.
+     *      5. Modifica la cumplimentación y actualiza el estado del Plan en el Edificio.
+     */
     function implement() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -382,6 +446,11 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Consulta la información de la cumplimentación de un Simulacro del Portal.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Verifica que la cumplimentación está ACTIVA (Pendiente o Cumplimentada).
+     */
     function seekPortalImpSim() {
         $validation = $this->validar_EDIFICIO_SIMULACRO_ID();
         if(!$validation['ok']) {
@@ -405,6 +474,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca un Simulacro y un Edificio por ID, y comprueba que existe una asociación entre el Plan del Simulacro y el Edificio.
     function searchSimAndBuilding() {
         $validation = $this->validar_sim_and_building();
         if(!$validation['ok']) {
@@ -433,6 +503,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $feedback;
     }
 
+    // Valida y busca la definición de un Simulacro por ID.
     function seekSimulacrum() {
         $validation = $this->validar_SIMULACRO_ID();
         if(!$validation['ok']) {
@@ -442,6 +513,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $this->seekBySimID();
     }
 
+    // Busca un Simulacro por ID.
     function seekBySimID() {
         $feedback = $this->defSim_entity->seek();
         if($feedback['ok']) {
@@ -458,6 +530,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $feedback;
     }
 
+    // Busca un Edificio por ID.
     function seekByBuildingID() {
         include_once './Model/Building_Model.php';
         $building_entity = new Building_Model();
@@ -477,6 +550,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $feedback;
     }
 
+    // Busca la asociación entre un Plan y un Edificio por ID.
     function seekPlanBuilding($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $buildPlan_entity = new BuildPlan_Model();
@@ -496,6 +570,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $feedback;
     }
 
+    // Búsqueda de una cumplimentación de un Simulacro por ID.
     function seekByImpSimID() {
         $feedback = $this->impSim_entity->seek();
         if($feedback['ok']) {
@@ -512,6 +587,11 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Obtención del estado de un Simulacro en un Edificio.
+     *      1. Recupera todas las cumplimentaciones del Simulacro en el Edificio.
+     *      2. Calcula el estado del Simulacro en función de las cumplimentaciones recuperadas.
+     */
     function get_simulacrum_state() {
         $feedback = $this->search_all_impsims();
         if(!$feedback['ok']) {
@@ -535,6 +615,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $feedback;
     }
 
+    // Búsqueda de TODAS las cumplimentaciones de un Simulacro en un Edificio.
     function searchActiveBuildPlans($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $bldPlan_entity = new BuildPlan_Model();
@@ -554,12 +635,14 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $feedback;
     }
 
+    // Cálculo y actgualización del estado de un Plan en un Edificio.
     function update_plan_state($edificio_id, $plan_id) {
         include_once './Service/CheckState_Service.php';
         $checkState_service = new CheckState_Service($edificio_id, $plan_id);
         $checkState_service->update_plan_state();
     }
 
+    // Consulta de número de cumplimentaciones de un Simulacro en un Edificio mayor que 1.
     function check_more_than_one_impsims($edificio_id, $simulacro_id) {
         $this->impSim_entity->setAttributes(array('edificio_id' => $edificio_id, 'simulacro_id' => $simulacro_id));
         $feedback = $this->impSim_entity->searchSimsBuildings();

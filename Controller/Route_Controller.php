@@ -27,7 +27,7 @@ class Route {
     function addForm() {
         if(!es_registrado()) {
             $route_service = new Route_Service();
-            $feedback = $route_service->dataRouteForm();
+            $feedback = $route_service->routeForm();
             if($feedback['ok']) {
                 include_once './View/Routes/Add_Route_View.php';
                 new Add_Route($feedback['resource'], $feedback['route'], $feedback['building']);
@@ -160,7 +160,7 @@ class Route {
     function searchForm() {
         if(!es_registrado()) {
             $route_service = new Route_Service();
-            $feedback = $route_service->dataRouteForm();
+            $feedback = $route_service->routeForm();
             if($feedback['ok']) {
                 include_once './View/Routes/Search_Route_View.php';
                 new Search_Route($feedback['resource'], $feedback['building'], $feedback['route']);

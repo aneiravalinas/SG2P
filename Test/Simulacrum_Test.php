@@ -6,22 +6,22 @@ $numTest = 0;
 $numFallos = 0;
 
 /*
- *  --- SEARCH_IMPSIMS: VALIDACIONES (Simulacro) ---
+ *  --- SEARCH_COMPLETIONS: VALIDACIONES (Simulacro) ---
  */
 
 // ID Simulacro vacío
 $_POST = array('simulacro_id' => '');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'SIMULACRO_ID', 'ID Simulacro vacío',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'SIMULACRO_ID', 'ID Simulacro vacío',
     'DFSIM_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 // ID Simulacro no numérico
 $_POST = array('simulacro_id' => 'aaa');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'SIMULACRO_ID', 'ID Simulacro no numérico',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'SIMULACRO_ID', 'ID Simulacro no numérico',
     'DFSIM_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
@@ -32,8 +32,8 @@ array_push($testSimulacrum, $respTest);
 // El simulacro no existe
 $_POST = array('simulacro_id' => '111111111111111111111111111');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'ACCION', 'El simulacro no existe',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'ACCION', 'El simulacro no existe',
     'DFSIMID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
@@ -44,24 +44,24 @@ array_push($testSimulacrum, $respTest);
 // Fecha Planificación inicial no válida
 $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12-25');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'FECHA_PLANIFICACION_INICIO', 'Fecha Planificación inicial no válida',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'FECHA_PLANIFICACION_INICIO', 'Fecha Planificación inicial no válida',
     'START_PLANNING_DATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 // Fecha Planificación final no válida
 $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12-25');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'FECHA_PLANIFICACION_FIN', 'Fecha Planificación final no válida',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'FECHA_PLANIFICACION_FIN', 'Fecha Planificación final no válida',
     'END_PLANNING_DATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 // ID Cumplimentación no numérico
 $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => 'aaa');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación no numérico',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación no numérico',
     'IMPSIM_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
@@ -69,8 +69,8 @@ array_push($testSimulacrum, $respTest);
 $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
                 'estado' => 'estado');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'ESTADO', 'Estado no válido',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'ESTADO', 'Estado no válido',
     'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
@@ -78,8 +78,8 @@ array_push($testSimulacrum, $respTest);
 $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12-25');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'FECHA_VENCIMIENTO_INICIO', 'Fecha Vencimiento inicial no válida',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIENTO_INICIO', 'Fecha Vencimiento inicial no válida',
     'START_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
@@ -87,8 +87,8 @@ array_push($testSimulacrum, $respTest);
 $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12-25');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'FECHA_VENCIMIENTO_FIN', 'Fecha Vencimiento final no válida',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIENTO_FIN', 'Fecha Vencimiento final no válida',
     'END_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
@@ -96,8 +96,8 @@ array_push($testSimulacrum, $respTest);
 $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => 'a');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'EDIFICIO_ID', 'ID Edificio no numérico',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'EDIFICIO_ID', 'ID Edificio no numérico',
     'BLD_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
@@ -105,8 +105,8 @@ array_push($testSimulacrum, $respTest);
 $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1', 'nombre_edificio' => 'aa');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'NOMBRE_EDIFICIO', 'Nombre de Edificio corto (menos de 3 caracteres)',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre de Edificio corto (menos de 3 caracteres)',
     'BLD_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
@@ -115,8 +115,8 @@ $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/2
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1',
     'nombre_edificio' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'NOMBRE_EDIFICIO', 'Nombre de Edificio largo (más de 60 caracteres)',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre de Edificio largo (más de 60 caracteres)',
     'BLD_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
@@ -125,13 +125,13 @@ $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/2
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1',
     'nombre_edificio' => 'Nombre ^Difico');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'NOMBRE_EDIFICIO', 'Nombre de Edificio con caracteres no permitidos',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre de Edificio con caracteres no permitidos',
     'BLD_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 /*
- *  --- SEARCH_IMPSIMS: ACCIONES ---
+ *  --- SEARCH_COMPLETIONS: ACCIONES ---
  */
 
 // Búsqueda de cumplimentaciones Ok
@@ -139,8 +139,8 @@ $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/2
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1',
     'nombre_edificio' => 'Nombre Edificio');
 $sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchImpSims();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_IMPSIMS', 'ACCION', 'Búsqueda de cumplimentaciones Ok',
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'ACCION', 'Búsqueda de cumplimentaciones Ok',
     'IMPSIM_SEARCH_OK', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 

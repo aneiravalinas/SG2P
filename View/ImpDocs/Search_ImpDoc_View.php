@@ -93,7 +93,7 @@ class Search_ImpDoc {
                                         insertacampo(document.formulariosearch,'documento_id', '<?php echo $this->document['documento_id'] ?>');
                                         insertacampo(document.formulariosearch,'controller','ImpDoc');
                                         insertacampo(document.formulariosearch,'action','show');
-                                        enviaformcorrecto(document.formulariosearch, check_IMPDOC_SEARCH());">
+                                        enviaformcorrecto(document.formulariosearch, check_CUMP_DOC_PROC_SEARCH());">
                                         Enviar
                                     </a>
                                 </div>

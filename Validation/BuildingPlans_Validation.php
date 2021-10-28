@@ -109,10 +109,6 @@ class BuildingPlans_Validation extends Validator {
     }
 
     function validar_ESTADO() {
-        if(!$this->no_vacio($this->estado)) {
-            return $this->rellena_validation(false,'BLDPLAN_STATE_EMPT','BLD_PLAN');
-        }
-
         if(!$this->en_valores($this->estado, self::states)) {
             return $this->rellena_validation(false,'BLDPLAN_STATE_KO','BLD_PLAN');
         }

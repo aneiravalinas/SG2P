@@ -36,6 +36,7 @@ class ImpRoute_Model extends Abstract_Model {
         }
     }
 
+    // Registra una cumplimentación.
     function ADD() {
         $this->query = "
             INSERT INTO PLANTA_RUTA 
@@ -61,6 +62,7 @@ class ImpRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Modifica los datos de una cumplimentación
     function EDIT() {
         $this->query = "UPDATE PLANTA_RUTA SET " .
             ($this->fecha_cumplimentacion == '' ? "" : "fecha_cumplimentacion = '$this->fecha_cumplimentacion', ") .
@@ -73,6 +75,7 @@ class ImpRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Elimina una cumplimentación
     function DELETE() {
         $this->query = "
             DELETE FROM PLANTA_RUTA
@@ -84,7 +87,8 @@ class ImpRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function SEARCH() {
+    // Busca cumplimentaciones de una Ruta que cumplan con los criterios establecidos.
+    function searchCompletions() {
         $this->query = "
             SELECT PLANTA_RUTA.*, PLANTA.nombre as nombre_planta, EDIFICIO.nombre AS nombre_edificio
             FROM PLANTA_RUTA
@@ -111,7 +115,8 @@ class ImpRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    function searchImpRoutes() {
+    // Busca cumplimentaciones de una Ruta en un Edificio que cumplan los criterios establecidos
+    function SEARCH() {
         $this->query = "
             SELECT PLANTA_RUTA.*, PLANTA.nombre AS nombre_planta
             FROM PLANTA_RUTA
@@ -134,6 +139,7 @@ class ImpRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Busca cumplimentaciones Activas (Pendientes o Cumplimentadas) de una Ruta en un Edificio
     function searchActiveImpRoutes() {
         $this->query = "
             SELECT PLANTA_RUTA.*, PLANTA.nombre AS nombre_planta
@@ -152,6 +158,7 @@ class ImpRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Consulta datos de una cumplimentación porID.
     function seek() {
         $this->query = "
             SELECT PLANTA_RUTA.*, PLANTA.nombre AS nombre_planta, PLANTA.edificio_id, EDIFICIO.username, RUTA.nombre AS nombre_ruta, RUTA.plan_id
@@ -170,6 +177,7 @@ class ImpRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Busca cumplimentaciones por ID de Planta.
     function searchByPlantaID() {
         $this->query = "
             SELECT * FROM PLANTA_RUTA
@@ -180,6 +188,7 @@ class ImpRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Busca cumplimentaciones por ID de Ruta.
     function searchByRouteID() {
         $this->query = "
             SELECT * FROM PLANTA_RUTA
@@ -190,6 +199,7 @@ class ImpRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Búsqueda de cumplimentaciones por ID.
     function searchRoutesFloors() {
         $this->query = "
             SELECT * FROM PLANTA_RUTA
@@ -202,6 +212,7 @@ class ImpRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Búsqueda de cumplimentaciones de una Ruta en un Edificio
     function searchRoutesBuildings($edificio_id) {
         $this->query = "
             SELECT PLANTA_RUTA.*

@@ -36,6 +36,10 @@ class CheckState_Service {
         );
     }
 
+    /*
+     *  - Obtiene y modifica el estado de un Plan en un Edificio.
+     *  - Genera una notificación en caso de que el nuevo estado del Plan sea CUMPLIMENTADO.
+     */
     function update_plan_state() {
         $feedback = $this->checkStatePlan();
         if($feedback['ok']) {
@@ -58,6 +62,9 @@ class CheckState_Service {
         }
     }
 
+    /*
+     *  - Genera una notificación a cada uno de los usuarios con rol 'organizacion' informando de que un Plan ha sido cumplimentado.
+     */
     function notificate_resp_org() {
         include_once './Model/User_Model.php';
         $user_entity = new User_Model();
@@ -74,6 +81,12 @@ class CheckState_Service {
         }
     }
 
+    /*
+     *  - Obtiene el estado de un Plan a partir del estado de cada uno de los TIPOS de Elemento.
+     *      - CUMPLIMENTADO: TODOS los elementos están CUMPLIMENTADOS.
+     *      - VENCIDO: TODOS los elementos están vencidos, o no hay elementos.
+     *      - PENDIENTE: Cualquier otro caso.
+     */
     function checkStatePlan() {
         $this->documentos = $this->checkStateDocuments();
         if(!$this->documentos['ok']) {
@@ -401,6 +414,12 @@ class CheckState_Service {
         return $this->get_state_element($elements);
     }
 
+    /*
+     *  - Devuelve el estado de un TIPO de Elemento a partir del Estado de cada uno de los Elementos.
+     *      - CUMPLIMENTADO: TODOS los elementos están CUMPLIMENTADOS.
+     *      - VENCIDO: TODOS los elementos están vencidos, o no hay elementos.
+     *      - PENDIENTE: Cualquier otro caso.
+     */
     function get_general_state_elements($elements) {
         if(empty($elements)) {
             return 'vencido';

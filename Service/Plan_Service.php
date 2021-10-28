@@ -1,5 +1,8 @@
 <?php
 
+
+// Última revisión: 2021-10-19
+
 include_once './Validation/Plan_Validation.php';
 include_once './Model/BuildPlan_Model.php';
 
@@ -24,6 +27,13 @@ class Plan_Service extends Plan_Validation {
         }
     }
 
+    /*
+     *  - Recupera las asignaciones entre Planes y Edificios.
+     *      1. Valida los atributos recibidos para el filtrado.
+     *      2. Recupera las asignaciones que coincidan con los criterios de búsqueda.
+     *          2a. Para los usuarios con rol de Responsable de Organización o Administrador, recupera todas las asignaciones.
+     *          2b. Para los usuarios con rol de Responsable de Edificio, solo recupera las asignaciones con los Edificios de los que sea responsable.
+     */
     function SEARCH() {
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
@@ -45,6 +55,12 @@ class Plan_Service extends Plan_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera las asignaciones ACTIVAS (Estado: Pendiente o Cumplimentado) entre Planes y el Edificio del Portal.
+     *         1. Valida los datos recibidos para la búsqueda.
+     *         2. Comprueba que el edificio existe.
+     *         3. Recupera los planes ACTIVOS asignados con el edificio que cumplan con los criterios de búsqueda.
+     */
     function searchPortalPlans() {
         $validation = $this->validar_atributos_search_portal();
         if(!$validation['ok']) {
@@ -69,6 +85,14 @@ class Plan_Service extends Plan_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Consulta los detalles de un Plan en un Edificio.
+     *  - Los detalles de un Plan incluyen la información de la definición del Plan junto con los elementos (Documentos, Procedimientos ...) que lo conforman.
+     *       1. Valida IDs del Edificio y del Plan.
+     *       2. Comprueba que el edificio exista y que el usuario tenga permisos sobre el edificio, comprueba que el plan existe y que este esté asignado al edificio.
+     *       3. Calcula dinámicamente el estado de cada uno de los TIPOS de elemento que conforman el plan y el estado de cada uno de los elementos.
+     *       4. Devuelve la información del Plan junto con los elementos que lo conforman.
+     */
     function seek() {
         $validation = $this->validar_atributos_seek();
         if(!$validation['ok']) {
@@ -102,6 +126,23 @@ class Plan_Service extends Plan_Validation {
 
         $bld_plan = $this->feedback['resource'];
 
+        /*
+         *  - La función checkStatePlan() del CheckState_Service determina el ESTADO del Plan en el Edificio en función del estado de cada uno de los elementos que
+         *  componen el Plan.
+         *  - Una vez se ejecuta esta función, el CheckState_Service dispone en los arrays "documentos, procedimientos, rutas, formaciones y simulacros" la información
+         *  de cada una de estos elementos junto con su estado en el edificio así como el estado del TIPO de elemento. Esta es la información de interés y el motivo
+         *  por el que se ejecuta la función.
+         *      - Estos arrays siguen la siguiente estructura:
+         *          * documentos {
+         *              [ok] => true,
+         *              [code] => 'CODE',
+         *              [estado] => 'pendiente', --- Estado GENERAL de los DOCUMENTOS
+         *              [elementos] => {
+         *                  [documento1] => id, nombre..., ESTADO ... --- Estado ESPECÍFICO de ese Documento.
+         *                  [documento2] => id, nombre..., ESTADO ... --- Estado ESPECÍFICO de ese Documento.
+         *                 }
+         *           }
+         */
         include_once './Service/CheckState_Service.php';
         $checkState_service = new CheckState_Service($bld_plan['edificio_id'], $bld_plan['plan_id']);
         $result = $checkState_service->checkStatePlan();
@@ -124,6 +165,16 @@ class Plan_Service extends Plan_Validation {
         return $this->feedback;
     }
 
+
+    /*
+     *  - Consulta los detalles de un Plan en el Edificio del Portal.
+     *  - Los detalles de un Plan incluyen la información de la definición del Plan junto con los elementos (Documentos, Procedimientos ...) que lo conforman.
+     *       1. Valida IDs del Edificio y del Plan.
+     *       2. Comprueba que el edificio y el plan existe, y que exista una asignacion ACTIVA entre ellos.
+     *       3. Calcula dinámicamente el estado de cada uno de los TIPOS de elemento que conforman el plan y el estado de cada uno de los elementos.
+     *          - Los elementos cuyo estado sea vencido o cuya visibilidad tenga el valor 'NO' no se devuelven en el resultado.
+     *       4. Devuelve la información del Plan junto con los elementos ACTIVOS y VISIBLES que lo conforman.
+     */
     function seekPortalPlan() {
         $validation = $this->validar_atributos_seek();
         if(!$validation['ok']) {
@@ -150,7 +201,30 @@ class Plan_Service extends Plan_Validation {
         }
 
         $bld_plan = $this->feedback['resource'];
+        if($bld_plan['estado'] == 'vencido') {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'BLDPLAN_NOT_EXST';
+            unset($this->feedback['resource']);
+            return $this->feedback;
+        }
 
+        /*
+         *  - La función checkStatePlan() del CheckState_Service determina el ESTADO del Plan en el Edificio en función del estado de cada uno de los elementos que
+         *  componen el Plan.
+         *  - Una vez se ejecuta esta función, el CheckState_Service dispone en los arrays "documentos, procedimientos, rutas, formaciones y simulacros" la información
+         *  de cada una de estos elementos junto con su estado en el edificio así como el estado del TIPO de elemento. Esta es la información de interés y el motivo
+         *  por el que se ejecuta la función.
+         *      - Estos arrays siguen la siguiente estructura:
+         *          * documentos {
+         *              [ok] => true,
+         *              [code] => 'CODE',
+         *              [estado] => 'pendiente', --- Estado GENERAL de los DOCUMENTOS
+         *              [elementos] => {
+         *                  [documento1] => id, nombre..., ESTADO ... --- Estado ESPECÍFICO de ese Documento.
+         *                  [documento2] => id, nombre..., ESTADO ... --- Estado ESPECÍFICO de ese Documento.
+         *                 }
+         *           }
+         */
         include_once './Service/CheckState_Service.php';
         $checkState_service = new CheckState_Service($bld_plan['edificio_id'], $bld_plan['plan_id']);
         $result = $checkState_service->checkStatePlan();
@@ -172,6 +246,8 @@ class Plan_Service extends Plan_Validation {
         return $this->feedback;
     }
 
+
+    // Elimina del listado de definiciones que se pasa por parámetros aquellas definiciones que NO sean "visibles" o cuyo estado sea "vencido".
     function clear_not_visible_or_expired($elements) {
         foreach($elements['elementos'] as $key => $element) {
             if((isset($element['visible']) && $element['visible'] == 'no') || $element['estado'] == 'vencido') {
@@ -183,6 +259,7 @@ class Plan_Service extends Plan_Validation {
     }
 
 
+    // Recupera la información de un Edificio filtrando por ID.
     function seekByBuildingID() {
         include_once './Model/Building_Model.php';
         $building_entity = new Building_Model();
@@ -201,6 +278,7 @@ class Plan_Service extends Plan_Validation {
         return $feedback;
     }
 
+    // Recupera la información de un Plan filtrando por ID.
     function seekByPlanID() {
         include_once './Model/DefPlan_Model.php';
         $defPlan_entity = new DefPlan_Model();
@@ -219,6 +297,7 @@ class Plan_Service extends Plan_Validation {
         return $feedback;
     }
 
+    // Recupera la información de una asignación entre un Edificio y un Plan por ID de Edificio e ID de Plan.
     function seekBldPlan() {
         $feedback = $this->bldPlan_entity->seek();
         if($feedback['ok']) {

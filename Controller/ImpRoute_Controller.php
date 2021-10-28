@@ -14,7 +14,7 @@ class ImpRoute {
     function show() {
         if($this->checkPermission()) {
             $route_service = new Route_Service();
-            $feedback = $route_service->searchImpRoutes();
+            $feedback = $route_service->searchCompletions();
             if($feedback['ok']) {
                 include_once './View/ImpRoutes/Show_ImpRoutes_View.php';
                 new Show_ImpRoutes($feedback['resource'], $feedback['route']);

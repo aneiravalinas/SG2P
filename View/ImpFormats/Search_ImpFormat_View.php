@@ -90,7 +90,7 @@ class Search_ImpFormat {
                                         insertacampo(document.formulariosearch,'formacion_id', '<?php echo $this->formation['formacion_id'] ?>');
                                         insertacampo(document.formulariosearch,'controller','ImpFormat');
                                         insertacampo(document.formulariosearch,'action','show');
-                                        enviaformcorrecto(document.formulariosearch, check_IMPFORMAT_SEARCH());">
+                                        enviaformcorrecto(document.formulariosearch, check_CUMP_SIM_FORMAT_SEARCH());">
                                         Enviar
                                     </a>
                                 </div>

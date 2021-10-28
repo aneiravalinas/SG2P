@@ -35,20 +35,27 @@ class Formation_Service extends Formation_Validation {
         }
     }
 
-    function searchImpFormats() {
+
+    /*
+     *  - Busca Cumplimentaciones de una Formación.
+     *      1. Valida y busca la formación por ID.
+     *      2. Valida el resto de atributos utilizados como filtro.
+     *      3. Recupera las cumplimentaciones de la Formación que cumplan con los datos de filtrado.
+     */
+    function searchCompletions() {
         $this->feedback = $this->seekFormation();
         if(!$this->feedback['ok']) {
             return $this->feedback;
         }
 
         $format = $this->feedback['resource'];
-        $validation = $this->validar_atributos_search_implements();
+        $validation = $this->validar_atributos_searchCompletions();
         if(!$validation['ok']) {
             $validation['formation'] = array('formacion_id' => $format['formacion_id']);
             return $validation;
         }
 
-        $this->feedback = $this->impFormat_entity->SEARCH();
+        $this->feedback = $this->impFormat_entity->searchCompletions();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPFORMAT_SEARCH_OK';
             $this->feedback['formation'] = $format;
@@ -62,6 +69,15 @@ class Formation_Service extends Formation_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los detalles de una Formación en un Edificio.
+     *  - Los detalles de una Formación incluyen los datos de la Definición de la Formación junto con sus cumplimentaciones en el Edificio.
+     *      1. Valida y busca la formación y el edificio por ID, y comprueba que el plan de la formación está asociado al edificio.
+     *      2. Comprueba que el usuario tenga permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador').
+     *      3. Valida el resto de atributos utilizados en la búsqueda (filtrado)
+     *      4. Calcula el estado de la formación en el edificio.
+     *      5. Realiza la búsqueda.
+     */
     function searchFormation() {
         $this->feedback = $this->searchFormatAndBuilding();
         if(!$this->feedback['ok']) {
@@ -90,7 +106,7 @@ class Formation_Service extends Formation_Validation {
         }
 
         $formation['estado'] = $format_state['estado'];
-        $this->feedback = $this->impFormat_entity->searchImpFormats();
+        $this->feedback = $this->impFormat_entity->SEARCH();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPFORMAT_SEARCH_OK';
             $this->feedback['formation'] = $formation;
@@ -105,6 +121,14 @@ class Formation_Service extends Formation_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los detalles de una Formación en el Edificio del Portal.
+     *  - Los detalles de una Formación incluyen los datos de la Definición de la Formación junto con sus cumplimentaciones ACTIVAS en el Edificio.
+     *      1. Valida y busca la formación y el edificio por ID, y comprueba que el plan de la formación está asociado al edificio.
+     *      2. Verifica que la asignación del plan de la formación y el edificio esté ACTIVA.
+     *      3. Se obtiene dinámicamente el estado de la Formación en el Edificio, y comprueba que este esté ACTIVO.
+     *      4. Recupera las cumplimentaciones ACTIVAS de la Formación en el Edificio.
+     */
     function seekPortalFormation() {
         $this->feedback = $this->searchFormatAndBuilding();
         if(!$this->feedback['ok']) {
@@ -158,6 +182,7 @@ class Formation_Service extends Formation_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca una Definición de Formación por ID, y recupera los Edificios que tengan una asignación ACTIVA con el Plan de la Formación.
     function addImpFormatForm() {
         $this->feedback = $this->seekFormation();
         if(!$this->feedback['ok']) {
@@ -175,6 +200,10 @@ class Formation_Service extends Formation_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  Valida y busca una Formación y un Edificio por ID, comprueba que existe una asociación entre el Plan de la Formación y el Edificio, y comprueba que el
+     *  usuario tenga permisos sobre el edificio.
+     */
     function formationForm() {
         $this->feedback = $this->searchFormatAndBuilding();
         if(!$this->feedback['ok']) {
@@ -191,6 +220,8 @@ class Formation_Service extends Formation_Validation {
         return $this->feedback;
     }
 
+
+    // Valida y busca una Formación y un Edificio por ID, y comprueba que exista una asociación ACTIVA entre el Plan de la Formación y el Edificio.
     function searchPortalFormationForm() {
         $this->feedback = $this->searchFormatAndBuilding();
         if(!$this->feedback['ok']) {
@@ -207,6 +238,11 @@ class Formation_Service extends Formation_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  1. Valida y busca una Definición de Formación por ID.
+     *  2. Valida los Edificios por ID.
+     *  3. Llama a la función ADD para añadir las cumplimentaciones en estado Pendiente de la Formación en los Edificios.
+     */
     function addImpFormat() {
         $validation = $this->validar_atributos_add();
         if(!$validation['ok']) {
@@ -224,6 +260,15 @@ class Formation_Service extends Formation_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Crea una Cumplimentación en estado PENDIENTE de la Formación que se pasa como parámetro en cada uno de los Edificios.
+     *  - Para cada uno de los Edificios:
+     *      1. Comprueba que el edificio existe.
+     *      2. Valida que el usuario que solicita la acción tiene permisos sobre el edificio.
+     *      3. Comprueaba que existe una asociación ACTIVA entre el Plan de la Formación y el Edificio.
+     *      4. Añade la Cumplimentación y recalcula el estado del Plan en el Edificio.
+     *  -  En caso de que se produzca un error al crear alguna de las cumplimentaciones, deshace TODOS los cambios realizados hasta el momento.
+     */
     function ADD($formation) {
         if(empty($this->buildings)) {
             $feedback['ok'] = true;
@@ -279,6 +324,13 @@ class Formation_Service extends Formation_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Elimina la cumplimentación de una Formación
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     *      3. En el caso de que rol del usuario sea 'edificio', verifica que la cumplimentación a eliminar no sea la única cumpolimetnación de la Formación en el Edificio.
+     *      4. Elimina la cumplimentación y actualiza el estado del Plan en el Edificio.
+     */
     function DELETE() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -306,6 +358,11 @@ class Formation_Service extends Formation_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Consulta la información de la cumplimentación de una Formación.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
+     */
     function seek() {
         $validation = $this->validar_EDIFICIO_FORMACION_ID();
         if(!$validation['ok']) {
@@ -330,6 +387,11 @@ class Formation_Service extends Formation_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Consulta la información de la cumplimentación de una Formación del Portal.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Verifica que la cumplimentación está ACTIVA (Pendiente o Cumplimentada).
+     */
     function seekPortalImpFormat() {
         $validation = $this->validar_EDIFICIO_FORMACION_ID();
         if(!$validation['ok']) {
@@ -353,6 +415,13 @@ class Formation_Service extends Formation_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Modifica el estado de la cumplimentación de una Formación a 'vencido'.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador').
+     *      3. Modifica el estado de la cumplimentación y añade la fecha actual como fecha de vencimiento.
+     *      4. Actualiza el estado del Plan en el Edificio.
+     */
     function expire() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -374,6 +443,14 @@ class Formation_Service extends Formation_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Cumplimenta la cumplimentación de una Formación.
+     *      1. Valida y busca la cumplimentación por ID.
+     *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador').
+     *      3. Verifica que la cumplimentación esté ACTIVA (estado Pendiente o Cumplimentado).
+     *      4. Valida los valores de los atributos necesarios para la cumplimentación.
+     *      5. Modifica la cumplimentación y actualiza el estado del Plan en el Edificio.
+     */
     function implement() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -407,6 +484,7 @@ class Formation_Service extends Formation_Validation {
         return$this->feedback;
     }
 
+    // Valida y busca una Formación y un Edificio por ID, y comprueba que existe una asociación entre el Plan de la Formación y el Edificio.
     function searchFormatAndBuilding() {
         $validation = $this->validar_format_and_building();
         if(!$validation['ok']) {
@@ -435,6 +513,7 @@ class Formation_Service extends Formation_Validation {
         return $feedback;
     }
 
+    // Valida y busca la definición de una Formación por ID.
     function seekFormation() {
         $validation = $this->validar_FORMACION_ID();
         if(!$validation['ok']) {
@@ -444,6 +523,7 @@ class Formation_Service extends Formation_Validation {
         return $this->seekByFormatID();
     }
 
+    // Busca un Edificio por ID.
     function seekByBuildingID() {
         include_once './Model/Building_Model.php';
         $building_entity = new Building_Model();
@@ -463,6 +543,7 @@ class Formation_Service extends Formation_Validation {
         return $feedback;
     }
 
+    // Busca la asociación entre un Plan y un Edificio por IDs.
     function seekPlanBuilding($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $buildPlan_entity = new BuildPlan_Model();
@@ -482,6 +563,7 @@ class Formation_Service extends Formation_Validation {
         return $feedback;
     }
 
+    // Búsqueda de una Formación por ID.
     function seekByFormatID() {
         $feedback = $this->defFormat_entity->seek();
         if($feedback['ok']) {
@@ -498,6 +580,7 @@ class Formation_Service extends Formation_Validation {
         return $feedback;
     }
 
+    // Búsqueda de una cumplimentación de una Formación por ID.
     function seekByImpFormatID() {
         $feedback = $this->impFormat_entity->seek();
         if($feedback['ok']) {
@@ -514,6 +597,12 @@ class Formation_Service extends Formation_Validation {
         return $feedback;
     }
 
+
+    /*
+     *  - Obtención del estado de una Formación en un Edificio.
+     *      1. Recupera todas las cumplimentaciones de la Formación en el Edificio.
+     *      2. Calcula el estado de la Formación en función de las cumplimentaciones recuperadas.
+     */
     function get_formation_state() {
         $feedback = $this->search_all_impformats();
         if(!$feedback['ok']) {
@@ -526,6 +615,7 @@ class Formation_Service extends Formation_Validation {
         return array('ok' => true, 'estado' => $estado);
     }
 
+    // Búsqueda de TODAS las cumplimentaciones de una Formación en un Edificio.
     function search_all_impformats() {
         $feedback = $this->impFormat_entity->searchFormatsBuildings();
         if($feedback['ok']) {
@@ -537,12 +627,14 @@ class Formation_Service extends Formation_Validation {
         return $feedback;
     }
 
+    // Cálculo y actualización del estado de un Plan en un Edificio.
     function update_plan_state($edificio_id, $plan_id) {
         include_once './Service/CheckState_Service.php';
         $checkState_service = new CheckState_Service($edificio_id, $plan_id);
         $checkState_service->update_plan_state();
     }
 
+    // Búsqueda de asociaciones ACTIVAS (Pendiente o Cumplimetnado) Edificio - Plan por ID de Plan.
     function searchActiveBuildPlans($plan_id) {
         include_once './Model/BuildPlan_Model.php';
         $bldPlan_entity = new BuildPlan_Model();
@@ -562,6 +654,7 @@ class Formation_Service extends Formation_Validation {
         return $feedback;
     }
 
+    // Consulta de número de cumplimentaciones de una Formación en un Edificio mayor que 1.
     function check_more_than_one_impformats($edificio_id, $formacion_id) {
         $this->impFormat_entity->setAttributes(array('edificio_id' => $edificio_id, 'formacion_id' => $formacion_id));
         $feedback = $this->impFormat_entity->searchFormatsBuildings();
