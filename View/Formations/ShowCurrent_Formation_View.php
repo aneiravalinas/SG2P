@@ -42,7 +42,7 @@ class ShowCurrent_Formation {
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-cump_id">ID Cumplimentación</span>
-                                            <span class="d-block att-value"><?php echo $this->imp_format['edificio_formacion_id'] ?></span>
+                                            <span class="d-block att-value"><?php echo $this->imp_format['cumplimentacion_id'] ?></span>
                                         </li>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-formacion_id">ID Formación</span>

@@ -27,8 +27,8 @@ class Implement_ImpRoute {
                         <form name="formularioadd" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="form-group col-md-4">
-                                    <label for="planta_ruta_id" class="i18n-cump_id">ID Cumplimentación</label>
-                                    <input type="text" value="<?php echo $this->imp_route['planta_ruta_id'] ?>" class="form-control" id="planta_ruta_id" name="planta_ruta_id" readonly/>
+                                    <label for="cumplimentacion_id" class="i18n-cump_id">ID Cumplimentación</label>
+                                    <input type="text" value="<?php echo $this->imp_route['cumplimentacion_id'] ?>" class="form-control" id="cumplimentacion_id" name="cumplimentacion_id" readonly/>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="ruta_id" class="i18n-ruta_id_id">ID Ruta</label>

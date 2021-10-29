@@ -14,7 +14,7 @@ class Document_Service extends Document_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('edificio_documento_id','edificio_id','documento_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
+        $this->atributos = array('cumplimentacion_id','edificio_id','documento_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
             'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'nombre_edificio', 'nombre_doc');
         $this->defDoc_entity = new DefDoc_Model();
         $this->impDoc_entity = new ImpDoc_Model();
@@ -357,14 +357,14 @@ class Document_Service extends Document_Validation {
                                                     'fecha_cumplimentacion' => default_data, 'estado' => 'pendiente'));
         $feedback = $this->impDoc_entity->ADD();
         if($feedback['ok']) {
-            $imp_doc_id = $this->impDoc_entity->edificio_documento_id;
+            $imp_doc_id = $this->impDoc_entity->cumplimentacion_id;
             $feedback = $this->ADD($document);
             if($feedback['ok']) {
                 $feedback['building'] = array('edificio_id' => $building['edificio_id']);
                 $this->update_plan_state($building['edificio_id'], $document['plan_id']);
                 return $feedback;
             }
-            $this->impDoc_entity->edificio_documento_id = $imp_doc_id;
+            $this->impDoc_entity->cumplimentacion_id = $imp_doc_id;
             $this->impDoc_entity->DELETE();
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'IMPDOC_ADD_KO';
@@ -386,7 +386,7 @@ class Document_Service extends Document_Validation {
      *          - Formato de la ruta: Uploads/PLAN_ID/EDIFICIO_ID/Documentos/DOCUMENTO_ID/CUMPLIMENTACION_ID/NOMBRE_FICHERO.
      */
     function seek() {
-        $validation = $this->validar_EDIFICIO_DOCUMENTO_ID();
+        $validation = $this->validar_CUMPLIMENTACION_ID();
         if(!$validation['ok']) {
             return $validation;
         }
@@ -402,7 +402,7 @@ class Document_Service extends Document_Validation {
             }
 
             $this->feedback['resource']['path'] = plans_path . $imp_doc['plan_id'] . '/' . $imp_doc['edificio_id'] . '/Documentos/' . $imp_doc['documento_id'] . '/' .
-                                        $imp_doc['edificio_documento_id'];
+                                        $imp_doc['cumplimentacion_id'];
             $this->feedback['code'] = 'IMPDOC_SEEK_OK';
         } else if($this->feedback['code'] == 'IMPDOCID_KO') {
             $this->feedback['code'] = 'IMPDOC_SEEK_KO';
@@ -419,7 +419,7 @@ class Document_Service extends Document_Validation {
      *          - Formato de la ruta: Uploads/PLAN_ID/EDIFICIO_ID/Documentos/DOCUMENTO_ID/CUMPLIMENTACION_ID/NOMBRE_FICHERO.
      */
     function seekPortalImpDoc() {
-        $validation = $this->validar_EDIFICIO_DOCUMENTO_ID();
+        $validation = $this->validar_CUMPLIMENTACION_ID();
         if(!$validation['ok']) {
             return $validation;
         }
@@ -436,7 +436,7 @@ class Document_Service extends Document_Validation {
             $this->feedback['code'] = 'PRTL_IMPDOC_SEEK_OK';
             $imp_doc = $this->feedback['resource'];
             $this->feedback['resource']['path'] = plans_path . $imp_doc['plan_id'] . '/' . $imp_doc['edificio_id'] . '/Documentos/' . $imp_doc['documento_id'] . '/' .
-                $imp_doc['edificio_documento_id'];
+                $imp_doc['cumplimentacion_id'];
         } else if($this->feedback['code'] == 'IMPDOCID_KO') {
             $this->feedback['code'] = 'PRTL_IMPDOC_SEEK_KO';
         }

@@ -30,7 +30,7 @@ class Search_ImpFormat {
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="cumplimentacion_id" class="i18n-cump_id">ID Cumplimentacion</label>
-                                    <input type="text" class="form-control" id="cumplimentacion_id" name="edificio_formacion_id" onblur="check_CUMPLIMENTACION_ID_SEARCH();"/>
+                                    <input type="text" class="form-control" id="cumplimentacion_id" name="cumplimentacion_id" onblur="check_CUMPLIMENTACION_ID_SEARCH();"/>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="edificio_id" class="i18n-edificio_id">ID Edificio</label>

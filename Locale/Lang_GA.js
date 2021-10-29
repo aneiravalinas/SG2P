@@ -1032,13 +1032,9 @@ arrayGA = {
             'FILENAME_FRMT' : 'O nome do ficherio da cumplimentación só pode contener letras, números e guións',
             'FILENAME_EXT' : 'O ficheiro da cumplimentación debe estar en formato pdf',
 
-            // ID Procedimiento
-            'IMPPROC_ID_EMPT' : 'O id da cumplimentación do procedemento non pode ser vacío',
-            'IMPPROC_ID_NOT_NUMERIC' : 'O id da cumplimentación do procedemento debe ser numérico',
-
-            // ID Ruta
-            'IMPROUTE_ID_EMPT' : 'O id da cumplimentación da ruta non pode estar vacío',
-            'IMPROUTE_ID_NOT_NUMERIC' : 'O id da cumplimentación da ruta debe ser numérico',
+            // ID Cumplimentación
+            'CUMP_ID_EMPT' : 'O id da cumplimentación non pode ser vacío',
+            'CUMP_ID_NOT_NUMERIC' : 'O id da cumplimentación debe ser numérico',
 
             // Fecha Planificación
             'PLANNING_DATE_EMPT' : 'A data de planificación non pode ser vacía',

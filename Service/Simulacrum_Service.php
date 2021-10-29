@@ -12,7 +12,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('edificio_simulacro_id','simulacro_id','edificio_id','estado','fecha_planificacion', 'fecha_planificacion_inicio','fecha_planificacion_fin',
+        $this->atributos = array('cumplimentacion_id','simulacro_id','edificio_id','estado','fecha_planificacion', 'fecha_planificacion_inicio','fecha_planificacion_fin',
             'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'url_recurso','destinatarios','nombre_edificio');
         $this->defSim_entity = new DefSim_Model();
         $this->impSim_entity = new ImpSim_Model();
@@ -302,14 +302,14 @@ class Simulacrum_Service extends Simulacrum_Validation {
                                                     'fecha_vencimiento' => default_data, 'url_recurso' => default_url, 'estado' => 'pendiente'));
         $feedback = $this->impSim_entity->ADD();
         if($feedback['ok']) {
-            $edificio_simulacro_id = $this->impSim_entity->edificio_simulacro_id;
+            $cumplimentacion_id = $this->impSim_entity->cumplimentacion_id;
             $feedback = $this->ADD($simulacrum);
             if($feedback['ok']) {
                 $feedback['building'] = array('edificio_id' => $building['edificio_id']);
                 $this->update_plan_state($building['edificio_id'], $simulacrum['plan_id']);
                 return $feedback;
             }
-            $this->impSim_entity->edificio_simulacro_id = $edificio_simulacro_id;
+            $this->impSim_entity->cumplimentacion_id = $cumplimentacion_id;
             $this->impSim_entity->DELETE();
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'IMPSIM_ADD_KO';
@@ -423,7 +423,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
     }
 
     function seek() {
-        $validation = $this->validar_EDIFICIO_SIMULACRO_ID();
+        $validation = $this->validar_CUMPLIMENTACION_ID();
         if(!$validation['ok']) {
             return $validation;
         }
@@ -452,7 +452,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
      *      2. Verifica que la cumplimentación está ACTIVA (Pendiente o Cumplimentada).
      */
     function seekPortalImpSim() {
-        $validation = $this->validar_EDIFICIO_SIMULACRO_ID();
+        $validation = $this->validar_CUMPLIMENTACION_ID();
         if(!$validation['ok']) {
             return $validation;
         }

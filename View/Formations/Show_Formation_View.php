@@ -121,7 +121,7 @@ class Show_Formation {
                                 <tbody>
                                 <?php foreach($this->imp_formats as $imp_format): ?>
                                     <tr>
-                                        <td class="text-center"><?php echo $imp_format['edificio_formacion_id'] ?></td>
+                                        <td class="text-center"><?php echo $imp_format['cumplimentacion_id'] ?></td>
                                         <td class="text-center i18n-<?php echo $imp_format['estado'] ?> <?php echo $imp_format['estado'] ?>"></td>
                                         <td class="text-center"><?php if($imp_format['fecha_planificacion'] != default_data) echo date_format(date_create($imp_format['fecha_planificacion']),'d/m/Y');?></td>
                                         <td class="text-center"><?php if($imp_format['fecha_vencimiento'] != default_data) echo date_format(date_create($imp_format['fecha_vencimiento']),'d/m/Y');?></td>
@@ -133,7 +133,7 @@ class Show_Formation {
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item i18n-details" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar,'edificio_formacion_id','<?php echo $imp_format['edificio_formacion_id'] ?>');
+                                                        insertacampo(document.formenviar,'cumplimentacion_id','<?php echo $imp_format['cumplimentacion_id'] ?>');
                                                         insertacampo(document.formenviar,'controller','Formation');
                                                         insertacampo(document.formenviar,'action','showCurrent');
                                                         enviaform(document.formenviar);">
@@ -142,7 +142,7 @@ class Show_Formation {
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item i18n-implement" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar, 'edificio_formacion_id','<?php echo $imp_format['edificio_formacion_id'] ?>');
+                                                        insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_format['cumplimentacion_id'] ?>');
                                                         insertacampo(document.formenviar, 'controller','Formation');
                                                         insertacampo(document.formenviar, 'action', 'implementForm');
                                                         enviaform(document.formenviar);">
@@ -152,7 +152,7 @@ class Show_Formation {
                                                     <?php if($imp_format['estado'] != 'vencido') :?>
                                                         <a class="dropdown-item i18n-expire" type="button" onclick="
                                                             crearform('formenviar','post');
-                                                            insertacampo(document.formenviar, 'edificio_formacion_id','<?php echo $imp_format['edificio_formacion_id'] ?>');
+                                                            insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_format['cumplimentacion_id'] ?>');
                                                             insertacampo(document.formenviar, 'controller','Formation');
                                                             insertacampo(document.formenviar, 'action', 'expireForm');
                                                             enviaform(document.formenviar);">
@@ -162,7 +162,7 @@ class Show_Formation {
                                                     <?php endif; ?>
                                                     <a class="dropdown-item i18n-delete" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar, 'edificio_formacion_id','<?php echo $imp_format['edificio_formacion_id'] ?>');
+                                                        insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_format['cumplimentacion_id'] ?>');
                                                         insertacampo(document.formenviar, 'controller','Formation');
                                                         insertacampo(document.formenviar, 'action','deleteForm');
                                                         enviaform(document.formenviar);">

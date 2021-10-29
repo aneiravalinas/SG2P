@@ -42,7 +42,7 @@ class ShowCurrent_ImpSim {
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-cump_id">ID Cumplimentación</span>
-                                            <span class="d-block att-value"><?php echo $this->imp_sim['edificio_simulacro_id'] ?></span>
+                                            <span class="d-block att-value"><?php echo $this->imp_sim['cumplimentacion_id'] ?></span>
                                         </li>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-simulacro_id">ID Simulacro</span>

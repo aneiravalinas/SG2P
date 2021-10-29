@@ -52,19 +52,19 @@ array_push($testDocument, $respTest);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('edificio_documento_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $document_service = new Document_Service();
 $feedback = $document_service->seek();
-$respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'EDIFICIO_DOCUMENTO_ID', 'ID de Cumplimentación vacío',
-    'IMPDOC_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('edificio_documento_id' => 'aaa');
+$_POST = array('cumplimentacion_id' => 'aaa');
 $document_service = new Document_Service();
 $feedback = $document_service->seek();
-$respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'EDIFICIO_DOCUMENTO_ID', 'ID de Cumplimentación no numérico',
-    'IMPDOC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 
@@ -73,7 +73,7 @@ array_push($testDocument, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_documento_id' => '1111111');
+$_POST = array('cumplimentacion_id' => '1111111');
 $document_service = new Document_Service();
 $feedback = $document_service->seek();
 $respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'ACCION', 'La cumplimentación no existe',
@@ -83,7 +83,7 @@ array_push($testDocument, $respTest);
 // El usuario no tiene permisos para consultar la cumplimentación
 $_SESSION['username'] = 'sg2ped';
 $_SESSION['rol'] = 'edificio';
-$_POST = array('edificio_documento_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $document_service = new Document_Service();
 $feedback = $document_service->seek();
 $respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'ACCION', 'El usuario no tiene permisos para consultar la cumplimentación',
@@ -92,7 +92,7 @@ array_push($testDocument, $respTest);
 
 // Búsqueda de Planes Ok
 $_SESSION['username'] = 'sg2ped2';
-$_POST = array('edificio_documento_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $document_service = new Document_Service();
 $feedback = $document_service->seek();
 $respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'ACCION', 'El usuario no tiene permisos para consultar la cumplimentación',
@@ -138,15 +138,15 @@ array_push($testDocument, $respTest);
  */
 
 // ID de Cumplimentación no numérico
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => 'aaaa');
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => 'aaaa');
 $document_service = new Document_Service();
 $feedback = $document_service->searchCompletions();
-$respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'EDIFICIO_DOCUMENTO_ID', 'ID de Cumplimentación no numérico',
-    'IMPDOC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // Estado de cumplimentación inválido
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'RandomState');
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'RandomState');
 $document_service = new Document_Service();
 $feedback = $document_service->searchCompletions();
 $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'ESTADO', 'Estado de cumplimentación inválido',
@@ -154,7 +154,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'ESTADO', 'Estado
 array_push($testDocument, $respTest);
 
 // Fecha de cumplimentación inicial inválida
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992-12/25');
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992-12/25');
 $document_service = new Document_Service();
 $feedback = $document_service->searchCompletions();
 $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha de cumplimentación inicial inválida',
@@ -162,7 +162,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENT
 array_push($testDocument, $respTest);
 
 // Fecha de cumplimentación final inválida
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992-12/25');
 $document_service = new Document_Service();
 $feedback = $document_service->searchCompletions();
@@ -171,7 +171,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENT
 array_push($testDocument, $respTest);
 
 // Fecha de vencimiento inicial inválida
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992-12/25');
 $document_service = new Document_Service();
 $feedback = $document_service->searchCompletions();
@@ -180,7 +180,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIENT
 array_push($testDocument, $respTest);
 
 // Fecha de vencimiento final inválida
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992-12/25');
 $document_service = new Document_Service();
 $feedback = $document_service->searchCompletions();
@@ -189,7 +189,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIENT
 array_push($testDocument, $respTest);
 
 // Nombre de Documento largo (más de 50 caracteres)
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
                 'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $document_service = new Document_Service();
@@ -199,7 +199,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'NOMBRE_DOC', 'No
 array_push($testDocument, $respTest);
 
 // Formato nombre documento incorrecto
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf.pdf');
 $document_service = new Document_Service();
@@ -209,7 +209,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'NOMBRE_DOC', 'Fo
 array_push($testDocument, $respTest);
 
 // ID Edificio no numérico
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf', 'edificio_id' => 'aaa');
 $document_service = new Document_Service();
@@ -219,7 +219,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'EDIFICIO_ID', 'I
 array_push($testDocument, $respTest);
 
 // Nombre de Edificio corto (menos de 3 caracteres)
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'aa');
 $document_service = new Document_Service();
@@ -229,7 +229,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO'
 array_push($testDocument, $respTest);
 
 // Nombre de Edificio largo (más de 60 caracteres)
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $document_service = new Document_Service();
@@ -239,7 +239,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO'
 array_push($testDocument, $respTest);
 
 // Nombre de Edificio con caracteres no permitidos
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'Nombre de Ed^ficio');
 $document_service = new Document_Service();
@@ -253,7 +253,7 @@ array_push($testDocument, $respTest);
  */
 
 // Búsqueda de cumplimentaciones Ok
-$_POST = array('documento_id' => '1', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'Nombre de Edificio');
 $document_service = new Document_Service();
@@ -344,15 +344,15 @@ array_push($testDocument, $respTest);
 $_SESSION['username'] = 'sg2ped2';
 
 // ID de Cumplimentación no numérico
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => 'aaaaaaaaaa');
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'cumplimentacion_id' => 'aaaaaaaaaa');
 $document_service = new Document_Service();
 $feedback = $document_service->searchDocument();
-$respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'EDIFICIO_DOCUMENTO_ID', 'ID de Cumplimentación no numérico',
-    'IMPDOC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // Estado de cumplimentación inválido
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'RandomState');
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'cumplimentacion_id' => '1', 'estado' => 'RandomState');
 $document_service = new Document_Service();
 $feedback = $document_service->searchDocument();
 $respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'ESTADO', 'Estado de cumplimentación inválido',
@@ -360,7 +360,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'ESTADO', 'Estado de
 array_push($testDocument, $respTest);
 
 // Fecha de cumplimentación inicial inválida
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992-12/25');
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992-12/25');
 $document_service = new Document_Service();
 $feedback = $document_service->searchDocument();
 $respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha de cumplimentación inicial inválida',
@@ -368,7 +368,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'FECHA_CUMPLIMENTACI
 array_push($testDocument, $respTest);
 
 // Fecha de cumplimentacion final inválida
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
         'fecha_cumplimentacion_fin' => '1992/12-25');
 $document_service = new Document_Service();
 $feedback = $document_service->searchDocument();
@@ -377,7 +377,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'FECHA_CUMPLIMENTACI
 array_push($testDocument, $respTest);
 
 // Fecha de vencimiento inicial inválida
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12-25');
 $document_service = new Document_Service();
 $feedback = $document_service->searchDocument();
@@ -386,7 +386,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'FECHA_VENCIMIENTO_I
 array_push($testDocument, $respTest);
 
 // Fecha de vencimiento final inválida
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_final' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12-25');
 $document_service = new Document_Service();
 $feedback = $document_service->searchDocument();
@@ -395,7 +395,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'FECHA_VENCIMIENTO_F
 array_push($testDocument, $respTest);
 
 // Nombre de Documento largo (más de 50 caracteres)
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $document_service = new Document_Service();
@@ -405,7 +405,7 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_DOCUMENT', 'NOMBRE_DOC', 'Nombr
 array_push($testDocument, $respTest);
 
 // Formato nombre documento incorrecto
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf.pdf');
 $document_service = new Document_Service();
@@ -419,7 +419,7 @@ array_push($testDocument, $respTest);
  */
 
 // Búsqueda de Cumplimentaciones Ok
-$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'edificio_documento_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+$_POST = array('documento_id' => '6', 'edificio_id' => '6', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
     'nombre_doc' => 'fichero.pdf');
 $document_service = new Document_Service();
@@ -763,7 +763,7 @@ $respTest = obtenerRespuesta('Document', 'ADD_IMPDOC', 'ACCION', 'Cumplimentaci�
 array_push($testDocument, $respTest);
 
 if($feedback['ok']) {
-    $imp_doc_id = $document_service->impDoc_entity->edificio_documento_id;
+    $imp_doc_id = $document_service->impDoc_entity->cumplimentacion_id;
 } else {
     $imp_doc_id = '';
 }
@@ -776,19 +776,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('edificio_documento_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $document_service = new Document_Service();
 $feedback = $document_service->seekPortalImpDoc();
-$respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_IMPDOC', 'EDIFICIO_DOCUMENTO_ID', 'ID de Cumplimentación vacío',
-    'IMPDOC_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_IMPDOC', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('edificio_documento_id' => 'aaa');
+$_POST = array('cumplimentacion_id' => 'aaa');
 $document_service = new Document_Service();
 $feedback = $document_service->seekPortalImpDoc();
-$respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_IMPDOC', 'EDIFICIO_DOCUMENTO_ID', 'ID de Cumplimentación no numérico',
-    'IMPDOC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_IMPDOC', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 /*
@@ -796,7 +796,7 @@ array_push($testDocument, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_documento_id' => '111111111111111111');
+$_POST = array('cumplimentacion_id' => '111111111111111111');
 $document_service = new Document_Service();
 $feedback = $document_service->seekPortalImpDoc();
 $respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_IMPDOC', 'ACCION', 'La cumplimentación del documento no existe',
@@ -804,7 +804,7 @@ $respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_IMPDOC', 'ACCION', 'La cum
 array_push($testDocument, $respTest);
 
 // La cumplimentación está vencida
-$_POST = array('edificio_documento_id' => '3');
+$_POST = array('cumplimentacion_id' => '3');
 $document_service = new Document_Service();
 $feedback = $document_service->seekPortalImpDoc();
 $respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_IMPDOC', 'ACCION', 'La cumplimentación está vencida',
@@ -812,7 +812,7 @@ $respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_IMPDOC', 'ACCION', 'La cum
 array_push($testDocument, $respTest);
 
 // Detalles de la cumplimentación del portal Ok
-$_POST = array('edificio_documento_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $document_service = new Document_Service();
 $feedback = $document_service->seekPortalImpDoc();
 $respTest = obtenerRespuesta('Document', 'SEEK_PORTAL_IMPDOC', 'ACCION', 'Detalles de la cumplimentación del portal Ok',
@@ -825,19 +825,19 @@ array_push($testDocument, $respTest);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('edificio_documento_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $document_service = new Document_Service();
 $feedback = $document_service->implement();
-$respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'EDIFICIO_DOCUMENTO_ID', 'ID de Cumplimentación vacío',
-    'IMPDOC_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('edificio_documento_id' => 'aaa');
+$_POST = array('cumplimentacion_id' => 'aaa');
 $document_service = new Document_Service();
 $feedback = $document_service->implement();
-$respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'EDIFICIO_DOCUMENTO_ID', 'ID de Cumplimentación no numérico',
-    'IMPDOC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 
@@ -846,7 +846,7 @@ array_push($testDocument, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_documento_id' => '1111111');
+$_POST = array('cumplimentacion_id' => '1111111');
 $document_service = new Document_Service();
 $feedback = $document_service->implement();
 $respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'ACCION', 'La cumplimentación no existe',
@@ -856,7 +856,7 @@ array_push($testDocument, $respTest);
 // El usuario no tiene permisos para consultar la cumplimentación
 $_SESSION['username'] = 'sg2ped';
 $_SESSION['rol'] = 'edificio';
-$_POST = array('edificio_documento_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $document_service = new Document_Service();
 $feedback = $document_service->implement();
 $respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'ACCION', 'El usuario no tiene permisos para consultar la cumplimentación',
@@ -865,7 +865,7 @@ array_push($testDocument, $respTest);
 
 // Cumplimentación vencida
 $_SESSION['username'] = 'sg2ped2';
-$_POST = array('edificio_documento_id' => '3');
+$_POST = array('cumplimentacion_id' => '3');
 $document_service = new Document_Service();
 $feedback = $document_service->implement();
 $respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'ACCION', 'La cumplimentación se encuentra vencida',
@@ -878,7 +878,7 @@ array_push($testDocument, $respTest);
 
 // Nombre Documento vacío
 $_SESSION['username'] = 'sg2ped2';
-$_POST = array('edificio_documento_id' => '1', 'nombre_doc' => '');
+$_POST = array('cumplimentacion_id' => '1', 'nombre_doc' => '');
 $document_service = new Document_Service();
 $feedback = $document_service->implement();
 $respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'NOMBRE_DOC', 'Nombre Documento vacío',
@@ -886,7 +886,7 @@ $respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'NOMBRE_DOC', 'Nombre Docu
 array_push($testDocument, $respTest);
 
 // Nombre Documento largo (más de 50 caracteres)
-$_POST = array('edificio_documento_id' => '1', 'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+$_POST = array('cumplimentacion_id' => '1', 'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $document_service = new Document_Service();
 $feedback = $document_service->implement();
 $respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'NOMBRE_DOC', 'Nombre Documento largo',
@@ -894,7 +894,7 @@ $respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'NOMBRE_DOC', 'Nombre Docu
 array_push($testDocument, $respTest);
 
 // Nombre Documento formato incorrecto
-$_POST = array('edificio_documento_id' => '1', 'nombre_doc' => 'docu^mento.pdf');
+$_POST = array('cumplimentacion_id' => '1', 'nombre_doc' => 'docu^mento.pdf');
 $document_service = new Document_Service();
 $feedback = $document_service->implement();
 $respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'NOMBRE_DOC', 'Nombre Documento formato incorrecto',
@@ -902,7 +902,7 @@ $respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'NOMBRE_DOC', 'Nombre Docu
 array_push($testDocument, $respTest);
 
 // Nombre Documento extensión no permitida
-$_POST = array('edificio_documento_id' => '1', 'nombre_doc' => 'documento.php');
+$_POST = array('cumplimentacion_id' => '1', 'nombre_doc' => 'documento.php');
 $document_service = new Document_Service();
 $feedback = $document_service->implement();
 $respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'NOMBRE_DOC', 'Extensión no permitida',
@@ -915,7 +915,7 @@ array_push($testDocument, $respTest);
 
 // Cumplimentación Ok
 $_SESSION['username'] = 'sg2ped';
-$_POST = array('edificio_documento_id' => $imp_doc_id, 'nombre_doc' => 'documento.pdf');
+$_POST = array('cumplimentacion_id' => $imp_doc_id, 'nombre_doc' => 'documento.pdf');
 $document_service = new Document_Service();
 $feedback = $document_service->implement();
 $respTest = obtenerRespuesta('Document', 'IMPLEMENT', 'ACCION', 'Cumplimentación de Documento Ok',
@@ -929,19 +929,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('edificio_documento_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $document_service = new Document_Service();
 $feedback = $document_service->expire();
-$respTest = obtenerRespuesta('Document', 'EXPIRE', 'EDIFICIO_DOCUMENTO_ID', 'ID de Cumplimentación vacío',
-    'IMPDOC_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'EXPIRE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('edificio_documento_id' => 'aaa');
+$_POST = array('cumplimentacion_id' => 'aaa');
 $document_service = new Document_Service();
 $feedback = $document_service->expire();
-$respTest = obtenerRespuesta('Document', 'EXPIRE', 'EDIFICIO_DOCUMENTO_ID', 'ID de Cumplimentación no numérico',
-    'IMPDOC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'EXPIRE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 /*
@@ -949,7 +949,7 @@ array_push($testDocument, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_documento_id' => '1111111');
+$_POST = array('cumplimentacion_id' => '1111111');
 $document_service = new Document_Service();
 $feedback = $document_service->expire();
 $respTest = obtenerRespuesta('Document', 'EXPIRE', 'ACCION', 'La cumplimentación no existe',
@@ -959,7 +959,7 @@ array_push($testDocument, $respTest);
 // El usuario no tiene permisos para consultar la cumplimentación
 $_SESSION['username'] = 'sg2ped';
 $_SESSION['rol'] = 'edificio';
-$_POST = array('edificio_documento_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $document_service = new Document_Service();
 $feedback = $document_service->expire();
 $respTest = obtenerRespuesta('Document', 'EXPIRE', 'ACCION', 'El usuario no tiene permisos para consultar la cumplimentación',
@@ -967,7 +967,7 @@ $respTest = obtenerRespuesta('Document', 'EXPIRE', 'ACCION', 'El usuario no tien
 array_push($testDocument, $respTest);
 
 // Cumplimentación vencida Ok
-$_POST = array('edificio_documento_id' => $imp_doc_id);
+$_POST = array('cumplimentacion_id' => $imp_doc_id);
 $document_service = new Document_Service();
 $feedback = $document_service->expire();
 $respTest = obtenerRespuesta('Document', 'EXPIRE', 'ACCION', 'Cumplimentación vencida Ok',
@@ -979,19 +979,19 @@ array_push($testDocument, $respTest);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('edificio_documento_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $document_service = new Document_Service();
 $feedback = $document_service->DELETE();
-$respTest = obtenerRespuesta('Document', 'DELETE', 'EDIFICIO_DOCUMENTO_ID', 'ID de Cumplimentación vacío',
-    'IMPDOC_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'DELETE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('edificio_documento_id' => 'aaa');
+$_POST = array('cumplimentacion_id' => 'aaa');
 $document_service = new Document_Service();
 $feedback = $document_service->DELETE();
-$respTest = obtenerRespuesta('Document', 'DELETE', 'EDIFICIO_DOCUMENTO_ID', 'ID de Cumplimentación no numérico',
-    'IMPDOC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Document', 'DELETE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
 /*
@@ -999,7 +999,7 @@ array_push($testDocument, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_documento_id' => '1111111');
+$_POST = array('cumplimentacion_id' => '1111111');
 $document_service = new Document_Service();
 $feedback = $document_service->DELETE();
 $respTest = obtenerRespuesta('Document', 'DELETE', 'ACCION', 'La cumplimentación no existe',
@@ -1009,7 +1009,7 @@ array_push($testDocument, $respTest);
 // El usuario no tiene permisos para consultar la cumplimentación
 $_SESSION['username'] = 'sg2ped';
 $_SESSION['rol'] = 'edificio';
-$_POST = array('edificio_documento_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $document_service = new Document_Service();
 $feedback = $document_service->DELETE();
 $respTest = obtenerRespuesta('Document', 'DELETE', 'ACCION', 'El usuario no tiene permisos para consultar la cumplimentación',
@@ -1018,7 +1018,7 @@ array_push($testDocument, $respTest);
 
 // La cumplimentación a eliminar es la única del documento en ese edificio
 $_SESSION['username'] = 'sg2ped2';
-$_POST = array('edificio_documento_id' => '2');
+$_POST = array('cumplimentacion_id' => '2');
 $document_service = new Document_Service();
 $feedback = $document_service->DELETE();
 $respTest = obtenerRespuesta('Document', 'DELETE', 'ACCION', 'La cumplimentación a eliminar es la única del documento en ese edificio',
@@ -1027,7 +1027,7 @@ array_push($testDocument, $respTest);
 
 // Cumplimentación eliminada Ok
 $_SESSION['username'] = 'sg2ped';
-$_POST = array('edificio_documento_id' => $imp_doc_id);
+$_POST = array('cumplimentacion_id' => $imp_doc_id);
 $document_service = new Document_Service();
 $feedback = $document_service->DELETE();
 $respTest = obtenerRespuesta('Document', 'DELETE', 'ACCION', 'Cumplimentación eliminada correctamente',

@@ -4,7 +4,7 @@ include_once './Model/Abstract_Model.php';
 
 class ImpDoc_Model extends Abstract_Model {
     var $atributos;
-    var $edificio_documento_id;
+    var $cumplimentacion_id;
     var $edificio_id;
     var $documento_id;
     var $estado;
@@ -18,7 +18,7 @@ class ImpDoc_Model extends Abstract_Model {
     var $nombre_edificio;
 
     function __construct() {
-        $this->atributos = array('edificio_documento_id','edificio_id','documento_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
+        $this->atributos = array('cumplimentacion_id','edificio_id','documento_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
             'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'nombre_doc','nombre_edificio');
         $this->fill_fields();
     }
@@ -55,7 +55,7 @@ class ImpDoc_Model extends Abstract_Model {
         ";
 
         $this->execute_single_query();
-        $this->edificio_documento_id = $this->id_autoincrement;
+        $this->cumplimentacion_id = $this->id_autoincrement;
         return $this->feedback;
     }
 
@@ -66,7 +66,7 @@ class ImpDoc_Model extends Abstract_Model {
             ($this->nombre_doc == '' ? "" : "nombre_doc = '$this->nombre_doc', ") .
             ($this->fecha_vencimiento == '' ? "" : "fecha_vencimiento = '$this->fecha_vencimiento', ") .
             ($this->estado == '' ? "" : "estado = '$this->estado'") .
-            " WHERE edificio_documento_id = '$this->edificio_documento_id'";
+            " WHERE cumplimentacion_id = '$this->cumplimentacion_id'";
 
         $this->execute_single_query();
         return $this->feedback;
@@ -76,7 +76,7 @@ class ImpDoc_Model extends Abstract_Model {
     function DELETE() {
         $this->query = "
             DELETE FROM EDIFICIO_DOCUMENTO
-            WHERE edificio_documento_id = '$this->edificio_documento_id'
+            WHERE cumplimentacion_id = '$this->cumplimentacion_id'
         ";
         $this->execute_single_query();
         return $this->feedback;
@@ -91,7 +91,7 @@ class ImpDoc_Model extends Abstract_Model {
             INNER JOIN EDIFICIO
                 ON EDIFICIO_DOCUMENTO.edificio_id = EDIFICIO.edificio_id
             WHERE
-                edificio_documento_id LIKE '%" . $this->edificio_documento_id . "%' AND
+                cumplimentacion_id LIKE '%" . $this->cumplimentacion_id . "%' AND
                 EDIFICIO_DOCUMENTO.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                 documento_id = '$this->documento_id' AND
                 estado LIKE '%" . $this->estado . "%' AND
@@ -117,7 +117,7 @@ class ImpDoc_Model extends Abstract_Model {
             INNER JOIN DOCUMENTO
                 ON EDIFICIO_DOCUMENTO.documento_id = DOCUMENTO.documento_id
             WHERE
-                edificio_documento_id = '$this->edificio_documento_id'
+                cumplimentacion_id = '$this->cumplimentacion_id'
         ";
 
         $this->get_one_result_from_query();
@@ -154,7 +154,7 @@ class ImpDoc_Model extends Abstract_Model {
             WHERE
                 edificio_id = '$this->edificio_id' AND
                 documento_id = '$this->documento_id' AND
-                edificio_documento_id LIKE '%" . $this->edificio_documento_id . "%' AND
+                cumplimentacion_id LIKE '%" . $this->cumplimentacion_id . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
                 fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
                                                     . ($this->fecha_vencimiento_fin == '' ? max_date : $this->fecha_vencimiento_fin) ."' AND

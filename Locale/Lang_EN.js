@@ -1033,13 +1033,9 @@ arrayEN = {
             'FILENAME_FRMT' : 'The file name of the completion can only contain letters, numbers and hyphens',
             'FILENAME_EXT' : 'The completion file must be in pdf format',
 
-            // ID Procedimiento
-            'IMPPROC_ID_EMPT' : 'The id of the procedure completion cannot be empty',
-            'IMPPROC_ID_NOT_NUMERIC' : 'The id of the procedure completion must be numeric',
-
-            // ID Ruta
-            'IMPROUTE_ID_EMPT' : 'The id of the route completion cannot be empty',
-            'IMPROUTE_ID_NOT_NUMERIC' : 'The id of the route completion must be numeric',
+            // ID Completion
+            'CUMP_ID_EMPT' : 'The id of the completion cannot be empty',
+            'CUMP_ID_NOT_NUMERIC' : 'The id of the completion must be numeric',
 
             // Fecha Planificación
             'PLANNING_DATE_EMPT' : 'The planning date cannot be empty',

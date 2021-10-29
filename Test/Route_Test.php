@@ -82,16 +82,25 @@ array_push($testRoute, $respTest);
  *  --- SEARCH_COMPLETIONS: VALIDACIONES ---
  */
 
-// ID de Planta no numérico
-$_POST = array('ruta_id' => '1', 'planta_id' => 'aaaa');
+
+// ID de Cumplimentación no numérico
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => 'aa');
 $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
-$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'PLANTA_ID', 'ID de Planta no numérico',
-    'FLR_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testRoute, $respTest);
+
+// Estado no válido
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'estado');
+$route_service = new Route_Service();
+$feedback = $route_service->searchCompletions();
+$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'ESTADO', 'Estado no válido',
+    'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 // Fecha de cumplimentación inicial no válida
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12-25');
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12-25');
 $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
 $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha de cumplimentación inicial no válida',
@@ -99,7 +108,7 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENTACI
 array_push($testRoute, $respTest);
 
 // Fecha de cumplimentación final no válida
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12-25');
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12-25');
 $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
 $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENTACION_FIN', 'Fecha de cumplimentación final no válida',
@@ -107,8 +116,8 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENTACI
 array_push($testRoute, $respTest);
 
 // Fecha de vencimiento inicial no válida
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-                'fecha_vencimiento_inicio' => '1992/12-25');
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+    'fecha_vencimiento_inicio' => '1992/12-25');
 $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
 $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIENTO_INICIO', 'Fecha de vencimiento inicial no válida',
@@ -116,7 +125,7 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIENTO_I
 array_push($testRoute, $respTest);
 
 // Fecha de vencimiento final no válida
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
     'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12-25');
 $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
@@ -125,7 +134,7 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIENTO_F
 array_push($testRoute, $respTest);
 
 // Nombre de documento cumplimentación largo
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
     'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
@@ -134,7 +143,7 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_DOC', 'Nombr
 array_push($testRoute, $respTest);
 
 // Nombre de documento cumplimentación con formato incorrecto
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
     'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documet*o');
 $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
@@ -142,59 +151,9 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_DOC', 'Nombr
     'FILENAME_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
-// ID de Cumplimentación no numérico
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => 'aa');
-$route_service = new Route_Service();
-$feedback = $route_service->searchCompletions();
-$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'PLANTA_RUTA_ID', 'ID de Cumplimentación no numérico',
-    'IMPROUTE_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testRoute, $respTest);
-
-// Estado no válido
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => '1',
-                    'estado' => 'estado');
-$route_service = new Route_Service();
-$feedback = $route_service->searchCompletions();
-$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'ESTADO', 'Estado no válido',
-    'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testRoute, $respTest);
-
-// Nombre Planta corto (menos de 3 caracteres)
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => '1',
-    'estado' => 'cumplimentado', 'nombre_planta' => 'aa');
-$route_service = new Route_Service();
-$feedback = $route_service->searchCompletions();
-$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_PLANTA', 'Nombre Planta Corto',
-    'FLR_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testRoute, $respTest);
-
-// Nombre Planta largo (más de 40 caracteres)
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => '1',
-    'estado' => 'cumplimentado', 'nombre_planta' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-$route_service = new Route_Service();
-$feedback = $route_service->searchCompletions();
-$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_PLANTA', 'Nombre Planta Largo',
-    'FLR_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testRoute, $respTest);
-
-// Nombre planta formato
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => '1',
-    'estado' => 'cumplimentado', 'nombre_planta' => 'plant^a');
-$route_service = new Route_Service();
-$feedback = $route_service->searchCompletions();
-$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_PLANTA', 'Nombre Planta Largo',
-    'FLR_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testRoute, $respTest);
-
 // Edificio ID no numérico
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => '1',
-    'estado' => 'cumplimentado', 'nombre_planta' => 'nombre planta', 'edificio_id' => 'aa');
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'edificio_id' => 'aa');
 $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
 $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'EDIFICIO_ID', 'Edificio ID no numérico',
@@ -202,9 +161,8 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'EDIFICIO_ID', 'Edif
 array_push($testRoute, $respTest);
 
 // Nombre Edificio corto (menos de 3 caracteres)
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => '1',
-    'estado' => 'cumplimentado', 'nombre_planta' => 'nombre planta', 'edificio_id' => '1', 'nombre_edificio' => 'aa');
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'aa');
 $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
 $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre Edificio corto ',
@@ -212,9 +170,9 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', '
 array_push($testRoute, $respTest);
 
 // Nombre Edificio largo (más de 60 caracteres)
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => '1',
-    'estado' => 'cumplimentado', 'nombre_planta' => 'nombre planta', 'edificio_id' => '1', 'nombre_edificio' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'edificio_id' => '1',
+    'nombre_edificio' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
 $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre Edificio largo ',
@@ -222,13 +180,53 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', '
 array_push($testRoute, $respTest);
 
 // Nombre Edificio formato
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => '1',
-    'estado' => 'cumplimentado', 'nombre_planta' => 'nombre planta', 'edificio_id' => '1', 'nombre_edificio' => 'nombr^ edi+cio');
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'edificio_id' => '1',
+    'nombre_edificio' => 'nombr^ edi+cio');
 $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
 $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre Edificio formato ',
     'BLD_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testRoute, $respTest);
+
+// ID de Planta no numérico
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'edificio_id' => '1',
+    'nombre_edificio' => 'Nombre Edificio', 'planta_id' => 'aaaa');
+$route_service = new Route_Service();
+$feedback = $route_service->searchCompletions();
+$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'PLANTA_ID', 'ID de Planta no numérico',
+    'FLR_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testRoute, $respTest);
+
+// Nombre Planta corto (menos de 3 caracteres)
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'edificio_id' => '1',
+    'nombre_edificio' => 'Nombre Edificio', 'planta_id' => '1', 'nombre_planta' => 'aa');
+$route_service = new Route_Service();
+$feedback = $route_service->searchCompletions();
+$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_PLANTA', 'Nombre Planta Corto',
+    'FLR_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testRoute, $respTest);
+
+// Nombre Planta largo (más de 40 caracteres)
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'edificio_id' => '1',
+    'nombre_edificio' => 'Nombre Edificio', 'planta_id' => '1', 'nombre_planta' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+$route_service = new Route_Service();
+$feedback = $route_service->searchCompletions();
+$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_PLANTA', 'Nombre Planta Largo',
+    'FLR_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testRoute, $respTest);
+
+// Nombre planta formato
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'edificio_id' => '1',
+    'nombre_edificio' => 'Nombre Edificio', 'planta_id' => '1', 'nombre_planta' => 'plant^a');
+$route_service = new Route_Service();
+$feedback = $route_service->searchCompletions();
+$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_PLANTA', 'Nombre Planta Largo',
+    'FLR_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 
@@ -237,9 +235,9 @@ array_push($testRoute, $respTest);
  */
 
 // Búsqueda de cumplimentaciones Ok
-$_POST = array('ruta_id' => '1', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => '1',
-    'estado' => 'cumplimentado', 'nombre_planta' => 'nombre planta', 'edificio_id' => '1', 'nombre_edificio' => 'nombre edificio');
+$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
+    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'edificio_id' => '1',
+    'nombre_edificio' => 'Nombre Edificio', 'planta_id' => '1', 'nombre_planta' => 'Nombre Planta');
 $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
 $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'ACCION', 'Búsqueda de cumplimentaciones Ok',
@@ -330,16 +328,25 @@ array_push($testRoute, $respTest);
 
 $_SESSION['username'] = 'sg2ped2';
 
-// ID de Planta no numérico
-$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'planta_id' => 'aaaa');
+
+// ID de Cumplimentación no numérico
+$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'cumplimentacion_id' => 'aa');
 $route_service = new Route_Service();
 $feedback = $route_service->searchRoute();
-$respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'PLANTA_ID', 'ID de Planta no numérico',
-    'FLR_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testRoute, $respTest);
+
+// Estado no válido
+$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'estado');
+$route_service = new Route_Service();
+$feedback = $route_service->searchRoute();
+$respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'ESTADO', 'Estado no válido',
+    'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 // Fecha de cumplimentación inicial no válida
-$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12-25');
+$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12-25');
 $route_service = new Route_Service();
 $feedback = $route_service->searchRoute();
 $respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha de cumplimentación inicial no válida',
@@ -347,7 +354,8 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'FECHA_CUMPLIMENTACION_INI
 array_push($testRoute, $respTest);
 
 // Fecha de cumplimentación final no válida
-$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12-25');
+$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12-25');
 $route_service = new Route_Service();
 $feedback = $route_service->searchRoute();
 $respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'FECHA_CUMPLIMENTACION_FIN', 'Fecha de cumplimentación final no válida',
@@ -356,7 +364,7 @@ array_push($testRoute, $respTest);
 
 // Fecha de vencimiento inicial no válida
 $_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-                    'fecha_vencimiento_inicio' => '1992/12-25');
+    'fecha_vencimiento_inicio' => '1992/12-25');
 $route_service = new Route_Service();
 $feedback = $route_service->searchRoute();
 $respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'FECHA_VENCIMIENTO_INICIO', 'Fecha de vencimiento inicial no válida',
@@ -364,8 +372,8 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'FECHA_VENCIMIENTO_INICIO'
 array_push($testRoute, $respTest);
 
 // Fecha de vencimiento final no válida
-$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12-25');
+$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12-25');
 $route_service = new Route_Service();
 $feedback = $route_service->searchRoute();
 $respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'FECHA_VENCIMIENTO_FIN', 'Fecha de vencimiento final no válida',
@@ -373,8 +381,9 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'FECHA_VENCIMIENTO_FIN', '
 array_push($testRoute, $respTest);
 
 // Nombre de documento cumplimentación largo
-$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
+    'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $route_service = new Route_Service();
 $feedback = $route_service->searchRoute();
 $respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'NOMBRE_DOC', 'Nombre de documento cumplimentación largo',
@@ -382,31 +391,22 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'NOMBRE_DOC', 'Nombre de d
 array_push($testRoute, $respTest);
 
 // Nombre de documento cumplimentación con formato incorrecto
-$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documet*o');
+$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documet*o');
 $route_service = new Route_Service();
 $feedback = $route_service->searchRoute();
 $respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'NOMBRE_DOC', 'Nombre de documento cumplimentación con formato incorrecto',
     'FILENAME_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
-// ID de Cumplimentación no numérico
-$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => 'aa');
+// ID de Planta no numérico
+$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf',
+    'planta_id' => 'aaaa');
 $route_service = new Route_Service();
 $feedback = $route_service->searchRoute();
-$respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'PLANTA_RUTA_ID', 'ID de Cumplimentación no numérico',
-    'IMPROUTE_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testRoute, $respTest);
-
-// Estado no válido
-$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => '1',
-    'estado' => 'estado');
-$route_service = new Route_Service();
-$feedback = $route_service->searchRoute();
-$respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'ESTADO', 'Estado no válido',
-    'STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'PLANTA_ID', 'ID de Planta no numérico',
+    'FLR_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 /*
@@ -415,9 +415,9 @@ array_push($testRoute, $respTest);
 
 // Búsqueda de cumplimentaciones Ok
 
-$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'planta_id' => '1', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'planta_ruta_id' => '1',
-    'estado' => 'cumplimentado');
+$_POST = array('ruta_id' => '1', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
+    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf',
+    'planta_id' => '1');
 $route_service = new Route_Service();
 $feedback = $route_service->searchRoute();
 $respTest = obtenerRespuesta('Route', 'SEARCH_ROUTE', 'ACCION', 'Búsqueda de cumplimentaciones Ok',
@@ -820,8 +820,8 @@ $respTest = obtenerRespuesta('Route', 'ADD_ROUTE', 'ACCION', 'El usuario no tien
 array_push($testRoute, $respTest);
 
 if($feedback['ok']) {
-    $planta_ruta_id = $route_service->impRoute_entity->planta_ruta_id;
-    $_POST = array('planta_ruta_id' => $planta_ruta_id);
+    $planta_ruta_id = $route_service->impRoute_entity->cumplimentacion_id;
+    $_POST = array('cumplimentacion_id' => $planta_ruta_id);
     $route_service = new Route_Service();
     $feedback = $route_service->DELETE();
 }
@@ -983,7 +983,7 @@ $respTest = obtenerRespuesta('Route', 'ADD_IMPROUTE', 'ACCION', 'Cumplimentació
 array_push($testRoute, $respTest);
 
 if($feedback['ok']) {
-    $planta_ruta_id = $route_service->impRoute_entity->planta_ruta_id;
+    $planta_ruta_id = $route_service->impRoute_entity->cumplimentacion_id;
 } else {
     $planta_ruta_id = '';
 }
@@ -995,19 +995,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('planta_ruta_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $route_service = new Route_Service();
 $feedback = $route_service->seek();
-$respTest = obtenerRespuesta('Route', 'SEEK', 'PLANTA_RUTA_ID', 'ID de Cumplimentación vacío',
-    'IMPROUTE_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'SEEK', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('planta_ruta_id' => 'aaaa');
+$_POST = array('cumplimentacion_id' => 'aaaa');
 $route_service = new Route_Service();
 $feedback = $route_service->seek();
-$respTest = obtenerRespuesta('Route', 'SEEK', 'PLANTA_RUTA_ID', 'ID de Cumplimentación no numérico',
-    'IMPROUTE_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'SEEK', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 /*
@@ -1015,7 +1015,7 @@ array_push($testRoute, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('planta_ruta_id' => '1111111111111111111111');
+$_POST = array('cumplimentacion_id' => '1111111111111111111111');
 $route_service = new Route_Service();
 $feedback = $route_service->seek();
 $respTest = obtenerRespuesta('Route', 'SEEK', 'ACCION', 'La cumplimentación no existe',
@@ -1026,7 +1026,7 @@ array_push($testRoute, $respTest);
 $_SESSION['username'] = 'sg2ped2';
 $_SESSION['rol'] = 'edificio';
 
-$_POST = array('planta_ruta_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $route_service = new Route_Service();
 $feedback = $route_service->seek();
 $respTest = obtenerRespuesta('Route', 'SEEK', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -1036,7 +1036,7 @@ array_push($testRoute, $respTest);
 // Consulta de los detalles de la cumplimentación Ok
 $_SESSION['username'] = 'sg2ped';
 
-$_POST = array('planta_ruta_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $route_service = new Route_Service();
 $feedback = $route_service->seek();
 $respTest = obtenerRespuesta('Route', 'SEEK', 'ACCION', 'Consulta de los detalles de la cumplimentación Ok',
@@ -1051,19 +1051,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('planta_ruta_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $route_service = new Route_Service();
 $feedback = $route_service->seekPortalImpRoute();
-$respTest = obtenerRespuesta('Route', 'SEEK_PORTAL_IMPROUTE', 'PLANTA_RUTA_ID', 'ID de Cumplimentación vacío',
-    'IMPROUTE_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'SEEK_PORTAL_IMPROUTE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('planta_ruta_id' => 'aaaa');
+$_POST = array('cumplimentacion_id' => 'aaaa');
 $route_service = new Route_Service();
 $feedback = $route_service->seekPortalImpRoute();
-$respTest = obtenerRespuesta('Route', 'SEEK_PORTAL_IMPROUTE', 'PLANTA_RUTA_ID', 'ID de Cumplimentación no numérico',
-    'IMPROUTE_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'SEEK_PORTAL_IMPROUTE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 /*
@@ -1071,7 +1071,7 @@ array_push($testRoute, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('planta_ruta_id' => '1111111111111111111111');
+$_POST = array('cumplimentacion_id' => '1111111111111111111111');
 $route_service = new Route_Service();
 $feedback = $route_service->seekPortalImpRoute();
 $respTest = obtenerRespuesta('Route', 'SEEK_PORTAL_IMPROUTE', 'ACCION', 'La cumplimentación no existe',
@@ -1079,7 +1079,7 @@ $respTest = obtenerRespuesta('Route', 'SEEK_PORTAL_IMPROUTE', 'ACCION', 'La cump
 array_push($testRoute, $respTest);
 
 // La cumplimentación está vencida
-$_POST = array('planta_ruta_id' => '3');
+$_POST = array('cumplimentacion_id' => '3');
 $route_service = new Route_Service();
 $feedback = $route_service->seekPortalImpRoute();
 $respTest = obtenerRespuesta('Route', 'SEEK_PORTAL_IMPROUTE', 'ACCION', 'La cumplimentación está vencida',
@@ -1087,7 +1087,7 @@ $respTest = obtenerRespuesta('Route', 'SEEK_PORTAL_IMPROUTE', 'ACCION', 'La cump
 array_push($testRoute, $respTest);
 
 // Consulta de los detalles de la cumplimentación Ok
-$_POST = array('planta_ruta_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $route_service = new Route_Service();
 $feedback = $route_service->seekPortalImpRoute();
 $respTest = obtenerRespuesta('Route', 'SEEK_PORTAL_IMPROUTE', 'ACCION', 'Consulta de los detalles de la cumplimentación Ok',
@@ -1099,19 +1099,19 @@ array_push($testRoute, $respTest);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('planta_ruta_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $route_service = new Route_Service();
 $feedback = $route_service->implement();
-$respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'PLANTA_RUTA_ID', 'ID de Cumplimentación vacío',
-    'IMPROUTE_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('planta_ruta_id' => 'aaaa');
+$_POST = array('cumplimentacion_id' => 'aaaa');
 $route_service = new Route_Service();
 $feedback = $route_service->implement();
-$respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'PLANTA_RUTA_ID', 'ID de Cumplimentación no numérico',
-    'IMPROUTE_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 /*
@@ -1119,7 +1119,7 @@ array_push($testRoute, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('planta_ruta_id' => '1111111111111111111111');
+$_POST = array('cumplimentacion_id' => '1111111111111111111111');
 $route_service = new Route_Service();
 $feedback = $route_service->implement();
 $respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'ACCION', 'La cumplimentación no existe',
@@ -1130,7 +1130,7 @@ array_push($testRoute, $respTest);
 $_SESSION['username'] = 'sg2ped2';
 $_SESSION['rol'] = 'edificio';
 
-$_POST = array('planta_ruta_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $route_service = new Route_Service();
 $feedback = $route_service->implement();
 $respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -1140,7 +1140,7 @@ array_push($testRoute, $respTest);
 // La cumplimentación está vencida
 $_SESSION['rol'] = 'organizacion';
 
-$_POST = array('planta_ruta_id' => '3');
+$_POST = array('cumplimentacion_id' => '3');
 $route_service = new Route_Service();
 $feedback = $route_service->implement();
 $respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'ACCION', 'La cumplimentación está vencida',
@@ -1152,7 +1152,7 @@ array_push($testRoute, $respTest);
  */
 
 // Fichero cumplimentación vacío
-$_POST = array('planta_ruta_id' => $planta_ruta_id, 'nombre_doc' => '');
+$_POST = array('cumplimentacion_id' => $planta_ruta_id, 'nombre_doc' => '');
 $route_service = new Route_Service();
 $feedback = $route_service->implement();
 $respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'NOMBRE_DOC', 'Fichero cumplimentación vacío',
@@ -1160,7 +1160,7 @@ $respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'NOMBRE_DOC', 'Fichero cumpli
 array_push($testRoute, $respTest);
 
 // Fichero cumplimentación largo (más de 50 caracteres)
-$_POST = array('planta_ruta_id' => $planta_ruta_id, 'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+$_POST = array('cumplimentacion_id' => $planta_ruta_id, 'nombre_doc' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $route_service = new Route_Service();
 $feedback = $route_service->implement();
 $respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'NOMBRE_DOC', 'Fichero cumplimentación largo',
@@ -1168,7 +1168,7 @@ $respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'NOMBRE_DOC', 'Fichero cumpli
 array_push($testRoute, $respTest);
 
 // Fichero cumplimentación formato
-$_POST = array('planta_ruta_id' => $planta_ruta_id, 'nombre_doc' => 'documênto');
+$_POST = array('cumplimentacion_id' => $planta_ruta_id, 'nombre_doc' => 'documênto');
 $route_service = new Route_Service();
 $feedback = $route_service->implement();
 $respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'NOMBRE_DOC', 'Fichero cumplimentación formato',
@@ -1176,7 +1176,7 @@ $respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'NOMBRE_DOC', 'Fichero cumpli
 array_push($testRoute, $respTest);
 
 // Fichero cumplimentación con extensión incorrecta
-$_POST = array('planta_ruta_id' => $planta_ruta_id, 'nombre_doc' => 'documento.php');
+$_POST = array('cumplimentacion_id' => $planta_ruta_id, 'nombre_doc' => 'documento.php');
 $route_service = new Route_Service();
 $feedback = $route_service->implement();
 $respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'NOMBRE_DOC', 'Fichero cumplimentación con extensión incorrecta',
@@ -1188,7 +1188,7 @@ array_push($testRoute, $respTest);
  */
 
 // Cumplimentación Ok
-$_POST = array('planta_ruta_id' => $planta_ruta_id, 'nombre_doc' => 'documento.pdf');
+$_POST = array('cumplimentacion_id' => $planta_ruta_id, 'nombre_doc' => 'documento.pdf');
 $route_service = new Route_Service();
 $feedback = $route_service->implement();
 $respTest = obtenerRespuesta('Route', 'IMPLEMENT', 'ACCION', 'Cumplimentación Ok',
@@ -1202,19 +1202,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('planta_ruta_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $route_service = new Route_Service();
 $feedback = $route_service->expire();
-$respTest = obtenerRespuesta('Route', 'EXPIRE', 'PLANTA_RUTA_ID', 'ID de Cumplimentación vacío',
-    'IMPROUTE_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'EXPIRE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('planta_ruta_id' => 'aaaa');
+$_POST = array('cumplimentacion_id' => 'aaaa');
 $route_service = new Route_Service();
 $feedback = $route_service->expire();
-$respTest = obtenerRespuesta('Route', 'EXPIRE', 'PLANTA_RUTA_ID', 'ID de Cumplimentación no numérico',
-    'IMPROUTE_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'EXPIRE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 
@@ -1223,7 +1223,7 @@ array_push($testRoute, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('planta_ruta_id' => '1111111111111111111111');
+$_POST = array('cumplimentacion_id' => '1111111111111111111111');
 $route_service = new Route_Service();
 $feedback = $route_service->expire();
 $respTest = obtenerRespuesta('Route', 'EXPIRE', 'ACCION', 'La cumplimentación no existe',
@@ -1234,7 +1234,7 @@ array_push($testRoute, $respTest);
 $_SESSION['username'] = 'sg2ped2';
 $_SESSION['rol'] = 'edificio';
 
-$_POST = array('planta_ruta_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $route_service = new Route_Service();
 $feedback = $route_service->expire();
 $respTest = obtenerRespuesta('Route', 'EXPIRE', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -1244,7 +1244,7 @@ array_push($testRoute, $respTest);
 // Cumplimentación vencida Ok
 $_SESSION['rol'] = 'organizacion';
 
-$_POST = array('planta_ruta_id' => $planta_ruta_id);
+$_POST = array('cumplimentacion_id' => $planta_ruta_id);
 $route_service = new Route_Service();
 $feedback = $route_service->expire();
 $respTest = obtenerRespuesta('Route', 'EXPIRE', 'ACCION', 'Cumplimentación vencida Ok',
@@ -1259,19 +1259,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('planta_ruta_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $route_service = new Route_Service();
 $feedback = $route_service->DELETE();
-$respTest = obtenerRespuesta('Route', 'DELETE', 'PLANTA_RUTA_ID', 'ID de Cumplimentación vacío',
-    'IMPROUTE_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'DELETE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('planta_ruta_id' => 'aaaa');
+$_POST = array('cumplimentacion_id' => 'aaaa');
 $route_service = new Route_Service();
 $feedback = $route_service->DELETE();
-$respTest = obtenerRespuesta('Route', 'DELETE', 'PLANTA_RUTA_ID', 'ID de Cumplimentación no numérico',
-    'IMPROUTE_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Route', 'DELETE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 /*
@@ -1279,7 +1279,7 @@ array_push($testRoute, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('planta_ruta_id' => '1111111111111111111111');
+$_POST = array('cumplimentacion_id' => '1111111111111111111111');
 $route_service = new Route_Service();
 $feedback = $route_service->DELETE();
 $respTest = obtenerRespuesta('Route', 'DELETE', 'ACCION', 'La cumplimentación no existe',
@@ -1290,7 +1290,7 @@ array_push($testRoute, $respTest);
 $_SESSION['username'] = 'sg2ped2';
 $_SESSION['rol'] = 'edificio';
 
-$_POST = array('planta_ruta_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $route_service = new Route_Service();
 $feedback = $route_service->DELETE();
 $respTest = obtenerRespuesta('Route', 'DELETE', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -1300,7 +1300,7 @@ array_push($testRoute, $respTest);
 // Sólo existe una cumplimentación de la ruta en el edificio
 $_SESSION['username'] = 'sg2ped';
 
-$_POST = array('planta_ruta_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $route_service = new Route_Service();
 $feedback = $route_service->DELETE();
 $respTest = obtenerRespuesta('Route', 'DELETE', 'ACCION', 'Sólo existe una cumplimentación de la ruta en el edificio',
@@ -1308,7 +1308,7 @@ $respTest = obtenerRespuesta('Route', 'DELETE', 'ACCION', 'Sólo existe una cump
 array_push($testRoute, $respTest);
 
 // Cumplimentación eliminada Ok
-$_POST = array('planta_ruta_id' => $planta_ruta_id);
+$_POST = array('cumplimentacion_id' => $planta_ruta_id);
 $route_service = new Route_Service();
 $feedback = $route_service->DELETE();
 $respTest = obtenerRespuesta('Route', 'DELETE', 'ACCION', 'Cumplimentación eliminada Ok',

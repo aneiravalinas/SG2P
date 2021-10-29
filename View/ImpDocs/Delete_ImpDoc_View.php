@@ -24,7 +24,7 @@ class Delete_ImpDoc {
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
                         <h3 class="mb-4 i18n-del-imp-doc-confirm">¿Está seguro que desea eliminar la cumplimentación de este documento? El cambio no será reversible</h3>
-                        <h2><?php echo $this->imp_doc['edificio_documento_id'] ?> - <?php echo $this->imp_doc['nombre_documento'] ?> - <?php echo $this->imp_doc['nombre_edificio'] ?></h2>
+                        <h2><?php echo $this->imp_doc['cumplimentacion_id'] ?> - <?php echo $this->imp_doc['nombre_documento'] ?> - <?php echo $this->imp_doc['nombre_edificio'] ?></h2>
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@ class Delete_ImpDoc {
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-delete" onclick="
                             crearform('formenviar','post');
-                            insertacampo(document.formenviar,'edificio_documento_id', '<?php echo $this->imp_doc['edificio_documento_id'] ?>');
+                            insertacampo(document.formenviar,'cumplimentacion_id', '<?php echo $this->imp_doc['cumplimentacion_id'] ?>');
                             insertacampo(document.formenviar,'controller','ImpDoc');
                             insertacampo(document.formenviar,'action','delete');
                             enviaform(document.formenviar);">

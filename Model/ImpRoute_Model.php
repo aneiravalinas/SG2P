@@ -5,7 +5,7 @@ include_once './Model/Abstract_Model.php';
 class ImpRoute_Model extends Abstract_Model {
 
     var $atributos;
-    var $planta_ruta_id;
+    var $cumplimentacion_id;
     var $planta_id;
     var $ruta_id;
     var $estado;
@@ -21,7 +21,7 @@ class ImpRoute_Model extends Abstract_Model {
     var $edificio_id;
 
     function __construct() {
-        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
+        $this->atributos = array('cumplimentacion_id','planta_id','ruta_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
             'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'nombre_doc','nombre_planta', 'nombre_edificio', 'edificio_id');
         $this->fill_fields();
     }
@@ -58,7 +58,7 @@ class ImpRoute_Model extends Abstract_Model {
         ";
 
         $this->execute_single_query();
-        $this->planta_ruta_id = $this->id_autoincrement;
+        $this->cumplimentacion_id = $this->id_autoincrement;
         return $this->feedback;
     }
 
@@ -69,7 +69,7 @@ class ImpRoute_Model extends Abstract_Model {
             ($this->fecha_vencimiento == '' ? "" : "fecha_vencimiento = '$this->fecha_vencimiento', ") .
             ($this->nombre_doc == '' ? "" : "nombre_doc = '$this->nombre_doc', ") .
             ($this->estado == '' ? "" : "estado = '$this->estado'") .
-            " WHERE planta_ruta_id = '$this->planta_ruta_id'";
+            " WHERE cumplimentacion_id = '$this->cumplimentacion_id'";
 
         $this->execute_single_query();
         return $this->feedback;
@@ -80,7 +80,7 @@ class ImpRoute_Model extends Abstract_Model {
         $this->query = "
             DELETE FROM PLANTA_RUTA
             WHERE
-                planta_ruta_id = '$this->planta_ruta_id'
+                cumplimentacion_id = '$this->cumplimentacion_id'
         ";
 
         $this->execute_single_query();
@@ -98,7 +98,7 @@ class ImpRoute_Model extends Abstract_Model {
                 ON EDIFICIO.edificio_id = PLANTA.edificio_id
             WHERE
                 PLANTA_RUTA.ruta_id = '$this->ruta_id' AND
-                planta_ruta_id LIKE '%" . $this->planta_ruta_id . "%' AND
+                cumplimentacion_id LIKE '%" . $this->cumplimentacion_id . "%' AND
                 PLANTA_RUTA.planta_id LIKE '%" . $this->planta_id . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
                 fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
@@ -125,7 +125,7 @@ class ImpRoute_Model extends Abstract_Model {
             WHERE   
                 ruta_id = '$this->ruta_id' AND
                 PLANTA.edificio_id = '$this->edificio_id' AND
-                planta_ruta_id LIKE '%" . $this->planta_ruta_id . "%' AND
+                cumplimentacion_id LIKE '%" . $this->cumplimentacion_id . "%' AND
                 PLANTA_RUTA.planta_id LIKE '%" . $this->planta_id . "%' AND
                 estado LIKE '%" . $this->estado . "%' AND
                 fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
@@ -170,7 +170,7 @@ class ImpRoute_Model extends Abstract_Model {
             INNER JOIN RUTA
                 ON PLANTA_RUTA.ruta_id = RUTA.ruta_id
             WHERE
-                planta_ruta_id = '$this->planta_ruta_id'
+                cumplimentacion_id = '$this->cumplimentacion_id'
         ";
 
         $this->get_one_result_from_query();

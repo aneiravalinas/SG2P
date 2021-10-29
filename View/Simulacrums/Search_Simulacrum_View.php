@@ -42,7 +42,7 @@ class Search_Simulacrum {
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="cumplimentacion_id" class="i18n-cump_id">ID Cumplimentacion</label>
-                                    <input type="text" class="form-control" id="cumplimentacion_id" name="edificio_simulacro_id" onblur="check_CUMPLIMENTACION_ID_SEARCH();"/>
+                                    <input type="text" class="form-control" id="cumplimentacion_id" name="cumplimentacion_id" onblur="check_CUMPLIMENTACION_ID_SEARCH();"/>
                                 </div>
                             </div>
 

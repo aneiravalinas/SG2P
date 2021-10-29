@@ -12,7 +12,7 @@ class Procedure_Service extends Procedure_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('edificio_procedimiento_id','edificio_id','procedimiento_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
+        $this->atributos = array('cumplimentacion_id','edificio_id','procedimiento_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
             'fecha_vencimiento','fecha_vencimiento_inicio', 'fecha_vencimiento_fin','nombre_doc', 'nombre_edificio');
         $this->defProc_entity = new DefProc_Model();
         $this->impProc_entity = new ImpProc_Model();
@@ -308,14 +308,14 @@ class Procedure_Service extends Procedure_Validation {
                                                     'fecha_cumplimentacion' => default_data, 'estado' => 'pendiente'));
         $feedback = $this->impProc_entity->ADD();
         if($feedback['ok']) {
-            $imp_proc_id = $this->impProc_entity->edificio_procedimiento_id;
+            $imp_proc_id = $this->impProc_entity->cumplimentacion_id;
             $feedback = $this->ADD($procedure);
             if($feedback['ok']) {
                 $feedback['building'] = array('edificio_id' => $building['edificio_id']);
                 $this->update_plan_state($building['edificio_id'], $procedure['plan_id']);
                 return $feedback;
             }
-            $this->impProc_entity->edificio_procedimiento_id = $imp_proc_id;
+            $this->impProc_entity->cumplimentacion_id = $imp_proc_id;
             $this->impProc_entity->DELETE();
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'IMPPROC_ADD_KO';
@@ -380,7 +380,7 @@ class Procedure_Service extends Procedure_Validation {
      *          - Formato de la ruta: Uploads/PLAN_ID/EDIFICIO_ID/Procedimientos/PROCEDIMIENTO_ID/CUMPLIMENTACION_ID/NOMBRE_FICHERO
      */
     function seek() {
-        $validation = $this->validar_EDIFICIO_PROCEDIMIENTO_ID();
+        $validation = $this->validar_CUMPLIMENTACION_ID();
         if(!$validation['ok']) {
             return $validation;
         }
@@ -396,7 +396,7 @@ class Procedure_Service extends Procedure_Validation {
             }
 
             $this->feedback['resource']['path'] = plans_path . $imp_proc['plan_id'] . '/' . $imp_proc['edificio_id'] . '/Procedimientos/' .
-                                                    $imp_proc['procedimiento_id'] . '/' . $imp_proc['edificio_procedimiento_id'];
+                                                    $imp_proc['procedimiento_id'] . '/' . $imp_proc['cumplimentacion_id'];
             $this->feedback['code'] = 'IMPPROC_SEEK_OK';
         } else if($this->feedback['code'] == 'IMPPROCID_KO') {
             $this->feedback['code'] = 'IMPPROC_SEEK_KO';
@@ -413,7 +413,7 @@ class Procedure_Service extends Procedure_Validation {
      *          - Formato de la ruta: Uploads/PLAN_ID/EDIFICIO_ID/Procedimientos/PROCEDIMIENTO_ID/CUMPLIMENTACION_ID/NOMBRE_FICHERO
      */
     function seekPortalImpProc() {
-        $validation = $this->validar_EDIFICIO_PROCEDIMIENTO_ID();
+        $validation = $this->validar_CUMPLIMENTACION_ID();
         if(!$validation['ok']) {
             return $validation;
         }
@@ -429,7 +429,7 @@ class Procedure_Service extends Procedure_Validation {
             }
             $this->feedback['code'] = 'PRTL_IMPPROC_SEEK_OK';
             $this->feedback['resource']['path'] = plans_path . $imp_proc['plan_id'] . '/' . $imp_proc['edificio_id'] . '/Procedimientos/' .
-                                                    $imp_proc['procedimiento_id'] . '/' . $imp_proc['edificio_procedimiento_id'];
+                                                    $imp_proc['procedimiento_id'] . '/' . $imp_proc['cumplimentacion_id'];
         } else if($this->feedback['code'] == 'QRY_KO') {
             $this->feedback['code'] = 'PRTL_IMPPROC_SEEK_KO';
         }

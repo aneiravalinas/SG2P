@@ -4,7 +4,7 @@ include_once 'Abstract_Model.php';
 
 class ImpSim_Model extends Abstract_Model {
     var $atributos;
-    var $edificio_simulacro_id;
+    var $cumplimentacion_id;
     var $edificio_id;
     var $simulacro_id;
     var $estado;
@@ -19,7 +19,7 @@ class ImpSim_Model extends Abstract_Model {
     var $fecha_vencimiento_fin;
 
     function __construct() {
-        $this->atributos = array('edificio_simulacro_id','simulacro_id','edificio_id','estado','fecha_planificacion','fecha_vencimiento', 'fecha_vencimiento_inicio',
+        $this->atributos = array('cumplimentacion_id','simulacro_id','edificio_id','estado','fecha_planificacion','fecha_vencimiento', 'fecha_vencimiento_inicio',
                                     'fecha_vencimiento_fin', 'url_recurso','destinatarios','nombre_edificio','fecha_planificacion_inicio','fecha_planificacion_fin');
         $this->fill_fields();
     }
@@ -58,7 +58,7 @@ class ImpSim_Model extends Abstract_Model {
         ";
 
         $this->execute_single_query();
-        $this->edificio_simulacro_id = $this->id_autoincrement;
+        $this->cumplimentacion_id = $this->id_autoincrement;
         return $this->feedback;
     }
 
@@ -70,7 +70,7 @@ class ImpSim_Model extends Abstract_Model {
             ($this->url_recurso == '' ? "" : "url_recurso = '$this->url_recurso', ") .
             ($this->destinatarios == '' ? "" : "destinatarios = '$this->destinatarios', ") .
             ($this->estado == '' ? "" : "estado = '$this->estado'") .
-            " WHERE edificio_simulacro_id = '$this->edificio_simulacro_id'";
+            " WHERE cumplimentacion_id = '$this->cumplimentacion_id'";
 
         $this->execute_single_query();
         return $this->feedback;
@@ -81,7 +81,7 @@ class ImpSim_Model extends Abstract_Model {
         $this->query = "
             DELETE FROM EDIFICIO_SIMULACRO
             WHERE
-                edificio_simulacro_id = '$this->edificio_simulacro_id'
+                cumplimentacion_id = '$this->cumplimentacion_id'
         ";
 
         $this->execute_single_query();
@@ -97,7 +97,7 @@ class ImpSim_Model extends Abstract_Model {
                 ON EDIFICIO_SIMULACRO.edificio_id = EDIFICIO.edificio_id
             WHERE
                 simulacro_id = '$this->simulacro_id' AND
-                edificio_simulacro_id LIKE '%" . $this->edificio_simulacro_id . "%' AND
+                cumplimentacion_id LIKE '%" . $this->cumplimentacion_id . "%' AND
                 EDIFICIO_SIMULACRO.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                 EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
                 fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
@@ -158,7 +158,7 @@ class ImpSim_Model extends Abstract_Model {
             INNER JOIN SIMULACRO
                 ON EDIFICIO_SIMULACRO.simulacro_id = SIMULACRO.simulacro_id
             WHERE
-                edificio_simulacro_id = '$this->edificio_simulacro_id'
+                cumplimentacion_id = '$this->cumplimentacion_id'
         ";
 
         $this->get_one_result_from_query();

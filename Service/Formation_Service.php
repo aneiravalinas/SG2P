@@ -12,7 +12,7 @@ class Formation_Service extends Formation_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('edificio_formacion_id', 'edificio_id', 'formacion_id', 'estado', 'fecha_planificacion', 'fecha_planificacion_inicio', 'fecha_planificacion_fin',
+        $this->atributos = array('cumplimentacion_id', 'edificio_id', 'formacion_id', 'estado', 'fecha_planificacion', 'fecha_planificacion_inicio', 'fecha_planificacion_fin',
             'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'url_recurso', 'destinatarios', 'nombre_edificio');
         $this->defFormat_entity = new DefFormat_Model();
         $this->impFormat_entity = new ImpFormat_Model();
@@ -307,14 +307,14 @@ class Formation_Service extends Formation_Validation {
                                                             'fecha_vencimiento' => default_data, 'url_recurso' => default_url, 'estado' => 'pendiente'));
         $feedback = $this->impFormat_entity->ADD();
         if($feedback['ok']) {
-            $edificio_formacion_id = $this->impFormat_entity->edificio_formacion_id;
+            $cumplimentacion_id = $this->impFormat_entity->cumplimentacion_id;
             $feedback = $this->ADD($formation);
             if($feedback['ok']) {
                 $feedback['building'] = array('edificio_id' => $building['edificio_id']);
                 $this->update_plan_state($building['edificio_id'], $formation['plan_id']);
                 return $feedback;
             }
-            $this->impFormat_entity->edificio_formacion_id = $edificio_formacion_id;
+            $this->impFormat_entity->cumplimentacion_id = $cumplimentacion_id;
             $this->impFormat_entity->DELETE();
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'IMPFORMAT_ADD_KO';
@@ -364,7 +364,7 @@ class Formation_Service extends Formation_Validation {
      *      2. Comprueba que el usuario tiene permisos sobre el edificio (es el responsable del edificio o el rol del usuario es 'organizacion' o 'administrador')
      */
     function seek() {
-        $validation = $this->validar_EDIFICIO_FORMACION_ID();
+        $validation = $this->validar_CUMPLIMENTACION_ID();
         if(!$validation['ok']) {
             return $validation;
         }
@@ -393,7 +393,7 @@ class Formation_Service extends Formation_Validation {
      *      2. Verifica que la cumplimentación está ACTIVA (Pendiente o Cumplimentada).
      */
     function seekPortalImpFormat() {
-        $validation = $this->validar_EDIFICIO_FORMACION_ID();
+        $validation = $this->validar_CUMPLIMENTACION_ID();
         if(!$validation['ok']) {
             return $validation;
         }

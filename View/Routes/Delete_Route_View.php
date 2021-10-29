@@ -24,7 +24,7 @@ class Delete_Route {
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
                         <h3 class="mb-4 i18n-del-imp-route-confirm">¿Está seguro que desea eliminar la cumplimentación de esta ruta? El cambio no será reversible</h3>
-                        <h2><?php echo $this->imp_route['planta_ruta_id'] ?> - <?php echo $this->imp_route['nombre_ruta'] ?> - <?php echo $this->imp_route['nombre_planta'] ?></h2>
+                        <h2><?php echo $this->imp_route['cumplimentacion_id'] ?> - <?php echo $this->imp_route['nombre_ruta'] ?> - <?php echo $this->imp_route['nombre_planta'] ?></h2>
                     </div>
                 </div>
 
@@ -41,7 +41,7 @@ class Delete_Route {
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-delete" onclick="
                             crearform('formenviar','post');
-                            insertacampo(document.formenviar,'planta_ruta_id', '<?php echo $this->imp_route['planta_ruta_id'] ?>');
+                            insertacampo(document.formenviar,'cumplimentacion_id', '<?php echo $this->imp_route['cumplimentacion_id'] ?>');
                             insertacampo(document.formenviar,'controller','Route');
                             insertacampo(document.formenviar,'action','delete');
                             enviaform(document.formenviar);">

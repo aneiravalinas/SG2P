@@ -651,7 +651,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
                 }
                 break;
             }
-            array_push($floors_with_routes, $impRoute_entity->planta_ruta_id);
+            array_push($floors_with_routes, $impRoute_entity->cumplimentacion_id);
         }
 
         if($feedback['ok']) {
@@ -662,7 +662,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         }
 
         foreach($floors_with_routes as $floor_route) {
-            $impRoute_entity->planta_ruta_id = $floor_route;
+            $impRoute_entity->cumplimentacion_id = $floor_route;
             $impRoute_entity->DELETE();
         }
 

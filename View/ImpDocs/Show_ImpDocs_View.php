@@ -73,7 +73,7 @@ class Show_ImpDocs {
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item i18n-details" type="button" onclick="
                                                     crearform('formenviar','post');
-                                                    insertacampo(document.formenviar,'edificio_documento_id','<?php echo $imp_doc['edificio_documento_id'] ?>');
+                                                    insertacampo(document.formenviar,'cumplimentacion_id','<?php echo $imp_doc['cumplimentacion_id'] ?>');
                                                     insertacampo(document.formenviar,'controller','ImpDoc');
                                                     insertacampo(document.formenviar,'action','showCurrent');
                                                     enviaform(document.formenviar);">
@@ -83,7 +83,7 @@ class Show_ImpDocs {
                                                 <?php if($imp_doc['estado'] != 'vencido') :?>
                                                 <a class="dropdown-item i18n-implement" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar, 'edificio_documento_id','<?php echo $imp_doc['edificio_documento_id'] ?>');
+                                                        insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_doc['cumplimentacion_id'] ?>');
                                                         insertacampo(document.formenviar, 'controller','ImpDoc');
                                                         insertacampo(document.formenviar, 'action', 'implementForm');
                                                         enviaform(document.formenviar);">
@@ -92,7 +92,7 @@ class Show_ImpDocs {
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item i18n-expire" type="button" onclick="
                                                     crearform('formenviar','post');
-                                                    insertacampo(document.formenviar, 'edificio_documento_id','<?php echo $imp_doc['edificio_documento_id'] ?>');
+                                                    insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_doc['cumplimentacion_id'] ?>');
                                                     insertacampo(document.formenviar, 'controller','ImpDoc');
                                                     insertacampo(document.formenviar, 'action', 'expireForm');
                                                     enviaform(document.formenviar);">
@@ -102,7 +102,7 @@ class Show_ImpDocs {
                                                 <?php endif; ?>
                                                 <a class="dropdown-item i18n-delete" type="button" onclick="
                                                     crearform('formenviar','post');
-                                                    insertacampo(document.formenviar, 'edificio_documento_id','<?php echo $imp_doc['edificio_documento_id'] ?>');
+                                                    insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_doc['cumplimentacion_id'] ?>');
                                                     insertacampo(document.formenviar, 'controller','ImpDoc');
                                                     insertacampo(document.formenviar, 'action','deleteForm');
                                                     enviaform(document.formenviar);">

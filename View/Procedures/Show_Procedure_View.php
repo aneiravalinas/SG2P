@@ -120,7 +120,7 @@ class Show_Procedure {
                                 <tbody>
                                 <?php foreach($this->imp_procs as $imp_proc): ?>
                                     <tr>
-                                        <td class="text-center"><?php echo $imp_proc['edificio_procedimiento_id'] ?></td>
+                                        <td class="text-center"><?php echo $imp_proc['cumplimentacion_id'] ?></td>
                                         <td class="text-center i18n-<?php echo $imp_proc['estado'] ?> <?php echo $imp_proc['estado'] ?>"></td>
                                         <td class="text-center"><?php if($imp_proc['nombre_doc'] != default_doc) echo $imp_proc['nombre_doc']; ?></td>
                                         <td class="text-center"><?php if($imp_proc['fecha_cumplimentacion'] != default_data) echo date_format(date_create($imp_proc['fecha_cumplimentacion']),'d/m/Y');?></td>
@@ -133,7 +133,7 @@ class Show_Procedure {
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item i18n-details" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar,'edificio_procedimiento_id','<?php echo $imp_proc['edificio_procedimiento_id'] ?>');
+                                                        insertacampo(document.formenviar,'cumplimentacion_id','<?php echo $imp_proc['cumplimentacion_id'] ?>');
                                                         insertacampo(document.formenviar,'controller','Procedure');
                                                         insertacampo(document.formenviar,'action','showCurrent');
                                                         enviaform(document.formenviar);">
@@ -142,7 +142,7 @@ class Show_Procedure {
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item i18n-implement" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar, 'edificio_procedimiento_id','<?php echo $imp_proc['edificio_procedimiento_id'] ?>');
+                                                        insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_proc['cumplimentacion_id'] ?>');
                                                         insertacampo(document.formenviar, 'controller','Procedure');
                                                         insertacampo(document.formenviar, 'action', 'implementForm');
                                                         enviaform(document.formenviar);">
@@ -152,7 +152,7 @@ class Show_Procedure {
                                                     <?php if($imp_proc['estado'] != 'vencido') :?>
                                                         <a class="dropdown-item i18n-expire" type="button" onclick="
                                                             crearform('formenviar','post');
-                                                            insertacampo(document.formenviar, 'edificio_procedimiento_id','<?php echo $imp_proc['edificio_procedimiento_id'] ?>');
+                                                            insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_proc['cumplimentacion_id'] ?>');
                                                             insertacampo(document.formenviar, 'controller','Procedure');
                                                             insertacampo(document.formenviar, 'action', 'expireForm');
                                                             enviaform(document.formenviar);">
@@ -162,7 +162,7 @@ class Show_Procedure {
                                                     <?php endif; ?>
                                                     <a class="dropdown-item i18n-delete" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar, 'edificio_procedimiento_id','<?php echo $imp_proc['edificio_procedimiento_id'] ?>');
+                                                        insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_proc['cumplimentacion_id'] ?>');
                                                         insertacampo(document.formenviar, 'controller','Procedure');
                                                         insertacampo(document.formenviar, 'action','deleteForm');
                                                         enviaform(document.formenviar);">

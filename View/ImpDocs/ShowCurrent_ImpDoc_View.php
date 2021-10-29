@@ -42,7 +42,7 @@ class ShowCurrent_ImpDoc {
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-cump_id">ID Cumplimentación</span>
-                                            <span class="d-block att-value"><?php echo $this->imp_doc['edificio_documento_id'] ?></span>
+                                            <span class="d-block att-value"><?php echo $this->imp_doc['cumplimentacion_id'] ?></span>
                                         </li>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-documento_id">ID Documento</span>

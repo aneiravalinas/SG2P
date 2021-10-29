@@ -24,7 +24,7 @@ class Expire_ImpRoute {
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
                         <h3 class="mb-4 i18n-expire-improute-confirm">¿Está seguro que desea vencer la cumplimentación de esta rua? El cambio no será reversible</h3>
-                        <h2><?php echo $this->imp_route['planta_ruta_id'] ?> - <?php echo $this->imp_route['nombre_ruta'] ?> - <?php echo $this->imp_route['nombre_planta'] ?></h2>
+                        <h2><?php echo $this->imp_route['cumplimentacion_id'] ?> - <?php echo $this->imp_route['nombre_ruta'] ?> - <?php echo $this->imp_route['nombre_planta'] ?></h2>
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@ class Expire_ImpRoute {
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-expire" onclick="
                             crearform('formenviar','post');
-                            insertacampo(document.formenviar, 'planta_ruta_id', '<?php echo $this->imp_route['planta_ruta_id'] ?>');
+                            insertacampo(document.formenviar, 'cumplimentacion_id', '<?php echo $this->imp_route['cumplimentacion_id'] ?>');
                             insertacampo(document.formenviar, 'controller', 'ImpRoute');
                             insertacampo(document.formenviar, 'action', 'expire');
                             enviaform(document.formenviar);">

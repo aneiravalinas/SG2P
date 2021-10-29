@@ -122,7 +122,7 @@ class Show_Route {
                                 <tbody>
                                 <?php foreach($this->imp_routes as $imp_route): ?>
                                     <tr>
-                                        <td class="text-center"><?php echo $imp_route['planta_ruta_id'] ?></td>
+                                        <td class="text-center"><?php echo $imp_route['cumplimentacion_id'] ?></td>
                                         <td class="text-center"><?php echo $imp_route['nombre_planta'] ?></td>
                                         <td class="text-center i18n-<?php echo $imp_route['estado'] ?> <?php echo $imp_route['estado'] ?>"></td>
                                         <td class="text-center"><?php if($imp_route['nombre_doc'] != default_doc) echo $imp_route['nombre_doc']; ?></td>
@@ -136,7 +136,7 @@ class Show_Route {
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item i18n-details" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar,'planta_ruta_id','<?php echo $imp_route['planta_ruta_id'] ?>');
+                                                        insertacampo(document.formenviar,'cumplimentacion_id','<?php echo $imp_route['cumplimentacion_id'] ?>');
                                                         insertacampo(document.formenviar,'controller','Route');
                                                         insertacampo(document.formenviar,'action','showCurrent');
                                                         enviaform(document.formenviar);">
@@ -145,7 +145,7 @@ class Show_Route {
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item i18n-implement" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar, 'planta_ruta_id','<?php echo $imp_route['planta_ruta_id'] ?>');
+                                                        insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_route['cumplimentacion_id'] ?>');
                                                         insertacampo(document.formenviar, 'controller','Route');
                                                         insertacampo(document.formenviar, 'action', 'implementForm');
                                                         enviaform(document.formenviar);">
@@ -155,7 +155,7 @@ class Show_Route {
                                                     <?php if($imp_route['estado'] != 'vencido') :?>
                                                         <a class="dropdown-item i18n-expire" type="button" onclick="
                                                             crearform('formenviar','post');
-                                                            insertacampo(document.formenviar, 'planta_ruta_id','<?php echo $imp_route['planta_ruta_id'] ?>');
+                                                            insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_route['cumplimentacion_id'] ?>');
                                                             insertacampo(document.formenviar, 'controller','Route');
                                                             insertacampo(document.formenviar, 'action', 'expireForm');
                                                             enviaform(document.formenviar);">
@@ -165,7 +165,7 @@ class Show_Route {
                                                     <?php endif; ?>
                                                     <a class="dropdown-item i18n-delete" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar, 'planta_ruta_id','<?php echo $imp_route['planta_ruta_id'] ?>');
+                                                        insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_route['cumplimentacion_id'] ?>');
                                                         insertacampo(document.formenviar, 'controller','Route');
                                                         insertacampo(document.formenviar, 'action','deleteForm');
                                                         enviaform(document.formenviar);">

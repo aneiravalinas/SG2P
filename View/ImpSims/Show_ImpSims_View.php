@@ -74,7 +74,7 @@ class Show_ImpSims {
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item i18n-details" type="button" onclick="
                                                     crearform('formenviar','post');
-                                                    insertacampo(document.formenviar,'edificio_simulacro_id','<?php echo $imp_sim['edificio_simulacro_id'] ?>');
+                                                    insertacampo(document.formenviar,'cumplimentacion_id','<?php echo $imp_sim['cumplimentacion_id'] ?>');
                                                     insertacampo(document.formenviar,'controller','ImpSim');
                                                     insertacampo(document.formenviar,'action','showCurrent');
                                                     enviaform(document.formenviar);">
@@ -84,7 +84,7 @@ class Show_ImpSims {
                                                 <?php if($imp_sim['estado'] != 'vencido') :?>
                                                     <a class="dropdown-item i18n-implement" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar, 'edificio_simulacro_id','<?php echo $imp_sim['edificio_simulacro_id'] ?>');
+                                                        insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_sim['cumplimentacion_id'] ?>');
                                                         insertacampo(document.formenviar, 'controller','ImpSim');
                                                         insertacampo(document.formenviar, 'action', 'implementForm');
                                                         enviaform(document.formenviar);">
@@ -93,7 +93,7 @@ class Show_ImpSims {
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item i18n-expire" type="button" onclick="
                                                         crearform('formenviar','post');
-                                                        insertacampo(document.formenviar, 'edificio_simulacro_id','<?php echo $imp_sim['edificio_simulacro_id'] ?>');
+                                                        insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_sim['cumplimentacion_id'] ?>');
                                                         insertacampo(document.formenviar, 'controller','ImpSim');
                                                         insertacampo(document.formenviar, 'action', 'expireForm');
                                                         enviaform(document.formenviar);">
@@ -103,7 +103,7 @@ class Show_ImpSims {
                                                 <?php endif; ?>
                                                 <a class="dropdown-item i18n-delete" type="button" onclick="
                                                     crearform('formenviar','post');
-                                                    insertacampo(document.formenviar, 'edificio_simulacro_id','<?php echo $imp_sim['edificio_simulacro_id'] ?>');
+                                                    insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_sim['cumplimentacion_id'] ?>');
                                                     insertacampo(document.formenviar, 'controller','ImpSim');
                                                     insertacampo(document.formenviar, 'action','deleteForm');
                                                     enviaform(document.formenviar);">

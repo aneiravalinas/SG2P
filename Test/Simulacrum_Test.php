@@ -58,15 +58,15 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'FECHA_PLANIFIC
 array_push($testSimulacrum, $respTest);
 
 // ID Cumplimentación no numérico
-$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => 'aaa');
+$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => 'aaa');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->searchCompletions();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación no numérico',
-    'IMPSIM_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'CUMPLIMENTACION_ID', 'ID Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 // Estado no válido
-$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
+$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
                 'estado' => 'estado');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->searchCompletions();
@@ -75,7 +75,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'ESTADO', 'Esta
 array_push($testSimulacrum, $respTest);
 
 // Fecha Vencimiento inicial no válida
-$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
+$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12-25');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->searchCompletions();
@@ -84,7 +84,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIE
 array_push($testSimulacrum, $respTest);
 
 // Fecha Vencimiento final no válida
-$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
+$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12-25');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->searchCompletions();
@@ -93,7 +93,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIE
 array_push($testSimulacrum, $respTest);
 
 // ID Edificio no numérico
-$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
+$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => 'a');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->searchCompletions();
@@ -102,7 +102,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'EDIFICIO_ID', 
 array_push($testSimulacrum, $respTest);
 
 // Nombre de Edificio corto (menos de 3 caracteres)
-$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
+$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1', 'nombre_edificio' => 'aa');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->searchCompletions();
@@ -111,7 +111,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICI
 array_push($testSimulacrum, $respTest);
 
 // Nombre de Edificio largo (más de 60 caracteres)
-$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
+$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1',
     'nombre_edificio' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $sim_service = new Simulacrum_Service();
@@ -121,7 +121,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICI
 array_push($testSimulacrum, $respTest);
 
 // Nombre de Edificio con caracteres no permitidos
-$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
+$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1',
     'nombre_edificio' => 'Nombre ^Difico');
 $sim_service = new Simulacrum_Service();
@@ -135,7 +135,7 @@ array_push($testSimulacrum, $respTest);
  */
 
 // Búsqueda de cumplimentaciones Ok
-$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
+$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1',
     'nombre_edificio' => 'Nombre Edificio');
 $sim_service = new Simulacrum_Service();
@@ -248,15 +248,15 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_SIMULACRUM', 'FECHA_PLANIFICA
 array_push($testSimulacrum, $respTest);
 
 // ID Cumplimentación no numérico
-$_POST = array('simulacro_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => 'aaa');
+$_POST = array('simulacro_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => 'aaa');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->searchSimulacrum();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_SIMULACRUM', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación no numérico',
-    'IMPSIM_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_SIMULACRUM', 'CUMPLIMENTACION_ID', 'ID Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 // Estado no válido
-$_POST = array('simulacro_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
+$_POST = array('simulacro_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'estado');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->searchSimulacrum();
@@ -265,7 +265,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_SIMULACRUM', 'ESTADO', 'Estad
 array_push($testSimulacrum, $respTest);
 
 // Fecha Vencimiento inicial no válida
-$_POST = array('simulacro_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
+$_POST = array('simulacro_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12-25');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->searchSimulacrum();
@@ -274,7 +274,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_SIMULACRUM', 'FECHA_VENCIMIEN
 array_push($testSimulacrum, $respTest);
 
 // Fecha Vencimiento final no válida
-$_POST = array('simulacro_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
+$_POST = array('simulacro_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12-25');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->searchSimulacrum();
@@ -288,7 +288,7 @@ array_push($testSimulacrum, $respTest);
  */
 
 // Búsqueda de cumplimentaciones Ok
-$_POST = array('simulacro_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'edificio_simulacro_id' => '1',
+$_POST = array('simulacro_id' => '4', 'edificio_id' => '2', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->searchSimulacrum();
@@ -718,7 +718,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'ADD_IMPSIM', 'ACCION', 'Cumplimentac
 array_push($testSimulacrum, $respTest);
 
 if($feedback['ok']) {
-    $edificio_simulacro_id = $sim_service->impSim_entity->edificio_simulacro_id;
+    $edificio_simulacro_id = $sim_service->impSim_entity->cumplimentacion_id;
 } else {
     $edificio_simulacro_id = '';
 }
@@ -731,19 +731,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID Cumplimentación vacío
-$_POST = array('edificio_simulacro_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
-$respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación vacío',
-    'IMPSIM_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'CUMPLIMENTACION_ID', 'ID Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 // ID Cumplimentación no numérico
-$_POST = array('edificio_simulacro_id' => 'aa');
+$_POST = array('cumplimentacion_id' => 'aa');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
-$respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación no numérico',
-    'IMPSIM_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'CUMPLIMENTACION_ID', 'ID Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 /*
@@ -751,7 +751,7 @@ array_push($testSimulacrum, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_simulacro_id' => '1111111111111111');
+$_POST = array('cumplimentacion_id' => '1111111111111111');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
 $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'ACCION', 'La cumplimentación no existe',
@@ -762,7 +762,7 @@ array_push($testSimulacrum, $respTest);
 $_SESSION['username'] = 'sg2ped';
 $_SESSION['rol'] = 'edificio';
 
-$_POST = array('edificio_simulacro_id' => '2');
+$_POST = array('cumplimentacion_id' => '2');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
 $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -772,7 +772,7 @@ array_push($testSimulacrum, $respTest);
 // La cumplimentación está vencida
 $_SESSION['username'] = 'sg2ped2';
 
-$_POST = array('edificio_simulacro_id' => '3');
+$_POST = array('cumplimentacion_id' => '3');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
 $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'ACCION', 'La cumplimentación está vencida',
@@ -784,7 +784,7 @@ array_push($testSimulacrum, $respTest);
  */
 
 // URL larga (más de 200 caracteres)
-$_POST = array('edificio_simulacro_id' => $edificio_simulacro_id, 'url_recurso' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+$_POST = array('cumplimentacion_id' => $edificio_simulacro_id, 'url_recurso' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
 $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'URL_RECURSO', 'URL larga (más de 200 caracteres)',
@@ -792,7 +792,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'URL_RECURSO', 'URL larg
 array_push($testSimulacrum, $respTest);
 
 // URL formato no válido
-$_POST = array('edificio_simulacro_id' => $edificio_simulacro_id, 'url_recurso' => 'http:url');
+$_POST = array('cumplimentacion_id' => $edificio_simulacro_id, 'url_recurso' => 'http:url');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
 $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'URL_RECURSO', 'URL formato no válido',
@@ -800,7 +800,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'URL_RECURSO', 'URL form
 array_push($testSimulacrum, $respTest);
 
 // Fecha Planificación vacía
-$_POST = array('edificio_simulacro_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => '');
+$_POST = array('cumplimentacion_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => '');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
 $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'FECHA_PLANIFICACION', 'Fecha Planificación vacía',
@@ -808,7 +808,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'FECHA_PLANIFICACION', '
 array_push($testSimulacrum, $respTest);
 
 // Fecha Planificación formato no válido
-$_POST = array('edificio_simulacro_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => '2012/25-12');
+$_POST = array('cumplimentacion_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => '2012/25-12');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
 $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'FECHA_PLANIFICACION', 'Fecha Planificación formato no válido',
@@ -816,7 +816,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'FECHA_PLANIFICACION', '
 array_push($testSimulacrum, $respTest);
 
 // Fecha Planificación anterior a la fecha actual
-$_POST = array('edificio_simulacro_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => '2012/12/25');
+$_POST = array('cumplimentacion_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => '2012/12/25');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
 $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'FECHA_PLANIFICACION', 'Fecha Planificación anterior a la fecha actual',
@@ -824,7 +824,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'FECHA_PLANIFICACION', '
 array_push($testSimulacrum, $respTest);
 
 // Destinatarios vacío
-$_POST = array('edificio_simulacro_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
+$_POST = array('cumplimentacion_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
                     'destinatarios' => '');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
@@ -833,7 +833,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'DESTINATARIOS', 'Destin
 array_push($testSimulacrum, $respTest);
 
 // Destinatarios largo (más de 200 caracteres)
-$_POST = array('edificio_simulacro_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
+$_POST = array('cumplimentacion_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
     'destinatarios' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
@@ -842,7 +842,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'IMPLEMENT', 'DESTINATARIOS', 'Destin
 array_push($testSimulacrum, $respTest);
 
 // Destinatarios con caracteres no permitidos
-$_POST = array('edificio_simulacro_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
+$_POST = array('cumplimentacion_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
     'destinatarios' => 'Destin+tarios');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
@@ -856,7 +856,7 @@ array_push($testSimulacrum, $respTest);
  */
 
 // Cumplimentación completada correctamente
-$_POST = array('edificio_simulacro_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
+$_POST = array('cumplimentacion_id' => $edificio_simulacro_id, 'url_recurso' => 'http://url', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
                     'destinatarios' => 'Todos.');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->implement();
@@ -872,19 +872,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID Cumplimentación vacío
-$_POST = array('edificio_simulacro_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->expire();
-$respTest = obtenerRespuesta('Simulacrum', 'EXPIRE', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación vacío',
-    'IMPSIM_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Simulacrum', 'EXPIRE', 'CUMPLIMENTACION_ID', 'ID Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 // ID Cumplimentación no numérico
-$_POST = array('edificio_simulacro_id' => 'aa');
+$_POST = array('cumplimentacion_id' => 'aa');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->expire();
-$respTest = obtenerRespuesta('Simulacrum', 'EXPIRE', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación no numérico',
-    'IMPSIM_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Simulacrum', 'EXPIRE', 'CUMPLIMENTACION_ID', 'ID Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 
@@ -894,7 +894,7 @@ array_push($testSimulacrum, $respTest);
 
 
 // La cumplimentación no existe
-$_POST = array('edificio_simulacro_id' => '1111111111111111');
+$_POST = array('cumplimentacion_id' => '1111111111111111');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->expire();
 $respTest = obtenerRespuesta('Simulacrum', 'EXPIRE', 'ACCION', 'La cumplimentación no existe',
@@ -905,7 +905,7 @@ array_push($testSimulacrum, $respTest);
 $_SESSION['username'] = 'sg2ped';
 $_SESSION['rol'] = 'edificio';
 
-$_POST = array('edificio_simulacro_id' => '2');
+$_POST = array('cumplimentacion_id' => '2');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->expire();
 $respTest = obtenerRespuesta('Simulacrum', 'EXPIRE', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -914,7 +914,7 @@ array_push($testSimulacrum, $respTest);
 
 // Cumplimentación vencida correctamente
 $_SESSION['username'] = 'sg2ped2';
-$_POST = array('edificio_simulacro_id' => $edificio_simulacro_id);
+$_POST = array('cumplimentacion_id' => $edificio_simulacro_id);
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->expire();
 $respTest = obtenerRespuesta('Simulacrum', 'EXPIRE', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -928,19 +928,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID Cumplimentación vacío
-$_POST = array('edificio_simulacro_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->DELETE();
-$respTest = obtenerRespuesta('Simulacrum', 'DELETE', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación vacío',
-    'IMPSIM_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Simulacrum', 'DELETE', 'CUMPLIMENTACION_ID', 'ID Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 // ID Cumplimentación no numérico
-$_POST = array('edificio_simulacro_id' => 'aa');
+$_POST = array('cumplimentacion_id' => 'aa');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->DELETE();
-$respTest = obtenerRespuesta('Simulacrum', 'DELETE', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación no numérico',
-    'IMPSIM_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Simulacrum', 'DELETE', 'CUMPLIMENTACION_ID', 'ID Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 /*
@@ -948,7 +948,7 @@ array_push($testSimulacrum, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_simulacro_id' => '1111111111111111');
+$_POST = array('cumplimentacion_id' => '1111111111111111');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->DELETE();
 $respTest = obtenerRespuesta('Simulacrum', 'DELETE', 'ACCION', 'La cumplimentación no existe',
@@ -959,7 +959,7 @@ array_push($testSimulacrum, $respTest);
 $_SESSION['username'] = 'sg2ped';
 $_SESSION['rol'] = 'edificio';
 
-$_POST = array('edificio_simulacro_id' => '2');
+$_POST = array('cumplimentacion_id' => '2');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->DELETE();
 $respTest = obtenerRespuesta('Simulacrum', 'DELETE', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -969,7 +969,7 @@ array_push($testSimulacrum, $respTest);
 // La cumplimentación a eliminar es la única cumplimentación del simulacro en el edificio
 $_SESSION['username'] = 'sg2ped2';
 
-$_POST = array('edificio_simulacro_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->DELETE();
 $respTest = obtenerRespuesta('Simulacrum', 'DELETE', 'ACCION', 'La cumplimentación a eliminar es la única cumplimentación del simulacro en el edificio',
@@ -977,7 +977,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'DELETE', 'ACCION', 'La cumplimentaci
 array_push($testSimulacrum, $respTest);
 
 // Cumplimentación eliminada correctamente
-$_POST = array('edificio_simulacro_id' => $edificio_simulacro_id);
+$_POST = array('cumplimentacion_id' => $edificio_simulacro_id);
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->DELETE();
 $respTest = obtenerRespuesta('Simulacrum', 'DELETE', 'ACCION', 'Cumplimentación eliminada correctamente',
@@ -992,19 +992,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID Cumplimentación vacío
-$_POST = array('edificio_simulacro_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->seek();
-$respTest = obtenerRespuesta('Simulacrum', 'SEEK', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación vacío',
-    'IMPSIM_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Simulacrum', 'SEEK', 'CUMPLIMENTACION_ID', 'ID Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 // ID Cumplimentación no numérico
-$_POST = array('edificio_simulacro_id' => 'aa');
+$_POST = array('cumplimentacion_id' => 'aa');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->seek();
-$respTest = obtenerRespuesta('Simulacrum', 'SEEK', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación no numérico',
-    'IMPSIM_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Simulacrum', 'SEEK', 'CUMPLIMENTACION_ID', 'ID Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 /*
@@ -1012,7 +1012,7 @@ array_push($testSimulacrum, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_simulacro_id' => '1111111111111111');
+$_POST = array('cumplimentacion_id' => '1111111111111111');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->seek();
 $respTest = obtenerRespuesta('Simulacrum', 'SEEK', 'ACCION', 'La cumplimentación no existe',
@@ -1023,7 +1023,7 @@ array_push($testSimulacrum, $respTest);
 $_SESSION['username'] = 'sg2ped';
 $_SESSION['rol'] = 'edificio';
 
-$_POST = array('edificio_simulacro_id' => '2');
+$_POST = array('cumplimentacion_id' => '2');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->seek();
 $respTest = obtenerRespuesta('Simulacrum', 'SEEK', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -1033,7 +1033,7 @@ array_push($testSimulacrum, $respTest);
 // Consulta de los detalles de la cumplimentación Ok
 $_SESSION['username'] = 'sg2ped2';
 
-$_POST = array('edificio_simulacro_id' => '2');
+$_POST = array('cumplimentacion_id' => '2');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->seek();
 $respTest = obtenerRespuesta('Simulacrum', 'SEEK', 'ACCION', 'Consulta de los detalles de la cumplimentación Ok',
@@ -1047,19 +1047,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID Cumplimentación vacío
-$_POST = array('edificio_simulacro_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->seekPortalImpSim();
-$respTest = obtenerRespuesta('Simulacrum', 'SEEK_PORTAL_IMPSIM', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación vacío',
-    'IMPSIM_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Simulacrum', 'SEEK_PORTAL_IMPSIM', 'CUMPLIMENTACION_ID', 'ID Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 // ID Cumplimentación no numérico
-$_POST = array('edificio_simulacro_id' => 'aa');
+$_POST = array('cumplimentacion_id' => 'aa');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->seekPortalImpSim();
-$respTest = obtenerRespuesta('Simulacrum', 'SEEK_PORTAL_IMPSIM', 'EDIFICIO_SIMULACRO_ID', 'ID Cumplimentación no numérico',
-    'IMPSIM_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Simulacrum', 'SEEK_PORTAL_IMPSIM', 'CUMPLIMENTACION_ID', 'ID Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
 
@@ -1068,7 +1068,7 @@ array_push($testSimulacrum, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_simulacro_id' => '1111111111111111');
+$_POST = array('cumplimentacion_id' => '1111111111111111');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->seekPortalImpSim();
 $respTest = obtenerRespuesta('Simulacrum', 'SEEK_PORTAL_IMPSIM', 'ACCION', 'La cumplimentación no existe',
@@ -1076,7 +1076,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEEK_PORTAL_IMPSIM', 'ACCION', 'La c
 array_push($testSimulacrum, $respTest);
 
 // La cumplimentación está vencida
-$_POST = array('edificio_simulacro_id' => '3');
+$_POST = array('cumplimentacion_id' => '3');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->seekPortalImpSim();
 $respTest = obtenerRespuesta('Simulacrum', 'SEEK_PORTAL_IMPSIM', 'ACCION', 'La cumplimentación está vencida',
@@ -1084,7 +1084,7 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEEK_PORTAL_IMPSIM', 'ACCION', 'La c
 array_push($testSimulacrum, $respTest);
 
 // Consulta de los detalles de la cumplimentacion OK
-$_POST = array('edificio_simulacro_id' => '2');
+$_POST = array('cumplimentacion_id' => '2');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->seekPortalImpSim();
 $respTest = obtenerRespuesta('Simulacrum', 'SEEK_PORTAL_IMPSIM', 'ACCION', 'Consulta de los detalles de la cumplimentacion OK',

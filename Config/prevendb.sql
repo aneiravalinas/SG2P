@@ -128,7 +128,7 @@ CREATE TABLE RUTA
 
 CREATE TABLE EDIFICIO_DOCUMENTO
 (
-    `edificio_documento_id` INT(10) AUTO_INCREMENT,
+    `cumplimentacion_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `documento_id` INT(10) NOT NULL,
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
@@ -136,14 +136,14 @@ CREATE TABLE EDIFICIO_DOCUMENTO
     `fecha_vencimiento` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(50) NOT NULL,
 
-    CONSTRAINT `pk_edificio_documento` PRIMARY KEY (`edificio_documento_id`),
+    CONSTRAINT `pk_edificio_documento` PRIMARY KEY (`cumplimentacion_id`),
     CONSTRAINT `fk_edificio_documento_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
     CONSTRAINT `fk_edificio_documento_to_documento` FOREIGN KEY (`documento_id`) REFERENCES DOCUMENTO (`documento_id`)
 );
 
 CREATE TABLE EDIFICIO_PROCEDIMIENTO
 (
-    `edificio_procedimiento_id` INT(10) AUTO_INCREMENT,
+    `cumplimentacion_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `procedimiento_id` INT(10) NOT NULL,
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
@@ -151,14 +151,14 @@ CREATE TABLE EDIFICIO_PROCEDIMIENTO
     `fecha_vencimiento` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(50) NOT NULL,
 
-    CONSTRAINT `pk_edificio_procedimiento` PRIMARY KEY (`edificio_procedimiento_id`),
+    CONSTRAINT `pk_edificio_procedimiento` PRIMARY KEY (`cumplimentacion_id`),
     CONSTRAINT `fk_edificio_procedimiento_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
     CONSTRAINT `fk_edificio_procedimiento_to_procedimiento` FOREIGN KEY (`procedimiento_id`) REFERENCES PROCEDIMIENTO (`procedimiento_id`)
 );
 
 CREATE TABLE PLANTA_RUTA
 (
-    `planta_ruta_id` INT(10) AUTO_INCREMENT,
+    `cumplimentacion_id` INT(10) AUTO_INCREMENT,
     `planta_id` INT(10) NOT NULL,
     `ruta_id` INT(10) NOT NULL,
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
@@ -166,7 +166,7 @@ CREATE TABLE PLANTA_RUTA
     `fecha_vencimiento` DATE NOT NULL DEFAULT '00-00-0000',
     `nombre_doc` VARCHAR(50) NOT NULL,
 
-    CONSTRAINT `pk_planta_ruta` PRIMARY KEY (`planta_ruta_id`),
+    CONSTRAINT `pk_planta_ruta` PRIMARY KEY (`cumplimentacion_id`),
     CONSTRAINT `fk_planta_ruta_to_planta` FOREIGN KEY (`planta_id`) REFERENCES PLANTA (`planta_id`),
     CONSTRAINT `fk_planta_ruta_to_ruta` FOREIGN KEY (`ruta_id`) REFERENCES RUTA (`ruta_id`)
 );
@@ -185,7 +185,7 @@ CREATE TABLE SIMULACRO
 
 CREATE TABLE EDIFICIO_SIMULACRO
 (
-    `edificio_simulacro_id` INT(10) AUTO_INCREMENT,
+    `cumplimentacion_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `simulacro_id` INT(10) NOT NULL,
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
@@ -194,7 +194,7 @@ CREATE TABLE EDIFICIO_SIMULACRO
     `url_recurso` VARCHAR(200) NOT NULL,
     `destinatarios` VARCHAR(200) NOT NULL,
 
-    CONSTRAINT `pk_edificio_simulacro` PRIMARY KEY (`edificio_simulacro_id`),
+    CONSTRAINT `pk_edificio_simulacro` PRIMARY KEY (`cumplimentacion_id`),
     CONSTRAINT `fk_edificio_simulacro_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
     CONSTRAINT `fk_edificio_simulacro_to_simulacro` FOREIGN KEY (`simulacro_id`) REFERENCES SIMULACRO (`simulacro_id`)
 );
@@ -213,7 +213,7 @@ CREATE TABLE FORMACION
 
 CREATE TABLE EDIFICIO_FORMACION
 (
-    `edificio_formacion_id` INT(10) AUTO_INCREMENT,
+    `cumplimentacion_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `formacion_id` INT(10) NOT NULL,
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
@@ -222,7 +222,7 @@ CREATE TABLE EDIFICIO_FORMACION
     `url_recurso` VARCHAR(200) NOT NULL,
     `destinatarios` VARCHAR(200) NOT NULL,
 
-    CONSTRAINT `pk_edificio_formacion` PRIMARY KEY (`edificio_formacion_id`),
+    CONSTRAINT `pk_edificio_formacion` PRIMARY KEY (`cumplimentacion_id`),
     CONSTRAINT `fk_edificio_formacion_to_edificio` FOREIGN KEY (`edificio_id`) REFERENCES EDIFICIO (`edificio_id`),
     CONSTRAINT `fk_edificio_formacion_to_formacion` FOREIGN KEY (`formacion_id`) REFERENCES FORMACION (`formacion_id`)
 );

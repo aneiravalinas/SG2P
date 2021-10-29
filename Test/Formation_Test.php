@@ -42,15 +42,15 @@ array_push($testFormation, $respTest);
  */
 
 // ID de cumplimentación no numérico
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => 'aaa');
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => 'aaa');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchCompletions();
-$respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'EDIFICIO_FORMACION_ID', 'ID de cumplimentación no numérico',
-    'IMPFORMAT_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'CUMPLIMENTACION_ID', 'ID de cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 // Estado no permitido
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'estado');
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'estado');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchCompletions();
 $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'ESTADO', 'Estado no permitido',
@@ -58,7 +58,7 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'ESTADO', 'Estad
 array_push($testFormation, $respTest);
 
 // Fecha Planificación inicial no válida
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12-25');
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12-25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchCompletions();
 $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'FECHA_PLANIFICACION_INICIO', 'Fecha Planificación inicial no válida',
@@ -66,7 +66,7 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'FECHA_PLANIFICA
 array_push($testFormation, $respTest);
 
 // Fecha Planificación final no válida
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
                     'fecha_planificacion_fin' => '2014/12-25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchCompletions();
@@ -75,7 +75,7 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'FECHA_PLANIFICA
 array_push($testFormation, $respTest);
 
 // Fecha Vencimiento inicial no válida
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12-25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchCompletions();
@@ -84,7 +84,7 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIEN
 array_push($testFormation, $respTest);
 
 // Fecha Vencimiento final no válida
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12-25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchCompletions();
@@ -93,7 +93,7 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'FECHA_VENCIMIEN
 array_push($testFormation, $respTest);
 
 // ID Edificio no numérico
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => 'aa');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchCompletions();
@@ -102,7 +102,7 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'EDIFICIO_ID', '
 array_push($testFormation, $respTest);
 
 // Nombre edificio corto (menos de 3 caracteres)
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
                         'nombre_edificio' => 'aa');
 $format_service = new Formation_Service();
@@ -112,7 +112,7 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO
 array_push($testFormation, $respTest);
 
 // Nombre Edificio largo (más de 60 caracteres)
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
     'nombre_edificio' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $format_service = new Formation_Service();
@@ -122,7 +122,7 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO
 array_push($testFormation, $respTest);
 
 // Nombre Edificio con caracteres no permitidos
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
     'nombre_edificio' => 'Nombrê Edificio');
 $format_service = new Formation_Service();
@@ -137,7 +137,7 @@ array_push($testFormation, $respTest);
  */
 
 // La búsqueda de cumplimentaciones se realiza correctamente
-$_POST = array('formacion_id' => '1', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
     'nombre_edificio' => 'Nombre Edificio');
 $format_service = new Formation_Service();
@@ -229,15 +229,15 @@ array_push($testFormation, $respTest);
 $_SESSION['username'] = 'sg2ped2';
 
 // ID de cumplimentación no numérico
-$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => 'aaa');
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'cumplimentacion_id' => 'aaa');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchFormation();
-$respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'EDIFICIO_FORMACION_ID', 'ID de cumplimentación no numérico',
-    'IMPFORMAT_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'CUMPLIMENTACION_ID', 'ID de cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 // Estado no permitido
-$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'estado');
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'estado');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchFormation();
 $respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'ESTADO', 'Estado no permitido',
@@ -245,7 +245,7 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'ESTADO', 'Estado 
 array_push($testFormation, $respTest);
 
 // Fecha Planificación inicial no válida
-$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12-25');
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12-25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchFormation();
 $respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'FECHA_PLANIFICACION_INICIO', 'Fecha Planificación inicial no válida',
@@ -253,7 +253,7 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'FECHA_PLANIFICACI
 array_push($testFormation, $respTest);
 
 // Fecha Planificación final no válida
-$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
                 'fecha_planificacion_fin' => '2014/12-25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchFormation();
@@ -262,7 +262,7 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'FECHA_PLANIFICACI
 array_push($testFormation, $respTest);
 
 // Fecha Vencimiento inicial no válida
-$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12-25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchFormation();
@@ -271,7 +271,7 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'FECHA_VENCIMIENTO
 array_push($testFormation, $respTest);
 
 // Fecha Vencimiento final no valida
-$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12-25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchFormation();
@@ -284,7 +284,7 @@ array_push($testFormation, $respTest);
  */
 
 // La búsqueda se realiza correctamente
-$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'edificio_formacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchFormation();
@@ -684,7 +684,7 @@ $respTest = obtenerRespuesta('Formation', 'ADD_IMPFORMAT', 'ACCION', 'Cumpliment
 array_push($testFormation, $respTest);
 
 if($feedback['ok']) {
-    $edificio_formacion_id = $format_service->impFormat_entity->edificio_formacion_id;
+    $edificio_formacion_id = $format_service->impFormat_entity->cumplimentacion_id;
 } else {
     $edificio_formacion_id = '';
 }
@@ -696,19 +696,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('edificio_formacion_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $format_service = new Formation_Service();
 $feedback = $format_service->seek();
-$respTest = obtenerRespuesta('Formation', 'SEEK', 'EDIFICIO_FORMACION_ID', 'ID de Cumplimentación vacío',
-    'IMPFORMAT_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'SEEK', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('edificio_formacion_id' => 'aaa');
+$_POST = array('cumplimentacion_id' => 'aaa');
 $format_service = new Formation_Service();
 $feedback = $format_service->seek();
-$respTest = obtenerRespuesta('Formation', 'SEEK', 'EDIFICIO_FORMACION_ID', 'ID de Cumplimentación no numérico',
-    'IMPFORMAT_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'SEEK', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 /*
@@ -716,7 +716,7 @@ array_push($testFormation, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_formacion_id' => '11111111111111111');
+$_POST = array('cumplimentacion_id' => '11111111111111111');
 $format_service = new Formation_Service();
 $feedback = $format_service->seek();
 $respTest = obtenerRespuesta('Formation', 'SEEK', 'ACCION', 'La cumplimentación no existe',
@@ -727,7 +727,7 @@ array_push($testFormation, $respTest);
 $_SESSION['username'] = 'sg2ped';
 $_SESSION['rol'] = 'edificio';
 
-$_POST = array('edificio_formacion_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $format_service = new Formation_Service();
 $feedback = $format_service->seek();
 $respTest = obtenerRespuesta('Formation', 'SEEK', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -737,7 +737,7 @@ array_push($testFormation, $respTest);
 // Consulta de los detalles de la cumplimentación Ok
 $_SESSION['username'] = 'sg2ped2';
 
-$_POST = array('edificio_formacion_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $format_service = new Formation_Service();
 $feedback = $format_service->seek();
 $respTest = obtenerRespuesta('Formation', 'SEEK', 'ACCION', 'Consulta de los detalles de la cumplimentación Ok',
@@ -752,19 +752,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('edificio_formacion_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
-$respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'EDIFICIO_FORMACION_ID', 'ID de Cumplimentación vacío',
-    'IMPFORMAT_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('edificio_formacion_id' => 'aaa');
+$_POST = array('cumplimentacion_id' => 'aaa');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
-$respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'EDIFICIO_FORMACION_ID', 'ID de Cumplimentación no numérico',
-    'IMPFORMAT_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 
@@ -773,7 +773,7 @@ array_push($testFormation, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_formacion_id' => '11111111111111111');
+$_POST = array('cumplimentacion_id' => '11111111111111111');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
 $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'ACCION', 'La cumplimentación no existe',
@@ -784,7 +784,7 @@ array_push($testFormation, $respTest);
 $_SESSION['username'] = 'sg2ped';
 $_SESSION['rol'] = 'edificio';
 
-$_POST = array('edificio_formacion_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
 $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -794,7 +794,7 @@ array_push($testFormation, $respTest);
 // La cumplimentación está vencida
 $_SESSION['username'] = 'sg2ped2';
 
-$_POST = array('edificio_formacion_id' => '4');
+$_POST = array('cumplimentacion_id' => '4');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
 $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'ACCION', 'La cumplimentación está vencida',
@@ -806,7 +806,7 @@ array_push($testFormation, $respTest);
  */
 
 // La URL no es válida
-$_POST = array('edificio_formacion_id' => $edificio_formacion_id, 'url_recurso' => 'https:/url_recurso.php');
+$_POST = array('cumplimentacion_id' => $edificio_formacion_id, 'url_recurso' => 'https:/url_recurso.php');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
 $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'URL_RECURSO', 'La URL no es válida',
@@ -814,7 +814,7 @@ $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'URL_RECURSO', 'La URL no
 array_push($testFormation, $respTest);
 
 // URL larga (más de 200 caracteres)
-$_POST = array('edificio_formacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+$_POST = array('cumplimentacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
 $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'URL_RECURSO', 'URL larga (más de 200 caracteres)',
@@ -822,7 +822,7 @@ $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'URL_RECURSO', 'URL larga
 array_push($testFormation, $respTest);
 
 // Fecha Planificación vacía
-$_POST = array('edificio_formacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => '');
+$_POST = array('cumplimentacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => '');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
 $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'FECHA_PLANIFICACION', 'Fecha Planificación vacía',
@@ -830,7 +830,7 @@ $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'FECHA_PLANIFICACION', 'F
 array_push($testFormation, $respTest);
 
 // Formato Fecha incorrecto
-$_POST = array('edificio_formacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => '1992/25-12');
+$_POST = array('cumplimentacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => '1992/25-12');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
 $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'FECHA_PLANIFICACION', 'Formato Fecha incorrecto',
@@ -838,7 +838,7 @@ $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'FECHA_PLANIFICACION', 'F
 array_push($testFormation, $respTest);
 
 // Fecha Planificación pasada
-$_POST = array('edificio_formacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => '1992/12/25');
+$_POST = array('cumplimentacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => '1992/12/25');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
 $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'FECHA_PLANIFICACION', 'Fecha Planificación pasada',
@@ -846,7 +846,7 @@ $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'FECHA_PLANIFICACION', 'F
 array_push($testFormation, $respTest);
 
 // Destinatarios vacío
-$_POST = array('edificio_formacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
+$_POST = array('cumplimentacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
                     'destinatarios' => '');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
@@ -855,7 +855,7 @@ $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'DESTINATARIOS', 'Destina
 array_push($testFormation, $respTest);
 
 // Destinatarios largo (más de 200 caracteres)
-$_POST = array('edificio_formacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
+$_POST = array('cumplimentacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
     'destinatarios' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
@@ -864,7 +864,7 @@ $respTest = obtenerRespuesta('Formation', 'IMPLEMENT', 'DESTINATARIOS', 'Destina
 array_push($testFormation, $respTest);
 
 // Destinatarios con caracteres no permitidos
-$_POST = array('edificio_formacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
+$_POST = array('cumplimentacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
     'destinatarios' => 'Destin+tarios');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
@@ -877,7 +877,7 @@ array_push($testFormation, $respTest);
  */
 
 // Cumplimentación completada Ok
-$_POST = array('edificio_formacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
+$_POST = array('cumplimentacion_id' => $edificio_formacion_id, 'url_recurso' => 'https://url_recurso.php', 'fecha_planificacion' => date_format(new DateTime(), 'Y-m-d'),
     'destinatarios' => 'Destinatarios.');
 $format_service = new Formation_Service();
 $feedback = $format_service->implement();
@@ -893,19 +893,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('edificio_formacion_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $format_service = new Formation_Service();
 $feedback = $format_service->expire();
-$respTest = obtenerRespuesta('Formation', 'EXPIRE', 'EDIFICIO_FORMACION_ID', 'ID de Cumplimentación vacío',
-    'IMPFORMAT_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'EXPIRE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('edificio_formacion_id' => 'aaa');
+$_POST = array('cumplimentacion_id' => 'aaa');
 $format_service = new Formation_Service();
 $feedback = $format_service->expire();
-$respTest = obtenerRespuesta('Formation', 'EXPIRE', 'EDIFICIO_FORMACION_ID', 'ID de Cumplimentación no numérico',
-    'IMPFORMAT_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'EXPIRE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 /*
@@ -914,7 +914,7 @@ array_push($testFormation, $respTest);
 
 
 // La cumplimentación no existe
-$_POST = array('edificio_formacion_id' => '11111111111111111');
+$_POST = array('cumplimentacion_id' => '11111111111111111');
 $format_service = new Formation_Service();
 $feedback = $format_service->expire();
 $respTest = obtenerRespuesta('Formation', 'EXPIRE', 'ACCION', 'La cumplimentación no existe',
@@ -925,7 +925,7 @@ array_push($testFormation, $respTest);
 $_SESSION['username'] = 'sg2ped';
 $_SESSION['rol'] = 'edificio';
 
-$_POST = array('edificio_formacion_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $format_service = new Formation_Service();
 $feedback = $format_service->expire();
 $respTest = obtenerRespuesta('Formation', 'EXPIRE', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -934,7 +934,7 @@ array_push($testFormation, $respTest);
 
 // Cumplimentación vencida correctamente
 $_SESSION['username'] = 'sg2ped2';
-$_POST = array('edificio_formacion_id' => $edificio_formacion_id);
+$_POST = array('cumplimentacion_id' => $edificio_formacion_id);
 $format_service = new Formation_Service();
 $feedback = $format_service->expire();
 $respTest = obtenerRespuesta('Formation', 'EXPIRE', 'ACCION', 'Cumplimentación vencida correctamente',
@@ -948,19 +948,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('edificio_formacion_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $format_service = new Formation_Service();
 $feedback = $format_service->DELETE();
-$respTest = obtenerRespuesta('Formation', 'DELETE', 'EDIFICIO_FORMACION_ID', 'ID de Cumplimentación vacío',
-    'IMPFORMAT_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'DELETE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('edificio_formacion_id' => 'aaa');
+$_POST = array('cumplimentacion_id' => 'aaa');
 $format_service = new Formation_Service();
 $feedback = $format_service->DELETE();
-$respTest = obtenerRespuesta('Formation', 'DELETE', 'EDIFICIO_FORMACION_ID', 'ID de Cumplimentación no numérico',
-    'IMPFORMAT_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'DELETE', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 /*
@@ -968,7 +968,7 @@ array_push($testFormation, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_formacion_id' => '11111111111111111');
+$_POST = array('cumplimentacion_id' => '11111111111111111');
 $format_service = new Formation_Service();
 $feedback = $format_service->DELETE();
 $respTest = obtenerRespuesta('Formation', 'DELETE', 'ACCION', 'La cumplimentación no existe',
@@ -979,7 +979,7 @@ array_push($testFormation, $respTest);
 $_SESSION['username'] = 'sg2ped';
 $_SESSION['rol'] = 'edificio';
 
-$_POST = array('edificio_formacion_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $format_service = new Formation_Service();
 $feedback = $format_service->DELETE();
 $respTest = obtenerRespuesta('Formation', 'DELETE', 'ACCION', 'El usuario no tiene permisos para consultar cumplimentaciones en el edificio',
@@ -989,7 +989,7 @@ array_push($testFormation, $respTest);
 // La cumplimentación a eliminar es la única cumplimentación de la formación en el edificio
 $_SESSION['username'] = 'sg2ped2';
 
-$_POST = array('edificio_formacion_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $format_service = new Formation_Service();
 $feedback = $format_service->DELETE();
 $respTest = obtenerRespuesta('Formation', 'DELETE', 'ACCION', 'La cumplimentación a eliminar es la única cumplimentación de la formación en el edificio',
@@ -997,7 +997,7 @@ $respTest = obtenerRespuesta('Formation', 'DELETE', 'ACCION', 'La cumplimentaci�
 array_push($testFormation, $respTest);
 
 // Cumplimentación eliminada correctamente
-$_POST = array('edificio_formacion_id' => $edificio_formacion_id);
+$_POST = array('cumplimentacion_id' => $edificio_formacion_id);
 $format_service = new Formation_Service();
 $feedback = $format_service->DELETE();
 $respTest = obtenerRespuesta('Formation', 'DELETE', 'ACCION', 'Cumplimentación eliminada correctamente',
@@ -1011,19 +1011,19 @@ unset($_SESSION['username'], $_SESSION['rol']);
  */
 
 // ID de Cumplimentación vacío
-$_POST = array('edificio_formacion_id' => '');
+$_POST = array('cumplimentacion_id' => '');
 $format_service = new Formation_Service();
 $feedback = $format_service->seekPortalImpFormat();
-$respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_IMPFORMAT', 'EDIFICIO_FORMACION_ID', 'ID de Cumplimentación vacío',
-    'IMPFORMAT_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_IMPFORMAT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+    'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 // ID de Cumplimentación no numérico
-$_POST = array('edificio_formacion_id' => 'aaa');
+$_POST = array('cumplimentacion_id' => 'aaa');
 $format_service = new Formation_Service();
 $feedback = $format_service->seekPortalImpFormat();
-$respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_IMPFORMAT', 'EDIFICIO_FORMACION_ID', 'ID de Cumplimentación no numérico',
-    'IMPFORMAT_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
+$respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_IMPFORMAT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+    'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
 /*
@@ -1031,7 +1031,7 @@ array_push($testFormation, $respTest);
  */
 
 // La cumplimentación no existe
-$_POST = array('edificio_formacion_id' => '11111111111111111');
+$_POST = array('cumplimentacion_id' => '11111111111111111');
 $format_service = new Formation_Service();
 $feedback = $format_service->seekPortalImpFormat();
 $respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_IMPFORMAT', 'ACCION', 'La cumplimentación no existe',
@@ -1039,7 +1039,7 @@ $respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_IMPFORMAT', 'ACCION', 'La
 array_push($testFormation, $respTest);
 
 // La cumplimentación está vencida
-$_POST = array('edificio_formacion_id' => '4');
+$_POST = array('cumplimentacion_id' => '4');
 $format_service = new Formation_Service();
 $feedback = $format_service->seekPortalImpFormat();
 $respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_IMPFORMAT', 'ACCION', 'La cumplimentación está vencida',
@@ -1047,7 +1047,7 @@ $respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_IMPFORMAT', 'ACCION', 'La
 array_push($testFormation, $respTest);
 
 // Consulta de los detalles de la cumplimentación de la formación en el portal Ok
-$_POST = array('edificio_formacion_id' => '1');
+$_POST = array('cumplimentacion_id' => '1');
 $format_service = new Formation_Service();
 $feedback = $format_service->seekPortalImpFormat();
 $respTest = obtenerRespuesta('Formation', 'SEEK_PORTAL_IMPFORMAT', 'ACCION', 'Consulta de los detalles de la cumplimentación de la formación en el portal Ok',

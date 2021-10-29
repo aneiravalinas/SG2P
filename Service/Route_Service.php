@@ -12,7 +12,7 @@ class Route_Service extends Route_Validation {
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
-        $this->atributos = array('planta_ruta_id','planta_id','ruta_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
+        $this->atributos = array('cumplimentacion_id','planta_id','ruta_id','estado','fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin',
             'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'nombre_doc','nombre_planta', 'nombre_edificio', 'edificio_id');
         $this->impRoute_entity = new ImpRoute_Model();
         $this->defRoute_entity = new DefRoute_Model();
@@ -420,7 +420,7 @@ class Route_Service extends Route_Validation {
                 }
                 break;
             }
-            array_push($created_imp_floors, $this->impRoute_entity->planta_ruta_id);
+            array_push($created_imp_floors, $this->impRoute_entity->cumplimentacion_id);
         }
 
         if(sizeof($floors) == sizeof($created_imp_floors)) {
@@ -432,7 +432,7 @@ class Route_Service extends Route_Validation {
         }
 
         foreach($created_imp_floors as $imp_floor) {
-            $this->impRoute_entity->planta_ruta_id = $imp_floor;
+            $this->impRoute_entity->cumplimentacion_id = $imp_floor;
             $this->impRoute_entity->DELETE();
         }
 
@@ -451,7 +451,7 @@ class Route_Service extends Route_Validation {
      *          - Formato de la Ruta: Uploads/PLAN_ID/EDIFICIO_ID/Rutas/RUTA_ID/CUMPLIMENTACION_ID/NOMBRE_FICHERO
      */
     function seek() {
-        $validation = $this->validar_PLANTA_RUTA_ID();
+        $validation = $this->validar_CUMPLIMENTACION_ID();
         if(!$validation['ok']) {
             return $validation;
         }
@@ -467,7 +467,7 @@ class Route_Service extends Route_Validation {
             }
 
             $this->feedback['resource']['path'] = plans_path . $imp_route['plan_id'] . '/' . $imp_route['edificio_id'] . '/Rutas/' .
-                                                        $imp_route['ruta_id'] . '/' . $imp_route['planta_ruta_id'];
+                                                        $imp_route['ruta_id'] . '/' . $imp_route['cumplimentacion_id'];
             $this->feedback['code'] = 'IMPROUTE_SEEK_OK';
         } else if($this->feedback['code'] == 'IMPROUTEID_KO') {
             $this->feedback['code'] = 'IMPROUTE_SEEK_KO';
@@ -484,7 +484,7 @@ class Route_Service extends Route_Validation {
      *          - Formato de la ruta: Uploads/PLAN_ID/EDIFICIO_ID/Rutas/RUTA_ID/CUMPLIMENTACION_ID/NOMBRE_FICHERO
      */
     function seekPortalImpRoute() {
-        $validation = $this->validar_PLANTA_RUTA_ID();
+        $validation = $this->validar_CUMPLIMENTACION_ID();
         if(!$validation['ok']) {
             return $validation;
         }
@@ -500,7 +500,7 @@ class Route_Service extends Route_Validation {
             }
             $this->feedback['code'] = 'PRTL_IMPROUTE_SEEK_OK';
             $this->feedback['resource']['path'] = plans_path . $imp_route['plan_id'] . '/' . $imp_route['edificio_id'] . '/Rutas/' .
-                                                    $imp_route['ruta_id'] . '/' . $imp_route['planta_ruta_id'];
+                                                    $imp_route['ruta_id'] . '/' . $imp_route['cumplimentacion_id'];
         } else if($this->feedback['code'] == 'QRY_KO') {
             $this->feedback['code'] = 'PRTL_IMPROUTE_SEEK_KO';
         }

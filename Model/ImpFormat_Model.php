@@ -4,7 +4,7 @@ include_once 'Abstract_Model.php';
 
 class ImpFormat_Model extends Abstract_Model {
     var $atributos;
-    var $edificio_formacion_id;
+    var $cumplimentacion_id;
     var $edificio_id;
     var $formacion_id;
     var $estado;
@@ -19,7 +19,7 @@ class ImpFormat_Model extends Abstract_Model {
     var $fecha_vencimiento_fin;
 
     function __construct() {
-        $this->atributos = array('edificio_formacion_id','edificio_id','formacion_id','estado','fecha_planificacion', 'fecha_planificacion_inicio', 'fecha_planificacion_fin',
+        $this->atributos = array('cumplimentacion_id','edificio_id','formacion_id','estado','fecha_planificacion', 'fecha_planificacion_inicio', 'fecha_planificacion_fin',
             'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'url_recurso','destinatarios','nombre_edificio');
         $this->fill_fields();
     }
@@ -58,7 +58,7 @@ class ImpFormat_Model extends Abstract_Model {
         ";
 
         $this->execute_single_query();
-        $this->edificio_formacion_id = $this->id_autoincrement;
+        $this->cumplimentacion_id = $this->id_autoincrement;
         return $this->feedback;
     }
 
@@ -70,7 +70,7 @@ class ImpFormat_Model extends Abstract_Model {
             ($this->url_recurso == '' ? "" : "url_recurso = '$this->url_recurso', ") .
             ($this->destinatarios == '' ? "" : "destinatarios = '$this->destinatarios', ") .
             ($this->estado == '' ? "" : "estado = '$this->estado'") .
-            " WHERE edificio_formacion_id = '$this->edificio_formacion_id'";
+            " WHERE cumplimentacion_id = '$this->cumplimentacion_id'";
 
         $this->execute_single_query();
         return $this->feedback;
@@ -81,7 +81,7 @@ class ImpFormat_Model extends Abstract_Model {
         $this->query = "
             DELETE FROM EDIFICIO_FORMACION
             WHERE
-                edificio_formacion_id = '$this->edificio_formacion_id'
+                cumplimentacion_id = '$this->cumplimentacion_id'
         ";
 
         $this->execute_single_query();
@@ -97,7 +97,7 @@ class ImpFormat_Model extends Abstract_Model {
                 ON EDIFICIO_FORMACION.edificio_id = EDIFICIO.edificio_id
             WHERE
                 formacion_id = '$this->formacion_id' AND
-                edificio_formacion_id LIKE '%" . $this->edificio_formacion_id . "%' AND
+                cumplimentacion_id LIKE '%" . $this->cumplimentacion_id . "%' AND
                 EDIFICIO_FORMACION.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                 EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
                 fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
@@ -139,7 +139,7 @@ class ImpFormat_Model extends Abstract_Model {
             INNER JOIN FORMACION
                 ON EDIFICIO_FORMACION.formacion_id = FORMACION.formacion_id
             WHERE
-                edificio_formacion_id = '$this->edificio_formacion_id'
+                cumplimentacion_id = '$this->cumplimentacion_id'
         ";
 
         $this->get_one_result_from_query();

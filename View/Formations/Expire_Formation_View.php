@@ -24,7 +24,7 @@ class Expire_Formation {
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
                         <h3 class="mb-4 i18n-expire-impformat-confirm">¿Está seguro que desea vencer la cumplimentación de esta formación? El cambio no será reversible</h3>
-                        <h2><?php echo $this->imp_format['edificio_formacion_id'] ?> - <?php echo $this->imp_format['nombre_formacion'] ?> - <?php echo $this->imp_format['nombre_edificio'] ?></h2>
+                        <h2><?php echo $this->imp_format['cumplimentacion_id'] ?> - <?php echo $this->imp_format['nombre_formacion'] ?> - <?php echo $this->imp_format['nombre_edificio'] ?></h2>
                     </div>
                 </div>
 
@@ -41,7 +41,7 @@ class Expire_Formation {
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-expire" onclick="
                             crearform('formenviar','post');
-                            insertacampo(document.formenviar, 'edificio_formacion_id', '<?php echo $this->imp_format['edificio_formacion_id'] ?>');
+                            insertacampo(document.formenviar, 'cumplimentacion_id', '<?php echo $this->imp_format['cumplimentacion_id'] ?>');
                             insertacampo(document.formenviar, 'controller', 'Formation');
                             insertacampo(document.formenviar, 'action', 'expire');
                             enviaform(document.formenviar);">
