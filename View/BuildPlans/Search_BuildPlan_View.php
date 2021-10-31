@@ -45,22 +45,40 @@ class Search_BuildPlan {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="nombre_edificio" class="i18n-nombre_edificio">Nombre Edificio</label>
-                                    <input type="text" class="form-control" id="nombre_edificio" name="nombre_edificio" onblur="check_BLDPLAN_NOMBRE_EDIFICIO_SEARCH();"/>
+                                    <input type="text" class="form-control" id="nombre_edificio" name="nombre_edificio" onblur="check_BUILDING_NAME_SEARCH();"/>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-md-4">
-                                    <label for="fecha_asignacion" class="i18n-date_assign">Fecha Asignación</label>
-                                    <input type="date" class="form-control" id="fecha_asignacion" name="fecha_asignacion"/>
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_asignacion_inicio" class="i18n-start_date_assign">Fecha Asignación Inicial</label>
+                                    <input type="date" class="form-control" id="fecha_asignacion_inicio" name="fecha_asignacion_inicio"/>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="fecha_cumplimentacion" class="i18n-date_comp">Fecha Implementación</label>
-                                    <input type="date" class="form-control" id="fecha_cumplimentacion" name="fecha_cumplimentacion"/>
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_asignacion_fin" class="i18n-end_date_assign">Fecha Asignación Final</label>
+                                    <input type="date" class="form-control" id="fecha_asignacion_fin" name="fecha_asignacion_fin"/>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="fecha_vencimiento" class="i18n-date_expire">Fecha Vencimiento</label>
-                                    <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento"/>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_cumplimentacion_inicio" class="i18n-start_date_comp">Fecha Cumplimentación Inicial</label>
+                                    <input type="date" class="form-control" id="fecha_cumplimentacion_inicio" name="fecha_cumplimentacion_inicio"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_cumplimentacion_fin" class="i18n-end_date_comp">Fecha Cumplimentacion Final</label>
+                                    <input type="date" class="form-control" id="fecha_cumplimentacion_fin" name="fecha_cumplimentacion_fin"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_vencimiento_inicio" class="i18n-start_date_expire">Fecha Vencimiento Inicial</label>
+                                    <input type="date" class="form-control" id="fecha_vencimiento_inicio" name="fecha_vencimiento_inicio"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="fecha_vencimiento_fin" class="i18n-end_date_expire">Fecha Vencimiento Final</label>
+                                    <input type="date" class="form-control" id="fecha_vencimiento_fin" name="fecha_vencimiento_fin"/>
                                 </div>
                             </div>
 

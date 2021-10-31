@@ -160,15 +160,6 @@ $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'EDIFICIO_ID', 'Edif
     'BLD_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
-// Nombre Edificio corto (menos de 3 caracteres)
-$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'aa');
-$route_service = new Route_Service();
-$feedback = $route_service->searchCompletions();
-$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre Edificio corto ',
-    'BLD_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testRoute, $respTest);
-
 // Nombre Edificio largo (más de 60 caracteres)
 $_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
     'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'edificio_id' => '1',
@@ -197,16 +188,6 @@ $route_service = new Route_Service();
 $feedback = $route_service->searchCompletions();
 $respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'PLANTA_ID', 'ID de Planta no numérico',
     'FLR_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testRoute, $respTest);
-
-// Nombre Planta corto (menos de 3 caracteres)
-$_POST = array('ruta_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25',
-    'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'nombre_doc' => 'documento.pdf', 'edificio_id' => '1',
-    'nombre_edificio' => 'Nombre Edificio', 'planta_id' => '1', 'nombre_planta' => 'aa');
-$route_service = new Route_Service();
-$feedback = $route_service->searchCompletions();
-$respTest = obtenerRespuesta('Route', 'SEARCH_COMPLETIONS', 'NOMBRE_PLANTA', 'Nombre Planta Corto',
-    'FLR_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testRoute, $respTest);
 
 // Nombre Planta largo (más de 40 caracteres)

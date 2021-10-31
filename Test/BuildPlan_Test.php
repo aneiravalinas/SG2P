@@ -49,36 +49,12 @@ $feedback = $buildPlan_service->SEARCH();
     'BLD_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
-// Fecha asignación no válida
-$_POST = array('plan_id' => '1', 'edificio_id' => '1', 'fecha_asignacion' => '2012/13/25');
-$buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->SEARCH();
-$respTest = obtenerRespuesta('BuildPlan','SEARCH','FECHA_ASIGNACION','Formato fecha asignación no válida',
-    'BLDPLAN_DATEASSIGN_KO', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testBuildPlan, $respTest);
-
-// Fecha implementación no válida
-$_POST = array('plan_id' => '1', 'edificio_id' => '1', 'fecha_asignacion' => '2012/12/25', 'fecha_cumplimentacion' => '2012/12/33');
-$buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->SEARCH();
-$respTest = obtenerRespuesta('BuildPlan','SEARCH','FECHA_CUMPLIMENTACION','Formato fecha asignación no válida',
-    'BLDPLAN_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testBuildPlan, $respTest);
-
 // Estado no válido
-$_POST = array('plan_id' => '1', 'edificio_id' => '1', 'fecha_asignacion' => '2012/12/25', 'FECHA_CUMPLIMENTACION' => '2012/12/30', 'estado' => 'randomword');
+$_POST = array('plan_id' => '1', 'edificio_id' => '1', 'estado' => 'randomword');
 $buildPlan_service = new BuildPlan_Service();
 $feedback = $buildPlan_service->SEARCH();
 $respTest = obtenerRespuesta('BuildPlan','SEARCH','ESTADO','Estado no permitido',
     'BLDPLAN_STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testBuildPlan, $respTest);
-
-// Nombre Edificio Corto (menos de 3 caracteres)
-$_POST = array('plan_id' => '1', 'nombre_edificio' => 'aa');
-$buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->SEARCH();
-$respTest = obtenerRespuesta('BuildPlan','SEARCH','NOMBRE_EDIFICIO','Nombre Edificio corto',
-    'BLD_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
 // Nombre Edificio largo (más de 60 caracteres)
@@ -96,6 +72,55 @@ $feedback = $buildPlan_service->SEARCH();
 $respTest = obtenerRespuesta('BuildPlan','SEARCH','NOMBRE_EDIFICIO','Nombre Edificio con caracteres no permitidos',
     'BLD_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
+
+// Fecha Asignación Inicial no válida
+$_POST = array('plan_id' => '1', 'fecha_asignacion_inicio' => '2012/12-25');
+$buildPlan_service = new BuildPlan_Service();
+$feedback = $buildPlan_service->SEARCH();
+$respTest = obtenerRespuesta('BuildPlan','SEARCH','FECHA_ASIGNACION_INICIO','Fecha Asignación Inicial no válida',
+    'START_DATEASSIGN_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testBuildPlan, $respTest);
+
+// Fecha Asignación Final no válida
+$_POST = array('plan_id' => '1', 'fecha_asignacion_fin' => '2012/12-25');
+$buildPlan_service = new BuildPlan_Service();
+$feedback = $buildPlan_service->SEARCH();
+$respTest = obtenerRespuesta('BuildPlan','SEARCH','FECHA_ASIGNACION_FIN','Fecha Asignación Final no válida',
+    'END_DATEASSIGN_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testBuildPlan, $respTest);
+
+// Fecha Cumplimentación Inicial no válida
+$_POST = array('plan_id' => '1', 'fecha_cumplimentacion_inicio' => '2012/12-25');
+$buildPlan_service = new BuildPlan_Service();
+$feedback = $buildPlan_service->SEARCH();
+$respTest = obtenerRespuesta('BuildPlan','SEARCH','FECHA_CUMPLIMENTACION_INICIO','Fecha Cumplimentación Inicial no válida',
+    'START_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testBuildPlan, $respTest);
+
+// Fecha Cumplimentación Final no válida
+$_POST = array('plan_id' => '1', 'fecha_cumplimentacion_fin' => '2012/12-25');
+$buildPlan_service = new BuildPlan_Service();
+$feedback = $buildPlan_service->SEARCH();
+$respTest = obtenerRespuesta('BuildPlan','SEARCH','FECHA_CUMPLIMENTACION_FIN','Fecha Cumplimentación Final no válida',
+    'END_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testBuildPlan, $respTest);
+
+// Fecha Vencimiento Inicial no válida
+$_POST = array('plan_id' => '1', 'fecha_vencimiento_inicio' => '2012/12-25');
+$buildPlan_service = new BuildPlan_Service();
+$feedback = $buildPlan_service->SEARCH();
+$respTest = obtenerRespuesta('BuildPlan','SEARCH','FECHA_VENCIMIENTO_INICIO','Fecha Vencimiento Inicial no válida',
+    'START_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testBuildPlan, $respTest);
+
+// Fecha Vencimiento Final no válida
+$_POST = array('plan_id' => '1', 'fecha_vencimiento_fin' => '2012/12-25');
+$buildPlan_service = new BuildPlan_Service();
+$feedback = $buildPlan_service->SEARCH();
+$respTest = obtenerRespuesta('BuildPlan','SEARCH','FECHA_VENCIMIENTO_FIN','Fecha Vencimiento Final no válida',
+    'END_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testBuildPlan, $respTest);
+
 
 /*
  *  --- SEARCH: ACCION ---

@@ -101,16 +101,6 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'EDIFICIO_ID', '
     'BLD_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
-// Nombre edificio corto (menos de 3 caracteres)
-$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
-    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
-                        'nombre_edificio' => 'aa');
-$format_service = new Formation_Service();
-$feedback = $format_service->searchCompletions();
-$respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre edificio corto (menos de 3 caracteres)',
-    'BLD_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testFormation, $respTest);
-
 // Nombre Edificio largo (más de 60 caracteres)
 $_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
@@ -124,13 +114,32 @@ array_push($testFormation, $respTest);
 // Nombre Edificio con caracteres no permitidos
 $_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
-    'nombre_edificio' => 'Nombrê Edificio');
+    'nombre_edificio' => 'Nombr+ Edificio');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchCompletions();
 $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre Edificio largo (más de 60 caracteres)',
     'BLD_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
+// Fecha Cumplimentación inicial no válida
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
+    'nombre_edificio' => 'Nombrê Edificio', 'fecha_cumplimentacion_inicio' => '2014/12-25');
+$format_service = new Formation_Service();
+$feedback = $format_service->searchCompletions();
+$respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha Cumplimentación inicial no válida',
+    'START_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testFormation, $respTest);
+
+// Fecha Cumplimentación final no válida
+$_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
+    'nombre_edificio' => 'Nombrê Edificio', 'fecha_cumplimentacion_inicio' => '2014/12/25', 'fecha_cumplimentacion_fin' => '2014/12-25');
+$format_service = new Formation_Service();
+$feedback = $format_service->searchCompletions();
+$respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENTACION_FIN', 'Fecha Cumplimentación final no válida',
+    'END_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testFormation, $respTest);
 
 /*
  *  --- SEARCH_COMPLETIONS: ACCIONES ---
@@ -139,7 +148,7 @@ array_push($testFormation, $respTest);
 // La búsqueda de cumplimentaciones se realiza correctamente
 $_POST = array('formacion_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
     'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25', 'edificio_id' => '1',
-    'nombre_edificio' => 'Nombre Edificio');
+    'nombre_edificio' => 'Nombre Edificio', 'fecha_cumplimentacion_inicio' => '2014/12/25', 'fecha_cumplimentacion_fin' => '2014/12/25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchCompletions();
 $respTest = obtenerRespuesta('Formation', 'SEARCH_COMPLETIONS', 'ACCION', 'La búsqueda de cumplimentaciones se realiza correctamente',
@@ -279,13 +288,34 @@ $respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'FECHA_VENCIMIENTO
     'END_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testFormation, $respTest);
 
+// Fecha Cumplimentación inical no válida
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12-25',
+    'fecha_cumplimentacion_inicio' => '2014/12-25');
+$format_service = new Formation_Service();
+$feedback = $format_service->searchFormation();
+$respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha Cumplimentación inical no válida',
+    'START_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testFormation, $respTest);
+
+// Fecha Cumplimentación final no válida
+$_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12-25',
+    'fecha_cumplimentacion_inicio' => '2014/12/25', 'fecha_cumplimentacion_fin' => '2014/12-25');
+$format_service = new Formation_Service();
+$feedback = $format_service->searchFormation();
+$respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'FECHA_CUMPLIMENTACION_FIN', 'Fecha Cumplimentación final no válida',
+    'END_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testFormation, $respTest);
+
 /*
  *  --- SEARCH_FORMATION: ACCIONES ---
  */
 
 // La búsqueda se realiza correctamente
 $_POST = array('formacion_id' => '4', 'edificio_id' => '2', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_planificacion_inicio' => '2014/12/25',
-    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25');
+    'fecha_planificacion_fin' => '2014/12/25', 'fecha_vencimiento_inicio' => '2014/12/25', 'fecha_vencimiento_fin' => '2014/12/25',
+    'fecha_cumplimentacion_inicio' => '2014/12/25', 'fecha_cumplimentacion_fin' => '2014/12/25');
 $format_service = new Formation_Service();
 $feedback = $format_service->searchFormation();
 $respTest = obtenerRespuesta('Formation', 'SEARCH_FORMATION', 'ACCION', 'La búsqueda se realiza correctamente',

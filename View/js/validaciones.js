@@ -20,9 +20,10 @@ function encrypt() {
 
 function not_empty(element, show=false) {
     var correct;
+    var pattern = /[^0-9]/;
     var value = document.getElementById(element).value;
 
-    if((value == null) || (value.length == 0)) {
+    if((value == null) || (value.length == 0) || !pattern.test(value)) {
         if(show) {
             openModal(element,'i18n-not-empty');
         }
@@ -72,10 +73,18 @@ function check_name_file(element) {
     var correct = true;
     var value = document.getElementById(element).value;
 
-    var extension = value.substring(value.lastIndexOf('.')).toLowerCase();
+    var file = value.split(/(\\|\/)/g).pop();
+    var extension = file.substring(file.lastIndexOf('.')).toLowerCase();
     if(extension !== '.pdf') {
         openModal(element, 'i18n-ext-not-allowed');
         correct = false;
+    } else {
+        let file_name = file.substring(0, file.lastIndexOf('.'));
+        let pattern = /[^a-zA-Z0-9\-_]/;
+        if(pattern.test(file_name)) {
+            openModal(element, 'i18n-only-letters-numbers-hyphen');
+            correct = false;
+        }
     }
 
     if(correct) {
@@ -311,7 +320,7 @@ function check_letters_numbers_accents_spaces(element, size) {
         correct = false;
     }
 
-    var pattern = /^[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+$/g;
+    var pattern = /^[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]+(\s?[a-zA-ZÀ-ÿ0-9\u00f1\u00d1]*)*$/g;
     if(!pattern.test(value)) {
         openModal(element,'i18n-letters-numbers-accents-spaces');
         correct = false;
@@ -375,7 +384,7 @@ function check_URL(element) {
     var correct = true;
     var value = document.getElementById(element).value;
 
-    var pattern = /^(ftp|http|https):\/\/[^ "']+$/;
+    var pattern = /^(ftp|http|https):\/\/[^\s"']+$/;
     if(!pattern.test(value)) {
         openModal(element, 'i18n-url-format');
         correct = false;

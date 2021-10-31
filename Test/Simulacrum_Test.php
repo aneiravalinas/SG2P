@@ -101,15 +101,6 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'EDIFICIO_ID', 
     'BLD_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
-// Nombre de Edificio corto (menos de 3 caracteres)
-$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
-    'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1', 'nombre_edificio' => 'aa');
-$sim_service = new Simulacrum_Service();
-$feedback = $sim_service->searchCompletions();
-$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre de Edificio corto (menos de 3 caracteres)',
-    'BLD_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testSimulacrum, $respTest);
-
 // Nombre de Edificio largo (más de 60 caracteres)
 $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1',
@@ -130,6 +121,26 @@ $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICI
     'BLD_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testSimulacrum, $respTest);
 
+// Fecha de Cumplimentación Inicial no válida
+$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
+    'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1',
+    'nombre_edificio' => 'Nombre Edifico', 'fecha_cumplimentacion_inicio' => '1992/12-25');
+$sim_service = new Simulacrum_Service();
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENTACION_INICIO', 'Fecha de Cumplimentación Inicial no válida',
+    'START_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testSimulacrum, $respTest);
+
+// Fecha de Cumplimentación Final no válida
+$_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
+    'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1',
+    'nombre_edificio' => 'Nombre Edifico', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12-25');
+$sim_service = new Simulacrum_Service();
+$feedback = $sim_service->searchCompletions();
+$respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'FECHA_CUMPLIMENTACION_FIN', 'Fecha de Cumplimentación Final no válida',
+    'END_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testSimulacrum, $respTest);
+
 /*
  *  --- SEARCH_COMPLETIONS: ACCIONES ---
  */
@@ -137,7 +148,7 @@ array_push($testSimulacrum, $respTest);
 // Búsqueda de cumplimentaciones Ok
 $_POST = array('simulacro_id' => '1', 'fecha_planificacion_inicio' => '1992/12/25', 'fecha_planificacion_fin' => '1992/12/25', 'cumplimentacion_id' => '1',
     'estado' => 'pendiente', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25', 'edificio_id' => '1',
-    'nombre_edificio' => 'Nombre Edificio');
+    'nombre_edificio' => 'Nombre Edificio', 'fecha_cumplimentacion_inicio' => '1992/12/25', 'fecha_cumplimentacion_fin' => '1992/12/25');
 $sim_service = new Simulacrum_Service();
 $feedback = $sim_service->searchCompletions();
 $respTest = obtenerRespuesta('Simulacrum', 'SEARCH_COMPLETIONS', 'ACCION', 'Búsqueda de cumplimentaciones Ok',

@@ -97,10 +97,6 @@ class Cumplimentation_Validation extends Validator {
     }
 
     function validar_NOMBRE_EDIFICIO() {
-        if(!$this->longitud_minima($this->nombre_edificio,3)) {
-            return $this->rellena_validation(false,'BLD_NAM_SHRT','CUMPLIMENTATION');
-        }
-
         if(!$this->longitud_maxima($this->nombre_edificio,60)) {
             return $this->rellena_validation(false,'BLD_NAM_LRG','CUMPLIMENTATION');
         }

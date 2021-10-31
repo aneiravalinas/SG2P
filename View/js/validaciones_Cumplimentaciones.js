@@ -32,11 +32,7 @@ function check_SIM_FORMAT_IMPLEMENT() {
 
 
 function check_NOMBRE_DOC() {
-    if(not_empty('nombre_doc')) {
-        return check_name_file('nombre_doc');
-    } else {
-        return true;
-    }
+    return check_name_file('nombre_doc');
 }
 
 function check_NOMBRE_DOC_SEARCH() {

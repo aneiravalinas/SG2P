@@ -112,10 +112,6 @@ class Route_Validation extends Doc_Proc_Route_Validation {
     }
 
     function validar_NOMBRE_PLANTA() {
-        if(!$this->longitud_minima($this->nombre_planta,3)) {
-            return $this->rellena_validation(false,'FLR_NAM_SHRT','IMP_ROUTE');
-        }
-
         if(!$this->longitud_maxima($this->nombre_planta,40)) {
             return $this->rellena_validation(false,'FLR_NAM_LRG','IMP_ROUTE');
         }

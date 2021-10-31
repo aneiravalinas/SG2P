@@ -191,6 +191,7 @@ CREATE TABLE EDIFICIO_SIMULACRO
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
     `fecha_vencimiento` DATE NOT NULL DEFAULT '00-00-0000',
+    `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
     `url_recurso` VARCHAR(200) NOT NULL,
     `destinatarios` VARCHAR(200) NOT NULL,
 
@@ -219,6 +220,7 @@ CREATE TABLE EDIFICIO_FORMACION
     `estado` enum('pendiente', 'cumplimentado', 'vencido') NOT NULL DEFAULT 'pendiente',
     `fecha_planificacion` DATE NOT NULL DEFAULT '00-00-0000',
     `fecha_vencimiento` DATE NOT NULL DEFAULT '00-00-0000',
+    `fecha_cumplimentacion` DATE NOT NULL DEFAULT '00-00-0000',
     `url_recurso` VARCHAR(200) NOT NULL,
     `destinatarios` VARCHAR(200) NOT NULL,
 

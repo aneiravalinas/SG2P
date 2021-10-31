@@ -66,6 +66,12 @@ class ShowCurrent_Simulacrum {
                                                 <span class="d-block att-value"><?php echo date_format(date_create($this->imp_sim['fecha_planificacion']),'d/m/Y');?></span>
                                             </li>
                                         <?php endif; ?>
+                                        <?php if($this->imp_sim['fecha_cumplimentacion'] != default_data) :?>
+                                            <li>
+                                                <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-date_comp">Fecha Cumplimentación</span>
+                                                <span class="d-block att-value"><?php echo date_format(date_create($this->imp_sim['fecha_cumplimentacion']),'d/m/Y');?></span>
+                                            </li>
+                                        <?php endif; ?>
                                         <?php if($this->imp_sim['fecha_vencimiento'] != default_data) :?>
                                             <li>
                                                 <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-date_expire">Fecha Vencimiento</span>

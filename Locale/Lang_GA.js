@@ -1286,6 +1286,8 @@ arrayGA = {
         'i18n-info_plan' : 'Información do Plan',
         'i18n-elements_plan' : 'Elementos do Plan',
         'i18n-nombre_plan' : 'Nome Plan',
+        'i18n-start_date_assign' : 'Data Asignación Inicial',
+        'i18n-end_date_assign' : 'Data Asignación Final',
 
         // IMP_DOCS
         'i18n-show-impdocs' : 'Ver Cumplimentacións',

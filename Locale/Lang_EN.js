@@ -1286,6 +1286,8 @@ arrayEN = {
         'i18n-info_plan' : 'Plan Information',
         'i18n-elements_plan' : 'Plan elements',
         'i18n-nombre_plan' : 'Plan Name',
+        'i18n-start_date_assign' : 'Initial Assignment Date',
+        'i18n-end_date_assign' : 'Final Assignment Date',
 
         // IMP_DOCS
         'i18n-show-impdocs' : 'See Completions',

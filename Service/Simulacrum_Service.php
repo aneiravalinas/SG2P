@@ -13,7 +13,8 @@ class Simulacrum_Service extends Simulacrum_Validation {
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
         $this->atributos = array('cumplimentacion_id','simulacro_id','edificio_id','estado','fecha_planificacion', 'fecha_planificacion_inicio','fecha_planificacion_fin',
-            'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'url_recurso','destinatarios','nombre_edificio');
+            'fecha_vencimiento', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin', 'url_recurso','destinatarios','nombre_edificio', 'fecha_cumplimentacion',
+            'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin');
         $this->defSim_entity = new DefSim_Model();
         $this->impSim_entity = new ImpSim_Model();
         $this->fill_fields();
@@ -299,7 +300,8 @@ class Simulacrum_Service extends Simulacrum_Validation {
         }
 
         $this->impSim_entity->setAttributes(array('edificio_id' => $this->edificio_id, 'fecha_planificacion' => default_data, 'destinatarios' => default_destinatarios,
-                                                    'fecha_vencimiento' => default_data, 'url_recurso' => default_url, 'estado' => 'pendiente'));
+                                                    'fecha_vencimiento' => default_data, 'fecha_cumplimentacion' => default_data, 'url_recurso' => default_url,
+                                                    'estado' => 'pendiente'));
         $feedback = $this->impSim_entity->ADD();
         if($feedback['ok']) {
             $cumplimentacion_id = $this->impSim_entity->cumplimentacion_id;
@@ -409,7 +411,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
             return $validation;
         }
 
-        $this->impSim_entity->estado = 'cumplimentado';
+        $this->impSim_entity->setAttributes(array('estado' => 'cumplimentado', 'fecha_cumplimentacion' => date('Y-m-d')));
         $this->feedback = $this->impSim_entity->EDIT();
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPSIM_IMPL_OK';

@@ -218,16 +218,6 @@ $respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'EDIFICIO_ID', 'I
     'BLD_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
-// Nombre de Edificio corto (menos de 3 caracteres)
-$_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
-    'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',
-    'nombre_doc' => 'fichero.pdf', 'edificio_id' => '1', 'nombre_edificio' => 'aa');
-$document_service = new Document_Service();
-$feedback = $document_service->searchCompletions();
-$respTest = obtenerRespuesta('Document', 'SEARCH_COMPLETIONS', 'NOMBRE_EDIFICIO', 'Nombre Edificio corto',
-    'BLD_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testDocument, $respTest);
-
 // Nombre de Edificio largo (más de 60 caracteres)
 $_POST = array('documento_id' => '1', 'cumplimentacion_id' => '1', 'estado' => 'pendiente', 'fecha_cumplimentacion_inicio' => '1992/12/25',
     'fecha_cumplimentacion_fin' => '1992/12/25', 'fecha_vencimiento_inicio' => '1992/12/25', 'fecha_vencimiento_fin' => '1992/12/25',

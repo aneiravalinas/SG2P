@@ -1298,6 +1298,8 @@ arrayES = {
         'i18n-info_plan' : 'Información del Plan',
         'i18n-elements_plan' : 'Elementos del Plan',
         'i18n-nombre_plan' : 'Nombre Plan',
+        'i18n-start_date_assign' : 'Fecha Asignación Inicial',
+        'i18n-end_date_assign' : 'Fecha Asignación Final',
 
         // IMP_DOCS
         'i18n-show-impdocs' : 'Ver Cumplimentaciones',

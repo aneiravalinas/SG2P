@@ -7,14 +7,22 @@ class BuildPlan_Model extends Abstract_Model {
     var $edificio_id;
     var $plan_id;
     var $fecha_asignacion;
+    var $fecha_asignacion_inicio;
+    var $fecha_asignacion_fin;
     var $fecha_cumplimentacion;
+    var $fecha_cumplimentacion_inicio;
+    var $fecha_cumplimentacion_fin;
     var $fecha_vencimiento;
+    var $fecha_vencimiento_inicio;
+    var $fecha_vencimiento_fin;
     var $estado;
     var $nombre_edificio;
     var $nombre_plan;
 
     function __construct() {
-        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_cumplimentacion', 'fecha_vencimiento', 'estado','nombre_edificio','nombre_plan');
+        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_cumplimentacion', 'fecha_vencimiento', 'estado','nombre_edificio','nombre_plan',
+                                    'fecha_asignacion_inicio', 'fecha_asignacion_fin', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin', 'fecha_vencimiento_inicio',
+                                    'fecha_vencimiento_fin');
         $this->fill_fields();
     }
 
@@ -84,9 +92,12 @@ class BuildPlan_Model extends Abstract_Model {
             WHERE EDIFICIO_PLAN.plan_id = '$this->plan_id' AND
                   EDIFICIO_PLAN.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                   estado LIKE '%" . $this->estado . "%' AND
-                  fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
-                  fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
-                  fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
+                  fecha_asignacion BETWEEN '" . ($this->fecha_asignacion_inicio == '' ? min_date : $this->fecha_asignacion_inicio) . "' AND '"
+                                                            . ($this->fecha_asignacion_fin == '' ? max_date : $this->fecha_asignacion_fin) ."' AND
+                  fecha_cumplimentacion BETWEEN '" . ($this->fecha_cumplimentacion_inicio == '' ? min_date : $this->fecha_cumplimentacion_inicio) . "' AND '"
+                                                            . ($this->fecha_cumplimentacion_fin == '' ? max_date : $this->fecha_cumplimentacion_fin) ."' AND
+                  fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
+                                                            . ($this->fecha_vencimiento_fin == '' ? max_date : $this->fecha_vencimiento_fin) ."' AND
                   EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%'
             ORDER BY estado, edificio_id
         ";
@@ -161,9 +172,12 @@ class BuildPlan_Model extends Abstract_Model {
             WHERE EDIFICIO_PLAN.plan_id LIKE '%" . $this->plan_id . "%' AND
                   EDIFICIO_PLAN.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                   estado LIKE '%" . $this->estado . "%' AND
-                  fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
-                  fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
-                  fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
+                  fecha_asignacion BETWEEN '" . ($this->fecha_asignacion_inicio == '' ? min_date : $this->fecha_asignacion_inicio) . "' AND '"
+                                                    . ($this->fecha_asignacion_fin == '' ? max_date : $this->fecha_asignacion_fin) ."' AND
+                  fecha_cumplimentacion BETWEEN '" . ($this->fecha_cumplimentacion_inicio == '' ? min_date : $this->fecha_cumplimentacion_inicio) . "' AND '"
+                                                    . ($this->fecha_cumplimentacion_fin == '' ? max_date : $this->fecha_cumplimentacion_fin) ."' AND
+                  fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
+                                                    . ($this->fecha_vencimiento_fin == '' ? max_date : $this->fecha_vencimiento_fin) ."' AND
                   EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
                   PLAN.nombre LIKE '%" . $this->nombre_plan . "%'
             ORDER BY estado, edificio_id, plan_id
@@ -188,9 +202,12 @@ class BuildPlan_Model extends Abstract_Model {
             WHERE EDIFICIO_PLAN.plan_id LIKE '%" . $this->plan_id . "%' AND
                   EDIFICIO_PLAN.edificio_id LIKE '%" . $this->edificio_id . "%' AND
                   estado LIKE '%" . $this->estado . "%' AND
-                  fecha_asignacion LIKE '%" . $this->fecha_asignacion . "%' AND
-                  fecha_cumplimentacion LIKE '%" . $this->fecha_cumplimentacion . "%' AND
-                  fecha_vencimiento LIKE '%" . $this->fecha_vencimiento . "%' AND
+                  fecha_asignacion BETWEEN '" . ($this->fecha_asignacion_inicio == '' ? min_date : $this->fecha_asignacion_inicio) . "' AND '"
+                                                    . ($this->fecha_asignacion_fin == '' ? max_date : $this->fecha_asignacion_fin) ."' AND
+                  fecha_cumplimentacion BETWEEN '" . ($this->fecha_cumplimentacion_inicio == '' ? min_date : $this->fecha_cumplimentacion_inicio) . "' AND '"
+                                                    . ($this->fecha_cumplimentacion_fin == '' ? max_date : $this->fecha_cumplimentacion_fin) ."' AND
+                  fecha_vencimiento BETWEEN '" . ($this->fecha_vencimiento_inicio == '' ? min_date : $this->fecha_vencimiento_inicio) . "' AND '"
+                                                    . ($this->fecha_vencimiento_fin == '' ? max_date : $this->fecha_vencimiento_fin) ."' AND
                   EDIFICIO.nombre LIKE '%" . $this->nombre_edificio . "%' AND
                   PLAN.nombre LIKE '%" . $this->nombre_plan . "%' AND
                   EDIFICIO.username = '$username'

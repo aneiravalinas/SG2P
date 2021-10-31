@@ -10,17 +10,21 @@ class ImpSim_Model extends Abstract_Model {
     var $estado;
     var $fecha_planificacion;
     var $fecha_vencimiento;
+    var $fecha_cumplimentacion;
     var $url_recurso;
     var $destinatarios;
     var $nombre_edificio;
     var $fecha_planificacion_inicio;
     var $fecha_planificacion_fin;
+    var $fecha_cumplimentacion_inicio;
+    var $fecha_cumplimentacion_fin;
     var $fecha_vencimiento_inicio;
     var $fecha_vencimiento_fin;
 
     function __construct() {
         $this->atributos = array('cumplimentacion_id','simulacro_id','edificio_id','estado','fecha_planificacion','fecha_vencimiento', 'fecha_vencimiento_inicio',
-                                    'fecha_vencimiento_fin', 'url_recurso','destinatarios','nombre_edificio','fecha_planificacion_inicio','fecha_planificacion_fin');
+                                    'fecha_vencimiento_fin', 'url_recurso','destinatarios','nombre_edificio','fecha_planificacion_inicio','fecha_planificacion_fin',
+                                    'fecha_cumplimentacion', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin');
         $this->fill_fields();
     }
 
@@ -44,6 +48,7 @@ class ImpSim_Model extends Abstract_Model {
              estado,
              fecha_planificacion,
              fecha_vencimiento,
+             fecha_cumplimentacion,
              url_recurso,
              destinatarios
             ) VALUES (
@@ -52,6 +57,7 @@ class ImpSim_Model extends Abstract_Model {
             '$this->estado',
             '$this->fecha_planificacion',
             '$this->fecha_vencimiento',
+            '$this->fecha_cumplimentacion',
             '$this->url_recurso',
             '$this->destinatarios'
             );
@@ -67,6 +73,7 @@ class ImpSim_Model extends Abstract_Model {
         $this->query = "UPDATE EDIFICIO_SIMULACRO SET " .
             ($this->fecha_planificacion == '' ? "" : "fecha_planificacion = '$this->fecha_planificacion', ") .
             ($this->fecha_vencimiento == '' ? "" : "fecha_vencimiento = '$this->fecha_vencimiento', ") .
+            ($this->fecha_cumplimentacion == '' ? "" : "fecha_cumplimentacion = '$this->fecha_cumplimentacion', ") .
             ($this->url_recurso == '' ? "" : "url_recurso = '$this->url_recurso', ") .
             ($this->destinatarios == '' ? "" : "destinatarios = '$this->destinatarios', ") .
             ($this->estado == '' ? "" : "estado = '$this->estado'") .
@@ -104,6 +111,8 @@ class ImpSim_Model extends Abstract_Model {
                                                     . ($this->fecha_vencimiento_fin == '' ? max_date : $this->fecha_vencimiento_fin) ."' AND
                 fecha_planificacion BETWEEN '" . ($this->fecha_planificacion_inicio == '' ? min_date : $this->fecha_planificacion_inicio) . "' AND '"
                                                     . ($this->fecha_planificacion_fin == '' ? max_date : $this->fecha_planificacion_fin) ."' AND
+                fecha_cumplimentacion BETWEEN '" . ($this->fecha_cumplimentacion_inicio == '' ? min_date : $this->fecha_cumplimentacion_inicio) . "' AND '"
+                                                    . ($this->fecha_cumplimentacion_fin == '' ? max_date : $this->fecha_cumplimentacion_fin) ."' AND
                 estado LIKE '%" . $this->estado . "%'
             ORDER BY estado, EDIFICIO_SIMULACRO.edificio_id
         ";
@@ -123,6 +132,8 @@ class ImpSim_Model extends Abstract_Model {
                                                     . ($this->fecha_vencimiento_fin == '' ? max_date : $this->fecha_vencimiento_fin) ."' AND
                 fecha_planificacion BETWEEN '" . ($this->fecha_planificacion_inicio == '' ? min_date : $this->fecha_planificacion_inicio) . "' AND '"
                                                         . ($this->fecha_planificacion_fin == '' ? max_date : $this->fecha_planificacion_fin) ."' AND
+                fecha_cumplimentacion BETWEEN '" . ($this->fecha_cumplimentacion_inicio == '' ? min_date : $this->fecha_cumplimentacion_inicio) . "' AND '"
+                                                        . ($this->fecha_cumplimentacion_fin == '' ? max_date : $this->fecha_cumplimentacion_fin) ."' AND
                 estado LIKE '%" . $this->estado . "%' 
             ORDER BY estado
         ";

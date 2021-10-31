@@ -15,7 +15,8 @@ class BuildPlan_Service extends BuildPlan_Validation {
     const msg_notification_add = 'Se ha asignado un nuevo plan';
 
     function __construct() {
-        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_cumplimentacion','fecha_vencimiento','estado','nombre_edificio');
+        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_cumplimentacion','fecha_vencimiento','estado','nombre_edificio', 'fecha_asignacion_inicio',
+                                    'fecha_asignacion_fin', 'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin', 'fecha_vencimiento_inicio', 'fecha_vencimiento_fin');
         $this->bldPlan_entity = new BuildPlan_Model();
         $this->defPlan_entity = new DefPlan_Model();
         $this->uploader = new Uploader();
@@ -783,7 +784,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         include_once './Model/ImpFormat_Model.php';
         $impFormat_entity = new ImpFormat_Model();
         $impFormat_entity->setAttributes(array('edificio_id' => $edificio_id, 'formacion_id' => $formation['formacion_id'],'estado' => 'pendiente', 'fecha_vencimiento' => default_data,
-                                            'fecha_planificacion' => default_data, 'url_recurso' => default_url, 'destinatarios' => default_destinatarios));
+                                            'fecha_planificacion' => default_data, 'fecha_cumplimentacion' => default_url, 'url_recurso' => default_url, 'destinatarios' => default_destinatarios));
         $feedback = $impFormat_entity->ADD();
         if($feedback['ok']) {
             $feedback = $this->create_impFormat($edificio_id, $formations);
@@ -898,7 +899,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         include_once './Model/ImpSim_Model.php';
         $impSim_entity = new ImpSim_Model();
         $impSim_entity->setAttributes(array('simulacro_id' => $simulacrum['simulacro_id'], 'edificio_id' => $edificio_id, 'estado' => 'pendiente', 'fecha_vencimiento' => default_data,
-                                        'fecha_planificacion' => default_data, 'url_recurso' => default_url, 'destinatarios' => default_destinatarios));
+                                        'fecha_planificacion' => default_data, 'fecha_cumplimentacion' => default_data, 'url_recurso' => default_url, 'destinatarios' => default_destinatarios));
         $feedback = $impSim_entity->ADD();
         if($feedback['ok']) {
             $feedback = $this->create_impSims($edificio_id, $simulacrums);

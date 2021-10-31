@@ -114,10 +114,11 @@ abstract class Validator {
         }
     }
 
-    function no_vacio($string){
-        if(!preg_match('/[a-zA-Z0-9]+/', $string) || $string==''){
+
+    function no_vacio($string) {
+        if($string == '' || preg_match('/^[\s]+$/', $string)) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
@@ -229,7 +230,7 @@ abstract class Validator {
     }
 
     function solo_letras_numeros_espacios_acentos($string) {
-        if(preg_match('/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ]*[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+$/',$string)) {
+        if(preg_match('/^[a-zA-Z0-9À-ÿ\x{00f1}\x{00d1}]+(\s?[a-zA-Z0-9À-ÿ\x{00f1}\x{00d1}])*$/',$string)) {
             return true;
         } else {
             return false;
@@ -252,13 +253,6 @@ abstract class Validator {
         }
     }
 
-    /*function validar_fecha($fecha) {
-        if(preg_match('/^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/', $fecha)) {
-            return true;
-        } else {
-            return false;
-        }
-    }*/
 
     function validar_fecha($fecha) {
         if(preg_match('/^(\d{4})(\/|-)(0[1-9]|1[0-2])\2([0-2][0-9]|3[0-1])$/', $fecha)) {
@@ -278,7 +272,7 @@ abstract class Validator {
     }
 
     function validar_url($url) {
-        if(preg_match('/^(ftp|http|https):\/\/[^ "\']+$/', $url)) {
+        if(preg_match('/^(ftp|http|https):\/\/[^\s"\']+$/', $url)) {
             return true;
         } else {
             return false;

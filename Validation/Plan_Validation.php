@@ -53,10 +53,6 @@ class Plan_Validation extends BuildingPlans_Validation {
     }
 
     function validar_NOMBRE_PLAN() {
-        if(!$this->longitud_minima($this->nombre_plan, 5)) {
-            return $this->rellena_validation(false, 'DFPLAN_NAM_SHRT', 'BLD_PLAN');
-        }
-
         if(!$this->longitud_maxima($this->nombre_plan,60)) {
             return $this->rellena_validation(false, 'DEFPLAN_NAM_LRG', 'BLD_PLAN');
         }

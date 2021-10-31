@@ -17,36 +17,12 @@ $respTest = obtenerRespuesta('Plan','SEARCH','EDIFICIO_ID','ID del edificio no n
     'BLD_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testPlan, $respTest);
 
-// Fecha asignación no válida
-$_POST = array('fecha_asignacion' => '2012/13/25');
-$plan_service = new Plan_Service();
-$feedback = $plan_service->SEARCH();
-$respTest = obtenerRespuesta('Plan','SEARCH','FECHA_ASIGNACION','Formato fecha asignación no válida',
-    'BLDPLAN_DATEASSIGN_KO', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testPlan, $respTest);
-
-// Fecha implementación no válida
-$_POST = array('fecha_cumplimentacion' => '2012/12/33');
-$plan_service = new Plan_Service();
-$feedback = $plan_service->SEARCH();
-$respTest = obtenerRespuesta('Plan','SEARCH','FECHA_CUMPLIMENTACION','Formato fecha asignación no válida',
-    'BLDPLAN_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testPlan, $respTest);
-
 // Estado no válido
 $_POST = array('estado' => 'randomword');
 $plan_service = new Plan_Service();
 $feedback = $plan_service->SEARCH();
 $respTest = obtenerRespuesta('Plan','SEARCH','ESTADO','Estado no permitido',
     'BLDPLAN_STATE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testPlan, $respTest);
-
-// Nombre Edificio Corto (menos de 3 caracteres)
-$_POST = array('nombre_edificio' => 'aa');
-$plan_service = new Plan_Service();
-$feedback = $plan_service->SEARCH();
-$respTest = obtenerRespuesta('Plan','SEARCH','NOMBRE_EDIFICIO','Nombre Edificio corto',
-    'BLD_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testPlan, $respTest);
 
 // Nombre Edificio largo (más de 60 caracteres)
@@ -73,14 +49,6 @@ $respTest = obtenerRespuesta('Plan','SEARCH','PLAN_ID','ID del plan no numérico
     'DFPLAN_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testPlan, $respTest);
 
-// Nombre de Plan corto (menos de 5 caracteres)
-$_POST = array('nombre_plan' => 'aaa');
-$plan_service = new Plan_Service();
-$feedback = $plan_service->SEARCH();
-$respTest = obtenerRespuesta('Plan','SEARCH','NOMBRE_PLAN','Nombre de Plan corto',
-    'DFPLAN_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testPlan, $respTest);
-
 // Nombre de Plan largo (más de 60 caracteres)
 $_POST = array('nombre_plan' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $plan_service = new Plan_Service();
@@ -95,6 +63,54 @@ $plan_service = new Plan_Service();
 $feedback = $plan_service->SEARCH();
 $respTest = obtenerRespuesta('Plan','SEARCH','NOMBRE_PLAN','Nombre de Plan con caracteres no permitidos',
     'DEFPLAN_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testPlan, $respTest);
+
+// Fecha asignacion inicial no válida
+$_POST = array('fecha_asignacion_inicio' => '2018-12/25');
+$plan_service = new Plan_Service();
+$feedback = $plan_service->SEARCH();
+$respTest = obtenerRespuesta('Plan','SEARCH','FECHA_ASIGNACION_INICIO','Fecha asignacion inicial no válida',
+    'START_DATEASSIGN_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testPlan, $respTest);
+
+// Fecha asignacion final no válida
+$_POST = array('fecha_asignacion_fin' => '2018-12/25');
+$plan_service = new Plan_Service();
+$feedback = $plan_service->SEARCH();
+$respTest = obtenerRespuesta('Plan','SEARCH','FECHA_ASIGNACION_FIN','Fecha asignacion final no válida',
+    'END_DATEASSIGN_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testPlan, $respTest);
+
+// Fecha Cumplimentación inicial no válida
+$_POST = array('fecha_cumplimentacion_inicio' => '2018-12/25');
+$plan_service = new Plan_Service();
+$feedback = $plan_service->SEARCH();
+$respTest = obtenerRespuesta('Plan','SEARCH','FECHA_CUMPLIMENTACION_INICIO','Fecha Cumplimentación inicial no válida',
+    'START_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testPlan, $respTest);
+
+// Fecha Cumplimentación final no válida
+$_POST = array('fecha_cumplimentacion_fin' => '2018-12/25');
+$plan_service = new Plan_Service();
+$feedback = $plan_service->SEARCH();
+$respTest = obtenerRespuesta('Plan','SEARCH','FECHA_CUMPLIMENTACION_FIN','Fecha Cumplimentación final no válida',
+    'END_DATECOMP_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testPlan, $respTest);
+
+// Fecha Vencimiento Inicial no válida
+$_POST = array('fecha_vencimiento_inicio' => '2018-12/25');
+$plan_service = new Plan_Service();
+$feedback = $plan_service->SEARCH();
+$respTest = obtenerRespuesta('Plan','SEARCH','FECHA_VENCIMIENTO_INICIO','Fecha Vencimiento Inicial no válida',
+    'START_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
+array_push($testPlan, $respTest);
+
+// Fecha Vencimiento Final no válida
+$_POST = array('fecha_vencimiento_fin' => '2018-12/25');
+$plan_service = new Plan_Service();
+$feedback = $plan_service->SEARCH();
+$respTest = obtenerRespuesta('Plan','SEARCH','FECHA_VENCIMIENTO_FIN','Fecha Vencimiento Final no válida',
+    'END_DATEEXPIRE_KO', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testPlan, $respTest);
 
 /*
@@ -131,14 +147,6 @@ $plan_service = new Plan_Service();
 $feedback = $plan_service->searchPortalPlans();
 $respTest = obtenerRespuesta('Portal','SEARCH_PORTAL_PLANS','EDIFICIO_ID','ID del edificio no numérico',
     'BLD_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testPlan, $respTest);
-
-// Nombre de Plan corto (menos de 5 caracteres)
-$_POST = array('edificio_id' => '1', 'nombre_plan' => 'aaa');
-$plan_service = new Plan_Service();
-$feedback = $plan_service->searchPortalPlans();
-$respTest = obtenerRespuesta('Portal','SEARCH_PORTAL_PLANS','NOMBRE_PLAN','Nombre de Plan corto',
-    'DFPLAN_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testPlan, $respTest);
 
 // Nombre de Plan largo (más de 60 caracteres)

@@ -12,7 +12,9 @@ class Plan_Service extends Plan_Validation {
     var $feedback = array();
 
     function __construct() {
-        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_cumplimentacion','fecha_vencimiento','estado','nombre_edificio','nombre_plan');
+        $this->atributos = array('edificio_id','plan_id','fecha_asignacion','fecha_cumplimentacion','fecha_vencimiento','estado','nombre_edificio','nombre_plan',
+                                    'fecha_cumplimentacion_inicio', 'fecha_cumplimentacion_fin', 'fecha_asignacion_inicio', 'fecha_asignacion_fin',
+                                    'fecha_vencimiento_inicio', 'fecha_vencimiento_fin');
         $this->bldPlan_entity = new BuildPlan_Model();
         $this->fill_fields();
     }
