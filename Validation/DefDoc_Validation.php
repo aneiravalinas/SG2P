@@ -1,25 +1,16 @@
 <?php
 
-include_once 'Validator.php';
+include_once 'Definition_Validation.php';
 
-class DefDoc_Validation extends Validator {
+class DefDoc_Validation extends Definition_Validation {
     var $documento_id;
-    var $plan_id;
-    var $nombre;
-    var $descripcion;
     var $visible;
 
     function __construct() {
-
     }
 
     function validar_atributos() {
-        $validacion = $this->validar_NOMBRE();
-        if(!$validacion['ok']) {
-            return $validacion;
-        }
-
-        $validacion = $this->validar_DESCRIPCION();
+        $validacion = parent::validar_atributos();
         if(!$validacion['ok']) {
             return $validacion;
         }
@@ -29,17 +20,13 @@ class DefDoc_Validation extends Validator {
     }
 
     function validar_atributos_search() {
-        $validacion = $this->rellena_validation(true,'00000','DEF_DOC');
+        $validacion = parent::validar_atributos_search();
+        if(!$validacion['ok']) {
+            return $validacion;
+        }
 
         if($this->documento_id != '') {
             $validacion = $this->validar_DOCUMENTO_ID();
-            if(!$validacion['ok']) {
-                return $validacion;
-            }
-        }
-
-        if($this->nombre != '') {
-            $validacion = $this->validar_NOMBRE();
             if(!$validacion['ok']) {
                 return $validacion;
             }
@@ -59,46 +46,6 @@ class DefDoc_Validation extends Validator {
 
         if(!$this->es_numerico($this->documento_id)) {
             return $this->rellena_validation(false,'DFDOC_ID_NOT_NUMERIC','DEF_DOC');
-        }
-
-        return $this->rellena_validation(true,'00000','DEF_DOC');
-    }
-
-    function validar_PLAN_ID() {
-        if(!$this->no_vacio($this->plan_id)) {
-            return $this->rellena_validation(false, 'DFPLAN_ID_EMPT', 'DEF_DOC');
-        }
-
-        if(!$this->es_numerico($this->plan_id)) {
-            return $this->rellena_validation(false, 'DFPLAN_ID_NOT_NUMERIC', 'DEF_DOC');
-        }
-
-        return $this->rellena_validation(true,'00000','DEF_DOC');
-    }
-
-    function validar_NOMBRE() {
-        if(!$this->longitud_minima($this->nombre,5)) {
-            return $this->rellena_validation(false,'DFDOC_NAM_SHRT','DEF_DOC');
-        }
-
-        if(!$this->longitud_maxima($this->nombre,50)) {
-            return $this->rellena_validation(false,'DFDOC_NAM_LRG','DEF_DOC');
-        }
-
-        if(!$this->solo_alfanumerico_espacios_guiones($this->nombre)) {
-            return $this->rellena_validation(false,'DFDOC_NAM_FRMT','DEF_DOC');
-        }
-
-        return $this->rellena_validation(true,'00000','DEF_DOC');
-    }
-
-    function validar_DESCRIPCION() {
-        if(!$this->no_vacio($this->descripcion)) {
-            return $this->rellena_validation(false,'DESC_EMPTY','DEF_DOC');
-        }
-
-        if(!$this->comprobar_textos($this->descripcion)) {
-            return $this->rellena_validation(false,'DESC_FRMT','DEF_DOC');
         }
 
         return $this->rellena_validation(true,'00000','DEF_DOC');

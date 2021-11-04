@@ -50,20 +50,12 @@ $respTest = obtenerRespuesta('DefFormat','SEARCH','FORMACION_ID','ID de Formaci�
     'DEFFRMT_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefFormat, $respTest);
 
-// Nombre de formación corto (menos de 5 caracteres)
-$_POST = array('plan_id' => '1', 'nombre' => 'aa');
-$defFormat_service = new DefFormat_Service();
-$feedback = $defFormat_service->SEARCH();
-$respTest = obtenerRespuesta('DefFormat','SEARCH','NOMBRE','Nombre corto',
-    'DFFRMT_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testDefFormat, $respTest);
-
-// Nombre de formación largo (más de 50 caracteres)
-$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre de formación largo (más de 60 caracteres)
+$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defFormat_service = new DefFormat_Service();
 $feedback = $defFormat_service->SEARCH();
 $respTest = obtenerRespuesta('DefFormat','SEARCH','NOMBRE','Nombre largo',
-    'DFFRMT_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefFormat, $respTest);
 
 // Nombre de formación con caracteres no permitidos
@@ -71,7 +63,7 @@ $_POST = array('plan_id' => '1', 'nombre' => 'nombre de form^cion');
 $defFormat_service = new DefFormat_Service();
 $feedback = $defFormat_service->SEARCH();
 $respTest = obtenerRespuesta('DefFormat','SEARCH','NOMBRE','Nombre con caracteres no permitidos',
-    'DFFRMT_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefFormat, $respTest);
 
 
@@ -129,15 +121,15 @@ $_POST = array('plan_id' => '1', 'nombre' => 'aa');
 $defFormat_service = new DefFormat_Service();
 $feedback = $defFormat_service->ADD();
 $respTest = obtenerRespuesta('DefFormat','ADD','NOMBRE','Nombre corto',
-    'DFFRMT_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefFormat, $respTest);
 
-// Nombre de formación largo (más de 50 caracteres)
-$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre de formación largo (más de 60 caracteres)
+$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defFormat_service = new DefFormat_Service();
 $feedback = $defFormat_service->ADD();
 $respTest = obtenerRespuesta('DefFormat','ADD','NOMBRE','Nombre largo',
-    'DFFRMT_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefFormat, $respTest);
 
 // Nombre de formación con caracteres no permitidos
@@ -145,7 +137,7 @@ $_POST = array('plan_id' => '1', 'nombre' => 'nombre de form^cion');
 $defFormat_service = new DefFormat_Service();
 $feedback = $defFormat_service->ADD();
 $respTest = obtenerRespuesta('DefFormat','ADD','NOMBRE','Nombre con caracteres no permitidos',
-    'DFFRMT_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefFormat, $respTest);
 
 // Descripción vacío
@@ -282,15 +274,15 @@ $_POST = array('formacion_id' => '1', 'nombre' => 'aa');
 $defFormat_service = new DefFormat_Service();
 $feedback = $defFormat_service->EDIT();
 $respTest = obtenerRespuesta('DefFormat','EDIT','NOMBRE','Nombre corto',
-    'DFFRMT_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefFormat, $respTest);
 
-// Nombre de formación largo (más de 50 caracteres)
-$_POST = array('formacion_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre de formación largo (más de 60 caracteres)
+$_POST = array('formacion_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defFormat_service = new DefFormat_Service();
 $feedback = $defFormat_service->EDIT();
 $respTest = obtenerRespuesta('DefFormat','EDIT','NOMBRE','Nombre largo',
-    'DFFRMT_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefFormat, $respTest);
 
 // Nombre de formación con caracteres no permitidos
@@ -298,7 +290,7 @@ $_POST = array('formacion_id' => '1', 'nombre' => 'nombre de form^cion');
 $defFormat_service = new DefFormat_Service();
 $feedback = $defFormat_service->EDIT();
 $respTest = obtenerRespuesta('DefFormat','EDIT','NOMBRE','Nombre con caracteres no permitidos',
-    'DFFRMT_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefFormat, $respTest);
 
 // Descripción vacío

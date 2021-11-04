@@ -50,20 +50,12 @@ $respTest = obtenerRespuesta('DefSim','SEARCH','SIMULACRO_ID','ID del simulacro 
     'DFSIM_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefSim, $respTest);
 
-// Nombre corto (menos de 5 caracteres)
-$_POST = array('plan_id' => '1', 'nombre' => 'aa');
-$defSim_service = new DefSim_Service();
-$feedback = $defSim_service->SEARCH();
-$respTest = obtenerRespuesta('DefSim','SEARCH','NOMBRE','Nombre del simulacro corto',
-    'DFSIM_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testDefSim, $respTest);
-
-// Nombre largo (más de 50 caracteres)
-$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre largo (más de 60 caracteres)
+$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defSim_service = new DefSim_Service();
 $feedback = $defSim_service->SEARCH();
 $respTest = obtenerRespuesta('DefSim','SEARCH','NOMBRE','Nombre del simulacro largo',
-    'DFSIM_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefSim, $respTest);
 
 // Nombre con caracteres no permitidos
@@ -71,7 +63,7 @@ $_POST = array('plan_id' => '1', 'nombre' => 'nombr^');
 $defSim_service = new DefSim_Service();
 $feedback = $defSim_service->SEARCH();
 $respTest = obtenerRespuesta('DefSim','SEARCH','NOMBRE','Nombre del simulacro con caracteres no permitidos',
-    'DFSIM_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefSim, $respTest);
 
 /*
@@ -130,15 +122,15 @@ $_POST = array('plan_id' => '1', 'nombre' => 'aa');
 $defSim_service = new DefSim_Service();
 $feedback = $defSim_service->ADD();
 $respTest = obtenerRespuesta('DefSim','ADD','NOMBRE','Nombre del simulacro corto',
-    'DFSIM_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefSim, $respTest);
 
-// Nombre largo (más de 50 caracteres)
-$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre largo (más de 60 caracteres)
+$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defSim_service = new DefSim_Service();
 $feedback = $defSim_service->ADD();
 $respTest = obtenerRespuesta('DefSim','ADD','NOMBRE','Nombre del simulacro largo',
-    'DFSIM_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefSim, $respTest);
 
 // Nombre con caracteres no permitidos
@@ -146,7 +138,7 @@ $_POST = array('plan_id' => '1', 'nombre' => 'nombr^');
 $defSim_service = new DefSim_Service();
 $feedback = $defSim_service->ADD();
 $respTest = obtenerRespuesta('DefSim','ADD','NOMBRE','Nombre del simulacro con caracteres no permitidos',
-    'DFSIM_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefSim, $respTest);
 
 // Descripción vacía
@@ -282,15 +274,15 @@ $_POST = array('simulacro_id' => '1', 'nombre' => 'aa');
 $defSim_service = new DefSim_Service();
 $feedback = $defSim_service->EDIT();
 $respTest = obtenerRespuesta('DefSim','EDIT','NOMBRE','Nombre del simulacro corto',
-    'DFSIM_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefSim, $respTest);
 
-// Nombre largo (más de 50 caracteres)
-$_POST = array('simulacro_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre largo (más de 60 caracteres)
+$_POST = array('simulacro_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defSim_service = new DefSim_Service();
 $feedback = $defSim_service->EDIT();
 $respTest = obtenerRespuesta('DefSim','EDIT','NOMBRE','Nombre del simulacro largo',
-    'DFSIM_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefSim, $respTest);
 
 // Nombre con caracteres no permitidos
@@ -298,7 +290,7 @@ $_POST = array('simulacro_id' => '1', 'nombre' => 'nombr^');
 $defSim_service = new DefSim_Service();
 $feedback = $defSim_service->EDIT();
 $respTest = obtenerRespuesta('DefSim','EDIT','NOMBRE','Nombre del simulacro con caracteres no permitidos',
-    'DFSIM_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefSim, $respTest);
 
 // Descripción vacía

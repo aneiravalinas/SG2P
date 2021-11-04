@@ -38,14 +38,14 @@ class Edit_DefSim {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" value="<?php echo $this->sim['nombre'] ?>" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFSIM()"/>
+                                    <input type="text" value="<?php echo $this->sim['nombre'] ?>" class="form-control" id="nombre" name="nombre" onblur="check_DEFINITION_NAME();"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="descripcion" class="i18n-descripcion">Descripcion</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPCION_DEFSIM()"><?php echo $this->sim['descripcion'] ?></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPTION();"><?php echo $this->sim['descripcion'] ?></textarea>
                                 </div>
                             </div>
 
@@ -63,7 +63,7 @@ class Edit_DefSim {
                                         insertacampo(document.formularioedit,'simulacro_id','<?php echo $this->sim['simulacro_id'] ?>');
                                         insertacampo(document.formularioedit,'controller','DefSim');
                                         insertacampo(document.formularioedit,'action','edit');
-                                        enviaformcorrecto(document.formularioedit,check_DEFSIM());">
+                                        enviaformcorrecto(document.formularioedit,check_DEFINITION());">
                                         Enviar
                                     </a>
                                 </div>

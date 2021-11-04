@@ -27,6 +27,12 @@ class DefSim_Service extends DefSim_Validation {
         }
     }
 
+    /*
+     *  - Recupera las definiciones de simulacros de un plan.
+     *      1. Valida y busca un plan por ID, comprobando que existe.
+     *      2. Valida los datos recibidos que se usarán como filtro en la búsqueda.
+     *      3. Recupera las definiciones de simulacros.
+     */
     function SEARCH() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -54,6 +60,13 @@ class DefSim_Service extends DefSim_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Añade la definición de un Simulacro.
+     *      1. Valida y busca la definición del plan al que se asocia el simulacro, comprobando que existe.
+     *      2. Valida los atributos que conforman la definición del simulacro.
+     *      3. Comprueba que el plan no tiene una definición de simulacro con el mismo nombre.
+     *      4. Añade la definición del simulacro.
+     */
     function ADD() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -84,6 +97,12 @@ class DefSim_Service extends DefSim_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Elimina la definición de un simulacro.
+     *      1. Valida y busca la definición de un simulacro por ID, comprobando que existe.
+     *      2. Verifica que no existan cumplimentaciones de ese simulacro en algún edificio.
+     *      3. Elimina la definición del simulacro.
+     */
     function DELETE() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -108,6 +127,13 @@ class DefSim_Service extends DefSim_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Modifica los datos de la definición de un simulacro.
+     *      1. Valida y busca la definición de un simulacro por ID, comprobando qeu existe.
+     *      2. Valida los nuevos datos recibidos.
+     *      3. En caso de que se haya recibido un nuevo nombre, verifica que exista una definición de simulacro en el mismo plan con ese nombre.
+     *      4. Modifica los datos de la definición del simulacro.
+     */
     function EDIT() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -141,7 +167,7 @@ class DefSim_Service extends DefSim_Validation {
         return $this->feedback;
     }
 
-
+    // Valida y busca la definición de un plan por ID.
     function seekPlan() {
         $validation = $this->validar_PLAN_ID();
         if(!$validation['ok']) {
@@ -151,6 +177,7 @@ class DefSim_Service extends DefSim_Validation {
         return $this->seekByPlanID();
     }
 
+    // Recupera la información de la definición de un simulacro por ID.
     function seek() {
         $validation = $this->validar_SIMULACRO_ID();
         if(!$validation['ok']) {
@@ -167,6 +194,7 @@ class DefSim_Service extends DefSim_Validation {
         return $this->feedback;
     }
 
+    // Recupera los datos de la definición de un plan por ID.
     function seekByPlanID() {
         $feedback = $this->defPlan_entity->seek();
         if($feedback['ok']) {
@@ -183,6 +211,7 @@ class DefSim_Service extends DefSim_Validation {
         return $feedback;
     }
 
+    // Recupera los datos de la definición de un simulacro por ID.
     function seekBySimID() {
         $feedback = $this->defSim_entity->seek();
         if($feedback['ok']) {
@@ -199,6 +228,7 @@ class DefSim_Service extends DefSim_Validation {
         return $feedback;
     }
 
+    // Comprueba que no existe un simulacro con el nombre indicado.
     function name_sim_not_exist() {
         $feedback = $this->defSim_entity->searchByName();
         if($feedback['ok']) {
@@ -215,6 +245,7 @@ class DefSim_Service extends DefSim_Validation {
         return $feedback;
     }
 
+    // Verifica que no existen cumplimentaciones de un simulacro.
     function imp_sims_not_exist() {
         include_once './Model/ImpSim_Model.php';
         $impSim_entity = new ImpSim_Model();

@@ -49,20 +49,12 @@ $respTest = obtenerRespuesta('DefRoute','SEARCH','RUTA_ID','ID de Ruta no numér
     'DEFROUTE_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefRoute, $respTest);
 
-// Nombre corto (menos de 5 caracteres)
-$_POST = array('plan_id' => '1', 'nombre' => 'aa');
-$defRoute_service = new DefRoute_Service();
-$feedback = $defRoute_service->SEARCH();
-$respTest = obtenerRespuesta('DefRoute','SEARCH','NOMBRE','Nombre de ruta corto',
-    'DFROUTE_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testDefRoute, $respTest);
-
-// Nombre de ruta largo (más de 50 caracteres)
-$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre de ruta largo (más de 60 caracteres)
+$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defRoute_service = new DefRoute_Service();
 $feedback = $defRoute_service->SEARCH();
 $respTest = obtenerRespuesta('DefRoute','SEARCH','NOMBRE','Nombre de ruta largo',
-    'DFROUTE_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefRoute, $respTest);
 
 // Nombre de ruta con caracteres no permitidos
@@ -70,7 +62,7 @@ $_POST = array('plan_id' => '1', 'nombre' => 'Nombre de R^ta');
 $defRoute_service = new DefRoute_Service();
 $feedback = $defRoute_service->SEARCH();
 $respTest = obtenerRespuesta('DefRoute','SEARCH','NOMBRE','Nombre de ruta con caracteres no permitidos',
-    'DFROUTE_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefRoute, $respTest);
 
 /*
@@ -126,15 +118,15 @@ $_POST = array('plan_id' => '1', 'nombre' => 'aa');
 $defRoute_service = new DefRoute_Service();
 $feedback = $defRoute_service->ADD();
 $respTest = obtenerRespuesta('DefRoute','ADD','NOMBRE','Nombre de ruta corto',
-    'DFROUTE_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefRoute, $respTest);
 
-// Nombre de ruta largo (más de 50 caracteres)
-$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre de ruta largo (más de 60 caracteres)
+$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defRoute_service = new DefRoute_Service();
 $feedback = $defRoute_service->ADD();
 $respTest = obtenerRespuesta('DefRoute','ADD','NOMBRE','Nombre de ruta largo',
-    'DFROUTE_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefRoute, $respTest);
 
 // Nombre de ruta con caracteres no permitidos
@@ -142,7 +134,7 @@ $_POST = array('plan_id' => '1', 'nombre' => 'Nombre de R^ta');
 $defRoute_service = new DefRoute_Service();
 $feedback = $defRoute_service->ADD();
 $respTest = obtenerRespuesta('DefRoute','ADD','NOMBRE','Nombre de ruta con caracteres no permitidos',
-    'DFROUTE_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefRoute, $respTest);
 
 // Descripción Vacía
@@ -357,15 +349,15 @@ $_POST = array('ruta_id' => '1', 'nombre' => 'aa');
 $defRoute_service = new DefRoute_Service();
 $feedback = $defRoute_service->EDIT();
 $respTest = obtenerRespuesta('DefRoute','EDIT','NOMBRE','Nombre de ruta corto',
-    'DFROUTE_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefRoute, $respTest);
 
-// Nombre de ruta largo (más de 50 caracteres)
-$_POST = array('ruta_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre de ruta largo (más de 60 caracteres)
+$_POST = array('ruta_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defRoute_service = new DefRoute_Service();
 $feedback = $defRoute_service->EDIT();
 $respTest = obtenerRespuesta('DefRoute','EDIT','NOMBRE','Nombre de ruta largo',
-    'DFROUTE_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefRoute, $respTest);
 
 // Nombre de ruta con caracteres no permitidos
@@ -373,7 +365,7 @@ $_POST = array('ruta_id' => '1', 'nombre' => 'Nombre de R^ta');
 $defRoute_service = new DefRoute_Service();
 $feedback = $defRoute_service->EDIT();
 $respTest = obtenerRespuesta('DefRoute','EDIT','NOMBRE','Nombre de ruta con caracteres no permitidos',
-    'DFROUTE_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefRoute, $respTest);
 
 // Descripción Vacía

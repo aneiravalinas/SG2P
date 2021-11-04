@@ -51,20 +51,12 @@ $respTest = obtenerRespuesta('DefProc','SEARCH','PROC_ID','El ID del Procedimien
     'DFPROC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 
-// Nombre del procedimiento corto (menos de 5 caracteres)
-$_POST = array('plan_id' => '1', 'nombre' => 'aaa');
-$defProc_service = new DefProc_Service();
-$feedback = $defProc_service->SEARCH();
-$respTest = obtenerRespuesta('DefProc','SEARCH','NOMBRE','Nombre del procedimiento corto',
-    'DFPROC_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testDefProc, $respTest);
-
-// Nombre del procedimiento largo (más de 50 caracteres)
-$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre del procedimiento largo (más de 60 caracteres)
+$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defProc_service = new DefProc_Service();
 $feedback = $defProc_service->SEARCH();
 $respTest = obtenerRespuesta('DefProc','SEARCH','NOMBRE','Nombre del procedimiento largo',
-    'DFPROC_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 
 // Nombre del procedimiento con caracteres no permitidos
@@ -72,7 +64,7 @@ $_POST = array('plan_id' => '1', 'nombre' => 'Nombre del Proc^edimiento');
 $defProc_service = new DefProc_Service();
 $feedback = $defProc_service->SEARCH();
 $respTest = obtenerRespuesta('DefProc','SEARCH','NOMBRE','Nombre del procedimiento con caracteres no permitidos',
-    'DFPROC_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 
 /*
@@ -171,15 +163,15 @@ $_POST = array('plan_id' => '1', 'nombre' => 'aaa');
 $defProc_service = new DefProc_Service();
 $feedback = $defProc_service->ADD();
 $respTest = obtenerRespuesta('DefProc','ADD','NOMBRE','Nombre del procedimiento corto',
-    'DFPROC_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 
-// Nombre del procedimiento largo (más de 50 caracteres)
-$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre del procedimiento largo (más de 60 caracteres)
+$_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defProc_service = new DefProc_Service();
 $feedback = $defProc_service->ADD();
 $respTest = obtenerRespuesta('DefProc','ADD','NOMBRE','Nombre del procedimiento largo',
-    'DFPROC_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 
 // Nombre del procedimiento con caracteres no permitidos
@@ -187,7 +179,7 @@ $_POST = array('plan_id' => '1', 'nombre' => 'Nombre del Proc^edimiento');
 $defProc_service = new DefProc_Service();
 $feedback = $defProc_service->ADD();
 $respTest = obtenerRespuesta('DefProc','ADD','NOMBRE','Nombre del procedimiento con caracteres no permitidos',
-    'DFPROC_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 
 // Descripción vacía
@@ -366,15 +358,15 @@ $_POST = array('procedimiento_id' => '1', 'nombre' => 'aaa');
 $defProc_service = new DefProc_Service();
 $feedback = $defProc_service->EDIT();
 $respTest = obtenerRespuesta('DefProc','EDIT','NOMBRE','Nombre del procedimiento corto',
-    'DFPROC_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 
 // Nombre del procedimiento largo (más de 50 caracteres)
-$_POST = array('procedimiento_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+$_POST = array('procedimiento_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defProc_service = new DefProc_Service();
 $feedback = $defProc_service->EDIT();
 $respTest = obtenerRespuesta('DefProc','EDIT','NOMBRE','Nombre del procedimiento largo',
-    'DFPROC_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 
 // Nombre del procedimiento con caracteres no permitidos
@@ -382,7 +374,7 @@ $_POST = array('procedimiento_id' => '1', 'nombre' => 'Nombre del Proc^edimiento
 $defProc_service = new DefProc_Service();
 $feedback = $defProc_service->EDIT();
 $respTest = obtenerRespuesta('DefProc','EDIT','NOMBRE','Nombre del procedimiento con caracteres no permitidos',
-    'DFPROC_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefProc, $respTest);
 
 // Descripción vacía

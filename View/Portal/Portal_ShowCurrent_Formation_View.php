@@ -108,13 +108,13 @@ class Portal_ShowCurrent_Formation {
                                 <tbody>
                                 <?php foreach($this->imp_formats as $imp_format): ?>
                                     <tr>
-                                        <td class="text-center"><?php echo $imp_format['edificio_formacion_id'] ?></td>
+                                        <td class="text-center"><?php echo $imp_format['cumplimentacion_id'] ?></td>
                                         <td class="text-center i18n-<?php echo $imp_format['estado'] ?> <?php echo $imp_format['estado'] ?>"></td>
                                         <td class="text-center"><?php if($imp_format['fecha_planificacion'] != default_data) echo date_format(date_create($imp_format['fecha_planificacion']),'d/m/Y');?></td>
                                         <td class="text-center">
                                             <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false" onclick="
                                                 crearform('formenviar', 'post');
-                                                insertacampo(document.formenviar, 'edificio_formacion_id', '<?php echo $imp_format['edificio_formacion_id'] ?>');
+                                                insertacampo(document.formenviar, 'cumplimentacion_id', '<?php echo $imp_format['cumplimentacion_id'] ?>');
                                                 insertacampo(document.formenviar, 'controller', 'Portal');
                                                 insertacampo(document.formenviar, 'action', 'seekPortalImpFormat');
                                                 enviaform(document.formenviar);">

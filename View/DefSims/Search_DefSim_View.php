@@ -37,7 +37,7 @@ class Search_DefSim {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFSIM_SEARCH();"/>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_DEFINITION_NAME_SEARCH();"/>
                                 </div>
                             </div>
 

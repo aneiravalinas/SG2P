@@ -110,6 +110,7 @@ class DefRoute_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Recupera las definiciones de rutas de un determinado plan que tengan cumplimentaciones en alguna de las plantas del edificio que se pasa como parámetro.
     function searchBuildingPlanRoutes($edificio_id) {
         $this->query = "
             SELECT * FROM RUTA

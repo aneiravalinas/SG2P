@@ -36,12 +36,7 @@
     <script type="text/javascript" src="./View/js/validaciones_Edificio.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_Planta.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_Espacio.js"></script>
-    <script text="text/javascript" src="./View/js/validaciones_DefPlan.js"></script>
-    <script text="text/javascript" src="./View/js/validaciones_DefDoc.js"></script>
-    <script text="text/javascript" src="./View/js/validaciones_DefProc.js"></script>
-    <script text="text/javascript" src="./View/js/validaciones_DefRoute.js"></script>
-    <script text="text/javascript" src="./View/js/validaciones_DefFormat.js"></script>
-    <script text="text/javascript" src="./View/js/validaciones_DefSim.js"></script>
+    <script text="text/javascript" src="./View/js/validaciones_Definiciones.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_BuildPlan.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_Plan.js"></script>
     <script text="text/javascript" src="./View/js/validaciones_Cumplimentaciones.js"></script>

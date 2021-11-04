@@ -962,10 +962,10 @@ arrayGA = {
             'DFPLAN_ID_EMPT' : 'O ID do Plan non pode ser vacío',
             'DFPLAN_ID_NOT_NUMERIC' : 'O ID do Plan debe ser numérico',
 
-            // Nombre DefPlan
-            'DFPLAN_NAM_SHRT' : 'O nome do plan debe ser superior a 5 caracteres',
-            'DEFPLAN_NAM_LRG' : 'O nome do plan plan non debe superar os 60 caracteres',
-            'DEFPLAN_NAM_FRMT' : 'O nome do plan contén caracteres non permitidos',
+            // Nombre Definición
+            'DEFNAM_SHRT' : 'O nome da definición debe ser superior a 5 caracteres',
+            'DEFNAM_LRG' : 'O nome da definición non debe superar os 60 caracteres',
+            'DEFNAM_FRMT' : 'O nome da definición contén caracteres non permitidos',
 
             // ID DefDoc
             'DFDOC_ID_EMPT' : 'O ID do documento non pode estar baleiro',
@@ -1040,6 +1040,10 @@ arrayGA = {
             'PLANNING_DATE_EMPT' : 'A data de planificación non pode ser vacía',
             'PLANNING_DATE_KO' : 'A data de planificación introducida ten un formato incorrecto',
             'PLANNING_DATE_PAST' : 'A data de planificación introducida é unha fecha pasada',
+
+            // Fecha Asignación
+            'START_DATEASSIGN_KO' : 'A data de asignacion inicial introducida ten un formato incorrecto',
+            'END_DATEASSIGN_KO' : 'A data de asignacion final introducida ten un formato incorrecto',
 
             // Fecha Vencimiento
             'DATEEXPIRE_KO' : 'A data de vencemento introducida ten un formato incorrecto',

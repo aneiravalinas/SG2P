@@ -37,7 +37,7 @@ class Edit_DefDoc {
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" value="<?php echo $this->doc['nombre'] ?>" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFDOC();"/>
+                                    <input type="text" value="<?php echo $this->doc['nombre'] ?>" class="form-control" id="nombre" name="nombre" onblur="check_DEFINITION_NAME();"/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="visible" class="i18n-visible">Visible</label>
@@ -51,7 +51,7 @@ class Edit_DefDoc {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="descripcion" class="i18n-descripcion">Descripcion</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPCION_DEFDOC()"><?php echo $this->doc['descripcion'] ?></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPTION()"><?php echo $this->doc['descripcion'] ?></textarea>
                                 </div>
                             </div>
 
@@ -69,7 +69,7 @@ class Edit_DefDoc {
                                         insertacampo(document.formularioedit,'documento_id','<?php echo $this->doc['documento_id'] ?>');
                                         insertacampo(document.formularioedit,'controller','DefDoc');
                                         insertacampo(document.formularioedit,'action','edit');
-                                        enviaformcorrecto(document.formularioedit,check_DEFDOC());">
+                                        enviaformcorrecto(document.formularioedit,check_DEFINITION());">
                                         Enviar
                                     </a>
                                 </div>

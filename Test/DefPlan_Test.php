@@ -17,20 +17,12 @@ $respTest = obtenerRespuesta('DefPlan','SEARCH','PLAN_ID','El id del plan debe s
     'DFPLAN_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefPlan, $respTest);
 
-// Nombre Plan corto (menos de 5 caracteres)
-$_POST = array('nombre' => 'aa');
-$defPlan_service = new DefPlan_Service();
-$feedback = $defPlan_service->SEARCH();
-$respTest = obtenerRespuesta('DefPlan','SEARCH','NOMBRE','Nombre del plan corto',
-    'DFPLAN_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testDefPlan, $respTest);
-
 // Nombre Plan largo (más de 60 caracteres)
 $_POST = array('nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defPlan_service = new DefPlan_Service();
 $feedback = $defPlan_service->SEARCH();
 $respTest = obtenerRespuesta('DefPlan','SEARCH','NOMBRE','Nombre del plan largo',
-    'DEFPLAN_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefPlan, $respTest);
 
 // Nombre del Plan con caracteres no permitidos
@@ -38,7 +30,7 @@ $_POST = array('nombre' => 'Nombre del Pl^n');
 $defPlan_service = new DefPlan_Service();
 $feedback = $defPlan_service->SEARCH();
 $respTest = obtenerRespuesta('DefPlan','SEARCH','NOMBRE','Nombre del caracteres no permitidos',
-    'DEFPLAN_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefPlan, $respTest);
 
 
@@ -63,7 +55,7 @@ $_POST = array('nombre' => 'aa');
 $defPlan_service = new DefPlan_Service();
 $feedback = $defPlan_service->ADD();
 $respTest = obtenerRespuesta('DefPlan','ADD','NOMBRE','Nombre del plan corto',
-    'DFPLAN_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefPlan, $respTest);
 
 // Nombre Plan largo (más de 60 caracteres)
@@ -71,7 +63,7 @@ $_POST = array('nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 $defPlan_service = new DefPlan_Service();
 $feedback = $defPlan_service->ADD();
 $respTest = obtenerRespuesta('DefPlan','ADD','NOMBRE','Nombre del plan largo',
-    'DEFPLAN_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefPlan, $respTest);
 
 // Nombre del Plan con caracteres no permitidos
@@ -79,7 +71,7 @@ $_POST = array('nombre' => 'Nombre del Pl^n');
 $defPlan_service = new DefPlan_Service();
 $feedback = $defPlan_service->ADD();
 $respTest = obtenerRespuesta('DefPlan','ADD','NOMBRE','Nombre del caracteres no permitidos',
-    'DEFPLAN_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefPlan, $respTest);
 
 // Descripción vacía
@@ -239,7 +231,7 @@ $_POST = array('plan_id' => '1', 'nombre' => 'aa');
 $defPlan_service = new DefPlan_Service();
 $feedback = $defPlan_service->EDIT();
 $respTest = obtenerRespuesta('DefPlan','EDIT','NOMBRE','Nombre del plan corto',
-    'DFPLAN_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefPlan, $respTest);
 
 // Nombre Plan largo (más de 60 caracteres)
@@ -247,7 +239,7 @@ $_POST = array('plan_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 $defPlan_service = new DefPlan_Service();
 $feedback = $defPlan_service->EDIT();
 $respTest = obtenerRespuesta('DefPlan','EDIT','NOMBRE','Nombre del plan largo',
-    'DEFPLAN_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefPlan, $respTest);
 
 // Nombre del Plan con caracteres no permitidos
@@ -255,7 +247,7 @@ $_POST = array('plan_id' => '1', 'nombre' => 'Nombre del Pl^n');
 $defPlan_service = new DefPlan_Service();
 $feedback = $defPlan_service->EDIT();
 $respTest = obtenerRespuesta('DefPlan','EDIT','NOMBRE','Nombre del caracteres no permitidos',
-    'DEFPLAN_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefPlan, $respTest);
 
 // Descripción vacía

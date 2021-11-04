@@ -974,10 +974,10 @@ arrayES = {
             'DFPLAN_ID_EMPT' : 'El ID del Plan no puede ser vacío',
             'DFPLAN_ID_NOT_NUMERIC' : 'El ID del Plan debe ser numérico',
 
-            // Nombre DefPlan
-            'DFPLAN_NAM_SHRT' : 'El nombre del plan debe ser superior a 5 caracteres',
-            'DEFPLAN_NAM_LRG' : 'El nombre del plan no debe superar los 60 caracteres',
-            'DEFPLAN_NAM_FRMT' : 'El nombre del plan contiene caracteres no permitidos',
+            // Nombre Definición
+            'DEFNAM_SHRT' : 'El nombre de la definición debe ser superior a 5 caracteres',
+            'DEFNAM_LRG' : 'El nombre de la definición no debe superar los 60 caracteres',
+            'DEFNAM_FRMT' : 'El nombre de la definición contiene caracteres no permitidos',
 
             // ID DefDoc
             'DFDOC_ID_EMPT' : 'El ID del Documento no puede ser vacío',
@@ -1055,6 +1055,10 @@ arrayES = {
 
             // Fecha Vencimiento
             'DATEEXPIRE_KO' : 'La fecha de vencimiento introducida tiene un formato incorrecto',
+
+            // Fecha Asignación
+            'START_DATEASSIGN_KO' : 'La fecha de asignación inicial introducida tiene un formato incorrecto',
+            'END_DATEASSIGN_KO' : 'La fecha de asignacion final introducida tiene un formato incorrecto',
 
             // Destinatarios
             'RECIPIENTS_EMPT' : 'El campo destinatarios no puede ser vacío',

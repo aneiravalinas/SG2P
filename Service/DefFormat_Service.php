@@ -27,6 +27,12 @@ class DefFormat_Service extends DefFormat_Validation {
         }
     }
 
+    /*
+     *  - Recupera las definiciones de formaciones de un plan.
+     *      1. Valida y busca un plan por ID, comprobando que existe.
+     *      2. Valida los datos recibidos que se usarán como filtro en la búsqueda.
+     *      3. Recupera las definiciones de formaciones.
+     */
     function SEARCH() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -54,6 +60,13 @@ class DefFormat_Service extends DefFormat_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Añade la definición de una formación.
+     *      1. Valida y busca la definición del plan al que se asocia la formación, comprobando que existe.
+     *      2. Valida los atributos que conforman la definición de la formación.
+     *      3. Comprueba que el plan no tiene una definición de formación con el mismo nombre.
+     *      4. Añade la definición de la formación.
+     */
     function ADD() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -84,6 +97,12 @@ class DefFormat_Service extends DefFormat_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Elimina la definición de una formación.
+     *      1. Valida y busca la definición de una formación por ID, comprobando que existe.
+     *      2. Verifica que no existen cumplimentaciones de esa formación en algún edificio.
+     *      3. Elimina la definición de la formación.
+     */
     function DELETE() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -108,6 +127,13 @@ class DefFormat_Service extends DefFormat_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Modifica los datos de la definición de una formación.
+     *      1. Valida y busca la definición de una formación por ID, comprobando que existe.
+     *      2. Valida los nuevos datos recibidos.
+     *      3. En caso de que se haya recibido un nuevo nombre, verifica que no exista una definición de formación en el mismo plan con ese nombre.
+     *      4. Modifica los datos de la definición de la formación.
+     */
     function EDIT() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -141,6 +167,7 @@ class DefFormat_Service extends DefFormat_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca la definición de un plan por ID.
     function seekPlan() {
         $validation = $this->validar_PLAN_ID();
         if(!$validation['ok']) {
@@ -150,7 +177,7 @@ class DefFormat_Service extends DefFormat_Validation {
         return $this->seekByPlanID();
     }
 
-
+    // Recupera la información de la definción de la formación por ID.
     function seek() {
         $validation = $this->validar_FORMACION_ID();
         if(!$validation['ok']) {
@@ -167,6 +194,7 @@ class DefFormat_Service extends DefFormat_Validation {
         return $this->feedback;
     }
 
+    // Verifica que no existen cumplimentaciones de una formación.
     function imp_formats_not_exist() {
         include_once './Model/ImpFormat_Model.php';
         $impFormat_entity = new ImpFormat_Model();
@@ -185,7 +213,7 @@ class DefFormat_Service extends DefFormat_Validation {
         return $feedback;
     }
 
-
+    // Recupera los datos de la definición de una formación por ID.
     function seekByFormatID() {
         $feedback = $this->defFormat_entity->seek();
         if($feedback['ok']) {
@@ -202,6 +230,7 @@ class DefFormat_Service extends DefFormat_Validation {
         return $feedback;
     }
 
+    // Recupera los datos de la definición de un plan por ID.
     function seekByPlanID() {
         $feedback = $this->defPlan_entity->seek();
         if($feedback['ok']) {
@@ -218,6 +247,7 @@ class DefFormat_Service extends DefFormat_Validation {
         return $feedback;
     }
 
+    // Comprueba que no existe una formación con el nombre indicado.
     function name_format_not_exist() {
         $feedback = $this->defFormat_entity->searchByName();
         if($feedback['ok']) {

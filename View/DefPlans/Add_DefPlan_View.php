@@ -24,14 +24,14 @@ class Add_DefPlan {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFPLAN();"/>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_DEFINITION_NAME();"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="descripcion" class="i18n-descripcion">Descripcion</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPCION_DEFPLAN()"></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPTION()"></textarea>
                                 </div>
                             </div>
 
@@ -47,7 +47,7 @@ class Add_DefPlan {
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
                                             insertacampo(document.formularioadd,'controller','DefPlan');
                                             insertacampo(document.formularioadd,'action','add');
-                                            enviaformcorrecto(document.formularioadd,check_DEFPLAN());">
+                                            enviaformcorrecto(document.formularioadd,check_DEFINITION());">
                                         Enviar
                                     </a>
                                 </div>

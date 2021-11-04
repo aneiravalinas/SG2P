@@ -108,13 +108,13 @@ class Portal_ShowCurrent_Simulacrum {
                                 <tbody>
                                 <?php foreach($this->imp_sims as $imp_sim): ?>
                                     <tr>
-                                        <td class="text-center"><?php echo $imp_sim['edificio_simulacro_id'] ?></td>
+                                        <td class="text-center"><?php echo $imp_sim['cumplimentacion_id'] ?></td>
                                         <td class="text-center i18n-<?php echo $imp_sim['estado'] ?> <?php echo $imp_sim['estado'] ?>"></td>
                                         <td class="text-center"><?php if($imp_sim['fecha_planificacion'] != default_data) echo date_format(date_create($imp_sim['fecha_planificacion']),'d/m/Y');?></td>
                                         <td class="text-center">
                                             <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false" onclick="
                                                 crearform('formenviar', 'post');
-                                                insertacampo(document.formenviar, 'edificio_simulacro_id', '<?php echo $imp_sim['edificio_simulacro_id'] ?>');
+                                                insertacampo(document.formenviar, 'cumplimentacion_id', '<?php echo $imp_sim['cumplimentacion_id'] ?>');
                                                 insertacampo(document.formenviar, 'controller', 'Portal');
                                                 insertacampo(document.formenviar, 'action', 'seekPortalImpSim');
                                                 enviaform(document.formenviar);">

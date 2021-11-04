@@ -962,10 +962,10 @@ arrayEN = {
             'DFPLAN_ID_EMPT' : 'Plan ID cannot be empty',
             'DFPLAN_ID_NOT_NUMERIC' : 'Plan ID must be numeric',
 
-            // Nombre DefPlan
-            'DFPLAN_NAM_SHRT' : 'The plan name must be longer than 5 characters',
-            'DEFPLAN_NAM_LRG' : 'Plan name must not exceed 60 characters',
-            'DEFPLAN_NAM_FRMT' : 'Plan name contains illegal characters',
+            // Nombre Definición
+            'DEFNAM_SHRT' : 'The definition name must be longer than 5 characters',
+            'DEFNAM_LRG' : 'The definition name must not exceed 60 characters',
+            'DEFNAM_FRMT' : 'Definition name contains illegal characters',
 
             // ID DefDoc
             'DFDOC_ID_EMPT' : 'Document ID cannot be empty',
@@ -1041,6 +1041,10 @@ arrayEN = {
             'PLANNING_DATE_EMPT' : 'The planning date cannot be empty',
             'PLANNING_DATE_KO' : 'The entered planning date is in the wrong format',
             'PLANNING_DATE_PAST' : 'The planning date entered is a past date',
+
+            // Fecha Asignación
+            'START_DATEASSIGN_KO' : 'The initial assignment date entered is in the wrong format',
+            'END_DATEASSIGN_KO' : 'The final assignment date entered has an incorrect format',
 
             // Fecha Vencimiento
             'DATEEXPIRE_KO' : 'The expiration date entered is in the wrong format',

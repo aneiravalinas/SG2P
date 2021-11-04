@@ -37,14 +37,14 @@ class Edit_DefFormat {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" value="<?php echo $this->format['nombre'] ?>" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFFORMAT();"/>
+                                    <input type="text" value="<?php echo $this->format['nombre'] ?>" class="form-control" id="nombre" name="nombre" onblur="check_DEFINITION();"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="descripcion" class="i18n-descripcion">Descripcion</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPCION_DEFFORMAT()"><?php echo $this->format['descripcion'] ?></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPTION();"><?php echo $this->format['descripcion'] ?></textarea>
                                 </div>
                             </div>
 
@@ -62,7 +62,7 @@ class Edit_DefFormat {
                                         insertacampo(document.formularioedit,'formacion_id','<?php echo $this->format['formacion_id'] ?>');
                                         insertacampo(document.formularioedit,'controller','DefFormat');
                                         insertacampo(document.formularioedit,'action','edit');
-                                        enviaformcorrecto(document.formularioedit,check_DEFFORMAT());">
+                                        enviaformcorrecto(document.formularioedit,check_DEFINITION());">
                                         Enviar
                                     </a>
                                 </div>

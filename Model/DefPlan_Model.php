@@ -23,6 +23,7 @@ class DefPlan_Model extends Abstract_Model {
         }
     }
 
+    // Añade la definición de un plan.
     function ADD() {
         $this->query = "
             INSERT INTO PLAN (
@@ -39,6 +40,7 @@ class DefPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Modifica la información de un plan por ID.
     function EDIT() {
         $this->query = "UPDATE PLAN SET " .
             ($this->nombre == '' ? "" : "nombre = '$this->nombre', ") .
@@ -49,6 +51,7 @@ class DefPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Elimina la definición de un plan por ID.
     function DELETE() {
         $this->query = "
             DELETE FROM PLAN
@@ -59,6 +62,7 @@ class DefPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Recupera información de planes filtrando por ID de plan o por nombre.
     function SEARCH() {
         $this->query = "
             SELECT * 
@@ -72,7 +76,7 @@ class DefPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
-    // Recupera la información de un Plan filtrando por ID.
+    // Recupera la información de un Plan por ID.
     function seek() {
         $this->query = "
             SELECT * FROM PLAN
@@ -83,6 +87,7 @@ class DefPlan_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Recupera planes con un nombre en específico.
     function seekNamePlan() {
         $this->query = "
             SELECT * FROM PLAN

@@ -36,7 +36,7 @@ class Search_DefDoc {
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFDOC_SEARCH();"/>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_DEFINITION_NAME_SEARCH();"/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="visible" class="i18n-visible">Visible</label>

@@ -31,14 +31,14 @@ class Add_DefRoute {
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFROUTE();"/>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_DEFINITION_NAME();"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="descripcion" class="i18n-descripcion">Descripcion</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPCION_DEFROUTE();"></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPTION();"></textarea>
                                 </div>
                             </div>
 
@@ -56,7 +56,7 @@ class Add_DefRoute {
                                         insertacampo(document.formularioadd,'plan_id', '<?php echo $this->plan['plan_id'] ?>');
                                         insertacampo(document.formularioadd,'controller','DefRoute');
                                         insertacampo(document.formularioadd,'action','add');
-                                        enviaformcorrecto(document.formularioadd,check_DEFROUTE());">
+                                        enviaformcorrecto(document.formularioadd,check_DEFINITION());">
                                         Enviar
                                     </a>
                                 </div>

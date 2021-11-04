@@ -94,14 +94,14 @@ class Portal_ShowCurrent_Document {
                                 <tbody>
                                 <?php foreach($this->imp_docs as $imp_doc): ?>
                                     <tr>
-                                        <td class="text-center"><?php echo $imp_doc['edificio_documento_id'] ?></td>
+                                        <td class="text-center"><?php echo $imp_doc['cumplimentacion_id'] ?></td>
                                         <td class="text-center i18n-<?php echo $imp_doc['estado'] ?> <?php echo $imp_doc['estado'] ?>"></td>
                                         <td class="text-center"><?php if($imp_doc['nombre_doc'] != default_doc) echo $imp_doc['nombre_doc']; ?></td>
                                         <td class="text-center"><?php if($imp_doc['fecha_cumplimentacion'] != default_data) echo date_format(date_create($imp_doc['fecha_cumplimentacion']),'d/m/Y');?></td>
                                         <td class="text-center">
                                             <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false" onclick="
                                                     crearform('formenviar', 'post');
-                                                    insertacampo(document.formenviar, 'edificio_documento_id', '<?php echo $imp_doc['edificio_documento_id'] ?>');
+                                                    insertacampo(document.formenviar, 'cumplimentacion_id', '<?php echo $imp_doc['cumplimentacion_id'] ?>');
                                                     insertacampo(document.formenviar, 'controller', 'Portal');
                                                     insertacampo(document.formenviar, 'action', 'seekPortalImpDoc');
                                                     enviaform(document.formenviar);">

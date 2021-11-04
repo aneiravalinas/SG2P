@@ -28,6 +28,12 @@ class DefDoc_Service extends DefDoc_Validation {
     }
 
 
+    /*
+     *  - Recupera las definiciones de documentos de un plan.
+     *      1. Valida y busca un plan por ID, y comprueba que existe.
+     *      2. Valida los datos recibidos que se usarán como filtro en la búsqueda.
+     *      3. Recupera las definiciones de documentos.
+     */
     function SEARCH() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -56,6 +62,7 @@ class DefDoc_Service extends DefDoc_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca la definición de un plan por ID.
     function seekPlan() {
         $validation = $this->validar_PLAN_ID();
         if(!$validation['ok']) {
@@ -65,6 +72,13 @@ class DefDoc_Service extends DefDoc_Validation {
         return $this->seekByPlanID();
     }
 
+    /*
+     *  - Añade la definición de un Documento.
+     *      1. Valida y busca la definición del plan al que se asocia el documento, comprobando que existe.
+     *      2. Valida los atributos que conforman la definición del documento.
+     *      3. Comprueba que el plan no tiene una definición de documento con el mismo nombre.
+     *      4. Añade la definición del documento.
+     */
     function ADD() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -95,6 +109,7 @@ class DefDoc_Service extends DefDoc_Validation {
         return $this->feedback;
     }
 
+    // Recupera la información de la definición de un documento por ID.
     function seek() {
         $validation = $this->validar_DOCUMENTO_ID();
         if(!$validation['ok']) {
@@ -111,6 +126,12 @@ class DefDoc_Service extends DefDoc_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Elimina la definición de un documento.
+     *      1. Valida y busca la definición de un documento por ID, comprobando que existe,
+     *      2. Verifica que no existan cumplimentaciones de ese documento en algún edificio.
+     *      3. Elimina la definición del documento.
+     */
     function DELETE() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -136,6 +157,13 @@ class DefDoc_Service extends DefDoc_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Modifica los datos de la definición de un documento.
+     *      1. Valida y busca la definición de un documento por ID, comprobando que existe.
+     *      2. Valida los nuevos datos recibidos.
+     *      3. En caso de que se haya recibido un nuevo nombre, verifica que no exista una definición de documento en el mismo plan con ese nombre.
+     *      4. Modifica los datos de la definición del documento.
+     */
     function EDIT() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -169,6 +197,7 @@ class DefDoc_Service extends DefDoc_Validation {
         return $this->feedback;
     }
 
+    // Recupera los datos de la definición de un plan por ID.
     function seekByPlanID() {
         $feedback = $this->defPlan_entity->seek();
         if($feedback['ok']) {
@@ -185,6 +214,7 @@ class DefDoc_Service extends DefDoc_Validation {
         return $feedback;
     }
 
+    // Recupera los datos de la definición de un documento por ID.
     function seekByDocID() {
         $feedback = $this->defDoc_entity->seek();
         if($feedback['ok']) {
@@ -201,6 +231,7 @@ class DefDoc_Service extends DefDoc_Validation {
         return $feedback;
     }
 
+    // Comprueba que no existe un documento con el nombre indicado.
     function name_doc_not_exist() {
         $feedback = $this->defDoc_entity->seekByDocName();
         if($feedback['ok']) {
@@ -217,6 +248,7 @@ class DefDoc_Service extends DefDoc_Validation {
         return $feedback;
     }
 
+    // Verifica que no existen cumplimentaciones de un documento.
     function imp_docs_not_exist() {
         include_once './Model/ImpDoc_Model.php';
         $impDoc_entity = new ImpDoc_Model();

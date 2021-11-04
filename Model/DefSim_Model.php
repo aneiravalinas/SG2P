@@ -108,6 +108,7 @@ class DefSim_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Recupera las definiciones de simulacros de un determinado plan que tienen cumplimentaciones en el edificio que se pasa como parámetro.
     function searchBuildingPlanSimulacrums($edificio_id) {
         $this->query = "
             SELECT * FROM SIMULACRO

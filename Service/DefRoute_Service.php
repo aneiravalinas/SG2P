@@ -27,6 +27,12 @@ class DefRoute_Service extends DefRoute_Validation {
         }
     }
 
+    /*
+     *  - Recupera las definiciones de rutas de un plan.
+     *      1. Valida y busca un plan por ID, comprobando que existe.
+     *      2. Valida los datos recibidos que se usarán como filtro en la búsqueda.
+     *      3. Recupera las definiciones de rutas.
+     */
     function SEARCH() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -54,7 +60,13 @@ class DefRoute_Service extends DefRoute_Validation {
         return $this->feedback;
     }
 
-
+    /*
+     *  - Añade la definición de una Ruta.
+     *      1. Valida y busca la definición de la ruta que se asocia a la ruta, comprobando que existe.
+     *      2. Valida que los atributos que conforman la definición de la ruta.
+     *      3. Comprueba que el plan no tiene una definición de ruta con el mismo nombre.
+     *      4. Añade la definición de la ruta.
+     */
     function ADD() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -85,6 +97,7 @@ class DefRoute_Service extends DefRoute_Validation {
         return $this->feedback;
     }
 
+    // Recupera la información de la definición de una ruta por ID.
     function seek() {
         $validation = $this->validar_RUTA_ID();
         if(!$validation['ok']) {
@@ -101,6 +114,12 @@ class DefRoute_Service extends DefRoute_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Elimina la definición de una ruta.
+     *      1. Valida y busca la definición de una ruta por ID, comprobando que existe.
+     *      2. Verifica que no existen cumplimentaciones de esa ruta en algún edificio.
+     *      3. Elimina la definición de la ruta.
+     */
     function DELETE() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -125,6 +144,7 @@ class DefRoute_Service extends DefRoute_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca la definición de un plan por ID.
     function seekPlan() {
         $validation = $this->validar_PLAN_ID();
         if(!$validation['ok']) {
@@ -134,6 +154,13 @@ class DefRoute_Service extends DefRoute_Validation {
         return $this->seekByPlanID();
     }
 
+    /*
+     *  - Modifica los datos de la definición de una ruta.
+     *      1. Valida y busca la definición de una ruta por ID, comprobando que existe.
+     *      2. Valida los nuevos datos recibidos.
+     *      3. En caso de que se haya recibido un nuevo nombre, verifica que no exista una definición de ruta en el mismo plan con ese nombre.
+     *      4. Modifica los datos de la definición de la ruta.
+     */
     function EDIT() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -167,7 +194,7 @@ class DefRoute_Service extends DefRoute_Validation {
         return $this->feedback;
     }
 
-
+    // Comprueba que no existe una ruta con el nombre indicado.
     function name_route_not_exist() {
         $feedback = $this->defRoute_entity->searchByRouteName();
         if($feedback['ok']) {
@@ -184,7 +211,7 @@ class DefRoute_Service extends DefRoute_Validation {
         return $feedback;
     }
 
-
+    // Recupera los datos de la definición de un plan por ID.
     function seekByPlanID() {
         $feedback = $this->defPlan_entity->seek();
         if($feedback['ok']) {
@@ -201,6 +228,7 @@ class DefRoute_Service extends DefRoute_Validation {
         return $feedback;
     }
 
+    // Recupera los datos de la definición de una ruta por ID.
     function seekByRouteID() {
         $feedback = $this->defRoute_entity->seek();
         if($feedback['ok']) {
@@ -217,6 +245,7 @@ class DefRoute_Service extends DefRoute_Validation {
         return $feedback;
     }
 
+    // Verifica que no existen cumplimentaciones de un procedimiento.
     function imp_routes_not_exist() {
         include_once './Model/ImpRoute_Model.php';
         $impRoute_entity = new ImpRoute_Model();

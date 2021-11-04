@@ -37,14 +37,14 @@ class Edit_DefRoute {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" value="<?php echo $this->route['nombre'] ?>" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFROUTE();"/>
+                                    <input type="text" value="<?php echo $this->route['nombre'] ?>" class="form-control" id="nombre" name="nombre" onblur="check_DEFINITION_NAME();"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="descripcion" class="i18n-descripcion">Descripcion</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPCION_DEFROUTE()"><?php echo $this->route['descripcion'] ?></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPTION();"><?php echo $this->route['descripcion'] ?></textarea>
                                 </div>
                             </div>
 
@@ -62,7 +62,7 @@ class Edit_DefRoute {
                                         insertacampo(document.formularioedit,'ruta_id','<?php echo $this->route['ruta_id'] ?>');
                                         insertacampo(document.formularioedit,'controller','DefRoute');
                                         insertacampo(document.formularioedit,'action','edit');
-                                        enviaformcorrecto(document.formularioedit,check_DEFROUTE());">
+                                        enviaformcorrecto(document.formularioedit,check_DEFINITION());">
                                         Enviar
                                     </a>
                                 </div>

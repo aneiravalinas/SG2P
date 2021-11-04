@@ -37,14 +37,14 @@ class Edit_DefProc {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" value="<?php echo $this->proc['nombre'] ?>" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFPROC();"/>
+                                    <input type="text" value="<?php echo $this->proc['nombre'] ?>" class="form-control" id="nombre" name="nombre" onblur="check_DEFINITION_NAME();"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="descripcion" class="i18n-descripcion">Descripcion</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPCION_DEFPROC()"><?php echo $this->proc['descripcion'] ?></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPTION();"><?php echo $this->proc['descripcion'] ?></textarea>
                                 </div>
                             </div>
 
@@ -62,7 +62,7 @@ class Edit_DefProc {
                                         insertacampo(document.formularioedit,'procedimiento_id','<?php echo $this->proc['procedimiento_id'] ?>');
                                         insertacampo(document.formularioedit,'controller','DefProc');
                                         insertacampo(document.formularioedit,'action','edit');
-                                        enviaformcorrecto(document.formularioedit,check_DEFPROC());">
+                                        enviaformcorrecto(document.formularioedit,check_DEFINITION());">
                                         Enviar
                                     </a>
                                 </div>

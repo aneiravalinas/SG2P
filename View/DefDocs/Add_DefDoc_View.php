@@ -41,14 +41,14 @@ class Add_DefDoc {
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_NOMBRE_DEFDOC();"/>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_DEFINITION_NAME();"/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="descripcion" class="i18n-descripcion">Descripcion</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPCION_DEFDOC();"></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" onblur="check_DESCRIPTION();"></textarea>
                                 </div>
                             </div>
 
@@ -66,7 +66,7 @@ class Add_DefDoc {
                                             insertacampo(document.formularioadd,'plan_id', '<?php echo $this->plan['plan_id'] ?>');
                                             insertacampo(document.formularioadd,'controller','DefDoc');
                                             insertacampo(document.formularioadd,'action','add');
-                                            enviaformcorrecto(document.formularioadd,check_DEFDOC());">
+                                            enviaformcorrecto(document.formularioadd,check_DEFINITION());">
                                         Enviar
                                     </a>
                                 </div>

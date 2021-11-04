@@ -108,6 +108,7 @@ class DefFormat_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Recupera las definiciones de formaciones de un plan concreto que tengan cumplimentaciones en el edificio que se pasa como parámetro.
     function searchBuildingPlanFormations($edificio_id) {
         $this->query = "
             SELECT * FROM FORMACION

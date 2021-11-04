@@ -113,6 +113,7 @@ class DefDoc_Model extends Abstract_Model {
         return $this->feedback;
     }
 
+    // Recupera las definiciones de documentos de un determinado plan que tengan cumplimentaciones en el edificio que se pasa como parámetro.
     function searchBuildingPlanDocuments($edificio_id) {
         $this->query = "
             SELECT * FROM DOCUMENTO

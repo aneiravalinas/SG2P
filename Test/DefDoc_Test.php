@@ -49,20 +49,12 @@ $respTest = obtenerRespuesta('DefDoc','SEARCH','DOCUMENTO_ID','ID del documento 
     'DFDOC_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
-// Nombre corto (menos de 5 caracteres)
-$_POST = array('plan_id' => '2','nombre' => 'aa');
-$defDoc_service = new DefDoc_Service();
-$feedback = $defDoc_service->SEARCH();
-$respTest = obtenerRespuesta('DefDoc','SEARCH','NOMBRE','Nombre de documento corto',
-    'DFDOC_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
-array_push($testDefDoc, $respTest);
-
-// Nombre largo (más de 50 caracteres)
-$_POST = array('plan_id' => '2','nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre largo (más de 60 caracteres)
+$_POST = array('plan_id' => '2','nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defDoc_service = new DefDoc_Service();
 $feedback = $defDoc_service->SEARCH();
 $respTest = obtenerRespuesta('DefDoc','SEARCH','NOMBRE','Nombre de documento largo',
-    'DFDOC_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
 // Nombre de documento con caracteres no permitidos
@@ -70,7 +62,7 @@ $_POST = array('plan_id' => '2','nombre' => 'Nombre del doc^mento');
 $defDoc_service = new DefDoc_Service();
 $feedback = $defDoc_service->SEARCH();
 $respTest = obtenerRespuesta('DefDoc','SEARCH','NOMBRE','Nombre de documento con caracteres no permitidos',
-    'DFDOC_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
 // Visibilidad documento valores no permitidos
@@ -174,15 +166,15 @@ $_POST = array('plan_id' => '2','nombre' => 'aa');
 $defDoc_service = new DefDoc_Service();
 $feedback = $defDoc_service->ADD();
 $respTest = obtenerRespuesta('DefDoc','ADD','NOMBRE','Nombre de documento corto',
-    'DFDOC_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
-// Nombre largo (más de 50 caracteres)
-$_POST = array('plan_id' => '2','nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre largo (más de 60 caracteres)
+$_POST = array('plan_id' => '2','nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defDoc_service = new DefDoc_Service();
 $feedback = $defDoc_service->ADD();
 $respTest = obtenerRespuesta('DefDoc','ADD','NOMBRE','Nombre de documento largo',
-    'DFDOC_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
 // Nombre de documento con caracteres no permitidos
@@ -190,7 +182,7 @@ $_POST = array('plan_id' => '2','nombre' => 'Nombre del doc^mento');
 $defDoc_service = new DefDoc_Service();
 $feedback = $defDoc_service->ADD();
 $respTest = obtenerRespuesta('DefDoc','ADD','NOMBRE','Nombre de documento con caracteres no permitidos',
-    'DFDOC_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
 // Descripción vacía
@@ -382,15 +374,15 @@ $_POST = array('documento_id' => '1', 'nombre' => 'aa');
 $defDoc_service = new DefDoc_Service();
 $feedback = $defDoc_service->EDIT();
 $respTest = obtenerRespuesta('DefDoc','EDIT','NOMBRE','Nombre de documento corto',
-    'DFDOC_NAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_SHRT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
-// Nombre largo (más de 50 caracteres)
-$_POST = array('documento_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+// Nombre largo (más de 60 caracteres)
+$_POST = array('documento_id' => '1', 'nombre' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 $defDoc_service = new DefDoc_Service();
 $feedback = $defDoc_service->EDIT();
 $respTest = obtenerRespuesta('DefDoc','EDIT','NOMBRE','Nombre de documento largo',
-    'DFDOC_NAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_LRG', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
 // Nombre de documento con caracteres no permitidos
@@ -398,7 +390,7 @@ $_POST = array('documento_id' => '1', 'nombre' => 'Nombre del doc^mento');
 $defDoc_service = new DefDoc_Service();
 $feedback = $defDoc_service->EDIT();
 $respTest = obtenerRespuesta('DefDoc','EDIT','NOMBRE','Nombre de documento con caracteres no permitidos',
-    'DFDOC_NAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
+    'DEFNAM_FRMT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDefDoc, $respTest);
 
 // Descripción vacía

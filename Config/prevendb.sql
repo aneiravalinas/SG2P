@@ -93,7 +93,7 @@ CREATE TABLE DOCUMENTO
 (
     `documento_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
-    `nombre` VARCHAR(50) NOT NULL,
+    `nombre` VARCHAR(60) NOT NULL,
     `descripcion` TEXT NOT NULL,
     `visible` enum('yes','no') NOT NULL,
 
@@ -106,7 +106,7 @@ CREATE TABLE PROCEDIMIENTO
 (
     `procedimiento_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
-    `nombre` VARCHAR(50) NOT NULL,
+    `nombre` VARCHAR(60) NOT NULL,
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_procedimiento` PRIMARY KEY (`procedimiento_id`),
@@ -118,7 +118,7 @@ CREATE TABLE RUTA
 (
     `ruta_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
-    `nombre` VARCHAR(50) NOT NULL,
+    `nombre` VARCHAR(60) NOT NULL,
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_ruta` PRIMARY KEY (`ruta_id`),
@@ -175,7 +175,7 @@ CREATE TABLE SIMULACRO
 (
     `simulacro_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
-    `nombre` VARCHAR(50) NOT NULL,
+    `nombre` VARCHAR(60) NOT NULL,
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_simulacro` PRIMARY KEY (`simulacro_id`),
@@ -204,7 +204,7 @@ CREATE TABLE FORMACION
 (
     `formacion_id` INT(10) AUTO_INCREMENT,
     `plan_id` INT(10) NOT NULL,
-    `nombre` VARCHAR(50) NOT NULL,
+    `nombre` VARCHAR(60) NOT NULL,
     `descripcion` TEXT NOT NULL,
 
     CONSTRAINT `pk_formacion` PRIMARY KEY (`formacion_id`),
