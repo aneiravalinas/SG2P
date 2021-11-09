@@ -37,6 +37,13 @@ class User_Service extends User_Validation {
         }
     }
 
+    /*
+     *  - Autentica a un usuario, almacenando en sesión el nombre de usuario y el rol.
+     *      1. Valida el nombre de usuario y la contraseña.
+     *      2. Busca al usuario por nombre de usuario, comprobando que existe.
+     *      3. Comprueba que la contraseña coincide con la contraseña recibida.
+     *      4. Almacena en sesión el nombre de usuario y el rol.
+     */
     function login() {
 
         $validation = $this->validar_atributos_login();
@@ -66,6 +73,11 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los usuarios almacenados en el sistema.
+     *      1. Valida los atributos recibidos que se usarán como filtro.
+     *      2. Recupera los usuarios que coincidan con los criterios de búsqueda.
+     */
     function SEARCH() {
 
         $validation = $this->validar_atributos_search();
@@ -86,6 +98,14 @@ class User_Service extends User_Validation {
 
     }
 
+    /*
+     *  - Registra un usuario en el sistema.
+     *      1. Valida los atributos con los que se va a registrar el usuario.
+     *      2. Verifica que el rol a asignar no es 'edificio' (la asignación del rol de responsable de edificio es realizado manualmente por la aplicación
+     *         en el momento en el que a un usuario le es asignado un edificio).
+     *      3. Comprueba que no existan otros usuarios con el DNI, nombre de usuario, email o teléfono indicados.
+     *      4. Sube la foto de perfil en caso de que se haya adjuntado una y registra al usuario.
+     */
     function ADD() {
 
         $validacion = $this->validar_atributos_add();
@@ -136,6 +156,14 @@ class User_Service extends User_Validation {
     }
 
 
+    /*
+     *  - Modifica los datos del perfil del usuario.
+     *      1. Valida los atributos recibidos.
+     *      2. Comprueba que el usuario que el perfil que se va a modificar pertenece al usuario que solicita la acción.
+     *      3. Comprueba que el usuario existe.
+     *      4. Comprueba que no existan otros usuarios con el email o teléfono indicados.
+     *      5. Sube la nueva foto de perfil y elimina la anterior en caso de que se haya adjuntado una, y modifica los datos del perfil.
+     */
     function editProfile() {
         $validation = $this->validar_atributos_perfil();
         if(!$validation['ok']) {
@@ -190,6 +218,16 @@ class User_Service extends User_Validation {
 
     }
 
+    /*
+     *  - Modifica los datos de un usuario.
+     *      1. Valida los atributos recibidos.
+     *      3. Recupera al usuario por nombre de usuario, comprobando que existe.
+     *      4. Comprueba que no existan otros usuarios con el DNI, email o teléfono indicados.
+     *      5. Si el nuevo rol indicado es 'edificio', verifica que tiene edificios asignados.
+     *      6. Si se modifica el rol y el antiguo rol es 'edificio', verifica que no tenga edificios asignados.
+     *      7. Si se modifica el rol y el antiguo rol es 'organizacion' o 'administrador', verifica que exista otro usuario con el mismo rol.
+     *      8. Sube la nueva foto de perfil y elimina la anterior si se ha adjuntado una nueva, y modifica los datos del usuario.
+     */
     function EDIT() {
         $validation = $this->validar_atributos_edit();
         if(!$validation['ok']) {
@@ -284,16 +322,15 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
-   /* function dataForm() {
-        $validation = $this->validar_USERNAME(); // Validamos formato del nombre de usuario.
-        if(!$validation['ok']) {
-            return $validation;
-        }
-
-        $this->feedback = $this->seekByUsername(); // Buscamos por nombre de usuario
-        return $this->feedback;
-    }*/
-
+    /*
+     *  - Elimina un usuario del sistema.
+     *      1. Valida el nombre de usuario.
+     *      2. Recupera al usuario por ID, comprobando que existe.
+     *      3. Si el rol del usuario a eliminar es 'edificio', comprueba que no tiene edificios asignados.
+     *      4. Si el rol del usuario es 'organizacion' o 'administrador', verifica que existe al menos otro usuario en sistema con el mismo rol.
+     *      5. Elimina al usuario del sistema y la foto de perfil asociado, en caso de que tenga uno. Si el usuario que se elimina es el mismo que solicita la acción,
+     *         elimina los datos de sesión.
+     */
     function DELETE() {
         $validation = $this->validar_USERNAME();
         if(!$validation['ok']) {
@@ -349,6 +386,11 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los datos de un usuario.
+     *      1. Valida el nombre de usuario recibido.
+     *      2. Recupera la información del usuario por ID, comprobando que existe.
+     */
     function seek() {
         $validation = $this->validar_USERNAME();
         if(!$validation['ok']) {
@@ -364,7 +406,11 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
-
+    /*
+     *  - Recupera la información del responsable de un portal.
+     *      1. Valida el nombre de usuario recibido.
+     *      2. Recupera la información del usuario por ID, y comprueba que el rol del usuario es 'edificio'.
+     */
     function seekPortalManager() {
         $validation = $this->validar_USERNAME();
         if(!$validation['ok']) {
@@ -385,6 +431,7 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
+    // Comprueba que existe más de un usuario con el rol que se pasa como parámetro.
     function check_more_than_one($rol) {
         $this->feedback = $this->user_entity->searchByRol($rol);
         if($this->feedback['ok']) {
@@ -400,7 +447,7 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
-
+    // Comprueba que el DNI, el nombre de usuario, el email y el teléfono sean únicos.
     function uq_attributes_not_exist() {
         $this->feedback = $this->seekByDNI();
         if($this->feedback['ok'] || $this->feedback['code'] !== 'DNI_NOT_EXST') { // Si el dni existe o se ha producido un error en la consulta (resultado false distinto a DNI_NOT_EXST)
@@ -430,6 +477,10 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Comprueba, en el caso de que se hayan modificado, que no exista otro usuario con el DNI, el nombre de usuario, el email y el teléfono especificados.
+     *  - El parámetro flag determina si se comprueba el campo DNI.
+     */
     function uq_att_changed_not_exists($user, $flag=true) {
         if($flag && $this->dni != $user['dni']) {
             $this->feedback = $this->seekByDNI();
@@ -459,6 +510,7 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
+    // Recupera a un usuario por ID.
     function seekByUsername() {
         $this->feedback = $this->user_entity->seek();
 
@@ -476,6 +528,7 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
+    // Recupera a un usuario por DNI.
     function seekByDNI() {
         $this->feedback = $this->user_entity->seekByID('dni',$this->dni);
         if($this->feedback['ok']) {
@@ -492,6 +545,7 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
+    // Recupera a un usuario por email.
     function seekByEmail() {
         $this->feedback = $this->user_entity->seekByID('email',$this->email);
         if($this->feedback['ok']) {
@@ -508,6 +562,7 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
+    // Recupera a un usuario por teléfono.
     function seekByTelefono() {
         $this->feedback = $this->user_entity->seekByID('telefono',$this->telefono);
         if($this->feedback['ok']) {
@@ -524,6 +579,7 @@ class User_Service extends User_Validation {
         return $this->feedback;
     }
 
+    // Comprueba si el usuario que se pasas como parámetro tiene edificios asignados.
     function user_has_buildings($username) {
         $this->feedback = $this->building_entity->seekByUsername($username);
         if($this->feedback['ok']) {

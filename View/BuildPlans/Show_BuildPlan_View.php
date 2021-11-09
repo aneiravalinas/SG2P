@@ -91,7 +91,7 @@ class Show_BuildPlan {
                                                     insertacampo(document.formenviar, 'plan_id','<?php echo $buildPlan['plan_id'] ?>');
                                                     insertacampo(document.formenviar, 'edificio_id','<?php echo $buildPlan['edificio_id'] ?>');
                                                     insertacampo(document.formenviar, 'controller','BuildPlan');
-                                                    insertacampo(document.formenviar, 'action', 'editForm');
+                                                    insertacampo(document.formenviar, 'action', 'expireForm');
                                                     enviaform(document.formenviar);">
                                                     Vencer
                                                 </a>

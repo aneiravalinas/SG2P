@@ -37,6 +37,13 @@ class Floor_Service extends Floor_Validation {
         }
     }
 
+    /*
+     *  - Recupera las plantas de un edificio.
+     *      1. Valida y busca el edificio por ID, comprobando que existe.
+     *      2. Si el rol del usuario es 'edificio', verifica que es el responsable del edificio sobre el que se realiza la consulta.
+     *      3. Valida los atributos recibidos que se usarán como condiciones de filtrado.
+     *      4. Recupera las plantas del edificio que coincidan con las condiciones de filtrado establecidas.
+     */
     function SEARCH() {
 
         $validation = $this->validar_EDIFICIO_ID();
@@ -76,6 +83,11 @@ class Floor_Service extends Floor_Validation {
     }
 
 
+    /*
+     *  - Recupera los datos de una planta.
+     *      1. Valida y busca la planta por ID, comprobando qeu existe.
+     *      2. Si el rol del usuario es 'edificio', verifica que la planta pertenece a un edificio del cual sea responsable.
+     */
     function seek() {
         $validation = $this->validar_PLANTA_ID();
         if(!$validation['ok']) {
@@ -102,6 +114,7 @@ class Floor_Service extends Floor_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca un edificio por ID, comprobando que existe.
     function emptyForm() {
         $validation = $this->validar_EDIFICIO_ID();
         if(!$validation['ok']) {
@@ -119,6 +132,14 @@ class Floor_Service extends Floor_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Registra una planta en un edificio.
+     *      1. Valida y busca el edificio por ID, comprobando que existe.
+     *      2. Valida los datos de la planta.
+     *      3. Verifica que no existe una planta en el mismo edificio con el número de planta especificado.
+     *      4. Sube la foto de la planta en caso de que se haya adjuntado una.
+     *      5. Registra los datos de la planta.
+     */
     function ADD() {
         $validation = $this->validar_EDIFICIO_ID();
         if(!$validation['ok']) {
@@ -174,6 +195,7 @@ class Floor_Service extends Floor_Validation {
 
     }
 
+    // Valida y busca una planta por ID, comprobando que existe. Recupera el edificio al que pertenece la planta.
     function dataForm() {
         $validation = $this->validar_PLANTA_ID();
         if(!$validation['ok']) {
@@ -189,6 +211,13 @@ class Floor_Service extends Floor_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Elimina una planta del sistema.
+     *      1. Valida y busca la planta por ID, comprobando que existe.
+     *      2. Verifica que la planta no tiene espacios asociados.
+     *      3. Comprueba que la planta no tiene cumplimentaciones de rutas asignadas.
+     *      4. Elimina la planta junto con la foto de la planta en caso de tenga una.
+     */
     function DELETE() {
         $validation = $this->validar_PLANTA_ID();
         if(!$validation['ok']) {
@@ -229,6 +258,14 @@ class Floor_Service extends Floor_Validation {
     }
 
 
+    /*
+     *  - Modifica los datos de una planta.
+     *      1. Valida y busca una planta por ID, comprobando que existe.
+     *      2. Valida los nuevos datos de la planta.
+     *      3. En caso de que se haya informado un nuevo número de planta, comprueba que no existe otra planta en el mismo edificio con ese número de planta.
+     *      4. Sube la nueva foto de la planta y elimina la anterior, en caso de que se haya adjuntado una.
+     *      5. Modifica los datos de la planta.
+     */
     function EDIT() {
         $validation = $this->validar_PLANTA_ID();
         if(!$validation['ok']) {
@@ -287,6 +324,11 @@ class Floor_Service extends Floor_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Busca las plantas asociadas al edificio del portal.
+     *      1. Valida y busca el edificio por ID, comprobando que existe.
+     *      2. Recupera las plantas asociadas al edificio.
+     */
     function searchPortalFloors() {
         $validation = $this->validar_EDIFICIO_ID();
         if(!$validation['ok']) {
@@ -308,6 +350,12 @@ class Floor_Service extends Floor_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los detalles de la planta de un portal. Los detalles de una planta del portal incluyen la información de la planta junto con el listado de los espacios
+     *    asociados.
+     *      1. Valida y busca la planta por ID, comprobando que existe.
+     *      2. Recupera los espacios asociados a la planta.
+     */
     function seekPortalFloor() {
         $validation = $this->validar_PLANTA_ID();
         if(!$validation['ok']) {
@@ -330,7 +378,7 @@ class Floor_Service extends Floor_Validation {
         return $this->feedback;
     }
 
-
+    // Recupera los datos de un edificio por ID.
     function seekByBuildingID() {
         $feedback = $this->building_entity->seek();
         if($feedback['ok']) {
@@ -347,7 +395,7 @@ class Floor_Service extends Floor_Validation {
         return $feedback;
     }
 
-
+    // Verifica que no existe una planta con un número de planta específico en un edificio.
     function num_planta_not_exists() {
         $feedback = $this->floor_entity->seekNumPlanta();
         if($feedback['ok']) {
@@ -362,6 +410,7 @@ class Floor_Service extends Floor_Validation {
         return $feedback;
     }
 
+    // Recupera los datos de una planta por ID.
     function seekByFloorID() {
         $feedback = $this->floor_entity->seek();
         if($feedback['ok']) {
@@ -378,6 +427,7 @@ class Floor_Service extends Floor_Validation {
         return $feedback;
     }
 
+    // Verifica que una planta no tiene espacios asociados.
     function has_not_spaces() {
         include_once './Model/Space_Model.php';
         $space_model = new Space_Model();
@@ -394,6 +444,7 @@ class Floor_Service extends Floor_Validation {
         return $feedback;
     }
 
+    // Verifica que una planta no tiene asociadas cumplimentaciones de rutas.
     function has_not_routes() {
         include_once './Model/ImpRoute_Model.php';
         $impl_route_model = new ImpRoute_Model();

@@ -1,10 +1,12 @@
 <?php
 
-class EditAll_BuildPlan {
+class Expire_BuildPlan {
     var $plan;
+    var $edificio;
 
-    function __construct($plan) {
+    function __construct($plan,$edificio) {
         $this->plan = $plan;
+        $this->edificio = $edificio;
         $this->render();
     }
 
@@ -22,8 +24,8 @@ class EditAll_BuildPlan {
 
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h3 class="mb-4 i18n-expireAll-bldplan-confirm">¿Está seguro que desea vencer TODAS las asignaciones de este Plan? El cambio no será reversible</h3>
-                        <h2><?php echo $this->plan['plan_id'] ?> - <?php echo $this->plan['nombre'] ?></h2>
+                        <h3 class="mb-4 i18n-expire-bldplan-confirm">¿Está seguro que desea vencer esta asignación? El cambio no será reversible</h3>
+                        <h2><?php echo $this->edificio['nombre'] ?> - <?php echo $this->plan['nombre'] ?></h2>
                     </div>
                 </div>
 
@@ -40,8 +42,9 @@ class EditAll_BuildPlan {
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-expire" onclick="
                             crearform('formenviar','post');
                             insertacampo(document.formenviar, 'plan_id', '<?php echo $this->plan['plan_id'] ?>');
+                            insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->edificio['edificio_id'] ?>');
                             insertacampo(document.formenviar, 'controller', 'BuildPlan');
-                            insertacampo(document.formenviar, 'action', 'expireAll');
+                            insertacampo(document.formenviar, 'action', 'expire');
                             enviaform(document.formenviar);">
                             Vencer
                         </a>

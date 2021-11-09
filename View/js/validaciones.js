@@ -20,10 +20,10 @@ function encrypt() {
 
 function not_empty(element, show=false) {
     var correct;
-    var pattern = /[^0-9]/;
+    var pattern = /^[\s]+$/;
     var value = document.getElementById(element).value;
 
-    if((value == null) || (value.length == 0) || !pattern.test(value)) {
+    if((value == null) || (value.length == 0) || pattern.test(value)) {
         if(show) {
             openModal(element,'i18n-not-empty');
         }

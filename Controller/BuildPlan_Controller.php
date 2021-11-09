@@ -105,13 +105,13 @@ class BuildPlan {
         }
     }
 
-    function editForm() {
+    function expireForm() {
         if($this->checkPermission()) {
             $buildPlan_service = new BuildPlan_Service();
             $feedback = $buildPlan_service->seek();
             if($feedback['ok']) {
-                include_once './View/BuildPlans/Edit_BuildPlan_View.php';
-                new Edit_BuildPlan($feedback['plan'],$feedback['edificio']);
+                include_once './View/BuildPlans/Expire_BuildPlan_View.php';
+                new Expire_BuildPlan($feedback['plan'],$feedback['edificio']);
             } else if(isset($feedback['plan'])) {
                 new Message($feedback['code'],'BuildPlan','show',$feedback['plan']);
             } else {
@@ -122,10 +122,10 @@ class BuildPlan {
         }
     }
 
-    function edit() {
+    function expire() {
         if($this->checkPermission()) {
             $buildPlan_service = new BuildPlan_Service();
-            $feedback = $buildPlan_service->EDIT();
+            $feedback = $buildPlan_service->expire();
             if(isset($feedback['plan'])) {
                 new Message($feedback['code'],'BuildPlan','show',$feedback['plan']);
             } else {
@@ -141,8 +141,8 @@ class BuildPlan {
             $buildPlan_service = new BuildPlan_Service();
             $feedback = $buildPlan_service->seekPlan();
             if($feedback['ok']) {
-                include_once './View/BuildPlans/EditAll_BuildPlan_View.php';
-                new EditAll_BuildPlan($feedback['resource']);
+                include_once './View/BuildPlans/ExpireAll_BuildPlan_View.php';
+                new ExpireAll_BuildPlan($feedback['resource']);
             } else {
                 new Message($feedback['code'], 'DefPlan', 'show');
             }

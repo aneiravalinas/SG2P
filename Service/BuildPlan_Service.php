@@ -37,6 +37,12 @@ class BuildPlan_Service extends BuildPlan_Validation {
         }
     }
 
+    /*
+     *  - Recupera los edificios asignados a un determinado plan.
+     *      1. Valida y busca un plan por ID, comprobando que existe.
+     *      2. Valida los atributos recibidos que se usarán como filtro en la búsqueda.
+     *      3. Recupera las asignaciones.
+     */
     function SEARCH() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -65,7 +71,13 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $this->feedback;
     }
 
-    function EDIT() {
+    /*
+     *  - Actúa como endpoint para la funcionalidad de vencer UN plan.
+     *      1. Valida y busca la asignación entre el plan y el edificio por ID, comprobando que existe.
+     *      2. Verifica que la asignación no se encuentre activa.
+     *      3. Llama a la función expire_assignments, el cual es la encarga de vencer la asignación y las cumplimentaciones.
+     */
+    function expire() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
             return $this->feedback;
@@ -85,6 +97,12 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Actúa como endpoint para la funcionalidad vencer TODAS las asignaciones de un plan.
+     *      1. Valida y busca la asignación entre el plan y el edificio por ID, comprobando que existe.
+     *      2. Recupera las asignaciones del plan con edifiicos que se encuentren activas.
+     *      4. Llama a la función expire_assignments, el cual es la encarga de vencer la asignación y las cumplimentaciones.
+     */
     function expireAll() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -106,6 +124,15 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Vence un plan en todos los edificios que tengan una asignación activa.
+     *  - Opera con las asignaciones almacenadas en el array build_plans. Este array es rellenado por las funciones expire y expireAll.
+     *  - Para cada una de las asignaciones:
+     *      1. Modifica el estado de la asignación entre el plan y el edificio a vencido.
+     *      2. Recupera las definiciones de documentos asociadas al plan.
+     *      3. Llama a expire_documents, el cual se encarga de vencer las cumplimentaciones del documento en el edificio que se pasa como parámetro.
+     *  - En caso de que se produzca un error, deshace los cambios realizados hasta el momento.
+     */
     function expire_assignments() {
         if(empty($this->build_plans)) {
             $feedback['ok'] = true;
@@ -138,6 +165,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
     }
 
 
+    // Valida y recupera los datos de un plan por ID.
     function seekPlan() {
         $validation = $this->validar_PLAN_ID();
         if(!$validation['ok']) {
@@ -147,6 +175,10 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $this->seekByPlanID();
     }
 
+    /*
+     *  1. Valida y recupera la información de un plan por ID, comprobando que existe.
+     *  2. Recupera los edificios que no tengan una asignación con el plan.
+     */
     function addForm() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -164,6 +196,15 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Actúa como endpoint para la funcionalidad de asignar el plan a varios edificios.
+     *      1. Valida y busca el plan por ID, comprobando que existe.
+     *      2. Comprueba que el plan tenga asociado, por lo menos, una definición de documento.
+     *      3. Valida los IDs de los Edificios a los que se va a asignar el plan.
+     *      4. Crea un directorio para el plan dentro del directorio Plans.
+     *      5. Llama a la función ADD, enviando las definiciones de documentos asociadas al plan, la cual se encarga de crear la asignación entre el plan y los edificios, y de crear una cumplimentación en estado pendiente para cada
+     *          una de las definiciones asociadas al plan.
+     */
     function multipleADD() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -208,6 +249,17 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Crea las asignaciones entre el plan y los edificios que recibe como parámetros.
+     *  - Para cada uno de los edificios:
+     *      1. Valida y recupera la información del edificio por ID, comprobando que existe.
+     *      2. Comprueba que el plan no tenga ya una asociación con el edificio.
+     *      3. Genera el directorio del edificio dentro del directorio del plan.
+     *      4. Crea la asignación entre el plan y el edificio.
+     *      5. Llama a la función create_impdocs, la cual se encarga de generar una cumplimentación en estado pendiente de los documentos en el edificio.
+     *      6. Genera una notificación al responsable del edificio conforme se ha asignado un plan.
+     *  - Si se produce un error en alguno de los pasos, deshace los cambios realizados.
+     */
     function ADD($buildings, $docs, $path) {
         if(empty($buildings)) {
             $this->feedback['ok'] = true;
@@ -264,6 +316,15 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Elimina la asignación entre un plan y un edificio, junto con las cumplimentaciones de los elementos asociados al plan en ese edificio.
+     *      1. Valida y busca la asignación entre un plan y un edificio por ID, comprobando que existe.
+     *      2. Elimina la asignación entre el plan y el edificio.
+     *      3. Recupera las definiciones de documentos asociadas al plan y llama a la función delete_impDocs, la cual elimina las cumplimentaciones de los documentos
+     *         en el edificio.
+     *      4. Elimina el directorio del edificio dentro del directorio del plan. Si tras la eliminación el directorio del plan está vacío, también es eliminado.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function DELETE() {
         $this->feedback = $this->seek();
         if(!$this->feedback['ok']) {
@@ -302,6 +363,13 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los datos de la asignación entre un plan y un edificio.
+     *      1. Valida y busca un plan por ID, comprobando que existe.
+     *      2. Valida y busca un edificio por ID, comprobando que existe.
+     *      3. Verifica que el usuario que solicita la acción tiene permisos en el edificio.
+     *      4. Recupera los datos de la asignación.
+     */
     function seek() {
         $this->feedback = $this->seekPlan();
         if(!$this->feedback['ok']) {
@@ -343,6 +411,16 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Crea una cumplimentación en estado pendiente de cada uno de los documentos recibidos en el edificio que se pasa como parámetro.
+     *  - Para cada uno de los documentos.
+     *      1. Crea un directorio para el documento dentro del directorio de documentos del Edificio
+     *          - Ejemplo de Ruta: /Plans/PLAN_ID/EDIFICIO_ID/Documentos/DOCUMENTO_ID
+     *      2. Crea la cumplimentación en estado pendiente.
+     *  - Una vez se crean las cumplimentaciones de todos los documentos en el edificio, recupera los procedimientos del plan e invoca a create_impProcs,
+     *    la cual creará las cumplimentaciones de los procedimientos del plan.
+     *  - Si se produce un error, deshace los cambios realizados hasta el momento.
+     */
     function create_impDocs($edificio_id, $docs, $path) {
         if(empty($docs)) {
             $feedback = $this->searchProcsByPlan();
@@ -378,6 +456,15 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Elimina las cumplimentaciones de los documentos en un edificio, los cuales se reciben como parámetro.
+     *  - Para cada uno de los documentos.
+     *      1. Recupera las cumplimentaciones del documento en el edificio. Si no hay cumplimentaciones de ese documento, pasa al siguiente.
+     *      2. Elimina las cumplimentaciones.
+     *  - Una vez eliminadas todas las cumplimentaciones de los documentos, recupera los procedimientos asociados al plan e invoca delete_impProcs, el cual
+     *    elimina las cumplimentaciones de los procedimientos en el edificio.
+     *  - Si se produce un error, deshace todos los cambios realizados.
+     */
     function delete_impDocs($edificio_id, $docs) {
         if(empty($docs)) {
             $feedback = $this->searchProcsByPlan();
@@ -426,6 +513,15 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Vence las cumplimentaciones de los documentos en un edificio. Ambos se reciben como parámetro.
+     *  - Para cada uno de los documentos:
+     *      1. Recupera las cumplimentaciones del documento en el edificio. Si no hay cumplimentaciones, pasa al siguiente documento.
+     *      2. Vence las cumplimentaciones activas, añadiendo como fecha de vencimiento la fecha actual.
+     *  - Una vez vence las cumplimentaciones de todos los documentos, recupera los procedimientos asociados al plan y llama a expire_procedures, el cual se encarga
+     *    de vencer las cumplimentaciones de los procedimientos en el edificio.
+     *  - Si se produce un error, deshace los cambios realizados.
+     */
     function expire_documents($edificio_id,$docs) {
         if(empty($docs)) {
             $feedback = $this->searchProcsByPlan();
@@ -473,6 +569,16 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Añade una cumplimentación en estado pendiente de cada uno de los procedimientos en el edificio, recibidos como parámetro.
+     *  - Para cada uno de los procedimientos.
+     *      1. Crea un directorio para el procedimiento dentro del directorio de procedimientos del Edificio
+     *          - Ejemplo de Ruta: /Plans/PLAN_ID/EDIFICIO_ID/Procedimientos/PROCEDIMIENTO_ID
+     *      2. Crea la cumplimentación en estado pendiente.
+     *  - Una vez se crean las cumplimentaciones de todos los procedimientos en el edificio, recupera las rutas del plan y las plantas del edificio, e
+     *    invoca a create_impRoutes, el cual crea una cumplimentación en estado pendiente de cada una de las rutas en cada una de las plantas del edificio.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function create_impProcs($edificio_id, $procs, $path) {
         if(empty($procs)) {
             $feedbackRoutes = $this->searchRoutesByPlan();
@@ -517,6 +623,15 @@ class BuildPlan_Service extends BuildPlan_Validation {
 
     }
 
+    /*
+     *  - Elimina las cumplimentaciones de los procedimientos en el edificio que se pasan como parámetros.
+     *  - Para cada uno de los procedimientos recibidos:
+     *      1. Recupera las cumplimentaciones del procedimiento en el edificio.
+     *      2. Elimina las cumplimentaciones.
+     *  - Una vez eliminadas las cumplimentaciones de los procedimientos, recupera las rutas del plan y las plantas del edificio, y llama a la función delete_impRoutes,
+     *    la cual se encarga de eliminar las cumplimentaciones de las rutas en las plantas.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function delete_impProcs($edificio_id, $procs) {
         if(empty($procs)) {
             $feedbackRoutes = $this->searchRoutesByPlan();
@@ -569,6 +684,15 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Vence las cumplimentaciones de los procedimientos en el edificio, los cuales se reciben como parámetro.
+     *  - Para cada uno de los procedimientos:
+     *      1. Recupera las cumplimentaciones del procedimiento en el edificio.
+     *      2. Vence las cumplimentaciones, añadiendo como fecha de vencimiento la fecha actual.
+     *  - Una vez vence las cumplimentaciones de todos los procedimientos, recupera las rutas del plan y las plantas del edificio y llama a la función expire_routes, la cual
+     *    se encarga de vencer las cumplimentaciones de las rutas en las plantas del edificio.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function expire_procedures($edificio_id, $procs) {
         if(empty($procs)) {
             $feedbackRoutes = $this->searchRoutesByPlan();
@@ -621,7 +745,16 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
-
+    /*
+     *  - Añade una cumplimentación en estado pendiente de cada una de las rutas en cada una de las plantas recibidas como parámetro.
+     *  - Para cada una de las rutas:
+     *      1. Crea un directorio de la ruta dentro del directorio de rutas del Edificio
+     *          - Ejemplo de Ruta: /Plans/PLAN_ID/EDIFICIO_ID/Rutas/RUTA_ID.
+     *      2. Crea una cumplimentación en estado pendiente en cada una de las plantas.
+     *  - Una vez creadas todas las cumplimentaciones, recupera las formaciones del plan y llama a la función create_impFormat, el cual se encarga de crear
+     *    las cumplimentaciones de las formaciones en el edificio.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function create_impRoutes($edificio_id, $routes, $floors, $path) {
         if(empty($routes)) {
             $feedback = $this->searchFormatsByPlan();
@@ -671,6 +804,15 @@ class BuildPlan_Service extends BuildPlan_Validation {
 
     }
 
+    /*
+     *  - Elimina las cumplimentaciones de las rutas recibidas en las plantas, ambas recibidas como parámetro.
+     *  - Para cada una de las rutas:
+     *      1. Recupera las cumplimentaciones de la ruta en cada planta.
+     *      2. Elimina las cumplimentaciones de la ruta en las plantas.
+     *  - Una vez eliminadas todas las cumplimentaciones, recupera las formaciones del plan y llama a la función delete_impFormats, que se encarga de eliminar las
+     *    cumplimentaciones de las formaciones en el edificio.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function delete_impRoutes($edificio_id, $routes, $floors) {
         if(empty($routes)) {
             $feedback = $this->searchFormatsByPlan();
@@ -721,6 +863,15 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Vence las cumplimentaciones de las rutas en las plantas del edificio, ambas pasadas como parámetros.
+     *  - Para cada una de las rutas:
+     *      1. Recupera las cumplimentaciones de la ruta en cada una de las plantas.
+     *      2. Vence las cumplimentaciones, añadiendo como fecha de vencimiento la fecha actual.
+     *  - Una vez vencidas todas las cumplimentaciones, recupera las formaciones del plan y llama a la función expire_formations, la cual vence
+     *    las cumplimentaciones de las formaciones en el edificio.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function expire_routes($edificio_id, $routes, $floors) {
         if(empty($routes)) {
             $feedback = $this->searchFormatsByPlan();
@@ -771,6 +922,12 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Añade una cumplimentación en estado pendiente de cada una de las formaciones en el edificio, ambos pasados como parámetro.
+     *  - Una vez añadidas las cumplimentaciones, recupera los simulacros del plan y llama a la función create_impSims, la cual crea una cumplimentación
+     *    en estado pendiente de cada simulacro en el edificio.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function create_impFormat($edificio_id, $formations) {
         if(empty($formations)) {
             $feedback = $this->searchSimsByPlan();
@@ -799,6 +956,15 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Elimina las cumplimentaciones de las formaciones en el edificio, ambos recibidos como parámetro.
+     *  - Para cada una de las formaciones:
+     *      1. Recupera las cumplimentaciones de la formación en el edificio.
+     *      2. Elimina las cumplimentaciones.
+     *  - Una vez eliminadas las cumplimentaciones, recupera los simulacros del plan y llama a delete_impSims, la cual se encarga de eliminar las cumplimentaciones
+     *    de los simulacros en el edificio.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function delete_impFormats($edificio_id, $formations) {
         if(empty($formations)) {
             $feedback = $this->searchSimsByPlan();
@@ -845,6 +1011,15 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Vence las cumplimentaciones de las formaciones en el edificio, ambos pasados como parámetro.
+     *  - Para cada una de las formaciones:
+     *      1. Recupera las cumplimentaciones de la formación en el edificio.
+     *      2. Vence las cumplimentaciones, añadiendo como fecha de vencimiento la fecha actual.
+     *  - Una vez vencidas todas las cumplimentaciones, recupera los simulacros del plan y llama a la función expire_simulacrums, la cual vence las cumplimentaciones
+     *    de los simulacros en el edificio.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function expire_formations($edificio_id, $formations) {
         if(empty($formations)) {
             $feedback = $this->searchSimsByPlan();
@@ -890,6 +1065,11 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Añade una cumplimentación en estado pendiente de cada uno de los simulacros en el edificio, ambos pasados como parámetro.
+     *  - Una vez añadidas las cumplimentaciones, devuelve true conforme la acción ha finalizado correctamente.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function create_impSims($edificio_id, $simulacrums) {
         if(empty($simulacrums)) {
             return array('ok' => true, 'code' => 'BLDPLAN_IMPADD_OK');
@@ -914,6 +1094,14 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Elimina las cumplimentaciones de los simulacros en el edificio, ambos recibidos como parámetro.
+     *  - Para cada uno de los simulacros:
+     *      1. Recupera las cumplimentaciones del simulacro en el edificio.
+     *      2. Elimina las cumplimentaciones.
+     *  - Una vez eliminadas las cumplimentaciones, devuelve true conforma las operaciones se han realizado con éxito.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function delete_impSims($edificio_id, $simulacrums) {
         if(empty($simulacrums)) {
             return array('ok' => true, 'code' => 'BLD_IMPDEL_OK');
@@ -955,6 +1143,14 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    /*
+     *  - Vence las cumplimentaciones de los simulacros en el edificio, ambos recibidos como parámetro.
+     *  - Para cada uno de los simulacros.
+     *      1. Recupera las cumplimentaciones del simulacro en el edificio.
+     *      2. Vence las cumplimentaciones, añadiendo como fecha de vencimiento la fecha actual.
+     *  - Una vez vencidas todas las cumplimentaciones, devuelve true conforme la acción se ha realizado con éxito.
+     *  - En caso de que se produzca un error, deshace los cambios realizados.
+     */
     function expire_simulacrums($edificio_id, $simulacrums) {
         if(empty($simulacrums)) {
             return $this->expire_assignments();
@@ -996,6 +1192,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera los datos de la definición de un plan por ID.
     function seekByPlanID() {
         $feedback = $this->defPlan_entity->seek();
         if($feedback['ok']) {
@@ -1012,6 +1209,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera aquellos edificios que no están asignados a un determinado plan.
     function searchBuildingCandidates() {
         $feedback = $this->bldPlan_entity->searchBuildingsCandidates();
         if($feedback['ok']) {
@@ -1028,6 +1226,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera los datos de un edificio por ID.
     function seekByBuildingID($edificio_id) {
         include_once './Model/Building_Model.php';
         $building_entity = new Building_Model();
@@ -1047,6 +1246,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera las definiciones de documentos asociadas a un plan.
     function searchDocsByPlan() {
         include_once './Model/DefDoc_Model.php';
         $defDoc_model = new DefDoc_Model();
@@ -1065,6 +1265,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera las definiciones de procedimientos asociadas a un plan.
     function searchProcsByPlan() {
         include_once './Model/DefProc_Model.php';
         $defProc_model = new DefProc_Model();
@@ -1083,6 +1284,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera las definiciones de rutas asociadas a un plan.
     function searchRoutesByPlan() {
         include_once './Model/DefRoute_Model.php';
         $defRoute_model = new DefRoute_Model();
@@ -1101,6 +1303,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera las definiciones de formaciones asociadas a un plan.
     function searchFormatsByPlan() {
         include_once './Model/DefFormat_Model.php';
         $defFormat_model = new DefFormat_Model();
@@ -1119,6 +1322,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera las definiciones de simulacros asociadas a un plan.
     function searchSimsByPlan() {
         include_once './Model/DefSim_Model.php';
         $defSim_model = new DefSim_Model();
@@ -1137,6 +1341,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera las plantas de un edificio.
     function searchFloorsByBuilding($edificio_id) {
         include_once './Model/Floor_Model.php';
         $floor_entity = new Floor_Model();
@@ -1157,6 +1362,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera las cumplimentaciones de un documento en un edificio.
     function searchImpDocs($edificio_id, $doc_id) {
         include_once './Model/ImpDoc_Model.php';
         $impDoc_entity = new ImpDoc_Model();
@@ -1175,6 +1381,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera las cumplimentaciones de un procedimiento en un edificio.
     function searchImpProcs($edificio_id, $proc_id) {
         include_once './Model/ImpProc_Model.php';
         $impProc_entity = new ImpProc_Model();
@@ -1191,6 +1398,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera las cumplimentaciones de una ruta en una planta.
     function searchImpRoutes($planta_id, $ruta_id) {
         include_once './Model/ImpRoute_Model.php';
         $impRoute_entity = new ImpRoute_Model();
@@ -1209,6 +1417,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera las cumplimentaciones de una formación en un edificio.
     function searchImpFormats($edificio_id, $format_id) {
         include_once './Model/ImpFormat_Model.php';
         $impFormat_entity = new ImpFormat_Model();
@@ -1227,6 +1436,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera las cumplimentaciones de un simulacro en un edificio.
     function searchImpSims($edificio_id, $sim_id) {
         include_once './Model/ImpSim_Model.php';
         $impSim_entity = new ImpSim_Model();
@@ -1246,6 +1456,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
     }
 
 
+    // Verifica que un plan no está asociado a un edificio.
     function bldPlan_not_exist($edificio_id) {
         $this->bldPlan_entity->edificio_id = $edificio_id;
         $feedback = $this->bldPlan_entity->seek();
@@ -1263,6 +1474,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera la información de la asociación entre un plan y un edificio.
     function seekBldPlan() {
         $feedback = $this->bldPlan_entity->seek();
         if($feedback['ok']) {
@@ -1279,6 +1491,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         return $feedback;
     }
 
+    // Recupera las asignaciones activas de un plan.
     function searchActiveAssignmentsByPlan() {
         $feedback = $this->bldPlan_entity->searchActivesByPlanID();
         if($feedback['ok']) {

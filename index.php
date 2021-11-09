@@ -43,5 +43,3 @@ if (isAuthenticated()) {
         }
     }
 }
-
-?>

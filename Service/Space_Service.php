@@ -39,6 +39,13 @@ class Space_Service extends Space_Validation {
         }
     }
 
+    /*
+     *  - Recupera los espacios asociados a una planta.
+     *      1. Valida y busca una planta por ID, comprobando que existe.
+     *      2. Recupera el edificio asociado a la planta. Si el usuario tiene el rol de 'edificio', verifica que el espacio pertenece a un edificio del cual sea responsable.
+     *      3. Valida los atributos recibidos que se usarán como filtro.
+     *      4. Recupera los espacios de la planta que coincidan con los criterios establecidos.
+     */
     function SEARCH() {
         $validation = $this->validar_PLANTA_ID();
         if(!$validation['ok']) {
@@ -82,6 +89,12 @@ class Space_Service extends Space_Validation {
 
     }
 
+    /*
+     *  - Recupera los datos de un espacio.
+     *      1. Valida y busca un espacio por ID, comprobando que existe.
+     *      2. Recupera los datos de la planta y el edificio al que pertenece el espacio. Si el rol del usuario es 'edificio', verifica que el usuario es responsable
+     *         del edificio al que pertenece el espacio.
+     */
     function seek() {
         $validation = $this->validar_ESPACIO_ID();
         if(!$validation['ok']) {
@@ -115,6 +128,7 @@ class Space_Service extends Space_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca una planta por ID.
     function emptyForm() {
         $validation = $this->validar_PLANTA_ID();
         if(!$validation['ok']) {
@@ -125,6 +139,7 @@ class Space_Service extends Space_Validation {
         return $this->feedback;
     }
 
+    // Valida y busca un espacio por ID. Recupera los datos de la planta asociada.
     function dataForm() {
         $validation = $this->validar_ESPACIO_ID();
         if(!$validation['ok']) {
@@ -141,6 +156,14 @@ class Space_Service extends Space_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Registra un espacio en el sistema.
+     *      1. Valida y busca una planta por ID, comprobando que existe.
+     *      2. Valida los datos con los que se va a registrar el espacio.
+     *      3. Verifica que no exista un espacio en la misma planta con el nombre indicado.
+     *      4. Sube la foto del espacio en caso de que se haya adjuntado una.
+     *      5. Registra los datos del espacio.
+     */
     function ADD() {
         $validation = $this->validar_PLANTA_ID();
         if(!$validation['ok']) {
@@ -195,7 +218,11 @@ class Space_Service extends Space_Validation {
 
     }
 
-
+    /*
+     *  - Elimina los datos de un espacio.
+     *      1. Valida y busca un espacio por ID, comprobando que existe.
+     *      2. Elimina los datos del espacio. En caso de que el espacio tenga una foto asociada, la elimina.
+     */
     function DELETE() {
         $validation = $this->validar_ESPACIO_ID();
         if(!$validation['ok']) {
@@ -222,6 +249,14 @@ class Space_Service extends Space_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Modifica los datos de un espacio.
+     *      1. Valida y busca un espacio por ID, comprobando que existe.
+     *      2. Valida los datos que se van a modificar del espacio.
+     *      3. En caso que se haya informado un nuevo nombre de espacio, verifica que no exista otro espacio en la misma planta con el nuevo nombre.
+     *      4. Sube la nueva foto del espacio en caso de que se haya adjuntado una nueva, y elimina la anterior.
+     *      5. Modifica los datos del espacio.
+     */
     function EDIT() {
         $validation = $this->validar_ESPACIO_ID();
         if(!$validation['ok']) {
@@ -280,6 +315,7 @@ class Space_Service extends Space_Validation {
         return $this->feedback;
     }
 
+    // Recupera los datos del espacio de un portal.
     function seekPortalSpace() {
         $validation = $this->validar_ESPACIO_ID();
         if(!$validation['ok']) {
@@ -296,7 +332,7 @@ class Space_Service extends Space_Validation {
         return $this->feedback;
     }
 
-
+    // Comprueba que no existe un espacio con el nombre indicado.
     function name_space_not_exists() {
         $feedback = $this->space_entity->seekNameSpace();
         if($feedback['ok']) {
@@ -311,7 +347,7 @@ class Space_Service extends Space_Validation {
         return $feedback;
     }
 
-
+    // Recupera los datos de un espacio por ID.
     function seekBySpaceID() {
         $feedback = $this->space_entity->seek();
         if($feedback['ok']) {
@@ -328,6 +364,7 @@ class Space_Service extends Space_Validation {
         return $feedback;
     }
 
+    // Recupera los datos de una planta por ID.
     function seekByFloorID() {
         $feedback = $this->floor_entity->seek();
         if($feedback['ok']) {
@@ -344,6 +381,7 @@ class Space_Service extends Space_Validation {
         return $feedback;
     }
 
+    // Recupera los datos de un edificio por ID.
     function seekByBuildingID() {
         $feedback = $this->building_entity->seek();
         if($feedback['ok']) {

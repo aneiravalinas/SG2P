@@ -39,11 +39,17 @@ class Building_Service extends Building_Validation {
 
     }
 
+    // Recupera los usuarios con rol de responsable de edificio para poder ser utilizados como condición de filtrado.
     function searchForm() {
         $this->feedback = $this->user_entity->searchByRol('edificio');
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los datos de los edificios registrados en sistema.
+     *      1. Valida los atributos que se utilizarán como condición de filtrado.
+     *      2. Recupera los edificios que coincidan con el filtro. Si el rol del usuario es responsable de edificio, solo se recuperan aquellos edificios que tenga asignado.
+     */
     function SEARCH() {
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
@@ -64,12 +70,13 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
-
+    // Recupera aquellos usuarios que son candidatos a ser responsables de un edificio (Rol 'registrado' o 'edificio').
     function addForm() {
         $this->feedback = $this->get_candidates();
         return $this->feedback;
     }
 
+    // Valida y busca un edificio por ID, comprobando que existe.
     function deleteForm() {
         $validation = $this->validar_EDIFICIO_ID();
         if(!$validation['ok']) {
@@ -80,6 +87,13 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Registra un edificio en el sistema.
+     *      1. Valida los atributos recibidos.
+     *      2. Verifica que el usuario informado para ser el responsable del edificio es un usuario candidato a serlo (el rol del usuario es 'edificio' o 'registrado').
+     *      3. Sube la foto del edificio en caso de que se haya informado.
+     *      4. Registra el edificio en sistema y modifica el rol del usuario asignado a 'edificio'.
+     */
     function ADD() {
         $validation = $this->validar_atributos_add();
         if(!$validation['ok']) {
@@ -124,6 +138,15 @@ class Building_Service extends Building_Validation {
 
     }
 
+    /*
+     *  - Elimina un edificio del sistema.
+     *      1. Valida y busca un edificio por ID, comprobando que existe.
+     *      2. Verifica que el edificio no tenga plantas asociadas.
+     *      3. Comprueba que el edificio no tenga planes asignados.
+     *      4. Elimina el edificio y la foto asociada en caso de que exista una.
+     *      5. Comprueba si el usuario responsable del edificio tiene más edificios asignados. En caso de que no los tenga,
+     *         modifica su rol a 'registrado'.
+     */
     function DELETE() {
         $validation = $this->validar_EDIFICIO_ID();
         if(!$validation['ok']) {
@@ -171,6 +194,10 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  1. Valida y busca un edificio por ID, comprobando que existe.
+     *  2. Recupera los usuarios candidatos a ser el responsable del edificio (rol 'edificio' o 'registrado')
+     */
     function editForm() {
         $validation = $this->validar_EDIFICIO_ID();
         if(!$validation['ok']) {
@@ -192,6 +219,14 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Modifica los datos de un edificio.
+     *      1. Valida los atributos recibidos.
+     *      2. Recupera el edificio por ID, comprobando que existe.
+     *      3. Comprueba que el usuario asignado al edificio es candidato a ser responsable del edificio (rol 'edificio' o 'registrado').
+     *      4. Sube la nueva foto del edificio y elimina la anterior, en caso de que se haya informado una foto nueva.
+     *      5. Modifica los datos del edificio. En caso que se haya modificado el responsable del edificio, modifica el rol del nuevo usuario y del antiguo.
+     */
     function EDIT() {
         $validation = $this->validar_atributos_edit();
         if(!$validation['ok']) {
@@ -263,6 +298,11 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los datos de un edificio.
+     *      1. Valida y busca un edificio por ID, comprobando que existe.
+     *      2. Si el usuario que solicita la acción es 'edificio', verifica que el usuario es responsable del edificio.
+     */
     function seek() {
         $validation = $this->validar_EDIFICIO_ID();
         if(!$validation['ok']) {
@@ -287,6 +327,12 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los datos del edificio del portal.
+     *      1. Si no se recibe un ID de edificio, recupera los datos del edificio cuyo identificador esté almacenado en sesión.
+     *      2. Valida y recupera el edificio por ID, comprobando que existe.
+     *      3. Almacena el ID del edificio en sesión.
+     */
     function seekPortal() {
         if($this->edificio_id == '') {
             if(isset($_SESSION['portal'])) {
@@ -310,6 +356,7 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+    // Recupera las ciudades en las que haya edificios registrados.
     function showCities() {
         $this->feedback = $this->building_entity->searchCities();
         if($this->feedback['ok']) {
@@ -326,6 +373,7 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+    // Recupera los edificios de una determina ciudad.
     function searchBuildingsByCity() {
         $validation = $this->validar_CIUDAD();
         if(!$validation['ok']) {
@@ -346,7 +394,7 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
-
+    // Recupera los usuarios candidatos a ser responsable de edificio.
     function get_candidates() {
         $this->feedback = $this->user_entity->get_usernames_byRoles(self::roles_candidates);
         if($this->feedback['ok']) {
@@ -361,6 +409,7 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+    // Verifica que un usuario es candidato a ser responsable de edificio.
     function is_candidate($username) {
         $this->user_entity->username = $username;
         $this->feedback = $this->user_entity->seek();
@@ -382,6 +431,7 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+    // Recupera un edificio por ID.
     function seekByBuildingID() {
         $this->feedback = $this->building_entity->seek();
         if($this->feedback['ok']) {
@@ -398,6 +448,7 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+    // Recupera un usuario por ID.
     function seekByUsername($username) {
         $this->feedback = $this->building_entity->seekByUsername($username);
         if($this->feedback['ok']) {
@@ -414,7 +465,7 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
-
+    // Verifica que un edificio no tiene plantas asociadas.
     function has_not_floors() {
         include_once './Model/Floor_Model.php';
         $floor_model = new Floor_Model();
@@ -431,6 +482,7 @@ class Building_Service extends Building_Validation {
         return $this->feedback;
     }
 
+    // Verifica que un edificio no tenga planes asignados.
     function has_not_plans() {
         include_once './Model/BuildPlan_Model.php';
         $build_plan_model = new BuildPlan_Model();
