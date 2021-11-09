@@ -2,6 +2,7 @@
 
 include './COMMON/Auth.php';
 
+// Testing
 if(!isset($_SESSION)) {
     session_start();
 }
