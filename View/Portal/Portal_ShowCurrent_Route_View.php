@@ -1,11 +1,14 @@
 <?php
 
-class Portal_ShowCurrent_Route {
+include './View/Page/header.php';
+
+class Portal_ShowCurrent_Route extends Header {
     var $imp_routes;
     var $route;
     var $building;
 
     function __construct($imp_routes, $route, $building) {
+        parent::__construct();
         $this->imp_routes = $imp_routes;
         $this->route = $route;
         $this->building = $building;
@@ -13,7 +16,6 @@ class Portal_ShowCurrent_Route {
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 

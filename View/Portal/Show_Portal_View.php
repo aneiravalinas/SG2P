@@ -1,15 +1,17 @@
 <?php
 
-class Show_Portal {
+include './View/Page/header.php';
+
+class Show_Portal extends Header {
     var $building;
 
     function __construct($building) {
+        parent::__construct();
         $this->building = $building;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">

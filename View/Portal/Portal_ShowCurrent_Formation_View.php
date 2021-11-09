@@ -1,11 +1,14 @@
 <?php
 
-class Portal_ShowCurrent_Formation {
+include './View/Page/header.php';
+
+class Portal_ShowCurrent_Formation extends Header {
     var $imp_formats;
     var $formation;
     var $building;
 
     function __construct($imp_formats, $formation, $building) {
+        parent::__construct();
         $this->imp_formats = $imp_formats;
         $this->formation = $formation;
         $this->building = $building;
@@ -13,7 +16,6 @@ class Portal_ShowCurrent_Formation {
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 

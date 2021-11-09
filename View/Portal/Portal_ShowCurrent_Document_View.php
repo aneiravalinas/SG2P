@@ -1,11 +1,14 @@
 <?php
 
-class Portal_ShowCurrent_Document {
+include './View/Page/header.php';
+
+class Portal_ShowCurrent_Document extends Header {
     var $imp_docs;
     var $document;
     var $building;
 
     function __construct($imp_docs, $document, $building) {
+        parent::__construct();
         $this->imp_docs = $imp_docs;
         $this->document = $document;
         $this->building = $building;
@@ -13,7 +16,6 @@ class Portal_ShowCurrent_Document {
     }
 
     function render() {
-        include_once './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->

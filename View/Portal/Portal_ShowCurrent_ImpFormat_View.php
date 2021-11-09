@@ -1,15 +1,17 @@
 <?php
 
-class Portal_ShowCurrent_ImpFormat {
+include './View/Page/header.php';
+
+class Portal_ShowCurrent_ImpFormat extends Header {
     var $imp_format;
 
     function __construct($imp_format) {
+        parent::__construct();
         $this->imp_format = $imp_format;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 

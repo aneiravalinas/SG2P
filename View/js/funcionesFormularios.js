@@ -7,6 +7,15 @@ function insertacampo(form ,name, value){
     formulario.appendChild(input);
 }
 
+function insertacampo_multiple(form, params) {
+	for(let key in params) {
+		let input = document.createElement('input');
+		input.name = key;
+		input.value = params[key];
+		form.appendChild(input);
+	}
+}
+
 function crearform(name, method){
 	var formu = document.createElement('form');
 	document.body.appendChild(formu);

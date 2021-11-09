@@ -1,17 +1,19 @@
 <?php
 
-class Portal_Plans {
+include './View/Page/header.php';
+
+class Portal_Plans extends Header {
     var $buildPlans;
     var $building;
 
     function __construct($buildPlans, $building) {
+        parent::__construct();
         $this->buildPlans = $buildPlans;
         $this->building = $building;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- === SECTION TABLE === -->

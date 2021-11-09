@@ -1,15 +1,17 @@
 <?php
 
-class Portal_ShowCurrent_ImpSim {
+include './View/Page/header.php';
+
+class Portal_ShowCurrent_ImpSim extends Header {
     var $imp_sim;
 
     function __construct($imp_sim) {
+        parent::__construct();
         $this->imp_sim = $imp_sim;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 

@@ -1,15 +1,17 @@
 <?php
 
-class Portal_ShowCurrent_ImpDoc {
+include './View/Page/header.php';
+
+class Portal_ShowCurrent_ImpDoc extends Header {
     var $imp_doc;
 
     function __construct($imp_doc) {
+        parent::__construct();
         $this->imp_doc = $imp_doc;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 

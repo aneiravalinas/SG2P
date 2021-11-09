@@ -1,17 +1,19 @@
 <?php
 
-class Portal_Search_Formation {
+include './View/Page/header.php';
+
+class Portal_Search_Formation extends Header {
     var $formation;
     var $building;
 
     function __construct($formation, $building) {
+        parent::__construct();
         $this->formation = $formation;
         $this->building = $building;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 

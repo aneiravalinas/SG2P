@@ -1,15 +1,17 @@
 <?php
 
-class Portal_Floors {
+include './View/Page/header.php';
+
+class Portal_Floors extends Header {
     var $floors;
 
     function __construct($floors) {
+        parent::__construct();
         $this->floors = $floors;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">

@@ -1,15 +1,17 @@
 <?php
 
-class Portal_Manager {
+include './View/Page/header.php';
+
+class Portal_Manager extends Header {
     var $user;
 
     function __construct($user) {
+        parent::__construct();
         $this->user = $user;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">

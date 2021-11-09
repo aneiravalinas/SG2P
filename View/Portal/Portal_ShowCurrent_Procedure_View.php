@@ -1,11 +1,14 @@
 <?php
 
-class Portal_ShowCurrent_Procedure {
+include './View/Page/header.php';
+
+class Portal_ShowCurrent_Procedure extends Header {
     var $imp_procs;
     var $procedure;
     var $building;
 
     function __construct($imp_procs, $procedure, $building) {
+        parent::__construct();
         $this->imp_procs = $imp_procs;
         $this->procedure = $procedure;
         $this->building = $building;
@@ -13,7 +16,6 @@ class Portal_ShowCurrent_Procedure {
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 

@@ -1,11 +1,14 @@
 <?php
 
-class Portal_ShowCurrent_Simulacrum {
+include './View/Page/header.php';
+
+class Portal_ShowCurrent_Simulacrum extends Header {
     var $imp_sims;
     var $simulacrum;
     var $building;
 
     function __construct($imp_sims, $simulacrum, $building) {
+        parent::__construct();
         $this->imp_sims = $imp_sims;
         $this->simulacrum = $simulacrum;
         $this->building = $building;
@@ -13,7 +16,6 @@ class Portal_ShowCurrent_Simulacrum {
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 

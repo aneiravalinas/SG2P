@@ -1,17 +1,19 @@
 <?php
 
-class Portal_Search_Simulacrum {
+include './View/Page/header.php';
+
+class Portal_Search_Simulacrum extends Header {
     var $simulacrum;
     var $building;
 
     function __construct($simulacrum, $building) {
+        parent::__construct();
         $this->simulacrum = $simulacrum;
         $this->building = $building;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 

@@ -1,17 +1,19 @@
 <?php
 
-class Portal_ShowCurrent_Floor {
+include './View/Page/header.php';
+
+class Portal_ShowCurrent_Floor extends Header {
     var $floor;
     var $spaces;
 
     function __construct($floor, $spaces) {
+        parent::__construct();
         $this->floor = $floor;
         $this->spaces = $spaces;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->

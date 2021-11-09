@@ -1,6 +1,7 @@
 <?php
 
 include './COMMON/Auth.php';
+include_once './Common/Stack.php';
 
 // Testing
 if(!isset($_SESSION)) {
@@ -9,6 +10,11 @@ if(!isset($_SESSION)) {
 $_SESSION['test'] = false;
 if(!defined('plans_path')) {
     define('plans_path','./Uploads/Plans/');
+}
+
+// Inicialización de la pila de retorno
+if(!isset($_SESSION['stack_post'])) {
+    $_SESSION['stack_post'] = array();
 }
 
 if (isAuthenticated()) {

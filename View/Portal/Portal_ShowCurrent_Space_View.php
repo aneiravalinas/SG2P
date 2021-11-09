@@ -1,15 +1,17 @@
 <?php
 
-class Portal_ShowCurrent_Space {
+include './View/Page/header.php';
+
+class Portal_ShowCurrent_Space extends Header {
     var $space;
 
     function __construct($space) {
+        parent::__construct();
         $this->space = $space;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->

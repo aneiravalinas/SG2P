@@ -1,15 +1,17 @@
 <?php
 
-class Portal_Buildings {
+include './View/Page/header.php';
+
+class Portal_Buildings extends Header {
     var $buildings;
 
     function __construct($buildings) {
+        parent::__construct();
         $this->buildings = $buildings;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">
@@ -46,9 +48,21 @@ class Portal_Buildings {
                     </div>
                 <?php endforeach; ?>
                 </div>
+
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+                        <a class="btn-get-started i18n-back" type="button" onclick="
+                            crearform('formenviar','post');
+                            insertacampo(document.formenviar, 'go_back', 'go_back');
+                            insertacampo_multiple(document.formenviar, <?php echo json_encode($this->previousShow); ?>);
+                            enviaform(document.formenviar);">
+                            Volver
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </section>
-
 <?php
         include './View/Page/footer.php';
     }

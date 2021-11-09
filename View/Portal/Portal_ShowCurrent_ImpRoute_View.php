@@ -1,15 +1,17 @@
 <?php
 
-class Portal_ShowCurrent_ImpRoute {
+include './View/Page/header.php';
+
+class Portal_ShowCurrent_ImpRoute extends Header {
     var $imp_route;
 
     function __construct($imp_route) {
+        parent::__construct();
         $this->imp_route = $imp_route;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 

@@ -1,15 +1,17 @@
 <?php
 
-class Portal_Cities {
+include './View/Page/header.php';
+
+class Portal_Cities extends Header {
     var $cities;
 
     function __construct($cities) {
+        parent::__construct();
         $this->cities = $cities;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">

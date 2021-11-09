@@ -1,11 +1,14 @@
 <?php
 
-class Portal_Search_Route {
+include './View/Page/header.php';
+
+class Portal_Search_Route extends Header {
     var $floors;
     var $route;
     var $building;
 
     function __construct($floors, $route, $building) {
+        parent::__construct();
         $this->floors = $floors;
         $this->route = $route;
         $this->building = $building;
@@ -13,7 +16,6 @@ class Portal_Search_Route {
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 

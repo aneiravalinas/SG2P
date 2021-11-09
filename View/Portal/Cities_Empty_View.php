@@ -1,17 +1,18 @@
 <?php
 
-class Cities_Empty {
+include './View/Page/header.php';
+
+class Cities_Empty extends Header {
     var $msg;
 
     function __construct($msg) {
+        parent::__construct();
         $this->msg = $msg;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
-
         <section id="hero" class="d-flex align-items-center">
             <div class="container" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
