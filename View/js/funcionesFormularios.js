@@ -10,6 +10,7 @@ function insertacampo(form ,name, value){
 function insertacampo_multiple(form, params) {
 	for(let key in params) {
 		let input = document.createElement('input');
+		input.type = 'hidden';
 		input.name = key;
 		input.value = params[key];
 		form.appendChild(input);

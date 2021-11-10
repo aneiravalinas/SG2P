@@ -51,11 +51,7 @@ class Portal_Buildings extends Header {
 
                 <div class="row justify-content-center">
                     <div class="col text-center">
-                        <a class="btn-get-started i18n-back" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar, 'go_back', 'go_back');
-                            insertacampo_multiple(document.formenviar, <?php echo json_encode($this->previousShow); ?>);
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                             Volver
                         </a>
                     </div>
