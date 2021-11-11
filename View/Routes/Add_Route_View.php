@@ -1,11 +1,14 @@
 <?php
 
-class Add_Route {
+include './View/Page/header.php';
+
+class Add_Route extends Header {
     var $floors;
     var $route;
     var $building;
 
     function __construct($floors, $route, $building) {
+        parent::__construct();
         $this->floors = $floors;
         $this->route = $route;
         $this->building = $building;
@@ -13,7 +16,6 @@ class Add_Route {
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -60,13 +62,7 @@ class Add_Route {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                        crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'ruta_id', '<?php echo $this->route['ruta_id'] ?>');
-                                        insertacampo(document.formenviar,'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','Route');
-                                        insertacampo(document.formenviar,'action','show');
-                                        enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

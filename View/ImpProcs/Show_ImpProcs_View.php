@@ -1,17 +1,19 @@
 <?php
 
-class Show_ImpProcs {
+include './View/Page/header.php';
+
+class Show_ImpProcs extends Header {
     var $imp_procs;
     var $procedure;
 
     function __construct($imp_procs, $procedure) {
+        parent::__construct();
         $this->imp_procs = $imp_procs;
         $this->procedure = $procedure;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -128,12 +130,7 @@ class Show_ImpProcs {
 
                 <div class="row justify-content-center">
                     <div class="col text-center">
-                        <a class="btn-get-started i18n-back" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'plan_id',<?php echo $this->procedure['plan_id'] ?>);
-                            insertacampo(document.formenviar,'controller','DefProc');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                             Volver
                         </a>
                     </div>

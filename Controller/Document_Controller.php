@@ -1,6 +1,8 @@
 <?php
 
-class Document {
+include_once 'Abstract_Controller.php';
+
+class Document extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
@@ -13,6 +15,7 @@ class Document {
             $doc_service = new Document_Service();
             $feedback = $doc_service->searchDocument();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Documents/Show_Document_View.php';
                 new Show_Document($feedback['resource'], $feedback['document'], $feedback['building']);
             } else if(isset($feedback['return'])) {
@@ -147,6 +150,7 @@ class Document {
             $doc_service = new Document_Service();
             $feedback = $doc_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Documents/ShowCurrent_Document_View.php';
                 new ShowCurrent_Document($feedback['resource']);
             } else {

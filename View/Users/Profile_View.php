@@ -1,15 +1,17 @@
 <?php
 
-class Profile {
+include './View/Page/header.php';
+
+class Profile extends Header {
     var $user;
 
     function __construct($user) {
+        parent::__construct();
         $this->user = $user;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -86,11 +88,7 @@ class Profile {
 
                             <div class="row justify-content-center">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-back" type="button" onclick="
-                                        crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','Panel');
-                                            insertacampo(document.formenviar,'action','deshboard');
-                                            enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                         Volver
                                     </a>
                                     <a class="btn-get-started i18n-edit" type="button" onclick="

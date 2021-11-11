@@ -1,15 +1,17 @@
 <?php
 
-class ShowCurrent_DefDoc {
+include './View/Page/header.php';
+
+class ShowCurrent_DefDoc extends Header {
     var $doc;
 
     function __construct($doc) {
+        parent::__construct();
         $this->doc = $doc;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">
@@ -54,12 +56,7 @@ class ShowCurrent_DefDoc {
 
                         <div class="row justify-content-center">
                             <div class="col text-center">
-                                <a class="btn-get-started i18n-back" type="button" onclick="
-                                    crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'plan_id','<?php echo $this->doc['plan_id'] ?>');
-                                    insertacampo(document.formenviar,'controller','DefDoc');
-                                    insertacampo(document.formenviar,'action','show');
-                                    enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                     Volver
                                 </a>
                             </div>

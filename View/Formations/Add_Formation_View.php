@@ -1,17 +1,19 @@
 <?php
 
-class Add_Formation {
+include './View/Page/header.php';
+
+class Add_Formation extends Header {
     var $formation;
     var $building;
 
     function __construct($formation, $building) {
+        parent::__construct();
         $this->formation = $formation;
         $this->building = $building;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -47,13 +49,7 @@ class Add_Formation {
 
                         <div class="row">
                             <div class="col d-flex justify-content-between flex-wrap">
-                                <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                    crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'formacion_id', '<?php echo $this->formation['formacion_id'] ?>');
-                                    insertacampo(document.formenviar,'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                    insertacampo(document.formenviar,'controller','Formation');
-                                    insertacampo(document.formenviar,'action','show');
-                                    enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                     Cancelar
                                 </a>
                                 <a class="btn-get-started i18n-enviar" type="button" onclick="

@@ -1,15 +1,17 @@
 <?php
 
-class ShowCurrent_Formation {
+include './View/Page/header.php';
+
+class ShowCurrent_Formation extends Header {
     var $imp_format;
 
     function __construct($imp_format) {
+        parent::__construct();
         $this->imp_format = $imp_format;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -98,13 +100,7 @@ class ShowCurrent_Formation {
 
                     <div class="row justify-content-center pb-5 pt-3">
                         <div class="col text-center">
-                            <a class="btn-get-started i18n-back" type="button" onclick="
-                                crearform('formenviar','post');
-                                insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->imp_format['edificio_id'] ?>');
-                                insertacampo(document.formenviar, 'formacion_id', '<?php echo $this->imp_format['formacion_id'] ?>');
-                                insertacampo(document.formenviar,'controller','Formation');
-                                insertacampo(document.formenviar,'action','show');
-                                enviaform(document.formenviar);">
+                            <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                 Volver
                             </a>
                         </div>

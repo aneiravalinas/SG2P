@@ -1,13 +1,15 @@
 <?php
 
-class Deshboard {
+include './View/Page/header.php';
+
+class Deshboard extends Header {
 
     function __construct() {
+        parent::__construct();
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ===== Panel Section ==== -->
@@ -99,6 +101,13 @@ class Deshboard {
                             </div>
                         </div>
                     <?php endif; ?>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
+                            Volver
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>

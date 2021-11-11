@@ -1,14 +1,12 @@
 <?php
 
-class ImpRoute {
+include_once 'Abstract_Controller.php';
+
+class ImpRoute extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
         include './Service/Route_Service.php';
-    }
-
-    function checkPermission() {
-        return (es_resp_organizacion() || es_admin());
     }
 
     function show() {
@@ -16,6 +14,7 @@ class ImpRoute {
             $route_service = new Route_Service();
             $feedback = $route_service->searchCompletions();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/ImpRoutes/Show_ImpRoutes_View.php';
                 new Show_ImpRoutes($feedback['resource'], $feedback['route']);
             } else if(isset($feedback['route'])) {
@@ -151,6 +150,7 @@ class ImpRoute {
             $route_service = new Route_Service();
             $feedback = $route_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/ImpRoutes/ShowCurrent_ImpRoute_View.php';
                 new ShowCurrent_ImpRoute($feedback['resource']);
             } else {

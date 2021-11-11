@@ -1,6 +1,8 @@
 <?php
 
-class Floor {
+include_once 'Abstract_Controller.php';
+
+class Floor extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
@@ -12,6 +14,7 @@ class Floor {
             $floor_service = new Floor_Service();
             $feedback = $floor_service->SEARCH();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Floors/Show_Floors_View.php';
                 new Show_Floors($feedback['resource'], $feedback['building']);
             } else if(isset($feedback['building'])) {
@@ -25,7 +28,7 @@ class Floor {
     }
 
     function addForm() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $floor_service = new Floor_Service();
             $feedback = $floor_service->emptyForm();
             if($feedback['ok']) {
@@ -42,7 +45,7 @@ class Floor {
     }
 
     function add() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $floor_service = new Floor_Service();
             $feedback = $floor_service->ADD();
             if(isset($feedback['building'])) {
@@ -60,6 +63,7 @@ class Floor {
             $floor_service = new Floor_Service();
             $feedback = $floor_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Floors/ShowCurrent_Floor_View.php';
                 new ShowCurrent_Floor($feedback['resource'], $feedback['building']);
             } else {
@@ -75,7 +79,7 @@ class Floor {
     }
 
     function deleteForm() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $floor_service = new Floor_Service();
             $feedback = $floor_service->dataForm();
             if($feedback['ok']) {
@@ -90,7 +94,7 @@ class Floor {
     }
 
     function delete() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $floor_service = new Floor_Service();
             $feedback = $floor_service->DELETE();
             if(isset($feedback['building'])) {
@@ -119,7 +123,7 @@ class Floor {
     }
 
     function editForm() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $floor_service = new Floor_Service();
             $feedback = $floor_service->dataForm();
             if($feedback['ok']) {
@@ -134,7 +138,7 @@ class Floor {
     }
 
     function edit() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $floor_service = new Floor_Service();
             $feedback = $floor_service->EDIT();
             if(isset($feedback['building'])) {

@@ -374,12 +374,7 @@ class Portal_ShowCurrent_Plan extends Header {
 
                         <div class="row justify-content-center">
                             <div class="col text-center">
-                                <a class="btn-get-started i18n-back" type="button" onclick="
-                                        crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','Portal');
-                                        insertacampo(document.formenviar,'action','showPortalPlans');
-                                        enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                     Volver
                                 </a>
                             </div>

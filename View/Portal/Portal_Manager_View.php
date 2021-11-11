@@ -74,11 +74,7 @@ class Portal_Manager extends Header {
 
                         <div class="row justify-content-center">
                             <div class="col text-center">
-                                <a class="btn-get-started i18n-back" type="button" onclick="
-                                        crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','Portal');
-                                            insertacampo(document.formenviar,'action','getPortal');
-                                            enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                     Volver
                                 </a>
                             </div>

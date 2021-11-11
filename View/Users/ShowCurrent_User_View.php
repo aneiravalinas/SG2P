@@ -1,15 +1,17 @@
 <?php
 
-class ShowCurrent_User {
+include './View/Page/header.php';
+
+class ShowCurrent_User extends Header {
     var $user;
 
     function __construct($user) {
+        parent::__construct();
         $this->user = $user;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -74,11 +76,7 @@ class ShowCurrent_User {
 
                             <div class="row justify-content-center">
                                 <div class="col text-center">
-                                    <a class="btn-get-started i18n-back" type="button" onclick="
-                                        crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','User');
-                                            insertacampo(document.formenviar,'action','show');
-                                            enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                         Volver
                                     </a>
                                 </div>

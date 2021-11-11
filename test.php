@@ -12,9 +12,7 @@ if(isset($_SESSION)) {
         define('plans_path','./Uploads/Test/');
     }
 
-    include_once './Controller/Test_Controller.php';
+    include './Controller/Test_Controller.php';
 
     $controller = new Test();
     $controller->test();
-
-    unset($_SESSION['test']);

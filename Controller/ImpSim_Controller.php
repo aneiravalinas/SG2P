@@ -1,14 +1,12 @@
 <?php
 
-class ImpSim {
+include_once 'Abstract_Controller.php';
+
+class ImpSim extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
         include './Service/Simulacrum_Service.php';
-    }
-
-    function checkPermission() {
-        return (es_resp_organizacion() || es_admin());
     }
 
     function show() {
@@ -16,6 +14,7 @@ class ImpSim {
             $sim_service = new Simulacrum_Service();
             $feedback = $sim_service->searchCompletions();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/ImpSims/Show_ImpSims_View.php';
                 new Show_ImpSims($feedback['resource'], $feedback['simulacrum']);
             } else if(isset($feedback['simulacrum'])) {
@@ -151,6 +150,7 @@ class ImpSim {
             $sim_service = new Simulacrum_Service();
             $feedback = $sim_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/ImpSims/ShowCurrent_ImpSim_View.php';
                 new ShowCurrent_ImpSim($feedback['resource']);
             } else {

@@ -1,17 +1,19 @@
 <?php
 
-class Show_DefSims {
+include './View/Page/header.php';
+
+class Show_DefSims extends Header {
     var $sims;
     var $plan;
 
     function __construct($sims, $plan) {
+        parent::__construct();
         $this->sims = $sims;
         $this->plan = $plan;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- === SECTION TABLE === -->
@@ -124,11 +126,7 @@ class Show_DefSims {
 
                 <div class="row justify-content-center">
                     <div class="col text-center">
-                        <a class="btn-get-started i18n-back" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'controller','DefPlan');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                             Volver
                         </a>
                     </div>

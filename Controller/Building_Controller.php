@@ -1,6 +1,8 @@
 <?php
 
-class Building {
+include_once 'Abstract_Controller.php';
+
+class Building extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
@@ -12,6 +14,7 @@ class Building {
             $building_service = new Building_Service();
             $feedback = $building_service->SEARCH();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Buildings/Show_Buildings_View.php';
                 new Show_Buildings($feedback['resource']);
             } else {
@@ -23,7 +26,7 @@ class Building {
     }
 
     function addForm() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $building_service = new Building_Service();
             $feedback = $building_service->addForm();
             if($feedback['ok']) {
@@ -38,7 +41,7 @@ class Building {
     }
 
     function add() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $building_service = new Building_Service();
             $feedback = $building_service->ADD();
             new Message($feedback['code'],'Building','show');
@@ -48,7 +51,7 @@ class Building {
     }
 
     function deleteForm() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $building_service = new Building_Service();
             $feedback = $building_service->deleteForm();
             if($feedback['ok']) {
@@ -63,7 +66,7 @@ class Building {
     }
 
     function delete() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $building_service = new Building_Service();
             $feedback = $building_service->DELETE();
             new Message($feedback['code'],'Building','show');
@@ -73,7 +76,7 @@ class Building {
     }
 
     function editForm() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $building_service = new Building_Service();
             $feedback = $building_service->editForm();
             if($feedback['ok']) {
@@ -88,7 +91,7 @@ class Building {
     }
 
     function edit() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $building_service = new Building_Service();
             $feedback = $building_service->EDIT();
             new Message($feedback['code'],'Building','show');
@@ -132,6 +135,7 @@ class Building {
             $building_service = new Building_Service();
             $feedback = $building_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Buildings/ShowCurrent_Building_View.php';
                 new ShowCurrent_Building($feedback['resource']);
             } else {

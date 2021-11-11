@@ -1,17 +1,19 @@
 <?php
 
-class Add_Procedure {
+include './View/Page/header.php';
+
+class Add_Procedure extends Header {
     var $procedure;
     var $building;
 
     function __construct($procedure, $building) {
+        parent::__construct();
         $this->procedure = $procedure;
         $this->building = $building;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -53,13 +55,7 @@ class Add_Procedure {
                         </form>
                         <div class="row">
                             <div class="col d-flex justify-content-between flex-wrap">
-                                <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                    crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'procedimiento_id', '<?php echo $this->procedure['procedimiento_id'] ?>');
-                                    insertacampo(document.formenviar,'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                    insertacampo(document.formenviar,'controller','Procedure');
-                                    insertacampo(document.formenviar,'action','show');
-                                    enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                     Cancelar
                                 </a>
                                 <a class="btn-get-started i18n-enviar" type="button" onclick="

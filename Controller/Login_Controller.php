@@ -1,6 +1,8 @@
 <?php
 
-class Login {
+include_once 'Abstract_Controller.php';
+
+class Login extends Abstract_Controller {
 
     function __construct() {
         include './Service/User_Service.php';
@@ -9,6 +11,7 @@ class Login {
     }
 
     function loginForm() {
+        $this->update_stack_post();
         new Login_View();
     }
 
@@ -30,5 +33,3 @@ class Login {
         header('location: .');
     }
 }
-
-?>

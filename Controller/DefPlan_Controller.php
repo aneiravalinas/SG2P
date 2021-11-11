@@ -1,14 +1,12 @@
 <?php
 
-class DefPlan {
+include_once 'Abstract_Controller.php';
+
+class DefPlan extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
         include './Service/DefPlan_Service.php';
-    }
-
-    function checkPermission() {
-        return (es_resp_organizacion() || es_admin());
     }
 
     function show() {
@@ -16,6 +14,7 @@ class DefPlan {
             $defPlan_service = new DefPlan_Service();
             $feedback = $defPlan_service->SEARCH();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/DefPlans/Show_DefPlans_View.php';
                 new Show_DefPlans($feedback['resource']);
             } else {
@@ -85,6 +84,7 @@ class DefPlan {
             $defPlan_service = new DefPlan_Service();
             $feedback = $defPlan_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/DefPlans/ShowCurrent_DefPlan_View.php';
                 new ShowCurrent_DefPlan($feedback['resource']);
             } else {

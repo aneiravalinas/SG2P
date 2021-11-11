@@ -1,15 +1,17 @@
 <?php
 
-class Show_Buildings {
+include './View/Page/header.php';
+
+class Show_Buildings extends Header {
     var $buildings;
 
     function __construct($buildings) {
+        parent::__construct();
         $this->buildings = $buildings;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- === SECTION TABLE === -->
@@ -116,6 +118,14 @@ class Show_Buildings {
                             <?php endif; ?>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
+                            Volver
+                        </a>
                     </div>
                 </div>
             </div>

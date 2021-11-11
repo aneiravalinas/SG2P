@@ -1,15 +1,17 @@
 <?php
 
-class Expire_ImpProc {
+include './View/Page/header.php';
+
+class Expire_ImpProc extends Header {
     var $imp_proc;
 
     function __construct($imp_proc) {
+        parent::__construct();
         $this->imp_proc = $imp_proc;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -30,12 +32,7 @@ class Expire_ImpProc {
 
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 d-flex justify-content-between flex-wrap">
-                        <a class="btn-get-started i18n-cancelar" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'procedimiento_id', '<?php echo $this->imp_proc['procedimiento_id'] ?>');
-                            insertacampo(document.formenviar,'controller','ImpProc');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-cancelar" type="button" onclick="go_current()">
                             Cancelar
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-expire" onclick="

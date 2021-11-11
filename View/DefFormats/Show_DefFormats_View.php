@@ -1,17 +1,19 @@
 <?php
 
-class Show_DefFormats {
+include './View/Page/header.php';
+
+class Show_DefFormats extends Header {
     var $formats;
     var $plan;
 
     function __construct($formats, $plan) {
+        parent::__construct();
         $this->formats = $formats;
         $this->plan = $plan;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -125,11 +127,7 @@ class Show_DefFormats {
 
                 <div class="row justify-content-center">
                     <div class="col text-center">
-                        <a class="btn-get-started i18n-back" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'controller','DefPlan');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                             Volver
                         </a>
                     </div>

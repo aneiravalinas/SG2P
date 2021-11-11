@@ -1,15 +1,17 @@
 <?php
 
-class ShowCurrent_Route {
+include './View/Page/header.php';
+
+class ShowCurrent_Route extends Header {
     var $imp_route;
 
     function __construct($imp_route) {
+        parent::__construct();
         $this->imp_route = $imp_route;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -88,13 +90,7 @@ class ShowCurrent_Route {
 
                     <div class="row justify-content-center pb-5 pt-3">
                         <div class="col text-center">
-                            <a class="btn-get-started i18n-back" type="button" onclick="
-                                crearform('formenviar','post');
-                                insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->imp_route['edificio_id'] ?>');
-                                insertacampo(document.formenviar, 'ruta_id', '<?php echo $this->imp_route['ruta_id'] ?>');
-                                insertacampo(document.formenviar,'controller','Route');
-                                insertacampo(document.formenviar,'action','show');
-                                enviaform(document.formenviar);">
+                            <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                 Volver
                             </a>
                         </div>

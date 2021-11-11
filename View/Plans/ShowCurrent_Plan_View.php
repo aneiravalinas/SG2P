@@ -1,12 +1,15 @@
 <?php
 
-class ShowCurrent_Plan {
+include './View/Page/header.php';
+
+class ShowCurrent_Plan extends Header {
     var $build_plan;
     var $building;
     var $plan;
     var $definitions;
 
     function __construct($build_plan, $building, $plan, $definitions) {
+        parent::__construct();
         $this->build_plan = $build_plan;
         $this->building = $building;
         $this->plan = $plan;
@@ -15,7 +18,6 @@ class ShowCurrent_Plan {
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -378,11 +380,7 @@ class ShowCurrent_Plan {
 
                         <div class="row justify-content-center">
                             <div class="col text-center">
-                                <a class="btn-get-started i18n-back" type="button" onclick="
-                                        crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'controller','Plan');
-                                        insertacampo(document.formenviar,'action','show');
-                                        enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                     Volver
                                 </a>
                             </div>

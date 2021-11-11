@@ -1,6 +1,8 @@
 <?php
 
-class Space {
+include_once 'Abstract_Controller.php';
+
+class Space extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
@@ -12,6 +14,7 @@ class Space {
             $space_service = new Space_Service();
             $feedback = $space_service->SEARCH();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Spaces/Show_Spaces_View.php';
                 new Show_Spaces($feedback['resource'], $feedback['floor']);
             } else if(isset($feedback['floor'])) {
@@ -87,6 +90,7 @@ class Space {
             $space_service = new Space_Service();
             $feedback = $space_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Spaces/ShowCurrent_Space_View.php';
                 new ShowCurrent_Space($feedback['resource'], $feedback['floor']);
             } else {

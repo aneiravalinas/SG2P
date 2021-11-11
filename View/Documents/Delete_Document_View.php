@@ -1,15 +1,17 @@
 <?php
 
-class Delete_Document {
+include './View/Page/header.php';
+
+class Delete_Document extends Header {
     var $imp_doc;
 
     function __construct($imp_doc) {
+        parent::__construct();
         $this->imp_doc = $imp_doc;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -30,13 +32,7 @@ class Delete_Document {
 
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 d-flex justify-content-between flex-wrap">
-                        <a class="btn-get-started i18n-cancelar" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'edificio_id', '<?php echo $this->imp_doc['edificio_id'] ?>');
-                            insertacampo(document.formenviar,'documento_id', '<?php echo $this->imp_doc['documento_id'] ?>');
-                            insertacampo(document.formenviar,'controller','Document');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-cancelar" type="button" onclick="go_current()">
                             Cancelar
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-delete" onclick="

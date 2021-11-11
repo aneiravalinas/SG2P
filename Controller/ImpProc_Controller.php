@@ -1,14 +1,12 @@
 <?php
 
-class ImpProc {
+include_once 'Abstract_Controller.php';
+
+class ImpProc extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
         include './Service/Procedure_Service.php';
-    }
-
-    function checkPermission() {
-        return (es_resp_organizacion() || es_admin());
     }
 
     function show() {
@@ -16,6 +14,7 @@ class ImpProc {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->searchCompletions();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/ImpProcs/Show_ImpProcs_View.php';
                 new Show_ImpProcs($feedback['resource'], $feedback['procedure']);
             } else if(isset($feedback['procedure'])) {
@@ -151,6 +150,7 @@ class ImpProc {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/ImpProcs/ShowCurrent_ImpProc_View.php';
                 new ShowCurrent_ImpProc($feedback['resource']);
             } else {

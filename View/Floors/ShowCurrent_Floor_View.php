@@ -1,17 +1,19 @@
 <?php
 
-class ShowCurrent_Floor {
+include './View/Page/header.php';
+
+class ShowCurrent_Floor extends Header {
     var $floor;
     var $building;
 
     function __construct($floor, $building) {
+        parent::__construct();
         $this->floor = $floor;
         $this->building = $building;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -63,12 +65,7 @@ class ShowCurrent_Floor {
 
                             <div class="row justify-content-center">
                                 <div class="col text-center">
-                                    <a class="btn-get-started i18n-back" type="button" onclick="
-                                        crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'edificio_id',<?php echo $this->building['edificio_id'] ?>);
-                                            insertacampo(document.formenviar,'controller','Floor');
-                                            insertacampo(document.formenviar,'action','show');
-                                            enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                         Volver
                                     </a>
                                 </div>

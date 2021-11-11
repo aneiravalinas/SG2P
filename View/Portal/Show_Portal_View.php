@@ -75,6 +75,14 @@ class Show_Portal extends Header {
                         </div>
                     </div>
             </div>
+
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
+                            Volver
+                        </a>
+                    </div>
+                </div>
         </section>
 
         <!-- ======= Contact Section ======= -->

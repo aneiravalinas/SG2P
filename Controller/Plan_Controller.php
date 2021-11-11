@@ -1,6 +1,8 @@
 <?php
 
-class Plan {
+include_once 'Abstract_Controller.php';
+
+class Plan extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
@@ -12,6 +14,7 @@ class Plan {
             $plan_service = new Plan_Service();
             $feedback = $plan_service->SEARCH();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Plans/Show_Plans_View.php';
                 new Show_Plans($feedback['resource']);
             } else {
@@ -36,6 +39,7 @@ class Plan {
             $plan_service = new Plan_Service();
             $feedback = $plan_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Plans/ShowCurrent_Plan_View.php';
                 new ShowCurrent_Plan($feedback['resource'], $feedback['edificio'], $feedback['plan'], $feedback['definiciones']);
             } else {

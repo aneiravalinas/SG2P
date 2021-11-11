@@ -1,17 +1,19 @@
 <?php
 
-class Edit_Building {
+include './View/Page/header.php';
+
+class Edit_Building extends Header {
     var $building;
     var $candidates;
 
     function __construct($building, $candidates) {
+        parent::__construct();
         $this->building = $building;
         $this->candidates = $candidates;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -89,11 +91,7 @@ class Edit_Building {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                        crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','Building');
-                                            insertacampo(document.formenviar,'action','show');
-                                            enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

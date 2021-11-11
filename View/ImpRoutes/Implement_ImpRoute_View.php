@@ -1,15 +1,17 @@
 <?php
 
-class Implement_ImpRoute {
+include './View/Page/header.php';
+
+class Implement_ImpRoute extends Header {
     var $imp_route;
 
     function __construct($imp_route) {
+        parent::__construct();
         $this->imp_route = $imp_route;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -68,12 +70,7 @@ class Implement_ImpRoute {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                        crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'ruta_id', '<?php echo $this->imp_route['ruta_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','ImpRoute');
-                                        insertacampo(document.formenviar,'action','show');
-                                        enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

@@ -1,14 +1,12 @@
 <?php
 
-class DefRoute {
+include_once 'Abstract_Controller.php';
+
+class DefRoute extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
         include './Service/DefRoute_Service.php';
-    }
-
-    function checkPermission() {
-        return (es_resp_organizacion() || es_admin());
     }
 
     function show() {
@@ -16,6 +14,7 @@ class DefRoute {
             $defRoute_service = new DefRoute_Service();
             $feedback = $defRoute_service->SEARCH();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/DefRoutes/Show_DefRoutes_View.php';
                 new Show_DefRoutes($feedback['resource'], $feedback['plan']);
             } else if(isset($feedback['plan'])) {
@@ -91,6 +90,7 @@ class DefRoute {
             $defRoute_service = new DefRoute_Service();
             $feedback = $defRoute_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/DefRoutes/ShowCurrent_DefRoute_View.php';
                 new ShowCurrent_DefRoute($feedback['resource']);
             } else {

@@ -1,16 +1,18 @@
 <?php
 
-class Test_View {
+include './View/Page/header.php';
+
+class Test_View extends Header {
     var $test;
 
     function __construct($test) {
+        parent::__construct();
         $this->test = $test;
         $this->render();
     }
 
     function render() {
         include_once './Common/Auth.php';
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->

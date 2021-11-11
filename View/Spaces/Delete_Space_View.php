@@ -1,17 +1,19 @@
 <?php
 
-class Delete_Space {
+include './View/Page/header.php';
+
+class Delete_Space extends Header {
     var $space;
     var $floor;
 
     function __construct($space, $floor) {
+        parent::__construct();
         $this->space = $space;
         $this->floor = $floor;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">
@@ -31,12 +33,7 @@ class Delete_Space {
 
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 d-flex justify-content-between flex-wrap">
-                        <a class="btn-get-started i18n-cancelar" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'planta_id','<?php echo $this->space['planta_id'] ?>');
-                            insertacampo(document.formenviar,'controller','Space');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-cancelar" type="button" onclick="go_current()">
                             Cancelar
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-delete" onclick="

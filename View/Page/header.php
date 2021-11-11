@@ -77,9 +77,10 @@ abstract class Header {
             </div>
         </header><!-- End Header -->
 
+        <?php if(!$_SESSION['test']) :?>
         <script>
-            var currentShow = <?php echo json_encode(getCurrentShow()); ?>;
-            var previousShow = <?php echo json_encode(getPreviousShow()); ?>;
+            let currentShow = <?php echo json_encode(getCurrentShow()); ?>;
+            let previousShow = <?php echo json_encode(getPreviousShow()); ?>;
 
 
             function go_previous() {
@@ -95,6 +96,7 @@ abstract class Header {
                 enviaform(document.formenviar);
             }
         </script>
+        <?php endif; ?>
 <?php
     }
 

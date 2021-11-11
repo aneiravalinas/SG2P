@@ -1,15 +1,17 @@
 <?php
 
-class ShowCurrent_DefProc {
+include './View/Page/header.php';
+
+class ShowCurrent_DefProc extends Header {
     var $proc;
 
     function __construct($proc) {
+        parent::__construct();
         $this->proc = $proc;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">
@@ -47,12 +49,7 @@ class ShowCurrent_DefProc {
 
                         <div class="row justify-content-center">
                             <div class="col text-center">
-                                <a class="btn-get-started i18n-back" type="button" onclick="
-                                    crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'plan_id','<?php echo $this->proc['plan_id'] ?>');
-                                    insertacampo(document.formenviar,'controller','DefProc');
-                                    insertacampo(document.formenviar,'action','show');
-                                    enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                     Volver
                                 </a>
                             </div>

@@ -126,13 +126,7 @@ class Portal_ShowCurrent_Procedure extends Header {
                     </div>
                     <div class="row justify-content-center pb-5">
                         <div class="col text-center">
-                            <a class="btn-get-started i18n-back" type="button" onclick="
-                                crearform('formenviar','post');
-                                insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                insertacampo(document.formenviar, 'plan_id', '<?php echo $this->procedure['plan_id'] ?>');
-                                insertacampo(document.formenviar,'controller','Portal');
-                                insertacampo(document.formenviar,'action','seekPortalPlan');
-                                enviaform(document.formenviar);">
+                            <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                 Volver
                             </a>
                         </div>

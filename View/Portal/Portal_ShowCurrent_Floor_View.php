@@ -64,12 +64,7 @@ class Portal_ShowCurrent_Floor extends Header {
 
                         <div class="row justify-content-center">
                             <div class="col text-center">
-                                <a class="btn-get-started i18n-back" type="button" onclick="
-                                    crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'edificio_id',<?php echo $this->floor['edificio_id'] ?>);
-                                    insertacampo(document.formenviar,'controller','Portal');
-                                    insertacampo(document.formenviar,'action','showPortalFloors');
-                                    enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                     Volver
                                 </a>
                             </div>

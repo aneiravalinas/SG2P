@@ -9,7 +9,7 @@ abstract class Abstract_Controller {
         if(!$_POST || ($_POST['controller'] == 'Portal' && $_POST['action'] == '_default')) {
             $_SESSION['stack_post'] = array();
             array_push($_SESSION['stack_post'], array('controller' => 'Portal', 'action' => '_default'));
-        } else if(isset($_SESSION['stack_post']['go_back'])) {
+        } else if(isset($_POST['go_back'])) {
             array_pop($_SESSION['stack_post']);
         } else {
             if(!empty($_SESSION['stack_post'])) {
@@ -21,5 +21,9 @@ abstract class Abstract_Controller {
 
             array_push($_SESSION['stack_post'], $_POST);
         }
+    }
+
+    function checkPermission() {
+        return (es_resp_organizacion() || es_admin());
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
-class Simulacrum {
+include_once 'Abstract_Controller.php';
+
+class Simulacrum extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
@@ -12,6 +14,7 @@ class Simulacrum {
             $sim_service = new Simulacrum_Service();
             $feedback = $sim_service->searchSimulacrum();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Simulacrums/Show_Simulacrum_View.php';
                 new Show_Simulacrum($feedback['resource'], $feedback['simulacrum'], $feedback['building']);
             } else if(isset($feedback['return'])) {
@@ -146,6 +149,7 @@ class Simulacrum {
             $sim_service = new Simulacrum_Service();
             $feedback = $sim_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Simulacrums/ShowCurrent_Simulacrum_View.php';
                 new ShowCurrent_Simulacrum($feedback['resource']);
             } else {

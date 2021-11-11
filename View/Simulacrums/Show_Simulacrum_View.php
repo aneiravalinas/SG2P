@@ -1,11 +1,14 @@
 <?php
 
-class Show_Simulacrum {
+include './View/Page/header.php';
+
+class Show_Simulacrum extends Header {
     var $imp_sims;
     var $simulacrum;
     var $building;
 
     function __construct($imp_sims, $simulacrum, $building) {
+        parent::__construct();
         $this->imp_sims = $imp_sims;
         $this->simulacrum = $simulacrum;
         $this->building = $building;
@@ -13,7 +16,6 @@ class Show_Simulacrum {
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -185,13 +187,7 @@ class Show_Simulacrum {
                     </div>
                     <div class="row justify-content-center pb-5">
                         <div class="col text-center">
-                            <a class="btn-get-started i18n-back" type="button" onclick="
-                                crearform('formenviar','post');
-                                insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                insertacampo(document.formenviar, 'plan_id', '<?php echo $this->simulacrum['plan_id'] ?>');
-                                insertacampo(document.formenviar,'controller','Plan');
-                                insertacampo(document.formenviar,'action','showCurrent');
-                                enviaform(document.formenviar);">
+                            <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                 Volver
                             </a>
                         </div>

@@ -1,17 +1,19 @@
 <?php
 
-class Add_BuildPlan {
+include './View/Page/header.php';
+
+class Add_BuildPlan extends Header {
     var $buildings;
     var $plan;
 
     function __construct($buildings, $plan) {
+        parent::__construct();
         $this->buildings = $buildings;
         $this->plan = $plan;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -55,12 +57,7 @@ class Add_BuildPlan {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                        crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'plan_id', '<?php echo $this->plan['plan_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','BuildPlan');
-                                        insertacampo(document.formenviar,'action','show');
-                                        enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

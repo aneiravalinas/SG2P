@@ -1,14 +1,12 @@
 <?php
 
-class DefFormat {
+include_once 'Abstract_Controller.php';
+
+class DefFormat extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
         include './Service/DefFormat_Service.php';
-    }
-
-    function checkPermission() {
-        return (es_resp_organizacion() || es_admin());
     }
 
     function show() {
@@ -16,6 +14,7 @@ class DefFormat {
             $defFormat_service = new DefFormat_Service();
             $feedback = $defFormat_service->SEARCH();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/DefFormats/Show_DefFormats_View.php';
                 new Show_DefFormats($feedback['resource'], $feedback['plan']);
             } else if(isset($feedback['plan'])) {
@@ -91,6 +90,7 @@ class DefFormat {
             $defFormat_service = new DefFormat_Service();
             $feedback = $defFormat_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/DefFormats/ShowCurrent_DefFormat_View.php';
                 new ShowCurrent_DefFormat($feedback['resource']);
             } else {

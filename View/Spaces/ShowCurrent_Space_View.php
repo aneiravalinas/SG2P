@@ -1,17 +1,19 @@
 <?php
 
-class ShowCurrent_Space {
+include './View/Page/header.php';
+
+class ShowCurrent_Space extends Header {
     var $space;
     var $floor;
 
     function __construct($space, $floor) {
+        parent::__construct();
         $this->space = $space;
         $this->floor = $floor;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -52,12 +54,7 @@ class ShowCurrent_Space {
 
                         <div class="row justify-content-center">
                             <div class="col text-center">
-                                <a class="btn-get-started i18n-back" type="button" onclick="
-                                    crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'planta_id',<?php echo $this->space['planta_id'] ?>);
-                                    insertacampo(document.formenviar,'controller','Space');
-                                    insertacampo(document.formenviar,'action','show');
-                                    enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                     Volver
                                 </a>
                             </div>

@@ -1,11 +1,14 @@
 <?php
 
-class Show_Formation {
+include './View/Page/header.php';
+
+class Show_Formation extends Header {
     var $imp_formats;
     var $formation;
     var $building;
 
     function __construct($imp_formats, $formation, $building) {
+        parent::__construct();
         $this->imp_formats = $imp_formats;
         $this->formation = $formation;
         $this->building = $building;
@@ -13,7 +16,6 @@ class Show_Formation {
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -186,13 +188,7 @@ class Show_Formation {
                     </div>
                     <div class="row justify-content-center pb-5">
                         <div class="col text-center">
-                            <a class="btn-get-started i18n-back" type="button" onclick="
-                                crearform('formenviar','post');
-                                insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                insertacampo(document.formenviar, 'plan_id', '<?php echo $this->formation['plan_id'] ?>');
-                                insertacampo(document.formenviar,'controller','Plan');
-                                insertacampo(document.formenviar,'action','showCurrent');
-                                enviaform(document.formenviar);">
+                            <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                 Volver
                             </a>
                         </div>

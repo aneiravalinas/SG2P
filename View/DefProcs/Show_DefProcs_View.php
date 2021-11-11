@@ -1,17 +1,19 @@
 <?php
 
-class Show_DefProcs {
+include './View/Page/header.php';
+
+class Show_DefProcs extends Header {
     var $procs;
     var $plan;
 
     function __construct($procs, $plan) {
+        parent::__construct();
         $this->procs = $procs;
         $this->plan = $plan;
         $this->render();
     }
 
-    function render() {
-        include './View/Page/header.php';
+    function render() {;
         ?>
 
         <!-- === SECTION TABLE === -->
@@ -124,11 +126,7 @@ class Show_DefProcs {
 
                 <div class="row justify-content-center">
                     <div class="col text-center">
-                        <a class="btn-get-started i18n-back" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'controller','DefPlan');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                             Volver
                         </a>
                     </div>

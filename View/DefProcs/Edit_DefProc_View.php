@@ -1,15 +1,17 @@
 <?php
 
-class Edit_DefProc {
+include './View/Page/header.php';
+
+class Edit_DefProc extends Header {
     var $proc;
 
     function __construct($proc) {
+        parent::__construct();
         $this->proc = $proc;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -50,12 +52,7 @@ class Edit_DefProc {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                        crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'plan_id','<?php echo $this->proc['plan_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','DefProc');
-                                        insertacampo(document.formenviar,'action','show');
-                                        enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

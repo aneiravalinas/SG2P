@@ -1,11 +1,14 @@
 <?php
 
-class Show_Document {
+include './View/Page/header.php';
+
+class Show_Document extends Header {
     var $imp_docs;
     var $document;
     var $building;
 
     function __construct($imp_docs, $document, $building) {
+        parent::__construct();
         $this->imp_docs = $imp_docs;
         $this->document = $document;
         $this->building = $building;
@@ -13,7 +16,6 @@ class Show_Document {
     }
 
     function render() {
-        include_once './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -186,13 +188,7 @@ class Show_Document {
                     </div>
                     <div class="row justify-content-center pb-5">
                         <div class="col text-center">
-                            <a class="btn-get-started i18n-back" type="button" onclick="
-                                        crearform('formenviar','post');
-                                        insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->building['edificio_id'] ?>');
-                                        insertacampo(document.formenviar, 'plan_id', '<?php echo $this->document['plan_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','Plan');
-                                        insertacampo(document.formenviar,'action','showCurrent');
-                                        enviaform(document.formenviar);">
+                            <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                 Volver
                             </a>
                         </div>

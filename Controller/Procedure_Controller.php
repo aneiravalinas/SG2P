@@ -1,6 +1,8 @@
 <?php
 
-class Procedure {
+include_once 'Abstract_Controller.php';
+
+class Procedure extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
@@ -12,6 +14,7 @@ class Procedure {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->searchProcedure();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Procedures/Show_Procedure_View.php';
                 new Show_Procedure($feedback['resource'], $feedback['procedure'], $feedback['building']);
             } else if(isset($feedback['return'])) {
@@ -146,6 +149,7 @@ class Procedure {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Procedures/ShowCurrent_Procedure_View.php';
                 new ShowCurrent_Procedure($feedback['resource']);
             } else {

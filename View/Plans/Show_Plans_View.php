@@ -1,15 +1,17 @@
 <?php
 
-class Show_Plans {
+include './View/Page/header.php';
+
+class Show_Plans extends Header {
     var $buildPlans;
 
     function __construct($buildPlans) {
+        parent::__construct();
         $this->buildPlans = $buildPlans;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- === SECTION TABLE === -->
@@ -97,11 +99,7 @@ class Show_Plans {
 
                 <div class="row justify-content-center">
                     <div class="col text-center">
-                        <a class="btn-get-started i18n-back" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'controller','Panel');
-                            insertacampo(document.formenviar,'action','deshboard');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                             Volver
                         </a>
                     </div>

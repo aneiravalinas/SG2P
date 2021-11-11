@@ -1,17 +1,19 @@
 <?php
 
-class Show_ImpDocs {
+include './View/Page/header.php';
+
+class Show_ImpDocs extends Header {
     var $imp_docs;
     var $document;
 
     function __construct($imp_docs, $document) {
+        parent::__construct();
         $this->imp_docs = $imp_docs;
         $this->document = $document;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">
@@ -127,12 +129,7 @@ class Show_ImpDocs {
 
                 <div class="row justify-content-center">
                     <div class="col text-center">
-                        <a class="btn-get-started i18n-back" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'plan_id',<?php echo $this->document['plan_id'] ?>);
-                            insertacampo(document.formenviar,'controller','DefDoc');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                             Volver
                         </a>
                     </div>

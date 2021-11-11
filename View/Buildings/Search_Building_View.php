@@ -1,15 +1,17 @@
 <?php
 
-class Search_Building {
+include './View/Page/header.php';
+
+class Search_Building extends Header {
     var $managers;
 
     function __construct($managers) {
+        parent::__construct();
         $this->managers = $managers;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -78,11 +80,7 @@ class Search_Building {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                        crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','Building');
-                                            insertacampo(document.formenviar,'action','show');
-                                            enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

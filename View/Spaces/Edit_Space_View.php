@@ -1,17 +1,19 @@
 <?php
 
-class Edit_Space {
+include './View/Page/header.php';
+
+class Edit_Space extends Header {
     var $space;
     var $floor;
 
     function __construct($space, $floor) {
+        parent::__construct();
         $this->space = $space;
         $this->floor = $floor;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -59,12 +61,7 @@ class Edit_Space {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                        crearform('formenviar','post');
-                                        insertacampo(document.formenviar, 'planta_id','<?php echo $this->space['planta_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','Space');
-                                        insertacampo(document.formenviar,'action','show');
-                                        enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

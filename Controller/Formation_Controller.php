@@ -1,6 +1,8 @@
 <?php
 
-class Formation {
+include_once 'Abstract_Controller.php';
+
+class Formation extends Abstract_Controller {
 
     function __construct() {
         include './Service/Formation_Service.php';
@@ -12,6 +14,7 @@ class Formation {
             $format_service = new Formation_Service();
             $feedback = $format_service->searchFormation();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Formations/Show_Formation_View.php';
                 new Show_Formation($feedback['resource'], $feedback['formation'], $feedback['building']);
             } else if(isset($feedback['return'])) {
@@ -146,6 +149,7 @@ class Formation {
             $format_service = new Formation_Service();
             $feedback = $format_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/Formations/ShowCurrent_Formation_View.php';
                 new ShowCurrent_Formation($feedback['resource']);
             } else {

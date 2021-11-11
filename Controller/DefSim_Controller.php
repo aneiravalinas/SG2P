@@ -1,14 +1,12 @@
 <?php
 
-class DefSim {
+include_once 'Abstract_Controller.php';
+
+class DefSim extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
         include './Service/DefSim_Service.php';
-    }
-
-    function checkPermission() {
-        return (es_resp_organizacion() || es_admin());
     }
 
     function show() {
@@ -16,6 +14,7 @@ class DefSim {
             $defSim_service = new DefSim_Service();
             $feedback = $defSim_service->SEARCH();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/DefSims/Show_DefSims_View.php';
                 new Show_DefSims($feedback['resource'], $feedback['plan']);
             } else if(isset($feedback['plan'])) {
@@ -91,6 +90,7 @@ class DefSim {
             $defSim_service = new DefSim_Service();
             $feedback = $defSim_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/DefSims/ShowCurrent_DefSim_View.php';
                 new ShowCurrent_DefSim($feedback['resource']);
             } else {

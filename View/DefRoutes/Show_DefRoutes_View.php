@@ -1,17 +1,19 @@
 <?php
 
-class Show_DefRoutes {
+include './View/Page/header.php';
+
+class Show_DefRoutes extends Header {
     var $routes;
     var $plan;
 
     function __construct($routes, $plan) {
+        parent::__construct();
         $this->routes = $routes;
         $this->plan = $plan;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- === SECTION TABLE === -->
@@ -124,11 +126,7 @@ class Show_DefRoutes {
 
                 <div class="row justify-content-center">
                     <div class="col text-center">
-                        <a class="btn-get-started i18n-back" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'controller','DefPlan');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                             Volver
                         </a>
                     </div>

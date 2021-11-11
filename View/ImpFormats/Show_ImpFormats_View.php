@@ -1,17 +1,19 @@
 <?php
 
-class Show_ImpFormats {
+include './View/Page/header.php';
+
+class Show_ImpFormats extends Header {
     var $imp_formats;
     var $formation;
 
     function __construct($imp_formats, $formation) {
+        parent::__construct();
         $this->imp_formats = $imp_formats;
         $this->formation = $formation;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -128,12 +130,7 @@ class Show_ImpFormats {
 
                 <div class="row justify-content-center">
                     <div class="col text-center">
-                        <a class="btn-get-started i18n-back" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'plan_id',<?php echo $this->formation['plan_id'] ?>);
-                            insertacampo(document.formenviar,'controller','DefFormat');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                             Volver
                         </a>
                     </div>

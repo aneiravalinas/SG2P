@@ -1,15 +1,17 @@
 <?php
 
-class Implement_Procedure {
+include './View/Page/header.php';
+
+class Implement_Procedure extends Header {
     var $imp_proc;
 
     function __construct($imp_proc) {
+        parent::__construct();
         $this->imp_proc = $imp_proc;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -69,13 +71,7 @@ class Implement_Procedure {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                        crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'procedimiento_id', '<?php echo $this->imp_proc['procedimiento_id'] ?>');
-                                        insertacampo(document.formenviar,'edificio_id', '<?php echo $this->imp_proc['edificio_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','Procedure');
-                                        insertacampo(document.formenviar,'action','show');
-                                        enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

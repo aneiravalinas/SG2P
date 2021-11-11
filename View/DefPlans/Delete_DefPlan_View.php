@@ -1,15 +1,17 @@
 <?php
 
-class Delete_DefPlan {
+include './View/Page/header.php';
+
+class Delete_DefPlan extends Header {
     var $plan;
 
     function __construct($plan) {
+        parent::__construct();
         $this->plan = $plan;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">
@@ -29,11 +31,7 @@ class Delete_DefPlan {
 
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 d-flex justify-content-between flex-wrap">
-                        <a class="btn-get-started i18n-cancelar" type="button" onclick="
-                                        crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','DefPlan');
-                                            insertacampo(document.formenviar,'action','show');
-                                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-cancelar" type="button" onclick="go_current()">
                             Cancelar
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-delete" onclick="

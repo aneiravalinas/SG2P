@@ -1,15 +1,17 @@
 <?php
 
-class ShowCurrent_DefPlan {
+include './View/Page/header.php';
+
+class ShowCurrent_DefPlan extends Header {
     var $plan;
 
     function __construct($plan) {
+        parent::__construct();
         $this->plan = $plan;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">
@@ -40,11 +42,7 @@ class ShowCurrent_DefPlan {
 
                         <div class="row justify-content-center">
                             <div class="col text-center">
-                                <a class="btn-get-started i18n-back" type="button" onclick="
-                                    crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'controller','DefPlan');
-                                    insertacampo(document.formenviar,'action','show');
-                                    enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                     Volver
                                 </a>
                             </div>

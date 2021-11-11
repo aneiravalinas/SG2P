@@ -1,17 +1,19 @@
 <?php
 
-class Show_Spaces {
+include './View/Page/header.php';
+
+class Show_Spaces extends Header {
     var $spaces;
     var $floor;
 
     function __construct($spaces, $floor) {
+        parent::__construct();
         $this->spaces = $spaces;
         $this->floor = $floor;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- === SECTION TABLE === -->
@@ -115,12 +117,7 @@ class Show_Spaces {
 
                 <div class="row justify-content-center">
                     <div class="col text-center">
-                        <a class="btn-get-started i18n-back" type="button" onclick="
-                                crearform('formenviar','post');
-                                insertacampo(document.formenviar,'edificio_id',<?php echo $this->floor['edificio_id'] ?>);
-                                insertacampo(document.formenviar,'controller','Floor');
-                                insertacampo(document.formenviar,'action','show');
-                                enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                             Volver
                         </a>
                     </div>

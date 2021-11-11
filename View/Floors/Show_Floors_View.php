@@ -1,17 +1,19 @@
 <?php
 
-class Show_Floors {
+include './View/Page/header.php';
+
+class Show_Floors extends Header {
     var $floors;
     var $building;
 
     function __construct($floors, $building) {
+        parent::__construct();
         $this->floors = $floors;
         $this->building = $building;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- === SECTION TABLE === -->
@@ -126,11 +128,7 @@ class Show_Floors {
 
                 <div class="row justify-content-center">
                     <div class="col text-center">
-                        <a class="btn-get-started i18n-back" type="button" onclick="
-                                crearform('formenviar','post');
-                                insertacampo(document.formenviar,'controller','Building');
-                                insertacampo(document.formenviar,'action','show');
-                                enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                             Volver
                         </a>
                     </div>

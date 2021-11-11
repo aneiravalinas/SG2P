@@ -51,12 +51,7 @@ class Portal_ShowCurrent_Space extends Header {
 
                         <div class="row justify-content-center">
                             <div class="col text-center">
-                                <a class="btn-get-started i18n-back" type="button" onclick="
-                                    crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'planta_id',<?php echo $this->space['planta_id'] ?>);
-                                    insertacampo(document.formenviar,'controller','Portal');
-                                    insertacampo(document.formenviar,'action','seekPortalFloor');
-                                    enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                     Volver
                                 </a>
                             </div>

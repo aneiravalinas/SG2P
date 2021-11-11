@@ -1,15 +1,17 @@
 <?php
 
-class Implement_ImpSim {
+include './View/Page/header.php';
+
+class Implement_ImpSim extends Header {
     var $imp_sim;
 
     function __construct($imp_sim) {
+        parent::__construct();
         $this->imp_sim = $imp_sim;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -88,12 +90,7 @@ class Implement_ImpSim {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                        crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'simulacro_id', '<?php echo $this->imp_sim['simulacro_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','ImpSim');
-                                        insertacampo(document.formenviar,'action','show');
-                                        enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

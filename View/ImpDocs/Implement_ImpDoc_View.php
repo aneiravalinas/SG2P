@@ -1,15 +1,17 @@
 <?php
 
-class Implement_ImpDoc {
+include './View/Page/header.php';
+
+class Implement_ImpDoc extends Header {
     var $imp_doc;
 
     function __construct($imp_doc) {
+        parent::__construct();
         $this->imp_doc = $imp_doc;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -69,12 +71,7 @@ class Implement_ImpDoc {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                        crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'documento_id', '<?php echo $this->imp_doc['documento_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','ImpDoc');
-                                        insertacampo(document.formenviar,'action','show');
-                                        enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

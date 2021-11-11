@@ -1,15 +1,17 @@
 <?php
 
-class Expire_ImpSim {
+include './View/Page/header.php';
+
+class Expire_ImpSim extends Header {
     var $imp_sim;
 
     function __construct($imp_sim) {
+        parent::__construct();
         $this->imp_sim = $imp_sim;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -30,12 +32,7 @@ class Expire_ImpSim {
 
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 d-flex justify-content-between flex-wrap">
-                        <a class="btn-get-started i18n-cancelar" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'simulacro_id', '<?php echo $this->imp_sim['simulacro_id'] ?>');
-                            insertacampo(document.formenviar,'controller','ImpSim');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-cancelar" type="button" onclick="go_current()">
                             Cancelar
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-expire" onclick="

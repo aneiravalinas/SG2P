@@ -1,14 +1,15 @@
 <?php
 
-class Add_User {
+include './View/Page/header.php';
+
+class Add_User extends Header {
 
     function __construct() {
+        parent::__construct();
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
-
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -80,11 +81,7 @@ class Add_User {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                        crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'controller','User');
-                                            insertacampo(document.formenviar,'action','show');
-                                            enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

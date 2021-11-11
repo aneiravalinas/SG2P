@@ -1,14 +1,12 @@
 <?php
 
-class ImpDoc {
+include_once 'Abstract_Controller.php';
+
+class ImpDoc extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
         include './Service/Document_Service.php';
-    }
-
-    function checkPermission() {
-        return (es_resp_organizacion() || es_admin());
     }
 
     function show() {
@@ -16,6 +14,7 @@ class ImpDoc {
             $doc_service = new Document_Service();
             $feedback = $doc_service->searchCompletions();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/ImpDocs/Show_ImpDocs_View.php';
                 new Show_ImpDocs($feedback['resource'], $feedback['document']);
             } else if(isset($feedback['document'])) {
@@ -151,6 +150,7 @@ class ImpDoc {
             $doc_service = new Document_Service();
             $feedback = $doc_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/ImpDocs/ShowCurrent_ImpDoc_View.php';
                 new ShowCurrent_ImpDoc($feedback['resource']);
             } else {

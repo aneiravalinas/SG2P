@@ -94,13 +94,7 @@ class Portal_ShowCurrent_ImpFormat extends Header {
 
                     <div class="row justify-content-center pb-5 pt-3">
                         <div class="col text-center">
-                            <a class="btn-get-started i18n-back" type="button" onclick="
-                                crearform('formenviar','post');
-                                insertacampo(document.formenviar, 'formacion_id', '<?php echo $this->imp_format['formacion_id'] ?>');
-                                insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->imp_format['edificio_id'] ?>');
-                                insertacampo(document.formenviar,'controller','Portal');
-                                insertacampo(document.formenviar,'action','seekPortalFormation');
-                                enviaform(document.formenviar);">
+                            <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                 Volver
                             </a>
                         </div>

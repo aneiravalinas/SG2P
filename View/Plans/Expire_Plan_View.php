@@ -1,17 +1,19 @@
 <?php
 
-class Expire_Plan {
+include './View/Page/header.php';
+
+class Expire_Plan extends Header {
     var $plan;
     var $edificio;
 
     function __construct($plan, $edificio) {
+        parent::__construct();
         $this->plan = $plan;
         $this->edificio = $edificio;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">
@@ -31,11 +33,7 @@ class Expire_Plan {
 
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 d-flex justify-content-between flex-wrap">
-                        <a class="btn-get-started i18n-cancelar" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'controller','Plan');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-cancelar" type="button" onclick="go_current()">
                             Cancelar
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-expire" onclick="

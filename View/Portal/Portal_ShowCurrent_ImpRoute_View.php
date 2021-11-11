@@ -84,13 +84,7 @@ class Portal_ShowCurrent_ImpRoute extends Header {
 
                     <div class="row justify-content-center pb-5 pt-3">
                         <div class="col text-center">
-                            <a class="btn-get-started i18n-back" type="button" onclick="
-                                crearform('formenviar','post');
-                                insertacampo(document.formenviar, 'ruta_id', '<?php echo $this->imp_route['ruta_id'] ?>');
-                                insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->imp_route['edificio_id'] ?>');
-                                insertacampo(document.formenviar,'controller','Portal');
-                                insertacampo(document.formenviar,'action','seekPortalRoute');
-                                enviaform(document.formenviar);">
+                            <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                 Volver
                             </a>
                         </div>

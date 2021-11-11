@@ -420,71 +420,71 @@ $respTest = obtenerRespuesta('BuildPlan','SEEK_PLAN','ACCION','El plan existe',
 array_push($testBuildPlan, $respTest);
 
 /*
- *  --- EDIT: VALIDACIONES (Plan) ---
+ *  --- EXPIRE: VALIDACIONES (Plan) ---
  */
 
 // ID Plan vacío
 $_POST = array('plan_id' => '');
 $buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->EDIT();
-$respTest = obtenerRespuesta('BuildPlan','EDIT','PLAN_ID','ID del plan vacío',
+$feedback = $buildPlan_service->expire();
+$respTest = obtenerRespuesta('BuildPlan','EXPIRE','PLAN_ID','ID del plan vacío',
     'DFPLAN_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
 // ID Plan no numérico
 $_POST = array('plan_id' => 'aaa');
 $buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->EDIT();
-$respTest = obtenerRespuesta('BuildPlan','EDIT','PLAN_ID','ID del plan no numérico',
+$feedback = $buildPlan_service->expire();
+$respTest = obtenerRespuesta('BuildPlan','EXPIRE','PLAN_ID','ID del plan no numérico',
     'DFPLAN_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
 /*
- *  --- EDIT: ACCIONES (Plan)  ---
+ *  --- EXPIRE: ACCIONES (Plan)  ---
  */
 
 // El Plan no existe
 $_POST = array('plan_id' => '11111111');
 $buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->EDIT();
-$respTest = obtenerRespuesta('BuildPlan','EDIT','ACCION','El plan no existe',
+$feedback = $buildPlan_service->expire();
+$respTest = obtenerRespuesta('BuildPlan','EXPIRE','ACCION','El plan no existe',
     'DFPLANID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
 /*
- *  --- EDIT: VALIDACIONES (Edificio) ---
+ *  --- EXPIRE: VALIDACIONES (Edificio) ---
  */
 
 // ID Edificio vacío
 $_POST = array('plan_id' => '1', 'edificio_id' => '');
 $buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->EDIT();
-$respTest = obtenerRespuesta('BuildPlan','EDIT','EDIFICIO_ID','ID Edificio vacío',
+$feedback = $buildPlan_service->expire();
+$respTest = obtenerRespuesta('BuildPlan','EXPIRE','EDIFICIO_ID','ID Edificio vacío',
     'BLD_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
 // ID Edificio no numérico
 $_POST = array('plan_id' => '1', 'edificio_id' => 'aaa');
 $buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->EDIT();
-$respTest = obtenerRespuesta('BuildPlan','EDIT','EDIFICIO_ID','ID Edificio no numérico',
+$feedback = $buildPlan_service->expire();
+$respTest = obtenerRespuesta('BuildPlan','EXPIRE','EDIFICIO_ID','ID Edificio no numérico',
     'BLD_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
 /*
- *  --- EDIT: ACCIONES (Edificio) ---
+ *  --- EXPIRE: ACCIONES (Edificio) ---
  */
 
 // El edificio no existe
 $_POST = array('plan_id' => '1', 'edificio_id' => '111111');
 $buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->EDIT();
-$respTest = obtenerRespuesta('BuildPlan','EDIT','ACCION','El edificio no existe',
+$feedback = $buildPlan_service->expire();
+$respTest = obtenerRespuesta('BuildPlan','EXPIRE','ACCION','El edificio no existe',
     'BLDID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
 /*
- *  --- EDIT: ACCIONES ---
+ *  --- EXPIRE: ACCIONES ---
  */
 
 // Usuario no es responsable del edificio
@@ -493,8 +493,8 @@ $_SESSION['username'] = 'sg2ped';
 
 $_POST = array('plan_id' => '1', 'edificio_id' => '2');
 $buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->EDIT();
-$respTest = obtenerRespuesta('BuildPlan','EDIT','ACCION','Usuario no es responsable del edificio',
+$feedback = $buildPlan_service->expire();
+$respTest = obtenerRespuesta('BuildPlan','EXPIRE','ACCION','Usuario no es responsable del edificio',
     'BLD_FRBD', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
@@ -503,8 +503,8 @@ $_SESSION['rol'] = 'organizacion';
 
 $_POST = array('plan_id' => '8', 'edificio_id' => '1');
 $buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->EDIT();
-$respTest = obtenerRespuesta('BuildPlan','EDIT','ACCION','El plan no está asignado al edificio',
+$feedback = $buildPlan_service->expire();
+$respTest = obtenerRespuesta('BuildPlan','EXPIRE','ACCION','El plan no está asignado al edificio',
     'BLDPLAN_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
@@ -512,16 +512,16 @@ array_push($testBuildPlan, $respTest);
 // Asignación ya vencida
 $_POST = array('plan_id' => '9', 'edificio_id' => '1');
 $buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->EDIT();
-$respTest = obtenerRespuesta('BuildPlan','EDIT','ACCION','La asignación ya se encuentra vencida',
+$feedback = $buildPlan_service->expire();
+$respTest = obtenerRespuesta('BuildPlan','EXPIRE','ACCION','La asignación ya se encuentra vencida',
     'BLDPLAN_ALREADY_EXPIRED', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 
 // Asignación vencida OK
 $_POST = array('plan_id' => '7', 'edificio_id' => '5');
 $buildPlan_service = new BuildPlan_Service();
-$feedback = $buildPlan_service->EDIT();
-$respTest = obtenerRespuesta('BuildPlan','EDIT','ACCION','Asignación vencida OK',
+$feedback = $buildPlan_service->expire();
+$respTest = obtenerRespuesta('BuildPlan','EXPIRE','ACCION','Asignación vencida OK',
     'BLDPLAN_EDTSTATE_OK', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testBuildPlan, $respTest);
 unset($_SESSION['rol'], $_SESSION['username']);

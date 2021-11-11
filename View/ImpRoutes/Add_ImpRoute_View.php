@@ -1,17 +1,19 @@
 <?php
 
-class Add_ImpRoute {
+include './View/Page/header.php';
+
+class Add_ImpRoute extends Header {
     var $buildings;
     var $route;
 
     function __construct($buildings, $route) {
+        parent::__construct();
         $this->buildings = $buildings;
         $this->route = $route;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -57,12 +59,7 @@ class Add_ImpRoute {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                        crearform('formenviar','post');
-                                        insertacampo(document.formenviar,'ruta_id', '<?php echo $this->route['ruta_id'] ?>');
-                                        insertacampo(document.formenviar,'controller','ImpRoute');
-                                        insertacampo(document.formenviar,'action','show');
-                                        enviaform(document.formenviar);">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

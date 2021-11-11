@@ -1,14 +1,12 @@
 <?php
 
-class ImpFormat {
+include_once 'Abstract_Controller.php';
+
+class ImpFormat extends Abstract_Controller {
 
     function __construct() {
         include './Service/Formation_Service.php';
         include './View/Page/Message_View.php';
-    }
-
-    function checkPermission() {
-        return (es_resp_organizacion() || es_admin());
     }
 
     function show() {
@@ -16,6 +14,7 @@ class ImpFormat {
             $format_service = new Formation_Service();
             $feedback = $format_service->searchCompletions();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/ImpFormats/Show_ImpFormats_View.php';
                 new Show_ImpFormats($feedback['resource'], $feedback['formation']);
             } else if(isset($feedback['formation'])) {
@@ -151,6 +150,7 @@ class ImpFormat {
             $format_service = new Formation_Service();
             $feedback = $format_service->seek();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/ImpFormats/ShowCurrent_ImpFormat_View.php';
                 new ShowCurrent_ImpFormat($feedback['resource']);
             } else {

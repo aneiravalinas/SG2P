@@ -1,17 +1,19 @@
 <?php
 
-class Show_ImpSims {
+include './View/Page/header.php';
+
+class Show_ImpSims extends Header {
     var $imp_sims;
     var $simulacrum;
 
     function __construct($imp_sims, $simulacrum) {
+        parent::__construct();
         $this->imp_sims = $imp_sims;
         $this->simulacrum = $simulacrum;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -128,12 +130,7 @@ class Show_ImpSims {
 
                 <div class="row justify-content-center">
                     <div class="col text-center">
-                        <a class="btn-get-started i18n-back" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'plan_id',<?php echo $this->simulacrum['plan_id'] ?>);
-                            insertacampo(document.formenviar,'controller','DefSim');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                             Volver
                         </a>
                     </div>

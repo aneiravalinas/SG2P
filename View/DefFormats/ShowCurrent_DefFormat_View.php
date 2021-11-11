@@ -1,15 +1,17 @@
 <?php
 
-class ShowCurrent_DefFormat {
+include './View/Page/header.php';
+
+class ShowCurrent_DefFormat extends Header {
     var $format;
 
     function __construct($format) {
+        parent::__construct();
         $this->format = $format;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">
@@ -47,12 +49,7 @@ class ShowCurrent_DefFormat {
 
                         <div class="row justify-content-center">
                             <div class="col text-center">
-                                <a class="btn-get-started i18n-back" type="button" onclick="
-                                    crearform('formenviar','post');
-                                    insertacampo(document.formenviar,'plan_id','<?php echo $this->format['plan_id'] ?>');
-                                    insertacampo(document.formenviar,'controller','DefFormat');
-                                    insertacampo(document.formenviar,'action','show');
-                                    enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                     Volver
                                 </a>
                             </div>

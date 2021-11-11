@@ -1,17 +1,19 @@
 <?php
 
-class Delete_Floor {
+include_once './View/Page/header.php';
+
+class Delete_Floor extends Header {
     var $floor;
     var $building;
 
     function __construct($floor, $building) {
+        parent::__construct();
         $this->floor = $floor;
         $this->building = $building;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <section id="hero" class="d-flex align-items-center">
@@ -31,12 +33,7 @@ class Delete_Floor {
 
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 d-flex justify-content-between flex-wrap">
-                        <a class="btn-get-started i18n-cancelar" type="button" onclick="
-                                        crearform('formenviar','post');
-                                            insertacampo(document.formenviar,'edificio_id','<?php echo $this->floor['edificio_id'] ?>');
-                                            insertacampo(document.formenviar,'controller','Floor');
-                                            insertacampo(document.formenviar,'action','show');
-                                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-cancelar" type="button" onclick="go_current()">
                             Cancelar
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-delete" onclick="

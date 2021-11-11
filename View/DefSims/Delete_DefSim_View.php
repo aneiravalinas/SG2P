@@ -1,15 +1,17 @@
 <?php
 
-class Delete_DefSim {
+include './View/Page/header.php';
+
+class Delete_DefSim extends Header {
     var $sim;
 
     function __construct($sim) {
+        parent::__construct();
         $this->sim = $sim;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -30,12 +32,7 @@ class Delete_DefSim {
 
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 d-flex justify-content-between flex-wrap">
-                        <a class="btn-get-started i18n-cancelar" type="button" onclick="
-                            crearform('formenviar','post');
-                            insertacampo(document.formenviar,'plan_id', '<?php echo $this->sim['plan_id'] ?>');
-                            insertacampo(document.formenviar,'controller','DefSim');
-                            insertacampo(document.formenviar,'action','show');
-                            enviaform(document.formenviar);">
+                        <a class="btn-get-started i18n-cancelar" type="button" onclick="go_current()">
                             Cancelar
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-delete" onclick="

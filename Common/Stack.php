@@ -9,8 +9,8 @@ function getCurrentShow() {
 }
 
 function getPreviousShow() {
-    if(!empty($_SESSION['stack_post']) && isset($_SESSION['stack_post'][count($_SESSION) - 2])) {
-        return $_SESSION['stack_post'][count($_SESSION) - 2];
+    if(isset($_SESSION['stack_post'][count($_SESSION['stack_post']) - 2])) {
+        return $_SESSION['stack_post'][count($_SESSION['stack_post']) - 2];
     } else {
         return array('controller' => 'Portal', 'action' => '_default');
     }

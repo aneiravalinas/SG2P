@@ -1,6 +1,8 @@
 <?php
 
-class User {
+include_once 'Abstract_Controller.php';
+
+class User extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
@@ -11,6 +13,7 @@ class User {
         $user_service = new User_Service();
         $feedback = $user_service->SEARCH();
         if($feedback['ok']) {
+            $this->update_stack_post();
             include './View/Users/Show_Users_View.php';
             new Show_Users($feedback['resource']);
         } else {
@@ -97,6 +100,7 @@ class User {
         $user_service = new User_Service();
         $feedback = $user_service->seek();
         if($feedback['ok']) {
+            $this->update_stack_post();
             include './View/Users/Profile_View.php';
             new Profile($feedback['resource']);
         } else {
@@ -114,6 +118,7 @@ class User {
         $user_service = new User_Service();
         $feedback = $user_service->seek();
         if($feedback['ok']) {
+            $this->update_stack_post();
             include './View/Users/ShowCurrent_User_View.php';
             new ShowCurrent_User($feedback['resource']);
         } else {

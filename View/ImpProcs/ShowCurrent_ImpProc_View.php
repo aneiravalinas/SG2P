@@ -1,16 +1,18 @@
 <?php
 
-class ShowCurrent_ImpProc {
+include './View/Page/header.php';
+
+class ShowCurrent_ImpProc extends Header {
     var $imp_proc;
 
     function __construct($imp_proc) {
+        parent::__construct();
         $this->imp_proc = $imp_proc;
         $this->render();
     }
 
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
 
@@ -89,12 +91,7 @@ class ShowCurrent_ImpProc {
 
                     <div class="row justify-content-center pb-5 pt-3">
                         <div class="col text-center">
-                            <a class="btn-get-started i18n-back" type="button" onclick="
-                                crearform('formenviar','post');
-                                insertacampo(document.formenviar, 'procedimiento_id', '<?php echo $this->imp_proc['procedimiento_id'] ?>');
-                                insertacampo(document.formenviar,'controller','ImpProc');
-                                insertacampo(document.formenviar,'action','show');
-                                enviaform(document.formenviar);">
+                            <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
                                 Volver
                             </a>
                         </div>

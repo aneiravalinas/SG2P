@@ -1,13 +1,15 @@
 <?php
 
-class Login_View {
+include './View/Page/header.php';
+
+class Login_View extends Header {
 
     function __construct() {
+        parent::__construct();
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
         <!-- ==== Login Box ===== -->
         <section id="hero" class="d-flex align-items-center">
@@ -28,20 +30,23 @@ class Login_View {
                                     </div>
                                 </form>
                                 <div class="text-center">
-                                    <a class="btn-get-started i18n-login" type="button" onclick=
+                                    <a class="btn-get-started i18n-login w-60 mt-3 d-block" type="button" onclick=
                                         "insertacampo(document.formulariologin,'controller','Login');
                                          insertacampo(document.formulariologin,'action','login');
                                          enviaformcorrecto(document.formulariologin, check_LOGIN());">
                                             Login
+                                    </a>
+                                    <a class="btn-get-started i18n-back w-60 mt-3 d-block" type="button" onclick="go_previous()">
+                                        Volver
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
-
 
 <?php
         include './View/Page/footer.php';

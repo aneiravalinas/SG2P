@@ -1,14 +1,12 @@
 <?php
 
-class BuildPlan {
+include_once 'Abstract_Controller.php';
+
+class BuildPlan extends Abstract_Controller {
 
     function __construct() {
         include './View/Page/Message_View.php';
         include './Service/BuildPlan_Service.php';
-    }
-
-    function checkPermission() {
-        return (es_resp_organizacion() || es_admin());
     }
 
     function show() {
@@ -16,6 +14,7 @@ class BuildPlan {
             $buildPlan_service = new BuildPlan_Service();
             $feedback = $buildPlan_service->SEARCH();
             if($feedback['ok']) {
+                $this->update_stack_post();
                 include_once './View/BuildPlans/Show_BuildPlan_View.php';
                 new Show_BuildPlan($feedback['resource'],$feedback['plan']);
             } else if(isset($feedback['plan'])) {

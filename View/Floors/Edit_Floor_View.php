@@ -1,17 +1,19 @@
 <?php
 
-class Edit_Floor {
+include './View/Page/header.php';
+
+class Edit_Floor extends Header {
     var $floor;
     var $building;
 
     function __construct($floor, $building) {
+        parent::__construct();
         $this->floor = $floor;
         $this->building = $building;
         $this->render();
     }
 
     function render() {
-        include './View/Page/header.php';
         ?>
 
         <!-- ======= FORM SECTION ====== --->
@@ -70,12 +72,7 @@ class Edit_Floor {
                         </form>
                         <div class="row">
                             <div class="col d-flex justify-content-between flex-wrap">
-                                <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
-                                    crearform('formenviar','post');
-                                    insertacampo(document.formenviar, 'edificio_id','<?php echo $this->floor['edificio_id'] ?>');
-                                    insertacampo(document.formenviar,'controller','Floor');
-                                    insertacampo(document.formenviar,'action','show');
-                                    enviaform(document.formenviar);">
+                                <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
                                     Cancelar
                                 </a>
                                 <a class="btn-get-started i18n-enviar" type="button" onclick="
