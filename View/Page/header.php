@@ -1,9 +1,11 @@
 <?php
 
 abstract class Header {
+    var $previousShow;
 
     function __construct() {
         include_once './Common/Stack.php';
+        $this->previousShow = getPreviousShow();
         self::render();
     }
 
