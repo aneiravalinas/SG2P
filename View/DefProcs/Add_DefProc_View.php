@@ -46,7 +46,12 @@ class Add_DefProc extends Header {
 
                             <div class="row">
                                 <div class="col d-flex justify-content-between flex-wrap">
-                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="go_current()">
+                                    <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
+                                        crearform('formenviar', 'post');
+                                        <?php foreach($this->currentShow as $key => $value): ?>
+                                        insertacampo(document.formenvia, '<?php echo $key; ?>', '<?php echo $value; ?>');
+                                        <?php endforeach; ?>
+                                        enviaform(document.formenviar);">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="
