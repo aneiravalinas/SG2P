@@ -2,10 +2,12 @@
 
 abstract class Header {
     var $previousShow;
+    var $currentShow;
 
     function __construct() {
         include_once './Common/Stack.php';
         $this->previousShow = getPreviousShow();
+        $this->currentShow = getCurrentShow();
         self::render();
     }
 
@@ -78,27 +80,6 @@ abstract class Header {
 
             </div>
         </header><!-- End Header -->
-
-        <?php if(!$_SESSION['test']) :?>
-        <script>
-            let currentShow = <?php echo json_encode(getCurrentShow()); ?>;
-            let previousShow = <?php echo json_encode(getPreviousShow()); ?>;
-
-
-            function go_previous() {
-                crearform('formenviar', 'post');
-                insertacampo(document.formenviar, 'go_back', 'go_back');
-                insertacampo_multiple(document.formenviar, previousShow);
-                enviaform(document.formenviar);
-            }
-
-            function go_current() {
-                crearform('formenviar', 'post');
-                insertacampo_multiple(document.formenviar, currentShow);
-                enviaform(document.formenviar);
-            }
-        </script>
-        <?php endif; ?>
 <?php
     }
 

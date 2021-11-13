@@ -10,6 +10,7 @@ abstract class Abstract_Controller {
             $_SESSION['stack_post'] = array();
             array_push($_SESSION['stack_post'], array('controller' => 'Portal', 'action' => '_default'));
         } else if(isset($_POST['go_back'])) {
+            unset($_POST['go_back']);
             array_pop($_SESSION['stack_post']);
         } else {
             if(!empty($_SESSION['stack_post'])) {

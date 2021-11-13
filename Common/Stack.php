@@ -1,7 +1,7 @@
 <?php
 
 function getCurrentShow() {
-    if(!empty($_SESSION['stack_post'])) {
+    if(isset($_SESSION['stack_post']) && !empty($_SESSION['stack_post'])) {
         return end($_SESSION['stack_post']);
     } else {
         return array('controller' => 'Portal', 'action' => '_default');
