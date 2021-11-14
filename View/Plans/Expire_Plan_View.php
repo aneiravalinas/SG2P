@@ -33,7 +33,12 @@ class Expire_Plan extends Header {
 
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 d-flex justify-content-between flex-wrap">
-                        <a class="btn-get-started i18n-cancelar" type="button" onclick="go_current()">
+                        <a class="btn-get-started i18n-cancelar" type="button" onclick="
+                                crearform('formenviar', 'post');
+                                <?php foreach($this->currentShow as $key => $value): ?>
+                                insertacampo(document.formenviar, '<?php echo $key; ?>', '<?php echo $value; ?>');
+                                <?php endforeach; ?>
+                                enviaform(document.formenviar);">
                             Cancelar
                         </a>
                         <a id="btn-cancel" type="button" class="btn-get-started i18n-expire" onclick="

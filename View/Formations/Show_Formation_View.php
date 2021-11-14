@@ -188,7 +188,13 @@ class Show_Formation extends Header {
                     </div>
                     <div class="row justify-content-center pb-5">
                         <div class="col text-center">
-                            <a class="btn-get-started i18n-back" type="button" onclick="go_previous()">
+                            <a class="btn-get-started i18n-back" type="button" onclick="
+                                    crearform('formenviar', 'post');
+                                    insertacampo(document.formenviar, 'go_back', 'go_back');
+                                    <?php foreach($this->previousShow as $key => $value): ?>
+                                    insertacampo(document.formenviar, '<?php echo $key; ?>', '<?php echo $value; ?>');
+                                    <?php endforeach; ?>
+                                    enviaform(document.formenviar);">
                                 Volver
                             </a>
                         </div>
