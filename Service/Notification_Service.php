@@ -67,6 +67,7 @@ class Notification_Service extends Notification_Validation {
             return $this->feedback;
         }
 
+        $this->feedback['code'] = 'NTF_SEARCH_FORM_OK';
         $this->feedback['buildings'] = $buildings;
         $this->feedback['user'] = array('username' => $user['username']);
         return $this->feedback;

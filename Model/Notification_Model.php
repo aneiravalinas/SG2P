@@ -33,12 +33,14 @@ class Notification_Model extends Abstract_Model {
         $this->query = "
             INSERT INTO NOTIFICACION
             (
+                id_notificacion,
                 username,
                 edificio_id,
                 plan_id,
                 fecha,
                 mensaje
             ) VALUES (
+                '$this->id_notificacion',
                 '$this->username',
                 '$this->edificio_id',
                 '$this->plan_id',

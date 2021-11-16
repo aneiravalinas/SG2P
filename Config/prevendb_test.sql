@@ -377,5 +377,9 @@ INSERT INTO EDIFICIO_SIMULACRO (`cumplimentacion_id`,`edificio_id`,`simulacro_id
 (2,2,4,'pendiente','url/recurso','Todos'),
 (3,2,4,'vencido','url/recurso','Todos');
 
+INSERT INTO NOTIFICACION (`id_notificacion`, `username`,`edificio_id`, `plan_id`, `mensaje`) VALUES
+(1,'sg2prg','2','1','mensaje');
+
+
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';
 GRANT ALL PRIVILEGES ON prevendb_test.* TO 'prevenroot'@'localhost';
