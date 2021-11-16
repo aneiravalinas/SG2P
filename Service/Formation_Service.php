@@ -52,7 +52,6 @@ class Formation_Service extends Formation_Validation {
         $format = $this->feedback['resource'];
         $validation = $this->validar_atributos_searchCompletions();
         if(!$validation['ok']) {
-            $validation['formation'] = array('formacion_id' => $format['formacion_id']);
             return $validation;
         }
 
@@ -60,11 +59,8 @@ class Formation_Service extends Formation_Validation {
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPFORMAT_SEARCH_OK';
             $this->feedback['formation'] = $format;
-        } else {
-            $this->feedback['formation'] = array('formacion_id' => $format['formacion_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'IMPFORMAT_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPFORMAT_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -96,13 +92,11 @@ class Formation_Service extends Formation_Validation {
 
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
-            $validation['return'] = array('formacion_id' => $formation['formacion_id'], 'edificio_id' => $building['edificio_id']);
             return $validation;
         }
 
         $format_state = $this->get_formation_state();
         if(!$format_state['ok']) {
-            $format_state['return'] = array('formacion_id' => $formation['formacion_id'], 'edificio_id' => $building['edificio_id']);
             return $format_state;
         }
 
@@ -112,11 +106,8 @@ class Formation_Service extends Formation_Validation {
             $this->feedback['code'] = 'IMPFORMAT_SEARCH_OK';
             $this->feedback['formation'] = $formation;
             $this->feedback['building'] = $building;
-        } else {
-            $this->feedback['return'] = array('formacion_id' => $formation['formacion_id'], 'edificio_id' => $building['edificio_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'IMPFORMAT_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPFORMAT_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -156,7 +147,6 @@ class Formation_Service extends Formation_Validation {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'DFFRMTID_NOT_EXST';
             unset($this->feedback['resource'], $this->feedback['formation'], $this->feedback['building']);
-            $this->feedback['return'] = array('formacion_id' => $formation['formacion_id'], 'edificio_id' => $building['edificio_id']);
             return $this->feedback;
         }
 
@@ -164,7 +154,6 @@ class Formation_Service extends Formation_Validation {
 
         $validation = $this->validar_atributos_search_portal();
         if(!$validation['ok']) {
-            $validation['return'] = array('formacion_id' => $formation['formacion_id'], 'edificio_id' => $building['edificio_id']);
             return $validation;
         }
 
@@ -173,11 +162,8 @@ class Formation_Service extends Formation_Validation {
             $this->feedback['code'] = 'PRTL_IMPFORMAT_SEARCH_OK';
             $this->feedback['formation'] = $formation;
             $this->feedback['building'] = $building;
-        } else {
-            $this->feedback['return'] = array('formacion_id' => $formation['formacion_id'], 'edificio_id' => $building['edificio_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'PRTL_IMPFORMAT_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'PRTL_IMPFORMAT_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -194,8 +180,6 @@ class Formation_Service extends Formation_Validation {
         $this->feedback = $this->searchActiveBuildPlans($formation['plan_id']);
         if($this->feedback['ok']) {
             $this->feedback['formation'] = $formation;
-        } else {
-            $this->feedback['formation'] = array('formacion_id' => $formation['formacion_id']);
         }
 
         return $this->feedback;
@@ -256,9 +240,7 @@ class Formation_Service extends Formation_Validation {
         }
 
         $formation = $this->feedback['resource'];
-        $this->feedback = $this->ADD($formation);
-        $this->feedback['formation'] = array('formacion_id' => $formation['formacion_id']);
-        return $this->feedback;
+        return $this->ADD($formation);
     }
 
     /*
@@ -300,7 +282,6 @@ class Formation_Service extends Formation_Validation {
         if($bld_plan['estado'] == 'vencido') {
             $feedback['ok'] = false;
             $feedback['code'] = 'BLDPLAN_EXPIRED';
-            $feedback['building'] = array('edificio_id' => $building['edificio_id']);
             return $feedback;
         }
 
@@ -312,7 +293,6 @@ class Formation_Service extends Formation_Validation {
             $cumplimentacion_id = $this->impFormat_entity->cumplimentacion_id;
             $feedback = $this->ADD($formation);
             if($feedback['ok']) {
-                $feedback['building'] = array('edificio_id' => $building['edificio_id']);
                 $this->update_plan_state($building['edificio_id'], $formation['plan_id']);
                 return $feedback;
             }
@@ -322,7 +302,6 @@ class Formation_Service extends Formation_Validation {
             $feedback['code'] = 'IMPFORMAT_ADD_KO';
         }
 
-        $feedback['building'] = array('edificio_id' => $building['edificio_id']);
         return $feedback;
     }
 
@@ -343,7 +322,6 @@ class Formation_Service extends Formation_Validation {
         if(es_resp_edificio()) {
             $this->feedback = $this->check_more_than_one_impformats($imp_format['edificio_id'], $imp_format['formacion_id']);
             if(!$this->feedback['ok']) {
-                $this->feedback['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
                 return $this->feedback;
             }
         }
@@ -356,7 +334,6 @@ class Formation_Service extends Formation_Validation {
             $this->feedback['code'] = 'IMPFORMAT_DEL_KO';
         }
 
-        $this->feedback['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
         return $this->feedback;
     }
 
@@ -441,7 +418,6 @@ class Formation_Service extends Formation_Validation {
             $this->feedback['code'] = 'IMPFORMAT_EXPIRE_KO';
         }
 
-        $this->feedback['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
         return $this->feedback;
     }
 
@@ -463,13 +439,11 @@ class Formation_Service extends Formation_Validation {
         if($imp_format['estado'] == 'vencido') {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'COMPL_EXPIRED';
-            $this->feedback['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
             return $this->feedback;
         }
 
         $validation = $this->validar_atributos_implement();
         if(!$validation['ok']) {
-            $validation['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
             return $validation;
         }
 
@@ -482,7 +456,6 @@ class Formation_Service extends Formation_Validation {
             $this->feedback['code'] = 'IMPFORMAT_IMPL_KO';
         }
 
-        $this->feedback['return'] = array('edificio_id' => $imp_format['edificio_id'], 'formacion_id' => $imp_format['formacion_id']);
         return$this->feedback;
     }
 

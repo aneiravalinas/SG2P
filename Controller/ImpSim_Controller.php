@@ -17,13 +17,11 @@ class ImpSim extends Abstract_Controller {
                 $this->update_stack_post();
                 include_once './View/ImpSims/Show_ImpSims_View.php';
                 new Show_ImpSims($feedback['resource'], $feedback['simulacrum']);
-            } else if(isset($feedback['simulacrum'])) {
-                new Message($feedback['code'], 'ImpSim', 'show', $feedback['simulacrum']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -34,13 +32,11 @@ class ImpSim extends Abstract_Controller {
             if($feedback['ok']) {
                 include_once './View/ImpSims/Add_ImpSim_View.php';
                 new Add_ImpSim($feedback['resource'], $feedback['simulacrum']);
-            } else if(isset($feedback['simulacrum'])) {
-                new Message($feedback['code'], 'ImpSim', 'show', $feedback['simulacrum']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -48,13 +44,9 @@ class ImpSim extends Abstract_Controller {
         if($this->checkPermission()) {
             $sim_service = new Simulacrum_Service();
             $feedback = $sim_service->addImpSim();
-            if(isset($feedback['simulacrum'])) {
-                new Message($feedback['code'], 'ImpSim', 'show', $feedback['simulacrum']);
-            } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -66,10 +58,10 @@ class ImpSim extends Abstract_Controller {
                 include_once './View/ImpSims/Delete_ImpSim_View.php';
                 new Delete_ImpSim($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -77,13 +69,9 @@ class ImpSim extends Abstract_Controller {
         if($this->checkPermission()) {
             $sim_service = new Simulacrum_Service();
             $feedback = $sim_service->DELETE();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'ImpSim', 'show', array('simulacro_id' => $feedback['return']['simulacro_id']));
-            } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -95,10 +83,10 @@ class ImpSim extends Abstract_Controller {
                 include_once './View/ImpSims/Expire_ImpSim_View.php';
                 new Expire_ImpSim($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else{
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -106,13 +94,9 @@ class ImpSim extends Abstract_Controller {
         if($this->checkPermission()) {
             $sim_service = new Simulacrum_Service();
             $feedback = $sim_service->expire();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'ImpSim', 'show', array('simulacro_id' => $feedback['return']['simulacro_id']));
-            } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -124,10 +108,10 @@ class ImpSim extends Abstract_Controller {
                 include_once './View/ImpSims/Implement_ImpSim_View.php';
                 new Implement_ImpSim($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -135,13 +119,9 @@ class ImpSim extends Abstract_Controller {
         if($this->checkPermission()) {
             $sim_service = new Simulacrum_Service();
             $feedback = $sim_service->implement();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'ImpSim', 'show', array('simulacro_id' => $feedback['return']['simulacro_id']));
-            } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -154,10 +134,10 @@ class ImpSim extends Abstract_Controller {
                 include_once './View/ImpSims/ShowCurrent_ImpSim_View.php';
                 new ShowCurrent_ImpSim($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -169,10 +149,10 @@ class ImpSim extends Abstract_Controller {
                 include_once './View/ImpSims/Search_ImpSim_View.php';
                 new Search_ImpSim($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 }

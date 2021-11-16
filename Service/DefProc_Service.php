@@ -42,7 +42,6 @@ class DefProc_Service extends DefProc_Validation {
         $plan = $this->feedback['resource'];
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $plan['plan_id']);
             return $validation;
         }
 
@@ -50,11 +49,8 @@ class DefProc_Service extends DefProc_Validation {
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'DFPROC_SEARCH_OK';
             $this->feedback['plan'] = array('plan_id' => $plan['plan_id'], 'nombre' => $plan['nombre']);
-        } else {
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'DFPROC_SEARCH_KO';
-            }
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'DFPROC_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -84,17 +80,13 @@ class DefProc_Service extends DefProc_Validation {
             return $this->feedback;
         }
 
-        $plan = $this->feedback['resource'];
-
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $plan['plan_id']);
             return $validation;
         }
 
         $this->feedback = $this->name_proc_not_exist();
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
             return $this->feedback;
         }
 
@@ -105,7 +97,6 @@ class DefProc_Service extends DefProc_Validation {
             $this->feedback['code'] = 'DFPROC_ADD_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
         return $this->feedback;
     }
 
@@ -138,11 +129,8 @@ class DefProc_Service extends DefProc_Validation {
             return $this->feedback;
         }
 
-        $proc = $this->feedback['resource'];
-
         $this->feedback = $this->imp_procs_not_exist();
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $proc['plan_id']);
             return $this->feedback;
         }
 
@@ -153,7 +141,6 @@ class DefProc_Service extends DefProc_Validation {
             $this->feedback['code'] = 'DFPROC_DEL_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $proc['plan_id']);
         return $this->feedback;
     }
 
@@ -174,7 +161,6 @@ class DefProc_Service extends DefProc_Validation {
 
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $proc['plan_id']);
             return $validation;
         }
 
@@ -182,7 +168,6 @@ class DefProc_Service extends DefProc_Validation {
             $this->defProc_entity->plan_id = $proc['plan_id'];
             $this->feedback = $this->name_proc_not_exist();
             if(!$this->feedback['ok']) {
-                $this->feedback['plan'] = array('plan_id' => $proc['plan_id']);
                 return $this->feedback;
             }
         }
@@ -194,7 +179,6 @@ class DefProc_Service extends DefProc_Validation {
             $this->feedback['code'] = 'DFPROC_EDT_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $proc['plan_id']);
         return $this->feedback;
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-include './View/Page/header.php';
+include_once './View/Page/header.php';
 
 class ShowCurrent_Simulacrum extends Header {
     var $imp_sim;

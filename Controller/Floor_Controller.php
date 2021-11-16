@@ -17,13 +17,11 @@ class Floor extends Abstract_Controller {
                 $this->update_stack_post();
                 include_once './View/Floors/Show_Floors_View.php';
                 new Show_Floors($feedback['resource'], $feedback['building']);
-            } else if(isset($feedback['building'])) {
-                new Message($feedback['code'],'Floor','show',$feedback['building']);
             } else {
-                new Message($feedback['code'],'Building','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -34,13 +32,11 @@ class Floor extends Abstract_Controller {
             if($feedback['ok']) {
                 include_once './View/Floors/Add_Floor_View.php';
                 new Add_Floor($feedback['building']);
-            } else if(isset($feedback['building'])){
-                new Message($feedback['code'],'Floor','show', $feedback['building']);
             } else {
-                new Message($feedback['code'],'Building','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -48,13 +44,9 @@ class Floor extends Abstract_Controller {
         if($this->checkPermission()) {
             $floor_service = new Floor_Service();
             $feedback = $floor_service->ADD();
-            if(isset($feedback['building'])) {
-                new Message($feedback['code'],'Floor','show', $feedback['building']);
-            } else {
-                new Message($feedback['code'],'Building','show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -67,14 +59,10 @@ class Floor extends Abstract_Controller {
                 include_once './View/Floors/ShowCurrent_Floor_View.php';
                 new ShowCurrent_Floor($feedback['resource'], $feedback['building']);
             } else {
-                if(isset($feedback['building'])) {
-                    new Message($feedback['code'],'Floor','show', $feedback['building']);
-                } else {
-                    new Message($feedback['code'],'Building','show');
-                }
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -86,10 +74,10 @@ class Floor extends Abstract_Controller {
                 include_once './View/Floors/Delete_Floor_View.php';
                 new Delete_Floor($feedback['resource'],$feedback['building']);
             } else {
-                new Message($feedback['code'],'Building','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -97,13 +85,9 @@ class Floor extends Abstract_Controller {
         if($this->checkPermission()) {
             $floor_service = new Floor_Service();
             $feedback = $floor_service->DELETE();
-            if(isset($feedback['building'])) {
-                new Message($feedback['code'],'Floor','show', $feedback['building']);
-            } else {
-                new Message($feedback['code'],'Building','show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -115,10 +99,10 @@ class Floor extends Abstract_Controller {
                 include_once './View/Floors/Search_Floor_View.php';
                 new Search_Floor($feedback['building']);
             } else {
-                new Message($feedback['code'],'Building','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -130,10 +114,10 @@ class Floor extends Abstract_Controller {
                 include_once './View/Floors/Edit_Floor_View.php';
                 new Edit_Floor($feedback['resource'],$feedback['building']);
             } else {
-                new Message($feedback['code'],'Building','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -141,13 +125,9 @@ class Floor extends Abstract_Controller {
         if($this->checkPermission()) {
             $floor_service = new Floor_Service();
             $feedback = $floor_service->EDIT();
-            if(isset($feedback['building'])) {
-                new Message($feedback['code'],'Floor','show',$feedback['building']);
-            } else {
-                new Message($feedback['code'],'Building','show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 

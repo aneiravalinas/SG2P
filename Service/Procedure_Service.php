@@ -54,7 +54,6 @@ class Procedure_Service extends Procedure_Validation {
         $proc = $this->feedback['resource'];
         $validation = $this->validar_atributos_searchCompletions();
         if(!$validation['ok']) {
-            $validation['procedure'] = array('procedimiento_id' => $proc['procedimiento_id']);
             return $validation;
         }
 
@@ -62,11 +61,8 @@ class Procedure_Service extends Procedure_Validation {
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPPROC_SEARCH_OK';
             $this->feedback['procedure'] = $proc;
-        } else {
-            $this->feedback['procedure'] = array('procedimiento_id' => $proc['procedimiento_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'IMPPROC_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPPROC_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -98,13 +94,11 @@ class Procedure_Service extends Procedure_Validation {
 
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
-            $validation['return'] = array('procedimiento_id' => $procedure['procedimiento_id'], 'edificio_id' => $building['edificio_id']);
             return $validation;
         }
 
         $proc_state = $this->get_procedure_state();
         if(!$proc_state['ok']) {
-            $proc_state['return'] = array('procedimiento_id' => $procedure['procedimiento_id'], 'edificio_id' => $building['edificio_id']);
             return $proc_state;
         }
 
@@ -114,11 +108,8 @@ class Procedure_Service extends Procedure_Validation {
             $this->feedback['code'] = 'IMPPROC_SEARCH_OK';
             $this->feedback['procedure'] = $procedure;
             $this->feedback['building'] = $building;
-        } else {
-            $this->feedback['return'] = array('procedimiento_id' => $procedure['procedimiento_id'], 'edificio_id' => $building['edificio_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'IMPPROC_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPPROC_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -158,7 +149,6 @@ class Procedure_Service extends Procedure_Validation {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'DFPROCID_NOT_EXST';
             unset($this->feedback['resource'], $this->feedback['procedure'], $this->feedback['building']);
-            $this->feedback['return'] = array('plan_id' => $procedure['plan_id'], 'edificio_id' => $building['edificio_id']);
             return $this->feedback;
         }
 
@@ -168,11 +158,8 @@ class Procedure_Service extends Procedure_Validation {
             $this->feedback['code'] = 'PRTL_IMPPROC_SEARCH_OK';
             $this->feedback['procedure'] = $procedure;
             $this->feedback['building'] = $building;
-        } else {
-            $this->feedback['return'] = array('plan_id' => $procedure['plan_id'], 'edificio_id' => $building['edificio_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'PRTL_IMPPROC_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'PRTL_IMPPROC_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -209,8 +196,6 @@ class Procedure_Service extends Procedure_Validation {
         $this->feedback = $this->searchActiveBuildPlans($procedure['plan_id']);
         if($this->feedback['ok']) {
             $this->feedback['procedure'] = $procedure;
-        } else {
-            $this->feedback['procedure'] = array('procedimiento_id' => $procedure['procedimiento_id']);
         }
 
         return $this->feedback;
@@ -233,9 +218,7 @@ class Procedure_Service extends Procedure_Validation {
         }
 
         $procedure = $this->feedback['resource'];
-        $this->feedback = $this->ADD($procedure);
-        $this->feedback['procedure'] = array('procedimiento_id' => $procedure['procedimiento_id']);
-        return $this->feedback;
+        return $this->ADD($procedure);
     }
 
     /*
@@ -280,13 +263,11 @@ class Procedure_Service extends Procedure_Validation {
         if($bld_plan['estado'] == 'vencido') {
             $feedback['ok'] = false;
             $feedback['code'] = 'BLDPLAN_EXPIRED';
-            $feedback['building'] = array('edificio_id' => $building['edificio_id']);
             return $feedback;
         }
 
         $feedback = $this->proc_building_actives_not_exist();
         if(!$feedback['ok']) {
-            $feedback['building'] = array('edificio_id' => $building['edificio_id']);
             return $feedback;
         }
 
@@ -297,7 +278,6 @@ class Procedure_Service extends Procedure_Validation {
         if(!$uploader->dir_exist($path . $this->procedimiento_id)['ok']) {
             $feedback = $uploader->create_dir($path, $this->procedimiento_id);
             if(!$feedback['ok']) {
-                $feedback['building'] = array('edificio_id' => $building['edificio_id']);
                 $feedback['code'] = 'BLDPLAN_DIRPROC_KO';
                 return $feedback;
             }
@@ -311,7 +291,6 @@ class Procedure_Service extends Procedure_Validation {
             $imp_proc_id = $this->impProc_entity->cumplimentacion_id;
             $feedback = $this->ADD($procedure);
             if($feedback['ok']) {
-                $feedback['building'] = array('edificio_id' => $building['edificio_id']);
                 $this->update_plan_state($building['edificio_id'], $procedure['plan_id']);
                 return $feedback;
             }
@@ -325,7 +304,6 @@ class Procedure_Service extends Procedure_Validation {
             $uploader->delete($path . $this->procedimiento_id);
         }
 
-        $feedback['building'] = array('edificio_id' => $building['edificio_id']);
         return $feedback;
     }
 
@@ -349,7 +327,6 @@ class Procedure_Service extends Procedure_Validation {
         if(es_resp_edificio()) {
             $this->feedback = $this->check_more_than_one_impprocs($imp_proc['edificio_id'], $imp_proc['procedimiento_id']);
             if(!$this->feedback['ok']) {
-                $this->feedback['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
                 return $this->feedback;
             }
         }
@@ -367,7 +344,6 @@ class Procedure_Service extends Procedure_Validation {
             $this->feedback['code'] = 'IMPPROC_DEL_KO';
         }
 
-        $this->feedback['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
         return $this->feedback;
     }
 
@@ -461,7 +437,6 @@ class Procedure_Service extends Procedure_Validation {
             $this->feedback['code'] = 'IMPPROC_EXPIRE_KO';
         }
 
-        $this->feedback['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
         return $this->feedback;
     }
 
@@ -485,13 +460,11 @@ class Procedure_Service extends Procedure_Validation {
         if($imp_proc['estado'] == 'vencido') {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'COMPL_EXPIRED';
-            $this->feedback['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
             return $this->feedback;
         }
 
         $validation = $this->validar_NOMBRE_DOC();
         if(!$validation['ok']) {
-            $validation['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
             return $validation;
         }
 
@@ -500,7 +473,6 @@ class Procedure_Service extends Procedure_Validation {
         if(!$_SESSION['test']) {
             $this->feedback = $uploader->uploadFile($imp_proc['path'], $this->nombre_doc);
             if(!$this->feedback['ok']) {
-                $this->feedback['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
                 return $this->feedback;
             }
         }
@@ -524,7 +496,6 @@ class Procedure_Service extends Procedure_Validation {
             }
         }
 
-        $this->feedback['return'] = array('edificio_id' => $imp_proc['edificio_id'], 'procedimiento_id' => $imp_proc['procedimiento_id']);
         return $this->feedback;
     }
 

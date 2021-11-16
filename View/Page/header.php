@@ -3,11 +3,11 @@
 abstract class Header {
     var $previousShow;
     var $currentShow;
+    var $unreadNotifications;
 
     function __construct() {
-        include_once './Common/Stack.php';
-        $this->previousShow = getPreviousShow();
-        $this->currentShow = getCurrentShow();
+        $this->getStackData();
+        $this->check_unread_notifications();
         self::render();
     }
 
@@ -63,6 +63,20 @@ abstract class Header {
                                 </a>
                             </li>
                             <li>
+                                <a type="button" class="nav-link" onclick="
+                                        crearform('formenviar', 'post');
+                                        insertacampo(document.formenviar, 'controller', 'Notification');
+                                        insertacampo(document.formenviar, 'action', 'show');
+                                        insertacampo(document.formenviar, 'username', '<?php echo $_SESSION['username']; ?>');
+                                        enviaform(document.formenviar)">
+                                    <?php if($this->unreadNotifications): ?>
+                                    <span class="iconify notif_icon_active" id="notif_icon" data-icon="clarity:notification-solid-badged"></span>
+                                    <?php else: ?>
+                                    <span class="iconify" id="notif_icon" data-icon="clarity:notification-solid"></span>
+                                    <?php endif; ?>
+                                </a>
+                            </li>
+                            <li>
                                 <a type="button" class="getstarted i18n-logout" onclick="
                                     crearform('formenviar','post');
                                         insertacampo(document.formenviar,'action','logout');
@@ -81,6 +95,18 @@ abstract class Header {
             </div>
         </header><!-- End Header -->
 <?php
+    }
+
+    function getStackData() {
+        include_once './Common/Stack.php';
+        $this->previousShow = getPreviousShow();
+        $this->currentShow = getCurrentShow();
+    }
+
+    function check_unread_notifications() {
+            include_once './Service/Notification_Service.php';
+            $notification_service = new Notification_Service();
+            $this->unreadNotifications = $notification_service->check_unread_notifications()['ok'];
     }
 
 }

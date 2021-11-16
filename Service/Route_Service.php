@@ -54,7 +54,6 @@ class Route_Service extends Route_Validation {
         $route = $this->feedback['resource'];
         $validation = $this->validar_atributos_searchCompletions();
         if(!$validation['ok']) {
-            $validation['route'] = array('ruta_id' => $route['ruta_id']);
             return $validation;
         }
 
@@ -62,11 +61,8 @@ class Route_Service extends Route_Validation {
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPROUTE_SEARCH_OK';
             $this->feedback['route'] = $route;
-        } else {
-            $this->feedback['route'] = array('ruta_id' => $route['ruta_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'IMPROUTE_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPROUTE_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -98,13 +94,11 @@ class Route_Service extends Route_Validation {
 
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
-            $validation['return'] = array('ruta_id' => $route['ruta_id'], 'edificio_id' => $building['edificio_id']);
             return $validation;
         }
 
         $route_state = $this->get_route_state();
         if(!$route_state['ok']) {
-            $route_state['return'] = array('ruta_id' => $route['ruta_id'], 'edificio_id' => $building['edificio_id']);
             return $route_state;
         }
 
@@ -114,11 +108,8 @@ class Route_Service extends Route_Validation {
             $this->feedback['code'] = 'IMPROUTE_SEARCH_OK';
             $this->feedback['route'] = $route;
             $this->feedback['building'] = $building;
-        } else {
-            $this->feedback['return'] = array('ruta_id' => $route['ruta_id'], 'edificio_id' => $building['edificio_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'IMPROUTE_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPROUTE_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -165,7 +156,6 @@ class Route_Service extends Route_Validation {
         $route['estado'] = $route_state['estado'];
         $validation = $this->validar_atributos_search_portal();
         if(!$validation['ok']) {
-            $validation['return'] = array('ruta_id' => $route['ruta_id'], 'edificio_id' => $building['edificio_id']);
             return $validation;
         }
 
@@ -174,11 +164,8 @@ class Route_Service extends Route_Validation {
             $this->feedback['code'] = 'PRTL_IMPROUTE_SEARCH_OK';
             $this->feedback['route'] = $route;
             $this->feedback['building'] = $building;
-        } else {
-            $this->feedback['return'] = array('ruta_id' => $route['ruta_id'], 'edificio_id' => $building['edificio_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'PRTL_IMPROUTE_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'PRTL_IMPROUTE_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -208,8 +195,6 @@ class Route_Service extends Route_Validation {
         if($this->feedback['ok']) {
             $this->feedback['route'] = $route;
             $this->feedback['building'] = $building;
-        } else {
-            $this->feedback['return'] = array('ruta_id' => $route['ruta_id'], 'edificio_id' => $building['edificio_id']);
         }
 
         return $this->feedback;
@@ -238,7 +223,6 @@ class Route_Service extends Route_Validation {
         $this->feedback = $this->searchBuildingFloors();
         $this->feedback['building'] = $building;
         $this->feedback['route'] = $route;
-
         return $this->feedback;
     }
 
@@ -296,7 +280,6 @@ class Route_Service extends Route_Validation {
             $this->feedback['code'] = 'IMPROUTE_ADD_KO';
         }
 
-        $this->feedback['return'] = array('edificio_id' => $building['edificio_id'], 'ruta_id' => $route['ruta_id']);
         return $this->feedback;
     }
 
@@ -311,8 +294,6 @@ class Route_Service extends Route_Validation {
         $this->feedback = $this->searchActiveBuildPlans($route['plan_id']);
         if($this->feedback['ok']) {
             $this->feedback['route'] = $route;
-        } else {
-            $this->feedback['route'] = array('ruta_id' => $route['ruta_id']);
         }
 
         return $this->feedback;
@@ -335,9 +316,7 @@ class Route_Service extends Route_Validation {
         }
 
         $route = $this->feedback['resource'];
-        $this->feedback = $this->ADD($route);
-        $this->feedback['route'] = array('ruta_id' => $route['ruta_id']);
-        return $this->feedback;
+        return  $this->ADD($route);
     }
 
     /*
@@ -382,7 +361,6 @@ class Route_Service extends Route_Validation {
         if($bld_plan['estado'] == 'vencido') {
             $feedback['ok'] = false;
             $feedback['code'] = 'BLDPLAN_EXPIRED';
-            $feedback['building'] = array('edificio_id' => $building['edificio_id']);
             return $feedback;
         }
 
@@ -402,7 +380,6 @@ class Route_Service extends Route_Validation {
         if(!$uploader->dir_exist($path . $route['ruta_id'])['ok']) {
             $feedback = $uploader->create_dir($path, $this->ruta_id);
             if(!$feedback['ok']) {
-                $feedback['building'] = array('edificio_id' => $building['edificio_id']);
                 $feedback['code'] = 'BLDPLAN_DIRROUTE_KO';
                 return $feedback;
             }
@@ -532,7 +509,6 @@ class Route_Service extends Route_Validation {
             $this->feedback['code'] = 'IMPROUTE_EXPIRE_KO';
         }
 
-        $this->feedback['return'] = array('edificio_id' => $imp_route['edificio_id'], 'ruta_id' => $imp_route['ruta_id']);
         return $this->feedback;
     }
 
@@ -556,13 +532,11 @@ class Route_Service extends Route_Validation {
         if($imp_route['estado'] == 'vencido') {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'COMPL_EXPIRED';
-            $this->feedback['return'] = array('edificio_id' => $imp_route['edificio_id'], 'ruta_id' => $imp_route['ruta_id']);
             return $this->feedback;
         }
 
         $validation = $this->validar_NOMBRE_DOC();
         if(!$validation['ok']) {
-            $validation['return'] = array('edificio_id' => $imp_route['edificio_id'], 'ruta_id' => $imp_route['ruta_id']);
             return $validation;
         }
 
@@ -571,7 +545,6 @@ class Route_Service extends Route_Validation {
         if(!$_SESSION['test']) {
             $this->feedback = $uploader->uploadFile($imp_route['path'], $this->nombre_doc);
             if(!$this->feedback['ok']) {
-                $this->feedback['return'] = array('edificio_id' => $imp_route['edificio_id'], 'ruta_id' => $imp_route['ruta_id']);
                 return $this->feedback;
             }
         }
@@ -595,7 +568,6 @@ class Route_Service extends Route_Validation {
             }
         }
 
-        $this->feedback['return'] = array('edificio_id' => $imp_route['edificio_id'], 'ruta_id' => $imp_route['ruta_id']);
         return $this->feedback;
     }
 
@@ -619,7 +591,6 @@ class Route_Service extends Route_Validation {
         if(es_resp_edificio()) {
             $this->feedback = $this->check_more_than_one_improutes($imp_route['edificio_id'], $imp_route['ruta_id']);
             if(!$this->feedback['ok']) {
-                $this->feedback['return'] = array('edificio_id' => $imp_route['edificio_id'], 'ruta_id' => $imp_route['ruta_id']);
                 return $this->feedback;
             }
         }
@@ -637,7 +608,6 @@ class Route_Service extends Route_Validation {
             $this->feedback['code'] = 'IMPROUTE_DEL_KO';
         }
 
-        $this->feedback['return'] = array('edificio_id' => $imp_route['edificio_id'], 'ruta_id' => $imp_route['ruta_id']);
         return $this->feedback;
     }
 

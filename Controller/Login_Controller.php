@@ -23,7 +23,7 @@ class Login extends Abstract_Controller {
         if($feedback['ok']) {
             header('location: .');
         } else {
-            new Message($feedback['code'],'Login','loginForm');
+            new Message($feedback['code']);
         }
     }
 

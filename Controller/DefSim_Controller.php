@@ -17,13 +17,11 @@ class DefSim extends Abstract_Controller {
                 $this->update_stack_post();
                 include_once './View/DefSims/Show_DefSims_View.php';
                 new Show_DefSims($feedback['resource'], $feedback['plan']);
-            } else if(isset($feedback['plan'])) {
-                new Message($feedback['code'],'DefSim','show',$feedback['code']);
             } else {
-                new Message($feedback['code'],'DefPlan','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -35,10 +33,10 @@ class DefSim extends Abstract_Controller {
                 include_once './View/DefSims/Add_DefSim_View.php';
                 new Add_DefSim($feedback['resource']);
             } else {
-                new Message($feedback['code'],'DefPlan','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -46,13 +44,9 @@ class DefSim extends Abstract_Controller {
         if($this->checkPermission()) {
             $defSim_service = new DefSim_Service();
             $feedback = $defSim_service->ADD();
-            if(isset($feedback['plan'])) {
-                new Message($feedback['code'],'DefSim','show',$feedback['plan']);
-            } else {
-                new Message($feedback['code'],'DefPlan','show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -64,10 +58,10 @@ class DefSim extends Abstract_Controller {
                 include_once './View/DefSims/Delete_DefSim_View.php';
                 new Delete_DefSim($feedback['resource']);
             } else {
-                new Message($feedback['code'],'DefPlan','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -75,13 +69,9 @@ class DefSim extends Abstract_Controller {
         if($this->checkPermission()) {
             $defSim_service = new DefSim_Service();
             $feedback = $defSim_service->DELETE();
-            if(isset($feedback['plan'])) {
-                new Message($feedback['code'],'DefSim','show',$feedback['plan']);
-            } else {
-                new Message($feedback['code'],'DefPlan','show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -94,10 +84,10 @@ class DefSim extends Abstract_Controller {
                 include_once './View/DefSims/ShowCurrent_DefSim_View.php';
                 new ShowCurrent_DefSim($feedback['resource']);
             } else {
-                new Message($feedback['code'],'DefPlan','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -109,10 +99,10 @@ class DefSim extends Abstract_Controller {
                 include_once './View/DefSims/Search_DefSim_View.php';
                 new Search_DefSim($feedback['resource']);
             } else {
-                new Message($feedback['code'],'DefPlan','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -124,10 +114,10 @@ class DefSim extends Abstract_Controller {
                 include_once './View/DefSims/Edit_DefSim_View.php';
                 new Edit_DefSim($feedback['resource']);
             } else {
-                new Message($feedback['code'],'DefPlan','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -135,13 +125,9 @@ class DefSim extends Abstract_Controller {
         if($this->checkPermission()) {
             $defSim_service = new DefSim_Service();
             $feedback = $defSim_service->EDIT();
-            if(isset($feedback['plan'])) {
-                new Message($feedback['code'],'DefSim','show',$feedback['plan']);
-            } else {
-                new Message($feedback['code'],'DefPlan','show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 

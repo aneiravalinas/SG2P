@@ -1,6 +1,6 @@
 <?php
 
-include './View/Page/header.php';
+include_once './View/Page/header.php';
 
 class Search_ImpRoute extends Header {
     var $route;

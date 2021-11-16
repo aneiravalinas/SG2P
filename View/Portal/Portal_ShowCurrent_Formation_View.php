@@ -1,6 +1,6 @@
 <?php
 
-include './View/Page/header.php';
+include_once './View/Page/header.php';
 
 class Portal_ShowCurrent_Formation extends Header {
     var $imp_formats;

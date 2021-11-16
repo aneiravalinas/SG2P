@@ -141,3 +141,16 @@
 .name_doc {
     font-size: large;
 }
+
+#notif_icon {
+    height: 25px;
+    width: 25px;
+}
+
+.notif_icon_active {
+    color: #3194db;
+}
+
+.notif_no {
+    background-color: #DAEBF9;
+}

@@ -17,13 +17,11 @@ class ImpProc extends Abstract_Controller {
                 $this->update_stack_post();
                 include_once './View/ImpProcs/Show_ImpProcs_View.php';
                 new Show_ImpProcs($feedback['resource'], $feedback['procedure']);
-            } else if(isset($feedback['procedure'])) {
-                new Message($feedback['code'], 'ImpProc', 'show', $feedback['proc']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -34,13 +32,11 @@ class ImpProc extends Abstract_Controller {
             if($feedback['ok']) {
                 include_once './View/ImpProcs/Add_ImpProc_View.php';
                 new Add_ImpProc($feedback['resource'], $feedback['procedure']);
-            } else if(isset($feedback['procedure'])) {
-                new Message($feedback['code'], 'ImpProc', 'show', $feedback['procedure']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -48,13 +44,9 @@ class ImpProc extends Abstract_Controller {
         if($this->checkPermission()) {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->addImpProc();
-            if(isset($feedback['procedure'])) {
-                new Message($feedback['code'], 'ImpProc', 'show', $feedback['procedure']);
-            } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -66,10 +58,10 @@ class ImpProc extends Abstract_Controller {
                include_once './View/ImpProcs/Delete_ImpProc_View.php';
                new Delete_ImpProc($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -77,13 +69,9 @@ class ImpProc extends Abstract_Controller {
         if($this->checkPermission()) {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->DELETE();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'ImpProc', 'show', array('procedimiento_id' => $feedback['return']['procedimiento_id']));
-            } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -95,10 +83,10 @@ class ImpProc extends Abstract_Controller {
                 include_once './View/ImpProcs/Expire_ImpProc_View.php';
                 new Expire_ImpProc($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -106,13 +94,9 @@ class ImpProc extends Abstract_Controller {
         if($this->checkPermission()) {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->expire();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'ImpProc', 'show', array('procedimiento_id' => $feedback['return']['procedimiento_id']));
-            } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshbaord');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -124,10 +108,10 @@ class ImpProc extends Abstract_Controller {
                 include_once './View/ImpProcs/Implement_ImpProc_View.php';
                 new Implement_ImpProc($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -135,13 +119,9 @@ class ImpProc extends Abstract_Controller {
         if($this->checkPermission()) {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->implement();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'ImpProc', 'show', array('procedimiento_id' => $feedback['return']['procedimiento_id']));
-            } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -154,10 +134,10 @@ class ImpProc extends Abstract_Controller {
                 include_once './View/ImpProcs/ShowCurrent_ImpProc_View.php';
                 new ShowCurrent_ImpProc($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -169,10 +149,10 @@ class ImpProc extends Abstract_Controller {
                 include_once './View/ImpProcs/Search_ImpProc_View.php';
                 new Search_ImpProc($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 }

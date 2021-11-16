@@ -52,11 +52,8 @@ class DefDoc_Service extends DefDoc_Validation {
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'DFDOC_SEARCH_OK';
             $this->feedback['plan'] = array('plan_id' => $plan['plan_id'], 'nombre' => $plan['nombre']);
-        } else {
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'DFDOC_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'DFDOC_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -89,13 +86,11 @@ class DefDoc_Service extends DefDoc_Validation {
 
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $plan['plan_id']);
             return $validation;
         }
 
         $this->feedback = $this->name_doc_not_exist();
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
             return $this->feedback;
         }
 
@@ -105,7 +100,7 @@ class DefDoc_Service extends DefDoc_Validation {
         } else if($this->feedback['code'] == 'QRY_KO') {
             $this->feedback['code'] = 'DFDOC_ADD_KO';
         }
-        $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
+
         return $this->feedback;
     }
 
@@ -138,11 +133,8 @@ class DefDoc_Service extends DefDoc_Validation {
             return $this->feedback;
         }
 
-        $doc = $this->feedback['resource'];
-
         $this->feedback = $this->imp_docs_not_exist();
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $doc['plan_id']);
             return $this->feedback;
         }
 
@@ -153,7 +145,6 @@ class DefDoc_Service extends DefDoc_Validation {
             $this->feedback['code'] = 'DFDOC_DEL_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $doc['plan_id']);
         return $this->feedback;
     }
 
@@ -173,7 +164,6 @@ class DefDoc_Service extends DefDoc_Validation {
         $doc = $this->feedback['resource'];
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $doc['plan_id']);
             return $validation;
         }
 
@@ -181,7 +171,6 @@ class DefDoc_Service extends DefDoc_Validation {
             $this->defDoc_entity->plan_id = $doc['plan_id'];
             $this->feedback = $this->name_doc_not_exist();
             if(!$this->feedback['ok']) {
-                $this->feedback['plan'] = array('plan_id' => $doc['plan_id']);
                 return $this->feedback;
             }
         }
@@ -193,7 +182,6 @@ class DefDoc_Service extends DefDoc_Validation {
             $this->feedback['code'] = 'DFDOC_EDT_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $doc['plan_id']);
         return $this->feedback;
     }
 

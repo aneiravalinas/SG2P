@@ -17,13 +17,11 @@ class DefDoc extends Abstract_Controller {
                 $this->update_stack_post();
                 include_once './View/DefDocs/Show_DefDocs_View.php';
                 new Show_DefDocs($feedback['resource'], $feedback['plan']);
-            } else if(isset($feedback['plan'])) {
-                new Message($feedback['code'],'DefDoc','show', $feedback['plan']);
             } else {
-                new Message($feedback['code'],'DefPlan','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -35,10 +33,10 @@ class DefDoc extends Abstract_Controller {
                 include_once './View/DefDocs/Add_DefDoc_View.php';
                 new Add_DefDoc($feedback['resource']);
             } else {
-                new Message($feedback['code'],'DefPlan','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -46,13 +44,9 @@ class DefDoc extends Abstract_Controller {
         if($this->checkPermission()) {
             $defDoc_service = new DefDoc_Service();
             $feedback = $defDoc_service->ADD();
-            if(isset($feedback['plan'])){
-                new Message($feedback['code'],'DefDoc','show', $feedback['plan']);
-            } else {
-                new Message($feedback['code'],'DefPlan','show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -64,10 +58,10 @@ class DefDoc extends Abstract_Controller {
                 include_once './View/DefDocs/Delete_DefDoc_View.php';
                 new Delete_DefDoc($feedback['resource']);
             } else {
-                new Message($feedback['code'],'DefPlan','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -75,13 +69,9 @@ class DefDoc extends Abstract_Controller {
         if($this->checkPermission()) {
             $defDoc_service = new DefDoc_Service();
             $feedback = $defDoc_service->DELETE();
-            if(isset($feedback['plan'])) {
-                new Message($feedback['code'], 'DefDoc','show',$feedback['plan']);
-            } else {
-                new Message($feedback['code'],'DefPlan','show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -93,10 +83,10 @@ class DefDoc extends Abstract_Controller {
                 include_once './View/DefDocs/Search_DefDoc_View.php';
                 new Search_DefDoc($feedback['resource']);
             } else {
-                new Message($feedback['code'],'DefPlan','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -109,10 +99,10 @@ class DefDoc extends Abstract_Controller {
                 include_once './View/DefDocs/ShowCurrent_DefDoc_View.php';
                 new ShowCurrent_DefDoc($feedback['resource']);
             } else {
-                new Message($feedback['code'],'DefPlan','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -124,10 +114,10 @@ class DefDoc extends Abstract_Controller {
                 include_once './View/DefDocs/Edit_DefDoc_View.php';
                 new Edit_DefDoc($feedback['resource']);
             } else {
-                new Message($feedback['code'],'DefPlan','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -135,13 +125,9 @@ class DefDoc extends Abstract_Controller {
         if($this->checkPermission()) {
             $defDoc_service = new DefDoc_Service();
             $feedback = $defDoc_service->EDIT();
-            if(isset($feedback['plan'])) {
-                new Message($feedback['code'],'DefDoc','show',$feedback['plan']);
-            } else {
-                new Message($feedback['code'],'DefPlan','show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 

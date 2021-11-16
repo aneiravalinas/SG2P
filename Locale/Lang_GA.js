@@ -838,6 +838,38 @@ arrayGA = {
         'BLDSIMS_SEARCH_KO' : 'Error ó consultar as cumplimentacións do simulacro no edificio',
 
 
+    // NOTIFICACIONES
+
+        // DELETE
+        'NTF_DEL_OK' : 'Eliminouse a notificación correctamente',
+        'NTF_DEL_KO' : 'Error ó eliminar a notificación',
+
+        // SEARCH
+        'NTF_SEARCH_OK' : 'A búsqueda de notificacións realizouse correctamente',
+        'NTF_SEARCH_KO' : 'Erro ó buscar notificacións',
+
+        // SEARCH_FORM
+        'NTF_BLDS_KO' : 'Error ó recuperar os edificios con notificacións rexistradas',
+        'NTF_PLANS_KO' : 'Error ó recuperar os plans con notificacións rexistradas',
+
+        // SEEK
+        'NTF_EDT_READ_KO' : 'Error ó modificar o estado da notificación',
+        'NTF_SEEK_OK' : 'Recuperáronse os detalles da notificación correctamente',
+
+        // Obtener nuevas notificaciones
+        'NTF_UR_EMPT' : 'O usuario non ten novas notificacións',
+        'NTF_UR_FILL' : 'O usuario ten novas notificacións',
+        'NTF_UR_KO' : 'Error ó buscar novas notificacións',
+
+        // Permisos
+        'NTF_USR_FRBD' : 'Non dispóns dos privilexios necesarios para consultar os datos da notificación',
+
+        // Búsqueda de Notificación por ID
+        'NTFID_NOT_EXST' : 'A notificación indicada non existe',
+        'NTFID_EXST' : 'A notificación existe',
+        'NTF_SEEK_KO' : 'Erro ó consultar os detalles da notificación',
+
+
         // Validaciones
 
             // Nombre de Usuario
@@ -1078,6 +1110,19 @@ arrayGA = {
 
             // Fecha Cumplimentación Final
             'END_DATECOMP_KO' : 'A data de cumplimentación final ten un formato incorrecto',
+
+            // ID Notificación
+            'NTFID_EMPT' : 'O ID da notificación non pode ser vacío',
+            'NTFID_NOT_NUMERIC' : 'O ID da notificación debe ser numérico',
+
+            // Fecha Inicio
+            'START_DATE_KO' : 'A data inicial ten un formato incorrecto',
+
+            // Fecha Fin
+            'END_DATE_KO' : 'A data final ten un formato incorrecto',
+
+            // Leído
+            'READ_KO' : 'O atributo leído só admite os valores SI ou NON',
 
 
 
@@ -1355,6 +1400,19 @@ arrayGA = {
         'i18n-end_planning_date' : 'Data Planificación Final',
         'i18n-start_date_expire' : 'Data Vencemento Inicial',
         'i18n-end_date_expire' : 'Data Vencemento Final',
+
+        // NOTIFICACIONES
+        'i18n-notifications' : 'Notificacións',
+        'i18n-show_notifications' : 'Listado de Notificacións',
+        'i18n-notifications-empty' : 'Non se atoparon Notificacións',
+        'i18n-read' : 'Leído',
+        'i18n-date' : 'Data',
+        'i18n-search-notifications' : 'Buscar Notificacións',
+        'i18n-fecha_inicio' : 'Data Inicio',
+        'i18n-fecha_fin' : 'Data Fin',
+        'i18n-msg' : 'Mensaxe',
+        'i18n-notification-details' : 'Detalles da Notificación',
+        'i18n-del-notification-confirm' : '¿Está seguro que desexa eliminar a notificación? O cambio non será reversible',
 
         // MODAL
             // Campos Modal

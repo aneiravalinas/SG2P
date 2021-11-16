@@ -17,71 +17,61 @@ class Space extends Abstract_Controller {
                 $this->update_stack_post();
                 include_once './View/Spaces/Show_Spaces_View.php';
                 new Show_Spaces($feedback['resource'], $feedback['floor']);
-            } else if(isset($feedback['floor'])) {
-                new Message($feedback['code'],'Space','show',$feedback['floor']);
             } else {
-                new Message($feedback['code'],'Building','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
     function addForm() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $space_service = new Space_Service();
             $feedback = $space_service->emptyForm();
             if($feedback['ok']) {
                 include './View/Spaces/Add_Space_View.php';
                 new Add_Space($feedback['resource']);
             } else {
-                new Message($feedback['code'],'Building','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
     function add() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $space_service = new Space_Service();
             $feedback = $space_service->ADD();
-            if(isset($feedback['floor'])) {
-                new Message($feedback['code'],'Space','show',$feedback['floor']);
-            } else {
-                new Message($feedback['code'],'Building','show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
     function deleteForm() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $space_service = new Space_Service();
             $feedback = $space_service->dataForm();
             if($feedback['ok']) {
                 include_once './View/Spaces/Delete_Space_View.php';
                 new Delete_Space($feedback['resource'], $feedback['floor']);
             } else {
-                new Message('FRB_ACCS','Building','show');
+                new Message('FRB_ACCS');
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
     function delete() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $space_service = new Space_Service();
             $feedback = $space_service->DELETE();
-            if(isset($feedback['floor'])) {
-                new Message($feedback['code'],'Space','show',$feedback['floor']);
-            } else {
-                new Message($feedback['code'],'Building','show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -94,10 +84,10 @@ class Space extends Abstract_Controller {
                 include_once './View/Spaces/ShowCurrent_Space_View.php';
                 new ShowCurrent_Space($feedback['resource'], $feedback['floor']);
             } else {
-                new Message($feedback['code'],'Building','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -109,39 +99,35 @@ class Space extends Abstract_Controller {
                 include_once './View/Spaces/Search_Space_View.php';
                 new Search_Space($feedback['resource']);
             } else {
-                new Message($feedback['code'],'Building','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
     function editForm() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $space_service = new Space_Service();
             $feedback = $space_service->dataForm();
             if($feedback['ok']) {
                 include_once './View/Spaces/Edit_Space_View.php';
                 new Edit_Space($feedback['resource'], $feedback['floor']);
             } else {
-                new Message($feedback['code'],'Building','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
     function edit() {
-        if(es_resp_organizacion() || es_admin()) {
+        if($this->checkPermission()) {
             $space_service = new Space_Service();
             $feedback = $space_service->EDIT();
-            if(isset($feedback['floor'])) {
-                new Message($feedback['code'],'Space','show',$feedback['floor']);
-            } else {
-                new Message($feedback['code'],'Building','show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 }

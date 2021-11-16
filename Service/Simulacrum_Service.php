@@ -51,7 +51,6 @@ class Simulacrum_Service extends Simulacrum_Validation {
         $simulacrum = $this->feedback['resource'];
         $validation = $this->validar_atributos_searchCompletions();
         if(!$validation['ok']) {
-            $validation['return'] = array('simulacro_id' => $simulacrum['simulacro_id']);
             return $validation;
         }
 
@@ -59,11 +58,8 @@ class Simulacrum_Service extends Simulacrum_Validation {
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'IMPSIM_SEARCH_OK';
             $this->feedback['simulacrum'] = $simulacrum;
-        } else {
-            $this->feedback['simulacrum'] = array('simulacro_id' => $simulacrum['simulacro_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'IMPSIM_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPSIM_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -95,13 +91,11 @@ class Simulacrum_Service extends Simulacrum_Validation {
 
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
-            $validation['return'] = array('simulacro_id' => $simulacrum['simulacro_id'], 'edificio_id' => $building['edificio_id']);
             return $validation;
         }
 
         $sim_state = $this->get_simulacrum_state();
         if(!$sim_state['ok']) {
-            $sim_state['return'] = array('simulacro_id' => $simulacrum['simulacro_id'], 'edificio_id' => $building['edificio_id']);
             return $sim_state;
         }
 
@@ -111,11 +105,8 @@ class Simulacrum_Service extends Simulacrum_Validation {
             $this->feedback['code'] = 'IMPSIM_SEARCH_OK';
             $this->feedback['simulacrum'] = $simulacrum;
             $this->feedback['building'] = $building;
-        } else {
-            $this->feedback['return'] = array('simulacro_id' => $simulacrum['simulacro_id'], 'edificio_id' => $building['edificio_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'IMPSIM_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'IMPSIM_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -161,7 +152,6 @@ class Simulacrum_Service extends Simulacrum_Validation {
         $simulacrum['estado'] = $sim_state['estado'];
         $validation = $this->validar_atributos_search_portal();
         if(!$validation['ok']) {
-            $validation['return'] = array('simulacro_id' => $simulacrum['simulacro_id'], 'edificio_id' => $building['edificio_id']);
             return $validation;
         }
 
@@ -170,11 +160,8 @@ class Simulacrum_Service extends Simulacrum_Validation {
             $this->feedback['code'] = 'PRTL_IMPSIM_SEARCH_OK';
             $this->feedback['simulacrum'] = $simulacrum;
             $this->feedback['building'] = $building;
-        } else {
-            $this->feedback['return'] = array('simulacro_id' => $simulacrum['simulacro_id'], 'edificio_id' => $building['edificio_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'PRTL_IMPSIM_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'PRTL_IMPSIM_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -208,8 +195,6 @@ class Simulacrum_Service extends Simulacrum_Validation {
         $this->feedback = $this->searchActiveBuildPlans($simulacrum['plan_id']);
         if($this->feedback['ok']) {
             $this->feedback['simulacrum'] = $simulacrum;
-        } else {
-            $this->feedback['simulacrum'] = array('simulacro_id' => $simulacrum['simulacro_id']);
         }
 
         return $this->feedback;
@@ -252,9 +237,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         }
 
         $simulacrum = $this->feedback['resource'];
-        $this->feedback = $this->ADD($simulacrum);
-        $this->feedback['simulacrum'] = array('simulacro_id' => $simulacrum['simulacro_id']);
-        return $this->feedback;
+        return $this->ADD($simulacrum);
     }
 
     /*
@@ -295,7 +278,6 @@ class Simulacrum_Service extends Simulacrum_Validation {
         if($bld_plan['estado'] == 'vencido') {
             $feedback['ok'] = false;
             $feedback['code'] = 'BLDPLAN_EXPIRED';
-            $feedback['building'] = array('edificio_id' => $building['edificio_id']);
             return $feedback;
         }
 
@@ -317,7 +299,6 @@ class Simulacrum_Service extends Simulacrum_Validation {
             $feedback['code'] = 'IMPSIM_ADD_KO';
         }
 
-        $feedback['building'] = array('edificio_id' => $building['edificio_id']);
         return $feedback;
     }
 
@@ -338,7 +319,6 @@ class Simulacrum_Service extends Simulacrum_Validation {
         if(es_resp_edificio()) {
             $this->feedback = $this->check_more_than_one_impsims($imp_sim['edificio_id'], $imp_sim['simulacro_id']);
             if(!$this->feedback['ok']) {
-                $this->feedback['return'] = array('edificio_id' => $imp_sim['edificio_id'], 'simulacro_id' => $imp_sim['simulacro_id']);
                 return $this->feedback;
             }
         }
@@ -351,7 +331,6 @@ class Simulacrum_Service extends Simulacrum_Validation {
             $this->feedback['code'] = 'IMPSIM_DEL_KO';
         }
 
-        $this->feedback['return'] = array('edificio_id' => $imp_sim['edificio_id'], 'simulacro_id' => $imp_sim['simulacro_id']);
         return $this->feedback;
     }
 
@@ -379,7 +358,6 @@ class Simulacrum_Service extends Simulacrum_Validation {
             $this->feedback['code'] = 'IMPSIM_EXPIRE_KO';
         }
 
-        $this->feedback['return'] = array('edificio_id' => $imp_sim['edificio_id'], 'simulacro_id' => $imp_sim['simulacro_id']);
         return $this->feedback;
     }
 
@@ -401,13 +379,11 @@ class Simulacrum_Service extends Simulacrum_Validation {
         if($imp_sim['estado'] == 'vencido') {
             $this->feedback['ok'] = false;
             $this->feedback['code'] = 'COMPL_EXPIRED';
-            $this->feedback['return'] = array('edificio_id' => $imp_sim['edificio_id'], 'simulacro_id' => $imp_sim['simulacro_id']);
             return $this->feedback;
         }
 
         $validation = $this->validar_atributos_implement();
         if(!$validation['ok']) {
-            $validation['return'] = array('edificio_id' => $imp_sim['edificio_id'], 'simulacro_id' => $imp_sim['simulacro_id']);
             return $validation;
         }
 
@@ -420,7 +396,6 @@ class Simulacrum_Service extends Simulacrum_Validation {
             $this->feedback['code'] = 'IMPSIM_IMPL_KO';
         }
 
-        $this->feedback['return'] = array('edificio_id' => $imp_sim['edificio_id'], 'simulacro_id' => $imp_sim['simulacro_id']);
         return $this->feedback;
     }
 

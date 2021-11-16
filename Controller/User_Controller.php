@@ -17,7 +17,7 @@ class User extends Abstract_Controller {
             include './View/Users/Show_Users_View.php';
             new Show_Users($feedback['resource']);
         } else {
-            new Message($feedback['code'],'Panel','deshboard');
+            new Message($feedback['code']);
         }
 
     }
@@ -32,7 +32,7 @@ class User extends Abstract_Controller {
             include_once './View/Users/Add_User_View.php';
             new Add_User();
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -40,9 +40,9 @@ class User extends Abstract_Controller {
         if(es_admin()) {
             $user_service = new User_Service();
             $feedback = $user_service->ADD();
-            new Message($feedback['code'],'User','show');
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -54,10 +54,10 @@ class User extends Abstract_Controller {
                 include_once './View/Users/Delete_User_View.php';
                 new Delete_User($feedback['resource']);
             } else {
-                new Message($feedback['code'],'User','show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -65,9 +65,9 @@ class User extends Abstract_Controller {
         if(es_admin()) {
             $user_service = new User_Service();
             $feedback = $user_service->DELETE();
-            new Message($feedback['code'], 'User','show');
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -75,14 +75,14 @@ class User extends Abstract_Controller {
         if(es_admin()) {
             $user_service = new User_Service();
             $feedback = $user_service->seek();
-            if ($feedback['ok']) {
+            if($feedback['ok']) {
                 include './View/Users/Edit_User_View.php';
                 new Edit_User($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'User', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -90,9 +90,9 @@ class User extends Abstract_Controller {
         if(es_admin()) {
             $user_service = new User_Service();
             $feedback = $user_service->EDIT();
-            new Message($feedback['code'],'User','show');
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -104,14 +104,14 @@ class User extends Abstract_Controller {
             include './View/Users/Profile_View.php';
             new Profile($feedback['resource']);
         } else {
-            new Message($feedback['code'], 'Panel', 'deshboard');
+            new Message($feedback['code']);
         }
     }
 
     function editProfile() {
         $user_service = new User_Service();
         $feedback = $user_service->editProfile();
-        new Message($feedback['code'], 'Panel', 'deshboard');
+        new Message($feedback['code']);
     }
 
     function showCurrent() {
@@ -122,7 +122,7 @@ class User extends Abstract_Controller {
             include './View/Users/ShowCurrent_User_View.php';
             new ShowCurrent_User($feedback['resource']);
         } else {
-            new Message($feedback['code'],'User','show');
+            new Message($feedback['code']);
         }
     }
 

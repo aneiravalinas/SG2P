@@ -66,7 +66,6 @@ class Floor_Service extends Floor_Validation {
 
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
-            $validation['building'] = array('edificio_id' => $building['edificio_id']);
             return $validation;
         }
 
@@ -102,7 +101,7 @@ class Floor_Service extends Floor_Validation {
             if(es_resp_edificio() && $building['username'] != getUser()) {
                 $this->feedback['ok'] = false;
                 $this->feedback['code'] = 'FLR_SEEK_NOT_ALLOWED';
-                $this->feedback['resource'] = '';
+                unset($this->feedback['resource']);
             } else {
                 $this->feedback['code'] = 'FLR_SEEK_OK';
                 $this->feedback['building'] = array('edificio_id' => $building['edificio_id'], 'nombre' => $building['nombre']);
@@ -128,7 +127,7 @@ class Floor_Service extends Floor_Validation {
 
         $building = $this->feedback['resource'];
         $this->feedback['building'] = array('edificio_id' => $building['edificio_id'], 'nombre' => $building['nombre']);
-        $this->feedback['resource'] = array();
+        unset($this->feedback['resource']);
         return $this->feedback;
     }
 
@@ -151,24 +150,19 @@ class Floor_Service extends Floor_Validation {
             return $this->feedback;
         }
 
-        $building = $this->feedback['resource'];
-
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
-            $validation['building'] = array('edificio_id' => $building['edificio_id']);
             return $validation;
         }
 
         $this->feedback = $this->num_planta_not_exists();
         if(!$this->feedback['ok']) {
-            $this->feedback['building'] = array('edificio_id' => $building['edificio_id']);
             return $this->feedback;
         }
 
         if($this->foto_planta != '') {
             $this->feedback = $this->uploader->uploadPhoto(floor_photos_path, 'foto_planta');
             if(!$this->feedback['ok']) {
-                $this->feedback['building'] = array('edificio_id' => $building['edificio_id']);
                 $this->feedback['code'] = 'FLR_PH_KO';
                 return $this->feedback;
             } else{
@@ -190,9 +184,7 @@ class Floor_Service extends Floor_Validation {
             $this->feedback['code'] = 'FLR_ADD_KO';
         }
 
-        $this->feedback['building'] = array('edificio_id' => $building['edificio_id']);
         return $this->feedback;
-
     }
 
     // Valida y busca una planta por ID, comprobando que existe. Recupera el edificio al que pertenece la planta.
@@ -233,13 +225,11 @@ class Floor_Service extends Floor_Validation {
 
         $this->feedback = $this->has_not_spaces();
         if(!$this->feedback['ok']) {
-            $this->feedback['building'] = array('edificio_id' => $floor['edificio_id']);
             return $this->feedback;
         }
 
         $this->feedback = $this->has_not_routes();
         if(!$this->feedback['ok']) {
-            $this->feedback['building'] = array('edificio_id' => $floor['edificio_id']);
             return $this->feedback;
         }
 
@@ -253,7 +243,6 @@ class Floor_Service extends Floor_Validation {
             $this->feedback['code'] = 'FLR_DEL_KO';
         }
 
-        $this->feedback['building'] = array('edificio_id' => $floor['edificio_id']);
         return $this->feedback;
     }
 
@@ -281,7 +270,6 @@ class Floor_Service extends Floor_Validation {
 
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
-            $validation['building'] = array('edificio_id' => $floor['edificio_id']);
             return $validation;
         }
 
@@ -289,7 +277,6 @@ class Floor_Service extends Floor_Validation {
             $this->floor_entity->edificio_id = $floor['edificio_id'];
             $this->feedback = $this->num_planta_not_exists();
             if(!$this->feedback['ok']) {
-                $this->feedback['building'] = array('edificio_id' => $floor['edificio_id']);
                 return $this->feedback;
             }
         }
@@ -320,7 +307,6 @@ class Floor_Service extends Floor_Validation {
             }
         }
 
-        $this->feedback['building'] = array('edificio_id' => $floor['edificio_id']);
         return $this->feedback;
     }
 

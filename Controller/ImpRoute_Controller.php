@@ -17,13 +17,11 @@ class ImpRoute extends Abstract_Controller {
                 $this->update_stack_post();
                 include_once './View/ImpRoutes/Show_ImpRoutes_View.php';
                 new Show_ImpRoutes($feedback['resource'], $feedback['route']);
-            } else if(isset($feedback['route'])) {
-                new Message($feedback['code'], 'ImpRoute', 'show', $feedback['route']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -34,13 +32,11 @@ class ImpRoute extends Abstract_Controller {
             if($feedback['ok']) {
                 include_once './View/ImpRoutes/Add_ImpRoute_View.php';
                 new Add_ImpRoute($feedback['resource'], $feedback['route']);
-            } else if(isset($feedback['route'])) {
-                new Message($feedback['code'], 'ImpRoute', 'show', $feedback['route']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -48,13 +44,9 @@ class ImpRoute extends Abstract_Controller {
         if($this->checkPermission()) {
             $route_service = new Route_Service();
             $feedback = $route_service->addImpRoute();
-            if(isset($feedback['route'])) {
-                new Message($feedback['code'], 'ImpRoute', 'show', $feedback['route']);
-            } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -66,10 +58,10 @@ class ImpRoute extends Abstract_Controller {
                 include_once './View/ImpRoutes/Expire_ImpRoute_View.php';
                 new Expire_ImpRoute($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -77,13 +69,9 @@ class ImpRoute extends Abstract_Controller {
         if($this->checkPermission()) {
             $route_service = new Route_Service();
             $feedback = $route_service->expire();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'ImpRoute', 'show', array('ruta_id' => $feedback['return']['ruta_id']));
-            } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -95,10 +83,10 @@ class ImpRoute extends Abstract_Controller {
                 include_once './View/ImpRoutes/Implement_ImpRoute_View.php';
                 new Implement_ImpRoute($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -106,13 +94,9 @@ class ImpRoute extends Abstract_Controller {
         if($this->checkPermission()) {
             $route_service = new Route_Service();
             $feedback = $route_service->implement();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'ImpRoute', 'show', array('ruta_id' => $feedback['return']['ruta_id']));
-            } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -124,10 +108,10 @@ class ImpRoute extends Abstract_Controller {
                 include_once './View/ImpRoutes/Delete_ImpRoute_View.php';
                 new Delete_ImpRoute($feedback['resource']);
             } else{
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -135,13 +119,9 @@ class ImpRoute extends Abstract_Controller {
         if($this->checkPermission()) {
             $route_service = new Route_Service();
             $feedback = $route_service->DELETE();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'ImpRoute', 'show', array('ruta_id' => $feedback['return']['ruta_id']));
-            } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -154,10 +134,10 @@ class ImpRoute extends Abstract_Controller {
                 include_once './View/ImpRoutes/ShowCurrent_ImpRoute_View.php';
                 new ShowCurrent_ImpRoute($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -169,10 +149,10 @@ class ImpRoute extends Abstract_Controller {
                 include_once './View/ImpRoutes/Search_ImpRoute_View.php';
                 new Search_ImpRoute($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'DefPlan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 }

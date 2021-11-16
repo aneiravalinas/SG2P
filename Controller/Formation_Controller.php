@@ -17,13 +17,11 @@ class Formation extends Abstract_Controller {
                 $this->update_stack_post();
                 include_once './View/Formations/Show_Formation_View.php';
                 new Show_Formation($feedback['resource'], $feedback['formation'], $feedback['building']);
-            } else if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Formation', 'show', $feedback['return']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -35,10 +33,10 @@ class Formation extends Abstract_Controller {
                 include_once './View/Formations/Add_Formation_View.php';
                 new Add_Formation($feedback['formation'], $feedback['building']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -46,14 +44,9 @@ class Formation extends Abstract_Controller {
         if(!es_registrado()) {
             $format_service = new Formation_Service();
             $feedback = $format_service->addImpFormat();
-            if(isset($feedback['formation']) && isset($feedback['building'])) {
-                new Message($feedback['code'], 'Formation', 'show', array('formacion_id' => $feedback['formation']['formacion_id'],
-                                                                                            'edificio_id' => $feedback['building']['edificio_id']));
-            } else {
-                new Message($feedback['code'], 'Plan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -65,10 +58,10 @@ class Formation extends Abstract_Controller {
                 include_once './View/Formations/Delete_Formation_View.php';
                 new Delete_Formation($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -76,13 +69,9 @@ class Formation extends Abstract_Controller {
         if(!es_registrado()) {
             $format_service = new Formation_Service();
             $feedback = $format_service->DELETE();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Formation', 'show', $feedback['return']);
-            } else {
-                new Message($feedback['code'], 'Plan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -94,10 +83,10 @@ class Formation extends Abstract_Controller {
                 include_once './View/Formations/Expire_Formation_View.php';
                 new Expire_Formation($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -105,13 +94,9 @@ class Formation extends Abstract_Controller {
         if(!es_registrado()) {
             $format_service = new Formation_Service();
             $feedback = $format_service->expire();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Formation', 'show', $feedback['return']);
-            } else {
-                new Message($feedback['code'], 'Plan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -123,10 +108,10 @@ class Formation extends Abstract_Controller {
                 include_once './View/Formations/Implement_Formation_View.php';
                 new Implement_Formation($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -134,13 +119,9 @@ class Formation extends Abstract_Controller {
         if(!es_registrado()) {
             $format_service = new Formation_Service();
             $feedback = $format_service->implement();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Formation', 'show', $feedback['return']);
-            } else {
-                new Message($feedback['code'], 'Plan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -153,10 +134,10 @@ class Formation extends Abstract_Controller {
                 include_once './View/Formations/ShowCurrent_Formation_View.php';
                 new ShowCurrent_Formation($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -168,10 +149,10 @@ class Formation extends Abstract_Controller {
                 include_once './View/Formations/Search_Formation_View.php';
                 new Search_Formation($feedback['formation'], $feedback['building']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 }

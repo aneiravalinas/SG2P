@@ -1,22 +1,18 @@
 <?php
 
-class Message {
+include_once './View/Page/header.php';
+
+class Message extends Header {
 
     var $msg;
-    var $controller;
-    var $action;
-    var $params;
 
-    function __construct($msg, $controller, $action, $params = array()) {
+    function __construct($msg) {
+        parent::__construct();
         $this->msg = $msg;
-        $this->controller = $controller;
-        $this->action = $action;
-        $this->params = $params;
         $this->render();
     }
 
     function render() {
-        include 'header.php';
         ?>
 
         <!-- ==== MESSAGE VIEW ==== -->
@@ -38,10 +34,8 @@ class Message {
                     <div class="col-xl-7 col-lg-9 text-center">
                         <a type="button" class="btn-get-started i18n-back" onclick=
                             "crearform('formenviar','post');
-                             insertacampo(document.formenviar,'action','<?php echo $this->action; ?>');
-                             insertacampo(document.formenviar,'controller','<?php echo $this->controller; ?>');
-                             <?php foreach($this->params as $field => $value) :?>
-                                insertacampo(document.formenviar,'<?php echo $field; ?>', '<?php echo $value; ?>');
+                             <?php foreach($this->currentShow as $key => $value) :?>
+                             insertacampo(document.formenviar,'<?php echo $key; ?>', '<?php echo $value; ?>');
                              <?php endforeach; ?>
                              enviaform(document.formenviar);">Volver</a>
                     </div>

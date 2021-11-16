@@ -42,7 +42,6 @@ class DefSim_Service extends DefSim_Validation {
         $plan = $this->feedback['resource'];
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $plan['plan_id']);
             return $validation;
         }
 
@@ -50,11 +49,8 @@ class DefSim_Service extends DefSim_Validation {
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'DFSIM_SEARCH_OK';
             $this->feedback['plan'] = array('plan_id' => $plan['plan_id'], 'nombre' => $plan['nombre']);
-        } else {
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'DFSIM_SEARCH_KO';
-            }
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'DFSIM_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -73,16 +69,13 @@ class DefSim_Service extends DefSim_Validation {
             return $this->feedback;
         }
 
-        $plan = $this->feedback['resource'];
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $plan['plan_id']);
             return $validation;
         }
 
         $this->feedback = $this->name_sim_not_exist();
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
             return $this->feedback;
         }
 
@@ -93,7 +86,6 @@ class DefSim_Service extends DefSim_Validation {
             $this->feedback['code'] = 'DFSIM_ADD_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
         return $this->feedback;
     }
 
@@ -109,10 +101,8 @@ class DefSim_Service extends DefSim_Validation {
             return $this->feedback;
         }
 
-        $sim = $this->feedback['resource'];
         $this->feedback = $this->imp_sims_not_exist();
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $sim['plan_id']);
             return $this->feedback;
         }
 
@@ -123,7 +113,6 @@ class DefSim_Service extends DefSim_Validation {
             $this->feedback['code'] = 'DFSIM_DEL_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $sim['plan_id']);
         return $this->feedback;
     }
 
@@ -143,7 +132,6 @@ class DefSim_Service extends DefSim_Validation {
         $sim = $this->feedback['resource'];
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $sim['plan_id']);
             return $validation;
         }
 
@@ -151,7 +139,6 @@ class DefSim_Service extends DefSim_Validation {
             $this->defSim_entity->plan_id = $sim['plan_id'];
             $this->feedback = $this->name_sim_not_exist();
             if(!$this->feedback['ok']) {
-                $this->feedback['plan'] = array('plan_id' => $sim['plan_id']);
                 return $this->feedback;
             }
         }
@@ -163,7 +150,6 @@ class DefSim_Service extends DefSim_Validation {
             $this->feedback['code'] = 'DFSIM_EDT_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $sim['plan_id']);
         return $this->feedback;
     }
 

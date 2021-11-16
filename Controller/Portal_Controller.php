@@ -34,7 +34,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_Buildings_View.php';
             new Portal_Buildings($feedback['resource']);
         } else {
-            new Message($feedback['code'],'Portal','_default');
+            new Message($feedback['code']);
         }
     }
 
@@ -46,7 +46,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Show_Portal_View.php';
             new Show_Portal($feedback['resource']);
         } else {
-            new Message($feedback['code'],'Portal','_default');
+            new Message($feedback['code']);
         }
     }
 
@@ -59,7 +59,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_Manager_View.php';
             new Portal_Manager($feedback['resource']);
         } else {
-            new Message($feedback['code'],'Portal','getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -72,7 +72,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_Floors_View.php';
             new Portal_Floors($feedback['resource']);
         } else {
-            new Message($feedback['code'],'Portal','getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -85,7 +85,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_ShowCurrent_Floor_View.php';
             new Portal_ShowCurrent_Floor($feedback['resource'], $feedback['spaces']);
         } else {
-            new Message($feedback['code'],'Portal','getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -98,7 +98,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_ShowCurrent_Space_View.php';
             new Portal_ShowCurrent_Space($feedback['resource']);
         } else {
-            new Message($feedback['code'],'Portal','getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -111,7 +111,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_Plans_View.php';
             new Portal_Plans($feedback['resource'], $feedback['building']);
         } else {
-            new Message($feedback['code'],'Portal','getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -124,7 +124,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_ShowCurrent_Plan_View.php';
             new Portal_ShowCurrent_Plan($feedback['resource'], $feedback['edificio'], $feedback['plan'], $feedback['definiciones']);
         } else {
-            new Message($feedback['code'],'Portal','getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -136,10 +136,8 @@ class Portal extends Abstract_Controller {
             $this->update_stack_post();
             include_once './View/Portal/Portal_ShowCurrent_Document_View.php';
             new Portal_ShowCurrent_Document($feedback['resource'], $feedback['document'], $feedback['building']);
-        } else if(isset($feedback['return'])) {
-            new Message($feedback['code'], 'Portal', 'seekPortalPlan', $feedback['return']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -152,7 +150,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_ShowCurrent_ImpDoc_View.php';
             new Portal_ShowCurrent_ImpDoc($feedback['resource']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -164,10 +162,8 @@ class Portal extends Abstract_Controller {
             $this->update_stack_post();
             include_once './View/Portal/Portal_ShowCurrent_Procedure_View.php';
             new Portal_ShowCurrent_Procedure($feedback['resource'], $feedback['procedure'], $feedback['building']);
-        } else if(isset($feedback['return'])) {
-            new Message($feedback['code'], 'Portal', 'seekPortalPlan', $feedback['return']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -180,7 +176,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_ShowCurrent_ImpProc_View.php';
             new Portal_ShowCurrent_ImpProc($feedback['resource']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -192,10 +188,8 @@ class Portal extends Abstract_Controller {
             $this->update_stack_post();
             include_once './View/Portal/Portal_ShowCurrent_Route_View.php';
             new Portal_ShowCurrent_Route($feedback['resource'], $feedback['route'], $feedback['building']);
-        } else if(isset($feedback['return'])) {
-            new Message($feedback['code'], 'Portal', 'seekPortalRoute', $feedback['return']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -208,7 +202,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_ShowCurrent_ImpRoute_View.php';
             new Portal_ShowCurrent_ImpRoute($feedback['resource']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -220,7 +214,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_Search_Route_View.php';
             new Portal_Search_Route($feedback['resource'],$feedback['route'], $feedback['building']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -232,10 +226,8 @@ class Portal extends Abstract_Controller {
             $this->update_stack_post();
             include_once './View/Portal/Portal_ShowCurrent_Formation_View.php';
             new Portal_ShowCurrent_Formation($feedback['resource'], $feedback['formation'], $feedback['building']);
-        } else if(isset($feedback['return'])) {
-            new Message($feedback['code'], 'Portal', 'seekPortalFormation', $feedback['return']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -248,7 +240,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_ShowCurrent_ImpFormat_View.php';
             new Portal_ShowCurrent_ImpFormat($feedback['resource']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -260,7 +252,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_Search_Formation_View.php';
             new Portal_Search_Formation($feedback['formation'], $feedback['building']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -272,10 +264,8 @@ class Portal extends Abstract_Controller {
             $this->update_stack_post();
             include_once './View/Portal/Portal_ShowCurrent_Simulacrum_View.php';
             new Portal_ShowCurrent_Simulacrum($feedback['resource'], $feedback['simulacrum'], $feedback['building']);
-        } else if(isset($feedback['return'])) {
-            new Message($feedback['code'], 'Portal', 'seekPortalSimulacrum', $feedback['return']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -288,7 +278,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_ShowCurrent_ImpSim_View.php';
             new Portal_ShowCurrent_ImpSim($feedback['resource']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 
@@ -300,7 +290,7 @@ class Portal extends Abstract_Controller {
             include_once './View/Portal/Portal_Search_Simulacrum_View.php';
             new Portal_Search_Simulacrum($feedback['simulacrum'], $feedback['building']);
         } else {
-            new Message($feedback['code'], 'Portal', 'getPortal');
+            new Message($feedback['code']);
         }
     }
 }

@@ -18,10 +18,10 @@ class Plan extends Abstract_Controller {
                 include_once './View/Plans/Show_Plans_View.php';
                 new Show_Plans($feedback['resource']);
             } else {
-                new Message($feedback['code'],'Panel','deshboard');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -30,7 +30,7 @@ class Plan extends Abstract_Controller {
             include_once './View/Plans/Search_Plans_View.php';
             new Search_Plans();
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -43,10 +43,10 @@ class Plan extends Abstract_Controller {
                 include_once './View/Plans/ShowCurrent_Plan_View.php';
                 new ShowCurrent_Plan($feedback['resource'], $feedback['edificio'], $feedback['plan'], $feedback['definiciones']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -59,10 +59,10 @@ class Plan extends Abstract_Controller {
                 include_once './View/Plans/Expire_Plan_View.php';
                 new Expire_Plan($feedback['plan'], $feedback['edificio']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -70,10 +70,10 @@ class Plan extends Abstract_Controller {
         if(!es_registrado()) {
             include_once './Service/BuildPlan_Service.php';
             $bldPlan_service = new BuildPlan_Service();
-            $feedback = $bldPlan_service->EDIT();
-            new Message($feedback['code'], 'Plan', 'show');
+            $feedback = $bldPlan_service->expire();
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS','Panel','deshboard');
+            new Message('FRB_ACCS');
         }
     }
 }

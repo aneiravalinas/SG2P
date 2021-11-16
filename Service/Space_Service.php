@@ -65,13 +65,12 @@ class Space_Service extends Space_Validation {
         if(es_resp_edificio() && $building['username'] != getUser()) {
             $this->feedback['code'] = 'SPC_SRCH_NOT_ALLOWED';
             $this->feedback['ok'] = false;
-            $this->feedback['resource'] = array();
+            unset($this->feedback['resource']);
             return $this->feedback;
         }
 
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
-            $validation['floor'] = array('planta_id' => $floor['planta_id']);
             return $validation;
         }
 
@@ -79,10 +78,8 @@ class Space_Service extends Space_Validation {
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'SPC_SRCH_OK';
             $this->feedback['floor'] = array('planta_id' => $floor['planta_id'], 'nombre' => $floor['nombre'], 'edificio_id' => $floor['edificio_id']);
-        } else {
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'SPC_SRCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'SPC_SRCH_KO';
         }
 
         return $this->feedback;
@@ -118,7 +115,7 @@ class Space_Service extends Space_Validation {
             if($building['username'] != getUser()) {
                 $this->feedback['ok'] = false;
                 $this->feedback['code'] = 'SPC_SEEK_NOT_ALLOWED';
-                $this->feedback['resource'] = array();
+                unset($this->feedback['resource']);
                 return $this->feedback;
             }
         }
@@ -178,13 +175,11 @@ class Space_Service extends Space_Validation {
         $floor = $this->feedback['resource'];
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
-            $validation['floor'] = array('planta_id' => $floor['planta_id']);
             return $validation;
         }
 
         $this->feedback = $this->name_space_not_exists();
         if(!$this->feedback['ok']) {
-            $this->feedback['floor'] = array('planta_id' => $floor['planta_id']);
             return $this->feedback;
         }
 
@@ -192,7 +187,6 @@ class Space_Service extends Space_Validation {
             $this->feedback = $this->uploader->uploadPhoto(space_photos_path, 'foto_espacio');
             if(!$this->feedback['ok']) {
                 $this->feedback['code'] = 'SPC_PH_KO';
-                $this->feedback['floor'] = array('planta_id' => $floor['planta_id']);
                 return $this->feedback;
             }
             $this->foto_espacio = $this->feedback['resource'];
@@ -213,9 +207,7 @@ class Space_Service extends Space_Validation {
             }
         }
 
-        $this->feedback['floor'] = array('planta_id' => $floor['planta_id']);
         return $this->feedback;
-
     }
 
     /*
@@ -245,7 +237,6 @@ class Space_Service extends Space_Validation {
             $this->feedback['code'] = 'SPC_DEL_KO';
         }
 
-        $this->feedback['floor'] = array('planta_id' => $floor['planta_id']);
         return $this->feedback;
     }
 
@@ -271,7 +262,6 @@ class Space_Service extends Space_Validation {
         $space = $this->feedback['resource'];
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
-            $validation['floor'] = array('planta_id' => $space['planta_id']);
             return $validation;
         }
 
@@ -279,7 +269,6 @@ class Space_Service extends Space_Validation {
             $this->space_entity->planta_id = $space['planta_id'];
             $this->feedback = $this->name_space_not_exists();
             if(!$this->feedback['ok']) {
-                $this->feedback['floor'] = array('planta_id' => $space['planta_id']);
                 return $this->feedback;
             }
         }
@@ -288,7 +277,6 @@ class Space_Service extends Space_Validation {
             $this->feedback = $this->uploader->uploadPhoto(space_photos_path, 'foto_espacio');
             if(!$this->feedback['ok']) {
                 $this->feedback['code'] = 'SPC_PH_KO';
-                $this->feedback['floor'] = array('planta_id' => $space['planta_id']);
                 return $this->feedback;
             }
             $this->foto_espacio = $this->feedback['resource'];
@@ -311,7 +299,6 @@ class Space_Service extends Space_Validation {
             }
         }
 
-        $this->feedback['floor'] = array('planta_id' => $space['planta_id']);
         return $this->feedback;
     }
 

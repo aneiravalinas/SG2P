@@ -17,13 +17,11 @@ class Simulacrum extends Abstract_Controller {
                 $this->update_stack_post();
                 include_once './View/Simulacrums/Show_Simulacrum_View.php';
                 new Show_Simulacrum($feedback['resource'], $feedback['simulacrum'], $feedback['building']);
-            } else if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Simulacrum', 'show', $feedback['return']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -35,10 +33,10 @@ class Simulacrum extends Abstract_Controller {
                 include_once './View/Simulacrums/Add_Simulacrum_View.php';
                 new Add_Simulacrum($feedback['simulacrum'], $feedback['building']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -46,14 +44,9 @@ class Simulacrum extends Abstract_Controller {
         if(!es_registrado()) {
             $sim_service = new Simulacrum_Service();
             $feedback = $sim_service->addImpSim();
-            if(isset($feedback['simulacrum']) && isset($feedback['building'])) {
-                new Message($feedback['code'], 'Simulacrum', 'show', array('edificio_id' => $feedback['building']['edificio_id'],
-                                                                                            'simulacro_id' => $feedback['simulacrum']['simulacro_id']));
-            } else {
-                new Message($feedback['code'], 'Plan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -65,10 +58,10 @@ class Simulacrum extends Abstract_Controller {
                 include_once './View/Simulacrums/Delete_Simulacrum_View.php';
                 new Delete_Simulacrum($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -76,13 +69,9 @@ class Simulacrum extends Abstract_Controller {
         if(!es_registrado()) {
             $sim_service = new Simulacrum_Service();
             $feedback = $sim_service->DELETE();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Simulacrum', 'show', $feedback['return']);
-            } else {
-                new Message($feedback['code'], 'Plan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -94,10 +83,10 @@ class Simulacrum extends Abstract_Controller {
                 include_once './View/Simulacrums/Expire_Simulacrum_View.php';
                 new Expire_Simulacrum($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -105,13 +94,9 @@ class Simulacrum extends Abstract_Controller {
         if(!es_registrado()) {
             $sim_service = new Simulacrum_Service();
             $feedback = $sim_service->expire();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Simulacrum', 'show', $feedback['return']);
-            } else {
-                new Message($feedback['code'], 'Plan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -123,10 +108,10 @@ class Simulacrum extends Abstract_Controller {
                 include_once './View/Simulacrums/Implement_Simulacrum_View.php';
                 new Implement_Simulacrum($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -134,13 +119,9 @@ class Simulacrum extends Abstract_Controller {
         if(!es_registrado()) {
             $sim_service = new Simulacrum_Service();
             $feedback = $sim_service->implement();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Simulacrum', 'show', $feedback['return']);
-            } else {
-                new Message($feedback['code'], 'Plan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -153,10 +134,10 @@ class Simulacrum extends Abstract_Controller {
                 include_once './View/Simulacrums/ShowCurrent_Simulacrum_View.php';
                 new ShowCurrent_Simulacrum($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -168,10 +149,10 @@ class Simulacrum extends Abstract_Controller {
                 include_once './View/Simulacrums/Search_Simulacrum_View.php';
                 new Search_Simulacrum($feedback['simulacrum'], $feedback['building']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 }

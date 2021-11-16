@@ -17,13 +17,11 @@ class Procedure extends Abstract_Controller {
                 $this->update_stack_post();
                 include_once './View/Procedures/Show_Procedure_View.php';
                 new Show_Procedure($feedback['resource'], $feedback['procedure'], $feedback['building']);
-            } else if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Procedure', 'show', $feedback['return']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -35,10 +33,10 @@ class Procedure extends Abstract_Controller {
                 include_once './View/Procedures/Add_Procedure_View.php';
                 new Add_Procedure($feedback['procedure'], $feedback['building']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -46,14 +44,9 @@ class Procedure extends Abstract_Controller {
         if(!es_registrado()) {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->addImpProc();
-            if(isset($feedback['procedure']) && isset($feedback['building'])) {
-                new Message($feedback['code'], 'Procedure', 'show', array('procedimiento_id' => $feedback['procedure']['procedimiento_id'],
-                                                                                            'edificio_id' => $feedback['building']['edificio_id']));
-            } else {
-                new Message($feedback['code'], 'Plan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -65,10 +58,10 @@ class Procedure extends Abstract_Controller {
                 include_once './View/Procedures/Delete_Procedure_View.php';
                 new Delete_Procedure($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -76,13 +69,9 @@ class Procedure extends Abstract_Controller {
         if(!es_registrado()) {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->DELETE();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Procedure', 'show', $feedback['return']);
-            } else {
-                new Message($feedback['code'], 'Plan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -94,10 +83,10 @@ class Procedure extends Abstract_Controller {
                 include_once './View/Procedures/Expire_Procedure_View.php';
                 new Expire_Procedure($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -105,13 +94,9 @@ class Procedure extends Abstract_Controller {
         if(!es_registrado()) {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->expire();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Procedure', 'show', $feedback['return']);
-            } else {
-                new Message($feedback['code'], 'Plan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -123,10 +108,10 @@ class Procedure extends Abstract_Controller {
                 include_once './View/Procedures/Implement_Procedure_View.php';
                 new Implement_Procedure($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -134,13 +119,9 @@ class Procedure extends Abstract_Controller {
         if(!es_registrado()) {
             $proc_service = new Procedure_Service();
             $feedback = $proc_service->implement();
-            if(isset($feedback['return'])) {
-                new Message($feedback['code'], 'Procedure', 'show', $feedback['return']);
-            } else {
-                new Message($feedback['code'], 'Plan', 'show');
-            }
+            new Message($feedback['code']);
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -153,10 +134,10 @@ class Procedure extends Abstract_Controller {
                 include_once './View/Procedures/ShowCurrent_Procedure_View.php';
                 new ShowCurrent_Procedure($feedback['resource']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 
@@ -168,10 +149,10 @@ class Procedure extends Abstract_Controller {
                 include_once './View/Procedures/Search_Procedure_View.php';
                 new Search_Procedure($feedback['procedure'], $feedback['building']);
             } else {
-                new Message($feedback['code'], 'Plan', 'show');
+                new Message($feedback['code']);
             }
         } else {
-            new Message('FRB_ACCS', 'Panel', 'deshboard');
+            new Message('FRB_ACCS');
         }
     }
 }

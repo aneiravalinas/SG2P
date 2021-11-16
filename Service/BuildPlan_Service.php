@@ -53,7 +53,6 @@ class BuildPlan_Service extends BuildPlan_Validation {
 
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $plan['plan_id']);
             return $validation;
         }
 
@@ -61,11 +60,8 @@ class BuildPlan_Service extends BuildPlan_Validation {
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'BLDPLAN_SEARCH_OK';
             $this->feedback['plan'] = array('plan_id' => $plan['plan_id'], 'nombre' => $plan['nombre']);
-        } else {
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'BLDPLAN_SEARCH_KO';
-            }
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'BLDPLAN_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -91,10 +87,7 @@ class BuildPlan_Service extends BuildPlan_Validation {
         }
 
         $this->build_plans = array($bld_plan);
-        $this->feedback = $this->expire_assignments();
-        $this->feedback['plan'] = array('plan_id' => $bld_plan['plan_id']);
-
-        return $this->feedback;
+        return $this->expire_assignments();
     }
 
     /*
@@ -109,19 +102,16 @@ class BuildPlan_Service extends BuildPlan_Validation {
             return $this->feedback;
         }
 
-        $plan = $this->feedback['resource'];
         $this->feedback = $this->searchActiveAssignmentsByPlan();
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
             return $this->feedback;
         }
 
         foreach($this->feedback['resource'] as $build_plan) {
             array_push($this->build_plans, $build_plan);
         }
-        $this->feedback = $this->expire_assignments();
-        $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
-        return $this->feedback;
+
+        return $this->expire_assignments();
     }
 
     /*
@@ -188,7 +178,6 @@ class BuildPlan_Service extends BuildPlan_Validation {
         $plan = $this->feedback['resource'];
         $this->feedback = $this->searchBuildingCandidates();
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
             return $this->feedback;
         }
 
@@ -217,14 +206,12 @@ class BuildPlan_Service extends BuildPlan_Validation {
             if($this->feedback['code'] == 'DFPLAN_DOC_NOT_EXST') {
                 $this->feedback['code'] = 'DFPLAN_ADD_NOT_DOCS';
             }
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
             return $this->feedback;
         }
 
         $docs = $this->feedback['resource'];
         $validation = $this->validar_BUILDINGS();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $plan['plan_id']);
             return $validation;
         }
 
@@ -232,7 +219,6 @@ class BuildPlan_Service extends BuildPlan_Validation {
         if(!$this->feedback['ok']) {
             $this->feedback = $this->uploader->create_dir(plans_path, $plan['plan_id']);
             if(!$this->feedback['ok']) {
-                $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
                 $this->feedback['code'] = 'BLDPLAN_DIRPLAN_KO';
                 return $this->feedback;
             }
@@ -245,7 +231,6 @@ class BuildPlan_Service extends BuildPlan_Validation {
             $this->feedback = $this->ADD($this->buildings, $docs, plans_path . $plan['plan_id']);
         }
 
-        $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
         return $this->feedback;
     }
 
@@ -348,8 +333,6 @@ class BuildPlan_Service extends BuildPlan_Validation {
                         $this->uploader->delete(plans_path . $plan['plan_id']);
                     }
                     $this->feedback['code'] = 'BLDPLAN_DEL_OK';
-                    $this->feedback['plan'] = $plan;
-                    $this->feedback['edificio'] = $building;
                     return $this->feedback;
                 }
             }
@@ -359,7 +342,6 @@ class BuildPlan_Service extends BuildPlan_Validation {
             $this->feedback['code'] = 'BLDPLAN_DEL_KO';
         }
 
-        $this->feedback['plan'] = $plan;
         return $this->feedback;
     }
 
@@ -379,13 +361,11 @@ class BuildPlan_Service extends BuildPlan_Validation {
         $plan = $this->feedback['resource'];
         $validation = $this->validar_EDIFICIO_ID();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $plan['plan_id']);
             return $validation;
         }
 
         $this->feedback = $this->seekByBuildingID($this->edificio_id);
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
             return $this->feedback;
         }
 
@@ -404,7 +384,6 @@ class BuildPlan_Service extends BuildPlan_Validation {
             $this->feedback['plan'] = array('plan_id' => $plan['plan_id'], 'nombre' => $plan['nombre']);
             $this->feedback['edificio'] = array('edificio_id' => $building['edificio_id'], 'nombre' => $building['nombre']);
         } else if($this->feedback['code'] == 'BLDPLAN_KO') {
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
             $this->feedback['code'] = 'BLDPLAN_SEEK_KO';
         }
 

@@ -845,6 +845,36 @@ arrayES = {
         'BLDSIMS_SEARCH_KO' : 'Error al consultar las cumplimentaciones del simulacro en el edificio',
 
 
+    // NOTIFICACIONES
+
+        // DELETE
+        'NTF_DEL_OK' : 'Se ha eliminado la notificación correctamente',
+        'NTF_DEL_KO' : 'Error al eliminar la notificación',
+
+        // SEARCH
+        'NTF_SEARCH_OK' : 'La búsqueda notificaciones se ha realizado correctamente',
+        'NTF_SEARCH_KO' : 'Error al buscar las notificaciones',
+
+        // SEARCH_FORM
+        'NTF_BLDS_KO' : 'Error al recuperar los edificios con notificaciones registradas',
+        'NTF_PLANS_KO' : 'Error al recuperar los planes con notificaciones registradas',
+
+        // SEEK
+        'NTF_EDT_READ_KO' : 'Error al modificar el estado de la notificación',
+        'NTF_SEEK_OK' : 'Se han recuperado los detalles de la notificación correctamente',
+
+        // Obtener nuevas notificaciones
+        'NTF_UR_EMPT' : 'El usuario no tiene nuevas notificaciones',
+        'NTF_UR_FILL' : 'El usuario tiene nuevas notificaciones',
+        'NTF_UR_KO' : 'Error al buscar nuevas notificaciones',
+
+        // Permisos
+        'NTF_USR_FRBD' : 'No dispone de los permisos necesarios para consultar la notificación',
+
+        // Búsqueda de Notificación por ID
+        'NTFID_NOT_EXST' : 'La notificación indicada no existe',
+        'NTFID_EXST' : 'La notificación existe',
+        'NTF_SEEK_KO' : 'Error al consultar los detalles de la notificación',
 
 
 
@@ -1090,6 +1120,19 @@ arrayES = {
 
             // Fecha Cumplimentación Final
             'END_DATECOMP_KO' : 'La fecha de cumplimentación final tiene un formato incorrecto',
+
+            // ID Notificación
+            'NTFID_EMPT' : 'El ID de la notificación no puede ser vacío',
+            'NTFID_NOT_NUMERIC' : 'El ID de la notificación debe ser numérico',
+
+            // Fecha Inicio
+            'START_DATE_KO' : 'La fecha de inicio tiene un formato incorrecto',
+
+            // Fecha Fin
+            'END_DATE_KO' : 'La fecha de fin tiene un formato incorrecto',
+
+            // Leído
+            'READ_KO' : 'El atributo leído sólo admite los valores SI o NO',
 
 
 
@@ -1367,6 +1410,19 @@ arrayES = {
         'i18n-end_planning_date' : 'Fecha Planificación Final',
         'i18n-start_date_expire' : 'Fecha Vencimiento Inicial',
         'i18n-end_date_expire' : 'Fecha Vencimiento Final',
+
+        // NOTIFICACIONES
+        'i18n-notifications' : 'Notificaciones',
+        'i18n-show_notifications' : 'Listado de Notificaciones',
+        'i18n-notifications-empty' : 'No se han encontrado Notificaciones',
+        'i18n-read' : 'Leído',
+        'i18n-date' : 'Fecha',
+        'i18n-search-notifications' : 'Buscar Notificaciones',
+        'i18n-fecha_inicio' : 'Fecha Inicio',
+        'i18n-fecha_fin' : 'Fecha Fin',
+        'i18n-msg' : 'Mensaje',
+        'i18n-notification-details' : 'Detalles de la Notificación',
+        'i18n-del-notification-confirm' : '¿Está seguro que desea eliminar la notificación? El cambio no será reversible',
 
 
 

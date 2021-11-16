@@ -12,6 +12,10 @@ if(isset($_SESSION)) {
         define('plans_path','./Uploads/Test/');
     }
 
+    if(!isset($_SESSION['stack_post'])) {
+        $_SESSION['stack_post'] = array();
+    }
+
     include './Controller/Test_Controller.php';
 
     $controller = new Test();

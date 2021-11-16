@@ -329,30 +329,15 @@ class Building_Service extends Building_Validation {
 
     /*
      *  - Recupera los datos del edificio del portal.
-     *      1. Si no se recibe un ID de edificio, recupera los datos del edificio cuyo identificador esté almacenado en sesión.
-     *      2. Valida y recupera el edificio por ID, comprobando que existe.
-     *      3. Almacena el ID del edificio en sesión.
+     *      1. Valida y recupera el edificio por ID.
      */
     function seekPortal() {
-        if($this->edificio_id == '') {
-            if(isset($_SESSION['portal'])) {
-                $this->edificio_id = $_SESSION['portal'];
-                $this->building_entity->edificio_id = $this->edificio_id;
-            }
-        }
-
         $validation = $this->validar_EDIFICIO_ID();
         if(!$validation['ok']) {
             return $validation;
         }
 
         $this->feedback = $this->seekByBuildingID();
-        if($this->feedback['ok']) {
-            if(!isset($_SESSION)) {
-                session_start();
-            }
-            $_SESSION['portal'] = $this->feedback['resource']['edificio_id'];
-        }
         return $this->feedback;
     }
 

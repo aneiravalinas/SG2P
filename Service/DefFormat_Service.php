@@ -42,7 +42,6 @@ class DefFormat_Service extends DefFormat_Validation {
         $plan = $this->feedback['resource'];
         $validation = $this->validar_atributos_search();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $plan['plan_id']);
             return $validation;
         }
 
@@ -50,11 +49,8 @@ class DefFormat_Service extends DefFormat_Validation {
         if($this->feedback['ok']) {
             $this->feedback['code'] = 'DFFRMT_SEARCH_OK';
             $this->feedback['plan'] = array('plan_id' => $plan['plan_id'], 'nombre' => $plan['nombre']);
-        } else {
-            if($this->feedback['code'] == 'QRY_KO') {
-                $this->feedback['code'] = 'DFFRMT_SEARCH_KO';
-            }
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
+        } else if($this->feedback['code'] == 'QRY_KO') {
+            $this->feedback['code'] = 'DFFRMT_SEARCH_KO';
         }
 
         return $this->feedback;
@@ -73,16 +69,13 @@ class DefFormat_Service extends DefFormat_Validation {
             return $this->feedback;
         }
 
-        $plan = $this->feedback['resource'];
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $plan['plan_id']);
             return $validation;
         }
 
         $this->feedback = $this->name_format_not_exist();
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
             return $this->feedback;
         }
 
@@ -93,7 +86,6 @@ class DefFormat_Service extends DefFormat_Validation {
             $this->feedback['code'] = 'DFFRMT_ADD_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $plan['plan_id']);
         return $this->feedback;
     }
 
@@ -112,7 +104,6 @@ class DefFormat_Service extends DefFormat_Validation {
         $format = $this->feedback['resource'];
         $this->feedback = $this->imp_formats_not_exist();
         if(!$this->feedback['ok']) {
-            $this->feedback['plan'] = array('plan_id' => $format['plan_id']);
             return $this->feedback;
         }
 
@@ -123,7 +114,6 @@ class DefFormat_Service extends DefFormat_Validation {
             $this->feedback['code'] = 'DFFRMT_DEL_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $format['plan_id']);
         return $this->feedback;
     }
 
@@ -143,7 +133,6 @@ class DefFormat_Service extends DefFormat_Validation {
         $format = $this->feedback['resource'];
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
-            $validation['plan'] = array('plan_id' => $format['plan_id']);
             return $validation;
         }
 
@@ -151,7 +140,6 @@ class DefFormat_Service extends DefFormat_Validation {
             $this->defFormat_entity->plan_id = $format['plan_id'];
             $this->feedback = $this->name_format_not_exist();
             if(!$this->feedback['ok']) {
-                $this->feedback['plan'] = array('plan_id' => $format['plan_id']);
                 return $this->feedback;
             }
         }
@@ -163,7 +151,6 @@ class DefFormat_Service extends DefFormat_Validation {
             $this->feedback['code'] = 'DFFRMT_EDIT_KO';
         }
 
-        $this->feedback['plan'] = array('plan_id' => $format['plan_id']);
         return $this->feedback;
     }
 

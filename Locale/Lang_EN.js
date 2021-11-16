@@ -837,6 +837,37 @@ arrayEN = {
         'BLDSIMS_SEARCH_OK' : 'The completions of the simulacrum in the building have been consulted correctly',
         'BLDSIMS_SEARCH_KO' : 'Error when consulting the completions of the simulacrum in the building',
 
+    // NOTIFICACIONES
+
+        // DELETE
+        'NTF_DEL_OK' : 'Notification has been removed successfully',
+        'NTF_DEL_KO' : 'Failed to delete notification',
+
+        // SEARCH
+        'NTF_SEARCH_OK' : 'Search notifications was successful',
+        'NTF_SEARCH_KO' : 'Failed to search for notifications',
+
+        // SEARCH_FORM
+        'NTF_BLDS_KO' : 'Failed to retrieve buildings with posted notifications',
+        'NTF_PLANS_KO' : 'Failed to retrieve plans with posted notifications',
+
+        // SEEK
+        'NTF_EDT_READ_KO' : 'Failed to modify notification status',
+        'NTF_SEEK_OK' : 'Notification details retrieved successfully',
+
+        // Obtener nuevas notificaciones
+        'NTF_UR_EMPT' : 'User has no new notifications',
+        'NTF_UR_FILL' : 'User has new notifications',
+        'NTF_UR_KO' : 'Failed to search for new notifications',
+
+        // Permisos
+        'NTF_USR_FRBD' : 'You do not have the necessary permissions to view the notification',
+
+        // Búsqueda de Notificación por ID
+        'NTFID_NOT_EXST' : 'The indicated notification does not exist',
+        'NTFID_EXST' : 'The notification exists',
+        'NTF_SEEK_KO' : 'Failed to check notification details',
+
 
         // Validaciones
 
@@ -1079,6 +1110,19 @@ arrayEN = {
 
             // Fecha Cumplimentación Final
             'END_DATECOMP_KO' : 'The final completion date is in an incorrect format',
+
+            // ID Notificación
+            'NTFID_EMPT' : 'Notification ID cannot be empty',
+            'NTFID_NOT_NUMERIC' : 'The notification ID must be numeric',
+
+            // Fecha Inicio
+            'START_DATE_KO' : 'The start date is in the wrong format',
+
+            // Fecha Fin
+            'END_DATE_KO' : 'The end date is in the wrong format',
+
+            // Leído
+            'READ_KO' : 'The attribute read only admits the values YES or NO',
 
 
 
@@ -1355,6 +1399,19 @@ arrayEN = {
         'i18n-end_planning_date' : 'Final Planning Date',
         'i18n-start_date_expire' : 'Initial Expiration Date',
         'i18n-end_date_expire' : 'Final Expiration Date',
+
+        // NOTIFICACIONES
+        'i18n-notifications' : 'Notifications',
+        'i18n-show_notifications' : 'Notifications List',
+        'i18n-notifications-empty' : 'No Notifications found',
+        'i18n-read' : 'Read',
+        'i18n-date' : 'Date',
+        'i18n-search-notifications' : 'Search Notifications',
+        'i18n-fecha_inicio' : 'Start Date',
+        'i18n-fecha_fin' : 'End Date',
+        'i18n-msg' : 'Message',
+        'i18n-notification-details' : 'Notification Details',
+        'i18n-del-notification-confirm' : 'Are you sure you want to delete the notification? The change will not be reversible',
 
         // MODAL
             // Campos Modal
