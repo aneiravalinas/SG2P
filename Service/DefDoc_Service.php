@@ -82,8 +82,6 @@ class DefDoc_Service extends DefDoc_Validation {
             return $this->feedback;
         }
 
-        $plan = $this->feedback['resource'];
-
         $validation = $this->validar_atributos();
         if(!$validation['ok']) {
             return $validation;

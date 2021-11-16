@@ -9,6 +9,7 @@ class Formation_Service extends Formation_Validation {
     var $defFormat_entity;
     var $impFormat_entity;
     var $feedback = array();
+    const new_msg_format = 'Se ha añadido una nueva formación a cumplimentar';
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
@@ -285,6 +286,13 @@ class Formation_Service extends Formation_Validation {
             return $feedback;
         }
 
+        $this->impFormat_entity->edificio_id = $this->edificio_id;
+        $feedback = $this->search_all_impformats();
+        if(!$feedback['ok']) {
+            return $feedback;
+        }
+
+        $new_element = ($feedback['code'] == 'BLDFORMATS_SEARCH_EMPT');
         $this->impFormat_entity->setAttributes(array('edificio_id' => $this->edificio_id, 'fecha_planificacion' => default_data, 'destinatarios' => default_destinatarios,
                                                             'fecha_vencimiento' => default_data, 'fecha_cumplimentacion' => default_data,
                                                             'url_recurso' => default_url, 'estado' => 'pendiente'));
@@ -294,6 +302,9 @@ class Formation_Service extends Formation_Validation {
             $feedback = $this->ADD($formation);
             if($feedback['ok']) {
                 $this->update_plan_state($building['edificio_id'], $formation['plan_id']);
+                if($new_element) {
+                    $this->notify_manager($building, $formation['plan_id']);
+                }
                 return $feedback;
             }
             $this->impFormat_entity->cumplimentacion_id = $cumplimentacion_id;
@@ -594,7 +605,11 @@ class Formation_Service extends Formation_Validation {
     function search_all_impformats() {
         $feedback = $this->impFormat_entity->searchFormatsBuildings();
         if($feedback['ok']) {
-            $feedback['code'] = 'BLDFORMATS_SEARCH_OK';
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['code'] = 'BLDFORMATS_SEARCH_EMPT';
+            } else {
+                $feedback['code'] = 'BLDFORMATS_SEARCH_OK';
+            }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'BLDFORMATS_SEARCH_KO';
         }
@@ -645,5 +660,17 @@ class Formation_Service extends Formation_Validation {
         }
 
         return $feedback;
+    }
+
+    function notify_manager($building, $plan_id) {
+        include_once './Model/Notification_Model.php';
+        $notification_entity = new Notification_Model();
+        $notification_entity->setAttributes(array(
+            'username' => $building['username'],
+            'edificio_id' => $building['edificio_id'],
+            'plan_id' => $plan_id,
+            'mensaje' => self::new_msg_format
+        ));
+        $notification_entity->ADD();
     }
 }

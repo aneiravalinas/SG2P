@@ -9,6 +9,7 @@ class Procedure_Service extends Procedure_Validation {
     var $defProc_entity;
     var $impProc_entity;
     var $feedback = array();
+    const msg_new_proc = 'Se ha añadido un nuevo procedimiento a cumplimentar';
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
@@ -271,6 +272,14 @@ class Procedure_Service extends Procedure_Validation {
             return $feedback;
         }
 
+        $this->impProc_entity->edificio_id = $this->edificio_id;
+        $feedback = $this->search_all_impprocs();
+        if(!$feedback['ok']) {
+            return $feedback;
+        }
+
+        $new_element = ($feedback['code'] == 'BLDPROCS_SEARCH_EMPT');
+
         include_once './Service/Uploader_Service.php';
         $uploader = new Uploader();
         $path = plans_path . $procedure['plan_id'] . '/' . $this->edificio_id . '/Procedimientos/';
@@ -292,6 +301,9 @@ class Procedure_Service extends Procedure_Validation {
             $feedback = $this->ADD($procedure);
             if($feedback['ok']) {
                 $this->update_plan_state($building['edificio_id'], $procedure['plan_id']);
+                if($new_element) {
+                    $this->notify_manager($building, $procedure['plan_id']);
+                }
                 return $feedback;
             }
             $this->impProc_entity->cumplimentacion_id = $imp_proc_id;
@@ -624,7 +636,11 @@ class Procedure_Service extends Procedure_Validation {
     function search_all_impprocs() {
         $feedback = $this->impProc_entity->searchProcsBuildings();
         if($feedback['ok']) {
-            $feedback['code'] = 'BLDPROCS_SEARCH_OK';
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['code'] = 'BLDPROCS_SEARCH_EMPT';
+            } else {
+                $feedback['code'] = 'BLDPROCS_SEARCH_OK';
+            }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'BLDPROCS_SEARCH_KO';
         }
@@ -702,5 +718,17 @@ class Procedure_Service extends Procedure_Validation {
         }
 
         return $feedback;
+    }
+
+    function notify_manager($building, $plan_id) {
+        include_once './Model/Notification_Model.php';
+        $notification_entity = new Notification_Model();
+        $notification_entity->setAttributes(array(
+            'username' => $building['username'],
+            'edificio_id' => $building['edificio_id'],
+            'plan_id' => $plan_id,
+            'mensaje' => self::msg_new_proc
+        ));
+        $notification_entity->ADD();
     }
 }

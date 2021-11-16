@@ -9,6 +9,7 @@ class Route_Service extends Route_Validation {
     var $impRoute_entity;
     var $defRoute_entity;
     var $feedback = array();
+    const msg_new_route = 'Se ha añadido una nueva ruta a cumplimentar';
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
@@ -364,6 +365,12 @@ class Route_Service extends Route_Validation {
             return $feedback;
         }
 
+        $feedback = $this->search_all_improutes();
+        if(!$feedback['ok']) {
+            return $feedback;
+        }
+
+        $new_element = ($feedback['code'] == 'BLDROUTES_SEARCH_EMPT');
         $feedback = $this->searchBuildingFloors();
         if(!$feedback['ok']) {
             if($feedback['code'] == 'BLD_FLOORS_SEARCH_EMPT') {
@@ -404,6 +411,9 @@ class Route_Service extends Route_Validation {
             $feedback = $this->ADD($route);
             if($feedback['ok']) {
                 $this->update_plan_state($building['edificio_id'], $route['plan_id']);
+                if($new_element) {
+                    $this->notify_manager($building, $route['plan_id']);
+                }
                 return $feedback;
             }
         }
@@ -823,5 +833,32 @@ class Route_Service extends Route_Validation {
         }
 
         return $feedback;
+    }
+
+    function search_all_improutes() {
+        $feedback = $this->impRoute_entity->searchRoutesBuildings($this->edificio_id);
+        if($feedback['ok']) {
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['code'] = 'BLDROUTES_SEARCH_EMPT';
+            } else{
+                $feedback['code'] = 'BLDROUTES_SEARCH_OK';
+            }
+        } else if($feedback['code'] == 'QRY_KO') {
+            $feedback['code'] = 'BLDROUTES_SEARCH_KO';
+        }
+
+        return $feedback;
+    }
+
+    function notify_manager($building, $plan_id) {
+        include_once './Model/Notification_Model.php';
+        $notification_entity = new Notification_Model();
+        $notification_entity->setAttributes(array(
+            'username' => $building['username'],
+            'edificio_id' => $building['edificio_id'],
+            'plan_id' => $plan_id,
+            'mensaje' => self::msg_new_route
+        ));
+        $notification_entity->ADD();
     }
 }

@@ -46,25 +46,24 @@ class ShowCurrent_Notification extends Header {
                                             <span class="d-block att-value"><?php echo $this->notification['id_notificacion'] ?></span>
                                         </li>
                                         <li>
-                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-read">Leído</span>
-                                            <span class="d-block att-value i18n-<?php echo $this->notification['leido'] ?>">Yes</span>
-                                        </li>
-                                        <li>
-                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-date">Fecha</span>
-                                            <span class="d-block att-value"><?php echo $this->notification['fecha'] ?></span>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                                <div class="col-lg-6 pt-4 pt-lg-0">
-                                    <ul>
-                                        <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-nombre_edificio">Nombre Edificio</span>
                                             <span class="d-block att-value"><?php echo $this->notification['nombre_edificio'] ?></span>
                                         </li>
                                         <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-read">Leído</span>
+                                            <span class="d-block att-value i18n-<?php echo $this->notification['leido'] ?>">Yes</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-5 pt-4 pt-lg-0">
+                                    <ul>
+                                        <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-nombre_plan">Nombre Plan</span>
                                             <span class="d-block att-value"><?php echo $this->notification['nombre_plan'] ?></span>
+                                        </li>
+                                        <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-date">Fecha</span>
+                                            <span class="d-block att-value"><?php echo date_format(date_create($this->notification['fecha']), 'd-m-Y'); ?></span>
                                         </li>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-msg">Mensaje</span>
@@ -77,7 +76,7 @@ class ShowCurrent_Notification extends Header {
                     </div>
 
                     <div class="row justify-content-center pb-5 pt-3">
-                        <div class="col text-center">
+                        <div class="col-xl-6 col-lg-9 d-flex justify-content-between flex-wrap">
                             <a class="btn-get-started i18n-back" type="button" onclick="
                                 crearform('formenviar', 'post');
                                 insertacampo(document.formenviar, 'go_back', 'go_back');
@@ -86,6 +85,15 @@ class ShowCurrent_Notification extends Header {
                                 <?php endforeach; ?>
                                 enviaform(document.formenviar);">
                                 Volver
+                            </a>
+                            <a class="btn-get-started" type="button" onclick="
+                                    crearform('formenviar', 'post');
+                                    insertacampo(document.formenviar, 'controller', 'Plan');
+                                    insertacampo(document.formenviar, 'action', 'showCurrent');
+                                    insertacampo(document.formenviar, 'edificio_id', '<?php echo $this->notification['edificio_id'] ?>');
+                                    insertacampo(document.formenviar, 'plan_id', '<?php echo $this->notification['plan_id'] ?>');
+                                    enviaform(document.formenviar);">
+                                Ver Plan
                             </a>
                         </div>
                     </div>

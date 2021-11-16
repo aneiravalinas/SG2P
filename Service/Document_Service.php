@@ -11,6 +11,8 @@ class Document_Service extends Document_Validation {
     var $defDoc_entity;
     var $impDoc_entity;
     var $feedback = array();
+    const msg_new_doc = 'Se ha añadido un nuevo documento a cumplimentar';
+
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
@@ -319,6 +321,14 @@ class Document_Service extends Document_Validation {
             return $feedback;
         }
 
+        $this->impDoc_entity->edificio_id = $this->edificio_id;
+        $feedback = $this->search_all_impdocs();
+        if(!$feedback['ok']) {
+            return $feedback;
+        }
+
+        $new_element = ($feedback['code'] == 'BLDDOCS_SEARCH_EMPT');
+
         include_once './Service/Uploader_Service.php';
         $uploader = new Uploader();
         $path = plans_path . $document['plan_id'] . '/' . $this->edificio_id . '/Documentos/';
@@ -340,6 +350,9 @@ class Document_Service extends Document_Validation {
             $feedback = $this->ADD($document);
             if($feedback['ok']) {
                 $this->update_plan_state($building['edificio_id'], $document['plan_id']);
+                if($new_element) {
+                    $this->notify_manager($building, $document['plan_id']);
+                }
                 return $feedback;
             }
             $this->impDoc_entity->cumplimentacion_id = $imp_doc_id;
@@ -527,6 +540,11 @@ class Document_Service extends Document_Validation {
             }
         }
 
+        $this->feedback = $this->get_document_state();
+        if(!$this->feedback['ok']) {
+            return $this->feedback;
+        }
+
         $this->impDoc_entity->setAttributes(array('fecha_cumplimentacion' => date('Y-m-d'),
                                             'nombre_doc' => $this->nombre_doc, 'estado' => 'cumplimentado'));
         $this->feedback = $this->impDoc_entity->EDIT();
@@ -650,7 +668,11 @@ class Document_Service extends Document_Validation {
     function search_all_impdocs() {
         $feedback = $this->impDoc_entity->searchDocsBuildings();
         if($feedback['ok']) {
-            $feedback['code'] = 'BLDDOCS_SEARCH_OK';
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['code'] = 'BLDDOCS_SEARCH_EMPT';
+            } else {
+                $feedback['code'] = 'BLDDOCS_SEARCH_OK';
+            }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'BLDOCS_SEARCH_KO';
         }
@@ -717,6 +739,18 @@ class Document_Service extends Document_Validation {
         $checkState_service = new CheckState_Service();
         $estado = $checkState_service->get_state_element($feedback['resource']);
         return array('ok' => true, 'estado' => $estado);
+    }
+
+    function notify_manager($building, $plan_id) {
+        include_once './Model/Notification_Model.php';
+        $notification_entity = new Notification_Model();
+        $notification_entity->setAttributes(array(
+            'username' => $building['username'],
+            'edificio_id' => $building['edificio_id'],
+            'plan_id' => $plan_id,
+            'mensaje' => self::msg_new_doc
+        ));
+        $notification_entity->ADD();
     }
 
 }

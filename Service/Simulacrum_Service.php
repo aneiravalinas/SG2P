@@ -9,6 +9,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
     var $defSim_entity;
     var $impSim_entity;
     var $feedback = array();
+    const msg_new_sim = 'Se ha añadido un nuevo simulacro a cumplimentar';
 
     function __construct() {
         date_default_timezone_set("Europe/Madrid");
@@ -281,6 +282,13 @@ class Simulacrum_Service extends Simulacrum_Validation {
             return $feedback;
         }
 
+        $this->impSim_entity->edificio_id = $this->edificio_id;
+        $feedback = $this->search_all_impsims();
+        if(!$feedback['ok']) {
+            return $feedback;
+        }
+
+        $new_element = ($feedback['code'] == 'BLDSIMS_SEARCH_EMPT');
         $this->impSim_entity->setAttributes(array('edificio_id' => $this->edificio_id, 'fecha_planificacion' => default_data, 'destinatarios' => default_destinatarios,
                                                     'fecha_vencimiento' => default_data, 'fecha_cumplimentacion' => default_data, 'url_recurso' => default_url,
                                                     'estado' => 'pendiente'));
@@ -291,6 +299,9 @@ class Simulacrum_Service extends Simulacrum_Validation {
             if($feedback['ok']) {
                 $feedback['building'] = array('edificio_id' => $building['edificio_id']);
                 $this->update_plan_state($building['edificio_id'], $simulacrum['plan_id']);
+                if($new_element) {
+                    $this->notify_manager($building, $simulacrum['plan_id']);
+                }
                 return $feedback;
             }
             $this->impSim_entity->cumplimentacion_id = $cumplimentacion_id;
@@ -584,7 +595,11 @@ class Simulacrum_Service extends Simulacrum_Validation {
     function search_all_impsims() {
         $feedback = $this->impSim_entity->searchSimsBuildings();
         if($feedback['ok']) {
-            $feedback['code'] = 'BLDSIMS_SEARCH_OK';
+            if($feedback['code'] == 'QRY_EMPT') {
+                $feedback['code'] = 'BLDSIMS_SEARCH_EMPT';
+            } else {
+                $feedback['code'] = 'BLDSIMS_SEARCH_OK';
+            }
         } else if($feedback['code'] == 'QRY_KO') {
             $feedback['code'] = 'BLDSIMS_SEARCH_KO';
         }
@@ -635,6 +650,18 @@ class Simulacrum_Service extends Simulacrum_Validation {
         }
 
         return $feedback;
+    }
+
+    function notify_manager($building, $plan_id) {
+        include_once './Model/Notification_Model.php';
+        $notification_entity = new Notification_Model();
+        $notification_entity->setAttributes(array(
+            'username' => $building['username'],
+            'edificio_id' => $building['edificio_id'],
+            'plan_id' => $plan_id,
+            'mensaje' => self::msg_new_sim
+        ));
+        $notification_entity->ADD();
     }
 
 }
