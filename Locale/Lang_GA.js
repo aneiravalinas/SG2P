@@ -1210,6 +1210,7 @@ arrayGA = {
         'i18n-edit-floor' : 'Editar Planta',
         'i18n-view-spaces' : 'Ver Espazos',
         'i18n-foto_planta' : 'Foto da Planta',
+        'i18n-floor_details' : 'Información da Planta',
 
         // SPACES VIEWS
         'i18n-spaces' : 'Espazos',

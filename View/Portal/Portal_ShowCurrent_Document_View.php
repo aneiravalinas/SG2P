@@ -43,7 +43,7 @@ class Portal_ShowCurrent_Document extends Header {
                     <div class="row content justify-content-center">
                         <div class="col-xl-8 col-lg-9">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-5 d-flex justify-content-center">
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-plan_id">Plan ID</span>
@@ -59,7 +59,7 @@ class Portal_ShowCurrent_Document extends Header {
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-lg-8 pt-4 pt-lg-0">
+                                <div class="col-7 d-flex justify-content-center">
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-descripcion">Descripción</span>
@@ -96,11 +96,11 @@ class Portal_ShowCurrent_Document extends Header {
                                 <tbody>
                                 <?php foreach($this->imp_docs as $imp_doc): ?>
                                     <tr>
-                                        <td class="text-center"><?php echo $imp_doc['cumplimentacion_id'] ?></td>
-                                        <td class="text-center i18n-<?php echo $imp_doc['estado'] ?> <?php echo $imp_doc['estado'] ?>"></td>
-                                        <td class="text-center"><?php if($imp_doc['nombre_doc'] != default_doc) echo $imp_doc['nombre_doc']; ?></td>
-                                        <td class="text-center"><?php if($imp_doc['fecha_cumplimentacion'] != default_data) echo date_format(date_create($imp_doc['fecha_cumplimentacion']),'d/m/Y');?></td>
-                                        <td class="text-center">
+                                        <td class="text-center align-middle"><?php echo $imp_doc['cumplimentacion_id'] ?></td>
+                                        <td class="text-center align-middle i18n-<?php echo $imp_doc['estado'] ?> <?php echo $imp_doc['estado'] ?>"></td>
+                                        <td class="text-center align-middle"><?php if($imp_doc['nombre_doc'] != default_doc) echo $imp_doc['nombre_doc']; ?></td>
+                                        <td class="text-center align-middle"><?php if($imp_doc['fecha_cumplimentacion'] != default_data) echo date_format(date_create($imp_doc['fecha_cumplimentacion']),'d/m/Y');?></td>
+                                        <td class="text-center align-middle">
                                             <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false" onclick="
                                                     crearform('formenviar', 'post');
                                                     insertacampo(document.formenviar, 'cumplimentacion_id', '<?php echo $imp_doc['cumplimentacion_id'] ?>');

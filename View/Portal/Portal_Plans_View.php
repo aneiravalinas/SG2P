@@ -56,11 +56,11 @@ class Portal_Plans extends Header {
                             <tbody>
                             <?php foreach($this->buildPlans as $buildPlan): ?>
                                 <tr>
-                                    <td class="text-center"><?php echo $buildPlan['nombre_plan'] ?></td>
-                                    <td class="text-center"><?php echo date_format(date_create($buildPlan['fecha_asignacion']), 'd/m/Y') ?></td>
-                                    <td class="i18n-<?php echo $buildPlan['estado'] ?> <?php echo $buildPlan['estado'] ?> text-center"></td>
-                                    <td class="text-center"><?php if($buildPlan['fecha_cumplimentacion'] != default_data) echo date_format(date_create($buildPlan['fecha_cumplimentacion']), 'd/m/Y'); ?></td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle"><?php echo $buildPlan['nombre_plan'] ?></td>
+                                    <td class="text-center align-middle"><?php echo date_format(date_create($buildPlan['fecha_asignacion']), 'd/m/Y') ?></td>
+                                    <td class="align-middle i18n-<?php echo $buildPlan['estado'] ?> <?php echo $buildPlan['estado'] ?> text-center"></td>
+                                    <td class="align-middle text-center"><?php if($buildPlan['fecha_cumplimentacion'] != default_data) echo date_format(date_create($buildPlan['fecha_cumplimentacion']), 'd/m/Y'); ?></td>
+                                    <td class="align-middle text-center">
                                         <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false" onclick="
                                                     crearform('formenviar', 'post');
                                                     insertacampo(document.formenviar, 'edificio_id', '<?php echo $buildPlan['edificio_id'] ?>');

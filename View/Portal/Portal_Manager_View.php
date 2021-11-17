@@ -14,9 +14,9 @@ class Portal_Manager extends Header {
     function render() {
         ?>
 
-        <section id="hero" class="d-flex align-items-center">
+        <section id="hero" class="d-flex align-items-center hero-section">
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center pt-5">
                     <div class="col-xl-7 col-lg-9 text-center">
                         <h1 class="mb-4 mt-4 i18n-details-manager">Información del Responsable</h1>
                     </div>
@@ -28,67 +28,69 @@ class Portal_Manager extends Header {
                             </label>
                         </div>
                     </div>
-
-                    <div class="col-xl-7 col-lg-9">
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="dni" class="i18n-dni">DNI</label>
-                                <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $this->user['dni'] ?>" disabled/>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="username" class="i18n-username">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" value="<?php echo $this->user['username'] ?>" disabled/>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="nombre" class="i18n-nombre">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $this->user['nombre'] ?>" disabled/>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="apellidos" class="i18n-apellidos">Apellidos</label>
-                                <input type="text" class="form-control" id="apellidos" name="apellidos" value="<?php echo $this->user['apellidos'] ?>" disabled/>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="email" class="i18n-email">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" value="<?php echo $this->user['email'] ?>" disabled/>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="telefono" class="i18n-telefono">Telefono</label>
-                                <input type="text" class="form-control" id="telefono" name="telefono" value="<?php echo $this->user['telefono'] ?>" disabled/>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col">
-                                <label for="rol" class="i18n-rol">Rol</label>
-                                <select id="rol" name="rol" class="form-select" disabled>
-                                    <option value="<?php echo $this->user['rol'] ?>" class="i18n-f-<?php echo $this->user['rol'] ?>" selected></option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-center">
-                            <div class="col text-center">
-                                <a class="btn-get-started i18n-back" type="button" onclick="
-                                    crearform('formenviar', 'post');
-                                    <?php foreach($this->previousShow as $key => $value): ?>
-                                    insertacampo(document.formenviar, '<?php echo $key; ?>', '<?php echo $value; ?>');
-                                    <?php endforeach; ?>
-                                    insertacampo(document.formenviar, 'go_back', 'go_back');
-                                    enviaform(document.formenviar);">
-                                    Volver
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
+
+        <main id="main">
+            <!-- ======= About Section ======= -->
+            <section id="about" class="about pt-2">
+                <div class="container" data-aos="fade-up">
+                    <div class="row content justify-content-center">
+                        <div class="col-xl-7 col-lg-8">
+                            <div class="row justify-content-center">
+                                <div class="col-5 d-flex justify-content-center">
+                                    <ul>
+                                        <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-dni">DNI</span>
+                                            <span class="d-block att-value"><?php echo $this->user['dni'] ?></span>
+                                        </li>
+                                        <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-username">Nombre de Usuario</span>
+                                            <span class="d-block att-value"><?php echo $this->user['username'] ?></span>
+                                        </li>
+                                        <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-telefono">Telefono</span>
+                                            <span class="d-block att-value"><?php echo $this->user['telefono'] ?></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-5 d-flex justify-content-center">
+                                    <ul>
+                                        <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-nombre">Nombre</span>
+                                            <span class="d-block att-value"><?php echo $this->user['nombre'] ?></span>
+                                        </li>
+                                        <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-apellidos">Apellidos</span>
+                                            <span class="d-block att-value"><?php echo $this->user['apellidos'] ?></span>
+                                        </li>
+                                        <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-email">Email</span>
+                                            <span class="d-block att-value"><?php echo $this->user['email'] ?></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center pb-5 pt-3">
+                        <div class="col text-center">
+                            <a class="btn-get-started i18n-back" type="button" onclick="
+                                    crearform('formenviar', 'post');
+                                    insertacampo(document.formenviar, 'go_back', 'go_back');
+                                    <?php foreach($this->previousShow as $key => $value): ?>
+                                    insertacampo(document.formenviar, '<?php echo $key; ?>', '<?php echo $value; ?>');
+                                    <?php endforeach; ?>
+                                    enviaform(document.formenviar);">
+                                Volver
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- End About Section -->
+        </main>
 
 <?php
         include './View/Page/footer.php';

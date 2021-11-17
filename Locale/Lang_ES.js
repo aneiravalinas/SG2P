@@ -1221,6 +1221,7 @@ arrayES = {
         'i18n-edit-floor' : 'Editar Planta',
         'i18n-view-spaces' : 'Ver Espacios',
         'i18n-foto_planta' : 'Foto de la Planta',
+        'i18n-floor_details' : 'Información de la Planta',
 
         // SPACES VIEWS
         'i18n-spaces' : 'Espacios',

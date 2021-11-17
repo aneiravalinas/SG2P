@@ -1209,6 +1209,7 @@ arrayEN = {
         'i18n-edit-floor' : 'Edit Floor',
         'i18n-view-spaces' : 'Show Spaces',
         'i18n-foto_planta' : 'Floor Photo',
+        'i18n-floor_details' : 'Floor Details',
 
         // SPACES VIEWS
         'i18n-spaces' : 'Spaces',

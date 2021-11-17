@@ -46,7 +46,7 @@ class Portal_ShowCurrent_Plan extends Header {
                     <div class="row content justify-content-center">
                         <div class="col-xl-8 col-lg-9">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-5 d-flex justify-content-center">
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-plan_id">ID Plan</span>
@@ -68,7 +68,7 @@ class Portal_ShowCurrent_Plan extends Header {
                                         <?php endif; ?>
                                     </ul>
                                 </div>
-                                <div class="col-lg-8 pt-4 pt-lg-0">
+                                <div class="col-7 d-flex justify-content-center">
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-descripcion">Descripción</span>

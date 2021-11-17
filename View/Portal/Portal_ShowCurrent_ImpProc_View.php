@@ -38,7 +38,7 @@ class Portal_ShowCurrent_ImpProc extends Header {
                     </div>
 
                     <div class="row content justify-content-center">
-                        <div class="col-xl-7 col-lg-8">
+                        <div class="col-xl-8 col-lg-9">
                             <div class="row justify-content-center">
                                 <div class="col-lg-7">
                                     <ul>

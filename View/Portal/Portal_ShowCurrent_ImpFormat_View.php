@@ -38,9 +38,9 @@ class Portal_ShowCurrent_ImpFormat extends Header {
                     </div>
 
                     <div class="row content justify-content-center">
-                        <div class="col-xl-7 col-lg-8">
+                        <div class="col-xl-8 col-lg-9">
                             <div class="row justify-content-center">
-                                <div class="col-lg-6">
+                                <div class="col-5 d-flex justify-content-center">
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-cump_id">ID Cumplimentación</span>
@@ -50,18 +50,6 @@ class Portal_ShowCurrent_ImpFormat extends Header {
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-formacion_id">ID Formación</span>
                                             <span class="d-block att-value"><?php echo $this->imp_format['formacion_id'] ?></span>
                                         </li>
-                                        <li>
-                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-edificio_id">ID Edificio</span>
-                                            <span class="d-block att-value"><?php echo $this->imp_format['edificio_id'] ?></span>
-                                        </li>
-                                        <li>
-                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-state">Estado</span>
-                                            <span class="d-block att-value i18n-<?php echo $this->imp_format['estado'] ?> <?php echo $this->imp_format['estado'] ?>">PENDIENTE</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-6 pt-4 pt-lg-0">
-                                    <ul>
                                         <?php if($this->imp_format['fecha_planificacion'] != default_data) :?>
                                             <li>
                                                 <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-planning_date">Fecha Planificación</span>
@@ -80,6 +68,18 @@ class Portal_ShowCurrent_ImpFormat extends Header {
                                                 <span class="d-block att-value"><a href="<?php echo $this->imp_format['url_recurso'] ?>"><span class="i18n-enlace_url">Acceder al Recurso</span></a></span>
                                             </li>
                                         <?php endif; ?>
+                                    </ul>
+                                </div>
+                                <div class="col-7 d-flex justify-content-center">
+                                    <ul>
+                                        <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-edificio_id">ID Edificio</span>
+                                            <span class="d-block att-value"><?php echo $this->imp_format['edificio_id'] ?></span>
+                                        </li>
+                                        <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-state">Estado</span>
+                                            <span class="d-block att-value i18n-<?php echo $this->imp_format['estado'] ?> <?php echo $this->imp_format['estado'] ?>">PENDIENTE</span>
+                                        </li>
                                         <?php if($this->imp_format['destinatarios'] != default_destinatarios) :?>
                                             <li>
                                                 <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-destinatarios">Destinatarios</span>
@@ -98,7 +98,7 @@ class Portal_ShowCurrent_ImpFormat extends Header {
                                 crearform('formenviar', 'post');
                                 insertacampo(document.formenviar, 'go_back', 'go_back');
                                 <?php foreach($this->previousShow as $key => $value): ?>
-                                insertacampo(document.formenviar, '<?php echo $key; ?>', '<?echo $value; ?>');
+                                insertacampo(document.formenviar, '<?php echo $key; ?>', '<?php echo $value; ?>');
                                 <?php endforeach; ?>
                                 enviaform(document.formenviar);">
                                 Volver
