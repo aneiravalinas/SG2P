@@ -104,9 +104,9 @@ class Show_Notifications extends Header {
                         <a class="btn-get-started i18n-back" type="button" onclick="
                             crearform('formenviar', 'post');
                             insertacampo(document.formenviar, 'go_back', 'go_back');
-                        <?php foreach($this->previousShow as $key => $value): ?>
+                            <?php foreach($this->previousShow as $key => $value): ?>
                             insertacampo(document.formenviar, '<?php echo $key; ?>', '<?php echo $value; ?>');
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
                             enviaform(document.formenviar);">
                             Volver
                         </a>

@@ -24,6 +24,12 @@ class Notification_Service extends Notification_Validation {
         }
     }
 
+    /*
+     *  - Recupera las notificaciones de un usuario.
+     *      1. Valida y busca un usuario por ID, comprobando que existe.
+     *      2. Valida los atributos recibidos que se usarán como condiciones de filtrado.
+     *      3. Recupera las notificaciones que coincidan con las condiciones de filtrado establecidas.
+     */
     function search() {
         $this->feedback = $this->seekUsername();
         if(!$this->feedback['ok']) {
@@ -47,6 +53,12 @@ class Notification_Service extends Notification_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera la información necesaria para construir el formulario de búsqueda.
+     *      1. Valida y busca un usuario por ID, comprobando que existe.
+     *      2. Recupera los distintos edificios que tengan registradas notificaciones dirigidas al usuario.
+     *      3. Recupera los distintos planes que tengan registradas notificaciones dirigidas al usuario.
+     */
     function searchForm() {
         $this->feedback = $this->seekUsername();
         if(!$this->feedback['ok']) {
@@ -73,6 +85,11 @@ class Notification_Service extends Notification_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los datos de una notificación y la marca como leída.
+     *      1. Valida y busca una notificación por ID, comprobando que existe.
+     *      2. Si la notificación está marcada como 'no leída', modifica su estado a 'leída'.
+     */
     function seek() {
         $this->feedback = $this->seekNotification();
         if(!$this->feedback['ok']) {
@@ -95,6 +112,11 @@ class Notification_Service extends Notification_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Elimina una notificación.
+     *      1. Valida y busca una notificación por ID, comprobando que existe.
+     *      2. Elimina la notificación.
+     */
     function delete() {
         $this->feedback = $this->seekNotification();
         if(!$this->feedback['ok']) {
@@ -111,6 +133,9 @@ class Notification_Service extends Notification_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Comprueba si existen nuevas notificaciones en estado 'no leído' dirigidas al usuario en sesión.
+     */
     function check_unread_notifications() {
         if(isAuthenticated()) {
             $this->notification_entity->username = $_SESSION['username'];
@@ -132,6 +157,11 @@ class Notification_Service extends Notification_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Recupera los datos de una notificación.
+     *      1. Valida y busca una notificación por ID, comprobando que existe.
+     *      2. Verifica que la notificación está dirigida al usuario registrado en sesión.
+     */
     function seekNotification() {
         $validation = $this->validar_ID_NOTIFICACION();
         if(!$validation['ok']) {
@@ -153,6 +183,9 @@ class Notification_Service extends Notification_Validation {
         return $this->feedback;
     }
 
+    /*
+     *  - Valida y busca los datos de un usuario, comprobando que existe.
+     */
     function seekUsername() {
         $validation = $this->validar_USERNAME();
         if(!$validation['ok']) {
@@ -162,6 +195,7 @@ class Notification_Service extends Notification_Validation {
         return $this->seekByUsername();
     }
 
+    // Recupera un usuario por ID.
     function seekByUsername() {
         include_once './Model/User_Model.php';
         $user_entity = new User_Model();
@@ -181,6 +215,7 @@ class Notification_Service extends Notification_Validation {
         return $feedback;
     }
 
+    // Recupera una notificación por ID.
     function seekNotificationByID() {
         $feedback = $this->notification_entity->seek();
         if($feedback['ok']) {

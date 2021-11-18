@@ -1153,6 +1153,11 @@ arrayEN = {
         'i18n-buildings' : 'Buildings',
         'i18n-admin-plans' : 'Administrate Plans',
         'i18n-manage-plans' : 'Manage Plans',
+        'i18n-info_users' : 'Management of Users registered in the system',
+        'i18n-info_profile' : 'Management of your User\'s data',
+        'i18n-info_buildings' : 'Management of the data of the Buildings, Floors and Spaces',
+        'i18n-info_defplans' : 'Management of the completion of the Plans in the Buildings',
+        'i18n-info_impplans' : 'Manage the definitions of the Plans and their assignments with Buildings',
 
         // USER VIEWS
         'i18n-dni' : 'DNI',

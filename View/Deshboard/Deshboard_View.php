@@ -17,7 +17,7 @@ class Deshboard extends Header {
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 text-center">
-                        <h1 class="i18n-admin">Panel de Administración</h1>
+                        <h1 class="i18n-admin pt-3 mt-5">Panel de Administración</h1>
                         <h2 class="i18n-select-option">Selecciona una opción</h2>
                     </div>
                 </div>
@@ -33,6 +33,7 @@ class Deshboard extends Header {
                                 <div>
                                     <div class="icon"><i class="iconify" data-icon="mono-icons:users" data-inline="false"></i></div>
                                     <h4 class="title i18n-users">Usuarios</h4>
+                                    <span class="i18n-info_users">Gestión los Usuarios registrados en el sistema</span>
                                 </div>
                             </a>
                         </div>
@@ -49,6 +50,7 @@ class Deshboard extends Header {
                                 <div>
                                     <div class="icon"><i class="iconify" data-icon="carbon:user-profile"></i></div>
                                     <h4 class="title i18n-profile">Mi Perfil</h4>
+                                    <span class="i18n-info_profile">Gestión de los datos de tu Usuario</span>
                                 </div>
                             </a>
                         </div>
@@ -65,6 +67,7 @@ class Deshboard extends Header {
                                 <div>
                                     <div class="icon"><i class="iconify" data-icon="bi:building"></i></div>
                                     <h4 class="title i18n-buildings">Edificios</h4>
+                                    <span class="i18n-info_buildings">Gestión de los datos de los Edificios, Plantas y Espacios</span>
                                 </div>
                             </a>
                         </div>
@@ -79,6 +82,7 @@ class Deshboard extends Header {
                                     <div>
                                         <div class="icon"><i class="iconify" data-icon="carbon:document-attachment"></i></div>
                                         <h4 class="title i18n-manage-plans">Gestionar Planes</h4>
+                                        <span class="i18n-info_impplans">Gestión de las cumplimentaciones de los Planes en los Edificios</span>
                                     </div>
                                 </a>
                             </div>
@@ -96,6 +100,7 @@ class Deshboard extends Header {
                                     <div>
                                         <div class="icon"><i class="iconify" data-icon="et:document"></i></div>
                                         <h4 class="title i18n-admin-plans">Administración de Planes</h4>
+                                        <span class="i18n-info_defplans">Gestión las definiciones de los Planes y sus asignaciones con Edificios</span>
                                     </div>
                                 </a>
                             </div>

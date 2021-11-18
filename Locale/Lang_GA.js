@@ -1154,6 +1154,11 @@ arrayGA = {
         'i18n-buildings' : 'Edificios',
         'i18n-admin-plans' : 'Administrar Plans',
         'i18n-manage-plans' : 'Xestionar Plans',
+        'i18n-info_users' : 'Xestión dos Usuarios rexistrados no sistema',
+        'i18n-info_profile' : 'Xestión dos datos do teu Usuario',
+        'i18n-info_buildings' : 'Xestión dos datos dos Edificios, Plantas y Espazos',
+        'i18n-info_defplans' : 'Xestión das cumplimentacións dos Plans nos Edificios',
+        'i18n-info_impplans' : 'Xestión das definicións dos Plans e as suas asignacións con Edificios',
 
         // USER VIEWS
         'i18n-dni' : 'DNI',

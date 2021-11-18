@@ -741,6 +741,7 @@ class Document_Service extends Document_Validation {
         return array('ok' => true, 'estado' => $estado);
     }
 
+    // Genera una notificación dirigida al responsable de un edificio conforme un nuevo documento ha sido asignado.
     function notify_manager($building, $plan_id) {
         include_once './Model/Notification_Model.php';
         $notification_entity = new Notification_Model();

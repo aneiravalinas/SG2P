@@ -652,6 +652,7 @@ class Simulacrum_Service extends Simulacrum_Validation {
         return $feedback;
     }
 
+    // Genera una notificación dirigida al responsable de un edificio conforme un nuevo simulacro ha sido asignado.
     function notify_manager($building, $plan_id) {
         include_once './Model/Notification_Model.php';
         $notification_entity = new Notification_Model();
