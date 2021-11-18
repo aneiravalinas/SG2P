@@ -64,11 +64,11 @@ class Show_ImpFormats extends Header {
                             <tbody>
                             <?php foreach($this->imp_formats as $imp_format): ?>
                                 <tr>
-                                    <td class="text-center"><?php echo $imp_format['nombre_edificio'] ?></td>
-                                    <td class="text-center i18n-<?php echo $imp_format['estado'] ?> <?php echo $imp_format['estado'] ?>"></td>
-                                    <td class="text-center"><?php if($imp_format['fecha_planificacion'] != default_data) echo date_format(date_create($imp_format['fecha_planificacion']),'d/m/Y');?></td>
-                                    <td class="text-center"><?php if($imp_format['fecha_vencimiento'] != default_data) echo date_format(date_create($imp_format['fecha_vencimiento']),'d/m/Y');?></td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle"><?php echo $imp_format['nombre_edificio'] ?></td>
+                                    <td class="text-center align-middle i18n-<?php echo $imp_format['estado'] ?> <?php echo $imp_format['estado'] ?>"></td>
+                                    <td class="text-center align-middle"><?php if($imp_format['fecha_planificacion'] != default_data) echo date_format(date_create($imp_format['fecha_planificacion']),'d/m/Y');?></td>
+                                    <td class="text-center align-middle"><?php if($imp_format['fecha_vencimiento'] != default_data) echo date_format(date_create($imp_format['fecha_vencimiento']),'d/m/Y');?></td>
+                                    <td class="text-center align-middle">
                                         <div class="btn-group px-md-2">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
                                                 <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>

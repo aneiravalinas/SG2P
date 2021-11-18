@@ -39,8 +39,8 @@ class ShowCurrent_ImpSim extends Header {
 
                     <div class="row content justify-content-center">
                         <div class="col-xl-7 col-lg-8">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-5 d-flex justify-content-center">
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-cump_id">ID Cumplimentación</span>
@@ -60,7 +60,7 @@ class ShowCurrent_ImpSim extends Header {
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-lg-6 pt-4 pt-lg-0">
+                                <div class="col-7 d-flex justify-content-center">
                                     <ul>
                                         <?php if($this->imp_sim['fecha_planificacion'] != default_data) :?>
                                             <li>

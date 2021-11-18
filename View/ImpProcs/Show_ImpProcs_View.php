@@ -64,11 +64,11 @@ class Show_ImpProcs extends Header {
                             <tbody>
                             <?php foreach($this->imp_procs as $imp_proc): ?>
                                 <tr>
-                                    <td class="text-center"><?php echo $imp_proc['nombre_edificio'] ?></td>
-                                    <td class="text-center"><?php if($imp_proc['nombre_doc'] != default_doc) echo $imp_proc['nombre_doc']; ?></td>
-                                    <td class="text-center i18n-<?php echo $imp_proc['estado'] ?> <?php echo $imp_proc['estado'] ?>"></td>
-                                    <td class="text-center"><?php if($imp_proc['fecha_cumplimentacion'] != default_data) echo date_format(date_create($imp_proc['fecha_cumplimentacion']),'d/m/Y');?></td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle"><?php echo $imp_proc['nombre_edificio'] ?></td>
+                                    <td class="text-center align-middle"><?php if($imp_proc['nombre_doc'] != default_doc) echo $imp_proc['nombre_doc']; ?></td>
+                                    <td class="text-center align-middle i18n-<?php echo $imp_proc['estado'] ?> <?php echo $imp_proc['estado'] ?>"></td>
+                                    <td class="text-center align-middle"><?php if($imp_proc['fecha_cumplimentacion'] != default_data) echo date_format(date_create($imp_proc['fecha_cumplimentacion']),'d/m/Y');?></td>
+                                    <td class="text-center align-middle">
                                         <div class="btn-group px-md-2">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
                                                 <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>

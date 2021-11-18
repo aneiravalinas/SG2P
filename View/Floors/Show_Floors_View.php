@@ -28,7 +28,7 @@ class Show_Floors extends Header {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 flex-wrap d-flex justify-content-end" id="search_add">
+                    <div class="col-xl-8 col-lg-9 flex-wrap d-flex justify-content-end" id="search_add">
                         <div>
                             <a type="button" onclick="
                                     crearform('formenviar','post');
@@ -51,23 +51,23 @@ class Show_Floors extends Header {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 table-responsive" id="col-table">
+                    <div class="col-xl-8 col-lg-9 table-responsive" id="col-table">
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col" class="i18n-planta_id">ID Planta</th>
-                                <th scope="col" class="i18n-nombre">Nombre</th>
-                                <th scope="col" class="i18n-num_planta">Número de Planta</th>
+                                <th scope="col" class="i18n-planta_id text-center">ID Planta</th>
+                                <th scope="col" class="i18n-nombre text-center">Nombre</th>
+                                <th scope="col" class="i18n-num_planta text-center">Número de Planta</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach($this->floors as $floor): ?>
                                 <tr>
-                                    <td><?php echo $floor['planta_id'] ?></td>
-                                    <td><?php echo $floor['nombre'] ?></td>
-                                    <td><?php echo $floor['num_planta'] ?></td>
-                                    <td>
+                                    <td class="text-center align-middle"><?php echo $floor['planta_id'] ?></td>
+                                    <td class="text-center align-middle"><?php echo $floor['nombre'] ?></td>
+                                    <td class="text-center align-middle"><?php echo $floor['num_planta'] ?></td>
+                                    <td class="text-center align-middle">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
                                                 <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>

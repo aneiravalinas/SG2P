@@ -40,8 +40,8 @@ class ShowCurrent_ImpRoute extends Header {
 
                     <div class="row content justify-content-center">
                         <div class="col-xl-7 col-lg-8">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-7">
+                            <div class="row">
+                                <div class="col-5 d-flex justify-content-center">
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-cump_id">ID Cumplimentación</span>
@@ -63,7 +63,7 @@ class ShowCurrent_ImpRoute extends Header {
                                         <?php endif; ?>
                                     </ul>
                                 </div>
-                                <div class="col-lg-5 pt-4 pt-lg-0">
+                                <div class="col-7 d-flex justify-content-center">
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-state">Estado</span>

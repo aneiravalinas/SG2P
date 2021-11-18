@@ -25,28 +25,28 @@ class Search_DefDoc extends Header {
                     <div class="col-xl-7 col-lg-9">
                         <form name="formulariosearch" method="post">
                             <div class="row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="plan_id" class="i18n-plan_id">ID Plan</label>
                                     <input type="text" value="<?php echo $this->plan['plan_id'] ?>" class="form-control" id="plan_id" name="plan_id" disabled/>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="documento_id" class="i18n-documento_id">ID Documento</label>
                                     <input type="text" class="form-control" id="documento_id" name="documento_id" onblur="check_DEFDOC_ID_SEARCH();"/>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="nombre" class="i18n-nombre">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_DEFINITION_NAME_SEARCH();"/>
-                                </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="visible" class="i18n-visible">Visible</label>
                                     <select id="visible" name="visible" class="form-select">
                                         <option value="" class="i18n-todos">Todos</option>
                                         <option value="yes" class="i18n-yes">Sí</option>
                                         <option value="no" class="i18n-no">No</option>
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="nombre" class="i18n-nombre">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" onblur="check_DEFINITION_NAME_SEARCH();"/>
                                 </div>
                             </div>
 

@@ -76,12 +76,12 @@ class Show_BuildPlan extends Header {
                             <tbody>
                             <?php foreach($this->buildPlans as $buildPlan): ?>
                                 <tr>
-                                    <td class="text-center"><?php echo $buildPlan['nombre_edificio'] ?></td>
-                                    <td class="text-center"><?php echo date_format(date_create($buildPlan['fecha_asignacion']), 'd/m/Y') ?></td>
-                                    <td class="i18n-<?php echo $buildPlan['estado'] ?> <?php echo $buildPlan['estado'] ?> text-center"></td>
-                                    <td class="text-center"><?php if($buildPlan['fecha_cumplimentacion'] != default_data) echo date_format(date_create($buildPlan['fecha_cumplimentacion']),'d/m/Y');?></td>
-                                    <td class="text-center"><?php if($buildPlan['fecha_vencimiento'] != default_data) echo date_format(date_create($buildPlan['fecha_vencimiento']),'d/m/Y');?></td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle"><?php echo $buildPlan['nombre_edificio'] ?></td>
+                                    <td class="text-center align-middle"><?php echo date_format(date_create($buildPlan['fecha_asignacion']), 'd/m/Y') ?></td>
+                                    <td class="i18n-<?php echo $buildPlan['estado'] ?> <?php echo $buildPlan['estado'] ?> text-center align-middle"></td>
+                                    <td class="text-center align-middle"><?php if($buildPlan['fecha_cumplimentacion'] != default_data) echo date_format(date_create($buildPlan['fecha_cumplimentacion']),'d/m/Y');?></td>
+                                    <td class="text-center align-middle"><?php if($buildPlan['fecha_vencimiento'] != default_data) echo date_format(date_create($buildPlan['fecha_vencimiento']),'d/m/Y');?></td>
+                                    <td class="text-center align-middle">
                                         <div class="btn-group px-md-2">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
                                                 <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>

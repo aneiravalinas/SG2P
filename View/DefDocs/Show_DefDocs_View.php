@@ -28,7 +28,7 @@ class Show_DefDocs extends Header {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 flex-wrap d-flex justify-content-end" id="search_add">
+                    <div class="col-xl-9 flex-wrap d-flex justify-content-end" id="search_add">
                         <div>
                             <a type="button" onclick="
                                 crearform('formenviar','post');
@@ -51,23 +51,23 @@ class Show_DefDocs extends Header {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 table-responsive" id="col-table">
+                    <div class="col-xl-9 table-responsive" id="col-table">
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col" class="i18n-documento_id">ID Documento</th>
-                                <th scope="col" class="i18n-nombre">Nombre</th>
-                                <th scope="col" class="i18n-visible">Visible</th>
+                                <th scope="col" class="i18n-documento_id text-center">ID Documento</th>
+                                <th scope="col" class="i18n-nombre text-center">Nombre</th>
+                                <th scope="col" class="i18n-visible text-center">Visible</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach($this->docs as $doc): ?>
                                 <tr>
-                                    <td><?php echo $doc['documento_id'] ?></td>
-                                    <td><?php echo $doc['nombre'] ?></td>
-                                    <td class="i18n-<?php echo $doc['visible'] ?>"></td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle"><?php echo $doc['documento_id'] ?></td>
+                                    <td class="text-center align-middle"><?php echo $doc['nombre'] ?></td>
+                                    <td class="text-center align-middle i18n-<?php echo $doc['visible'] ?>"></td>
+                                    <td class="text-center align-middle">
                                         <div class="btn-group px-md-2">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
                                                 <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>
@@ -100,7 +100,7 @@ class Show_DefDocs extends Header {
                                                 </a>
                                             </div>
                                         </div>
-                                        <div class="btn-group">
+                                        <div class="btn-group mt-2 mt-md-0">
                                             <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false"
                                                     onclick="
                                                             crearform('formenviar','post');

@@ -50,7 +50,7 @@ class Edit_DefPlan extends Header {
                                         <?php foreach($this->currentShow as $key => $value): ?>
                                         insertacampo(document.formenviar, '<?php echo $key; ?>', '<?php echo $value; ?>');
                                         <?php endforeach; ?>
-                                        enviaform(document.formneviar);">
+                                        enviaform(document.formenviar);">
                                         Cancelar
                                     </a>
                                     <a class="btn-get-started i18n-enviar" type="button" onclick="

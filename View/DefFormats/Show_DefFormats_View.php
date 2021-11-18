@@ -29,7 +29,7 @@ class Show_DefFormats extends Header {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 flex-wrap d-flex justify-content-end" id="search_add">
+                    <div class="col-xl-8 flex-wrap d-flex justify-content-end" id="search_add">
                         <div>
                             <a type="button" onclick="
                                 crearform('formenviar','post');
@@ -52,21 +52,21 @@ class Show_DefFormats extends Header {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 table-responsive" id="col-table">
+                    <div class="col-xl-8 table-responsive" id="col-table">
                         <table class="table table-hover">
                             <thead>
-                            <tr>
-                                <th scope="col" class="i18n-formacion_id">ID Formacion</th>
-                                <th scope="col" class="i18n-nombre">Nombre</th>
-                                <th scope="col"></th>
-                            </tr>
+                                <tr>
+                                    <th scope="col" class="i18n-formacion_id text-center">ID Formacion</th>
+                                    <th scope="col" class="i18n-nombre text-center">Nombre</th>
+                                    <th scope="col"></th>
+                                </tr>
                             </thead>
                             <tbody>
                             <?php foreach($this->formats as $format): ?>
                                 <tr>
-                                    <td><?php echo $format['formacion_id'] ?></td>
-                                    <td><?php echo $format['nombre'] ?></td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle"><?php echo $format['formacion_id'] ?></td>
+                                    <td class="text-center align-middle"><?php echo $format['nombre'] ?></td>
+                                    <td class="text-center align-middle">
                                         <div class="btn-group px-md-2">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
                                                 <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>
@@ -99,7 +99,7 @@ class Show_DefFormats extends Header {
                                                 </a>
                                             </div>
                                         </div>
-                                        <div class="btn-group">
+                                        <div class="btn-group mt-2 mt-md-0">
                                             <button type="button" class="btn btn-primary btn-sm" data-boundary="window" aria-haspopup="true" aria-expanded="false"
                                                     onclick="
                                                             crearform('formenviar','post');

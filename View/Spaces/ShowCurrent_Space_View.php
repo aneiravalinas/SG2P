@@ -18,10 +18,10 @@ class ShowCurrent_Space extends Header {
 
         <!-- ======= FORM SECTION ====== --->
 
-        <section id="hero" class="d-flex align-items-center">
+        <section id="hero" class="d-flex align-items-center hero-section pb-2">
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 text-center">
+                    <div class="col-xl-7 col-lg-9 text-center pt-5">
                         <h1><?php echo $this->floor['nombre'] ?></h1>
                         <h2 class="mb-4 i18n-details-space">Detalles del Espacio</h2>
                     </div>
@@ -31,44 +31,58 @@ class ShowCurrent_Space extends Header {
                             <img src="<?php echo space_photos_path . $this->space['foto_espacio'] ?>" id="picture-profile" class="rounded-circle"/>
                         </div>
                     </div>
-
-                    <div class="col-xl-7 col-lg-9">
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="espacio_id" class="i18n-espacio_id">ID del Espacio</label>
-                                <input type="text" class="form-control" id="espacio_id" name="espacio_id" value="<?php echo $this->space['espacio_id'] ?>" disabled/>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="nombre" class="i18n-nombre">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $this->space['nombre'] ?>" disabled/>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col">
-                                <label for="descripcion" class="i18n-descripcion">Descripcion</label>
-                                <textarea class="form-control" id="descripcion" name="descripcion" rows="5" disabled><?php echo $this->space['descripcion'] ?></textarea>
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-center">
-                            <div class="col text-center">
-                                <a class="btn-get-started i18n-back" type="button" onclick="
-                                        crearform('formenviar', 'post');
-                                        insertacampo(document.formenviar, 'go_back', 'go_back');
-                                        <?php foreach($this->previousShow as $key => $value): ?>
-                                        insertacampo(document.formenviar, '<?php echo $key; ?>', '<?php echo $value; ?>');
-                                        <?php endforeach; ?>
-                                        enviaform(document.formenviar);">
-                                    Volver
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
+
+        <main id="main">
+            <!-- ======= About Section ======= -->
+            <section id="about" class="about">
+                <div class="container" data-aos="fade-up">
+
+                    <div class="row content justify-content-center">
+                        <div class="col-xl-8 col-lg-9">
+                            <div class="row justify-content-center">
+                                <div class="col-5 d-flex justify-content-center">
+                                    <ul>
+                                        <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-espacio_id">ID Espacio</span>
+                                            <span class="d-block att-value"><?php echo $this->space['espacio_id'] ?></span>
+                                        </li>
+                                        <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-nombre">Nombre</span>
+                                            <span class="d-block att-value"><?php echo $this->space['nombre'] ?></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-7 d-flex justify-content-center">
+                                    <ul>
+                                        <li>
+                                            <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-descripcion">Descripcion</span>
+                                            <span class="d-block att-value"><?php echo $this->space['descripcion'] ?></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center pb-5 pt-3">
+                        <div class="col text-center">
+                            <a class="btn-get-started i18n-back" type="button" onclick="
+                                    crearform('formenviar', 'post');
+                                    insertacampo(document.formenviar, 'go_back', 'go_back');
+                                    <?php foreach($this->previousShow as $key => $value): ?>
+                                    insertacampo(document.formenviar, '<?php echo $key; ?>', '<?php echo $value; ?>');
+                                    <?php endforeach; ?>
+                                    enviaform(document.formenviar);">
+                                Volver
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- End About Section -->
+        </main>
 
 <?php
         include './View/Page/footer.php';

@@ -50,17 +50,17 @@ class Show_DefPlans extends Header {
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col" class="i18n-plan_id">ID Plan</th>
-                                <th scope="col" class="i18n-nombre">Nombre</th>
+                                <th scope="col" class="i18n-plan_id text-center">ID Plan</th>
+                                <th scope="col" class="i18n-nombre text-center">Nombre</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach($this->plans as $plan): ?>
                                 <tr>
-                                    <td><?php echo $plan['plan_id'] ?></td>
-                                    <td><?php echo $plan['nombre'] ?></td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle"><?php echo $plan['plan_id'] ?></td>
+                                    <td class="text-center align-middle"><?php echo $plan['nombre'] ?></td>
+                                    <td class="text-center align-middle">
                                         <div class="btn-group px-md-2">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
                                                 <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>

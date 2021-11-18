@@ -38,8 +38,8 @@ class ShowCurrent_Notification extends Header {
 
                     <div class="row content justify-content-center">
                         <div class="col-xl-7 col-lg-8">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-5 d-flex justify-content-center">
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-notification_id">ID Notificación</span>
@@ -55,7 +55,7 @@ class ShowCurrent_Notification extends Header {
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-lg-5 pt-4 pt-lg-0">
+                                <div class="col-7 d-flex justify-content-center">
                                     <ul>
                                         <li>
                                             <i class="bx bx-chevron-right att-icon"></i><span class="att-field i18n-nombre_plan">Nombre Plan</span>
@@ -76,7 +76,7 @@ class ShowCurrent_Notification extends Header {
                     </div>
 
                     <div class="row justify-content-center pb-5 pt-3">
-                        <div class="col-xl-6 col-lg-9 d-flex justify-content-between flex-wrap">
+                        <div class="col-xl-5 col-lg-9 d-flex justify-content-between flex-wrap">
                             <a class="btn-get-started i18n-back" type="button" onclick="
                                 crearform('formenviar', 'post');
                                 insertacampo(document.formenviar, 'go_back', 'go_back');

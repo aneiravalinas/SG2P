@@ -25,7 +25,7 @@ class Show_Buildings extends Header {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 flex-wrap d-flex justify-content-end" id="search_add">
+                    <div class="col-xl-8 col-lg-9 flex-wrap d-flex justify-content-end" id="search_add">
                         <div>
                             <a type="button" onclick="
                                     crearform('formenviar','post');
@@ -46,23 +46,23 @@ class Show_Buildings extends Header {
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 table-responsive" id="col-table">
+                    <div class="col-xl-8 col-lg-9 table-responsive" id="col-table">
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col" class="i18n-responsable">Responsable</th>
-                                <th scope="col" class="i18n-nombre">Nombre</th>
-                                <th scope="col" class="i18n-city">Ciudad</th>
+                                <th scope="col" class="i18n-responsable text-center">Responsable</th>
+                                <th scope="col" class="i18n-nombre text-center">Nombre</th>
+                                <th scope="col" class="i18n-city text-center">Ciudad</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach($this->buildings as $building): ?>
                                 <tr>
-                                    <td><?php echo $building['username'] ?></td>
-                                    <td><?php echo $building['nombre'] ?></td>
-                                    <td><?php echo $building['ciudad'] ?></td>
-                                    <td>
+                                    <td class="text-center align-middle"><?php echo $building['username'] ?></td>
+                                    <td class="text-center align-middle"><?php echo $building['nombre'] ?></td>
+                                    <td class="text-center align-middle"><?php echo $building['ciudad'] ?></td>
+                                    <td class="text-center align-middle">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
                                                 <span class="iconify" data-icon="icon-park-outline:config" data-inline="false"></span>
