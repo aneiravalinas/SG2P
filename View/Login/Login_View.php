@@ -38,8 +38,7 @@ class Login_View extends Header {
                                     </a>
                                     <a class="btn-get-started i18n-back w-60 mt-3 d-block" type="button" onclick="
                                             crearform('formenviar', 'post');
-                                            insertacampo(document.formenviar, 'go_back', 'go_back');
-                                            <?php foreach($this->previousShow as $key => $value): ?>
+                                            <?php foreach($this->currentShow as $key => $value): ?>
                                             insertacampo(document.formenviar, '<?php echo $key; ?>', '<?php echo $value; ?>');
                                             <?php endforeach; ?>
                                             enviaform(document.formenviar);">

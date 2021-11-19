@@ -11,7 +11,6 @@ class Login extends Abstract_Controller {
     }
 
     function loginForm() {
-        $this->update_stack_post();
         new Login_View();
     }
 
