@@ -236,7 +236,7 @@ CREATE TABLE NOTIFICACION
     `username` VARCHAR(20) NOT NULL,
     `edificio_id` INT(10) NOT NULL,
     `plan_id` INT(10) NOT NULL,
-    `leido` enum('yes','no') DEFAULT 'no',
+    `leido` enum('yes','no') NOT NULL DEFAULT 'no',
     `fecha` DATE NOT NULL DEFAULT CURRENT_DATE,
     `mensaje` VARCHAR(280) NOT NULL,
 
