@@ -32,8 +32,8 @@ class Uploader {
         $temp = $_FILES[$field_name]['tmp_name'];
         $path = $_FILES[$field_name]['name'];
         $ext = pathinfo($path)['extension'];
-        $filename = pathinfo($path)['filename']; // Obtenemos el nombre de la imagen.
-        $file = $filename . '_' . uniqid() . '.' . $ext; // Nuevo nombre de la imágen: 'NombreAnterior_ID.ext'
+
+        $file = uniqid() . '.' . $ext; // Sustituye el nombre de la imagen por UUID
         if(move_uploaded_file($temp, $dir_path . $file)) { // Se almacena la imágen en servidor
             $feedback['resource'] = $file;
             $feedback['ok'] = true;
