@@ -1,6 +1,6 @@
 <?php
 
-include './COMMON/Auth.php';
+include './Common/Auth.php';
 include_once './Common/Stack.php';
 
 // Testing

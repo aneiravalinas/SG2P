@@ -1,6 +1,6 @@
 <?php
 
-include './COMMON/Auth.php';
+include './Common/Auth.php';
 
 if(isset($_SESSION)) {
     session_destroy();

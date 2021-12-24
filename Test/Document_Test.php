@@ -55,7 +55,7 @@ array_push($testDocument, $respTest);
 $_POST = array('cumplimentacion_id' => '');
 $document_service = new Document_Service();
 $feedback = $document_service->seek();
-$respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
+$respTest = obtenerRespuesta('Document', 'SEEK', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación vacío',
     'CUMP_ID_EMPT', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
@@ -63,7 +63,7 @@ array_push($testDocument, $respTest);
 $_POST = array('cumplimentacion_id' => 'aaa');
 $document_service = new Document_Service();
 $feedback = $document_service->seek();
-$respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
+$respTest = obtenerRespuesta('Document', 'SEEK', 'CUMPLIMENTACION_ID', 'ID de Cumplimentación no numérico',
     'CUMP_ID_NOT_NUMERIC', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
@@ -76,7 +76,7 @@ array_push($testDocument, $respTest);
 $_POST = array('cumplimentacion_id' => '1111111');
 $document_service = new Document_Service();
 $feedback = $document_service->seek();
-$respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'ACCION', 'La cumplimentación no existe',
+$respTest = obtenerRespuesta('Document', 'SEEK', 'ACCION', 'La cumplimentación no existe',
     'IMPDOCID_NOT_EXST', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
@@ -86,16 +86,16 @@ $_SESSION['rol'] = 'edificio';
 $_POST = array('cumplimentacion_id' => '1');
 $document_service = new Document_Service();
 $feedback = $document_service->seek();
-$respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'ACCION', 'El usuario no tiene permisos para consultar la cumplimentación',
+$respTest = obtenerRespuesta('Document', 'SEEK', 'ACCION', 'El usuario no tiene permisos para consultar la cumplimentación',
     'BLD_FRBD', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 
-// Búsqueda de Planes Ok
+// Consulta de los detalles de la cumplimentación Ok
 $_SESSION['username'] = 'sg2ped2';
 $_POST = array('cumplimentacion_id' => '1');
 $document_service = new Document_Service();
 $feedback = $document_service->seek();
-$respTest = obtenerRespuesta('Document', 'SEEK_DOCUMENT', 'ACCION', 'El usuario no tiene permisos para consultar la cumplimentación',
+$respTest = obtenerRespuesta('Document', 'SEEK', 'ACCION', 'Consulta de los detalles de la cumplimentación Ok',
     'IMPDOC_SEEK_OK', $_POST, $feedback['code'], $numTest, $numFallos);
 array_push($testDocument, $respTest);
 

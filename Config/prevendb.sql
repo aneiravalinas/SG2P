@@ -1,3 +1,5 @@
+SET GLOBAL sql_mode = 'NO_ENGINE_SUBSTITUTION';
+SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';
 
 DROP DATABASE IF EXISTS prevendb;
 CREATE DATABASE prevendb DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -237,7 +239,7 @@ CREATE TABLE NOTIFICACION
     `edificio_id` INT(10) NOT NULL,
     `plan_id` INT(10) NOT NULL,
     `leido` enum('yes','no') NOT NULL DEFAULT 'no',
-    `fecha` DATE NOT NULL DEFAULT CURRENT_DATE,
+    `fecha` DATE NOT NULL,
     `mensaje` VARCHAR(280) NOT NULL,
 
     CONSTRAINT `pk_notificacion` PRIMARY KEY (`id_notificacion`),
