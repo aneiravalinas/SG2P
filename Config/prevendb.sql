@@ -250,46 +250,7 @@ CREATE TABLE NOTIFICACION
 
 
 INSERT INTO USUARIO (`username`, `dni`, `password`,`rol`,`nombre`,`apellidos`,`email`,`telefono`,`foto_perfil`) VALUES
-('sg2padmin','14197701P','7a25b0bc04e77a2f7453dd021168cdc2','administrador','admin','adminsurname','admin@email.es','666666666','default.png'),
-('sg2porg','84001360R','7a25b0bc04e77a2f7453dd021168cdc2','organizacion','rorganizacion','rorganizacion','rorg@email.es','666666667','default.png'),
-('sg2ped','67453966A','7a25b0bc04e77a2f7453dd021168cdc2','edificio','redificio','redificio','red@email.es','666666668','default.png'),
-('sg2ped2','53147657Q','7a25b0bc04e77a2f7453dd021168cdc2','edificio','redificioo','redificioo','red2@email.es','666666669','default.png'),
-('sg2prg','20271577K','7a25b0bc04e77a2f7453dd021168cdc2','registrado','registrado','registrado','rg@email.es','666666665','default.png');
-
-INSERT INTO EDIFICIO (`edificio_id`, `username`, `nombre`, `calle`, `ciudad`, `provincia`, `codigo_postal`, `telefono`, `foto_edificio`) VALUES
-(1,'sg2ped','Edificio Uno','Calle ejemplo 1','Ourense','Ourense','36687','987678765','default.png'),
-(2,'sg2ped2','Edificio Dos','Calle ejemplo 2','Ourense','Ourense','36687','987678766','default.png'),
-(3,'sg2ped','Edificio Tres','Calle ejemplo 3','Ourense','Ourense','36687','987678768','default.png'),
-(4,'sg2ped2','Edificio Cuatro','Calle ejemplo 4','Ourense','Ourense','36687','987678769','default.png');
-
-INSERT INTO PLANTA (`planta_id`, `edificio_id`, `nombre`, `num_planta`, `descripcion`, `foto_planta`) VALUES
-(1,1,'Planta Uno',1,'descripcion de la planta uno','default.png'),
-(2,1,'Planta Dos',2,'descripcion de la planta dos','default.png'),
-(3,1,'Planta Tres',3,'descripcion de la planta tres','default.png');
-
-INSERT INTO ESPACIO (`espacio_id`, `planta_id`, `nombre`, `descripcion`, `foto_espacio`) VALUES
-(1,1,'Espacio Uno','Descripcion del espacio uno','default.png'),
-(2,1,'Espacio Dos','Descripcion del espacio dos','default.png'),
-(3,1,'Espacio Tres','Descripcion del espacio tres','default.png');
-
-INSERT INTO PLAN (`plan_id`, `nombre`, `descripcion`) VALUES
-(1,'Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil');
-
-INSERT INTO DOCUMENTO(`plan_id`, `documento_id`,`nombre`, `descripcion`) VALUES
-(1,1,'Documento 1 do Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil'),
-(1,2,'Documento 2 do Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil');
-
-INSERT INTO PROCEDIMIENTO(`plan_id`, `procedimiento_id`, `nombre`, `descripcion`) VALUES
-(1,1,'Procedemento 1 do Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil');
-
-INSERT INTO RUTA(`plan_id`, `ruta_id`, `nombre`, `descripcion`) VALUES
-(1,1,'Rutas do Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil');
-
-INSERT INTO FORMACION(`plan_id`, `formacion_id`, `nombre`, `descripcion`) VALUES
-(1,1,'Formacións do Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil');
-
-INSERT INTO SIMULACRO(`plan_id`, `simulacro_id`, `nombre`, `descripcion`) VALUES
-(1,1,'Simulacros do Plan de Autoprotección 2021','El Plan de Autoprotección es el documento que establece el marco orgánico y funcional previsto para un centro, establecimiento, espacio, instalación o dependencia, con el objeto de prevenir y controlar los riesgos sobre las personas y los bienes y dar respuesta adecuada a las posibles situaciones de emergencia, en la zona bajo responsabilidad del titular de la actividad, garantizando la integración de éstas actuaciones con el sistema público de protección civil');
+('sg2padmin','14197701P','7a25b0bc04e77a2f7453dd021168cdc2','administrador','admin','adminsurname','admin@email.es','666666666','default.png');
 
 
 CREATE USER IF NOT EXISTS 'prevenroot'@'localhost' IDENTIFIED BY 'passsg2p';
