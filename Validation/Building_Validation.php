@@ -279,10 +279,6 @@ class Building_Validation extends Validator {
             return $this->rellena_validation(false,'BLD_PH_EXT','EDIFICIO'); // Extensión de fichero no permitida
         }
 
-        /* if(!$this->max_tamanho_imagen('foto_perfil',100000)) {
-             return $this->rellena_validation(false,'PRPH_LRG','USUARIO'); // Tamaño de imagen superior al 100kb
-         } */
-
         if(!$this->formato_nombre_imagen('foto_edificio')) {
             return $this->rellena_validation(false, 'BLD_PH_FRMT', 'EDIFICIO'); // Formato de nombre incorrecto (sólo letras, números y guiones)
         }

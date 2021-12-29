@@ -189,7 +189,7 @@ abstract class Validator {
         $path = $_FILES[$image]['name'];
         $extension = pathinfo($path)['extension'];
 
-        return in_array($extension,$extensiones);
+        return in_array(strtolower($extension),$extensiones);
     }
 
     function extension_fichero($string) {
@@ -246,7 +246,7 @@ abstract class Validator {
     }
 
     function comprobar_textos($string) {
-        if(preg_match('/^[.,¡!¿?\/&ª\-_ºA-Za-z0-9À-úñÑ\s\t\n]+$/',$string)) {
+        if(preg_match('/^[.,¡!()¿?\/&ª\-_ºA-Za-z0-9À-úñÑ\s\t\n]+$/',$string)) {
             return true;
         } else {
             return false;

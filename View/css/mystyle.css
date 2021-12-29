@@ -154,3 +154,7 @@
 .notif_no {
     background-color: #DAEBF9;
 }
+
+#descripcion {
+    white-space: pre;
+}
