@@ -107,6 +107,7 @@ class Portal_ShowCurrent_Plan extends Header {
                                             <div id="faq-list-1" class="collapse" data-bs-parent=".faq-list">
                                                 <ul class="mt-3">
                                                     <?php foreach($this->definitions['documentos']['elementos'] as $documento) :?>
+                                                    <?php if($documento['visible'] == 'yes'): ?>
                                                         <li class="border-top">
                                                             <?php if($documento['estado'] == 'pendiente'): ?>
                                                                 <i class="iconify icon-help pendiente" data-icon="ant-design:exclamation-circle-outlined"></i>
@@ -143,6 +144,7 @@ class Portal_ShowCurrent_Plan extends Header {
                                                                 </a>
                                                             <?php endif; ?>
                                                         </li>
+                                                    <?php endif; ?>
                                                     <?php endforeach;?>
                                                 </ul>
                                             </div>
