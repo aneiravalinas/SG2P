@@ -50,7 +50,7 @@ class Portal_Floors extends Header {
                 <?php else: ?>
                     <div class="row justify-content-center mt-5 pt-5">
                         <div class="col text-center">
-                            <h1 class="i18n-portal-floors-empty">Este edificio no tiene plantas registradas todavía</h1>
+                            <h2 class="i18n-portal-floors-empty">Este edificio no tiene plantas registradas todavía</h2>
                         </div>
                     </div>
                 <?php endif; ?>
