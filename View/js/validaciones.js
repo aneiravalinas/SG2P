@@ -293,6 +293,37 @@ function check_only_numbers(element, size=null) {
     }
 }
 
+function check_number_positive_or_negative(element, size = null) {
+    var correct = true;
+    var value = document.getElementById(element).value;
+
+    var pattern = /^[\-]?[0-9]+$/;
+    if(!pattern.test(value)) {
+        openModal(element,'i18n-numbers-format');
+        correct = false;
+    }
+
+    if(size != null) {
+        let number = value;
+        if(number.charAt(0) === '-') {
+            number = number.slice(1);
+        }
+
+        if(number.length > size) {
+            openModal(element, 'i18n-max-size');
+            correct = false;
+        }
+    }
+
+    if(correct) {
+        document.getElementById(element).style.borderColor = 'green';
+        return true;
+    } else {
+        document.getElementById(element).style.borderColor = 'red';
+        return false;
+    }
+}
+
 function check_imagen(element) {
     var value = document.getElementById(element).value;
     var allowed_extensions = new Array('.jpg','.jpeg','.png');
@@ -420,3 +451,4 @@ function check_fecha_mayor_actual(element) {
 
 
 }
+

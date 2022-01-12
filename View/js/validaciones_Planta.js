@@ -54,7 +54,7 @@ function check_NOMBRE_PLANTA() {
 
 function check_NUM_PLANTA_SEARCH() {
     if(not_empty('num_planta')) {
-        return check_only_numbers('num_planta',2);
+        return check_number_positive_or_negative('num_planta',2);
     } else {
         document.getElementById('num_planta').style.borderColor = 'green';
         return true;
@@ -63,7 +63,7 @@ function check_NUM_PLANTA_SEARCH() {
 
 
 function check_NUM_PLANTA() {
-    if(not_empty('num_planta',true) && check_only_numbers('num_planta',2)) {
+    if(not_empty('num_planta',true) && check_number_positive_or_negative('num_planta',2)) {
         return true;
     } else {
         return false;

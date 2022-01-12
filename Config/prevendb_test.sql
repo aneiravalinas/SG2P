@@ -45,7 +45,7 @@ CREATE TABLE PLANTA
     `planta_id` INT(10) AUTO_INCREMENT,
     `edificio_id` INT(10) NOT NULL,
     `nombre` VARCHAR(40) NOT NULL,
-    `num_planta` TINYINT UNSIGNED NOT NULL,
+    `num_planta` TINYINT NOT NULL,
     `descripcion` TEXT NOT NULL,
     `foto_planta` VARCHAR(40) NOT NULL,
 

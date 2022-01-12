@@ -60,6 +60,14 @@ abstract class Validator {
         }
     }
 
+    function es_numerico_positivo_o_negativo($string) {
+        if(preg_match('/^[\-]?[0-9]+$/',$string)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //comprueba si un string tiene solo letras numeros y espacios
     //devuelve true si es corrrecto false en caso contrario
     function solo_alfanumerico_espacios($string){

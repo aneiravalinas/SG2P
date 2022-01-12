@@ -108,7 +108,7 @@ class Floor_Validation extends Validator {
             return $this->rellena_validation(false,'NUM_FLOOR_EMPT','PLANTA');
         }
 
-        if(!$this->es_numerico($this->num_planta)) {
+        if(!$this->es_numerico_positivo_o_negativo($this->num_planta)) {
             return $this->rellena_validation(false,'NUM_FLOOR_NOT_NUMERIC','PLANTA');
         }
 
