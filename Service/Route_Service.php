@@ -271,6 +271,13 @@ class Route_Service extends Route_Validation {
             return $this->feedback;
         }
 
+        $bld_plan = $this->feedback['resource'];
+        if($bld_plan['estado'] == 'vencido') {
+            $this->feedback['ok'] = false;
+            $this->feedback['code'] = 'BLDPLAN_EXPIRED';
+            return $this->feedback;
+        }
+
         $this->impRoute_entity->setAttributes(array('nombre_doc' => default_doc, 'fecha_cumplimentacion' => default_data,
                                                         'fecha_vencimiento' => default_data, 'estado' => 'pendiente'));
         $this->feedback = $this->impRoute_entity->ADD();

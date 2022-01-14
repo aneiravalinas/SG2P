@@ -49,7 +49,7 @@ class Add_DefProc extends Header {
                                     <a class="btn-get-started i18n-cancelar" id="btn-cancel" type="button" onclick="
                                         crearform('formenviar', 'post');
                                         <?php foreach($this->currentShow as $key => $value): ?>
-                                        insertacampo(document.formenvia, '<?php echo $key; ?>', '<?php echo $value; ?>');
+                                        insertacampo(document.formenviar, '<?php echo $key; ?>', '<?php echo $value; ?>');
                                         <?php endforeach; ?>
                                         enviaform(document.formenviar);">
                                         Cancelar

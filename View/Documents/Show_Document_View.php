@@ -142,16 +142,16 @@ class Show_Document extends Header {
                                                         Detalles
                                                     </a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item i18n-implement" type="button" onclick="
-                                                        crearform('formenviar','post');
-                                                        insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_doc['cumplimentacion_id'] ?>');
-                                                        insertacampo(document.formenviar, 'controller','Document');
-                                                        insertacampo(document.formenviar, 'action', 'implementForm');
-                                                        enviaform(document.formenviar);">
-                                                        Cumplimentar
-                                                    </a>
-                                                    <div class="dropdown-divider"></div>
                                                     <?php if($imp_doc['estado'] != 'vencido') :?>
+                                                        <a class="dropdown-item i18n-implement" type="button" onclick="
+                                                                crearform('formenviar','post');
+                                                                insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_doc['cumplimentacion_id'] ?>');
+                                                                insertacampo(document.formenviar, 'controller','Document');
+                                                                insertacampo(document.formenviar, 'action', 'implementForm');
+                                                                enviaform(document.formenviar);">
+                                                            Cumplimentar
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item i18n-expire" type="button" onclick="
                                                         crearform('formenviar','post');
                                                         insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_doc['cumplimentacion_id'] ?>');

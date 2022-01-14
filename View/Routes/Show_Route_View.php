@@ -145,16 +145,16 @@ class Show_Route extends Header {
                                                         Detalles
                                                     </a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item i18n-implement" type="button" onclick="
-                                                        crearform('formenviar','post');
-                                                        insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_route['cumplimentacion_id'] ?>');
-                                                        insertacampo(document.formenviar, 'controller','Route');
-                                                        insertacampo(document.formenviar, 'action', 'implementForm');
-                                                        enviaform(document.formenviar);">
-                                                        Cumplimentar
-                                                    </a>
-                                                    <div class="dropdown-divider"></div>
                                                     <?php if($imp_route['estado'] != 'vencido') :?>
+                                                        <a class="dropdown-item i18n-implement" type="button" onclick="
+                                                                crearform('formenviar','post');
+                                                                insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_route['cumplimentacion_id'] ?>');
+                                                                insertacampo(document.formenviar, 'controller','Route');
+                                                                insertacampo(document.formenviar, 'action', 'implementForm');
+                                                                enviaform(document.formenviar);">
+                                                            Cumplimentar
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item i18n-expire" type="button" onclick="
                                                             crearform('formenviar','post');
                                                             insertacampo(document.formenviar, 'cumplimentacion_id','<?php echo $imp_route['cumplimentacion_id'] ?>');
